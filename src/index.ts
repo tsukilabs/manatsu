@@ -1,0 +1,3 @@
+class Manatsu {
+    public install() {}
+}
