@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MButton } from '../src/index';
+import { MButton } from '../src';
 </script>
 
 <template>

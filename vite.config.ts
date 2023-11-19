@@ -1,9 +1,11 @@
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import manatsu from './src/plugins/vite';
+import { ManatsuDark } from './src/themes/manatsu-dark';
 
 export default defineConfig({
-    plugins: [vue()],
+    plugins: [vue(), manatsu(ManatsuDark)],
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),

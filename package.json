@@ -2,27 +2,18 @@
     "name": "manatsu",
     "version": "0.1.0",
     "description": "Vue 3 component library",
-    "author": {
-        "name": "Andrew Ferreira",
-        "email": "andrew.shien2@gmail.com",
-        "url": "https://github.com/ferreira-tb"
-    },
+    "license": "MIT",
+    "private": false,
     "homepage": "https://github.com/ferreira-tb/manatsu",
     "repository": {
         "type": "git",
         "url": "https://github.com/ferreira-tb/manatsu.git"
     },
-    "bugs": {
-        "url": "https://github.com/ferreira-tb/manatsu/issues",
-        "email": "andrew.shien2@gmail.com"
-    },
-    "license": "MIT",
     "keywords": [
         "manatsu",
         "vue",
         "component library"
     ],
-    "private": false,
     "type": "module",
     "files": [
         "dist"
@@ -33,7 +24,8 @@
         ".": {
             "import": "./dist/manatsu.js",
             "require": "./dist/manatsu.umd.cjs"
-        }
+        },
+        "./themes/*": "./dist/themes/*"
     },
     "types": "dist/index.d.ts",
     "lint-staged": {
@@ -46,11 +38,14 @@
         "prepare": "husky install",
         "prettier": "npx prettier . --write",
         "taze": "npx taze -w -f",
-        "test": "vitest",
+        "test": "vitest --run",
         "test:coverage": "vitest --coverage",
         "test:ui": "vitest --ui --watch --coverage.enabled=true",
         "test:watch": "vitest --watch",
         "type-check": "vue-tsc --noEmit"
+    },
+    "dependencies": {
+        "unocss": "^0.57.6"
     },
     "devDependencies": {
         "@octokit/core": "^5.0.1",
@@ -65,6 +60,7 @@
         "npm-run-all2": "^6.1.1",
         "prettier": "^3.1.0",
         "taze": "^0.12.0",
+        "terser": "^5.24.0",
         "tslib": "^2.6.2",
         "typescript": "^5.2.2",
         "vite": "^5.0.0",
