@@ -1,9 +1,9 @@
 {
-    "include": ["*.config.ts"],
+    "include": ["./**/*"],
     "compilerOptions": {
         "baseUrl": ".",
         "target": "esnext",
-        "lib": ["esnext", "dom"],
+        "lib": ["esnext"],
         "module": "esnext",
         "moduleResolution": "bundler",
         "resolveJsonModule": true,

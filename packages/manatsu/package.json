@@ -1,0 +1,52 @@
+{
+    "name": "manatsu",
+    "version": "0.1.2",
+    "description": "Vue 3 component library",
+    "license": "MIT",
+    "private": false,
+    "homepage": "https://github.com/ferreira-tb/manatsu",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ferreira-tb/manatsu.git"
+    },
+    "keywords": [
+        "manatsu",
+        "vue",
+        "component library",
+        "unocss"
+    ],
+    "type": "module",
+    "files": [
+        "lib"
+    ],
+    "main": "./lib/manatsu.umd.cjs",
+    "module": "./lib/manatsu.js",
+    "exports": {
+        ".": {
+            "import": "./lib/manatsu.js",
+            "require": "./lib/manatsu.umd.cjs",
+            "types": "./lib/manatsu.d.ts"
+        },
+        "./themes": {
+            "import": "./lib/themes.js",
+            "require": "./lib/themes.umd.cjs",
+            "types": "./lib/themes.d.ts"
+        },
+        "./vite": {
+            "import": "./lib/plugins/vite.js",
+            "require": "./lib/plugins/vite.umd.cjs",
+            "types": "./lib/plugins/vite.d.ts"
+        }
+    },
+    "lint-staged": {
+        "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
+    },
+    "scripts": {
+        "build": "run-p type-check build-only",
+        "build-only": "vite build",
+        "type-check": "vue-tsc --noEmit"
+    },
+    "dependencies": {
+        "unocss": "^0.57.6"
+    }
+}

@@ -1,5 +1,5 @@
 {
-    "include": ["*.config.ts"],
+    "include": ["./**/*"],
     "compilerOptions": {
         "baseUrl": ".",
         "target": "esnext",
@@ -11,7 +11,9 @@
         "removeComments": true,
         "verbatimModuleSyntax": true,
         "skipLibCheck": true,
-        "declaration": false,
+        "declaration": true,
+        "declarationMap": false,
+        "declarationDir": "dist",
 
         "alwaysStrict": true,
         "noImplicitAny": true,
