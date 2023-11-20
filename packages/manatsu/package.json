@@ -19,23 +19,18 @@
     "files": [
         "lib"
     ],
-    "main": "./lib/manatsu.umd.cjs",
-    "module": "./lib/manatsu.js",
+    "main": "./lib/manatsu.cjs",
+    "module": "./lib/manatsu.mjs",
     "exports": {
         ".": {
-            "import": "./lib/manatsu.js",
-            "require": "./lib/manatsu.umd.cjs",
+            "import": "./lib/manatsu.mjs",
+            "require": "./lib/manatsu.cjs",
             "types": "./lib/manatsu.d.ts"
         },
-        "./themes": {
-            "import": "./lib/themes.js",
-            "require": "./lib/themes.umd.cjs",
-            "types": "./lib/themes.d.ts"
-        },
-        "./vite": {
-            "import": "./lib/plugins/vite.js",
-            "require": "./lib/plugins/vite.umd.cjs",
-            "types": "./lib/plugins/vite.d.ts"
+        "./presets": {
+            "import": "./lib/presets.mjs",
+            "require": "./lib/presets.cjs",
+            "types": "./lib/presets.d.ts"
         }
     },
     "lint-staged": {
@@ -48,5 +43,11 @@
     },
     "dependencies": {
         "unocss": "^0.57.6"
+    },
+    "peerDependencies": {
+        "unocss": "^0.57.6"
+    },
+    "engines": {
+        "node": ">=14"
     }
 }

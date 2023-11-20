@@ -14,8 +14,17 @@ export default defineConfig({
         emptyOutDir: true,
         lib: {
             entry: resolve(dirname, 'src/index.ts'),
-            fileName: 'manatsu',
-            formats: ['es']
+            formats: ['es', 'cjs'],
+            fileName: (format) => {
+                switch (format) {
+                    case 'es':
+                        return 'manatsu.mjs';
+                    case 'cjs':
+                        return 'manatsu.cjs';
+                    default:
+                        throw new Error(`Invalid format: ${format}`);
+                }
+            }
         },
         rollupOptions: {
             external: ['vue']
