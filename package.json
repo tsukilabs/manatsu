@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.10.5",
@@ -8,8 +8,9 @@
     "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
   },
   "scripts": {
-    "dev": "vite -c packages/playground/vite.config.ts",
     "build": "node --loader ts-node/esm scripts/build.ts",
+    "bump": "pnpm exec bumpp -r --no-commit --no-tag -p false",
+    "dev": "vite -c packages/playground/vite.config.ts",
     "minify": "pnpm exec minify-it packages/manatsu/dist -r",
     "prepare": "husky install",
     "prettier": "pnpm exec prettier . --write",
@@ -29,6 +30,7 @@
     "@vitest/coverage-istanbul": "1.0.0-beta.5",
     "@vitest/ui": "1.0.0-beta.5",
     "@vue/test-utils": "^2.4.2",
+    "bumpp": "^9.2.0",
     "execa": "^8.0.1",
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",

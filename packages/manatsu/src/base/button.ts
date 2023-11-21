@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue';
 
 export const mButton = {
-  padding: '100px',
-  color: 'green'
+  padding: '200px',
+  color: 'red'
 } satisfies CSSProperties;

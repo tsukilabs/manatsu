@@ -3,7 +3,7 @@ import { MButton } from '@manatsu/vue';
 </script>
 
 <template>
-  <div class="flex flex-col w-48 gap-6">
+  <div>
     <div>Hello world!</div>
     <button class="m-button">Botão Normal</button>
     <MButton>Teste</MButton>

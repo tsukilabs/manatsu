@@ -8,8 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     uno({
-      configFile: path.join(__dirname, 'uno.config.ts'),
-      mode: 'vue-scoped'
+      configFile: path.join(__dirname, 'uno.config.ts')
     })
   ]
 });
