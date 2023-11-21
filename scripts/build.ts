@@ -5,37 +5,43 @@ import { fileURLToPath } from 'node:url';
 import { existsSync as exists } from 'node:fs';
 import { execa } from 'execa';
 
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+const dist = path.resolve(dirname, '../packages/manatsu/dist');
+
 try {
-    await execa('pnpm', ['-F', 'manatsu', 'build'], { stdio: 'inherit' });
-    await buildPresets();
-    await execa('pnpm', ['minify'], { stdio: 'inherit' });
+  if (exists(dist)) await fs.rm(dist, { recursive: true });
+  await execa('pnpm', ['-F', 'manatsu', 'build'], { stdio: 'inherit' });
+
+  await buildVue();
+  await execa('pnpm', ['minify'], { stdio: 'inherit' });
 } catch (err) {
-    console.error(err);
-    process.exit(1);
+  console.error(err);
+  process.exit(1);
 }
 
-async function buildPresets() {
-    const dirname = path.dirname(fileURLToPath(import.meta.url));
-    const lib = path.resolve(dirname, '../packages/manatsu/lib');
+async function buildVue() {
+  const targetVueDist = path.join(dist, 'vue');
+  if (!exists(targetVueDist))
+    await fs.mkdir(targetVueDist, { recursive: true });
 
-    const presets = path.resolve(dirname, '../packages/presets/dist');
-    if (exists(presets)) await fs.rm(presets, { recursive: true });
-    await execa('pnpm', ['-F', '@manatsu/presets', 'build'], {
-        stdio: 'inherit'
-    });
+  const localVueDist = path.resolve(dirname, '../packages/vue/dist');
+  if (exists(localVueDist)) await fs.rm(localVueDist, { recursive: true });
+  await execa('pnpm', ['-F', '@manatsu/vue', 'build'], {
+    stdio: 'inherit'
+  });
 
-    await Promise.all([
-        fs.rename(
-            path.join(presets, 'index.d.ts'),
-            path.join(lib, 'presets.d.ts')
-        ),
-        fs.rename(
-            path.join(presets, 'presets.mjs'),
-            path.join(lib, 'presets.mjs')
-        ),
-        fs.rename(
-            path.join(presets, 'presets.cjs'),
-            path.join(lib, 'presets.cjs')
-        )
-    ]);
+  await Promise.all([
+    fs.rename(
+      path.join(localVueDist, 'index.d.ts'),
+      path.join(targetVueDist, 'index.d.ts')
+    ),
+    fs.rename(
+      path.join(localVueDist, 'index.js'),
+      path.join(targetVueDist, 'index.mjs')
+    ),
+    fs.rename(
+      path.join(localVueDist, 'index.cjs'),
+      path.join(targetVueDist, 'index.cjs')
+    )
+  ]);
 }

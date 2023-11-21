@@ -1,6 +1,6 @@
 import { defineConfig } from 'unocss';
-import { ManatsuDark } from '@manatsu/presets';
+import { ManatsuDark } from 'manatsu';
 
 export default defineConfig({
-    presets: [ManatsuDark()]
+  presets: [ManatsuDark()]
 });

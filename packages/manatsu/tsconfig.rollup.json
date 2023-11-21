@@ -1,9 +1,8 @@
 {
-  "include": ["./**/*"],
+  "include": ["rollup.config.ts"],
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "esnext",
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -11,9 +10,6 @@
     "removeComments": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "declarationMap": false,
-    "declarationDir": "dist",
 
     "alwaysStrict": true,
     "noImplicitAny": true,
@@ -31,6 +27,8 @@
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+
+    "types": ["node"]
   }
 }

@@ -30,8 +30,4 @@ coverage
 *.sln
 *.sw?
 
-out
-lib
-*.env
 config.json
-memo.md

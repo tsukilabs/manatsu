@@ -1,52 +1,48 @@
 {
-    "name": "manatsu",
-    "version": "0.1.3",
-    "description": "Vue 3 component library",
-    "license": "MIT",
-    "private": false,
-    "homepage": "https://github.com/ferreira-tb/manatsu",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ferreira-tb/manatsu.git"
+  "name": "manatsu",
+  "version": "0.1.4",
+  "description": "UnoCSS component library",
+  "license": "MIT",
+  "private": false,
+  "homepage": "https://github.com/ferreira-tb/manatsu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ferreira-tb/manatsu.git"
+  },
+  "keywords": [
+    "component library",
+    "unocss",
+    "vue"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
-    "keywords": [
-        "vue",
-        "component library",
-        "unocss"
-    ],
-    "type": "module",
-    "files": [
-        "lib"
-    ],
-    "main": "./lib/manatsu.cjs",
-    "module": "./lib/manatsu.mjs",
-    "exports": {
-        ".": {
-            "import": "./lib/manatsu.mjs",
-            "require": "./lib/manatsu.cjs",
-            "types": "./lib/manatsu.d.ts"
-        },
-        "./presets": {
-            "import": "./lib/presets.mjs",
-            "require": "./lib/presets.cjs",
-            "types": "./lib/presets.d.ts"
-        }
-    },
-    "lint-staged": {
-        "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
-    },
-    "scripts": {
-        "build": "run-p type-check build-only",
-        "build-only": "vite build",
-        "type-check": "vue-tsc --noEmit"
-    },
-    "dependencies": {
-        "unocss": "^0.57.6"
-    },
-    "peerDependencies": {
-        "unocss": "^0.57.6"
-    },
-    "engines": {
-        "node": ">=14"
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.mjs",
+      "require": "./dist/vue/index.cjs"
     }
+  },
+  "lint-staged": {
+    "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
+  },
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin typescript={tsconfig:'tsconfig.rollup.json'}"
+  },
+  "dependencies": {
+    "unocss": "^0.57.6"
+  },
+  "engines": {
+    "node": ">=14"
+  }
 }

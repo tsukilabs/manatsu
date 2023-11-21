@@ -1,12 +1,10 @@
 {
-    "name": "@manatsu/playground",
-    "type": "module",
-    "private": true,
-    "dependencies": {
-        "unocss": "^0.57.6"
-    },
-    "devDependencies": {
-        "@manatsu/presets": "workspace:*",
-        "manatsu": "workspace:*"
-    }
+  "name": "@manatsu/playground",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@manatsu/vue": "workspace:*",
+    "manatsu": "workspace:*",
+    "unocss": "^0.57.6"
+  }
 }
