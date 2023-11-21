@@ -10,7 +10,7 @@
     "scripts": {
         "dev": "vite -c packages/playground/vite.config.ts",
         "build": "node --loader ts-node/esm scripts/build.ts",
-        "minify": "npx minify-it packages/manatsu/lib",
+        "minify": "npx minify-it packages/manatsu/lib -r",
         "prepare": "husky install",
         "prettier": "npx prettier . --write",
         "taze": "npx taze -w -f -r",
@@ -23,7 +23,7 @@
     "devDependencies": {
         "@octokit/core": "^5.0.1",
         "@rollup/plugin-typescript": "^11.1.5",
-        "@types/node": "^20.9.2",
+        "@types/node": "^20.9.3",
         "@vitejs/plugin-vue": "^4.5.0",
         "@vitest/browser": "1.0.0-beta.5",
         "@vitest/coverage-istanbul": "1.0.0-beta.5",
@@ -32,7 +32,7 @@
         "execa": "^8.0.1",
         "husky": "^8.0.3",
         "lint-staged": "^15.1.0",
-        "minify-it": "^1.0.1",
+        "minify-it": "^1.1.0",
         "npm-run-all2": "^6.1.1",
         "prettier": "^3.1.0",
         "rollup": "^4.5.0",
@@ -40,13 +40,13 @@
         "terser": "^5.24.0",
         "ts-node": "^10.9.1",
         "tslib": "^2.6.2",
-        "typescript": "^5.2.2",
+        "typescript": "5.2.2",
         "unocss": "^0.57.6",
         "vite": "^5.0.0",
         "vite-plugin-dts": "^3.6.3",
         "vitest": "1.0.0-beta.5",
         "vue": "^3.3.8",
         "vue-tsc": "^1.8.22",
-        "webdriverio": "^8.23.1"
+        "webdriverio": "^8.23.3"
     }
 }

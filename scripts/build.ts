@@ -1,5 +1,6 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
+import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { existsSync as exists } from 'node:fs';
 import { execa } from 'execa';
