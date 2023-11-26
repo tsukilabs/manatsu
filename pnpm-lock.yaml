@@ -42,8 +42,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1
       minify-it:
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       npm-run-all2:
         specifier: ^6.1.1
         version: 6.1.1
@@ -3174,8 +3174,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /minify-it@1.1.0:
-    resolution: {integrity: sha512-fm71b3qbJndjnjoBbxJ4N6hK5Adr7StgzI3ZHboaJENW3pNCGM5EadJbM0rc437/RZU5lwibQq/Rzmzhtq6lPA==}
+  /minify-it@1.1.1:
+    resolution: {integrity: sha512-QsyR/eDyCRHY8qKXo9pR+nFkQgL39nNa8wVxNxVi6oYnWsDrLygau9K5LmYdl1C8Ur6njGbOkxGITGzu6noe1A==}
     hasBin: true
     dependencies:
       terser: 5.24.0

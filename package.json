@@ -33,7 +33,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "miho": "^1.6.1",
-    "minify-it": "^1.1.0",
+    "minify-it": "^1.1.1",
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.1.0",
     "rollup": "^4.5.0",
