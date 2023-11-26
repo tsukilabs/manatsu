@@ -26,6 +26,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
+    "./*": "./*",
     "./style.css": "./dist/style.css"
   },
   "lint-staged": {
