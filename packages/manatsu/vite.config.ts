@@ -1,11 +1,10 @@
-/// <reference types="vite/client" />
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [vue(), dts({ rollupTypes: true })],
+  root: __dirname,
+  plugins: [vue()],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -15,7 +14,7 @@ export default defineConfig({
       fileName: (format) => {
         switch (format) {
           case 'es':
-            return 'index.js';
+            return 'index.mjs';
           case 'cjs':
             return 'index.cjs';
           default:

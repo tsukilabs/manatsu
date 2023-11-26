@@ -7,41 +7,23 @@ import { execa } from 'execa';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.resolve(dirname, '../packages/manatsu/dist');
+const components = path.resolve(dirname, '../packages/components/dist');
 
 try {
-  if (exists(dist)) await fs.rm(dist, { recursive: true });
-  await execa('pnpm', ['-F', 'manatsu', 'build'], { stdio: 'inherit' });
+  if (exists(dist)) {
+    await fs.rm(dist, { recursive: true });
+  }
 
-  await buildVue();
+  await Promise.all([
+    execa('pnpm', ['-F', 'manatsu', 'build']),
+    execa('pnpm', ['-F', 'components', 'build'])
+  ]);
+
+  const dts = path.join(components, 'index.d.ts');
+  await fs.rename(dts, path.join(dist, 'index.d.ts'));
+
   await execa('pnpm', ['minify'], { stdio: 'inherit' });
 } catch (err) {
   console.error(err);
   process.exit(1);
-}
-
-async function buildVue() {
-  const targetVueDist = path.join(dist, 'vue');
-  if (!exists(targetVueDist))
-    await fs.mkdir(targetVueDist, { recursive: true });
-
-  const localVueDist = path.resolve(dirname, '../packages/vue/dist');
-  if (exists(localVueDist)) await fs.rm(localVueDist, { recursive: true });
-  await execa('pnpm', ['-F', '@manatsu/vue', 'build'], {
-    stdio: 'inherit'
-  });
-
-  await Promise.all([
-    fs.rename(
-      path.join(localVueDist, 'index.d.ts'),
-      path.join(targetVueDist, 'index.d.ts')
-    ),
-    fs.rename(
-      path.join(localVueDist, 'index.js'),
-      path.join(targetVueDist, 'index.mjs')
-    ),
-    fs.rename(
-      path.join(localVueDist, 'index.cjs'),
-      path.join(targetVueDist, 'index.cjs')
-    )
-  ]);
 }

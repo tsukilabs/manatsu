@@ -1,1 +1,1 @@
-export { default as ManatsuDark } from './manatsu-dark';
+export * from '@manatsu/components';
