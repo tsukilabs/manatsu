@@ -5,9 +5,10 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     globals: false,
+    environment: 'jsdom',
     browser: {
       name: 'chrome',
-      enabled: true,
+      enabled: false,
       headless: true
     },
     watch: false,

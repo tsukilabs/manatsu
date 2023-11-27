@@ -25,9 +25,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    },
-    "./*": "./*",
-    "./style.css": "./dist/style.css"
+    }
   },
   "lint-staged": {
     "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"

@@ -8,6 +8,6 @@
 
 <style module lang="scss">
 .m-button {
-  width: var(--mana-button);
+  width: 100px;
 }
 </style>

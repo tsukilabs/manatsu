@@ -1,0 +1,10 @@
+{
+  "name": "@manatsu/themes",
+  "version": "0.1.9",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": "./*",
+    "./manatsu-dark": "./manatsu-dark/main.scss"
+  }
+}

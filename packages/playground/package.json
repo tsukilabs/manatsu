@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "manatsu": "workspace:*",
-    "@manatsu/components": "workspace:*"
+    "@manatsu/components": "workspace:*",
+    "@manatsu/themes": "workspace:*"
   }
 }
