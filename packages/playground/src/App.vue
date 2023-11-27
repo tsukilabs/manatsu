@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { MButton } from '@manatsu/components';
+import { FilledButton } from '@manatsu/components';
 </script>
 
 <template>
   <div>
     <div>Hello world!</div>
-    <MButton>Test</MButton>
-    <MButton>Test2</MButton>
+    <FilledButton>Test</FilledButton>
+    <FilledButton>Test2</FilledButton>
   </div>
 </template>
