@@ -8,13 +8,15 @@
     "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
   },
   "scripts": {
-    "build": "node --loader ts-node/esm scripts/build.ts",
+    "build": "miho -l build",
     "build:playground": "pnpm -F @manatsu/playground build",
     "deps": "pnpm exec taze -f -r",
     "dev": "vite serve packages/playground",
     "minify": "pnpm exec minify-it packages/manatsu/dist -r",
     "prepare": "husky install",
-    "prettier": "pnpm exec prettier . --write",
+    "format": "pnpm exec prettier . --write",
+    "format-check": "pnpm exec prettier . --check",
+    "release": "miho -l publish",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
