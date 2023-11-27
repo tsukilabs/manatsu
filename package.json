@@ -10,11 +10,11 @@
   "scripts": {
     "build": "node --loader ts-node/esm scripts/build.ts",
     "build:playground": "pnpm -F @manatsu/playground build",
+    "deps": "pnpm exec taze -f -r",
     "dev": "vite serve packages/playground",
     "minify": "pnpm exec minify-it packages/manatsu/dist -r",
     "prepare": "husky install",
     "prettier": "pnpm exec prettier . --write",
-    "taze": "pnpm exec taze -f -r",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
@@ -22,6 +22,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "devDependencies": {
+    "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/node": "^20.10.0",
     "@vitejs/plugin-vue": "^4.5.0",
@@ -32,7 +33,7 @@
     "execa": "^8.0.1",
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
-    "miho": "^1.6.1",
+    "miho": "^1.7.9",
     "minify-it": "^1.1.1",
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.1.0",

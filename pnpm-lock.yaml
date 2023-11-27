@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@octokit/core':
+        specifier: ^5.0.2
+        version: 5.0.2
       '@rollup/plugin-typescript':
         specifier: ^11.1.5
         version: 11.1.5(rollup@4.5.0)(tslib@2.6.2)(typescript@5.3.2)
@@ -39,8 +42,8 @@ importers:
         specifier: ^15.1.0
         version: 15.1.0
       miho:
-        specifier: ^1.6.1
-        version: 1.6.1
+        specifier: ^1.7.9
+        version: 1.7.9
       minify-it:
         specifier: ^1.1.1
         version: 1.1.1
@@ -748,6 +751,70 @@ packages:
       which: 4.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@octokit/auth-token@4.0.0:
+    resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
+    engines: {node: '>= 18'}
+    dev: true
+
+  /@octokit/core@5.0.2:
+    resolution: {integrity: sha512-cZUy1gUvd4vttMic7C0lwPed8IYXWYp8kHIMatyhY8t8n3Cpw2ILczkV5pGMPqef7v0bLo0pOHrEHarsau2Ydg==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/auth-token': 4.0.0
+      '@octokit/graphql': 7.0.2
+      '@octokit/request': 8.1.6
+      '@octokit/request-error': 5.0.1
+      '@octokit/types': 12.3.0
+      before-after-hook: 2.2.3
+      universal-user-agent: 6.0.1
+    dev: true
+
+  /@octokit/endpoint@9.0.3:
+    resolution: {integrity: sha512-TXVX57fJV7SA6LvRkeXPIOBr8AKvKDlhwNVBP/26O9DjIFi+CkYZGFLP9WtPdVOicRIhqGHxBCC6Fdj5AWWGgQ==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/types': 12.3.0
+      universal-user-agent: 6.0.1
+    dev: true
+
+  /@octokit/graphql@7.0.2:
+    resolution: {integrity: sha512-OJ2iGMtj5Tg3s6RaXH22cJcxXRi7Y3EBqbHTBRq+PQAqfaS8f/236fUrWhfSn8P4jovyzqucxme7/vWSSZBX2Q==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/request': 8.1.6
+      '@octokit/types': 12.3.0
+      universal-user-agent: 6.0.1
+    dev: true
+
+  /@octokit/openapi-types@19.0.2:
+    resolution: {integrity: sha512-8li32fUDUeml/ACRp/njCWTsk5t17cfTM1jp9n08pBrqs5cDFJubtjsSnuz56r5Tad6jdEPJld7LxNp9dNcyjQ==}
+    dev: true
+
+  /@octokit/request-error@5.0.1:
+    resolution: {integrity: sha512-X7pnyTMV7MgtGmiXBwmO6M5kIPrntOXdyKZLigNfQWSEQzVxR4a4vo49vJjTWX70mPndj8KhfT4Dx+2Ng3vnBQ==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/types': 12.3.0
+      deprecation: 2.3.1
+      once: 1.4.0
+    dev: true
+
+  /@octokit/request@8.1.6:
+    resolution: {integrity: sha512-YhPaGml3ncZC1NfXpP3WZ7iliL1ap6tLkAp6MvbK2fTTPytzVUyUesBBogcdMm86uRYO5rHaM1xIWxigWZ17MQ==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/endpoint': 9.0.3
+      '@octokit/request-error': 5.0.1
+      '@octokit/types': 12.3.0
+      universal-user-agent: 6.0.1
+    dev: true
+
+  /@octokit/types@12.3.0:
+    resolution: {integrity: sha512-nJ8X2HRr234q3w/FcovDlA+ttUU4m1eJAourvfUUtwAWeqL8AsyRqfnLvVnYn3NFbUnsmzQCzLNdFerPwdmcDQ==}
+    dependencies:
+      '@octokit/openapi-types': 19.0.2
     dev: true
 
   /@one-ini/wasm@0.1.1:
@@ -1578,6 +1645,10 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: true
 
+  /before-after-hook@2.2.3:
+    resolution: {integrity: sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==}
+    dev: true
+
   /big-integer@1.6.51:
     resolution: {integrity: sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==}
     engines: {node: '>=0.6'}
@@ -2041,6 +2112,10 @@ packages:
       ast-types: 0.13.4
       escodegen: 2.1.0
       esprima: 4.0.1
+    dev: true
+
+  /deprecation@2.3.1:
+    resolution: {integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==}
     dev: true
 
   /dequal@2.0.3:
@@ -3158,8 +3233,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /miho@1.6.1:
-    resolution: {integrity: sha512-MjZ96Zb4BsO/JJivFoCuxYRL3ysNSKtrhviU+Eylhe3wK86wXy24t2mTf8t4+P4CPs08I/2hjsvidf2sSUragA==}
+  /miho@1.7.9:
+    resolution: {integrity: sha512-xoGutepUiyZYjOO7wX0b1JtmflJAAUleTdZZrr7VtI0hPmVXdpf/ZYvPCj38pLSjkRY2xJPxz0wC7BCmCfr1nA==}
     hasBin: true
     dependencies:
       c12: 1.5.1
@@ -4566,6 +4641,10 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       imurmurhash: 0.1.4
+    dev: true
+
+  /universal-user-agent@6.0.1:
+    resolution: {integrity: sha512-yCzhz6FN2wU1NiiQRogkTQszlQSlpWaw8SvVegAc+bDxbzHgh1vX8uIe8OYyMH6DwH+sdTJsgMl36+mSMdRJIQ==}
     dev: true
 
   /universalify@0.1.2:
