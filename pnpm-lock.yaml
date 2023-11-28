@@ -27,8 +27,8 @@ importers:
         specifier: 1.0.0-beta.5
         version: 1.0.0-beta.5(vitest@1.0.0-beta.5)
       '@vitest/ui':
-        specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5(vitest@1.0.0-beta.5)
+        specifier: 1.0.0-beta.6
+        version: 1.0.0-beta.6(vitest@1.0.0-beta.5)
       '@vue/test-utils':
         specifier: ^2.4.2
         version: 2.4.2(vue@3.3.9)
@@ -94,7 +94,7 @@ importers:
         version: 3.6.3(@types/node@20.10.0)(rollup@4.5.0)(typescript@5.3.2)(vite@5.0.2)
       vitest:
         specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.5)(jsdom@23.0.0)(sass@1.69.5)
+        version: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.6)(jsdom@23.0.0)(sass@1.69.5)
       vue:
         specifier: ^3.3.9
         version: 3.3.9(typescript@5.3.2)
@@ -1211,7 +1211,7 @@ packages:
       estree-walker: 3.0.3
       magic-string: 0.30.5
       sirv: 2.0.3
-      vitest: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.5)(jsdom@23.0.0)(sass@1.69.5)
+      vitest: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.6)(jsdom@23.0.0)(sass@1.69.5)
       webdriverio: 8.24.3(typescript@5.3.2)
     dev: true
 
@@ -1228,7 +1228,7 @@ packages:
       magicast: 0.3.2
       picocolors: 1.0.0
       test-exclude: 6.0.0
-      vitest: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.5)(jsdom@23.0.0)(sass@1.69.5)
+      vitest: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.6)(jsdom@23.0.0)(sass@1.69.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1263,23 +1263,31 @@ packages:
       tinyspy: 2.2.0
     dev: true
 
-  /@vitest/ui@1.0.0-beta.5(vitest@1.0.0-beta.5):
-    resolution: {integrity: sha512-+qnxIATVmI/Mqo4q2Uv1aGpIjCKQxVSY5FOhjx594t75r8xSMGPfjWsReINO/h5+wrHNW9FG2eUwZkjnxHvNxw==}
+  /@vitest/ui@1.0.0-beta.6(vitest@1.0.0-beta.5):
+    resolution: {integrity: sha512-tnRgw6sJLoGaUuGp0GQaEFHvYkeo1tgGRgcSlZ6JMFkI+ghCon/FLsUbAePV80ULkqagYE6yAhOEnOH7+Ud01w==}
     peerDependencies:
       vitest: ^1.0.0-0
     dependencies:
-      '@vitest/utils': 1.0.0-beta.5
+      '@vitest/utils': 1.0.0-beta.6
       fast-glob: 3.3.2
       fflate: 0.8.1
       flatted: 3.2.9
       pathe: 1.1.1
       picocolors: 1.0.0
       sirv: 2.0.3
-      vitest: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.5)(jsdom@23.0.0)(sass@1.69.5)
+      vitest: 1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.6)(jsdom@23.0.0)(sass@1.69.5)
     dev: true
 
   /@vitest/utils@1.0.0-beta.5:
     resolution: {integrity: sha512-5ippiVcc6KjnAZiMc5Gz5g1tWTG+21g5scr+cedYC+YxAjqZzOG/ncJuM/Eqq9a+/MAJJc5zOGBcDYl27x62jg==}
+    dependencies:
+      diff-sequences: 29.6.3
+      loupe: 2.3.7
+      pretty-format: 29.7.0
+    dev: true
+
+  /@vitest/utils@1.0.0-beta.6:
+    resolution: {integrity: sha512-PyUf4dTFRLfq6YAdAab39i32O/qhpeCVM7cUpN1au7BrvYI/e43ZDhhHdwbt8zP14l06PNrXd5nTSZPFQwmsVw==}
     dependencies:
       diff-sequences: 29.6.3
       loupe: 2.3.7
@@ -5292,7 +5300,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.5)(jsdom@23.0.0)(sass@1.69.5):
+  /vitest@1.0.0-beta.5(@types/node@20.10.0)(@vitest/browser@1.0.0-beta.5)(@vitest/ui@1.0.0-beta.6)(jsdom@23.0.0)(sass@1.69.5):
     resolution: {integrity: sha512-wmrGmXMKysR+JBvIwy0COgLrRSsZTR00dN+IpWBxGC4ACF5Mt/uYyrPLJZ0ixK4P3bxI16vd92JXMsuGnm9gQQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -5323,7 +5331,7 @@ packages:
       '@vitest/runner': 1.0.0-beta.5
       '@vitest/snapshot': 1.0.0-beta.5
       '@vitest/spy': 1.0.0-beta.5
-      '@vitest/ui': 1.0.0-beta.5(vitest@1.0.0-beta.5)
+      '@vitest/ui': 1.0.0-beta.6(vitest@1.0.0-beta.5)
       '@vitest/utils': 1.0.0-beta.5
       acorn-walk: 8.3.0
       cac: 6.7.14
