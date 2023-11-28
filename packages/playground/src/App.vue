@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { FilledButton } from '@manatsu/components';
+import { MButton } from '@manatsu/components';
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-4">
     <div>Hello world!</div>
-    <FilledButton>Test</FilledButton>
-    <FilledButton>Test2</FilledButton>
+    <MButton>Test</MButton>
+    <MButton>Test2</MButton>
   </div>
 </template>

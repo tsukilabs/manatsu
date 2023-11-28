@@ -1,1 +1,33 @@
 @use '../base/main.scss';
+
+:root {
+  --mana-color-primary: #4dd8e7;
+  --mana-color-on-primary: #00363b;
+  --mana-color-primary-container: #004f55;
+  --mana-color-on-primary-container: #87f3ff;
+  --mana-color-secondary: #b1cbcf;
+  --mana-color-on-secondary: #1c3437;
+  --mana-color-secondary-container: #324b4e;
+  --mana-color-on-secondary-container: #cde7eb;
+  --mana-color-tertiary: #b8c6ea;
+  --mana-color-on-tertiary: #22304c;
+  --mana-color-tertiary-container: #394764;
+  --mana-color-on-tertiary-container: #d8e2ff;
+  --mana-color-error: #ffb4ab;
+  --mana-color-error-container: #93000a;
+  --mana-color-on-error: #690005;
+  --mana-color-on-error-container: #ffdad6;
+  --mana-color-background: #191c1d;
+  --mana-color-on-background: #e0e3e3;
+  --mana-color-surface: #191c1d;
+  --mana-color-on-surface: #e0e3e3;
+  --mana-color-surface-variant: #3f484a;
+  --mana-color-on-surface-variant: #bec8c9;
+  --mana-color-outline: #899294;
+  --mana-color-inverse-on-surface: #191c1d;
+  --mana-color-inverse-surface: #e0e3e3;
+  --mana-color-inverse-primary: #006971;
+  --mana-color-shadow: #000000;
+  --mana-color-surface-tint: #4dd8e7;
+  --mana-color-outline-variant: #3f484a;
+}

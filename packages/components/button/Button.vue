@@ -8,6 +8,12 @@
 
 <style module lang="scss">
 .m-button {
-  width: 100px;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+
+  text-align: center;
+  padding: 1rem 2rem;
 }
 </style>

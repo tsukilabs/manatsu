@@ -1,3 +1,4 @@
+import './assets/style.css';
 import '@manatsu/themes/manatsu-dark';
 import { createApp } from 'vue';
 import App from './App.vue';

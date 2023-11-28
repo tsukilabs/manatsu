@@ -1,8 +1,8 @@
 {
   "vsicons.associations.files": [
     {
-      "icon": "tsconfig",
-      "extensions": ["tsconfig.rollup.json"],
+      "icon": "tailwind",
+      "extensions": ["tailwind.config.mjs"],
       "filename": true,
       "format": "svg"
     }
