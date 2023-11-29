@@ -1,5 +1,5 @@
 {
-  "include": ["*.config.ts", "./src/**/*"],
+  "include": ["*.config.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",

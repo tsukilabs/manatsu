@@ -3,8 +3,8 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { Octokit } from '@octokit/core';
 import { existsSync as exists } from 'node:fs';
-import { execa, type Options as ExecaOptions } from 'execa';
-import { defineConfig, PackageManager } from 'miho';
+import { type Options as ExecaOptions, execa } from 'execa';
+import { PackageManager, defineConfig } from 'miho';
 
 export default defineConfig({
   recursive: true,
@@ -42,7 +42,7 @@ export default defineConfig({
         tag_name: version,
         name: version,
         draft: false,
-        prerelease: false,
+        prerelease: true,
         generate_release_notes: true,
         owner: 'ferreira-tb',
         repo: 'manatsu',

@@ -5,6 +5,7 @@
     "github.vscode-pull-request-github",
     "esbenp.prettier-vscode",
     "vscode-icons-team.vscode-icons",
-    "vue.volar"
+    "vue.volar",
+    "dbaeumer.vscode-eslint"
   ]
 }
