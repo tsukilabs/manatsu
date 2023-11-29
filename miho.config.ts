@@ -31,8 +31,6 @@ export default defineConfig({
 
       const dts = path.join(components, 'index.d.ts');
       await fs.rename(dts, path.join(dist, 'index.d.ts'));
-
-      await execa('pnpm', ['minify'], options);
     },
     publish: async () => {
       const { version } = await import('./package.json');
