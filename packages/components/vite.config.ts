@@ -9,6 +9,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    minify: false,
     lib: {
       entry: join(__dirname, 'index.ts'),
       formats: ['es'],
