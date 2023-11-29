@@ -1,10 +1,10 @@
-import process from 'node:process';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { Octokit } from '@octokit/core';
+import process from 'node:process';
 import { existsSync as exists } from 'node:fs';
-import { type Options as ExecaOptions, execa } from 'execa';
+import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
+import { type Options as ExecaOptions, execa } from 'execa';
 
 export default defineConfig({
   recursive: true,
@@ -14,6 +14,7 @@ export default defineConfig({
     all: true
   },
   jobs: {
+    skip: ['publish'],
     build: async () => {
       const dist = path.join(process.cwd(), 'packages/manatsu/dist');
       const components = path.join(process.cwd(), 'packages/components/dist');

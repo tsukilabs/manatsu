@@ -1,19 +1,51 @@
-<script setup lang="ts"></script>
+<!-- eslint-disable @typescript-eslint/no-unsafe-return -->
+<script setup lang="ts">
+import { computed } from 'vue';
+import FilledButton from './FilledButton.vue';
+
+interface Props {
+  readonly type?: 'filled';
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'filled'
+});
+
+const button = computed(() => {
+  switch (props.type) {
+    case 'filled':
+      return FilledButton;
+    default:
+      return FilledButton;
+  }
+});
+</script>
 
 <template>
-  <button :class="$style['m-button']" type="button">
-    <slot></slot>
-  </button>
+  <div class="m-button" role="none">
+    <component :is="button">
+      <slot></slot>
+    </component>
+  </div>
 </template>
 
-<style module lang="scss">
+<style lang="scss">
 .m-button {
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  max-width: max-content;
+  white-space: nowrap;
 
-  text-align: center;
-  padding: 1rem 2rem;
+  button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    padding: var(--mana-button-padding);
+    color: inherit;
+    font-family: inherit;
+    text-align: center;
+  }
 }
 </style>

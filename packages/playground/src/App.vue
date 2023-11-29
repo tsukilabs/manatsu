@@ -3,9 +3,15 @@ import { MButton } from '@manatsu/components';
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <div>Hello world!</div>
-    <MButton>Test</MButton>
-    <MButton>Test2</MButton>
-  </div>
+  <main class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <div>Hello world!</div>
+      <MButton>Inside flex-col</MButton>
+      <MButton>Inside flex-col with more text</MButton>
+    </div>
+    <div class="flex gap-2">
+      <MButton>Inside flex</MButton>
+      <MButton>Inside flex with more text</MButton>
+    </div>
+  </main>
 </template>

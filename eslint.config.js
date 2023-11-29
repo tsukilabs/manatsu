@@ -7,5 +7,21 @@ export default config({
     'packages/components/tsconfig.json',
     'packages/manatsu/tsconfig.json',
     'packages/playground/tsconfig.json'
-  ]
+  ],
+  overrides: {
+    vue: {
+      'vue/block-lang': [
+        'error',
+        {
+          script: {
+            lang: 'ts'
+          },
+          style: {
+            lang: 'scss',
+            allowNoLang: false
+          }
+        }
+      ]
+    }
+  }
 });

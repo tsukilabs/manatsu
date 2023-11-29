@@ -5,6 +5,7 @@
   "private": true,
   "exports": {
     "./*": "./*",
-    "./manatsu-dark": "./manatsu-dark/main.scss"
+    "./manatsu-dark": "./manatsu-dark/main.scss",
+    "./manatsu-light": "./manatsu-light/main.scss"
   }
 }

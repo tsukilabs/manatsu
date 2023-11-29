@@ -11,6 +11,7 @@
     "removeComments": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
+    "isolatedModules": true,
     "declaration": false,
 
     "alwaysStrict": true,

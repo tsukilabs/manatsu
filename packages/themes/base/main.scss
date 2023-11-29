@@ -1,4 +1,16 @@
+:root {
+  --mana-font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+}
+
+:root {
+  --mana-button-border-radius: 5px;
+  --mana-button-padding: 0.25em 0.75em;
+}
+
 body {
   background-color: var(--mana-color-background);
   color: var(--mana-color-on-background);
+  font-family: var(--mana-font-family);
 }
