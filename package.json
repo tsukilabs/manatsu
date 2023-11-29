@@ -28,7 +28,7 @@
     "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
     "@tb-dev/eslint-config": "^1.3.3",
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.10.1",
     "@vitejs/plugin-vue": "^4.5.0",
     "@vitest/browser": "1.0.0-beta.5",
     "@vitest/coverage-istanbul": "1.0.0-beta.6",
