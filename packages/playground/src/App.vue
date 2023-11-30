@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MButton } from '@manatsu/components';
+import { MButton } from '@manatsu/components/index.ts';
 </script>
 
 <template>

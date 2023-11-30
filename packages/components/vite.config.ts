@@ -5,15 +5,24 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   root: __dirname,
-  plugins: [vue(), dts({ rollupTypes: true, declarationOnly: true })],
+  plugins: [vue(), dts({ rollupTypes: true })],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
     minify: false,
     lib: {
       entry: join(__dirname, 'index.ts'),
-      formats: ['es'],
-      fileName: 'index'
+      formats: ['es', 'cjs'],
+      fileName: (format) => {
+        switch (format) {
+          case 'es':
+            return 'index.mjs';
+          case 'cjs':
+            return 'index.cjs';
+          default:
+            throw new Error(`Invalid format: ${format}`);
+        }
+      }
     },
     rollupOptions: {
       external: ['vue']

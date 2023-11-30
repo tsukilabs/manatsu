@@ -1,6 +1,6 @@
 {
   "name": "manatsu",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Component library",
   "license": "MIT",
   "private": false,
@@ -29,9 +29,6 @@
     "./style": "./dist/style.css",
     "./themes/manatsu-dark": "./dist/themes/manatsu-dark.css",
     "./themes/manatsu-light": "./dist/themes/manatsu-light.css"
-  },
-  "lint-staged": {
-    "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
   },
   "scripts": {
     "build": "run-p type-check build-only",

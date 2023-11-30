@@ -38,9 +38,9 @@ export default defineConfig({
       const packages = ['manatsu', 'components', 'themes'] as const;
       await Promise.all(packages.map((pkg) => buildPackage(pkg)));
 
-      // Move files.
+      // Copy files.
       const dts = path.join(components, 'index.d.ts');
-      await fs.rename(dts, path.join(manatsu, 'index.d.ts'));
+      await fs.copyFile(dts, path.join(manatsu, 'index.d.ts'));
     },
     publish: async () => {
       const { version } = await import('./package.json');

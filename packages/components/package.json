@@ -1,10 +1,22 @@
 {
   "name": "@manatsu/components",
-  "version": "0.1.11",
+  "version": "0.1.12",
+  "private": false,
   "type": "module",
-  "private": true,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./*",
+    "./style": "./dist/style.css"
   },
   "scripts": {
     "build": "run-p type-check build-only",

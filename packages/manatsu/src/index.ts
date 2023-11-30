@@ -1,1 +1,1 @@
-export * from '@manatsu/components';
+export * from '@manatsu/components/index.ts';
