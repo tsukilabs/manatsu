@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     outDir: 'dist',
-    emptyOutDir: true,
+    emptyOutDir: false,
     minify: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),

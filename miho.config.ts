@@ -6,9 +6,20 @@ import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
 
+type PackageName = 'manatsu' | 'components' | 'themes';
+
+function getDistDir(packageName: PackageName) {
+  return path.join(process.cwd(), `packages/${packageName}/dist`);
+}
+
+function buildPackage(packageName: PackageName) {
+  const options: ExecaOptions = { stdio: 'inherit' };
+  return execa('pnpm', ['-F', packageName, 'build'], options);
+}
+
 export default defineConfig({
-  recursive: true,
   packageManager: PackageManager.PNPM,
+  recursive: true,
   commit: {
     push: true,
     all: true
@@ -16,21 +27,20 @@ export default defineConfig({
   jobs: {
     skip: ['publish'],
     build: async () => {
-      const dist = path.join(process.cwd(), 'packages/manatsu/dist');
-      const components = path.join(process.cwd(), 'packages/components/dist');
+      const manatsu = getDistDir('manatsu');
+      const components = getDistDir('components');
 
-      if (exists(dist)) {
-        await fs.rm(dist, { recursive: true });
+      if (exists(manatsu)) {
+        await fs.rm(manatsu, { recursive: true });
       }
 
-      const options: ExecaOptions = { stdio: 'inherit' };
-      await Promise.all([
-        execa('pnpm', ['-F', 'manatsu', 'build'], options),
-        execa('pnpm', ['-F', 'components', 'build'], options)
-      ]);
+      // Build.
+      const packages = ['manatsu', 'components', 'themes'] as const;
+      await Promise.all(packages.map((pkg) => buildPackage(pkg)));
 
+      // Move files.
       const dts = path.join(components, 'index.d.ts');
-      await fs.rename(dts, path.join(dist, 'index.d.ts'));
+      await fs.rename(dts, path.join(manatsu, 'index.d.ts'));
     },
     publish: async () => {
       const { version } = await import('./package.json');

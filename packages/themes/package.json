@@ -5,7 +5,10 @@
   "private": true,
   "exports": {
     "./*": "./*",
-    "./manatsu-dark": "./manatsu-dark/main.scss",
-    "./manatsu-light": "./manatsu-light/main.scss"
+    "./manatsu-dark": "./src/manatsu-dark.scss",
+    "./manatsu-light": "./src/manatsu-light.scss"
+  },
+  "scripts": {
+    "build": "sass src:../manatsu/dist/themes --no-source-map"
   }
 }

@@ -43,7 +43,7 @@ const bgColor = computed(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .m-button {
   display: inline-flex;
   flex-wrap: nowrap;

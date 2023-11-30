@@ -25,7 +25,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./style": "./dist/style.css",
+    "./themes/manatsu-dark": "./dist/themes/manatsu-dark.css",
+    "./themes/manatsu-light": "./dist/themes/manatsu-light.css"
   },
   "lint-staged": {
     "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write"
