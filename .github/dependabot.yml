@@ -1,11 +1,18 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
+    groups:
+      non-major:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
     schedule:
-      interval: "daily"
+      interval: 'daily'
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-        interval: "weekly"
+      interval: 'weekly'
