@@ -6,6 +6,8 @@
     "esbenp.prettier-vscode",
     "vscode-icons-team.vscode-icons",
     "dbaeumer.vscode-eslint",
-    "vue.vscode-typescript-vue-plugin"
+    "vue.vscode-typescript-vue-plugin",
+    "donjayamanne.githistory",
+    "phoenisx.cssvar"
   ]
 }
