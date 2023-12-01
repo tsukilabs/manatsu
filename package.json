@@ -11,6 +11,7 @@
   "scripts": {
     "build": "miho -l build",
     "build:playground": "pnpm -F @manatsu/playground build",
+    "build:themes": "pnpm -F @manatsu/themes build",
     "deps": "pnpm exec taze -f -r -w",
     "dev": "vite serve packages/playground",
     "prepare": "husky install",
@@ -25,22 +26,23 @@
     "type-check": "vue-tsc --noEmit"
   },
   "devDependencies": {
+    "@manatsu/theme-builder": "^0.1.5",
     "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@tb-dev/eslint-config": "^1.4.1",
-    "@types/node": "^20.10.1",
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@tb-dev/eslint-config": "^1.4.3",
+    "@types/node": "^20.10.2",
+    "@vitejs/plugin-vue": "^4.5.1",
     "@vitest/browser": "1.0.0-beta.6",
     "@vitest/coverage-istanbul": "1.0.0-beta.6",
     "@vitest/ui": "1.0.0-beta.6",
     "@vue/test-utils": "^2.4.3",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.54.0",
+    "eslint": "^8.55.0",
     "execa": "^8.0.1",
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.1.0",
-    "miho": "^1.7.11",
+    "miho": "^2.0.0",
     "npm-run-all2": "^6.1.1",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
@@ -61,6 +63,6 @@
     "webdriverio": "^8.24.6"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.3.0"
   }
 }
