@@ -1,9 +1,9 @@
 import { h } from 'vue';
-import { expect, test } from 'vitest';
+import { expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Button from './Button.vue';
 
-test('render', () => {
+it('should render', () => {
   const label = 'My Button';
   const wrapper = mount(Button, {
     slots: {

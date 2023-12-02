@@ -1,41 +1,23 @@
-<!-- eslint-disable @typescript-eslint/no-unsafe-return -->
 <script setup lang="ts">
 import { computed } from 'vue';
+import type { ButtonProps } from './types';
 
-interface Props {
-  readonly type?: 'filled' | 'tonal';
-}
+const props = defineProps<ButtonProps>();
 
-const props = withDefaults(defineProps<Props>(), {
-  type: 'filled'
-});
-
-const color = computed(() => {
-  switch (props.type) {
-    case 'filled':
-      return 'var(--mana-color-on-primary)';
-    case 'tonal':
-      return 'var(--mana-color-on-secondary-container)';
-    default:
-      return 'var(--mana-color-on-primary)';
-  }
-});
-
-const bgColor = computed(() => {
-  switch (props.type) {
-    case 'filled':
-      return 'var(--mana-color-primary)';
-    case 'tonal':
-      return 'var(--mana-color-secondary-container)';
-    default:
-      return 'var(--mana-color-primary)';
-  }
+const classList = computed(() => {
+  return {
+    'm-button-elevated': props.elevated,
+    'm-button-filled': props.filled,
+    'm-button-tonal': props.tonal,
+    'm-button-outlined': props.outlined,
+    'm-button-text': props.text
+  };
 });
 </script>
 
 <template>
-  <div class="m-button" role="none">
-    <button type="button">
+  <div class="m-button-wrapper" role="none">
+    <button type="button" class="m-button" :class="classList" :style="style">
       <span class="m-button-content">
         <slot></slot>
       </span>
@@ -44,37 +26,55 @@ const bgColor = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.m-button {
+.m-button-wrapper {
   display: inline-flex;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   max-width: max-content;
   white-space: nowrap;
+}
 
-  button {
-    cursor: pointer;
-    border: none;
-    border-radius: var(--mana-button-border-radius);
-    background-color: v-bind('bgColor');
-    padding: var(--mana-button-padding);
-    min-width: var(--mana-button-min-width);
-    min-height: var(--mana-button-height);
-    color: v-bind('color');
-    line-height: var(--mana-button-line-height);
-    font-family: inherit;
-    text-align: center;
+.m-button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--mana-border-radius);
+  padding: var(--mana-button-padding);
+  min-width: var(--mana-button-min-width);
+  min-height: var(--mana-button-min-height);
+  line-height: var(--mana-button-line-height);
+  font-family: inherit;
+  text-align: center;
 
-    transition: {
-      property: filter;
-      duration: 200ms;
-      timing-function: ease-in-out;
-    }
-
-    &:hover,
-    &:active {
-      filter: contrast(150%);
-    }
+  transition: {
+    property: filter;
+    duration: 200ms;
+    timing-function: ease-in-out;
   }
+
+  &:hover {
+    filter: contrast(120%);
+  }
+}
+
+.m-button-filled {
+  background-color: var(--mana-color-primary);
+  color: var(--mana-color-on-primary);
+}
+
+.m-button-tonal {
+  background-color: var(--mana-color-secondary-container);
+  color: var(--mana-color-on-secondary-container);
+}
+
+.m-button-outlined {
+  border: 1px solid var(--mana-color-outline);
+  background-color: transparent;
+  color: var(--mana-color-primary);
+}
+
+.m-button-text {
+  background-color: transparent;
+  color: var(--mana-color-primary);
 }
 </style>
