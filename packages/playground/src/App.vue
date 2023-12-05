@@ -19,20 +19,21 @@ import { MButton, MInput } from '@manatsu/components/index.ts';
 </template>
 
 <style lang="scss">
-main {
+@mixin flex($flex-direction: row, $gap: 1rem) {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  flex-direction: $flex-direction;
+  gap: $gap;
+}
+
+main {
+  @include flex($flex-direction: column, $gap: 2rem);
 }
 
 main > div:first-child {
-  display: flex;
-  gap: 1rem;
+  @include flex($gap: 1rem);
 }
 
 main > div:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  @include flex($flex-direction: column);
 }
 </style>
