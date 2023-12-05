@@ -14,7 +14,13 @@ const classList = computed(() => {
 
 <template>
   <div role="none">
-    <input type="text" class="m-input" :class="classList" :style="style" />
+    <input
+      type="text"
+      class="m-input"
+      :class="classList"
+      :style="style"
+      placeholder="teste"
+    />
   </div>
 </template>
 

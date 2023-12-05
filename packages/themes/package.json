@@ -9,6 +9,6 @@
     "./manatsu-light": "./src/manatsu-light.scss"
   },
   "scripts": {
-    "build": "sass src:../manatsu/dist/themes --no-source-map"
+    "build": "sass src:../../dist/themes --no-source-map"
   }
 }

@@ -38,6 +38,9 @@
   "dependencies": {
     "@manatsu/components": "workspace:*"
   },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
   "engines": {
     "node": ">=18"
   }

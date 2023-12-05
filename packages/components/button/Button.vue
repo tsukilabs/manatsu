@@ -8,9 +8,9 @@ const classList = computed(() => {
   return {
     'm-button-elevated': props.elevated,
     'm-button-filled': props.filled,
-    'm-button-tonal': props.tonal,
     'm-button-outlined': props.outlined,
-    'm-button-text': props.text
+    'm-button-text': props.text,
+    'm-button-tonal': props.tonal
   };
 });
 </script>
@@ -53,18 +53,19 @@ const classList = computed(() => {
   }
 
   &:hover {
-    filter: contrast(120%);
+    filter: contrast(150%);
   }
+}
+
+.m-button-elevated {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  background-color: var(--mana-color-surface-low);
+  color: var(--mana-color-primary);
 }
 
 .m-button-filled {
   background-color: var(--mana-color-primary);
   color: var(--mana-color-on-primary);
-}
-
-.m-button-tonal {
-  background-color: var(--mana-color-secondary-container);
-  color: var(--mana-color-on-secondary-container);
 }
 
 .m-button-outlined {
@@ -76,5 +77,10 @@ const classList = computed(() => {
 .m-button-text {
   background-color: transparent;
   color: var(--mana-color-primary);
+}
+
+.m-button-tonal {
+  background-color: var(--mana-color-secondary-container);
+  color: var(--mana-color-on-secondary-container);
 }
 </style>

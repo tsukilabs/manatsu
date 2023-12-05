@@ -5,6 +5,7 @@ import { MButton, MInput } from '@manatsu/components/index.ts';
 <template>
   <main class="flex flex-col gap-4">
     <div class="flex gap-2">
+      <MButton elevated>Elevated</MButton>
       <MButton filled>Filled</MButton>
       <MButton tonal>Tonal</MButton>
       <MButton outlined>Outlined</MButton>
