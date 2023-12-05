@@ -47,7 +47,7 @@
     "postcss": "^8.4.32",
     "prettier": "^3.1.0",
     "prettier-plugin-css-order": "^2.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.7",
+    "prettier-plugin-tailwindcss": "^0.5.8",
     "rollup": "^4.6.1",
     "sass": "^1.69.5",
     "tailwindcss": "^3.3.6",
@@ -59,8 +59,8 @@
     "vite-plugin-dts": "^3.6.4",
     "vitest": "1.0.1",
     "vue": "^3.3.10",
-    "vue-tsc": "^1.8.24",
-    "webdriverio": "^8.24.6"
+    "vue-tsc": "^1.8.25",
+    "webdriverio": "^8.24.9"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
