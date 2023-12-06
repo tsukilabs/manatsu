@@ -26,6 +26,13 @@ const classList = computed(() => {
 </template>
 
 <style scoped lang="scss">
+:global(:root) {
+  --mana-button-line-height: 1.1;
+  --mana-button-min-height: 34px;
+  --mana-button-min-width: 10ch;
+  --mana-button-padding: 0.25em 0.75em;
+}
+
 .m-button-wrapper {
   display: inline-flex;
   flex-wrap: nowrap;

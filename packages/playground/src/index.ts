@@ -1,5 +1,4 @@
-import './assets/style.css';
-import '@manatsu/themes/manatsu-light';
+import 'manatsu/src/assets/main.scss';
 import { createApp } from 'vue';
 import App from './App.vue';
 

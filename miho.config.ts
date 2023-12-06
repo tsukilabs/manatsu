@@ -6,7 +6,7 @@ import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
 
-type PackageName = 'manatsu' | 'components' | 'themes';
+type PackageName = 'manatsu' | 'components';
 
 export default defineConfig({
   packageManager: PackageManager.PNPM,
@@ -35,7 +35,7 @@ export default defineConfig({
 
       // Build.
       await fs.mkdir(root, { recursive: true });
-      const packages = ['manatsu', 'components', 'themes'] as const;
+      const packages: PackageName[] = ['manatsu', 'components'];
       await Promise.all(packages.map(build));
 
       // Copy files.

@@ -118,14 +118,9 @@ importers:
       '@manatsu/components':
         specifier: workspace:*
         version: link:../components
-      '@manatsu/themes':
-        specifier: workspace:*
-        version: link:../themes
       manatsu:
         specifier: workspace:*
         version: link:../manatsu
-
-  packages/themes: {}
 
 packages:
 

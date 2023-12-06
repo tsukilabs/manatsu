@@ -26,9 +26,8 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./style": "./dist/style.css",
-    "./themes/manatsu-dark": "./dist/themes/manatsu-dark.css",
-    "./themes/manatsu-light": "./dist/themes/manatsu-light.css"
+    "./*": "./*",
+    "./style": "./dist/style.css"
   },
   "scripts": {
     "build": "run-p type-check build-only",

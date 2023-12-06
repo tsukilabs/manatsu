@@ -11,7 +11,6 @@
   "scripts": {
     "build": "miho -l build",
     "build:playground": "pnpm -F @manatsu/playground build",
-    "build:themes": "pnpm -F @manatsu/themes build",
     "deps": "pnpm exec taze -f -r -w",
     "dev": "vite serve packages/playground",
     "prepare": "husky install",
