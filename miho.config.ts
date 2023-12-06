@@ -48,6 +48,7 @@ export default defineConfig({
       const dts = join(components, 'index.d.ts');
       await fs.copyFile(dts, join(root, 'index.d.ts'));
     },
+
     publish: async () => {
       const { version } = await import('./package.json');
       const { GITHUB_TOKEN } = await import('./config.json');
