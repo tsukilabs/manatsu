@@ -18,7 +18,7 @@ function switchDarkMode() {
   <main>
     <div class="dark-mode">
       <span>Dark mode: {{ darkMode }}</span>
-      <MButton filled @click="switchDarkMode">Elevated</MButton>
+      <MButton @click="switchDarkMode">Toggle</MButton>
     </div>
     <div>
       <MButton elevated>Elevated</MButton>
@@ -34,7 +34,7 @@ function switchDarkMode() {
   </main>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @mixin flex($flex-direction: row, $gap: 1rem) {
   display: flex;
   flex-direction: $flex-direction;
@@ -47,5 +47,10 @@ main {
 
 main > div {
   @include flex($gap: 1rem);
+}
+
+.dark-mode {
+  @include flex($gap: 1rem);
+  align-items: center;
 }
 </style>

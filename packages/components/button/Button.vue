@@ -5,13 +5,19 @@ import type { ButtonProps } from './types';
 const props = defineProps<ButtonProps>();
 
 const classList = computed(() => {
-  return {
+  const classes = {
     'm-button-elevated': props.elevated,
     'm-button-filled': props.filled,
     'm-button-outlined': props.outlined,
     'm-button-text': props.text,
     'm-button-tonal': props.tonal
   };
+
+  if (Object.values(classes).every((c) => !c)) {
+    classes['m-button-filled'] = true;
+  }
+
+  return classes;
 });
 </script>
 
