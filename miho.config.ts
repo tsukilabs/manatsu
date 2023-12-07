@@ -46,7 +46,7 @@ export default defineConfig({
       );
 
       const dts = join(components, 'index.d.ts');
-      await fs.copyFile(dts, join(root, 'index.d.ts'));
+      await fs.copyFile(dts, join(root, 'components.d.ts'));
     },
 
     publish: async () => {

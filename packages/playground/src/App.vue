@@ -1,9 +1,25 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue';
+import { darkModeKey } from 'manatsu/src/index.ts';
 import { MButton, MInput } from '@manatsu/components/index.ts';
+
+const darkMode = inject(darkModeKey, () => ref<boolean | 'auto'>(false), true);
+
+function switchDarkMode() {
+  if (darkMode.value === 'auto') {
+    darkMode.value = false;
+  } else {
+    darkMode.value = !darkMode.value;
+  }
+}
 </script>
 
 <template>
   <main>
+    <div class="dark-mode">
+      <span>Dark mode: {{ darkMode }}</span>
+      <MButton filled @click="switchDarkMode">Elevated</MButton>
+    </div>
     <div>
       <MButton elevated>Elevated</MButton>
       <MButton filled>Filled</MButton>
@@ -26,14 +42,10 @@ import { MButton, MInput } from '@manatsu/components/index.ts';
 }
 
 main {
-  @include flex($flex-direction: column, $gap: 2rem);
+  @include flex($flex-direction: column, $gap: 1rem);
 }
 
-main > div:first-child {
+main > div {
   @include flex($gap: 1rem);
-}
-
-main > div:nth-child(2) {
-  @include flex($flex-direction: column);
 }
 </style>

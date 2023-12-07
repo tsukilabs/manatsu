@@ -1,15 +1,4 @@
 {
-  "vsicons.associations.files": [
-    {
-      "icon": "tailwind",
-      "extensions": ["tailwind.config.mjs"],
-      "filename": true,
-      "format": "svg"
-    }
-  ],
-  "vsicons.associations.folders": [
-    { "icon": "theme", "extensions": ["presets"], "format": "svg" }
-  ],
   "prettier.requireConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[vue]": {
