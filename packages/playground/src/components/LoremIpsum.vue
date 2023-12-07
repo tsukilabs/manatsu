@@ -1,11 +1,7 @@
 <script setup lang="ts">
-interface Props {
-  paragraphs?: 1 | 2 | 3;
-}
-
-withDefaults(defineProps<Props>(), {
-  paragraphs: 1
-});
+defineProps<{
+  paragraphs: 1 | 2 | 3;
+}>();
 </script>
 
 <template>
