@@ -25,7 +25,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "devDependencies": {
-    "@manatsu/theme-builder": "^0.1.5",
+    "@manatsu/theme-builder": "^0.2.0",
     "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
     "@tb-dev/eslint-config": "^1.4.4",

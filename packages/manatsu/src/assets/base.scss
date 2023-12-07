@@ -10,4 +10,7 @@ body {
   background-color: var(--mana-color-background);
   color: var(--mana-color-on-background);
   font-family: var(--mana-font-family);
+  font-size: var(--mana-tp-body-medium-font-size);
+  line-height: var(--mana-tp-body-medium-line-height);
+  letter-spacing: var(--mana-tp-body-medium-letter-spacing);
 }

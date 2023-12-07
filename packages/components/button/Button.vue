@@ -4,8 +4,8 @@ import type { ButtonProps } from './types';
 
 const props = defineProps<ButtonProps>();
 
-const classList = computed(() => {
-  const classes = {
+const materialType = computed(() => {
+  const types = {
     'm-button-elevated': props.elevated,
     'm-button-filled': props.filled,
     'm-button-outlined': props.outlined,
@@ -13,11 +13,15 @@ const classList = computed(() => {
     'm-button-tonal': props.tonal
   };
 
-  if (Object.values(classes).every((c) => !c)) {
-    classes['m-button-filled'] = true;
+  if (Object.values(types).every((c) => !c)) {
+    types['m-button-filled'] = true;
   }
 
-  return classes;
+  return types;
+});
+
+const classList = computed(() => {
+  return { ...materialType.value };
 });
 </script>
 

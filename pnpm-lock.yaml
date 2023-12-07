@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@manatsu/theme-builder':
-        specifier: ^0.1.5
-        version: 0.1.5
+        specifier: ^0.2.0
+        version: 0.2.0
       '@octokit/core':
         specifier: ^5.0.2
         version: 5.0.2
@@ -115,6 +115,9 @@ importers:
       '@manatsu/components':
         specifier: workspace:*
         version: link:../components
+      '@vueuse/core':
+        specifier: ^10.0.0
+        version: 10.7.0(vue@3.3.10)
       vue:
         specifier: ^3.3.0
         version: 3.3.10(typescript@5.3.3)
@@ -661,8 +664,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@manatsu/theme-builder@0.1.5:
-    resolution: {integrity: sha512-g8EQCAjZmx7QqZ0xINW3tPuV2TMRkDyceSuTDX5Q6OjvK2JjJ5fvyms3/Je0lY8hbbNF3cpAfGjaRw+mRRwMvQ==}
+  /@manatsu/theme-builder@0.2.0:
+    resolution: {integrity: sha512-+Ih5S3TmphEhEUC5FCzTD7IBvZFoAVhNvpHK1PrvUt+jS4uozGZeJUeCH8FylTt0tOfTSN4HyC/jv/y/Ojvojg==}
     hasBin: true
     dependencies:
       postcss: 8.4.32
@@ -1255,7 +1258,6 @@ packages:
 
   /@types/web-bluetooth@0.0.20:
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
-    dev: true
 
   /@types/which@2.0.2:
     resolution: {integrity: sha512-113D3mDkZDjo+EeUEHCFy0qniNc1ZpecGiAU7WSo7YDoSzolZIQKpYFHrPpjkB2nuyahcKfrmLXeQlh7gqJYdw==}
@@ -1732,11 +1734,9 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: true
 
   /@vueuse/metadata@10.7.0:
     resolution: {integrity: sha512-GlaH7tKP2iBCZ3bHNZ6b0cl9g0CJK8lttkBNUX156gWvNYhTKEtbweWLm9rxCPIiwzYcr/5xML6T8ZUEt+DkvA==}
-    dev: true
 
   /@vueuse/shared@10.7.0(vue@3.3.10):
     resolution: {integrity: sha512-kc00uV6CiaTdc3i1CDC4a3lBxzaBE9AgYNtFN87B5OOscqeWElj/uza8qVDmk7/U8JbqoONLbtqiLJ5LGRuqlw==}
@@ -1745,7 +1745,6 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: true
 
   /@wdio/config@8.24.12:
     resolution: {integrity: sha512-3HW7qG1rIHzOIybV6oHR1CqLghsN0G3Xzs90ZciGL8dYhtcLtYCHwuWmBw4mkaB5xViU4AmZDuj7ChiG8Cr6Qw==}
@@ -5982,7 +5981,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.3.10(typescript@5.3.3)
-    dev: true
 
   /vue-eslint-parser@9.3.2(eslint@8.55.0):
     resolution: {integrity: sha512-q7tWyCVaV9f8iQyIA5Mkj/S6AoJ9KBN8IeUSf3XEmBrOtxOZnfTg5s4KClbZBCK3GtnT/+RyCLZyDHuZwTuBjg==}
