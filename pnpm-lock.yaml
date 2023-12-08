@@ -31,7 +31,7 @@ importers:
         version: 4.5.2(vite@5.0.7)(vue@3.3.11)
       '@vitest/browser':
         specifier: 1.0.2
-        version: 1.0.2(vitest@1.0.2)(webdriverio@8.24.12)
+        version: 1.0.2(vitest@1.0.2)(webdriverio@8.26.0)
       '@vitest/coverage-istanbul':
         specifier: 1.0.2
         version: 1.0.2(vitest@1.0.2)
@@ -105,8 +105,8 @@ importers:
         specifier: ^1.8.25
         version: 1.8.25(typescript@5.3.3)
       webdriverio:
-        specifier: ^8.24.12
-        version: 8.24.12(typescript@5.3.3)
+        specifier: ^8.26.0
+        version: 8.26.0(typescript@5.3.3)
 
   packages/components: {}
 
@@ -937,8 +937,8 @@ packages:
       - supports-color
     dev: true
 
-  /@puppeteer/browsers@1.8.0:
-    resolution: {integrity: sha512-TkRHIV6k2D8OlUe8RtG+5jgOF/H98Myx0M6AOafC8DdNVOFiBSFa5cpRDtpm8LXOa9sVwe0+e6Q3FC56X/DZfg==}
+  /@puppeteer/browsers@1.9.0:
+    resolution: {integrity: sha512-QwguOLy44YBGC8vuPP2nmpX4MUN2FzWbsnvZJtiCzecU3lHmVZkaC1tq6rToi9a200m8RzlVtDyxCS0UIDrxUg==}
     engines: {node: '>=16.3.0'}
     hasBin: true
     dependencies:
@@ -1492,7 +1492,7 @@ packages:
       vue: 3.3.11(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.0.2(vitest@1.0.2)(webdriverio@8.24.12):
+  /@vitest/browser@1.0.2(vitest@1.0.2)(webdriverio@8.26.0):
     resolution: {integrity: sha512-CvHdDtwvYc11kshHWnv+1C2URYIBSBOW3Fvxta9yN6BXbDuQDiyjQQVLNM4uk7JEdnQyS3xAVPxteWTwTzScJg==}
     peerDependencies:
       playwright: '*'
@@ -1511,7 +1511,7 @@ packages:
       magic-string: 0.30.5
       sirv: 2.0.3
       vitest: 1.0.2(@types/node@20.10.4)(@vitest/browser@1.0.2)(@vitest/ui@1.0.2)(jsdom@23.0.1)(sass@1.69.5)
-      webdriverio: 8.24.12(typescript@5.3.3)
+      webdriverio: 8.26.0(typescript@5.3.3)
     dev: true
 
   /@vitest/coverage-istanbul@1.0.2(vitest@1.0.2):
@@ -1914,7 +1914,7 @@ packages:
     resolution: {integrity: sha512-uzwZyBVgqz0Wz1KL3aOUaQsxT8TNkzxti4NNTSMrU256qAPqc/n75rB7V73QASapCMpy70mZZTsuPgQYYj4ytQ==}
     engines: {node: ^16.13 || >=18}
     dependencies:
-      '@puppeteer/browsers': 1.8.0
+      '@puppeteer/browsers': 1.9.0
       '@wdio/logger': 8.24.12
       '@wdio/types': 8.24.12
       decamelize: 6.0.0
@@ -5476,8 +5476,8 @@ packages:
     resolution: {integrity: sha512-aFZ19IgVmhdB2uX599ve2kE6BIE3YMnQ6Gp6BURhW/oIzpXGKr878TQfAQZn1+i0Flcc/UKUy1gOlcfaUBCryg==}
     dev: true
 
-  /streamx@2.15.5:
-    resolution: {integrity: sha512-9thPGMkKC2GctCzyCUjME3yR03x2xNo0GPKGkRw2UMYN+gqWa9uqpyNWhmsNCutU5zHmkUum0LsCRQTXUgUCAg==}
+  /streamx@2.15.6:
+    resolution: {integrity: sha512-q+vQL4AAz+FdfT137VF69Cc/APqUbxy+MDOImRrMvchJpigHj9GksgDU2LYbO9rx7RX6osWgxJB2WxhYv4SZAw==}
     dependencies:
       fast-fifo: 1.3.2
       queue-tick: 1.0.1
@@ -5600,7 +5600,7 @@ packages:
     dependencies:
       b4a: 1.6.4
       fast-fifo: 1.3.2
-      streamx: 2.15.5
+      streamx: 2.15.6
     dev: true
 
   /tar@6.2.0:
@@ -6052,7 +6052,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.10.4
-      '@vitest/browser': 1.0.2(vitest@1.0.2)(webdriverio@8.24.12)
+      '@vitest/browser': 1.0.2(vitest@1.0.2)(webdriverio@8.26.0)
       '@vitest/expect': 1.0.2
       '@vitest/runner': 1.0.2
       '@vitest/snapshot': 1.0.2
@@ -6238,8 +6238,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webdriverio@8.24.12(typescript@5.3.3):
-    resolution: {integrity: sha512-Ddu0NNRMVkTzRzqvm3m0wt2eLUn+Plz2Cj+1QXDnVpddYJvk9J3elZC2hqNyscEtecQ+h2y3r36OcJqkl9jPag==}
+  /webdriverio@8.26.0(typescript@5.3.3):
+    resolution: {integrity: sha512-4HfYTB1khiNaCtJGWnFmm/T5O1KAEL9srpWvIjw2XOkTd53rJ8pKTEU0lr/YtAunOELqcTZeTxb7Y0zfLsEEww==}
     engines: {node: ^16.13 || >=18}
     peerDependencies:
       devtools: ^8.14.0
