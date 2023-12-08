@@ -22,15 +22,12 @@ function switchDarkMode() {
       <MButton @click="switchDarkMode">Toggle</MButton>
     </div>
     <div>
-      <MButton elevated>Elevated</MButton>
       <MButton filled>Filled</MButton>
       <MButton tonal>Tonal</MButton>
       <MButton outlined>Outlined</MButton>
-      <MButton text>Text</MButton>
     </div>
     <div>
-      <MInput filled />
-      <MInput outlined />
+      <MInput />
     </div>
     <LoremIpsum :paragraphs="3" />
   </main>
