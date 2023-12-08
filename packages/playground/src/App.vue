@@ -27,7 +27,7 @@ function switchDarkMode() {
       <MButton>Lorem ipsum dolor</MButton>
     </div>
     <div>
-      <MInput />
+      <MInput placeholder="Text field" />
     </div>
     <LoremIpsum :paragraphs="3" />
   </main>
