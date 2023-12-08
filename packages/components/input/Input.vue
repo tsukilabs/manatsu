@@ -12,11 +12,18 @@ defineProps<InputProps>();
 
 <style scoped lang="scss">
 .m-input {
+  outline: none;
   border: 1px solid var(--mana-color-outline);
   border-radius: var(--mana-border-radius);
   background-color: transparent;
   color: inherit;
   caret-color: var(--mana-color-primary);
   font-family: inherit;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: var(--mana-color-primary);
+  }
 }
 </style>

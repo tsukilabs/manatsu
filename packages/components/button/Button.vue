@@ -4,23 +4,9 @@ import type { ButtonProps } from './types';
 
 const props = defineProps<ButtonProps>();
 
-const materialType = computed(() => {
-  const types = {
-    'm-button-filled': props.filled,
-    'm-button-outlined': props.outlined,
-    'm-button-tonal': props.tonal
-  };
-
-  if (Object.values(types).every((c) => !c)) {
-    types['m-button-filled'] = true;
-  }
-
-  return types;
-});
-
-const classList = computed(() => {
-  return { ...materialType.value };
-});
+const classList = computed(() => ({
+  'm-button-outlined': props.outlined
+}));
 </script>
 
 <template>
@@ -35,8 +21,7 @@ const classList = computed(() => {
 
 <style scoped lang="scss">
 :global(:root) {
-  --mana-button-line-height: 1.1;
-  --mana-button-min-height: 34px;
+  --mana-button-min-height: 32px;
   --mana-button-min-width: 10ch;
   --mana-button-padding: 0.25em 0.75em;
 }
@@ -57,34 +42,34 @@ const classList = computed(() => {
   padding: var(--mana-button-padding);
   min-width: var(--mana-button-min-width);
   min-height: var(--mana-button-min-height);
-  line-height: var(--mana-button-line-height);
+  font-weight: var(--mana-tp-label-large-font-weight);
+  font-size: var(--mana-tp-label-large-font-size);
+  line-height: var(--mana-tp-label-large-line-height);
   font-family: inherit;
   text-align: center;
+}
 
-  transition: {
-    property: filter;
-    duration: 200ms;
-    timing-function: ease-in-out;
-  }
+.m-button:not(.m-button-outlined) {
+  transition: filter 0.3s ease-in-out;
+  background-color: var(--mana-color-primary);
+  color: var(--mana-color-on-primary);
 
   &:hover {
     filter: contrast(150%);
   }
 }
 
-.m-button-filled {
-  background-color: var(--mana-color-primary);
-  color: var(--mana-color-on-primary);
-}
-
 .m-button-outlined {
+  transition:
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
   border: 1px solid var(--mana-color-outline);
   background-color: transparent;
-  color: var(--mana-color-primary);
-}
+  color: inherit;
 
-.m-button-tonal {
-  background-color: var(--mana-color-secondary-container);
-  color: var(--mana-color-on-secondary-container);
+  &:hover {
+    border-color: var(--mana-color-primary);
+    color: var(--mana-color-primary);
+  }
 }
 </style>

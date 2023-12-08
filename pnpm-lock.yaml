@@ -31,7 +31,7 @@ importers:
         version: 4.5.2(vite@5.0.7)(vue@3.3.11)
       '@vitest/browser':
         specifier: 1.0.2
-        version: 1.0.2(vitest@1.0.2)(webdriverio@8.24.12)
+        version: 1.0.2(vitest@1.0.2)(webdriverio@8.26.0)
       '@vitest/coverage-istanbul':
         specifier: 1.0.2
         version: 1.0.2(vitest@1.0.2)
@@ -105,10 +105,12 @@ importers:
         specifier: ^1.8.25
         version: 1.8.25(typescript@5.3.3)
       webdriverio:
-        specifier: ^8.24.12
-        version: 8.24.12(typescript@5.3.3)
+        specifier: ^8.26.0
+        version: 8.26.0(typescript@5.3.3)
 
   packages/components: {}
+
+  packages/composables: {}
 
   packages/manatsu:
     dependencies:
@@ -127,6 +129,9 @@ importers:
       '@manatsu/components':
         specifier: workspace:*
         version: link:../components
+      '@manatsu/composables':
+        specifier: workspace:*
+        version: link:../composables
       manatsu:
         specifier: workspace:*
         version: link:../manatsu
@@ -1492,7 +1497,7 @@ packages:
       vue: 3.3.11(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.0.2(vitest@1.0.2)(webdriverio@8.24.12):
+  /@vitest/browser@1.0.2(vitest@1.0.2)(webdriverio@8.26.0):
     resolution: {integrity: sha512-CvHdDtwvYc11kshHWnv+1C2URYIBSBOW3Fvxta9yN6BXbDuQDiyjQQVLNM4uk7JEdnQyS3xAVPxteWTwTzScJg==}
     peerDependencies:
       playwright: '*'
@@ -1511,7 +1516,7 @@ packages:
       magic-string: 0.30.5
       sirv: 2.0.3
       vitest: 1.0.2(@types/node@20.10.4)(@vitest/browser@1.0.2)(@vitest/ui@1.0.2)(jsdom@23.0.1)(sass@1.69.5)
-      webdriverio: 8.24.12(typescript@5.3.3)
+      webdriverio: 8.26.0(typescript@5.3.3)
     dev: true
 
   /@vitest/coverage-istanbul@1.0.2(vitest@1.0.2):
@@ -6052,7 +6057,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.10.4
-      '@vitest/browser': 1.0.2(vitest@1.0.2)(webdriverio@8.24.12)
+      '@vitest/browser': 1.0.2(vitest@1.0.2)(webdriverio@8.26.0)
       '@vitest/expect': 1.0.2
       '@vitest/runner': 1.0.2
       '@vitest/snapshot': 1.0.2
@@ -6238,8 +6243,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webdriverio@8.24.12(typescript@5.3.3):
-    resolution: {integrity: sha512-Ddu0NNRMVkTzRzqvm3m0wt2eLUn+Plz2Cj+1QXDnVpddYJvk9J3elZC2hqNyscEtecQ+h2y3r36OcJqkl9jPag==}
+  /webdriverio@8.26.0(typescript@5.3.3):
+    resolution: {integrity: sha512-4HfYTB1khiNaCtJGWnFmm/T5O1KAEL9srpWvIjw2XOkTd53rJ8pKTEU0lr/YtAunOELqcTZeTxb7Y0zfLsEEww==}
     engines: {node: ^16.13 || >=18}
     peerDependencies:
       devtools: ^8.14.0

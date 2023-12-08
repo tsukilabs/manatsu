@@ -5,6 +5,7 @@ export default config({
   project: [
     'tsconfig.json',
     'packages/components/tsconfig.json',
+    'packages/composables/tsconfig.json',
     'packages/manatsu/tsconfig.json',
     'packages/playground/tsconfig.json'
   ],

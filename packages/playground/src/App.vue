@@ -22,9 +22,9 @@ function switchDarkMode() {
       <MButton @click="switchDarkMode">Toggle</MButton>
     </div>
     <div>
-      <MButton filled>Filled</MButton>
-      <MButton tonal>Tonal</MButton>
+      <MButton>Button</MButton>
       <MButton outlined>Outlined</MButton>
+      <MButton>Lorem ipsum dolor</MButton>
     </div>
     <div>
       <MInput />
