@@ -1,9 +1,9 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@8.12.0",
+  "packageManager": "pnpm@8.12.1",
   "lint-staged": {
     "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write",
     "*.{?(c|m)@(j|t)s,vue}": "pnpm lint"
@@ -28,8 +28,8 @@
     "@manatsu/theme-builder": "^0.2.1",
     "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@tb-dev/eslint-config": "^1.4.4",
-    "@tb-dev/utility-types": "^1.0.0",
+    "@tb-dev/eslint-config": "^1.4.6",
+    "@tb-dev/utility-types": "^1.0.1",
     "@types/node": "^20.10.4",
     "@vitejs/plugin-vue": "^4.5.2",
     "@vitest/browser": "1.0.4",
@@ -42,7 +42,7 @@
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.2.0",
-    "miho": "^2.2.1",
+    "miho": "^2.2.2",
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.1.1",
     "prettier-plugin-css-order": "^2.0.1",
