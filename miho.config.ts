@@ -59,8 +59,11 @@ export default defineConfig({
       if (GITHUB) {
         await github(GITHUB_TOKEN);
       } else {
-        const args = ['publish', '-r', '--no-git-checks', '--otp', NPM_TOKEN];
-        await execa('pnpm', args, execaOptions);
+        const args = ['publish', '-r', '--no-git-checks'];
+        await execa('pnpm', args, {
+          ...execaOptions,
+          env: { NPM_TOKEN }
+        });
       }
     }
   }
