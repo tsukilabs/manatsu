@@ -59,6 +59,10 @@ export default defineConfig({
       if (GITHUB) {
         await github(GITHUB_TOKEN);
       } else {
+        // eslint-disable-next-line no-template-curly-in-string
+        const config = '//registry.npmjs.org/:_authToken=${NPM_TOKEN}';
+        await execa('npm', ['config', 'set', config], execaOptions);
+
         const args = ['publish', '-r', '--no-git-checks'];
         await execa('pnpm', args, {
           ...execaOptions,
