@@ -23,7 +23,6 @@ export default defineConfig({
     }
   },
   jobs: {
-    skip: ['publish'],
     build: async () => {
       const root = join(cwd(), 'dist');
       const manatsu = dist('manatsu');
