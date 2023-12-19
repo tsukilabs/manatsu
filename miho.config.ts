@@ -38,6 +38,19 @@ export default defineConfig({
           return fs.copyFile(pkgDts, join(dist('manatsu'), `${pkg}.d.ts`));
         })
       );
+
+      // Fix dts path.
+      const dts = join(dist('manatsu'), 'index.d.ts');
+      let dtsContent = await fs.readFile(dts, 'utf-8');
+
+      for (const dep of deps) {
+        dtsContent = dtsContent.replaceAll(
+          `@manatsu/${dep}/index.ts`,
+          `./${dep}`
+        );
+      }
+
+      await fs.writeFile(dts, dtsContent, 'utf-8');
     },
 
     publish: async () => {
