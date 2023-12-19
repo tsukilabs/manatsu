@@ -83,13 +83,12 @@ export default defineConfig({
   }
 });
 
-function dist(packageName: PackageName) {
-  return join(cwd(), `packages/${packageName}/dist`);
+function dist(pkgName: PackageName) {
+  return join(cwd(), `packages/${pkgName}/dist`);
 }
 
-function build(packageName: PackageName) {
+function build(pkgName: PackageName) {
   const options: ExecaOptions = { stdio: 'inherit' };
-  const pkg =
-    packageName === 'manatsu' ? packageName : `@manatsu/${packageName}`;
+  const pkg = pkgName === 'manatsu' ? pkgName : `@manatsu/${pkgName}`;
   return execa('pnpm', ['-F', pkg, 'build'], options);
 }
