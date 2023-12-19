@@ -45,8 +45,20 @@ export default defineConfig({
         files.map((f) => fs.copyFile(f, join(root, basename(f))))
       );
 
-      const dts = join(components, 'index.d.ts');
-      await fs.copyFile(dts, join(root, 'components.d.ts'));
+      const indexDtsFile = 'index.d.ts';
+      const componentsDtsFile = 'components.d.ts';
+
+      const componentsDts = join(components, indexDtsFile);
+      await fs.copyFile(componentsDts, join(root, componentsDtsFile));
+
+      // Fix dts path.
+      const indexDts = join(root, indexDtsFile);
+      let indexDtsContent = await fs.readFile(indexDts, 'utf-8');
+      indexDtsContent = indexDtsContent.replaceAll(
+        '@manatsu/components/index.ts',
+        `./${componentsDtsFile}`
+      );
+      await fs.writeFile(indexDts, indexDtsContent, 'utf-8');
     },
 
     publish: async () => {
@@ -77,5 +89,7 @@ function dist(packageName: PackageName) {
 
 function build(packageName: PackageName) {
   const options: ExecaOptions = { stdio: 'inherit' };
-  return execa('pnpm', ['-F', packageName, 'build'], options);
+  const pkg =
+    packageName === 'manatsu' ? packageName : `@manatsu/${packageName}`;
+  return execa('pnpm', ['-F', pkg, 'build'], options);
 }

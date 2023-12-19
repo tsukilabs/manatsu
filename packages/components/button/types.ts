@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'vue';
+import type { StyleValue } from 'vue';
 
 export interface ButtonProps {
   outlined?: boolean;
-  style?: CSSProperties;
+  style?: StyleValue;
 }
