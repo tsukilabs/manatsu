@@ -6,6 +6,7 @@ import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
 
 type PackageName = 'manatsu' | 'components' | 'composables';
+const execaOptions: ExecaOptions = { stdio: 'inherit' };
 
 export default defineConfig({
   packageManager: PackageManager.PNPM,
@@ -54,23 +55,13 @@ export default defineConfig({
     },
 
     publish: async () => {
-      const { version } = await import('./package.json');
-      const { GITHUB_TOKEN } = await import('./config.json');
-      const octokit = new Octokit({ auth: GITHUB_TOKEN });
-
-      await octokit.request('POST /repos/{owner}/{repo}/releases', {
-        tag_name: `v${version}`,
-        name: `v${version}`,
-        draft: false,
-        prerelease: true,
-        generate_release_notes: true,
-        owner: 'ferreira-tb',
-        repo: 'manatsu',
-        headers: {
-          'X-GitHub-Api-Version': '2022-11-28',
-          accept: 'application/vnd.github+json'
-        }
-      });
+      const { GITHUB, GITHUB_TOKEN, NPM_TOKEN } = await import('./config.json');
+      if (GITHUB) {
+        await github(GITHUB_TOKEN);
+      } else {
+        const args = ['publish', '-r', '--no-git-checks', '--otp', NPM_TOKEN];
+        await execa('pnpm', args, execaOptions);
+      }
     }
   }
 });
@@ -80,7 +71,25 @@ function dist(pkgName: PackageName) {
 }
 
 function build(pkgName: PackageName) {
-  const options: ExecaOptions = { stdio: 'inherit' };
   const pkg = pkgName === 'manatsu' ? pkgName : `@manatsu/${pkgName}`;
-  return execa('pnpm', ['-F', pkg, 'build'], options);
+  return execa('pnpm', ['-F', pkg, 'build'], execaOptions);
+}
+
+async function github(token: string) {
+  const { version } = await import('./package.json');
+  const octokit = new Octokit({ auth: token });
+
+  await octokit.request('POST /repos/{owner}/{repo}/releases', {
+    tag_name: `v${version}`,
+    name: `v${version}`,
+    draft: false,
+    prerelease: true,
+    generate_release_notes: true,
+    owner: 'ferreira-tb',
+    repo: 'manatsu',
+    headers: {
+      'X-GitHub-Api-Version': '2022-11-28',
+      accept: 'application/vnd.github+json'
+    }
+  });
 }
