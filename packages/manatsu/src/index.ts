@@ -3,8 +3,9 @@ import { type Plugin, effectScope, ref, watchEffect } from 'vue';
 import { tryOnScopeDispose, usePreferredDark } from '@vueuse/core';
 import * as symbol from './symbol';
 
-export * from '@manatsu/components/index.ts';
 export * from './symbol';
+export * from '@manatsu/components';
+export * from '@manatsu/composables';
 
 export interface ManatsuOptions {
   /** @default 'auto' */

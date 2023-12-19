@@ -1,12 +1,8 @@
-import fs from 'node:fs/promises';
-import { cwd } from 'node:process';
-import { basename, join } from 'node:path';
-import { existsSync as exists } from 'node:fs';
 import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
 
-type PackageName = 'manatsu' | 'components';
+type PackageName = 'manatsu' | 'components' | 'composables';
 
 export default defineConfig({
   packageManager: PackageManager.PNPM,
@@ -24,40 +20,8 @@ export default defineConfig({
   },
   jobs: {
     build: async () => {
-      const root = join(cwd(), 'dist');
-      const manatsu = dist('manatsu');
-      const components = dist('components');
-
-      if (exists(root)) {
-        await fs.rm(root, { recursive: true });
-      }
-
-      // Build.
-      await fs.mkdir(root, { recursive: true });
-      const packages: PackageName[] = ['manatsu', 'components'];
+      const packages: PackageName[] = ['manatsu', 'components', 'composables'];
       await Promise.all(packages.map(build));
-
-      // Copy files.
-      let files = await fs.readdir(manatsu);
-      files = files.map((f) => join(manatsu, f));
-      await Promise.all(
-        files.map((f) => fs.copyFile(f, join(root, basename(f))))
-      );
-
-      const indexDtsFile = 'index.d.ts';
-      const componentsDtsFile = 'components.d.ts';
-
-      const componentsDts = join(components, indexDtsFile);
-      await fs.copyFile(componentsDts, join(root, componentsDtsFile));
-
-      // Fix dts path.
-      const indexDts = join(root, indexDtsFile);
-      let indexDtsContent = await fs.readFile(indexDts, 'utf-8');
-      indexDtsContent = indexDtsContent.replaceAll(
-        '@manatsu/components/index.ts',
-        `./${componentsDtsFile}`
-      );
-      await fs.writeFile(indexDts, indexDtsContent, 'utf-8');
     },
 
     publish: async () => {
@@ -81,10 +45,6 @@ export default defineConfig({
     }
   }
 });
-
-function dist(pkgName: PackageName) {
-  return join(cwd(), `packages/${pkgName}/dist`);
-}
 
 function build(pkgName: PackageName) {
   const options: ExecaOptions = { stdio: 'inherit' };

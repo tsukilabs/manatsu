@@ -1,6 +1,6 @@
 {
   "name": "manatsu",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Component library",
   "license": "MIT",
   "private": false,
@@ -35,9 +35,12 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@manatsu/components": "workspace:*"
+    "@manatsu/components": "workspace:*",
+    "@manatsu/composables": "workspace:*"
   },
   "peerDependencies": {
+    "@manatsu/components": "latest",
+    "@manatsu/composables": "latest",
     "@vueuse/core": "^10.0.0",
     "vue": "^3.3.0"
   },
