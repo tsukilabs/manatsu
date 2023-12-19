@@ -25,7 +25,7 @@ export default defineConfig({
       }
     },
     rollupOptions: {
-      external: ['vue', /^@vueuse\//, /^@manatsu\//]
+      external: ['vue', /^@vueuse\//]
     }
   }
 });

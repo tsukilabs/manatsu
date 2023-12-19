@@ -1,3 +1,7 @@
+import fs from 'node:fs/promises';
+import { cwd } from 'node:process';
+import { basename, join } from 'node:path';
+import { existsSync as exists } from 'node:fs';
 import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
@@ -20,8 +24,48 @@ export default defineConfig({
   },
   jobs: {
     build: async () => {
+      const root = join(cwd(), 'dist');
+      const manatsu = dist('manatsu');
+
+      if (exists(root)) {
+        await fs.rm(root, { recursive: true });
+      }
+
+      // Build.
+      await fs.mkdir(root, { recursive: true });
       const packages: PackageName[] = ['manatsu', 'components', 'composables'];
       await Promise.all(packages.map(build));
+
+      // Copy files.
+      let files = await fs.readdir(manatsu);
+      files = files.map((f) => join(manatsu, f));
+      await Promise.all(
+        files.map((f) => fs.copyFile(f, join(root, basename(f))))
+      );
+
+      type Deps = Exclude<PackageName, 'manatsu'>[];
+      const deps: Deps = ['components', 'composables'];
+
+      await Promise.all(
+        deps.map(async (pkg) => {
+          const distDir = dist(pkg);
+          const pkgDts = join(distDir, 'index.d.ts');
+          return fs.copyFile(pkgDts, join(root, `${pkg}.d.ts`));
+        })
+      );
+
+      // Fix dts path.
+      const rootDts = join(root, 'index.d.ts');
+      let dtsContent = await fs.readFile(rootDts, 'utf-8');
+
+      for (const dep of deps) {
+        dtsContent = dtsContent.replaceAll(
+          `@manatsu/${dep}/index.ts`,
+          `./${dep}.d.ts`
+        );
+      }
+
+      await fs.writeFile(rootDts, dtsContent, 'utf-8');
     },
 
     publish: async () => {
@@ -45,6 +89,10 @@ export default defineConfig({
     }
   }
 });
+
+function dist(pkgName: PackageName) {
+  return join(cwd(), `packages/${pkgName}/dist`);
+}
 
 function build(pkgName: PackageName) {
   const options: ExecaOptions = { stdio: 'inherit' };

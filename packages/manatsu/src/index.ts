@@ -4,8 +4,8 @@ import { tryOnScopeDispose, usePreferredDark } from '@vueuse/core';
 import * as symbol from './symbol';
 
 export * from './symbol';
-export * from '@manatsu/components';
-export * from '@manatsu/composables';
+export * from '@manatsu/components/index.ts';
+export * from '@manatsu/composables/index.ts';
 
 export interface ManatsuOptions {
   /** @default 'auto' */
