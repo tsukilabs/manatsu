@@ -27,7 +27,7 @@ function setDarkMode(darkMode: boolean) {
   body.setAttribute('class', classes.join(' '));
 }
 
-export function createManatsu(options: ManatsuOptions = {}) {
+export function createManatsu(options: ManatsuOptions = {}): Plugin {
   const manatsu: Plugin = {
     install(app) {
       const darkMode = ref(options.darkMode ?? 'auto');

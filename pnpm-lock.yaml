@@ -120,6 +120,9 @@ importers:
       '@manatsu/composables':
         specifier: workspace:*
         version: link:../composables
+      '@tb-dev/utility-types':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@vueuse/core':
         specifier: ^10.0.0
         version: 10.7.0(vue@3.3.13)
@@ -1216,7 +1219,6 @@ packages:
 
   /@tb-dev/utility-types@1.0.1:
     resolution: {integrity: sha512-jR1QZ37xkms8P/DJgtfCLCieXpCeKYFxnAN1i1muCW534/WndlljRls8xFD262u6+jN/LK9LF5laR+izANxlFA==}
-    dev: true
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}

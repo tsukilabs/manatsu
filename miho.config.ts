@@ -53,19 +53,6 @@ export default defineConfig({
           return fs.copyFile(pkgDts, join(root, `${pkg}.d.ts`));
         })
       );
-
-      // Fix dts path.
-      const rootDts = join(root, 'index.d.ts');
-      let dtsContent = await fs.readFile(rootDts, 'utf-8');
-
-      for (const dep of deps) {
-        dtsContent = dtsContent.replaceAll(
-          `@manatsu/${dep}/index.ts`,
-          `./${dep}.d.ts`
-        );
-      }
-
-      await fs.writeFile(rootDts, dtsContent, 'utf-8');
     },
 
     publish: async () => {

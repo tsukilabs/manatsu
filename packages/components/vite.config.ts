@@ -12,17 +12,8 @@ export default defineConfig({
     minify: false,
     lib: {
       entry: join(__dirname, 'index.ts'),
-      formats: ['es', 'cjs'],
-      fileName: (format) => {
-        switch (format) {
-          case 'es':
-            return 'index.mjs';
-          case 'cjs':
-            return 'index.cjs';
-          default:
-            throw new Error(`Invalid format: ${format}`);
-        }
-      }
+      formats: ['es'],
+      fileName: 'index'
     },
     rollupOptions: {
       external: ['vue']

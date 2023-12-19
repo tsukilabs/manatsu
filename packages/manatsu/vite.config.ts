@@ -12,20 +12,18 @@ export default defineConfig({
     minify: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'cjs'],
-      fileName: (format) => {
-        switch (format) {
-          case 'es':
-            return 'index.mjs';
-          case 'cjs':
-            return 'index.cjs';
-          default:
-            throw new Error(`Invalid format: ${format}`);
-        }
-      }
+      formats: ['es'],
+      fileName: 'index'
     },
     rollupOptions: {
-      external: ['vue', /^@vueuse\//]
+      external: ['vue', /^@vueuse\//],
+      output: {
+        chunkFileNames: '[name].js',
+        manualChunks: {
+          components: ['@manatsu/components/index.ts'],
+          composables: ['@manatsu/composables/index.ts']
+        }
+      }
     }
   }
 });
