@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/composables",
-  "version": "0.1.21",
+  "version": "0.1.23",
   "private": false,
   "type": "module",
   "files": [

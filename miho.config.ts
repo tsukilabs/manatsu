@@ -1,7 +1,6 @@
+import { join } from 'node:path';
 import fs from 'node:fs/promises';
 import { cwd } from 'node:process';
-import { basename, join } from 'node:path';
-import { existsSync as exists } from 'node:fs';
 import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
@@ -24,33 +23,19 @@ export default defineConfig({
   },
   jobs: {
     build: async () => {
-      const root = join(cwd(), 'dist');
-      const manatsu = dist('manatsu');
-
-      if (exists(root)) {
-        await fs.rm(root, { recursive: true });
-      }
-
       // Build.
-      await fs.mkdir(root, { recursive: true });
       const packages: PackageName[] = ['manatsu', 'components', 'composables'];
       await Promise.all(packages.map(build));
 
       // Copy files.
-      let files = await fs.readdir(manatsu);
-      files = files.map((f) => join(manatsu, f));
-      await Promise.all(
-        files.map((f) => fs.copyFile(f, join(root, basename(f))))
-      );
-
       type Deps = Exclude<PackageName, 'manatsu'>[];
       const deps: Deps = ['components', 'composables'];
 
       await Promise.all(
-        deps.map(async (pkg) => {
+        deps.map((pkg): Promise<void> => {
           const distDir = dist(pkg);
           const pkgDts = join(distDir, 'index.d.ts');
-          await fs.copyFile(pkgDts, join(root, `${pkg}.d.ts`));
+          return fs.copyFile(pkgDts, join(dist('manatsu'), `${pkg}.d.ts`));
         })
       );
     },
