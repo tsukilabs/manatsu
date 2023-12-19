@@ -55,19 +55,12 @@ export default defineConfig({
     },
 
     publish: async () => {
-      const { GITHUB, GITHUB_TOKEN, NPM_TOKEN } = await import('./config.json');
+      const { GITHUB, GITHUB_TOKEN } = await import('./config.json');
       if (GITHUB) {
         await github(GITHUB_TOKEN);
       } else {
-        // eslint-disable-next-line no-template-curly-in-string
-        const config = '//registry.npmjs.org/:_authToken=${NPM_TOKEN}';
-        await execa('npm', ['config', 'set', config], execaOptions);
-
         const args = ['publish', '-r', '--no-git-checks'];
-        await execa('pnpm', args, {
-          ...execaOptions,
-          env: { NPM_TOKEN }
-        });
+        await execa('pnpm', args, execaOptions);
       }
     }
   }
