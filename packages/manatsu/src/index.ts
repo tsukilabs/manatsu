@@ -27,25 +27,33 @@ function setDarkMode(darkMode: boolean) {
   body.setAttribute('class', classes.join(' '));
 }
 
-export const manatsu: Plugin<ManatsuOptions> = {
-  install(app, options = {}) {
-    const darkMode = ref(options.darkMode ?? 'auto');
-    const preferredDark = usePreferredDark();
-    app.provide(symbol.darkModeKey, darkMode);
+export function createManatsu(options: ManatsuOptions = {}) {
+  const manatsu: Plugin = {
+    install(app) {
+      const darkMode = ref(options.darkMode ?? 'auto');
+      const preferredDark = usePreferredDark();
+      app.provide(symbol.darkModeKey, darkMode);
 
-    const scope = effectScope();
-    scope.run(() => {
-      watchEffect(() => {
-        if (darkMode.value === 'auto') {
-          setDarkMode(preferredDark.value);
-        } else {
-          setDarkMode(darkMode.value);
-        }
+      /** @see https://github.com/vuejs/core/pull/8801 */
+      /** @see https://github.com/vuejs/core/issues/8787 */
+      const scope = effectScope();
+      scope.run(() => {
+        watchEffect(() => {
+          if (darkMode.value === 'auto') {
+            setDarkMode(preferredDark.value);
+          } else {
+            setDarkMode(darkMode.value);
+          }
+        });
       });
-    });
 
-    tryOnScopeDispose(() => {
-      scope.stop();
-    });
-  }
-};
+      app.runWithContext(() => {
+        tryOnScopeDispose(() => {
+          scope.stop();
+        });
+      });
+    }
+  };
+
+  return manatsu;
+}
