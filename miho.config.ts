@@ -50,7 +50,7 @@ export default defineConfig({
         deps.map(async (pkg) => {
           const distDir = dist(pkg);
           const pkgDts = join(distDir, 'index.d.ts');
-          return fs.copyFile(pkgDts, join(root, `${pkg}.d.ts`));
+          await fs.copyFile(pkgDts, join(root, `${pkg}.d.ts`));
         })
       );
     },
