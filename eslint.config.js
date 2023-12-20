@@ -1,6 +1,7 @@
 import config from '@tb-dev/eslint-config';
 
 export default config({
+  vitest: true,
   vue: true,
   project: [
     'tsconfig.json',

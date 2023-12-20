@@ -28,7 +28,7 @@
     "@manatsu/theme-builder": "^0.2.1",
     "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@tb-dev/eslint-config": "^1.4.11",
+    "@tb-dev/eslint-config": "^1.5.3",
     "@tb-dev/utility-types": "^1.0.1",
     "@types/node": "^20.10.5",
     "@vitejs/plugin-vue": "^4.5.2",

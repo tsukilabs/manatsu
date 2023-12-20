@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { inject, ref } from 'vue';
 import { darkModeKey } from 'manatsu/src/index.ts';
-import { MButton, MInput } from '@manatsu/components/index.ts';
+import {
+  MButton,
+  MInput,
+  MNavbar,
+  MScaffold
+} from '@manatsu/components/index.ts';
 import LoremIpsum from './components/LoremIpsum.vue';
 
 const darkMode = inject(darkModeKey, () => ref<boolean | 'auto'>(false), true);
@@ -16,21 +21,27 @@ function switchDarkMode() {
 </script>
 
 <template>
-  <main>
-    <div class="dark-mode">
-      <span>Dark mode: {{ darkMode }}</span>
-      <MButton @click="switchDarkMode">Toggle</MButton>
-    </div>
-    <div>
-      <MButton>Button</MButton>
-      <MButton outlined>Outlined</MButton>
-      <MButton>Lorem ipsum dolor</MButton>
-    </div>
-    <div>
-      <MInput placeholder="Text field" />
-    </div>
-    <LoremIpsum :paragraphs="3" />
-  </main>
+  <MScaffold navbar>
+    <template #navbar>
+      <MNavbar />
+    </template>
+
+    <main>
+      <div class="dark-mode">
+        <span>Dark mode: {{ darkMode }}</span>
+        <MButton @click="switchDarkMode">Toggle</MButton>
+      </div>
+      <div>
+        <MButton>Button</MButton>
+        <MButton outlined>Outlined</MButton>
+        <MButton>Lorem ipsum dolor</MButton>
+      </div>
+      <div>
+        <MInput placeholder="Text field" />
+      </div>
+      <LoremIpsum :paragraphs="3" />
+    </main>
+  </MScaffold>
 </template>
 
 <style scoped lang="scss">

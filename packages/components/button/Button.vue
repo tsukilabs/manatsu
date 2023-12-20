@@ -21,9 +21,9 @@ const classList = computed(() => ({
 
 <style scoped lang="scss">
 :global(:root) {
-  --mana-button-min-height: 32px;
-  --mana-button-min-width: 10ch;
-  --mana-button-padding: 0.25em 0.75em;
+  --m-button-min-height: 32px;
+  --m-button-min-width: 10ch;
+  --m-button-padding: 0.25em 0.75em;
 }
 
 .m-button-wrapper {
@@ -38,21 +38,21 @@ const classList = computed(() => ({
 .m-button {
   cursor: pointer;
   border: none;
-  border-radius: var(--mana-border-radius);
-  padding: var(--mana-button-padding);
-  min-width: var(--mana-button-min-width);
-  min-height: var(--mana-button-min-height);
-  font-weight: var(--mana-tp-label-large-font-weight);
-  font-size: var(--mana-tp-label-large-font-size);
-  line-height: var(--mana-tp-label-large-line-height);
+  border-radius: var(--m-border-radius);
+  padding: var(--m-button-padding);
+  min-width: var(--m-button-min-width);
+  min-height: var(--m-button-min-height);
+  font-weight: var(--m-tp-label-large-font-weight);
+  font-size: var(--m-tp-label-large-font-size);
+  line-height: var(--m-tp-label-large-line-height);
   font-family: inherit;
   text-align: center;
 }
 
 .m-button:not(.m-button-outlined) {
   transition: filter 0.3s ease-in-out;
-  background-color: var(--mana-color-primary);
-  color: var(--mana-color-on-primary);
+  background-color: var(--m-color-primary);
+  color: var(--m-color-on-primary);
 
   &:hover {
     filter: contrast(150%);
@@ -63,13 +63,13 @@ const classList = computed(() => ({
   transition:
     color 0.3s ease-in-out,
     border-color 0.3s ease-in-out;
-  border: 1px solid var(--mana-color-outline);
+  border: 1px solid var(--m-color-outline);
   background-color: transparent;
   color: inherit;
 
   &:hover {
-    border-color: var(--mana-color-primary);
-    color: var(--mana-color-primary);
+    border-color: var(--m-color-primary);
+    color: var(--m-color-primary);
   }
 }
 </style>

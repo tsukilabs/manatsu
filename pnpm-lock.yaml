@@ -18,8 +18,8 @@ importers:
         specifier: ^11.1.5
         version: 11.1.5(rollup@4.9.1)(tslib@2.6.2)(typescript@5.3.3)
       '@tb-dev/eslint-config':
-        specifier: ^1.4.11
-        version: 1.4.11(eslint@8.56.0)(typescript@5.3.3)
+        specifier: ^1.5.3
+        version: 1.5.3(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0)
       '@tb-dev/utility-types':
         specifier: ^1.0.1
         version: 1.0.1
@@ -108,9 +108,29 @@ importers:
         specifier: ^8.26.3
         version: 8.26.3(typescript@5.3.3)
 
-  packages/components: {}
+  packages/components:
+    dependencies:
+      '@manatsu/composables':
+        specifier: workspace:*
+        version: link:../composables
+      '@tb-dev/utility-types':
+        specifier: ^1.0.1
+        version: 1.0.1
+      '@vueuse/core':
+        specifier: ^10.7.0
+        version: 10.7.0(vue@3.3.13)
+      vue:
+        specifier: ^3.3.0
+        version: 3.3.13(typescript@5.3.3)
 
-  packages/composables: {}
+  packages/composables:
+    dependencies:
+      '@vueuse/core':
+        specifier: ^10.7.0
+        version: 10.7.0(vue@3.3.13)
+      vue:
+        specifier: ^3.3.0
+        version: 3.3.13(typescript@5.3.3)
 
   packages/manatsu:
     dependencies:
@@ -124,7 +144,7 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       '@vueuse/core':
-        specifier: ^10.0.0
+        specifier: ^10.7.0
         version: 10.7.0(vue@3.3.13)
       vue:
         specifier: ^3.3.0
@@ -1195,8 +1215,8 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tb-dev/eslint-config@1.4.11(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-2W+JW9NWbPoKA9/sRcW0GARMNvE3pgFi763d+aTQUqZc4Xgu78WfjtIPnObLtyDBtuM4wAkboglF+NAgTjGPkA==}
+  /@tb-dev/eslint-config@1.5.3(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0):
+    resolution: {integrity: sha512-/ykeaJKuJ4Q5JCItNQJfkGYezqu1jQL97hsmFXhUXRVq5usH887n06l0mM4lBww1orFInH3MARIbIyPmrv7jzw==}
     peerDependencies:
       eslint: ^8.0.0
     dependencies:
@@ -1206,6 +1226,7 @@ packages:
       eslint-config-prettier: 9.1.0(eslint@8.56.0)
       eslint-plugin-perfectionist: 2.5.0(eslint@8.56.0)(typescript@5.3.3)(vue-eslint-parser@9.3.2)
       eslint-plugin-unicorn: 49.0.0(eslint@8.56.0)
+      eslint-plugin-vitest: 0.3.18(@typescript-eslint/eslint-plugin@6.15.0)(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0)
       eslint-plugin-vue: 9.19.2(eslint@8.56.0)
       globals: 13.24.0
       vue-eslint-parser: 9.3.2(eslint@8.56.0)
@@ -1215,6 +1236,7 @@ packages:
       - svelte
       - svelte-eslint-parser
       - typescript
+      - vitest
     dev: true
 
   /@tb-dev/utility-types@1.0.1:
@@ -2740,6 +2762,28 @@ packages:
       regjsparser: 0.10.0
       semver: 7.5.4
       strip-indent: 3.0.0
+    dev: true
+
+  /eslint-plugin-vitest@0.3.18(@typescript-eslint/eslint-plugin@6.15.0)(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0):
+    resolution: {integrity: sha512-IJzs6BpA//wkNxo5845uPIMOIp4j76MiKiagJ3hD6a2DemrktdpB7mmTjU0EeFuq14NXFoO1wN8Fwrx2VxWBRA==}
+    engines: {node: ^18.0.0 || >= 20.0.0}
+    peerDependencies:
+      '@typescript-eslint/eslint-plugin': '*'
+      eslint: '>=8.0.0'
+      vitest: '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/eslint-plugin':
+        optional: true
+      vitest:
+        optional: true
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 6.15.0(@typescript-eslint/parser@6.15.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/utils': 6.15.0(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      vitest: 1.1.0(@types/node@20.10.5)(@vitest/browser@1.1.0)(@vitest/ui@1.1.0)(jsdom@23.0.1)(sass@1.69.5)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: true
 
   /eslint-plugin-vue@9.19.2(eslint@8.56.0):

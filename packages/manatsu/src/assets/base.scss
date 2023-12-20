@@ -1,16 +1,16 @@
 :root {
-  --mana-font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  --m-font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
 
-  --mana-border-radius: 3px;
+  --m-border-radius: 3px;
 }
 
 body {
-  background-color: var(--mana-color-background);
-  color: var(--mana-color-on-background);
-  font-size: var(--mana-tp-body-medium-font-size);
-  line-height: var(--mana-tp-body-medium-line-height);
-  font-family: var(--mana-font-family);
-  letter-spacing: var(--mana-tp-body-medium-letter-spacing);
+  background-color: var(--m-color-background);
+  color: var(--m-color-on-background);
+  font-size: var(--m-tp-body-medium-font-size);
+  line-height: var(--m-tp-body-medium-line-height);
+  font-family: var(--m-font-family);
+  letter-spacing: var(--m-tp-body-medium-letter-spacing);
 }

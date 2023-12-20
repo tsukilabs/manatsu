@@ -9,7 +9,10 @@
   },
   "editor.tabSize": 2,
   "files.exclude": {
-    ".eslintcache": true
+    ".eslintcache": true,
+    "**/components/dist": true,
+    "**/composables/dist": true,
+    "coverage": true
   },
   "typescript.tsdk": "node_modules/typescript/lib"
 }

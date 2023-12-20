@@ -17,23 +17,23 @@ defineProps<InputProps>();
 
 <style scoped lang="scss">
 :global(:root) {
-  --mana-input-padding: 0.4em;
+  --m-input-padding: 0.4em;
 }
 
 .m-input {
   outline: none;
-  border: 1px solid var(--mana-color-outline);
-  border-radius: var(--mana-border-radius);
+  border: 1px solid var(--m-color-outline);
+  border-radius: var(--m-border-radius);
   background-color: transparent;
-  padding: var(--mana-input-padding);
+  padding: var(--m-input-padding);
   color: inherit;
-  caret-color: var(--mana-color-primary);
+  caret-color: var(--m-color-primary);
   font-family: inherit;
 
   &:hover,
   &:active,
   &:focus {
-    border-color: var(--mana-color-primary);
+    border-color: var(--m-color-primary);
   }
 }
 </style>
