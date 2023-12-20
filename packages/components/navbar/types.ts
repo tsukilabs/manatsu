@@ -1,7 +1,7 @@
-import type { StyleValue } from 'vue';
+import type { StyleValue, VNodeChild } from 'vue';
 
 export interface NavbarProps {
-  /** @default '30px' */
   height?: string;
   style?: StyleValue;
+  title?: string | (() => VNodeChild);
 }

@@ -23,7 +23,7 @@ function switchDarkMode() {
 <template>
   <MScaffold navbar>
     <template #navbar>
-      <MNavbar />
+      <MNavbar title="olá" />
     </template>
 
     <main>

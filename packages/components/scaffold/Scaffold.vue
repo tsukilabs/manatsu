@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import { useToPixel } from '@manatsu/composables/index.ts';
 import type { ScaffoldProps } from './types';
 
-const props = withDefaults(defineProps<ScaffoldProps>(), {
-  inset: '5px'
-});
-
-const insetRef = useToPixel(() => props.inset);
+defineProps<ScaffoldProps>();
 </script>
 
 <template>
@@ -15,22 +10,34 @@ const insetRef = useToPixel(() => props.inset);
       <slot name="navbar"></slot>
     </div>
 
-    <div class="m-scaffold-content" :style="contentStyle">
-      <slot></slot>
+    <div class="m-scaffold-main">
+      <div class="m-scaffold-content" :style="contentStyle">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+:global(:root) {
+  --m-scaffold-content-padding: 1rem;
+}
+
 .m-scaffold {
   display: flex;
-  position: absolute;
   flex-direction: column;
-  inset: v-bind('insetRef');
+  min-width: 320px;
+  min-height: 100vh;
   overflow: hidden;
 }
 
+.m-scaffold-main {
+  width: 100%;
+  height: 100%;
+}
+
 .m-scaffold-content {
+  padding: var(--m-scaffold-content-padding);
   width: 100%;
   height: 100%;
 }
