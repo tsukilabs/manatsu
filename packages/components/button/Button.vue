@@ -42,9 +42,7 @@ const classList = computed(() => ({
   padding: var(--m-button-padding);
   min-width: var(--m-button-min-width);
   min-height: var(--m-button-min-height);
-  font-weight: var(--m-tp-label-large-font-weight);
-  font-size: var(--m-tp-label-large-font-size);
-  line-height: var(--m-tp-label-large-line-height);
+  font-size: 1em;
   font-family: inherit;
   text-align: center;
 }
@@ -60,9 +58,7 @@ const classList = computed(() => ({
 }
 
 .m-button-outlined {
-  transition:
-    color 0.3s ease-in-out,
-    border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
   border: 1px solid var(--m-color-outline);
   background-color: transparent;
   color: inherit;

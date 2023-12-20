@@ -24,16 +24,19 @@ const NavbarTitle = defineComponent(() => {
 </template>
 
 <style scoped lang="scss">
+:global(:root) {
+  --m-navbar-padding: 0 1rem;
+}
+
 .m-navbar {
   display: flex;
   align-items: center;
+  padding: var(--m-navbar-padding);
   width: 100%;
   height: v-bind('heightRef');
 }
 
 .m-navbar-title {
-  font-weight: var(--m-tp-headline-medium-font-weight);
-  font-size: var(--m-tp-headline-medium-font-size);
-  line-height: var(--m-tp-headline-medium-line-height);
+  font-size: 1.5rem;
 }
 </style>
