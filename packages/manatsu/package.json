@@ -39,7 +39,8 @@
   },
   "peerDependencies": {
     "@vueuse/core": "^10.7.0",
-    "vue": "^3.3.0"
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0"
   },
   "engines": {
     "node": ">=18"

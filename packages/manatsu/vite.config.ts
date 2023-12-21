@@ -16,7 +16,7 @@ export default defineConfig({
       fileName: 'index'
     },
     rollupOptions: {
-      external: ['vue', /^@vueuse\//],
+      external: ['vue', 'vue-router', /^@vueuse\//],
       output: {
         chunkFileNames: '[name].js',
         manualChunks: {
