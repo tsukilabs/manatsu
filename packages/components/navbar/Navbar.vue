@@ -2,6 +2,7 @@
 import NavbarLogo from './NavbarLogo.vue';
 import type { NavbarProps } from './types';
 import NavbarTitle from './NavbarTitle.vue';
+import SocialLink from '../link/SocialLink.vue';
 import DynamicLink from '../link/DynamicLink.vue';
 
 defineProps<NavbarProps>();
@@ -13,6 +14,15 @@ defineProps<NavbarProps>();
       <NavbarLogo v-if="logo" :logo="logo" />
       <NavbarTitle v-if="title" :title="title" />
     </DynamicLink>
+
+    <div v-if="socialLinks">
+      <SocialLink
+        v-for="link of socialLinks"
+        :key="link.to"
+        :to="link.to"
+        :icon="link.icon"
+      />
+    </div>
   </header>
 </template>
 
@@ -25,6 +35,7 @@ defineProps<NavbarProps>();
 
 .m-navbar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: var(--m-navbar-padding);
   width: var(--m-navbar-width);

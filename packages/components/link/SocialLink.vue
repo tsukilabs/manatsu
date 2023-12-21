@@ -18,9 +18,31 @@ const SocialLinkIcon = defineComponent(() => {
 </script>
 
 <template>
-  <DynamicLink :to="to">
-    <SocialLinkIcon />
+  <DynamicLink :to="to" class="m-social-link">
+    <SocialLinkIcon class="m-social-link-icon" />
   </DynamicLink>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+:global(:root) {
+  --m-social-link-size: 36px;
+  --m-social-link-icon-size: 20px;
+}
+
+.m-social-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--m-social-link-size);
+  height: var(--m-social-link-size);
+}
+
+.m-social-link-icon {
+  width: var(--m-social-link-icon-size);
+  height: var(--m-social-link-icon-size);
+}
+
+.m-social-link-icon > :deep(svg) {
+  fill: currentColor;
+}
+</style>
