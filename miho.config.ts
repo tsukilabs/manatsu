@@ -12,7 +12,7 @@ export default defineConfig({
   packageManager: PackageManager.PNPM,
   recursive: true,
   commit: {
-    push: true,
+    push: false,
     all: true,
     message: (miho) => {
       const pkg = miho.getPackageByName('manatsu');
