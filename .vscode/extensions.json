@@ -7,6 +7,8 @@
     "vscode-icons-team.vscode-icons",
     "dbaeumer.vscode-eslint",
     "vue.vscode-typescript-vue-plugin",
-    "donjayamanne.githistory"
+    "donjayamanne.githistory",
+    "vue.volar",
+    "redhat.vscode-yaml"
   ]
 }

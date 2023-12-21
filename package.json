@@ -13,10 +13,10 @@
     "build:playground": "pnpm -F @manatsu/playground build",
     "deps": "pnpm exec taze -f -r -w -l",
     "dev": "vite serve packages/playground",
-    "prepare": "husky install",
     "format": "pnpm exec prettier . --write",
     "format-check": "pnpm exec prettier . --check",
     "lint": "eslint . --config eslint.config.js --cache",
+    "prepare": "husky install",
     "release": "miho -l publish",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
@@ -57,7 +57,7 @@
     "vitest": "1.1.0",
     "vue": "^3.3.13",
     "vue-router": "^4.2.5",
-    "vue-tsc": "^1.8.25",
+    "vue-tsc": "^1.8.26",
     "webdriverio": "^8.27.0"
   },
   "peerDependencies": {
