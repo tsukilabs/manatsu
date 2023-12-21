@@ -1,42 +1,40 @@
 <script setup lang="ts">
-import { defineComponent, h } from 'vue';
-import { useToPixel } from '@manatsu/composables/index.ts';
+import NavbarLogo from './NavbarLogo.vue';
 import type { NavbarProps } from './types';
+import NavbarTitle from './NavbarTitle.vue';
+import DynamicLink from '../dynamic-link/DynamicLink.vue';
 
-const props = withDefaults(defineProps<NavbarProps>(), {
-  height: '60px'
-});
-
-const heightRef = useToPixel(() => props.height);
-
-const NavbarTitle = defineComponent(() => {
-  if (typeof props.title === 'string') {
-    return () => h('span', props.title);
-  }
-  return props.title;
-});
+defineProps<NavbarProps>();
 </script>
 
 <template>
-  <header class="m-navbar" :style="style">
-    <NavbarTitle v-if="title" class="m-navbar-title" />
+  <header class="m-navbar">
+    <DynamicLink :to="titleLink" class="m-navbar-title-link">
+      <NavbarLogo v-if="logo" :logo="logo" />
+      <NavbarTitle v-if="title" :title="title" />
+    </DynamicLink>
   </header>
 </template>
 
 <style scoped lang="scss">
 :global(:root) {
+  --m-navbar-height: 60px;
   --m-navbar-padding: 0 1rem;
+  --m-navbar-width: 100%;
 }
 
 .m-navbar {
   display: flex;
   align-items: center;
   padding: var(--m-navbar-padding);
-  width: 100%;
-  height: v-bind('heightRef');
+  width: var(--m-navbar-width);
+  height: var(--m-navbar-height);
+  white-space: nowrap;
 }
 
-.m-navbar-title {
-  font-size: 1.5rem;
+.m-navbar-title-link {
+  display: flex;
+  align-items: center;
+  user-select: none;
 }
 </style>
