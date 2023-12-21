@@ -85,7 +85,7 @@ async function github(token: string) {
     draft: false,
     prerelease: true,
     generate_release_notes: true,
-    owner: 'ferreira-tb',
+    owner: 'manatsujs',
     repo: 'manatsu',
     headers: {
       'X-GitHub-Api-Version': '2022-11-28',
