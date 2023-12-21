@@ -5,11 +5,13 @@ import type { NavbarTitleProps } from './types';
 const props = defineProps<NavbarTitleProps>();
 
 const TitleText = defineComponent(() => {
-  if (typeof props.title === 'function') {
-    return props.title;
-  }
+  return () => {
+    if (typeof props.title === 'function') {
+      return props.title;
+    }
 
-  return () => h('span', props.title);
+    return h('span', props.title);
+  };
 });
 </script>
 

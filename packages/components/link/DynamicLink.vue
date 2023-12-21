@@ -20,7 +20,12 @@ const isExternalLink = computed(() => {
   </span>
 
   <!-- prettier-ignore -->
-  <a v-else-if="isExternalLink" :href="(to as string)">
+  <a
+    v-else-if="isExternalLink"
+    :href="(to as string)"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     <slot></slot>
   </a>
 

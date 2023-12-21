@@ -2,7 +2,7 @@
 import NavbarLogo from './NavbarLogo.vue';
 import type { NavbarProps } from './types';
 import NavbarTitle from './NavbarTitle.vue';
-import DynamicLink from '../dynamic-link/DynamicLink.vue';
+import DynamicLink from '../link/DynamicLink.vue';
 
 defineProps<NavbarProps>();
 </script>
@@ -29,12 +29,12 @@ defineProps<NavbarProps>();
   padding: var(--m-navbar-padding);
   width: var(--m-navbar-width);
   height: var(--m-navbar-height);
+  user-select: none;
   white-space: nowrap;
 }
 
 .m-navbar-title-link {
   display: flex;
   align-items: center;
-  user-select: none;
 }
 </style>

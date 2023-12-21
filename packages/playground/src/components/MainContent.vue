@@ -34,22 +34,20 @@ function switchDarkMode() {
 </template>
 
 <style scoped lang="scss">
-@mixin flex($flex-direction: row, $gap: 1rem) {
-  display: flex;
-  flex-direction: $flex-direction;
-  gap: $gap;
-}
-
 main {
-  @include flex($flex-direction: column, $gap: 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 main > div {
-  @include flex($gap: 1rem);
+  display: flex;
+  gap: 1rem;
 }
 
 .dark-mode {
-  @include flex($gap: 1rem);
+  display: flex;
   align-items: center;
+  gap: 1rem;
 }
 </style>

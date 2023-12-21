@@ -5,14 +5,15 @@ import type { NavbarLogoProps } from './types';
 const props = defineProps<NavbarLogoProps>();
 
 const TitleLogo = defineComponent(() => {
-  if (typeof props.logo === 'function') {
-    return props.logo;
-  }
+  return () => {
+    if (typeof props.logo === 'function') {
+      return props.logo;
+    }
 
-  return () =>
-    h('img', {
+    return h('img', {
       src: props.logo
     });
+  };
 });
 </script>
 

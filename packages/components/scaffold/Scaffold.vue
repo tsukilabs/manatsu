@@ -6,7 +6,7 @@ defineProps<ScaffoldProps>();
 
 <template>
   <div class="m-scaffold">
-    <div v-if="navbar">
+    <div v-if="navbar" class="m-scaffold-header">
       <slot name="navbar"></slot>
     </div>
 
@@ -32,13 +32,10 @@ defineProps<ScaffoldProps>();
 }
 
 .m-scaffold-main {
-  width: 100%;
-  height: 100%;
+  flex: 1 1 auto;
 }
 
 .m-scaffold-content {
   padding: var(--m-scaffold-content-padding);
-  width: 100%;
-  height: 100%;
 }
 </style>
