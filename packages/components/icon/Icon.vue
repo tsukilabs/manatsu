@@ -15,5 +15,3 @@ const html = computed<string | null>(() => {
 <template>
   <span :aria-label="ariaLabel ?? icon" v-html="html"></span>
 </template>
-
-<style scoped lang="scss"></style>
