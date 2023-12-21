@@ -12,7 +12,7 @@ export default defineConfig({
   packageManager: PackageManager.PNPM,
   recursive: true,
   commit: {
-    push: false,
+    push: true,
     all: true,
     message: (miho) => {
       const pkg = miho.getPackageByName('manatsu');
@@ -23,6 +23,9 @@ export default defineConfig({
     }
   },
   jobs: {
+    // As the main branch is protected, this job should be executed on its own.
+    skip: ['publish'],
+
     build: async () => {
       // Build.
       const packages: PackageName[] = ['manatsu', 'components', 'composables'];
