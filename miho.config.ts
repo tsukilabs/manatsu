@@ -1,9 +1,9 @@
 import { join } from 'node:path';
 import fs from 'node:fs/promises';
 import { cwd } from 'node:process';
-import { Octokit } from '@octokit/core';
 import { PackageManager, defineConfig } from 'miho';
 import { type Options as ExecaOptions, execa } from 'execa';
+import { github } from './scripts/github';
 
 type PackageName = 'manatsu' | 'components' | 'composables';
 const execaOptions: ExecaOptions = { stdio: 'inherit' };
@@ -60,7 +60,8 @@ export default defineConfig({
     publish: async () => {
       const { GITHUB, GITHUB_TOKEN } = await import('./config.json');
       if (GITHUB) {
-        await github(GITHUB_TOKEN);
+        const { version } = await import('./package.json');
+        await github(GITHUB_TOKEN, version);
       } else {
         const args = ['publish', '-r', '--no-git-checks'];
         await execa('pnpm', args, execaOptions);
@@ -76,23 +77,4 @@ function dist(pkgName: PackageName) {
 function build(pkgName: PackageName) {
   const pkg = pkgName === 'manatsu' ? pkgName : `@manatsu/${pkgName}`;
   return execa('pnpm', ['-F', pkg, 'build'], execaOptions);
-}
-
-async function github(token: string) {
-  const { version } = await import('./package.json');
-  const octokit = new Octokit({ auth: token });
-
-  await octokit.request('POST /repos/{owner}/{repo}/releases', {
-    tag_name: `v${version}`,
-    name: `v${version}`,
-    draft: false,
-    prerelease: true,
-    generate_release_notes: true,
-    owner: 'manatsujs',
-    repo: 'manatsu',
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28',
-      accept: 'application/vnd.github+json'
-    }
-  });
 }
