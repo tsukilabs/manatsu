@@ -1,0 +1,10 @@
+[package]
+name = "manatsu"
+version = "0.1.34"
+description = "CLI tools for Manatsu"
+authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }

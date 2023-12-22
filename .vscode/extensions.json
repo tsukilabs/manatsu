@@ -9,6 +9,8 @@
     "vue.vscode-typescript-vue-plugin",
     "donjayamanne.githistory",
     "vue.volar",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml"
   ]
 }
