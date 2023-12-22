@@ -10,9 +10,18 @@ export interface NavbarTitleProps {
   title: string | (() => VNodeChild);
 }
 
+export interface NavbarMenuItem {
+  to?: RouteLocationRaw;
+}
+
+export interface NavbarMenuProps {
+  menu?: NavbarMenuItem[];
+}
+
 export interface NavbarProps
   extends Partial<NavbarLogoProps>,
-    Partial<NavbarTitleProps> {
+    Partial<NavbarTitleProps>,
+    Partial<NavbarMenuProps> {
   socialLinks?: SocialLinkProps[];
   titleLink?: RouteLocationRaw;
 }
