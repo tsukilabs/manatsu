@@ -1,7 +1,26 @@
 {
   "name": "@manatsu/components",
-  "version": "0.1.32",
+  "version": "0.1.34",
+  "description": "Manatsu components",
+  "license": "MIT",
   "private": false,
+  "homepage": "https://github.com/manatsujs/manatsu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manatsujs/manatsu.git"
+  },
+  "contributors": [
+    {
+      "name": "Andrew Ferreira",
+      "email": "andrew.shien2@gmail.com",
+      "url": "https://tb.dev.br/"
+    }
+  ],
+  "keywords": [
+    "manatsu",
+    "components",
+    "vue"
+  ],
   "type": "module",
   "files": [
     "dist"

@@ -1,21 +1,29 @@
 {
   "name": "manatsu",
-  "version": "0.1.32",
-  "description": "Component library",
+  "version": "0.1.34",
+  "description": "Vue component library",
   "license": "MIT",
   "private": false,
-  "homepage": "https://github.com/ferreira-tb/manatsu",
+  "homepage": "https://github.com/manatsujs/manatsu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ferreira-tb/manatsu.git"
+    "url": "https://github.com/manatsujs/manatsu.git"
   },
+  "contributors": [
+    {
+      "name": "Andrew Ferreira",
+      "email": "andrew.shien2@gmail.com",
+      "url": "https://tb.dev.br/"
+    }
+  ],
   "keywords": [
+    "manatsu",
     "component library",
     "vue"
   ],
   "type": "module",
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

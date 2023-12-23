@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavbarLogo from './NavbarLogo.vue';
+import NavbarMenu from './NavbarMenu.vue';
 import type { NavbarProps } from './types';
 import NavbarTitle from './NavbarTitle.vue';
 import SocialLink from '../link/SocialLink.vue';
@@ -15,7 +16,12 @@ defineProps<NavbarProps>();
       <NavbarTitle v-if="title" :title="title" />
     </DynamicLink>
 
-    <div v-if="socialLinks">
+    <NavbarMenu v-if="menu && menu.length > 0" />
+
+    <div
+      v-if="socialLinks && socialLinks.length > 0"
+      class="m-navbar-social-links"
+    >
       <SocialLink
         v-for="link of socialLinks"
         :key="link.to"
@@ -47,5 +53,9 @@ defineProps<NavbarProps>();
 .m-navbar-title-link {
   display: flex;
   align-items: center;
+}
+
+.m-navbar-social-links {
+  display: flex;
 }
 </style>
