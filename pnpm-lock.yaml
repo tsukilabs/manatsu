@@ -18,8 +18,8 @@ importers:
         specifier: ^11.1.5
         version: 11.1.5(rollup@4.9.1)(tslib@2.6.2)(typescript@5.3.3)
       '@tb-dev/eslint-config':
-        specifier: ^1.5.3
-        version: 1.5.3(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0)
+        specifier: ^1.5.4
+        version: 1.5.4(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0)
       '@tb-dev/utility-types':
         specifier: ^1.0.1
         version: 1.0.1
@@ -1224,8 +1224,8 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tb-dev/eslint-config@1.5.3(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0):
-    resolution: {integrity: sha512-/ykeaJKuJ4Q5JCItNQJfkGYezqu1jQL97hsmFXhUXRVq5usH887n06l0mM4lBww1orFInH3MARIbIyPmrv7jzw==}
+  /@tb-dev/eslint-config@1.5.4(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0):
+    resolution: {integrity: sha512-HEPjY+kSAErWbiiVvLmy6zZeVrgJl3/0IjF/zZjR2HJef/wV7Pjb8nr2UDFbpeVCQm6ZidBIqb/Q8igUVWeSCQ==}
     peerDependencies:
       eslint: ^8.0.0
     dependencies:
