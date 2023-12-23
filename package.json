@@ -18,7 +18,6 @@
     "lint": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
     "release": "miho -l publish",
-    "readme": "manatsu dev readme",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
