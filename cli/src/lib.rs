@@ -14,9 +14,11 @@ pub fn readme() -> Result<(), Box<dyn Error>> {
 
   for pkg in PACKAGES {
     let dest_readme = get_package_path(pkg)?.join(file);
-    fs::copy(&src_readme, dest_readme)?;
+    fs::copy(&src_readme, &dest_readme)?;
+    println!("Copied: {}", dest_readme.display());
   }
 
+  println!("Done!");
   Ok(())
 }
 
