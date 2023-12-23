@@ -1,0 +1,5 @@
+# Manatsu
+
+```
+cargo install manatsu
+```
