@@ -11,6 +11,7 @@
   "scripts": {
     "build": "miho -l build",
     "build:playground": "pnpm -F @manatsu/playground build",
+    "cli": "cargo run --manifest-path=cli/Cargo.toml --",
     "deps": "pnpm exec taze -f -r -w -l",
     "dev": "vite serve packages/playground",
     "format": "pnpm exec prettier . --write",
