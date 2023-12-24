@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+cargo clippy --manifest-path=cli/Cargo.toml
 npx lint-staged
 npm test
