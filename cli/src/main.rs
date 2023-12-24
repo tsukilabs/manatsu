@@ -1,6 +1,6 @@
+use anyhow::Result;
 use clap::{Parser, Subcommand};
-use manatsu;
-use std::error::Error;
+use manatsu::dev;
 
 #[derive(Debug, Parser)]
 #[command(version, about, long_about = None)]
@@ -17,6 +17,7 @@ enum Commands {
 
 #[derive(Debug, Subcommand)]
 enum DevCommands {
+  Build,
   /// Generate component template.
   Component {
     /// Component name.
@@ -26,13 +27,14 @@ enum DevCommands {
   Readme,
 }
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main() -> Result<()> {
   let cli = ManatsuCli::parse();
 
   match cli.command {
     Commands::Dev(value) => match value {
-      DevCommands::Component { name } => manatsu::component(&name)?,
-      DevCommands::Readme => manatsu::readme()?,
+      DevCommands::Build => dev::build()?,
+      DevCommands::Component { name } => dev::component(&name)?,
+      DevCommands::Readme => dev::readme()?,
     },
   };
 
