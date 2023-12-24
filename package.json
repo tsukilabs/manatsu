@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.12.1",
@@ -18,7 +18,7 @@
     "format-check": "pnpm exec prettier . --check",
     "lint": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
-    "release": "miho -l publish",
+    "release": "manatsu dev release",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@manatsu/theme-builder": "^0.2.1",
-    "@octokit/core": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.5",
     "@tb-dev/eslint-config": "^1.5.4",
     "@tb-dev/utility-types": "^1.0.1",

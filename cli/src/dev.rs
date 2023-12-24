@@ -1,94 +1,14 @@
-pub mod packages;
+mod build;
+mod json;
+mod packages;
+pub use build::build;
 
-use self::packages::PACKAGES;
-use anyhow::{anyhow, Result};
+use anyhow::Result;
 use convert_case::{Case, Casing};
+use json::{Config, Package};
 use std::env;
 use std::fs;
 use std::process::{Command, Stdio};
-use std::thread;
-use std::time::Instant;
-
-/// Build all public packages.
-pub fn build() -> Result<()> {
-  let start = Instant::now();
-  let mut handles = vec![];
-
-  for pkg in PACKAGES {
-    let builder = thread::Builder::new().name(pkg.to_string());
-    let handle = builder.spawn(move || {
-      let pkg_name = match pkg {
-        "manatsu" => pkg.to_string(),
-        _ => format!("@manatsu/{pkg}"),
-      };
-
-      println!("Building: {pkg_name}");
-      let mut command = match env::consts::OS {
-        "windows" => Command::new("cmd"),
-        _ => Command::new("sh"),
-      };
-
-      match env::consts::OS {
-        "windows" => command.arg("/C"),
-        _ => command.arg("-c"),
-      };
-
-      let output = command
-        .arg("pnpm")
-        .args(["-F", pkg_name.as_str(), "build"])
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .output()
-        .unwrap();
-
-      assert!(output.status.success());
-      println!("Done: {pkg_name}");
-    });
-
-    match handle {
-      Ok(h) => handles.push(h),
-      Err(e) => panic!("{:?}", e),
-    }
-  }
-
-  for handle in handles {
-    let pkg_name = handle.thread().name().unwrap().to_owned();
-    if let Err(_) = handle.join() {
-      return Err(anyhow!("Could not build \"{pkg_name}\"."));
-    }
-  }
-
-  println!("Copying files...");
-  let dist = packages::dist("manatsu")?;
-  for pkg in PACKAGES {
-    if pkg == "manatsu" {
-      continue;
-    }
-
-    let to = dist.join(format!("{pkg}.d.ts"));
-    fs::copy(packages::dts(pkg)?, to)?;
-  }
-
-  println!("Fixing type exports...");
-  let dts = packages::dts("manatsu")?;
-  let mut content = fs::read_to_string(&dts)?;
-
-  for pkg in PACKAGES {
-    if pkg == "manatsu" {
-      continue;
-    }
-
-    content = content.replace(
-      format!("@manatsu/{pkg}/index.ts").as_str(),
-      format!("./{pkg}").as_str(),
-    );
-  }
-
-  fs::write(dts, content)?;
-
-  println!("Built in: {:?}", start.elapsed());
-  Ok(())
-}
 
 /// Generate component template.
 pub fn component(name: &str) -> Result<()> {
@@ -137,6 +57,7 @@ pub fn readme() -> Result<()> {
   let cwd = env::current_dir()?;
   let src_readme = cwd.join(filename);
 
+  println!("Copying README files...");
   for pkg in packages::PACKAGES {
     let dest_readme = packages::root(pkg)?.join(filename);
     fs::copy(&src_readme, &dest_readme)?;
@@ -149,5 +70,58 @@ pub fn readme() -> Result<()> {
 
 /// Release a new version.
 pub fn release() -> Result<()> {
+  let config_file = json::read_config()?;
+  let config: Config = serde_json::from_str(&config_file)?;
+
+  readme()?;
+
+  if config.github {
+    let package_file = json::read_package()?;
+    let package: Package = serde_json::from_str(&package_file)?;
+
+    let base_url = "https://api.github.com";
+    let owner_repo = "manatsujs/manatsu";
+    let body = ureq::json!({
+      "tag_name": format!("v{}", package.version),
+      "name": format!("v{}", package.version),
+      "draft": false,
+      "prerelease": true,
+      "generate_release_notes": true
+    });
+
+    let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
+    let github_token = format!("Bearer {}", config.github_token);
+
+    ureq::post(&endpoint)
+      .set("Authorization", &github_token)
+      .set("X-GitHub-Api-Version", "2022-11-28")
+      .set("accept", "application/vnd.github+json")
+      .send_json(body)?;
+  } else {
+    let mut command = match env::consts::OS {
+      "windows" => Command::new("cmd"),
+      _ => Command::new("sh"),
+    };
+
+    match env::consts::OS {
+      "windows" => command.arg("/C"),
+      _ => command.arg("-c"),
+    };
+
+    command
+      .arg("pnpm")
+      .args(["publish", "-r", "--no-git-checks"])
+      .stdout(Stdio::inherit())
+      .stderr(Stdio::inherit())
+      .output()?;
+  }
+
+  let manifest_path = "--manifest-path=cli/Cargo.toml";
+  Command::new("cargo")
+    .args([manifest_path, "publish"])
+    .stdout(Stdio::inherit())
+    .stderr(Stdio::inherit())
+    .output()?;
+
   Ok(())
 }
