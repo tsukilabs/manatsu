@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.1.35"
+version = "0.1.36"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/manatsujs/manatsu"
 repository = "https://github.com/manatsujs/manatsu"
@@ -9,5 +9,7 @@ license = "MIT"
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.4", features = ["derive"] }
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
 convert_case = "0.6"
+ureq = "2"
