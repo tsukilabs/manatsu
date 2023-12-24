@@ -63,6 +63,7 @@ pub fn component(name: &str) -> Result<(), Box<dyn Error>> {
   let vue_path = pkg_path.join(vue_filename);
   fs::write(vue_path, vue)?;
 
+  println!("Component created: {}", pascal_name);
   Ok(())
 }
 
