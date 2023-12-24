@@ -118,7 +118,7 @@ pub fn release() -> Result<()> {
 
   let manifest_path = "--manifest-path=cli/Cargo.toml";
   Command::new("cargo")
-    .args([manifest_path, "publish"])
+    .args(["publish", manifest_path])
     .stdout(Stdio::inherit())
     .stderr(Stdio::inherit())
     .output()?;
