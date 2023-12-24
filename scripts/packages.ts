@@ -6,7 +6,7 @@ export type PackageName = 'manatsu' | 'components' | 'composables';
 
 export function packages(...exclude: PackageName[]) {
   const pkgs: PackageName[] = ['manatsu', 'components', 'composables'];
-  return pkgs.filter((pkg) => exclude.includes(pkg));
+  return pkgs.filter((pkg) => !exclude.includes(pkg));
 }
 
 export function packageRoot(pkgName: PackageName) {
