@@ -11,8 +11,17 @@ struct ManatsuCli {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
+  #[command(subcommand)]
+  Dev(DevCommands),
+}
+
+#[derive(Debug, Subcommand)]
+enum DevCommands {
   /// Generate component template.
-  Component,
+  Component {
+    /// Component name.
+    name: String,
+  },
   /// Synchronize all README files.
   Readme,
 }
@@ -21,8 +30,10 @@ fn main() -> Result<(), Box<dyn Error>> {
   let cli = ManatsuCli::parse();
 
   match cli.command {
-    Commands::Component => todo!(),
-    Commands::Readme => manatsu::readme()?,
+    Commands::Dev(value) => match value {
+      DevCommands::Component { name } => manatsu::component(&name)?,
+      DevCommands::Readme => manatsu::readme()?,
+    },
   };
 
   Ok(())
