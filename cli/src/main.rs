@@ -25,6 +25,8 @@ enum DevCommands {
   },
   /// Synchronize all README files.
   Readme,
+  /// Release a new version.
+  Release,
 }
 
 fn main() -> Result<()> {
@@ -35,6 +37,7 @@ fn main() -> Result<()> {
       DevCommands::Build => dev::build()?,
       DevCommands::Component { name } => dev::component(&name)?,
       DevCommands::Readme => dev::readme()?,
+      DevCommands::Release => dev::release()?,
     },
   };
 

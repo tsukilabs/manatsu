@@ -1,13 +1,13 @@
 pub mod packages;
 
 use self::packages::PACKAGES;
-use std::time::Instant;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 use std::env;
 use std::fs;
 use std::process::{Command, Stdio};
 use std::thread;
+use std::time::Instant;
 
 /// Build all public packages.
 pub fn build() -> Result<()> {
@@ -85,7 +85,7 @@ pub fn build() -> Result<()> {
   }
 
   fs::write(dts, content)?;
-  
+
   println!("Built in: {:?}", start.elapsed());
   Ok(())
 }
@@ -144,5 +144,10 @@ pub fn readme() -> Result<()> {
   }
 
   println!("Done!");
+  Ok(())
+}
+
+/// Release a new version.
+pub fn release() -> Result<()> {
   Ok(())
 }
