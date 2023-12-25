@@ -5,7 +5,6 @@ pub use build::build;
 
 use anyhow::Result;
 use convert_case::{Case, Casing};
-use json::{Config, Package};
 use std::env;
 use std::fs;
 use std::process::{Command, Stdio};
@@ -70,50 +69,48 @@ pub fn readme() -> Result<()> {
 
 /// Release a new version.
 pub fn release() -> Result<()> {
-  let config_file = json::read_config()?;
-  let config: Config = serde_json::from_str(&config_file)?;
-
   readme()?;
+  let config = json::read_config().ok();
 
-  if config.github {
-    let package_file = json::read_package()?;
-    let package: Package = serde_json::from_str(&package_file)?;
+  match config {
+    Some(c) if c.github => {
+      let package = json::read_package()?;
 
-    let base_url = "https://api.github.com";
-    let owner_repo = "manatsujs/manatsu";
-    let body = ureq::json!({
-      "tag_name": format!("v{}", package.version),
-      "name": format!("v{}", package.version),
-      "draft": false,
-      "prerelease": true,
-      "generate_release_notes": true
-    });
+      let base_url = "https://api.github.com";
+      let owner_repo = "manatsujs/manatsu";
+      let body = ureq::json!({
+        "tag_name": format!("v{}", package.version),
+        "name": format!("v{}", package.version),
+        "draft": false,
+        "prerelease": true,
+        "generate_release_notes": true
+      });
+  
+      let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
+      let github_token = format!("Bearer {}", c.github_token);
+  
+      ureq::post(&endpoint)
+        .set("Authorization", &github_token)
+        .set("X-GitHub-Api-Version", "2022-11-28")
+        .set("accept", "application/vnd.github+json")
+        .send_json(body)?;
+    }
+    _ => {
+      let mut command = match env::consts::OS {
+        "windows" => Command::new("cmd"),
+        _ => Command::new("pnpm"),
+      };
 
-    let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
-    let github_token = format!("Bearer {}", config.github_token);
-
-    ureq::post(&endpoint)
-      .set("Authorization", &github_token)
-      .set("X-GitHub-Api-Version", "2022-11-28")
-      .set("accept", "application/vnd.github+json")
-      .send_json(body)?;
-  } else {
-    let mut command = match env::consts::OS {
-      "windows" => Command::new("cmd"),
-      _ => Command::new("sh"),
-    };
-
-    match env::consts::OS {
-      "windows" => command.arg("/C"),
-      _ => command.arg("-c"),
-    };
-
-    command
-      .arg("pnpm")
-      .args(["publish", "-r", "--no-git-checks"])
-      .stdout(Stdio::inherit())
-      .stderr(Stdio::inherit())
-      .output()?;
+      if env::consts::OS == "windows" {
+        command.arg("/C").arg("pnpm");
+      };
+  
+      command
+        .args(["publish", "-r", "--no-git-checks"])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .output()?;
+    }
   }
 
   let manifest_path = "--manifest-path=cli/Cargo.toml";
