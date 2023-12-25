@@ -15,9 +15,7 @@ export default defineConfig({
     }
   },
   jobs: {
-    // As the main branch is protected, this job should be executed on its own.
-    skip: ['publish'],
     build: true,
-    publish: true
+    publish: false
   }
 });

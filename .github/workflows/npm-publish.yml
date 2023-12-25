@@ -31,4 +31,5 @@ jobs:
       - run: pnpm cli dev build
       - run: pnpm cli dev release
         env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

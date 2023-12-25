@@ -9,7 +9,7 @@
     "*.{?(c|m)@(j|t)s,vue}": "pnpm lint"
   },
   "scripts": {
-    "build": "manatsu dev build",
+    "build": "cargo run --manifest-path=cli/Cargo.toml -- dev build",
     "build:playground": "pnpm -F @manatsu/playground build",
     "cli": "cargo run --manifest-path=cli/Cargo.toml --",
     "deps": "pnpm exec taze -f -r -w -l",
@@ -18,7 +18,7 @@
     "format-check": "pnpm exec prettier . --check",
     "lint": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
-    "release": "manatsu dev release",
+    "release": "cargo run --manifest-path=cli/Cargo.toml -- dev release",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
