@@ -21,7 +21,8 @@ The following tools are required when contributing to Manatsu:
 ### Setup
 
 ```bash
-cargo install manatsu miho
+cargo install manatsu
+cargo install miho
 npm install -g @antfu/ni
 
 git clone https://github.com/manatsujs/manatsu.git
