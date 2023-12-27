@@ -2,7 +2,9 @@
 
 > This is work in progress and **SHOULD NOT** be used in production environments.
 
-```sh
+Manatsu is a component library for [Vue](https://vuejs.org/), designed from the outset to integrate with [Tauri](https://tauri.app/) applications.
+
+```bash
 cargo install manatsu
 manatsu create
 ```
@@ -18,7 +20,7 @@ The following tools are required when contributing to Manatsu:
 
 ### Setup
 
-```sh
+```bash
 cargo install manatsu miho
 npm install -g @antfu/ni
 
