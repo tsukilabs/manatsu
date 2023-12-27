@@ -21,9 +21,7 @@
     "prepare": "husky install",
     "release": "pnpm build && pnpm run cli dev release",
     "test": "vitest --run",
-    "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
-    "test:watch": "vitest --watch",
     "type-check": "vue-tsc --noEmit"
   },
   "devDependencies": {

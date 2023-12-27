@@ -1,6 +1,13 @@
 {
   "vsicons.associations.folders": [
-    { "icon": "theme", "extensions": ["composables"], "format": "svg" }
+    { "icon": "theme", "extensions": ["composables"], "format": "svg" },
+    { "icon": "aurelia", "extensions": ["manatsu"], "format": "svg" },
+    {
+      "icon": "images",
+      "extensions": ["images", "imgs"],
+      "format": "svg",
+      "overrides": "images"
+    }
   ],
   "prettier.requireConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
