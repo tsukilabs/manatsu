@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.13.1",
@@ -11,6 +11,7 @@
   "scripts": {
     "build": "pnpm run cli dev build",
     "build:playground": "pnpm -F @manatsu/playground build",
+    "bump": "miho bump --no-ask --add .",
     "cli": "cargo run --manifest-path=cli/Cargo.toml --",
     "deps": "pnpm exec taze -f -r -w -l",
     "dev": "vite serve packages/playground",
@@ -18,7 +19,7 @@
     "format-check": "pnpm exec prettier . --check",
     "lint": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
-    "release": "pnpm run cli dev release",
+    "release": "pnpm build && pnpm run cli dev release",
     "test": "vitest --run",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --watch --coverage.enabled=true",
@@ -42,7 +43,6 @@
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.2.0",
-    "npm-run-all2": "^6.1.1",
     "prettier": "^3.1.1",
     "prettier-plugin-css-order": "^2.0.1",
     "rollup": "^4.9.1",
