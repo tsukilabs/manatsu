@@ -1,7 +1,34 @@
 # Manatsu
 
-```
-npm create manatsu@latest
+> This is work in progress and **SHOULD NOT** be used in production environments.
+
+```sh
+cargo install manatsu
+manatsu create
 ```
 
-This is work in progress and **should not** be used in production environments.
+## Contributing
+
+The following tools are required when contributing to Manatsu:
+
+- [Node](https://nodejs.org) (version 20 or higher)
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Miho](https://crates.io/crates/miho) (version 3 or higher).
+- [@antfu/ni](https://github.com/antfu/ni)
+
+### Setup
+
+```sh
+cargo install manatsu miho
+npm install -g @antfu/ni
+
+git clone https://github.com/manatsujs/manatsu.git
+cd manatsu
+pnpm install
+```
+
+## License
+
+[MIT](https://raw.githubusercontent.com/manatsujs/manatsu/main/LICENSE)
+
+Copyright (c) 2023 Andrew Ferreira
