@@ -6,8 +6,7 @@
   "packageManager": "pnpm@8.13.1",
   "lint-staged": {
     "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write",
-    "*.{?(c|m)@(j|t)s,vue}": "pnpm lint",
-    "*.rs": "cargo clippy --manifest-path=cli/Cargo.toml"
+    "*.{?(c|m)@(j|t)s,vue}": "pnpm lint"
   },
   "scripts": {
     "build": "cargo run --manifest-path=cli/Cargo.toml -- dev build",
@@ -37,7 +36,7 @@
     "@vitest/coverage-istanbul": "1.1.0",
     "@vitest/ui": "1.1.0",
     "@vue/test-utils": "^2.4.3",
-    "@vueuse/core": "^10.7.0",
+    "@vueuse/core": "^10.7.1",
     "eslint": "^8.56.0",
     "execa": "^8.0.1",
     "husky": "^8.0.3",

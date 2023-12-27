@@ -85,10 +85,10 @@ pub fn release() -> Result<()> {
         "prerelease": true,
         "generate_release_notes": true
       });
-  
+
       let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
       let github_token = format!("Bearer {}", c.github_token);
-  
+
       ureq::post(&endpoint)
         .set("Authorization", &github_token)
         .set("X-GitHub-Api-Version", "2022-11-28")
@@ -104,7 +104,7 @@ pub fn release() -> Result<()> {
       if env::consts::OS == "windows" {
         command.arg("/C").arg("pnpm");
       };
-  
+
       command
         .args(["publish", "-r", "--no-git-checks"])
         .stdout(Stdio::inherit())
