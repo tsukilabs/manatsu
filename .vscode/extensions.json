@@ -10,6 +10,7 @@
     "vue.volar",
     "redhat.vscode-yaml",
     "rust-lang.rust-analyzer",
-    "tamasfe.even-better-toml"
+    "tamasfe.even-better-toml",
+    "vivaxy.vscode-conventional-commits"
   ]
 }
