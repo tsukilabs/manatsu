@@ -15,7 +15,7 @@ pub fn component(name: &str) -> Result<()> {
   let kebab = name.to_case(Case::Kebab);
   let pascal = name.to_case(Case::Pascal);
 
-  let pkg_path = packages::root("components")?.join(kebab);
+  let pkg_path = packages::package_dir("components")?.join(kebab);
   fs::create_dir_all(&pkg_path)?;
 
   // index.ts
@@ -59,10 +59,14 @@ pub fn readme() -> Result<()> {
 
   println!("Copying README files...");
   for pkg in packages::PACKAGES {
-    let dest_readme = packages::root(pkg)?.join(filename);
+    let dest_readme = packages::package_dir(pkg)?.join(filename);
     fs::copy(&src_readme, &dest_readme)?;
     println!("Copied: {}", dest_readme.display());
   }
+
+  let cli_readme = cwd.join("cli").join(filename);
+  fs::copy(&src_readme, &cli_readme)?;
+  println!("Copied: {}", cli_readme.display());
 
   println!("Done!");
   Ok(())

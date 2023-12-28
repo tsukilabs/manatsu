@@ -41,11 +41,11 @@ pub fn build() -> Result<()> {
 
 fn copy_files() -> Result<()> {
   println!("Copying files...");
-  let dist = packages::dist("manatsu")?;
+  let dist = packages::dist_dir("manatsu")?;
   for pkg in PACKAGES {
     if pkg != "manatsu" {
       let to = dist.join(format!("{pkg}.d.ts"));
-      fs::copy(packages::dts(pkg)?, to)?;
+      fs::copy(packages::dts_file(pkg)?, to)?;
     }
   }
 
@@ -54,7 +54,7 @@ fn copy_files() -> Result<()> {
 
 fn fix_exports() -> Result<()> {
   println!("Fixing type exports...");
-  let dts = packages::dts("manatsu")?;
+  let dts = packages::dts_file("manatsu")?;
   let mut content = fs::read_to_string(&dts)?;
 
   for pkg in PACKAGES {
