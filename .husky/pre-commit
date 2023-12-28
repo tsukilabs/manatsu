@@ -2,5 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cargo clippy --manifest-path=cli/Cargo.toml
-npx lint-staged
-npm test
+cargo test --manifest-path=cli/Cargo.toml
+nlx lint-staged
+nr test
