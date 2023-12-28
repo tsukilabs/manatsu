@@ -41,7 +41,7 @@ pub fn create(project: Project) -> Result<()> {
   println!("Downloading template...");
   let bytes = download_template(project.template)?;
 
-  println!("Extracting project...");
+  println!("Building project...");
   fs::create_dir_all(&path).with_context(|| "Could not create project folder")?;
 
   let cursor = Cursor::new(bytes);
@@ -49,7 +49,7 @@ pub fn create(project: Project) -> Result<()> {
   zip.extract(&path)?;
   hoist_extracted_files(&path, project.template)?;
 
-  println!("Created project: {}", project.name);
+  println!("Project built: {}", project.name);
   Ok(())
 }
 
