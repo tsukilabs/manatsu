@@ -9,8 +9,7 @@ pub use component::component;
 pub use release::release;
 
 use anyhow::Result;
-use std::env;
-use std::fs;
+use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {

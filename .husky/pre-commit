@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cargo clippy --manifest-path=cli/Cargo.toml
-cargo test --manifest-path=cli/Cargo.toml
+nr clippy
+nr test:cargo
 nlx lint-staged
 nr test

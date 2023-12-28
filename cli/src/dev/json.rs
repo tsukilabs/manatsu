@@ -1,15 +1,14 @@
 use anyhow::Result;
-use serde::{Deserialize, Serialize};
-use std::env;
-use std::fs;
+use serde::Deserialize;
+use std::{env, fs};
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize)]
 pub struct Config {
   pub github: bool,
   pub github_token: String,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize)]
 pub struct Package {
   pub version: String,
 }

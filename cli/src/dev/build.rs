@@ -1,7 +1,6 @@
 use super::packages::{self, PACKAGES};
 use anyhow::Result;
-use std::env;
-use std::fs;
+use std::{env, fs};
 use std::process::{Command, Stdio};
 use std::time::Instant;
 
