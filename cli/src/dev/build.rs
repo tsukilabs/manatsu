@@ -43,12 +43,10 @@ fn copy_files() -> Result<()> {
   println!("Copying files...");
   let dist = packages::dist("manatsu")?;
   for pkg in PACKAGES {
-    if pkg == "manatsu" {
-      continue;
+    if pkg != "manatsu" {
+      let to = dist.join(format!("{pkg}.d.ts"));
+      fs::copy(packages::dts(pkg)?, to)?;
     }
-
-    let to = dist.join(format!("{pkg}.d.ts"));
-    fs::copy(packages::dts(pkg)?, to)?;
   }
 
   Ok(())
@@ -60,14 +58,12 @@ fn fix_exports() -> Result<()> {
   let mut content = fs::read_to_string(&dts)?;
 
   for pkg in PACKAGES {
-    if pkg == "manatsu" {
-      continue;
+    if pkg != "manatsu" {
+      content = content.replace(
+        format!("@manatsu/{pkg}/index.ts").as_str(),
+        format!("./{pkg}").as_str(),
+      );
     }
-
-    content = content.replace(
-      format!("@manatsu/{pkg}/index.ts").as_str(),
-      format!("./{pkg}").as_str(),
-    );
   }
 
   fs::write(dts, content)?;
