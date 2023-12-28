@@ -1,14 +1,22 @@
 use super::{json, readme};
 use anyhow::Result;
+use miho::git::{self, GitCommit};
+use miho::stdio::MihoStdio;
 use std::env;
 use std::process::{Command, Stdio};
 
 /// Release a new version.
 pub fn release() -> Result<()> {
   readme()?;
-  let config = json::read_config().ok();
 
-  match config {
+  let commit_flags = GitCommit {
+    message: String::from("chore: sync readme files"),
+    no_verify: true,
+  };
+
+  git::commit(MihoStdio::Inherit, commit_flags)?;
+
+  match json::read_config().ok() {
     Some(cfg) if cfg.github => github(&cfg.github_token)?,
     _ => local()?,
   }
