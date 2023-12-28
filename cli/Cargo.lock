@@ -418,9 +418,9 @@ checksum = "f665ee40bc4a3c5590afb1e9677db74a508659dfd71e126420da8274909a0167"
 
 [[package]]
 name = "miho"
-version = "3.0.3"
+version = "3.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ea96d1feebfd4721ea4f6efa38a0b85f47e981ae873140bd278f4cead4b43191"
+checksum = "1ad48a25066825683715f999c52ff773313878fa3a5fd3ddca786bc10370263a"
 dependencies = [
  "anyhow",
  "clap",

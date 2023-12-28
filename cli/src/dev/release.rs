@@ -9,12 +9,14 @@ use std::process::{Command, Stdio};
 pub fn release() -> Result<()> {
   readme()?;
 
-  let commit_flags = GitCommit {
-    message: String::from("chore: sync readme files"),
-    no_verify: true,
-  };
+  if let Ok(true) = git::is_dirty() {
+    let commit_flags = GitCommit {
+      message: String::from("chore: sync readme files"),
+      no_verify: true,
+    };
 
-  git::commit(MihoStdio::Inherit, commit_flags)?;
+    git::commit(MihoStdio::Inherit, commit_flags)?;
+  }
 
   match json::read_config().ok() {
     Some(cfg) if cfg.github => github(&cfg.github_token)?,
