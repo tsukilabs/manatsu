@@ -12,11 +12,11 @@ struct ManatsuCli {
 #[derive(Debug, Subcommand)]
 enum Commands {
   #[command(subcommand)]
-  Dev(DevCommands),
+  Dev(DevCommand),
 }
 
 #[derive(Debug, Subcommand)]
-enum DevCommands {
+enum DevCommand {
   Build,
   /// Generate component template.
   Component {
@@ -29,17 +29,21 @@ enum DevCommands {
   Release,
 }
 
+impl DevCommand {
+  fn execute(&self) -> Result<()> {
+    match self {
+      DevCommand::Build => dev::build(),
+      DevCommand::Component { name } => dev::component(&name),
+      DevCommand::Readme => dev::readme(),
+      DevCommand::Release => dev::release(),
+    }
+  }
+}
+
 fn main() -> Result<()> {
   let cli = ManatsuCli::parse();
 
   match cli.command {
-    Commands::Dev(value) => match value {
-      DevCommands::Build => dev::build()?,
-      DevCommands::Component { name } => dev::component(&name)?,
-      DevCommands::Readme => dev::readme()?,
-      DevCommands::Release => dev::release()?,
-    },
-  };
-
-  Ok(())
+    Commands::Dev(value) => value.execute(),
+  }
 }
