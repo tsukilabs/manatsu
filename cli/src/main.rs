@@ -14,10 +14,16 @@ struct ManatsuCli {
 
 #[derive(Debug, Subcommand)]
 enum Command {
+  /// Easily create a new project.
   Create(CreateCommand),
 
+  /// Helpful commands when contributing to Manatsu.
   #[command(subcommand)]
   Dev(DevCommand),
+}
+
+trait ManatsuCommand {
+  fn execute(&self) -> Result<()>;
 }
 
 #[derive(Debug, Args)]
@@ -38,25 +44,6 @@ struct CreateCommand {
   template: Option<String>,
 }
 
-#[derive(Debug, Subcommand)]
-enum DevCommand {
-  /// Builds all the public packages.
-  Build,
-  /// Generates a component template.
-  Component {
-    /// Component name.
-    name: String,
-  },
-  /// Synchronizes all README files of the monorepo.
-  Readme,
-  /// Releases a new version, publishing all the public packages.
-  Release,
-}
-
-trait ManatsuCommand {
-  fn execute(&self) -> Result<()>;
-}
-
 impl ManatsuCommand for CreateCommand {
   fn execute(&self) -> Result<()> {
     let template = self.template.as_deref();
@@ -71,6 +58,21 @@ impl ManatsuCommand for CreateCommand {
 
     project::create(project)
   }
+}
+
+#[derive(Debug, Subcommand)]
+enum DevCommand {
+  /// Builds all the public packages.
+  Build,
+  /// Generates a component template.
+  Component {
+    /// Component name.
+    name: String,
+  },
+  /// Synchronizes all README files of the monorepo.
+  Readme,
+  /// Releases a new version, publishing all the public packages.
+  Release,
 }
 
 impl ManatsuCommand for DevCommand {
