@@ -11,6 +11,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1"
 convert_case = "0.6"
+globset = "0.4"
 miho = "3"
 regex = "1.10"
 zip = "0.6"

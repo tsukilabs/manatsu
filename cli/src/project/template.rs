@@ -1,11 +1,11 @@
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub enum Template {
   Vue,
 }
 
 impl Template {
   pub fn url(&self) -> String {
-    let name: &str = self.clone().into();
+    let name: &str = (*self).into();
     format!("https://github.com/manatsujs/{name}/archive/refs/heads/main.zip")
   }
 }
