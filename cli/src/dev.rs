@@ -1,13 +1,14 @@
 mod build;
 mod json;
 mod packages;
+mod release;
 pub use build::build;
+pub use release::release;
 
 use anyhow::Result;
 use convert_case::{Case, Casing};
 use std::env;
 use std::fs;
-use std::process::{Command, Stdio};
 
 /// Generate component template.
 pub fn component(name: &str) -> Result<()> {
@@ -64,61 +65,5 @@ pub fn readme() -> Result<()> {
   }
 
   println!("Done!");
-  Ok(())
-}
-
-/// Release a new version.
-pub fn release() -> Result<()> {
-  readme()?;
-  let config = json::read_config().ok();
-
-  match config {
-    Some(c) if c.github => {
-      let package = json::read_package()?;
-
-      let base_url = "https://api.github.com";
-      let owner_repo = "manatsujs/manatsu";
-      let body = ureq::json!({
-        "tag_name": format!("v{}", package.version),
-        "name": format!("v{}", package.version),
-        "draft": false,
-        "prerelease": true,
-        "generate_release_notes": true
-      });
-
-      let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
-      let github_token = format!("Bearer {}", c.github_token);
-
-      ureq::post(&endpoint)
-        .set("Authorization", &github_token)
-        .set("X-GitHub-Api-Version", "2022-11-28")
-        .set("accept", "application/vnd.github+json")
-        .send_json(body)?;
-    }
-    _ => {
-      let mut command = match env::consts::OS {
-        "windows" => Command::new("cmd"),
-        _ => Command::new("pnpm"),
-      };
-
-      if env::consts::OS == "windows" {
-        command.arg("/C").arg("pnpm");
-      };
-
-      command
-        .args(["publish", "-r", "--no-git-checks"])
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()?;
-    }
-  }
-
-  let manifest_path = "--manifest-path=cli/Cargo.toml";
-  Command::new("cargo")
-    .args(["publish", manifest_path])
-    .stdout(Stdio::inherit())
-    .stderr(Stdio::inherit())
-    .output()?;
-
   Ok(())
 }
