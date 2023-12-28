@@ -6,7 +6,7 @@ Manatsu is a component library for [Vue](https://vuejs.org/), designed from the 
 
 ```bash
 cargo install manatsu
-manatsu create
+manatsu create my-project
 ```
 
 ## Contributing

@@ -31,7 +31,10 @@ pub fn build() -> Result<()> {
     .stderr(Stdio::inherit())
     .output()?;
 
+  println!("Copying files...");
   copy_files()?;
+
+  println!("Fixing type exports...");
   fix_exports()?;
 
   println!("Built in: {:?}", start.elapsed());
@@ -39,7 +42,6 @@ pub fn build() -> Result<()> {
 }
 
 fn copy_files() -> Result<()> {
-  println!("Copying files...");
   let dist = packages::dist_dir("manatsu")?;
   for pkg in PACKAGES {
     if pkg != "manatsu" {
@@ -52,7 +54,6 @@ fn copy_files() -> Result<()> {
 }
 
 fn fix_exports() -> Result<()> {
-  println!("Fixing type exports...");
   let dts = packages::dts_file("manatsu")?;
   let mut content = fs::read_to_string(&dts)?;
 
