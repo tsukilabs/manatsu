@@ -13,6 +13,7 @@
     "build:playground": "pnpm -F @manatsu/playground build",
     "bump": "miho bump --no-ask --add .",
     "cli": "cargo run --manifest-path=cli/Cargo.toml --",
+    "cli:doc": "cargo doc --open --manifest-path=cli/Cargo.toml",
     "deps": "taze -f -r -w -l",
     "dev": "vite serve packages/playground",
     "format": "prettier . --write",
