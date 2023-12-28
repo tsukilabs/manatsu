@@ -1,11 +1,10 @@
 use super::packages::{self, PACKAGES};
 use anyhow::Result;
-use std::env;
-use std::fs;
+use std::{env, fs};
 use std::process::{Command, Stdio};
 use std::time::Instant;
 
-/// Build all public packages.
+/// Builds all the public packages.
 pub fn build() -> Result<()> {
   let start = Instant::now();
 

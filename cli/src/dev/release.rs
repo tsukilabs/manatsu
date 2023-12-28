@@ -5,7 +5,10 @@ use miho::stdio::MihoStdio;
 use std::env;
 use std::process::{Command, Stdio};
 
-/// Release a new version.
+/// Releases a new version, publishing all the public packages.
+///
+/// It is not necessary to synchronize the README files before
+/// calling this function, as it will already do that.
 pub fn release() -> Result<()> {
   readme()?;
 
@@ -19,14 +22,14 @@ pub fn release() -> Result<()> {
   }
 
   match json::read_config().ok() {
-    Some(cfg) if cfg.github => github(&cfg.github_token)?,
-    _ => local()?,
+    Some(cfg) if cfg.github => create_github_release(&cfg.github_token)?,
+    _ => publish_to_npm()?,
   }
 
   Ok(())
 }
 
-fn github(github_token: &str) -> Result<()> {
+fn create_github_release(github_token: &str) -> Result<()> {
   let package = json::read_package()?;
 
   let base_url = "https://api.github.com";
@@ -51,7 +54,7 @@ fn github(github_token: &str) -> Result<()> {
   Ok(())
 }
 
-fn local() -> Result<()> {
+fn publish_to_npm() -> Result<()> {
   let mut command = match env::consts::OS {
     "windows" => Command::new("cmd"),
     _ => Command::new("pnpm"),
@@ -67,11 +70,11 @@ fn local() -> Result<()> {
     .stderr(Stdio::inherit())
     .output()?;
 
-  cargo()?;
+  publish_to_cargo()?;
   Ok(())
 }
 
-fn cargo() -> Result<()> {
+fn publish_to_cargo() -> Result<()> {
   let manifest_path = "--manifest-path=cli/Cargo.toml";
   Command::new("cargo")
     .args(["publish", manifest_path])
