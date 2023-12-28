@@ -13,13 +13,6 @@ pub fn release() -> Result<()> {
     _ => local()?,
   }
 
-  let manifest_path = "--manifest-path=cli/Cargo.toml";
-  Command::new("cargo")
-    .args(["publish", manifest_path])
-    .stdout(Stdio::inherit())
-    .stderr(Stdio::inherit())
-    .output()?;
-
   Ok(())
 }
 
@@ -60,6 +53,18 @@ fn local() -> Result<()> {
 
   command
     .args(["publish", "-r", "--no-git-checks"])
+    .stdout(Stdio::inherit())
+    .stderr(Stdio::inherit())
+    .output()?;
+
+  cargo()?;
+  Ok(())
+}
+
+fn cargo() -> Result<()> {
+  let manifest_path = "--manifest-path=cli/Cargo.toml";
+  Command::new("cargo")
+    .args(["publish", manifest_path])
     .stdout(Stdio::inherit())
     .stderr(Stdio::inherit())
     .output()?;
