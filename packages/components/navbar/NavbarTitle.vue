@@ -1,22 +1,17 @@
 <script setup lang="ts">
-import { defineComponent, h } from 'vue';
 import type { NavbarTitleProps } from './types';
 
-const props = defineProps<NavbarTitleProps>();
-
-const TitleText = defineComponent(() => {
-  return () => {
-    if (typeof props.title === 'function') {
-      return props.title;
-    }
-
-    return h('span', props.title);
-  };
-});
+defineProps<NavbarTitleProps>();
 </script>
 
 <template>
-  <TitleText class="m-navbar-title" />
+  <component
+    :is="title"
+    v-if="typeof title === 'function'"
+    class="m-navbar-title"
+  />
+
+  <span v-else class="m-navbar-title">{{ title }}</span>
 </template>
 
 <style scoped lang="scss">
