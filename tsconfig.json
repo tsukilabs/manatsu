@@ -1,5 +1,5 @@
 {
-  "include": ["*.config.ts", "scripts/**/*"],
+  "include": ["*.config.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",

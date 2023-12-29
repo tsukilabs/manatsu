@@ -4,17 +4,17 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [vue()],
   test: {
+    watch: false,
     globals: false,
     environment: 'jsdom',
-    browser: {
-      name: 'chrome',
-      enabled: false,
-      headless: true
-    },
-    watch: false,
+    include: [
+      'packages/components/**/*.test.ts',
+      'packages/composables/**/*.test.ts'
+    ],
     coverage: {
       provider: 'istanbul',
-      reporter: ['html']
+      reporter: ['html'],
+      include: ['packages/components/*', 'packages/composables/*']
     }
   }
 });

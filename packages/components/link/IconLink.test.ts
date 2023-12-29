@@ -6,11 +6,12 @@ import IconLink from './IconLink.vue';
 enableAutoUnmount(afterEach);
 
 describe('icon-link', () => {
-  it('should render icon', () => {
+  it('should render link and icon', () => {
     const wrapper = mount(IconLink, {
       props: { icon: 'github', to: 'https://tb.dev.br/' }
     });
 
+    expect(wrapper.find('a').exists()).toBe(true);
     expect(wrapper.find('svg').exists()).toBe(true);
   });
 
