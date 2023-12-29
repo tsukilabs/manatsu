@@ -3,21 +3,21 @@ import { describe, expect, it } from 'vitest';
 import { useToPixel } from '.';
 
 describe('useToPixel', () => {
-  it('should return a pixel string', async () => {
+  it.concurrent('should return a pixel string', async () => {
     const unit = useToPixel(10);
     await nextTick();
 
     expect(unit.value).toBe('10px');
   });
 
-  it('should remain unchanged', async () => {
+  it.concurrent('should remain unchanged', async () => {
     const unit = useToPixel('2rem');
     await nextTick();
 
     expect(unit.value).toBe('2rem');
   });
 
-  it('should return an object with pixel strings', async () => {
+  it.concurrent('should return an object with pixel strings', async () => {
     const unit = useToPixel({
       a: '10px',
       b: 25,
@@ -31,7 +31,7 @@ describe('useToPixel', () => {
     expect(Object.values(unit.value).every((v) => v.endsWith('px'))).toBe(true);
   });
 
-  it('inner ref should remain reactive', async () => {
+  it.concurrent('inner ref should remain reactive', async () => {
     const pixel = ref<string | number>(50);
     const unit = useToPixel({ pixel });
 
