@@ -5,6 +5,7 @@ import type { ButtonProps } from './types';
 const props = defineProps<ButtonProps>();
 
 const classList = computed(() => ({
+  'm-button-filled': !props.outlined,
   'm-button-outlined': props.outlined
 }));
 </script>
@@ -47,7 +48,7 @@ const classList = computed(() => ({
   text-align: center;
 }
 
-.m-button:not(.m-button-outlined) {
+.m-button-filled {
   transition: filter 0.3s ease-in-out;
   background-color: var(--m-color-primary);
   color: var(--m-color-on-primary);
