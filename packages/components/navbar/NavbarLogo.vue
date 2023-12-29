@@ -11,7 +11,7 @@ defineProps<NavbarLogoProps>();
     class="m-navbar-logo"
   />
 
-  <img v-else class="m-navbar-logo" />
+  <img v-else class="m-navbar-logo" :src="logo" />
 </template>
 
 <style scoped lang="scss">

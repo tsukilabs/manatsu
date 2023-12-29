@@ -13,9 +13,7 @@ describe('dynamic-link', () => {
 
   it('should render anchor if `to` is external', () => {
     const wrapper = mount(DynamicLink, { props: { to: 'https://tb.dev.br/' } });
-
-    const anchor = wrapper.find('a:not([class*="router-link"])');
-    expect(anchor.exists()).toBe(true);
+    expect(wrapper.find('a:not([class*="router-link"])').exists()).toBe(true);
   });
 
   it('should render router-link if `to` is a route', async () => {
@@ -35,7 +33,6 @@ describe('dynamic-link', () => {
       }
     });
 
-    const anchor = wrapper.find('a[class*="router-link"]');
-    expect(anchor.exists()).toBe(true);
+    expect(wrapper.find('a[class*="router-link"]').exists()).toBe(true);
   });
 });

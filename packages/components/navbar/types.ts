@@ -18,10 +18,11 @@ export interface NavbarMenuProps {
   menu?: NavbarMenuItem[];
 }
 
-export interface NavbarProps
-  extends Partial<NavbarLogoProps>,
-    Partial<NavbarTitleProps>,
-    Partial<NavbarMenuProps> {
+export type NavbarChildrenProps = Partial<NavbarLogoProps> &
+  Partial<NavbarTitleProps> &
+  Partial<NavbarMenuProps>;
+
+export interface NavbarProps extends NavbarChildrenProps {
   socialLinks?: IconLinkProps[];
   titleLink?: RouteLocationRaw;
 }
