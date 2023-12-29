@@ -1,1 +1,1 @@
-export * from './social';
+export * as social from './social';

@@ -1,12 +1,14 @@
-import type { VNodeChild } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
-import type { SocialIcon } from '../icon';
+import type { IconProps } from '../icon';
 
 export interface DynamicLinkProps {
   to?: RouteLocationRaw;
 }
 
-export interface SocialLinkProps {
-  icon: SocialIcon | (() => VNodeChild);
+export interface IconLinkProps {
+  height?: string | number;
+  icon: IconProps['icon'];
+  iconProps?: Omit<IconProps, 'icon'>;
   to: string;
+  width?: string | number;
 }

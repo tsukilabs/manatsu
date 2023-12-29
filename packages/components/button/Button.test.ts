@@ -1,19 +1,16 @@
-import { h } from 'vue';
-import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { enableAutoUnmount, mount } from '@vue/test-utils';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import Button from './Button.vue';
 
+enableAutoUnmount(afterEach);
+
 describe('button', () => {
-  it('should render', () => {
-    const label = 'My Button';
-    const wrapper = mount(Button, {
-      slots: {
-        default: h('span', label)
-      }
-    });
+  it('should emit event on click', async () => {
+    const onClick = vi.fn();
+    const wrapper = mount(Button, { props: { onClick } });
 
-    const button = wrapper.get('button');
+    await wrapper.trigger('click');
 
-    expect(button.text()).toBe(label);
+    expect(onClick).toHaveBeenCalled();
   });
 });

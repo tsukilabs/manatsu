@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import {
+  type IconLinkProps,
   MNavbar,
-  MScaffold,
-  type SocialLinkProps
+  MScaffold
 } from '@manatsu/components/index.ts';
 import peach from '/peach.png';
-import MainContent from './components/MainContent.vue';
 
-const socialLinks: SocialLinkProps[] = [
+const socialLinks: IconLinkProps[] = [
   { icon: 'github', to: 'https://github.com/manatsujs/manatsu' },
   { icon: 'facebook', to: 'https://example.com/1' },
   { icon: 'discord', to: 'https://example.com/2' },
@@ -19,9 +18,14 @@ const socialLinks: SocialLinkProps[] = [
 <template>
   <MScaffold navbar>
     <template #navbar>
-      <MNavbar title="Title" :logo="peach" :social-links="socialLinks" />
+      <MNavbar
+        title="Title"
+        title-link="/"
+        :logo="peach"
+        :social-links="socialLinks"
+      />
     </template>
 
-    <MainContent />
+    <RouterView />
   </MScaffold>
 </template>
