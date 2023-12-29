@@ -48,7 +48,7 @@
     "prettier": "^3.1.1",
     "prettier-plugin-css-order": "^2.0.1",
     "rollup": "^4.9.1",
-    "sass": "^1.69.5",
+    "sass": "^1.69.6",
     "taze": "^0.13.1",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
