@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/playground",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "type": "module",
   "private": true,
   "scripts": {
@@ -12,5 +12,8 @@
     "@manatsu/components": "workspace:*",
     "@manatsu/composables": "workspace:*",
     "manatsu": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^5.0.10"
   }
 }

@@ -3,7 +3,7 @@ import NavbarLogo from './NavbarLogo.vue';
 import NavbarMenu from './NavbarMenu.vue';
 import type { NavbarProps } from './types';
 import NavbarTitle from './NavbarTitle.vue';
-import SocialLink from '../link/SocialLink.vue';
+import IconLink from '../link/IconLink.vue';
 import DynamicLink from '../link/DynamicLink.vue';
 
 defineProps<NavbarProps>();
@@ -22,7 +22,7 @@ defineProps<NavbarProps>();
       v-if="socialLinks && socialLinks.length > 0"
       class="m-navbar-social-links"
     >
-      <SocialLink
+      <IconLink
         v-for="link of socialLinks"
         :key="link.to"
         :to="link.to"

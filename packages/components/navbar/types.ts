@@ -1,6 +1,6 @@
 import type { VNodeChild } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
-import type { SocialLinkProps } from '..';
+import type { IconLinkProps } from '../link';
 
 export interface NavbarLogoProps {
   logo: string | (() => VNodeChild);
@@ -18,10 +18,11 @@ export interface NavbarMenuProps {
   menu?: NavbarMenuItem[];
 }
 
-export interface NavbarProps
-  extends Partial<NavbarLogoProps>,
-    Partial<NavbarTitleProps>,
-    Partial<NavbarMenuProps> {
-  socialLinks?: SocialLinkProps[];
+export type NavbarChildrenProps = Partial<NavbarLogoProps> &
+  Partial<NavbarTitleProps> &
+  Partial<NavbarMenuProps>;
+
+export interface NavbarProps extends NavbarChildrenProps {
+  socialLinks?: IconLinkProps[];
   titleLink?: RouteLocationRaw;
 }

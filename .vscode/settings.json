@@ -18,8 +18,7 @@
   "files.exclude": {
     ".eslintcache": true,
     "**/components/dist": true,
-    "**/composables/dist": true,
-    "coverage": true
+    "**/composables/dist": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "[rust]": {

@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.13.1",
@@ -24,16 +24,22 @@
     "release": "nr build && nr cli dev release",
     "test": "vitest --run",
     "test:cargo": "cargo test --manifest-path=cli/Cargo.toml",
-    "test:ui": "vitest --ui --watch --coverage.enabled=true",
+    "test:ui": "vitest --ui --watch",
     "type-check": "vue-tsc --noEmit"
+  },
+  "pnpm": {
+    "requiredScripts": [
+      "build",
+      "type-check"
+    ]
   },
   "devDependencies": {
     "@manatsu/theme-builder": "^0.2.1",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@tb-dev/eslint-config": "^1.5.4",
+    "@tb-dev/eslint-config": "^1.5.8",
     "@tb-dev/utility-types": "^1.0.1",
     "@types/node": "^20.10.5",
-    "@vitejs/plugin-vue": "^5.0.0",
+    "@vitejs/plugin-vue": "^5.0.1",
     "@vitest/browser": "1.1.0",
     "@vitest/coverage-istanbul": "1.1.0",
     "@vitest/ui": "1.1.0",
@@ -56,12 +62,9 @@
     "vite": "^5.0.10",
     "vite-plugin-dts": "^3.7.0",
     "vitest": "1.1.0",
-    "vue": "^3.3.13",
+    "vue": "^3.4.0",
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.27",
     "webdriverio": "^8.27.0"
-  },
-  "peerDependencies": {
-    "vue": "^3.3.0"
   }
 }

@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import { defineComponent, h } from 'vue';
 import type { NavbarLogoProps } from './types';
 
-const props = defineProps<NavbarLogoProps>();
-
-const TitleLogo = defineComponent(() => {
-  return () => {
-    if (typeof props.logo === 'function') {
-      return props.logo;
-    }
-
-    return h('img', {
-      src: props.logo
-    });
-  };
-});
+defineProps<NavbarLogoProps>();
 </script>
 
 <template>
-  <TitleLogo class="m-navbar-logo" />
+  <component
+    :is="logo"
+    v-if="typeof logo === 'function'"
+    class="m-navbar-logo"
+  />
+
+  <img v-else class="m-navbar-logo" :src="logo" />
 </template>
 
 <style scoped lang="scss">

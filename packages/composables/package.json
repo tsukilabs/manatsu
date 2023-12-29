@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/composables",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "description": "Manatsu composables",
   "license": "MIT",
   "private": false,
@@ -38,6 +38,9 @@
     "build": "run-p type-check build-only",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
+  },
+  "devDependencies": {
+    "vite": "^5.0.10"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.7.0",

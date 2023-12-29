@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/components",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "description": "Manatsu components",
   "license": "MIT",
   "private": false,
@@ -43,6 +43,9 @@
   "dependencies": {
     "@manatsu/composables": "workspace:*",
     "@tb-dev/utility-types": "^1.0.1"
+  },
+  "devDependencies": {
+    "vite": "^5.0.10"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.7.0",
