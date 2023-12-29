@@ -6,28 +6,34 @@ import {
   unref
 } from 'vue';
 
-export type PixelRecord = Record<string, MaybeRefOrGetter<string | number>>;
+export type PixelRecord<T extends string> = Record<
+  T,
+  MaybeRefOrGetter<string | number>
+>;
 
 export function useToPixel(
   unit: MaybeRefOrGetter<string | number>
 ): ComputedRef<string>;
-export function useToPixel(
-  unit: MaybeRefOrGetter<PixelRecord>
-): ComputedRef<Record<string, string>>;
-export function useToPixel(
-  unit: MaybeRefOrGetter<string | number | PixelRecord>
+export function useToPixel<T extends PixelRecord<string>, K extends keyof T>(
+  unit: MaybeRefOrGetter<T>
+): ComputedRef<Record<K, string>>;
+export function useToPixel<T extends PixelRecord<string>, K extends keyof T>(
+  unit: MaybeRefOrGetter<string | number | T>
 ) {
   const unitRef = toRef(unit);
 
   return computed(() => {
     if (typeof unitRef.value !== 'object') return toPixel(unitRef.value);
 
-    return Object.entries(unitRef.value).reduce<Record<string, string>>(
+    return Object.entries(unitRef.value).reduce<Record<K, string>>(
       (record, [key, value]) => {
-        record[key] = toPixel(value);
+        record[key as K] = toPixel(value);
         return record;
       },
-      {}
+
+      /** @see https://typescript-eslint.io/rules/prefer-reduce-type-parameter/#when-not-to-use-it */
+      // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
+      {} as Record<K, string>
     );
   });
 }
