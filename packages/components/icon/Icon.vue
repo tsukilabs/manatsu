@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToPixel } from '@manatsu/composables/index.ts';
+import { useToPixel } from '@manatsu/composables/src/index.ts';
 import { type CSSProperties, type ComputedRef, computed, toRef } from 'vue';
 import { social } from './svg';
 import type { IconProps } from './types';

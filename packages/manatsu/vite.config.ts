@@ -21,7 +21,7 @@ export default defineConfig({
         chunkFileNames: '[name].js',
         manualChunks: {
           components: ['@manatsu/components/index.ts'],
-          composables: ['@manatsu/composables/index.ts']
+          composables: ['@manatsu/composables/src/index.ts']
         }
       }
     }

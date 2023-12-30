@@ -22,9 +22,7 @@
   },
   "editor.tabSize": 2,
   "files.exclude": {
-    ".eslintcache": true,
-    "**/components/dist": true,
-    "**/composables/dist": true
+    ".eslintcache": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "[rust]": {

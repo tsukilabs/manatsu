@@ -10,7 +10,7 @@ export default defineConfig({
     emptyOutDir: true,
     minify: false,
     lib: {
-      entry: join(__dirname, 'index.ts'),
+      entry: join(__dirname, 'src/index.ts'),
       formats: ['es'],
       fileName: 'index'
     },
