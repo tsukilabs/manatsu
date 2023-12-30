@@ -1,4 +1,5 @@
 import { h } from 'vue';
+import { GitHub } from '@manatsu/icons/src/index.ts';
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
 import Navbar from './Navbar.vue';
@@ -27,11 +28,11 @@ describe('navbar', () => {
 
   it('should have social links', () => {
     const socialLinks: IconLinkProps[] = [
-      { icon: 'github', to: 'https://example.com/0' },
-      { icon: 'facebook', to: 'https://example.com/1' },
-      { icon: 'discord', to: 'https://example.com/2' },
-      { icon: 'instagram', to: 'https://example.com/3' },
-      { icon: 'x', to: 'https://example.com/4' }
+      { icon: () => h(GitHub), to: 'https://example.com/0' },
+      { icon: () => h(GitHub), to: 'https://example.com/1' },
+      { icon: () => h(GitHub), to: 'https://example.com/2' },
+      { icon: () => h(GitHub), to: 'https://example.com/3' },
+      { icon: () => h(GitHub), to: 'https://example.com/4' }
     ];
 
     const wrapper = mount(Navbar, { props: { socialLinks } });

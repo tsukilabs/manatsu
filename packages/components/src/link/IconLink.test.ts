@@ -1,4 +1,5 @@
 import { h } from 'vue';
+import { GitHub } from '@manatsu/icons/src/index.ts';
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
 import IconLink from './IconLink.vue';
@@ -8,7 +9,7 @@ enableAutoUnmount(afterEach);
 describe('icon-link', () => {
   it('should render link and icon', () => {
     const wrapper = mount(IconLink, {
-      props: { icon: 'github', to: 'https://tb.dev.br/' }
+      props: { icon: () => h(GitHub), to: 'https://tb.dev.br/' }
     });
 
     expect(wrapper.find('a').exists()).toBe(true);

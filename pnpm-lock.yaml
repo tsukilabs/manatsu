@@ -110,6 +110,9 @@ importers:
       '@manatsu/composables':
         specifier: workspace:*
         version: link:../composables
+      '@manatsu/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@tb-dev/utility-types':
         specifier: ^1.0.1
         version: 1.0.1
@@ -183,6 +186,9 @@ importers:
       '@manatsu/composables':
         specifier: workspace:*
         version: link:../composables
+      '@manatsu/icons':
+        specifier: workspace:*
+        version: link:../icons
       manatsu:
         specifier: workspace:*
         version: link:../manatsu

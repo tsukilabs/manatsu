@@ -3,6 +3,8 @@ use miho;
 
 pub fn format_files<T: AsRef<str>>(glob: T) -> Result<()> {
   let glob = glob.as_ref();
+
+  println!("Formatting files...");
   miho::Command::new("pnpm")
     .args(["exec", "prettier", glob, "--write"])
     .stdio(miho::Stdio::Inherit)
@@ -24,6 +26,7 @@ where
     cmd.args(args);
   }
 
+  println!("Linting files...");
   cmd
     .arg(glob)
     .stdio(miho::Stdio::Inherit)
