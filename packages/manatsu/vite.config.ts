@@ -20,7 +20,7 @@ export default defineConfig({
       output: {
         chunkFileNames: '[name].js',
         manualChunks: {
-          components: ['@manatsu/components/index.ts'],
+          components: ['@manatsu/components/src/index.ts'],
           composables: ['@manatsu/composables/src/index.ts']
         }
       }

@@ -3,7 +3,7 @@ import {
   type IconLinkProps,
   MNavbar,
   MScaffold
-} from '@manatsu/components/index.ts';
+} from '@manatsu/components/src/index.ts';
 import peach from '/peach.png';
 
 const socialLinks: IconLinkProps[] = [
