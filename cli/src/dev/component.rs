@@ -1,12 +1,25 @@
+mod icon;
+
+pub use icon::{create_icon, IconType};
+
 use super::packages;
-use anyhow::Result;
+use crate::vue::VueString;
+use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
+use regex::Regex;
 use std::fs;
 
+/// <https://regex101.com/r/igEb6A>
+pub const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
+
 /// Generates a component template.
-pub fn component(name: &str) -> Result<()> {
-  let kebab = name.to_case(Case::Kebab);
-  let pascal = name.to_case(Case::Pascal);
+pub fn create(name: &str) -> Result<()> {
+  let name = name.to_lowercase();
+  if !is_valid_name(&name)? {
+    return Err(anyhow!("Invalid component name: {}", name));
+  }
+
+  let (kebab, pascal) = to_kebab_and_pascal(name);
 
   let pkg_path = packages::package_dir("components")?.join(kebab);
   fs::create_dir_all(&pkg_path)?;
@@ -34,12 +47,32 @@ pub fn component(name: &str) -> Result<()> {
   vue.push_str("<template>\n<div></div>\n</template>\n\n");
   vue.push_str("<style scoped lang=\"scss\"></style>");
 
-  let mut vue_filename = pascal.clone();
-  vue_filename.push_str(".vue");
-
-  let vue_path = pkg_path.join(vue_filename);
+  let vue_path = pkg_path.join(pascal.append_vue_ext());
   fs::write(vue_path, vue)?;
 
   println!("Component created: {pascal}");
   Ok(())
+}
+
+/// Determines whether the component name is valid.
+///
+/// # Examples
+/// ```
+/// use manatsu::dev::component::is_valid_name;
+///
+/// let name = "button";
+/// assert!(is_valid_name(name).unwrap());
+///
+/// let name = "Select99@";
+/// assert!(!is_valid_name(name).unwrap());
+/// ```
+pub fn is_valid_name(name: &str) -> Result<bool> {
+  let regex = Regex::new(COMPONENT_NAME_REGEX)?;
+  Ok(regex.is_match(name))
+}
+
+fn to_kebab_and_pascal(name: String) -> (String, String) {
+  let kebab = name.to_case(Case::Kebab);
+  let pascal = name.to_case(Case::Pascal);
+  (kebab, pascal)
 }

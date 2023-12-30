@@ -18,8 +18,10 @@
   ],
   "keywords": [
     "manatsu",
-    "component library",
-    "vue"
+    "components",
+    "composables",
+    "vue",
+    "tauri"
   ],
   "type": "module",
   "files": [

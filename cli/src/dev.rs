@@ -1,11 +1,10 @@
 mod build;
-mod component;
+pub mod component;
 mod json;
 mod packages;
 mod release;
 
 pub use build::build;
-pub use component::component;
 pub use release::release;
 
 use anyhow::Result;

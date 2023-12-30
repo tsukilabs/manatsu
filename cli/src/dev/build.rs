@@ -1,8 +1,8 @@
-use super::packages::{self, PACKAGES};
+use super::packages::{self, is_standalone, PACKAGES};
 use anyhow::Result;
-use std::{env, fs};
 use std::process::{Command, Stdio};
 use std::time::Instant;
+use std::{env, fs};
 
 /// Builds all the public packages.
 pub fn build() -> Result<()> {
@@ -44,7 +44,7 @@ pub fn build() -> Result<()> {
 fn copy_files() -> Result<()> {
   let dist = packages::dist_dir("manatsu")?;
   for pkg in PACKAGES {
-    if pkg != "manatsu" {
+    if !is_standalone(pkg) {
       let to = dist.join(format!("{pkg}.d.ts"));
       fs::copy(packages::dts_file(pkg)?, to)?;
     }
@@ -58,7 +58,7 @@ fn fix_exports() -> Result<()> {
   let mut content = fs::read_to_string(&dts)?;
 
   for pkg in PACKAGES {
-    if pkg != "manatsu" {
+    if !is_standalone(pkg) {
       content = content.replace(
         format!("@manatsu/{pkg}/index.ts").as_str(),
         format!("./{pkg}").as_str(),

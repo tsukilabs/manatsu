@@ -1,8 +1,8 @@
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
-use manatsu::dev;
-use manatsu::project::template::Template;
-use manatsu::project::{self, Project};
+use manatsu::dev::component::IconType;
+use manatsu::dev::{self, component};
+use manatsu::project::{Project, Template};
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu")]
@@ -56,7 +56,7 @@ impl ManatsuCommand for CreateCommand {
       template: template.unwrap_or(Template::Vue),
     };
 
-    project::create(project)
+    project.create()
   }
 }
 
@@ -69,6 +69,13 @@ enum DevCommand {
     /// Component name.
     name: String,
   },
+  /// Generates a icon template.
+  Icon {
+    /// Icon name.
+    name: String,
+    /// Icon type.
+    icon_type: String,
+  },
   /// Synchronizes all README files of the monorepo.
   Readme,
   /// Releases a new version, publishing all the public packages.
@@ -79,7 +86,11 @@ impl ManatsuCommand for DevCommand {
   fn execute(&self) -> Result<()> {
     match self {
       DevCommand::Build => dev::build(),
-      DevCommand::Component { name } => dev::component(name),
+      DevCommand::Component { name } => component::create(name),
+      DevCommand::Icon { name, icon_type } => {
+        let icon_type = IconType::try_from(icon_type.as_str())?;
+        component::create_icon(name, icon_type)
+      }
       DevCommand::Readme => dev::readme(),
       DevCommand::Release => dev::release(),
     }

@@ -9,8 +9,8 @@ import AboutView from './views/AboutView.vue';
 const router = createRouter({
   history: createMemoryHistory(),
   routes: [
-    { path: '/', component: () => HomeView },
-    { path: '/about', component: () => AboutView }
+    { path: '/', component: HomeView },
+    { path: '/about', component: AboutView }
   ]
 });
 
