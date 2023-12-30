@@ -1,11 +1,10 @@
 mod icon;
 
-pub use icon::{create_icon, IconType};
-
 use super::packages;
 use crate::vue::VueString;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
+pub use icon::{create_icon, IconType};
 use regex::Regex;
 use std::fs;
 

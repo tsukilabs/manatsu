@@ -1,8 +1,6 @@
 use super::{json, readme};
 use anyhow::Result;
 use miho::git::{self, GitCommit};
-use miho::stdio::MihoStdio;
-use std::env;
 use std::process::{Command, Stdio};
 
 /// Releases a new version, publishing all the public packages.
@@ -18,7 +16,7 @@ pub fn release() -> Result<()> {
       no_verify: true,
     };
 
-    git::commit(MihoStdio::Inherit, commit_flags)?;
+    git::commit(miho::Stdio::Inherit, commit_flags)?;
   }
 
   match json::read_config().ok() {
@@ -55,19 +53,9 @@ fn create_github_release(github_token: &str) -> Result<()> {
 }
 
 fn publish_to_npm() -> Result<()> {
-  let mut command = match env::consts::OS {
-    "windows" => Command::new("cmd"),
-    _ => Command::new("pnpm"),
-  };
-
-  if env::consts::OS == "windows" {
-    command.arg("/C").arg("pnpm");
-  };
-
-  command
+  miho::Command::new("pnpm")
     .args(["publish", "-r", "--no-git-checks"])
-    .stdout(Stdio::inherit())
-    .stderr(Stdio::inherit())
+    .stdio(miho::Stdio::Inherit)
     .output()?;
 
   publish_to_cargo()?;
@@ -78,8 +66,8 @@ fn publish_to_cargo() -> Result<()> {
   let manifest_path = "--manifest-path=cli/Cargo.toml";
   Command::new("cargo")
     .args(["publish", manifest_path])
-    .stdout(Stdio::inherit())
     .stderr(Stdio::inherit())
+    .stdout(Stdio::inherit())
     .output()?;
 
   Ok(())

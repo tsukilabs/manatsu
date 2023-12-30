@@ -4,10 +4,9 @@ mod json;
 mod packages;
 mod release;
 
+use anyhow::Result;
 pub use build::build;
 pub use release::release;
-
-use anyhow::Result;
 use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.

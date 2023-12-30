@@ -3,8 +3,8 @@ use crate::dev::packages;
 use crate::vue::VueString;
 use anyhow::{anyhow, Context, Result};
 use convert_case::{Case, Casing};
-use std::process::{Command, Stdio};
-use std::{env, fs};
+use miho;
+use std::fs;
 
 pub enum IconType {
   Social,
@@ -89,19 +89,9 @@ pub fn create_icon(name: &str, icon_type: IconType) -> Result<()> {
 }
 
 fn format_files() -> Result<()> {
-  let mut command = match env::consts::OS {
-    "windows" => Command::new("cmd"),
-    _ => Command::new("nlx"),
-  };
-
-  if env::consts::OS == "windows" {
-    command.arg("/C").arg("nlx");
-  };
-
-  command
+  miho::Command::new("nlx")
     .args(["prettier", "icons/**/index.ts", "--write"])
-    .stdout(Stdio::inherit())
-    .stderr(Stdio::inherit())
+    .stdio(miho::Stdio::Inherit)
     .output()
     .with_context(|| "Could not format index file before editing it")?;
 
@@ -109,19 +99,9 @@ fn format_files() -> Result<()> {
 }
 
 fn lint_files() -> Result<()> {
-  let mut command = match env::consts::OS {
-    "windows" => Command::new("cmd"),
-    _ => Command::new("nlx"),
-  };
-
-  if env::consts::OS == "windows" {
-    command.arg("/C").arg("nlx");
-  };
-
-  command
+  miho::Command::new("nlx")
     .args(["eslint", "--fix", "icons/**/index.ts"])
-    .stdout(Stdio::inherit())
-    .stderr(Stdio::inherit())
+    .stdio(miho::Stdio::Inherit)
     .output()
     .with_context(|| "Could not lint index file after editing it")?;
 

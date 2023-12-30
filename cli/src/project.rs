@@ -1,13 +1,12 @@
 mod template;
 
-pub use template::Template;
-
 use anyhow::{anyhow, Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use regex::Regex;
 use std::io::Cursor;
 use std::path::{Path, PathBuf};
 use std::{env, fs};
+pub use template::Template;
 use zip::ZipArchive;
 
 /// <https://regex101.com/r/9dSatE>

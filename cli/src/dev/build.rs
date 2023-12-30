@@ -1,21 +1,14 @@
 use super::packages::{self, is_standalone, PACKAGES};
 use anyhow::Result;
-use std::process::{Command, Stdio};
+use miho;
+use std::fs;
 use std::time::Instant;
-use std::{env, fs};
 
 /// Builds all the public packages.
 pub fn build() -> Result<()> {
   let start = Instant::now();
 
-  let mut command = match env::consts::OS {
-    "windows" => Command::new("cmd"),
-    _ => Command::new("pnpm"),
-  };
-
-  if env::consts::OS == "windows" {
-    command.arg("/C").arg("pnpm");
-  };
+  let mut command = miho::Command::new("pnpm");
 
   let mut args = vec!["run", "--parallel"];
   for pkg in PACKAGES {
@@ -25,11 +18,7 @@ pub fn build() -> Result<()> {
 
   args.push("build");
 
-  command
-    .args(args)
-    .stdout(Stdio::inherit())
-    .stderr(Stdio::inherit())
-    .output()?;
+  command.args(args).stdio(miho::Stdio::Inherit).output()?;
 
   println!("Copying files...");
   copy_files()?;
