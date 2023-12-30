@@ -1,7 +1,7 @@
 mod build;
 pub mod component;
 mod json;
-mod packages;
+pub mod packages;
 mod release;
 
 use anyhow::Result;

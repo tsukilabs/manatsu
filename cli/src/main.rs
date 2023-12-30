@@ -63,7 +63,10 @@ impl ManatsuCommand for CreateCommand {
 #[derive(Debug, Subcommand)]
 enum DevCommand {
   /// Builds all the public packages.
-  Build,
+  Build {
+    /// If present, only the indicated packages will be built.
+    packages: Option<Vec<String>>,
+  },
   /// Generates a component template.
   Component {
     /// Component name.
@@ -85,7 +88,13 @@ enum DevCommand {
 impl ManatsuCommand for DevCommand {
   fn execute(&self) -> Result<()> {
     match self {
-      DevCommand::Build => dev::build(),
+      DevCommand::Build { packages } => {
+        let packages = packages.as_deref();
+        match packages {
+          Some(p) if !p.is_empty() => dev::build(p),
+          _ => dev::build(dev::packages::PACKAGES),
+        }
+      }
       DevCommand::Component { name } => component::create(name),
       DevCommand::Icon { name, icon_type } => {
         let icon_type = IconType::try_from(icon_type.as_str())?;

@@ -60,16 +60,16 @@ pub fn create_icon(name: &str, icon_type: IconType) -> Result<()> {
   let pascal = name.to_case(Case::Pascal);
 
   let icon_type: &str = icon_type.into();
-  let pkg_path = packages::package_dir("icons")?.join(icon_type);
+  let src = packages::package_src("icons")?.join(icon_type);
 
-  if pkg_path.try_exists()? {
-    fs::create_dir_all(&pkg_path)?;
+  if src.try_exists()? {
+    fs::create_dir_all(&src)?;
   }
 
   // Formats the files to ensure their structure is correct.
   format_files()?;
 
-  let index_path = pkg_path.join("index.ts");
+  let index_path = src.join("index.ts");
   let mut index = fs::read_to_string(&index_path)?;
 
   let icon_export = format!("export {{ default as {pascal} }} from './{pascal}.vue';\n");
@@ -81,7 +81,7 @@ pub fn create_icon(name: &str, icon_type: IconType) -> Result<()> {
 
   // Component.vue
   let vue = "<template>\n<svg></svg>\n</template>";
-  let vue_path = pkg_path.join(pascal.append_vue_ext());
+  let vue_path = src.join(pascal.append_vue_ext());
   fs::write(vue_path, vue)?;
 
   println!("Icon created: {pascal}");
@@ -90,7 +90,7 @@ pub fn create_icon(name: &str, icon_type: IconType) -> Result<()> {
 
 fn format_files() -> Result<()> {
   miho::Command::new("nlx")
-    .args(["prettier", "icons/**/index.ts", "--write"])
+    .args(["prettier", "icons/src/**/index.ts", "--write"])
     .stdio(miho::Stdio::Inherit)
     .output()
     .with_context(|| "Could not format index file before editing it")?;
@@ -100,7 +100,7 @@ fn format_files() -> Result<()> {
 
 fn lint_files() -> Result<()> {
   miho::Command::new("nlx")
-    .args(["eslint", "--fix", "icons/**/index.ts"])
+    .args(["eslint", "--fix", "icons/src/**/index.ts"])
     .stdio(miho::Stdio::Inherit)
     .output()
     .with_context(|| "Could not lint index file after editing it")?;

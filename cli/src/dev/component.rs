@@ -18,16 +18,17 @@ pub fn create(name: &str) -> Result<()> {
     return Err(anyhow!("Invalid component name: {}", name));
   }
 
-  let (kebab, pascal) = to_kebab_and_pascal(name);
+  let kebab = name.to_case(Case::Kebab);
+  let pascal = name.to_case(Case::Pascal);
 
-  let pkg_path = packages::package_dir("components")?.join(kebab);
-  fs::create_dir_all(&pkg_path)?;
+  let src = packages::package_src("components")?.join(kebab);
+  fs::create_dir_all(&src)?;
 
   // index.ts
   let mut index = format!("export {{ default as M{pascal} }} from './{pascal}.vue';\n");
   index.push_str("export type * from './types';");
 
-  let index_path = pkg_path.join("index.ts");
+  let index_path = src.join("index.ts");
   fs::write(index_path, index)?;
 
   // types.ts
@@ -35,7 +36,7 @@ pub fn create(name: &str) -> Result<()> {
   props.push_str("Props");
   let types = format!("export interface {props} {{}}");
 
-  let types_path = pkg_path.join("types.ts");
+  let types_path = src.join("types.ts");
   fs::write(types_path, types)?;
 
   // Component.vue
@@ -46,7 +47,7 @@ pub fn create(name: &str) -> Result<()> {
   vue.push_str("<template>\n<div></div>\n</template>\n\n");
   vue.push_str("<style scoped lang=\"scss\"></style>");
 
-  let vue_path = pkg_path.join(pascal.append_vue_ext());
+  let vue_path = src.join(pascal.append_vue_ext());
   fs::write(vue_path, vue)?;
 
   println!("Component created: {pascal}");
@@ -68,10 +69,4 @@ pub fn create(name: &str) -> Result<()> {
 pub fn is_valid_name(name: &str) -> Result<bool> {
   let regex = Regex::new(COMPONENT_NAME_REGEX)?;
   Ok(regex.is_match(name))
-}
-
-fn to_kebab_and_pascal(name: String) -> (String, String) {
-  let kebab = name.to_case(Case::Kebab);
-  let pascal = name.to_case(Case::Pascal);
-  (kebab, pascal)
 }
