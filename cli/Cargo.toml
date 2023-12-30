@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.1.49"
+version = "0.1.50"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/manatsujs/manatsu"
 repository = "https://github.com/manatsujs/manatsu"

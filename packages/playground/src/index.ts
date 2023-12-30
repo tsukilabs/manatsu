@@ -17,8 +17,10 @@ const router = createRouter({
 const app = createApp(App);
 const manatsu = createManatsu();
 
+// @ts-expect-error vue@3.4
 app.use(router);
 void router.push('/');
 
+// @ts-expect-error vue@3.4
 app.use(manatsu);
 app.mount('#app');
