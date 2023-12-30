@@ -74,10 +74,10 @@ enum DevCommand {
   },
   /// Generates a icon template.
   Icon {
-    /// Icon name.
-    name: String,
     /// Icon type.
     icon_type: String,
+    /// Icon name.
+    name: String,
   },
   /// Synchronizes all README files of the monorepo.
   Readme,
@@ -92,13 +92,13 @@ impl ManatsuCommand for DevCommand {
         let packages = packages.as_deref();
         match packages {
           Some(p) if !p.is_empty() => dev::build(p),
-          _ => dev::build(dev::packages::PACKAGES),
+          _ => dev::build(dev::package::PACKAGES),
         }
       }
       DevCommand::Component { name } => component::create(name),
-      DevCommand::Icon { name, icon_type } => {
+      DevCommand::Icon { icon_type, name } => {
         let icon_type = IconType::try_from(icon_type.as_str())?;
-        component::create_icon(name, icon_type)
+        component::create_icon(icon_type, name)
       }
       DevCommand::Readme => dev::readme(),
       DevCommand::Release => dev::release(),

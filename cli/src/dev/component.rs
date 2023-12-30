@@ -1,19 +1,20 @@
 mod icon;
 
-use super::packages;
+use super::package;
 use crate::vue::VueString;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 pub use icon::{create_icon, IconType};
 use regex::Regex;
 use std::fs;
+use super::command;
 
 /// <https://regex101.com/r/igEb6A>
 pub const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
 /// Generates a component template.
-pub fn create(name: &str) -> Result<()> {
-  let name = name.to_lowercase();
+pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
+  let name = name.as_ref().to_lowercase();
   if !is_valid_name(&name)? {
     return Err(anyhow!("Invalid component name: {}", name));
   }
@@ -21,7 +22,7 @@ pub fn create(name: &str) -> Result<()> {
   let kebab = name.to_case(Case::Kebab);
   let pascal = name.to_case(Case::Pascal);
 
-  let src = packages::package_src("components")?.join(kebab);
+  let src = package::src("components")?.join(&kebab);
   fs::create_dir_all(&src)?;
 
   // index.ts
@@ -50,6 +51,12 @@ pub fn create(name: &str) -> Result<()> {
   let vue_path = src.join(pascal.append_vue_ext());
   fs::write(vue_path, vue)?;
 
+  let glob = get_component_glob(kebab);
+  command::format_files(&glob)?;
+
+  let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
+  command::lint(glob, Some(args))?;
+
   println!("Component created: {pascal}");
   Ok(())
 }
@@ -66,7 +73,13 @@ pub fn create(name: &str) -> Result<()> {
 /// let name = "Select99@";
 /// assert!(!is_valid_name(name).unwrap());
 /// ```
-pub fn is_valid_name(name: &str) -> Result<bool> {
+pub fn is_valid_name<T: AsRef<str>>(name: T) -> Result<bool> {
+  let name = name.as_ref();
   let regex = Regex::new(COMPONENT_NAME_REGEX)?;
   Ok(regex.is_match(name))
+}
+
+fn get_component_glob<T: AsRef<str>>(name: T) -> String {
+  let name = name.as_ref();
+  format!("**/components/src/{name}/**/*.{{ts,vue}}")
 }

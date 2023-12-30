@@ -1,4 +1,4 @@
-use super::packages::{self, is_standalone, PACKAGES};
+use super::package::{self, is_standalone, PACKAGES};
 use anyhow::{anyhow, Result};
 use miho;
 use std::fs;
@@ -49,11 +49,11 @@ where
 }
 
 fn copy_files(packages: &Vec<String>) -> Result<()> {
-  let dist = packages::package_dist("manatsu")?;
+  let dist = package::dist("manatsu")?;
   for pkg in packages {
     if !is_standalone(pkg) {
       let to = dist.join(format!("{pkg}.d.ts"));
-      fs::copy(packages::dts_file(pkg)?, to)?;
+      fs::copy(package::dts(pkg)?, to)?;
     }
   }
 
@@ -61,7 +61,7 @@ fn copy_files(packages: &Vec<String>) -> Result<()> {
 }
 
 fn fix_exports(packages: &Vec<String>) -> Result<()> {
-  let dts = packages::dts_file("manatsu")?;
+  let dts = package::dts("manatsu")?;
   let mut content = fs::read_to_string(&dts)?;
 
   for pkg in packages {

@@ -47,26 +47,14 @@ impl Template {
   }
 }
 
-impl From<&str> for Template {
-  fn from(_: &str) -> Self {
-    Template::Vue
-  }
-}
-
 impl From<Template> for &str {
   fn from(_: Template) -> Self {
     "template-vue"
   }
 }
 
-impl From<String> for Template {
-  fn from(_: String) -> Self {
+impl<T: AsRef<str>> From<T> for Template {
+  fn from(_: T) -> Self {
     Template::Vue
-  }
-}
-
-impl From<Template> for String {
-  fn from(_: Template) -> Self {
-    String::from("template-vue")
   }
 }
