@@ -6,14 +6,8 @@ import LoremIpsum from './LoremIpsum.vue';
 
 const darkMode = inject(darkModeKey, () => ref<boolean | 'auto'>(false), true);
 
-const inputRef = ref<string | null>(null);
-
-function switchDarkMode() {
-  if (darkMode.value === 'auto') {
-    darkMode.value = false;
-  } else {
-    darkMode.value = !darkMode.value;
-  }
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
 }
 </script>
 
@@ -21,7 +15,7 @@ function switchDarkMode() {
   <main>
     <div class="dark-mode">
       <span>Dark mode: {{ darkMode }}</span>
-      <MButton @click="switchDarkMode">Toggle</MButton>
+      <MButton @click="toggleDarkMode">Toggle</MButton>
     </div>
     <div>
       <MButton>Button</MButton>
@@ -29,8 +23,7 @@ function switchDarkMode() {
       <MButton>Lorem ipsum dolor</MButton>
     </div>
     <div>
-      <MInput v-model="inputRef" placeholder="Text field" />
-      <p>{{ inputRef }}</p>
+      <MInput placeholder="Text field" />
     </div>
     <LoremIpsum :paragraphs="3" />
   </main>

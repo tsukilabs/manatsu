@@ -24,7 +24,6 @@
   "files.exclude": {
     ".eslintcache": true
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
