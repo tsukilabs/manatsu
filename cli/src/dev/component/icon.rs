@@ -1,6 +1,5 @@
 use super::is_valid_name;
-use crate::dev::command;
-use crate::dev::package;
+use crate::dev::{self, package};
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 use std::fs;
@@ -33,13 +32,13 @@ where
   write_vue(&pascal, &src)?;
 
   // Formats the files to ensure their structure is correct.
-  command::format_files(ICON_GLOB)?;
+  dev::format_files(ICON_GLOB)?;
 
   // Adds an export declaration to the local index.
   write_to_dir_index(&pascal, src)?;
 
   // Lint the files to ensure that the exports are sorted.
-  command::lint(ICON_GLOB, None)?;
+  dev::lint(ICON_GLOB, None)?;
 
   println!("Created icon {pascal} in {:?}", start.elapsed());
   Ok(())

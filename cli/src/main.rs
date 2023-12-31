@@ -1,7 +1,7 @@
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
-use manatsu::dev::component::IconType;
-use manatsu::dev::{self, component};
+use manatsu::dev;
+use manatsu::dev::component::{self, IconType};
 use manatsu::project::{Project, Template};
 
 #[derive(Debug, Parser)]

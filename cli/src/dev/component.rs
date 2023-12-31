@@ -1,7 +1,7 @@
 mod icon;
 
-use super::command;
 use super::package;
+use crate::dev;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 pub use icon::{create_icon, IconType};
@@ -41,10 +41,10 @@ where
   write_test(&kebab, &pascal, src)?;
 
   let glob = format!("**/components/src/{kebab}/**/*.{{ts,vue}}");
-  command::format_files(&glob)?;
+  dev::format_files(&glob)?;
 
   let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
-  command::lint(glob, Some(args))?;
+  dev::lint(glob, Some(args))?;
 
   println!("Created component {pascal} in {:?}", start.elapsed());
   Ok(())

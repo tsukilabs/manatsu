@@ -3,10 +3,10 @@ pub mod component;
 mod json;
 pub mod package;
 mod release;
-pub mod command;
 
-use anyhow::Result;
+use anyhow::{Context, Result};
 pub use build::build;
+use miho;
 pub use release::release;
 use std::{env, fs};
 
@@ -28,5 +28,43 @@ pub fn readme() -> Result<()> {
   println!("Copied: {}", cli_readme.display());
 
   println!("Done!");
+  Ok(())
+}
+
+pub fn format_files<G>(glob: G) -> Result<()>
+where
+  G: AsRef<str>,
+{
+  let glob = glob.as_ref();
+
+  println!("Formatting files...");
+  miho::Command::new("pnpm")
+    .args(["exec", "prettier", glob, "--write"])
+    .stdio(miho::Stdio::Inherit)
+    .output()
+    .with_context(|| format!("Could not format files: {}", glob))?;
+
+  Ok(())
+}
+
+pub fn lint<G>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()>
+where
+  G: AsRef<str>,
+{
+  let glob = glob.as_ref();
+  let mut cmd = miho::Command::new("pnpm");
+  cmd.args(["exec", "eslint", "--fix"]);
+
+  if let Some(args) = extra_args {
+    cmd.args(args);
+  }
+
+  println!("Linting files...");
+  cmd
+    .arg(glob)
+    .stdio(miho::Stdio::Inherit)
+    .output()
+    .with_context(|| format!("Could not lint files: {}", glob))?;
+
   Ok(())
 }
