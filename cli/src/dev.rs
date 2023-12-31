@@ -10,6 +10,9 @@ use miho;
 pub use release::release;
 use std::{env, fs};
 
+pub(crate) const CLI_MANIFEST: &str = "--manifest-path=cli/Cargo.toml";
+pub(crate) const PLUGIN_MANIFEST: &str = "--manifest-path=plugin/Cargo.toml";
+
 /// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {
   let filename = "README.md";

@@ -7,7 +7,7 @@ use std::path::Path;
 use std::time::Instant;
 
 /// <https://regex101.com/r/igEb6A>
-pub const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
+pub(crate) const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
 /// Generates a component template.
 pub fn create<T>(name: T) -> Result<()>
@@ -16,25 +16,25 @@ where
 {
   let start = Instant::now();
 
-  let name = name.as_ref().to_lowercase();
-  if !is_valid_name(&name)? {
+  let name = name.as_ref();
+  if !is_valid_name(name)? {
     return Err(anyhow!("Invalid component name: {}", name));
   }
 
   let kebab = name.to_case(Case::Kebab);
   let pascal = name.to_case(Case::Pascal);
-  let src = package::src("components")?.join(&kebab);
+  let dir = package::src("components")?.join(&kebab);
 
-  if !src.try_exists()? {
-    fs::create_dir_all(&src)?;
+  if !dir.try_exists()? {
+    fs::create_dir_all(&dir)?;
   } else {
-    return Err(anyhow!("Component already exists"));
+    return Err(anyhow!("Component {pascal} already exists"));
   }
 
-  write_index(&pascal, &src)?;
-  write_typings(&pascal, &src)?;
-  write_vue(&pascal, &src)?;
-  write_test(&kebab, &pascal, src)?;
+  write_index(&pascal, &dir)?;
+  write_typings(&pascal, &dir)?;
+  write_vue(&pascal, &dir)?;
+  write_test(&kebab, &pascal, dir)?;
 
   let glob = format!("**/components/src/{kebab}/**/*.{{ts,vue}}");
   dev::format_files(&glob)?;
@@ -42,78 +42,76 @@ where
   let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
   dev::lint(glob, Some(args))?;
 
-  println!("Created component {pascal} in {:?}", start.elapsed());
+  println!("Component {pascal} created in {:?}", start.elapsed());
   Ok(())
 }
 
-fn write_index<P, S>(pascal: P, src: S) -> Result<()>
+fn write_index<P, D>(pascal: P, dir: D) -> Result<()>
 where
   P: AsRef<str>,
-  S: AsRef<Path>,
+  D: AsRef<Path>,
 {
   let pascal = pascal.as_ref();
   let mut index = format!("export {{ default as M{pascal} }} from './{pascal}.vue';\n");
   index.push_str("export type * from './types';");
 
-  let src = src.as_ref();
-  let index_path = src.join("index.ts");
-  fs::write(index_path, index)?;
+  let dir = dir.as_ref();
+  let path = dir.join("index.ts");
+  fs::write(path, index)?;
   Ok(())
 }
 
-fn write_typings<P, S>(pascal: P, src: S) -> Result<()>
+fn write_typings<P, D>(pascal: P, dir: D) -> Result<()>
 where
   P: AsRef<str>,
-  S: AsRef<Path>,
+  D: AsRef<Path>,
 {
   let pascal = pascal.as_ref();
-  let props = format!("{pascal}Props");
-  let props_interface = format!("export interface {props} {{}}");
+  let cts = format!("export interface {pascal}Props {{}}");
 
-  let src = src.as_ref();
-  let path = src.join("types.ts");
-  fs::write(path, props_interface)?;
+  let dir = dir.as_ref();
+  let path = dir.join("types.ts");
+  fs::write(path, cts)?;
   Ok(())
 }
 
-fn write_vue<P, S>(pascal: P, src: S) -> Result<()>
+fn write_vue<P, D>(pascal: P, dir: D) -> Result<()>
 where
   P: AsRef<str>,
-  S: AsRef<Path>,
+  D: AsRef<Path>,
 {
   let pascal = pascal.as_ref();
-  let props = format!("{pascal}Props");
 
-  let mut vue = String::from("<script setup lang=\"ts\">\n");
-  vue.push_str(format!("import type {{ {props} }} from './types';\n\n").as_str());
-  vue.push_str(format!("defineProps<{props}>();\n").as_str());
-  vue.push_str("</script>\n\n");
-  vue.push_str("<template>\n<div></div>\n</template>\n\n");
-  vue.push_str("<style scoped lang=\"scss\"></style>");
+  let mut cts = String::from("<script setup lang=\"ts\">\n");
+  cts.push_str(format!("import type {{ {pascal}Props }} from './types';\n\n").as_str());
+  cts.push_str(format!("defineProps<{pascal}Props>();\n").as_str());
+  cts.push_str("</script>\n\n");
+  cts.push_str("<template>\n<div></div>\n</template>\n\n");
+  cts.push_str("<style scoped lang=\"scss\"></style>");
 
-  let src = src.as_ref();
-  let path = src.join(format!("{pascal}.vue"));
-  fs::write(path, vue)?;
+  let dir = dir.as_ref();
+  let path = dir.join(format!("{pascal}.vue"));
+  fs::write(path, cts)?;
   Ok(())
 }
 
-fn write_test<P, S>(kebab: P, pascal: P, src: S) -> Result<()>
+fn write_test<P, D>(kebab: P, pascal: P, dir: D) -> Result<()>
 where
   P: AsRef<str>,
-  S: AsRef<Path>,
+  D: AsRef<Path>,
 {
   let kebab = kebab.as_ref();
   let pascal = pascal.as_ref();
 
-  let mut test = String::from("import { afterEach, describe, it } from 'vitest';\n");
-  test.push_str("import { enableAutoUnmount } from '@vue/test-utils';\n");
-  test.push_str(format!("import {pascal} from './{pascal}.vue';\n\n").as_str());
-  test.push_str("enableAutoUnmount(afterEach);\n\n");
-  test.push_str(format!("describe('{kebab}', () => {{ it.todo('todo'); }});").as_str());
+  let mut cts = String::from("import { afterEach, describe, it } from 'vitest';\n");
+  cts.push_str("import { enableAutoUnmount } from '@vue/test-utils';\n");
+  cts.push_str(format!("import {pascal} from './{pascal}.vue';\n\n").as_str());
+  cts.push_str("enableAutoUnmount(afterEach);\n\n");
+  cts.push_str(format!("describe('{kebab}', () => {{ it.todo('todo'); }});").as_str());
 
-  let src = src.as_ref();
-  let path = src.join(format!("{pascal}.test.ts"));
-  fs::write(path, test)?;
+  let dir = dir.as_ref();
+  let path = dir.join(format!("{pascal}.test.ts"));
+  fs::write(path, cts)?;
   Ok(())
 }
 

@@ -72,6 +72,11 @@ enum DevCommand {
     /// Component name.
     name: String,
   },
+  /// Generates a composable template.
+  Composable {
+    /// Composable name.
+    name: String,
+  },
   /// Generates a icon template.
   Icon {
     /// Icon type.
@@ -96,6 +101,7 @@ impl ManatsuCommand for DevCommand {
         }
       }
       DevCommand::Component { name } => scaffold::create_component(name),
+      DevCommand::Composable { name } => scaffold::create_composable(name),
       DevCommand::Icon { icon_type, name } => {
         let icon_type = IconType::try_from(icon_type.as_str())?;
         scaffold::create_icon(icon_type, name)
