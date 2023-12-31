@@ -16,7 +16,6 @@ The following tools are required when contributing to Manatsu:
 - [Node](https://nodejs.org) (version 20 or higher)
 - [pnpm](https://pnpm.io/) (version 8 or higher)
 - [Rust](https://www.rust-lang.org/tools/install)
-- [Miho](https://crates.io/crates/miho) (version 3 or higher)
 - [@antfu/ni](https://github.com/antfu/ni)
 
 ### Setup
@@ -27,7 +26,7 @@ npm install -g @antfu/ni
 
 git clone https://github.com/manatsujs/manatsu.git
 cd manatsu
-pnpm install
+ni install
 ```
 
 ## License
