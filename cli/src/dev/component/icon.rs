@@ -1,14 +1,17 @@
 use super::is_valid_name;
+use crate::dev::command;
 use crate::dev::package;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 use std::fs;
-use crate::dev::command;
+use std::time::Instant;
 
 const ICON_GLOB: &str = "**/icons/src/**/*.{ts,vue}";
 
 /// Generates an icon template.
 pub fn create_icon<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
+  let start = Instant::now();
+
   let name = name.as_ref().to_lowercase();
   if !is_valid_name(&name)? {
     return Err(anyhow!("Invalid icon name: {}", name));
@@ -41,7 +44,7 @@ pub fn create_icon<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
   // Lint the files to ensure that the exports are sorted.
   command::lint(ICON_GLOB, None)?;
 
-  println!("Icon created: {pascal}");
+  println!("Created icon {pascal} in {:?}", start.elapsed());
   Ok(())
 }
 

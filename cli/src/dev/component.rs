@@ -7,12 +7,15 @@ use convert_case::{Case, Casing};
 pub use icon::{create_icon, IconType};
 use regex::Regex;
 use std::fs;
+use std::time::Instant;
 
 /// <https://regex101.com/r/igEb6A>
 pub const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
 /// Generates a component template.
 pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
+  let start = Instant::now();
+
   let name = name.as_ref().to_lowercase();
   if !is_valid_name(&name)? {
     return Err(anyhow!("Invalid component name: {}", name));
@@ -56,7 +59,7 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
   command::lint(glob, Some(args))?;
 
-  println!("Component created: {pascal}");
+  println!("Created component {pascal} in {:?}", start.elapsed());
   Ok(())
 }
 

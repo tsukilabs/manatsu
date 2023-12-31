@@ -44,7 +44,7 @@ where
   println!("Fixing type exports...");
   fix_exports(&packages)?;
 
-  println!("Built in: {:?}", start.elapsed());
+  println!("Built in {:?}", start.elapsed());
   Ok(())
 }
 

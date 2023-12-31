@@ -5,6 +5,7 @@ use globset::{Glob, GlobSet, GlobSetBuilder};
 use regex::Regex;
 use std::io::Cursor;
 use std::path::{Path, PathBuf};
+use std::time::Instant;
 use std::{env, fs};
 pub use template::Template;
 use zip::ZipArchive;
@@ -24,6 +25,8 @@ impl<'a> Project<'a> {
   ///
   /// Vue: <https://github.com/manatsujs/template-vue>
   pub fn create(&self) -> Result<()> {
+    let start = Instant::now();
+
     if !is_valid_name(self.name)? {
       return Err(anyhow!("Invalid project name: {}", self.name));
     }
@@ -48,7 +51,7 @@ impl<'a> Project<'a> {
     zip.extract(&path)?;
     hoist_extracted_files(&path, self.template)?;
 
-    println!("Project built: {}", self.name);
+    println!("Built {} in {:?}", self.name, start.elapsed());
     Ok(())
   }
 }
