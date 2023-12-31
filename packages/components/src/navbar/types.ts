@@ -11,11 +11,12 @@ export interface NavbarTitleProps {
 }
 
 export interface NavbarMenuItem {
+  key: string;
   to?: RouteLocationRaw;
 }
 
 export interface NavbarMenuProps {
-  menu?: NavbarMenuItem[];
+  items: NavbarMenuItem[];
 }
 
 export type NavbarChildrenProps = Partial<NavbarLogoProps> &

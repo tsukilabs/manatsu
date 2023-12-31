@@ -1,10 +1,8 @@
 use super::{json, readme};
+use crate::dev::{CLI_MANIFEST, PLUGIN_MANIFEST};
 use anyhow::Result;
 use miho::git::{self, GitCommit};
 use std::process::{Command, Stdio};
-
-const CLI_MANIFEST: &str = "--manifest-path=cli/Cargo.toml";
-const PLUGIN_MANIFEST: &str = "--manifest-path=plugin/Cargo.toml";
 
 /// Releases a new version, publishing all the public packages.
 ///

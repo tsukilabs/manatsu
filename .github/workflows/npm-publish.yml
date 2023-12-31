@@ -15,7 +15,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install
-      - run: pnpm run clippy
+      - run: pnpm run clippy:cli
       - run: pnpm run test
 
   publish-npm:

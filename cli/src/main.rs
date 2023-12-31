@@ -1,7 +1,7 @@
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
 use manatsu::dev;
-use manatsu::dev::component::{self, IconType};
+use manatsu::dev::scaffold::{self, IconType};
 use manatsu::project::{Project, Template};
 
 #[derive(Debug, Parser)]
@@ -72,6 +72,11 @@ enum DevCommand {
     /// Component name.
     name: String,
   },
+  /// Generates a composable template.
+  Composable {
+    /// Composable name.
+    name: String,
+  },
   /// Generates a icon template.
   Icon {
     /// Icon type.
@@ -95,10 +100,11 @@ impl ManatsuCommand for DevCommand {
           _ => dev::build(dev::package::PACKAGES),
         }
       }
-      DevCommand::Component { name } => component::create(name),
+      DevCommand::Component { name } => scaffold::create_component(name),
+      DevCommand::Composable { name } => scaffold::create_composable(name),
       DevCommand::Icon { icon_type, name } => {
         let icon_type = IconType::try_from(icon_type.as_str())?;
-        component::create_icon(icon_type, name)
+        scaffold::create_icon(icon_type, name)
       }
       DevCommand::Readme => dev::readme(),
       DevCommand::Release => dev::release(),
