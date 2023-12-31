@@ -7,13 +7,17 @@ use convert_case::{Case, Casing};
 pub use icon::{create_icon, IconType};
 use regex::Regex;
 use std::fs;
+use std::path::Path;
 use std::time::Instant;
 
 /// <https://regex101.com/r/igEb6A>
 pub const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
 /// Generates a component template.
-pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
+pub fn create<T>(name: T) -> Result<()>
+where
+  T: AsRef<str>,
+{
   let start = Instant::now();
 
   let name = name.as_ref().to_lowercase();
@@ -27,22 +31,59 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let src = package::src("components")?.join(&kebab);
   fs::create_dir_all(&src)?;
 
-  // index.ts
+  write_index(&pascal, &src)?;
+  write_typings(&pascal, &src)?;
+  write_vue(&pascal, &src)?;
+  write_test(&kebab, &pascal, src)?;
+
+  let glob = format!("**/components/src/{kebab}/**/*.{{ts,vue}}");
+  command::format_files(&glob)?;
+
+  let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
+  command::lint(glob, Some(args))?;
+
+  println!("Created component {pascal} in {:?}", start.elapsed());
+  Ok(())
+}
+
+fn write_index<P, S>(pascal: P, src: S) -> Result<()>
+where
+  P: AsRef<str>,
+  S: AsRef<Path>,
+{
+  let pascal = pascal.as_ref();
   let mut index = format!("export {{ default as M{pascal} }} from './{pascal}.vue';\n");
   index.push_str("export type * from './types';");
 
+  let src = src.as_ref();
   let index_path = src.join("index.ts");
   fs::write(index_path, index)?;
+  Ok(())
+}
 
-  // types.ts
-  let mut props = pascal.clone();
-  props.push_str("Props");
-  let types = format!("export interface {props} {{}}");
+fn write_typings<P, S>(pascal: P, src: S) -> Result<()>
+where
+  P: AsRef<str>,
+  S: AsRef<Path>,
+{
+  let pascal = pascal.as_ref();
+  let props = format!("{pascal}Props");
+  let props_interface = format!("export interface {props} {{}}");
 
-  let types_path = src.join("types.ts");
-  fs::write(types_path, types)?;
+  let src = src.as_ref();
+  let path = src.join("types.ts");
+  fs::write(path, props_interface)?;
+  Ok(())
+}
 
-  // Component.vue
+fn write_vue<P, S>(pascal: P, src: S) -> Result<()>
+where
+  P: AsRef<str>,
+  S: AsRef<Path>,
+{
+  let pascal = pascal.as_ref();
+  let props = format!("{pascal}Props");
+
   let mut vue = String::from("<script setup lang=\"ts\">\n");
   vue.push_str(format!("import type {{ {props} }} from './types';\n\n").as_str());
   vue.push_str(format!("defineProps<{props}>();\n").as_str());
@@ -50,16 +91,29 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   vue.push_str("<template>\n<div></div>\n</template>\n\n");
   vue.push_str("<style scoped lang=\"scss\"></style>");
 
-  let vue_path = src.join(format!("{pascal}.vue"));
-  fs::write(vue_path, vue)?;
+  let src = src.as_ref();
+  let path = src.join(format!("{pascal}.vue"));
+  fs::write(path, vue)?;
+  Ok(())
+}
 
-  let glob = get_component_glob(kebab);
-  command::format_files(&glob)?;
+fn write_test<P, S>(kebab: P, pascal: P, src: S) -> Result<()>
+where
+  P: AsRef<str>,
+  S: AsRef<Path>,
+{
+  let kebab = kebab.as_ref();
+  let pascal = pascal.as_ref();
 
-  let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
-  command::lint(glob, Some(args))?;
+  let mut test = String::from("import { afterEach, describe, it } from 'vitest';\n");
+  test.push_str("import { enableAutoUnmount } from '@vue/test-utils';\n");
+  test.push_str(format!("import {pascal} from './{pascal}.vue';\n\n").as_str());
+  test.push_str("enableAutoUnmount(afterEach);\n\n");
+  test.push_str(format!("describe('{kebab}', () => {{ it.todo('todo'); }});").as_str());
 
-  println!("Created component {pascal} in {:?}", start.elapsed());
+  let src = src.as_ref();
+  let path = src.join(format!("{pascal}.test.ts"));
+  fs::write(path, test)?;
   Ok(())
 }
 
@@ -75,13 +129,11 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
 /// let name = "Select99@";
 /// assert!(!is_valid_name(name).unwrap());
 /// ```
-pub fn is_valid_name<T: AsRef<str>>(name: T) -> Result<bool> {
+pub fn is_valid_name<T>(name: T) -> Result<bool>
+where
+  T: AsRef<str>,
+{
   let name = name.as_ref();
   let regex = Regex::new(COMPONENT_NAME_REGEX)?;
   Ok(regex.is_match(name))
-}
-
-fn get_component_glob<T: AsRef<str>>(name: T) -> String {
-  let name = name.as_ref();
-  format!("**/components/src/{name}/**/*.{{ts,vue}}")
 }
