@@ -123,25 +123,24 @@ fn remove_entry(path: &Path) -> Result<()> {
 }
 
 /// Determines whether the project name is valid.
-///
-/// # Examples
-/// ```
-/// use manatsu::project::is_valid_name;
-///
-/// let name = "my-project";
-/// assert!(is_valid_name(name).unwrap());
-///
-/// let name = "真夏";
-/// assert!(!is_valid_name(name).unwrap());
-/// ```
-pub fn is_valid_name(project_name: &str) -> Result<bool> {
+pub(crate) fn is_valid_name(project_name: &str) -> Result<bool> {
   let regex = Regex::new(PROJECT_NAME_REGEX)?;
   Ok(regex.is_match(project_name))
 }
 
 #[cfg(test)]
 mod tests {
-  use crate::project::template::Template;
+  use super::template::Template;
+  use super::*;
+
+  #[test]
+  fn should_determine_if_name_is_valid() {
+    let name = "my-project";
+    assert!(is_valid_name(name).unwrap());
+
+    let name = "真夏";
+    assert!(!is_valid_name(name).unwrap());
+  }
 
   #[test]
   fn should_return_status_200() {

@@ -118,22 +118,25 @@ where
 }
 
 /// Determines whether the component name is valid.
-///
-/// # Examples
-/// ```
-/// use manatsu::dev::scaffold::is_valid_name;
-///
-/// let name = "button";
-/// assert!(is_valid_name(name).unwrap());
-///
-/// let name = "Select99@";
-/// assert!(!is_valid_name(name).unwrap());
-/// ```
-pub fn is_valid_name<T>(name: T) -> Result<bool>
+pub(crate) fn is_valid_name<T>(name: T) -> Result<bool>
 where
   T: AsRef<str>,
 {
   let name = name.as_ref();
   let regex = Regex::new(COMPONENT_NAME_REGEX)?;
   Ok(regex.is_match(name))
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn should_determine_if_name_is_valid() {
+    let name = "button";
+    assert!(is_valid_name(name).unwrap());
+
+    let name = "Select99@";
+    assert!(!is_valid_name(name).unwrap());
+  }
 }
