@@ -27,9 +27,13 @@ where
 
   let kebab = name.to_case(Case::Kebab);
   let pascal = name.to_case(Case::Pascal);
-
   let src = package::src("components")?.join(&kebab);
-  fs::create_dir_all(&src)?;
+
+  if !src.try_exists()? {
+    fs::create_dir_all(&src)?;
+  } else {
+    return Err(anyhow!("Component already exists"));
+  }
 
   write_index(&pascal, &src)?;
   write_typings(&pascal, &src)?;

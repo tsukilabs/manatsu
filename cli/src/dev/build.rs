@@ -22,7 +22,8 @@ where
     pkg.replace("@manatsu/", "")
   });
 
-  let packages = packages.filter(|pkg| PACKAGES.contains(&pkg.as_str()));
+  let filter = |pkg: &String| PACKAGES.contains(&pkg.as_str());
+  let packages = packages.filter(filter);
 
   let packages: Vec<String> = packages.collect();
   if packages.is_empty() {

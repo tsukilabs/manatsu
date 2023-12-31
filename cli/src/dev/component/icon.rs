@@ -25,7 +25,7 @@ where
   let pascal = name.to_case(Case::Pascal);
   let src = package::src("icons")?.join(icon_type);
 
-  if src.try_exists()? {
+  if !src.try_exists()? {
     fs::create_dir_all(&src)?;
   }
 
@@ -53,8 +53,12 @@ where
   let pascal = pascal.as_ref();
   let src = src.as_ref();
 
-  let vue = "<template>\n<svg></svg>\n</template>";
   let path = src.join(format!("{pascal}.vue"));
+  if path.try_exists()? {
+    return Err(anyhow!("Icon already exists"));
+  }
+
+  let vue = "<template>\n<svg></svg>\n</template>";
   fs::write(path, vue)?;
   Ok(())
 }
