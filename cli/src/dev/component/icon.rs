@@ -4,12 +4,16 @@ use crate::dev::package;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 use std::fs;
+use std::path::Path;
 use std::time::Instant;
 
 const ICON_GLOB: &str = "**/icons/src/**/*.{ts,vue}";
 
 /// Generates an icon template.
-pub fn create_icon<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
+pub fn create_icon<T>(icon_type: IconType, name: T) -> Result<()>
+where
+  T: AsRef<str>,
+{
   let start = Instant::now();
 
   let name = name.as_ref().to_lowercase();
@@ -17,9 +21,8 @@ pub fn create_icon<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
     return Err(anyhow!("Invalid icon name: {}", name));
   }
 
-  let pascal = name.to_case(Case::Pascal);
-
   let icon_type: &str = icon_type.into();
+  let pascal = name.to_case(Case::Pascal);
   let src = package::src("icons")?.join(icon_type);
 
   if src.try_exists()? {
@@ -27,24 +30,49 @@ pub fn create_icon<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
   }
 
   // This comes first to ensure that the new icon is formatted by Prettier.
-  let vue = "<template>\n<svg></svg>\n</template>";
-  let vue_path = src.join(format!("{pascal}.vue"));
-  fs::write(vue_path, vue)?;
+  write_vue(&pascal, &src)?;
 
   // Formats the files to ensure their structure is correct.
   command::format_files(ICON_GLOB)?;
 
-  let index_path = src.join("index.ts");
-  let mut index = fs::read_to_string(&index_path)?;
-
-  let icon_export = format!("export {{ default as {pascal} }} from './{pascal}.vue';\n");
-  index.push_str(icon_export.as_str());
-  fs::write(index_path, index)?;
+  // Adds an export declaration to the local index.
+  write_to_dir_index(&pascal, src)?;
 
   // Lint the files to ensure that the exports are sorted.
   command::lint(ICON_GLOB, None)?;
 
   println!("Created icon {pascal} in {:?}", start.elapsed());
+  Ok(())
+}
+
+fn write_vue<P, S>(pascal: P, src: S) -> Result<()>
+where
+  P: AsRef<str>,
+  S: AsRef<Path>,
+{
+  let pascal = pascal.as_ref();
+  let src = src.as_ref();
+
+  let vue = "<template>\n<svg></svg>\n</template>";
+  let path = src.join(format!("{pascal}.vue"));
+  fs::write(path, vue)?;
+  Ok(())
+}
+
+fn write_to_dir_index<P, S>(pascal: P, src: S) -> Result<()>
+where
+  P: AsRef<str>,
+  S: AsRef<Path>,
+{
+  let pascal = pascal.as_ref();
+  let src = src.as_ref();
+
+  let path = src.join("index.ts");
+  let mut index = fs::read_to_string(&path)?;
+
+  let export_decl = format!("export {{ default as {pascal} }} from './{pascal}.vue';\n");
+  index.push_str(export_decl.as_str());
+  fs::write(path, index)?;
   Ok(())
 }
 
