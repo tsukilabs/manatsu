@@ -23,9 +23,12 @@ pub fn readme() -> Result<()> {
     println!("Copied: {}", dest_readme.display());
   }
 
-  let cli_readme = cwd.join("cli").join(filename);
-  fs::copy(&src_readme, &cli_readme)?;
-  println!("Copied: {}", cli_readme.display());
+  let crates = ["cli", "plugin"];
+  for cr in crates {
+    let cr_readme = cwd.join(cr).join(filename);
+    fs::copy(&src_readme, &cr_readme)?;
+    println!("Copied: {}", cr_readme.display());
+  }
 
   println!("Done!");
   Ok(())
