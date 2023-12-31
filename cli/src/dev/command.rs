@@ -1,7 +1,10 @@
 use anyhow::{Context, Result};
 use miho;
 
-pub fn format_files<T: AsRef<str>>(glob: T) -> Result<()> {
+pub fn format_files<G>(glob: G) -> Result<()>
+where
+  G: AsRef<str>,
+{
   let glob = glob.as_ref();
 
   println!("Formatting files...");
