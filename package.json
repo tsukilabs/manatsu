@@ -14,7 +14,6 @@
     "cli": "cargo run --manifest-path=cli/Cargo.toml --",
     "clippy": "run-s clippy:*",
     "clippy:cli": "cargo clippy --manifest-path=cli/Cargo.toml -- -D warnings",
-    "clippy:playground": "cargo clippy --manifest-path=packages/playground/src-tauri/Cargo.toml -- -D warnings",
     "clippy:plugin": "cargo clippy --manifest-path=plugin/Cargo.toml -- -D warnings",
     "deps": "taze -f -r -w -l",
     "dev": "cargo tauri dev",
