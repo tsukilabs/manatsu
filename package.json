@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.13.1",
@@ -10,13 +10,12 @@
   },
   "scripts": {
     "build": "nr cli dev build",
-    "build:playground": "pnpm -F @manatsu/playground build",
     "bump": "miho bump --no-ask --add .",
     "cli": "cargo run --manifest-path=cli/Cargo.toml --",
     "clippy": "run-s clippy:*",
     "clippy:cli": "cargo clippy --manifest-path=cli/Cargo.toml -- -D warnings",
     "deps": "taze -f -r -w -l",
-    "dev": "vite serve packages/playground",
+    "dev": "cargo tauri dev",
     "docs:cli": "cargo doc --open --manifest-path=cli/Cargo.toml",
     "format": "prettier . --write",
     "format-check": "prettier . --check",
@@ -37,6 +36,7 @@
   "devDependencies": {
     "@manatsu/theme-builder": "^0.2.1",
     "@rollup/plugin-typescript": "^11.1.5",
+    "@tauri-apps/api": "^1.5.3",
     "@tb-dev/eslint-config": "^1.5.8",
     "@tb-dev/utility-types": "^1.0.1",
     "@types/node": "^20.10.6",

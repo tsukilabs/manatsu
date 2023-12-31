@@ -14,6 +14,9 @@ importers:
       '@rollup/plugin-typescript':
         specifier: ^11.1.5
         version: 11.1.5(rollup@4.9.2)(tslib@2.6.2)(typescript@5.3.3)
+      '@tauri-apps/api':
+        specifier: ^1.5.3
+        version: 1.5.3
       '@tb-dev/eslint-config':
         specifier: ^1.5.8
         version: 1.5.8(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0)
@@ -1164,6 +1167,11 @@ packages:
     engines: {node: '>=14.16'}
     dependencies:
       defer-to-connect: 2.0.1
+    dev: true
+
+  /@tauri-apps/api@1.5.3:
+    resolution: {integrity: sha512-zxnDjHHKjOsrIzZm6nO5Xapb/BxqUq1tc7cGkFXsFkGTsSWgCPH1D8mm0XS9weJY2OaR73I3k3S+b7eSzJDfqA==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: true
 
   /@tb-dev/eslint-config@1.5.8(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.0):

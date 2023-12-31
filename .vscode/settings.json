@@ -28,8 +28,12 @@
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
-  "rust-analyzer.showUnlinkedFileNotification": false,
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
-  }
+  },
+  "rust-analyzer.showUnlinkedFileNotification": false,
+  "rust-analyzer.linkedProjects": [
+    "cli/Cargo.toml",
+    "packages/playground/src-tauri/Cargo.toml"
+  ]
 }

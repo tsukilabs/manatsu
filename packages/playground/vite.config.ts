@@ -3,10 +3,23 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   plugins: [vue()],
-  root: __dirname,
+  clearScreen: false,
+  server: {
+    port: 5175,
+    strictPort: true
+  },
+  envPrefix: [
+    'VITE_',
+    'TAURI_PLATFORM',
+    'TAURI_ARCH',
+    'TAURI_FAMILY',
+    'TAURI_PLATFORM_VERSION',
+    'TAURI_PLATFORM_TYPE',
+    'TAURI_DEBUG'
+  ],
   build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-    minify: false
+    target: 'esnext',
+    minify: false,
+    sourcemap: false
   }
 });

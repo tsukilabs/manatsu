@@ -1,0 +1,37 @@
+{
+  "build": {
+    "beforeBuildCommand": "nr build",
+    "beforeDevCommand": "nr dev",
+    "devPath": "http://localhost:5175",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "playground",
+    "version": "0.1.55"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false
+    },
+    "bundle": {
+      "active": false,
+      "identifier": "manatsu.playground",
+      "icon": ["icons/icon.ico"]
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Playground",
+        "height": 600,
+        "width": 800
+      }
+    ]
+  }
+}
