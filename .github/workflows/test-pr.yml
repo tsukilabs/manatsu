@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: 20.x
           cache: pnpm
-      - run: cargo clippy --manifest-path=cli/Cargo.toml -- -D warnings
-      - run: cargo test --manifest-path=cli/Cargo.toml
       - run: pnpm install
-      - run: pnpm test
+      - run: pnpm run clippy
+      - run: pnpm run test
