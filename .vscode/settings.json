@@ -4,9 +4,15 @@
     { "icon": "aurelia", "extensions": ["manatsu"], "format": "svg" },
     {
       "icon": "images",
-      "extensions": ["images", "imgs"],
+      "extensions": ["images", "icons"],
       "format": "svg",
       "overrides": "images"
+    },
+    {
+      "icon": "component",
+      "extensions": ["components"],
+      "format": "svg",
+      "overrides": "component"
     }
   ],
   "prettier.requireConfig": true,
@@ -16,9 +22,7 @@
   },
   "editor.tabSize": 2,
   "files.exclude": {
-    ".eslintcache": true,
-    "**/components/dist": true,
-    "**/composables/dist": true
+    ".eslintcache": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "[rust]": {

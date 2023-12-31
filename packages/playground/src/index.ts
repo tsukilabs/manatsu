@@ -9,16 +9,18 @@ import AboutView from './views/AboutView.vue';
 const router = createRouter({
   history: createMemoryHistory(),
   routes: [
-    { path: '/', component: () => HomeView },
-    { path: '/about', component: () => AboutView }
+    { path: '/', component: HomeView },
+    { path: '/about', component: AboutView }
   ]
 });
 
 const app = createApp(App);
 const manatsu = createManatsu();
 
+// @ts-expect-error vue@3.4
 app.use(router);
 void router.push('/');
 
+// @ts-expect-error vue@3.4
 app.use(manatsu);
 app.mount('#app');

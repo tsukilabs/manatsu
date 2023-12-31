@@ -1,14 +1,13 @@
 mod build;
-mod component;
+pub mod component;
 mod json;
-mod packages;
+pub mod package;
 mod release;
-
-pub use build::build;
-pub use component::component;
-pub use release::release;
+pub mod command;
 
 use anyhow::Result;
+pub use build::build;
+pub use release::release;
 use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.
@@ -18,8 +17,8 @@ pub fn readme() -> Result<()> {
   let src_readme = cwd.join(filename);
 
   println!("Copying README files...");
-  for pkg in packages::PACKAGES {
-    let dest_readme = packages::package_dir(pkg)?.join(filename);
+  for pkg in package::PACKAGES {
+    let dest_readme = package::dir(pkg)?.join(filename);
     fs::copy(&src_readme, &dest_readme)?;
     println!("Copied: {}", dest_readme.display());
   }

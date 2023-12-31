@@ -5,8 +5,8 @@ import * as symbol from './symbol';
 import { setDarkMode } from './plugin';
 
 export * from './symbol';
-export * from '@manatsu/components/index.ts';
-export * from '@manatsu/composables/index.ts';
+export * from '@manatsu/components/src/index.ts';
+export * from '@manatsu/composables/src/index.ts';
 
 export interface ManatsuOptions {
   /** @default 'auto' */

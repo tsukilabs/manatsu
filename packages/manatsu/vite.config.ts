@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import { join } from 'node:path';
 import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -11,7 +11,7 @@ export default defineConfig({
     emptyOutDir: true,
     minify: false,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: join(__dirname, 'src/index.ts'),
       formats: ['es'],
       fileName: 'index'
     },
@@ -20,8 +20,8 @@ export default defineConfig({
       output: {
         chunkFileNames: '[name].js',
         manualChunks: {
-          components: ['@manatsu/components/index.ts'],
-          composables: ['@manatsu/composables/index.ts']
+          components: ['@manatsu/components/src/index.ts'],
+          composables: ['@manatsu/composables/src/index.ts']
         }
       }
     }

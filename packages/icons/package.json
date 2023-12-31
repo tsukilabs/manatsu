@@ -1,7 +1,7 @@
 {
-  "name": "@manatsu/composables",
+  "name": "@manatsu/icons",
   "version": "0.1.51",
-  "description": "Manatsu composables",
+  "description": "Manatsu icons",
   "license": "MIT",
   "private": false,
   "homepage": "https://github.com/manatsujs/manatsu",
@@ -18,7 +18,7 @@
   ],
   "keywords": [
     "manatsu",
-    "composables",
+    "icons",
     "vue",
     "tauri"
   ],
@@ -44,7 +44,6 @@
     "vite": "^5.0.10"
   },
   "peerDependencies": {
-    "@vueuse/core": "^10.7.0",
     "vue": "^3.3.0"
   }
 }

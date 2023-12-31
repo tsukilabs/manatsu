@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToPixel } from '@manatsu/composables/index.ts';
+import { useToPixel } from '@manatsu/composables/src/index.ts';
 import { type CSSProperties, type ComputedRef, toRef } from 'vue';
 import Icon from '../icon/Icon.vue';
 import DynamicLink from './DynamicLink.vue';

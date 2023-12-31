@@ -1,14 +1,12 @@
-pub mod template;
+mod template;
 
 use anyhow::{anyhow, Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use regex::Regex;
-use std::io::{Cursor, Read};
+use std::io::Cursor;
 use std::path::{Path, PathBuf};
-use std::time::Duration;
 use std::{env, fs};
-use template::Template;
-use ureq::Response;
+pub use template::Template;
 use zip::ZipArchive;
 
 /// <https://regex101.com/r/9dSatE>
@@ -21,67 +19,37 @@ pub struct Project<'a> {
   pub template: Template,
 }
 
-/// Create a new Manatsu project from a template.
-///
-/// Vue: <https://github.com/manatsujs/template-vue>
-pub fn create(project: Project) -> Result<()> {
-  if !is_valid_name(project.name)? {
-    return Err(anyhow!("Invalid project name: {}", project.name));
-  }
-
-  let path = env::current_dir()?.join(project.name);
-  if path.try_exists()? {
-    if project.force {
-      fs::remove_dir_all(&path)?
-    } else {
-      return Err(anyhow!("Directory already exists: {}", path.display()));
+impl<'a> Project<'a> {
+  /// Create a new Manatsu project from a template.
+  ///
+  /// Vue: <https://github.com/manatsujs/template-vue>
+  pub fn create(&self) -> Result<()> {
+    if !is_valid_name(self.name)? {
+      return Err(anyhow!("Invalid project name: {}", self.name));
     }
-  }
 
-  println!("Downloading template...");
-  let bytes = download_template(project.template)?;
+    let path = env::current_dir()?.join(self.name);
+    if path.try_exists()? {
+      if self.force {
+        fs::remove_dir_all(&path)?
+      } else {
+        return Err(anyhow!("Directory already exists: {}", path.display()));
+      }
+    }
 
-  println!("Building project...");
-  fs::create_dir_all(&path).with_context(|| "Could not create project folder")?;
+    println!("Downloading template...");
+    let bytes = self.template.download()?;
 
-  let cursor = Cursor::new(bytes);
-  let mut zip = ZipArchive::new(cursor)?;
-  zip.extract(&path)?;
-  hoist_extracted_files(&path, project.template)?;
+    println!("Building project...");
+    fs::create_dir_all(&path).with_context(|| "Could not create project folder")?;
 
-  println!("Project built: {}", project.name);
-  Ok(())
-}
+    let cursor = Cursor::new(bytes);
+    let mut zip = ZipArchive::new(cursor)?;
+    zip.extract(&path)?;
+    hoist_extracted_files(&path, self.template)?;
 
-/// Download a Manatsu template as bytes.
-pub fn download_template(template: Template) -> Result<Vec<u8>> {
-  let template_url = template.url();
-  let response = ureq::get(&template_url)
-    .timeout(Duration::from_secs(10))
-    .call()
-    .with_context(|| format!("Could not fetch: {}", template_url))?;
-
-  let mut bytes = create_bytes_vec(&response)?;
-  response
-    .into_reader()
-    .take(10_000_000)
-    .read_to_end(&mut bytes)?;
-
-  Ok(bytes)
-}
-
-fn create_bytes_vec(response: &Response) -> Result<Vec<u8>> {
-  let header_name = "content-length";
-  if response.has(header_name) {
-    let len: usize = response
-      .header(header_name)
-      .ok_or(anyhow!("Header unavailable: {}", header_name))?
-      .parse()
-      .with_context(|| format!("Could not parse header: {}", header_name))?;
-
-    Ok(Vec::with_capacity(len))
-  } else {
-    Ok(Vec::with_capacity(100_000))
+    println!("Project built: {}", self.name);
+    Ok(())
   }
 }
 

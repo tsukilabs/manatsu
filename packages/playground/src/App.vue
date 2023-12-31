@@ -1,17 +1,25 @@
 <script setup lang="ts">
+import { h } from 'vue';
 import {
   type IconLinkProps,
   MNavbar,
   MScaffold
-} from '@manatsu/components/index.ts';
+} from '@manatsu/components/src/index.ts';
+import {
+  Discord,
+  Facebook,
+  GitHub,
+  Instagram,
+  Twitter
+} from '@manatsu/icons/src/index.ts';
 import peach from '/peach.png';
 
 const socialLinks: IconLinkProps[] = [
-  { icon: 'github', to: 'https://github.com/manatsujs/manatsu' },
-  { icon: 'facebook', to: 'https://example.com/1' },
-  { icon: 'discord', to: 'https://example.com/2' },
-  { icon: 'instagram', to: 'https://example.com/3' },
-  { icon: 'x', to: 'https://example.com/4' }
+  { icon: () => h(GitHub), to: 'https://github.com/manatsujs/manatsu' },
+  { icon: () => h(Discord), to: 'https://example.com/1' },
+  { icon: () => h(Facebook), to: 'https://example.com/2' },
+  { icon: () => h(Instagram), to: 'https://example.com/3' },
+  { icon: () => h(Twitter), to: 'https://example.com/4' }
 ];
 </script>
 
