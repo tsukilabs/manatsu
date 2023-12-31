@@ -3,5 +3,5 @@
 
 nr clippy
 nr test:cargo
-nlx lint-staged
+pnpm exec lint-staged
 nr test
