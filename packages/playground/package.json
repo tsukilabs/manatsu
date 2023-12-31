@@ -1,11 +1,12 @@
 {
   "name": "@manatsu/playground",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "run-p type-check build-only",
     "build-only": "vite build",
+    "dev": "vite",
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
