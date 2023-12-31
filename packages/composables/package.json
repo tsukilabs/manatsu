@@ -40,11 +40,15 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },
+  "dependencies": {
+    "@tb-dev/utility-types": "^1.0.1"
+  },
   "devDependencies": {
     "vite": "^5.0.10"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.7.0",
-    "vue": "^3.3.0"
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0"
   }
 }

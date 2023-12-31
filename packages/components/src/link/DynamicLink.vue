@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useExternalLink } from '@manatsu/composables/src/index.ts';
 import type { DynamicLinkProps } from './types';
 
 const props = defineProps<DynamicLinkProps>();
 
-const isExternalLink = computed(() => {
-  if (typeof props.to === 'string') {
-    return props.to.startsWith('http');
-  }
-
-  return false;
-});
+const isExternalLink = useExternalLink(() => props.to);
 </script>
 
 <template>
