@@ -1,9 +1,10 @@
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
 use inquire::validator::Validation;
-use inquire::{required, Text};
+use inquire::{required, Select, Text};
 use manatsu::dev;
-use manatsu::dev::scaffold::{component, composable, icon};
+use manatsu::dev::scaffold::icon::{self, IconType};
+use manatsu::dev::scaffold::{component, composable};
 use manatsu::project::{Project, Template};
 
 #[derive(Debug, Parser)]
@@ -74,12 +75,7 @@ enum DevCommand {
   /// Generates a composable template.
   Composable,
   /// Generates a icon template.
-  Icon {
-    /// Icon type.
-    icon_type: String,
-    /// Icon name.
-    name: String,
-  },
+  Icon,
   /// Synchronizes all README files of the monorepo.
   Readme,
   /// Releases a new version, publishing all the public packages.
@@ -128,8 +124,22 @@ impl ManatsuCommand for DevCommand {
 
         composable::create(name)
       }
-      DevCommand::Icon { icon_type, name } => {
-        let icon_type = icon::IconType::try_from(icon_type.as_str())?;
+      DevCommand::Icon => {
+        let name_validator = |name: &str| {
+          if component::is_valid(name)? {
+            Ok(Validation::Valid)
+          } else {
+            Ok(Validation::Invalid("Invalid icon name".into()))
+          }
+        };
+
+        let name = Text::new("Icon name")
+          .with_validator(required!("Icon name is required"))
+          .with_validator(name_validator)
+          .prompt()?;
+
+        let options = vec![IconType::Social];
+        let icon_type = Select::new("Select an icon type", options).prompt()?;
         icon::create(icon_type, name)
       }
       DevCommand::Readme => dev::readme(),
