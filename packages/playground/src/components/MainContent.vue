@@ -30,6 +30,7 @@ function switchDarkMode() {
     </div>
     <div>
       <MInput v-model="inputRef" placeholder="Text field" />
+      <p>{{ inputRef }}</p>
     </div>
     <LoremIpsum :paragraphs="3" />
   </main>
