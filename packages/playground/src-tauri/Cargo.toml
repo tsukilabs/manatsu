@@ -1,6 +1,6 @@
 [package]
 name = "playground"
-version = "0.1.55"
+version = "0.1.56"
 description = "Manatsu playground"
 homepage = "https://github.com/manatsujs/manatsu"
 repository = "https://github.com/manatsujs/manatsu"
@@ -20,7 +20,7 @@ version = "1.0"
 features = ["derive"]
 
 [dependencies.tauri]
-version = "1.5.4"
+version = "1.5"
 features = []
 
 [features]

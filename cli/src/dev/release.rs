@@ -3,6 +3,9 @@ use anyhow::Result;
 use miho::git::{self, GitCommit};
 use std::process::{Command, Stdio};
 
+const CLI_MANIFEST: &str = "--manifest-path=cli/Cargo.toml";
+const PLUGIN_MANIFEST: &str = "--manifest-path=plugin/Cargo.toml";
+
 /// Releases a new version, publishing all the public packages.
 ///
 /// It is not necessary to synchronize the README files before
@@ -21,7 +24,11 @@ pub fn release() -> Result<()> {
 
   match json::read_config().ok() {
     Some(cfg) if cfg.github => create_github_release(&cfg.github_token)?,
-    _ => publish_to_npm()?,
+    _ => {
+      publish_to_npm()?;
+      publish_to_cargo(CLI_MANIFEST)?;
+      publish_to_cargo(PLUGIN_MANIFEST)?;
+    }
   }
 
   Ok(())
@@ -58,14 +65,16 @@ fn publish_to_npm() -> Result<()> {
     .stdio(miho::Stdio::Inherit)
     .output()?;
 
-  publish_to_cargo()?;
   Ok(())
 }
 
-fn publish_to_cargo() -> Result<()> {
-  let manifest_path = "--manifest-path=cli/Cargo.toml";
+fn publish_to_cargo<T>(manifest: T) -> Result<()>
+where
+  T: AsRef<str>,
+{
+  let manifest = manifest.as_ref();
   Command::new("cargo")
-    .args(["publish", manifest_path])
+    .args(["publish", manifest])
     .stderr(Stdio::inherit())
     .stdout(Stdio::inherit())
     .output()?;

@@ -2,6 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 nr clippy
-nr test:cargo
-pnpm exec lint-staged
 nr test
+pnpm exec lint-staged

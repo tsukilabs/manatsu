@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.1.55",
+  "version": "0.1.56",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.13.1",
@@ -14,6 +14,8 @@
     "cli": "cargo run --manifest-path=cli/Cargo.toml --",
     "clippy": "run-s clippy:*",
     "clippy:cli": "cargo clippy --manifest-path=cli/Cargo.toml -- -D warnings",
+    "clippy:playground": "cargo clippy --manifest-path=packages/playground/src-tauri/Cargo.toml -- -D warnings",
+    "clippy:plugin": "cargo clippy --manifest-path=plugin/Cargo.toml -- -D warnings",
     "deps": "taze -f -r -w -l",
     "dev": "cargo tauri dev",
     "docs:cli": "cargo doc --open --manifest-path=cli/Cargo.toml",
@@ -22,10 +24,11 @@
     "lint": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
     "release": "nr build && nr cli dev release",
-    "test": "vitest --run",
-    "test:cargo": "cargo test --manifest-path=cli/Cargo.toml",
-    "test:ui": "vitest --ui --watch",
-    "type-check": "vue-tsc --noEmit"
+    "test": "run-s test:*",
+    "test:cli": "cargo test --manifest-path=cli/Cargo.toml",
+    "test:vue": "vitest --run",
+    "type-check": "vue-tsc --noEmit",
+    "ui": "vitest --ui --watch"
   },
   "pnpm": {
     "requiredScripts": [
