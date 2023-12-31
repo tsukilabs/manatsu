@@ -16,7 +16,7 @@ defineProps<NavbarProps>();
       <NavbarTitle v-if="title" :title="title" />
     </DynamicLink>
 
-    <NavbarMenu v-if="menu && menu.length > 0" />
+    <NavbarMenu v-if="items && items.length > 0" :items="items" />
 
     <div
       v-if="socialLinks && socialLinks.length > 0"
