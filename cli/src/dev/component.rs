@@ -1,13 +1,12 @@
 mod icon;
 
+use super::command;
 use super::package;
-use crate::vue::VueString;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 pub use icon::{create_icon, IconType};
 use regex::Regex;
 use std::fs;
-use super::command;
 
 /// <https://regex101.com/r/igEb6A>
 pub const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
@@ -48,7 +47,7 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   vue.push_str("<template>\n<div></div>\n</template>\n\n");
   vue.push_str("<style scoped lang=\"scss\"></style>");
 
-  let vue_path = src.join(pascal.append_vue_ext());
+  let vue_path = src.join(format!("{pascal}.vue"));
   fs::write(vue_path, vue)?;
 
   let glob = get_component_glob(kebab);

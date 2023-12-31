@@ -1,6 +1,5 @@
 use super::is_valid_name;
 use crate::dev::package;
-use crate::vue::VueString;
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
 use std::fs;
@@ -26,7 +25,7 @@ pub fn create_icon<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
 
   // This comes first to ensure that the new icon is formatted by Prettier.
   let vue = "<template>\n<svg></svg>\n</template>";
-  let vue_path = src.join(pascal.append_vue_ext());
+  let vue_path = src.join(format!("{pascal}.vue"));
   fs::write(vue_path, vue)?;
 
   // Formats the files to ensure their structure is correct.
