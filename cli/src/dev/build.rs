@@ -67,7 +67,7 @@ fn fix_exports(packages: &Vec<String>) -> Result<()> {
   for pkg in packages {
     if !is_standalone(pkg) {
       content = content.replace(
-        format!("@manatsu/{pkg}/index.ts").as_str(),
+        format!("@manatsu/{pkg}/src/index.ts").as_str(),
         format!("./{pkg}").as_str(),
       );
     }
