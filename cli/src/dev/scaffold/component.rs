@@ -17,7 +17,7 @@ where
   let start = Instant::now();
 
   let name = name.as_ref();
-  if !is_valid_name(name)? {
+  if !is_valid(name)? {
     return Err(anyhow!("Invalid component name: {}", name));
   }
 
@@ -116,7 +116,7 @@ where
 }
 
 /// Determines whether the component name is valid.
-pub(crate) fn is_valid_name<T>(name: T) -> Result<bool>
+pub fn is_valid<T>(name: T) -> Result<bool>
 where
   T: AsRef<str>,
 {
@@ -132,9 +132,9 @@ mod tests {
   #[test]
   fn should_determine_if_name_is_valid() {
     let name = "button";
-    assert!(is_valid_name(name).unwrap());
+    assert!(is_valid(name).unwrap());
 
     let name = "Select99@";
-    assert!(!is_valid_name(name).unwrap());
+    assert!(!is_valid(name).unwrap());
   }
 }

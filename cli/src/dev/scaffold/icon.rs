@@ -2,9 +2,9 @@ use super::component;
 use crate::dev::{self, package};
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
-use std::fs;
 use std::path::Path;
 use std::time::Instant;
+use std::{fmt, fs};
 
 /// Generates an icon template.
 pub fn create<T>(icon_type: IconType, name: T) -> Result<()>
@@ -14,7 +14,7 @@ where
   let start = Instant::now();
 
   let name = name.as_ref();
-  if !component::is_valid_name(name)? {
+  if !component::is_valid(name)? {
     return Err(anyhow!("Invalid icon name: {}", name));
   }
 
@@ -79,6 +79,7 @@ where
   Ok(())
 }
 
+#[derive(Copy, Clone)]
 pub enum IconType {
   Social,
 }
@@ -120,5 +121,13 @@ impl From<IconType> for String {
     match icon_type {
       IconType::Social => String::from("social"),
     }
+  }
+}
+
+impl fmt::Display for IconType {
+  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    let name: &str = (*self).into();
+    let name = name.to_case(Case::Title);
+    write!(f, "{name}")
   }
 }

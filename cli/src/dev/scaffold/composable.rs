@@ -16,7 +16,7 @@ where
   let start = Instant::now();
 
   let name = name.as_ref();
-  if !is_valid_name(name)? {
+  if !is_valid(name)? {
     return Err(anyhow!("Invalid composable name: {}", name));
   }
 
@@ -96,7 +96,7 @@ where
 }
 
 /// Determines whether the composable name is valid.
-pub(crate) fn is_valid_name<T>(name: T) -> Result<bool>
+pub fn is_valid<T>(name: T) -> Result<bool>
 where
   T: AsRef<str>,
 {
@@ -112,9 +112,9 @@ mod tests {
   #[test]
   fn should_determine_if_name_is_valid() {
     let name = "useManatsu";
-    assert!(is_valid_name(name).unwrap());
+    assert!(is_valid(name).unwrap());
 
     let name = "composable-name";
-    assert!(!is_valid_name(name).unwrap());
+    assert!(!is_valid(name).unwrap());
   }
 }

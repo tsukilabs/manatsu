@@ -1,8 +1,11 @@
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
+use inquire::validator::Validation;
+use inquire::{required, Select, Text};
 use manatsu::dev;
-use manatsu::dev::scaffold::{self, IconType};
-use manatsu::project::{Project, Template};
+use manatsu::dev::scaffold::icon::{self, IconType};
+use manatsu::dev::scaffold::{component, composable};
+use manatsu::project::{self, Project, Template};
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu")]
@@ -28,32 +31,36 @@ trait ManatsuCommand {
 
 #[derive(Debug, Args)]
 struct CreateCommand {
-  /// Name of the new project.
-  project_name: String,
-
-  /// Project description.
-  #[arg(short = 'd', long, value_name = "DESCRIPTION")]
-  description: Option<String>,
-
   /// Overwrites the directory if it already exists.
   #[arg(short = 'f', long)]
   force: bool,
-
-  /// Project template.
-  #[arg(short = 't', long, value_name = "NAME")]
-  template: Option<String>,
 }
 
 impl ManatsuCommand for CreateCommand {
   fn execute(&self) -> Result<()> {
-    let template = self.template.as_deref();
-    let template = template.map(|t| t.into());
+    let validator = |name: &str| {
+      if project::is_valid(name)? {
+        Ok(Validation::Valid)
+      } else {
+        Ok(Validation::Invalid("Invalid component name".into()))
+      }
+    };
+
+    let project_name = Text::new("Project name")
+      .with_validator(required!("Project name is required"))
+      .with_validator(validator)
+      .prompt()?;
+
+    let description = Text::new("Description").prompt_skippable()?;
+
+    let options = vec![Template::Vue];
+    let template = Select::new("Select a template", options).prompt()?;
 
     let project = Project {
-      name: &self.project_name,
-      description: self.description.as_deref(),
+      name: project_name,
+      description,
       force: self.force,
-      template: template.unwrap_or(Template::Vue),
+      template,
     };
 
     project.create()
@@ -68,22 +75,11 @@ enum DevCommand {
     packages: Option<Vec<String>>,
   },
   /// Generates a component template.
-  Component {
-    /// Component name.
-    name: String,
-  },
+  Component,
   /// Generates a composable template.
-  Composable {
-    /// Composable name.
-    name: String,
-  },
+  Composable,
   /// Generates a icon template.
-  Icon {
-    /// Icon type.
-    icon_type: String,
-    /// Icon name.
-    name: String,
-  },
+  Icon,
   /// Synchronizes all README files of the monorepo.
   Readme,
   /// Releases a new version, publishing all the public packages.
@@ -100,11 +96,55 @@ impl ManatsuCommand for DevCommand {
           _ => dev::build(dev::package::PACKAGES),
         }
       }
-      DevCommand::Component { name } => scaffold::create_component(name),
-      DevCommand::Composable { name } => scaffold::create_composable(name),
-      DevCommand::Icon { icon_type, name } => {
-        let icon_type = IconType::try_from(icon_type.as_str())?;
-        scaffold::create_icon(icon_type, name)
+      DevCommand::Component => {
+        let validator = |name: &str| {
+          if component::is_valid(name)? {
+            Ok(Validation::Valid)
+          } else {
+            Ok(Validation::Invalid("Invalid component name".into()))
+          }
+        };
+
+        let name = Text::new("Component name")
+          .with_validator(required!("Component name is required"))
+          .with_validator(validator)
+          .prompt()?;
+
+        component::create(name)
+      }
+      DevCommand::Composable => {
+        let validator = |name: &str| {
+          if composable::is_valid(name)? {
+            Ok(Validation::Valid)
+          } else {
+            Ok(Validation::Invalid("Invalid composable name".into()))
+          }
+        };
+
+        let name = Text::new("Composable name")
+          .with_validator(required!("Composable name is required"))
+          .with_validator(validator)
+          .prompt()?;
+
+        composable::create(name)
+      }
+      DevCommand::Icon => {
+        let validator = |name: &str| {
+          if component::is_valid(name)? {
+            Ok(Validation::Valid)
+          } else {
+            Ok(Validation::Invalid("Invalid icon name".into()))
+          }
+        };
+
+        let name = Text::new("Icon name")
+          .with_validator(required!("Icon name is required"))
+          .with_validator(validator)
+          .prompt()?;
+
+        let options = vec![IconType::Social];
+        let icon_type = Select::new("Select an icon type", options).prompt()?;
+        icon::create(icon_type, name)
       }
       DevCommand::Readme => dev::readme(),
       DevCommand::Release => dev::release(),
