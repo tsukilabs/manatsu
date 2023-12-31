@@ -1,10 +1,6 @@
-mod icon;
-
-use super::package;
-use crate::dev;
+use crate::dev::{self, package};
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
-pub use icon::{create_icon, IconType};
 use regex::Regex;
 use std::fs;
 use std::path::Path;
@@ -125,7 +121,7 @@ where
 ///
 /// # Examples
 /// ```
-/// use manatsu::dev::component::is_valid_name;
+/// use manatsu::dev::scaffold::is_valid_name;
 ///
 /// let name = "button";
 /// assert!(is_valid_name(name).unwrap());

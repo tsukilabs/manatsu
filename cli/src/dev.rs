@@ -1,5 +1,5 @@
 mod build;
-pub mod component;
+pub mod scaffold;
 mod json;
 pub mod package;
 mod release;

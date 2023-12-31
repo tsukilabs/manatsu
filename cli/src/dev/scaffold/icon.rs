@@ -1,4 +1,4 @@
-use super::is_valid_name;
+use super::component;
 use crate::dev::{self, package};
 use anyhow::{anyhow, Result};
 use convert_case::{Case, Casing};
@@ -9,14 +9,14 @@ use std::time::Instant;
 const ICON_GLOB: &str = "**/icons/src/**/*.{ts,vue}";
 
 /// Generates an icon template.
-pub fn create_icon<T>(icon_type: IconType, name: T) -> Result<()>
+pub fn create<T>(icon_type: IconType, name: T) -> Result<()>
 where
   T: AsRef<str>,
 {
   let start = Instant::now();
 
   let name = name.as_ref().to_lowercase();
-  if !is_valid_name(&name)? {
+  if !component::is_valid_name(&name)? {
     return Err(anyhow!("Invalid icon name: {}", name));
   }
 
