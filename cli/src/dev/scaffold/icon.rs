@@ -79,7 +79,7 @@ where
   Ok(())
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone)]
 pub enum IconType {
   Social,
 }

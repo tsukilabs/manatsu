@@ -5,7 +5,7 @@ use inquire::{required, Select, Text};
 use manatsu::dev;
 use manatsu::dev::scaffold::icon::{self, IconType};
 use manatsu::dev::scaffold::{component, composable};
-use manatsu::project::{Project, Template};
+use manatsu::project::{self, Project, Template};
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu")]
@@ -31,32 +31,36 @@ trait ManatsuCommand {
 
 #[derive(Debug, Args)]
 struct CreateCommand {
-  /// Name of the new project.
-  project_name: String,
-
-  /// Project description.
-  #[arg(short = 'd', long, value_name = "DESCRIPTION")]
-  description: Option<String>,
-
   /// Overwrites the directory if it already exists.
   #[arg(short = 'f', long)]
   force: bool,
-
-  /// Project template.
-  #[arg(short = 't', long, value_name = "NAME")]
-  template: Option<String>,
 }
 
 impl ManatsuCommand for CreateCommand {
   fn execute(&self) -> Result<()> {
-    let template = self.template.as_deref();
-    let template = template.map(|t| t.into());
+    let validator = |name: &str| {
+      if project::is_valid(name)? {
+        Ok(Validation::Valid)
+      } else {
+        Ok(Validation::Invalid("Invalid component name".into()))
+      }
+    };
+
+    let project_name = Text::new("Project name")
+      .with_validator(required!("Project name is required"))
+      .with_validator(validator)
+      .prompt()?;
+
+    let description = Text::new("Description").prompt_skippable()?;
+
+    let options = vec![Template::Vue];
+    let template = Select::new("Select a template", options).prompt()?;
 
     let project = Project {
-      name: &self.project_name,
-      description: self.description.as_deref(),
+      name: project_name,
+      description,
       force: self.force,
-      template: template.unwrap_or(Template::Vue),
+      template,
     };
 
     project.create()
@@ -125,7 +129,7 @@ impl ManatsuCommand for DevCommand {
         composable::create(name)
       }
       DevCommand::Icon => {
-        let name_validator = |name: &str| {
+        let validator = |name: &str| {
           if component::is_valid(name)? {
             Ok(Validation::Valid)
           } else {
@@ -135,7 +139,7 @@ impl ManatsuCommand for DevCommand {
 
         let name = Text::new("Icon name")
           .with_validator(required!("Icon name is required"))
-          .with_validator(name_validator)
+          .with_validator(validator)
           .prompt()?;
 
         let options = vec![IconType::Social];

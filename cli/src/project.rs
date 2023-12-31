@@ -11,27 +11,28 @@ pub use template::Template;
 use zip::ZipArchive;
 
 /// <https://regex101.com/r/9dSatE>
-pub const PROJECT_NAME_REGEX: &str = r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
+pub(crate) const PROJECT_NAME_REGEX: &str =
+  r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
 
-pub struct Project<'a> {
-  pub name: &'a str,
-  pub description: Option<&'a str>,
+pub struct Project {
+  pub name: String,
+  pub description: Option<String>,
   pub force: bool,
   pub template: Template,
 }
 
-impl<'a> Project<'a> {
+impl Project {
   /// Create a new Manatsu project from a template.
   ///
   /// Vue: <https://github.com/manatsujs/template-vue>
   pub fn create(&self) -> Result<()> {
     let start = Instant::now();
 
-    if !is_valid_name(self.name)? {
+    if !is_valid(&self.name)? {
       return Err(anyhow!("Invalid project name: {}", self.name));
     }
 
-    let path = env::current_dir()?.join(self.name);
+    let path = env::current_dir()?.join(&self.name);
     if path.try_exists()? {
       if self.force {
         fs::remove_dir_all(&path)?
@@ -123,7 +124,11 @@ fn remove_entry(path: &Path) -> Result<()> {
 }
 
 /// Determines whether the project name is valid.
-pub(crate) fn is_valid_name(project_name: &str) -> Result<bool> {
+pub fn is_valid<T>(project_name: T) -> Result<bool>
+where
+  T: AsRef<str>,
+{
+  let project_name = project_name.as_ref();
   let regex = Regex::new(PROJECT_NAME_REGEX)?;
   Ok(regex.is_match(project_name))
 }
@@ -136,10 +141,10 @@ mod tests {
   #[test]
   fn should_determine_if_name_is_valid() {
     let name = "my-project";
-    assert!(is_valid_name(name).unwrap());
+    assert!(is_valid(name).unwrap());
 
     let name = "真夏";
-    assert!(!is_valid_name(name).unwrap());
+    assert!(!is_valid(name).unwrap());
   }
 
   #[test]
