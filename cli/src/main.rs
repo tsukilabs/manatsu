@@ -1,7 +1,9 @@
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
+use inquire::validator::Validation;
+use inquire::{required, Text};
 use manatsu::dev;
-use manatsu::dev::scaffold::{self, IconType};
+use manatsu::dev::scaffold::{component, composable, icon};
 use manatsu::project::{Project, Template};
 
 #[derive(Debug, Parser)]
@@ -68,15 +70,9 @@ enum DevCommand {
     packages: Option<Vec<String>>,
   },
   /// Generates a component template.
-  Component {
-    /// Component name.
-    name: String,
-  },
+  Component,
   /// Generates a composable template.
-  Composable {
-    /// Composable name.
-    name: String,
-  },
+  Composable,
   /// Generates a icon template.
   Icon {
     /// Icon type.
@@ -100,11 +96,41 @@ impl ManatsuCommand for DevCommand {
           _ => dev::build(dev::package::PACKAGES),
         }
       }
-      DevCommand::Component { name } => scaffold::create_component(name),
-      DevCommand::Composable { name } => scaffold::create_composable(name),
+      DevCommand::Component => {
+        let validator = |name: &str| {
+          if component::is_valid(name)? {
+            Ok(Validation::Valid)
+          } else {
+            Ok(Validation::Invalid("Invalid component name".into()))
+          }
+        };
+
+        let name = Text::new("Component name")
+          .with_validator(required!("Component name is required"))
+          .with_validator(validator)
+          .prompt()?;
+
+        component::create(name)
+      }
+      DevCommand::Composable => {
+        let validator = |name: &str| {
+          if composable::is_valid(name)? {
+            Ok(Validation::Valid)
+          } else {
+            Ok(Validation::Invalid("Invalid composable name".into()))
+          }
+        };
+
+        let name = Text::new("Composable name")
+          .with_validator(required!("Composable name is required"))
+          .with_validator(validator)
+          .prompt()?;
+
+        composable::create(name)
+      }
       DevCommand::Icon { icon_type, name } => {
-        let icon_type = IconType::try_from(icon_type.as_str())?;
-        scaffold::create_icon(icon_type, name)
+        let icon_type = icon::IconType::try_from(icon_type.as_str())?;
+        icon::create(icon_type, name)
       }
       DevCommand::Readme => dev::readme(),
       DevCommand::Release => dev::release(),

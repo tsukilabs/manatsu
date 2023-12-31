@@ -14,7 +14,7 @@ where
   let start = Instant::now();
 
   let name = name.as_ref();
-  if !component::is_valid_name(name)? {
+  if !component::is_valid(name)? {
     return Err(anyhow!("Invalid icon name: {}", name));
   }
 

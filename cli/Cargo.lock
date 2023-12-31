@@ -549,8 +549,10 @@ version = "0.1.57"
 dependencies = [
  "anyhow",
  "clap",
+ "colored",
  "convert_case",
  "globset",
+ "inquire",
  "miho",
  "regex",
  "serde",
