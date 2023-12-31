@@ -1,4 +1,6 @@
 use anyhow::{anyhow, Context, Result};
+use convert_case::{Case, Casing};
+use std::fmt;
 use std::io::Read;
 use std::time::Duration;
 use ureq::Response;
@@ -56,5 +58,14 @@ impl From<Template> for &str {
 impl<T: AsRef<str>> From<T> for Template {
   fn from(_: T) -> Self {
     Template::Vue
+  }
+}
+
+impl fmt::Display for Template {
+  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    let name: &str = (*self).into();
+    let name = name.replace("template-", "");
+    let name = name.to_case(Case::Title);
+    write!(f, "{name}")
   }
 }
