@@ -2,6 +2,7 @@
 
 fn main() {
   tauri::Builder::default()
+    .plugin(tauri_plugin_manatsu::init())
     .run(tauri::generate_context!())
-    .expect("error while running tauri application");
+    .expect("Playground could not be started");
 }

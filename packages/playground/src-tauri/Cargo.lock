@@ -1902,6 +1902,7 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "tauri-plugin-manatsu",
 ]
 
 [[package]]
@@ -2721,6 +2722,15 @@ dependencies = [
  "syn 1.0.109",
  "tauri-codegen",
  "tauri-utils",
+]
+
+[[package]]
+name = "tauri-plugin-manatsu"
+version = "0.1.57"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "843945d7520ef08c3cfa84714a4532b990f37a582892b807549f4536e9bc5b87"
+dependencies = [
+ "tauri",
 ]
 
 [[package]]
