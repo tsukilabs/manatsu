@@ -2,9 +2,9 @@ use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
 use inquire::validator::Validation;
 use inquire::{required, Select, Text};
-use manatsu::dev;
 use manatsu::dev::scaffold::icon::{self, IconType};
 use manatsu::dev::scaffold::{component, composable};
+use manatsu::dev::{self, package};
 use manatsu::project::{self, Project, Template};
 
 #[derive(Debug, Parser)]
@@ -93,7 +93,7 @@ impl ManatsuCommand for DevCommand {
         let packages = packages.as_deref();
         match packages {
           Some(p) if !p.is_empty() => dev::build(p),
-          _ => dev::build(dev::package::PACKAGES),
+          _ => dev::build(package::PUBLIC_PACKAGES),
         }
       }
       DevCommand::Component => {

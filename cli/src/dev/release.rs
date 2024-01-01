@@ -1,4 +1,4 @@
-use super::{json, readme};
+use super::json;
 use crate::dev::{CLI_MANIFEST, PLUGIN_MANIFEST};
 use anyhow::Result;
 use miho::git::{self, GitCommit};
@@ -9,7 +9,7 @@ use std::process::{Command, Stdio};
 /// It is not necessary to synchronize the README files before
 /// calling this function, as it will already do that.
 pub fn release() -> Result<()> {
-  readme()?;
+  super::readme()?;
 
   if let Ok(true) = git::is_dirty() {
     let commit_flags = GitCommit {

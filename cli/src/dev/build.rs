@@ -1,4 +1,4 @@
-use super::package::{self, is_standalone, PACKAGES};
+use super::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{anyhow, Result};
 use miho;
 use std::fs;
@@ -22,7 +22,7 @@ where
     pkg.replace("@manatsu/", "")
   });
 
-  let filter = |pkg: &String| PACKAGES.contains(&pkg.as_str());
+  let filter = |pkg: &String| PUBLIC_PACKAGES.contains(&pkg.as_str());
   let packages = packages.filter(filter);
 
   let packages: Vec<String> = packages.collect();

@@ -110,6 +110,9 @@ importers:
       '@manatsu/icons':
         specifier: workspace:*
         version: link:../icons
+      '@manatsu/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@tb-dev/utility-types':
         specifier: ^1.0.2
         version: 1.0.2
@@ -129,6 +132,9 @@ importers:
 
   packages/composables:
     dependencies:
+      '@manatsu/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@tb-dev/utility-types':
         specifier: ^1.0.2
         version: 1.0.2
@@ -148,6 +154,9 @@ importers:
 
   packages/icons:
     dependencies:
+      '@manatsu/shared':
+        specifier: workspace:*
+        version: link:../shared
       vue:
         specifier: ^3.3.0
         version: 3.4.3(typescript@5.3.3)
@@ -164,6 +173,9 @@ importers:
       '@manatsu/composables':
         specifier: workspace:*
         version: link:../composables
+      '@manatsu/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@tb-dev/utility-types':
         specifier: ^1.0.2
         version: 1.0.2
@@ -192,9 +204,22 @@ importers:
       '@manatsu/icons':
         specifier: workspace:*
         version: link:../icons
+      '@manatsu/shared':
+        specifier: workspace:*
+        version: link:../shared
       manatsu:
         specifier: workspace:*
         version: link:../manatsu
+    devDependencies:
+      vite:
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.6)(sass@1.69.6)
+
+  packages/shared:
+    dependencies:
+      '@tb-dev/utility-types':
+        specifier: ^1.0.2
+        version: 1.0.2
     devDependencies:
       vite:
         specifier: ^5.0.10

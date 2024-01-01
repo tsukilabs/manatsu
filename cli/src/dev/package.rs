@@ -2,53 +2,67 @@ use anyhow::Result;
 use std::env;
 use std::path::PathBuf;
 
-/// Manatsu package names.
-pub const PACKAGES: [&str; 4] = ["manatsu", "components", "composables", "icons"];
+/// Public package names.
+pub const PUBLIC_PACKAGES: [&str; 4] = ["manatsu", "components", "composables", "icons"];
+
+/// Private package names.
+pub const PRIVATE_PACKAGES: [&str; 2] = ["playground", "shared"];
+
+/// Returns all package names.
+pub fn all() -> Vec<String> {
+  let mut packages = PUBLIC_PACKAGES.to_vec();
+  packages.extend_from_slice(&PRIVATE_PACKAGES);
+
+  let packages = packages.iter().map(|p| p.to_string());
+  packages.collect()
+}
 
 /// Returns the path to a package.
-pub fn dir<P>(pkg: P) -> Result<PathBuf>
+pub fn dir<P>(package: P) -> Result<PathBuf>
 where
   P: AsRef<str>,
 {
-  let pkg = pkg.as_ref();
+  let package = package.as_ref();
   let cwd = env::current_dir()?;
-  let path = cwd.join("packages").join(pkg);
+  let path = cwd.join("packages").join(package);
   Ok(path)
 }
 
 /// Returns the path to the source folder of a given package.
-pub fn src<P>(pkg: P) -> Result<PathBuf>
+pub fn src<P>(package: P) -> Result<PathBuf>
 where
   P: AsRef<str>,
 {
-  let pkg = pkg.as_ref();
-  let path = dir(pkg)?.join("src");
+  let package = package.as_ref();
+  let path = dir(package)?.join("src");
   Ok(path)
 }
 
 /// Returns the path to the dist folder of a given package.
-pub fn dist<P>(pkg: P) -> Result<PathBuf>
+pub fn dist<P>(package: P) -> Result<PathBuf>
 where
   P: AsRef<str>,
 {
-  let pkg = pkg.as_ref();
-  let path = dir(pkg)?.join("dist");
+  let package = package.as_ref();
+  let path = dir(package)?.join("dist");
   Ok(path)
 }
 
-pub fn dts<P>(pkg: P) -> Result<PathBuf>
+/// Returns the path to the `index.d.ts` file of a given package.
+pub fn dts<P>(package: P) -> Result<PathBuf>
 where
   P: AsRef<str>,
 {
-  let pkg = pkg.as_ref();
-  let path = dist(pkg)?.join("index.d.ts");
+  let package = package.as_ref();
+  let path = dist(package)?.join("index.d.ts");
   Ok(path)
 }
 
-pub fn is_standalone<P>(pkg: P) -> bool
+/// Whether the package should be merged with the `manatsu` package.
+pub fn is_standalone<P>(package: P) -> bool
 where
   P: AsRef<str>,
 {
-  let pkg = pkg.as_ref();
-  pkg == "manatsu" || pkg == "icons"
+  let package = package.as_ref();
+  package != "components" && package != "composables"
 }
