@@ -8,11 +8,11 @@ enableAutoUnmount(afterEach);
 describe('navbar-logo', () => {
   it('should have a image as logo', () => {
     const wrapper = mount(NavbarLogo, { props: { logo: 'src' } });
-    expect(wrapper.find('img.m-navbar-logo').exists()).toBe(true);
+    expect(wrapper.find('img').exists()).toBe(true);
   });
 
   it('should use render function', () => {
     const wrapper = mount(NavbarLogo, { props: { logo: () => h('svg') } });
-    expect(wrapper.find('svg.m-navbar-logo').exists()).toBe(true);
+    expect(wrapper.find('svg').exists()).toBe(true);
   });
 });

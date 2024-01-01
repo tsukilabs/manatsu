@@ -1,5 +1,5 @@
-@mixin -flex($justify: null, $items: null) {
-  display: flex;
+@mixin -flex($display: flex, $justify: null, $items: null) {
+  display: $display;
 
   @if $justify {
     justify-content: $justify;
@@ -11,22 +11,27 @@
 }
 
 /* Justify content and align items. */
-@mixin center {
-  @include -flex($justify: center, $items: center);
+@mixin center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: center, $items: center);
 }
 
-@mixin x-center {
-  @include -flex($justify: center);
+@mixin x-center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: center);
 }
 
-@mixin x-end {
-  @include -flex($justify: flex-end);
+@mixin x-end($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-end);
 }
 
-@mixin x-between-y-center {
-  @include -flex($justify: space-between, $items: center);
+@mixin x-between-y-center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: space-between, $items: center);
 }
 
-@mixin y-center {
-  @include -flex($items: center);
+@mixin y-center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $items: center);
 }

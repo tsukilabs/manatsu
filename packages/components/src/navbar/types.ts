@@ -16,17 +16,13 @@ export interface NavbarMenuItem {
   to?: RouteLocationRaw;
 }
 
-export interface NavbarMenuProps {
-  items: NavbarMenuItem[];
-}
-
 export type NavbarChildrenProps = Partial<NavbarLogoProps> &
   Partial<NavbarTitleProps>;
 
 export interface NavbarProps extends NavbarChildrenProps {
   height?: string | number;
   logoStyle?: StyleValue;
-  menuItems?: NavbarMenuProps['items'];
+  menuItems?: NavbarMenuItem[];
   menuStyle?: StyleValue;
   socialLinks?: IconLinkProps[];
   socialLinksStyle?: StyleValue;

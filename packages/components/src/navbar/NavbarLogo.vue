@@ -5,17 +5,6 @@ defineProps<NavbarLogoProps>();
 </script>
 
 <template>
-  <component
-    :is="logo"
-    v-if="typeof logo === 'function'"
-    class="m-navbar-logo"
-  />
-
-  <img v-else class="m-navbar-logo" :src="logo" />
+  <component :is="logo" v-if="typeof logo === 'function'" />
+  <img v-else :src="logo" />
 </template>
-
-<style scoped lang="scss">
-.m-navbar-logo {
-  margin: 0 8px 0 0;
-}
-</style>

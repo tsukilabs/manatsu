@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useToPixel } from '@manatsu/composables/src/index.ts';
 import NavbarLogo from './NavbarLogo.vue';
-import NavbarMenu from './NavbarMenu.vue';
 import type { NavbarProps } from './types';
 import NavbarTitle from './NavbarTitle.vue';
 import IconLink from '../link/IconLink.vue';
@@ -20,17 +19,43 @@ const width = useToPixel(() => props.width);
   <header class="m-navbar" :style="style">
     <div>
       <DynamicLink class="m-navbar-title-link" :to="titleLink">
-        <NavbarLogo v-if="logo" :logo="logo" :style="logoStyle" />
-        <NavbarTitle v-if="title" :title="title" :style="titleStyle" />
+        <NavbarLogo
+          v-if="logo"
+          class="m-navbar-logo"
+          :logo="logo"
+          :style="logoStyle"
+        />
+        <NavbarTitle
+          v-if="title"
+          class="m-navbar-title"
+          :title="title"
+          :style="titleStyle"
+        />
       </DynamicLink>
     </div>
 
     <div class="m-navbar-content">
-      <NavbarMenu
+      <div
         v-if="menuItems && menuItems.length > 0"
-        :items="menuItems"
+        class="m-navbar-menu"
         :style="menuStyle"
-      />
+      >
+        <div
+          v-for="item of menuItems"
+          :key="item.key"
+          class="m-navbar-menu-item"
+          role="none"
+        >
+          <DynamicLink :to="item.to">
+            <component
+              :is="item.label"
+              v-if="typeof item.label === 'function'"
+            />
+            <span v-else>{{ item.label ?? item.key }}</span>
+          </DynamicLink>
+        </div>
+      </div>
+
       <div
         v-if="socialLinks && socialLinks.length > 0"
         class="m-navbar-social-links"
@@ -65,11 +90,28 @@ const width = useToPixel(() => props.width);
   & > * {
     @include flex.y-center;
   }
+
+  .m-navbar-logo {
+    margin: 0 8px 0 0;
+  }
+
+  .m-navbar-title {
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
 }
 
 .m-navbar-content {
   @include flex.x-end;
   flex: 1 1 auto;
+  gap: 1rem;
+
+  & > :not(:first-child)::before {
+    background-color: var(--m-color-outline);
+    width: 1px;
+    height: 24px;
+    content: '';
+  }
 
   .m-navbar-social-links {
     @include flex.y-center;

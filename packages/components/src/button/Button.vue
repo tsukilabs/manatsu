@@ -21,17 +21,11 @@ const classList = computed(() => ({
 </template>
 
 <style scoped lang="scss">
-:global(:root) {
-  --m-button-min-height: 32px;
-  --m-button-min-width: 10ch;
-  --m-button-padding: 0.25em 0.75em;
-}
+@use '@manatsu/sass/flex';
 
 .m-button-wrapper {
-  display: inline-flex;
+  @include flex.center($inline: true);
   flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
   max-width: max-content;
   white-space: nowrap;
 }
@@ -40,9 +34,9 @@ const classList = computed(() => ({
   cursor: pointer;
   border: none;
   border-radius: var(--m-border-radius);
-  padding: var(--m-button-padding);
-  min-width: var(--m-button-min-width);
-  min-height: var(--m-button-min-height);
+  padding: 0.25em 0.75em;
+  min-width: 10ch;
+  min-height: 32px;
   font-size: 1em;
   font-family: inherit;
   text-align: center;
