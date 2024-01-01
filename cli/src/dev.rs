@@ -1,8 +1,8 @@
 mod build;
-pub mod scaffold;
 mod json;
 pub mod package;
 mod release;
+pub mod scaffold;
 
 use anyhow::{Context, Result};
 pub use build::build;

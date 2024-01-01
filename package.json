@@ -5,8 +5,7 @@
   "private": true,
   "packageManager": "pnpm@8.13.1",
   "lint-staged": {
-    "*.{?(c|m)@(j|t)s,scss,vue,md,json}": "prettier --write",
-    "*.{?(c|m)@(j|t)s,scss,vue}": "pnpm lint:ts"
+    "*.{?(c|m)@(j|t)s,?(s)css,vue,md,json,toml}": "prettier --write"
   },
   "scripts": {
     "build": "nr cli dev build",
@@ -22,13 +21,13 @@
     "format": "prettier . --write",
     "format-check": "prettier . --check",
     "lint": "run-p lint:*",
-    "lint:ts": "eslint . --config eslint.config.js --cache",
     "lint:style": "stylelint **/*.{scss,vue} --cache",
+    "lint:ts": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
     "release": "nr build && nr cli dev release",
     "test": "run-p test:*",
     "test:cli": "cargo test --manifest-path=cli/Cargo.toml",
-    "test:vue": "vitest --run",
+    "test:ts": "vitest --run",
     "type-check": "vue-tsc --noEmit",
     "ui": "vitest --ui --watch"
   },
