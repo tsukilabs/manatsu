@@ -1,4 +1,4 @@
-import './assets/main.scss';
+import './style/main.scss';
 import { type Plugin, effectScope, ref, watchEffect } from 'vue';
 import { tryOnScopeDispose, usePreferredDark } from '@vueuse/core';
 import * as symbol from './symbol';
