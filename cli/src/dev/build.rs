@@ -1,4 +1,4 @@
-use super::package::{self, is_standalone, PACKAGES};
+use super::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{anyhow, Result};
 use miho;
 use std::fs;
@@ -22,17 +22,23 @@ where
     pkg.replace("@manatsu/", "")
   });
 
-  let filter = |pkg: &String| PACKAGES.contains(&pkg.as_str());
-  let packages = packages.filter(filter);
-
   let packages: Vec<String> = packages.collect();
   if packages.is_empty() {
     return Err(anyhow!("Nothing to build"));
   }
 
-  for pkg in &packages {
-    args.push("--filter");
-    args.push(pkg);
+  let filter_flag = "--filter";
+  for package in &packages {
+    let package = package.as_str();
+
+    if should_build(package) {
+      args.push(filter_flag);
+      args.push(package);
+    }
+  }
+
+  if !args.contains(&filter_flag) {
+    return Err(anyhow!("Selected package(s) cannot be built"));
   }
 
   args.push("build");
@@ -47,6 +53,16 @@ where
 
   println!("Built in {:?}", start.elapsed());
   Ok(())
+}
+
+fn should_build(package: &str) -> bool {
+  if PUBLIC_PACKAGES.contains(&package) {
+    // The sass package doesn't need to be built.
+    package != "sass"
+  } else {
+    // We shouldn't build private packages.
+    false
+  }
 }
 
 fn copy_files(packages: &Vec<String>) -> Result<()> {

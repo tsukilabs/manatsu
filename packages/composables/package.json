@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/manatsujs/manatsu.git"
   },
+  "bugs": {
+    "url": "https://github.com/manatsujs/manatsu/issues"
+  },
   "contributors": [
     {
       "name": "Andrew Ferreira",
@@ -41,6 +44,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@manatsu/shared": "workspace:*",
     "@tb-dev/utility-types": "^1.0.2"
   },
   "devDependencies": {

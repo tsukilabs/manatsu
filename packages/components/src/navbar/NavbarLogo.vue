@@ -15,11 +15,7 @@ defineProps<NavbarLogoProps>();
 </template>
 
 <style scoped lang="scss">
-:global(:root) {
-  --m-navbar-logo-margin: 0 8px 0 0;
-}
-
 .m-navbar-logo {
-  margin: var(--m-navbar-logo-margin);
+  margin: 0 8px 0 0;
 }
 </style>

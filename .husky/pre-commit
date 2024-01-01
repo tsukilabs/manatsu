@@ -3,4 +3,5 @@
 
 nr clippy
 nr test
+nr lint
 pnpm exec lint-staged

@@ -1,6 +1,6 @@
 :root {
   --m-color-primary: #006c49;
-  --m-color-on-primary: #ffffff;
+  --m-color-on-primary: #fff;
   --m-color-primary-container: #8cf7c3;
   --m-color-on-primary-container: #002113;
   --m-color-primary-fixed: #8cf7c3;
@@ -8,7 +8,7 @@
   --m-color-primary-fixed-dim: #6fdba8;
   --m-color-on-primary-fixed-variant: #005236;
   --m-color-secondary: #006c49;
-  --m-color-on-secondary: #ffffff;
+  --m-color-on-secondary: #fff;
   --m-color-secondary-container: #8bf7c4;
   --m-color-on-secondary-container: #002114;
   --m-color-secondary-fixed: #8bf7c4;
@@ -16,7 +16,7 @@
   --m-color-secondary-fixed-dim: #6fdba9;
   --m-color-on-secondary-fixed-variant: #005236;
   --m-color-tertiary: #3d6473;
-  --m-color-on-tertiary: #ffffff;
+  --m-color-on-tertiary: #fff;
   --m-color-tertiary-container: #c0e9fa;
   --m-color-on-tertiary-container: #001f29;
   --m-color-tertiary-fixed: #c0e9fa;
@@ -25,7 +25,7 @@
   --m-color-on-tertiary-fixed-variant: #244c5a;
   --m-color-error: #ba1a1a;
   --m-color-error-container: #ffdad6;
-  --m-color-on-error: #ffffff;
+  --m-color-on-error: #fff;
   --m-color-on-error-container: #410002;
   --m-color-background: #fbfdf9;
   --m-color-on-background: #191c1a;
@@ -33,10 +33,10 @@
   --m-color-inverse-on-surface: #eff1ed;
   --m-color-inverse-surface: #2e312f;
   --m-color-inverse-primary: #6fdba8;
-  --m-color-shadow: #000000;
+  --m-color-shadow: #000;
   --m-color-surface-tint: #006c49;
   --m-color-outline-variant: #c0c9c1;
-  --m-color-scrim: #000000;
+  --m-color-scrim: #000;
   --m-color-surface: #f8faf6;
   --m-color-on-surface: #191c1a;
   --m-color-surface-variant: #dce5dd;
@@ -45,7 +45,7 @@
   --m-color-surface-container-high: #e7e9e5;
   --m-color-surface-container: #eceeea;
   --m-color-surface-container-low: #f2f4f0;
-  --m-color-surface-container-lowest: #ffffff;
+  --m-color-surface-container-lowest: #fff;
   --m-color-surface-dim: #d8dbd7;
   --m-color-surface-bright: #f8faf6;
 }
@@ -73,10 +73,10 @@
   --m-color-inverse-on-surface: #191c1a;
   --m-color-inverse-surface: #e1e3df;
   --m-color-inverse-primary: #006c49;
-  --m-color-shadow: #000000;
+  --m-color-shadow: #000;
   --m-color-surface-tint: #6fdba8;
   --m-color-outline-variant: #404943;
-  --m-color-scrim: #000000;
+  --m-color-scrim: #000;
   --m-color-surface: #111412;
   --m-color-on-surface: #c5c7c3;
   --m-color-surface-variant: #404943;

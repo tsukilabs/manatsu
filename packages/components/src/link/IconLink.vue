@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { useToPixel } from '@manatsu/composables/src/index.ts';
-import { type CSSProperties, type ComputedRef, toRef } from 'vue';
 import Icon from '../icon/Icon.vue';
 import DynamicLink from './DynamicLink.vue';
 import type { IconLinkProps } from './types';
 
 const props = withDefaults(defineProps<IconLinkProps>(), {
-  height: 36,
-  width: 36
+  height: '36px',
+  width: '36px'
 });
 
-const style: ComputedRef<CSSProperties> = useToPixel({
-  height: toRef(() => props.height),
-  width: toRef(() => props.width)
-});
+const height = useToPixel(() => props.height);
+const width = useToPixel(() => props.width);
 </script>
 
 <template>
@@ -23,9 +20,11 @@ const style: ComputedRef<CSSProperties> = useToPixel({
 </template>
 
 <style scoped lang="scss">
+@use '@manatsu/sass/flex';
+
 .m-icon-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex.center;
+  width: v-bind('width');
+  height: v-bind('height');
 }
 </style>

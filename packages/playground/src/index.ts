@@ -1,4 +1,4 @@
-import 'manatsu/src/assets/main.scss';
+import 'manatsu/src/style/main.scss';
 import { createApp } from 'vue';
 import { createManatsu } from 'manatsu/src/index.ts';
 import { createMemoryHistory, createRouter } from 'vue-router';

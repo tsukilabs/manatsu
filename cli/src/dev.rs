@@ -1,8 +1,8 @@
 mod build;
-pub mod scaffold;
 mod json;
 pub mod package;
 mod release;
+pub mod scaffold;
 
 use anyhow::{Context, Result};
 pub use build::build;
@@ -20,7 +20,7 @@ pub fn readme() -> Result<()> {
   let src_readme = cwd.join(filename);
 
   println!("Copying README files...");
-  for pkg in package::PACKAGES {
+  for pkg in package::all() {
     let dest_readme = package::dir(pkg)?.join(filename);
     fs::copy(&src_readme, &dest_readme)?;
     println!("Copied: {}", dest_readme.display());
@@ -37,6 +37,7 @@ pub fn readme() -> Result<()> {
   Ok(())
 }
 
+/// Format files using Prettier.
 pub fn format_files<G>(glob: G) -> Result<()>
 where
   G: AsRef<str>,
@@ -53,6 +54,7 @@ where
   Ok(())
 }
 
+/// Lint files, fixing as many issues as possible.
 pub fn lint<G>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()>
 where
   G: AsRef<str>,

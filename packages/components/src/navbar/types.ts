@@ -1,4 +1,4 @@
-import type { VNodeChild } from 'vue';
+import type { StyleValue, VNodeChild } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 import type { IconLinkProps } from '../link';
 
@@ -12,6 +12,7 @@ export interface NavbarTitleProps {
 
 export interface NavbarMenuItem {
   key: string;
+  label: string | (() => VNodeChild);
   to?: RouteLocationRaw;
 }
 
@@ -20,10 +21,17 @@ export interface NavbarMenuProps {
 }
 
 export type NavbarChildrenProps = Partial<NavbarLogoProps> &
-  Partial<NavbarTitleProps> &
-  Partial<NavbarMenuProps>;
+  Partial<NavbarTitleProps>;
 
 export interface NavbarProps extends NavbarChildrenProps {
+  height?: string | number;
+  logoStyle?: StyleValue;
+  menuItems?: NavbarMenuProps['items'];
+  menuStyle?: StyleValue;
   socialLinks?: IconLinkProps[];
+  socialLinksStyle?: StyleValue;
+  style?: StyleValue;
   titleLink?: RouteLocationRaw;
+  titleStyle?: StyleValue;
+  width?: string | number;
 }

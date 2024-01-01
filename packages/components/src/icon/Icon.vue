@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { useToPixel } from '@manatsu/composables/src/index.ts';
-import { type CSSProperties, type ComputedRef, toRef } from 'vue';
 import type { IconProps } from './types';
 
 const props = withDefaults(defineProps<IconProps>(), {
-  height: 20,
-  width: 20
+  height: '20px',
+  width: '20px'
 });
 
-const style: ComputedRef<CSSProperties> = useToPixel({
-  height: toRef(() => props.height),
-  width: toRef(() => props.width)
-});
+const height = useToPixel(() => props.height);
+const width = useToPixel(() => props.width);
 </script>
 
 <template>
@@ -21,6 +18,11 @@ const style: ComputedRef<CSSProperties> = useToPixel({
 </template>
 
 <style scoped lang="scss">
+.m-icon {
+  width: v-bind('width');
+  height: v-bind('height');
+}
+
 .m-icon :deep(svg) {
   fill: currentColor;
 }

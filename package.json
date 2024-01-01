@@ -5,8 +5,7 @@
   "private": true,
   "packageManager": "pnpm@8.13.1",
   "lint-staged": {
-    "*.{?(c|m)@(j|t)s,css,vue,md,json}": "prettier --write",
-    "*.{?(c|m)@(j|t)s,vue}": "pnpm lint"
+    "*.{?(c|m)@(j|t)s,?(s)css,vue,md,json,toml,yaml}": "prettier --write"
   },
   "scripts": {
     "build": "nr cli dev build",
@@ -21,26 +20,23 @@
     "docs:cli": "cargo doc --open --manifest-path=cli/Cargo.toml",
     "format": "prettier . --write",
     "format-check": "prettier . --check",
-    "lint": "eslint . --config eslint.config.js --cache",
+    "lint": "run-p lint:*",
+    "lint:style": "stylelint **/*.{scss,vue} --cache",
+    "lint:ts": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
     "release": "nr build && nr cli dev release",
-    "test": "run-s test:*",
+    "test": "run-p test:*",
     "test:cli": "cargo test --manifest-path=cli/Cargo.toml",
-    "test:vue": "vitest --run",
+    "test:ts": "vitest --run",
     "type-check": "vue-tsc --noEmit",
     "ui": "vitest --ui --watch"
-  },
-  "pnpm": {
-    "requiredScripts": [
-      "build",
-      "type-check"
-    ]
   },
   "devDependencies": {
     "@manatsu/theme-builder": "^0.2.1",
     "@rollup/plugin-typescript": "^11.1.5",
     "@tauri-apps/api": "^1.5.3",
     "@tb-dev/eslint-config": "^1.5.8",
+    "@tb-dev/stylelint-config": "^1.0.5",
     "@tb-dev/utility-types": "^1.0.2",
     "@types/node": "^20.10.6",
     "@vitejs/plugin-vue": "^5.0.2",
@@ -58,6 +54,9 @@
     "prettier-plugin-css-order": "^2.0.1",
     "rollup": "^4.9.2",
     "sass": "^1.69.6",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard-scss": "^12.0.0",
+    "stylelint-config-standard-vue": "^1.0.0",
     "taze": "^0.13.1",
     "tslib": "^2.6.2",
     "typescript": "5.3.3",

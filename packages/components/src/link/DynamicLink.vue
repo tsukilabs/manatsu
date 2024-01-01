@@ -13,10 +13,9 @@ const isExternalLink = useExternalLink(() => props.to);
     <slot></slot>
   </span>
 
-  <!-- prettier-ignore -->
   <a
-    v-else-if="isExternalLink"
-    :href="(to as string)"
+    v-else-if="typeof to === 'string' && isExternalLink"
+    :href="to"
     target="_blank"
     rel="noopener noreferrer"
   >
