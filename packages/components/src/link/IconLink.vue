@@ -20,10 +20,10 @@ const width = useToPixel(() => props.width);
 </template>
 
 <style scoped lang="scss">
-@use '../style';
+@use '@manatsu/sass/flex';
 
 .m-icon-link {
-  @include style.flex-center;
+  @include flex.center;
   width: v-bind('width');
   height: v-bind('height');
 }

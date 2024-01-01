@@ -1,0 +1,32 @@
+@mixin -flex($justify: null, $items: null) {
+  display: flex;
+
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @if $items {
+    align-items: $items;
+  }
+}
+
+/* Justify content and align items. */
+@mixin center {
+  @include -flex($justify: center, $items: center);
+}
+
+@mixin x-center {
+  @include -flex($justify: center);
+}
+
+@mixin x-end {
+  @include -flex($justify: flex-end);
+}
+
+@mixin x-between-y-center {
+  @include -flex($justify: space-between, $items: center);
+}
+
+@mixin y-center {
+  @include -flex($items: center);
+}

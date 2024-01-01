@@ -48,10 +48,10 @@ const width = useToPixel(() => props.width);
 </template>
 
 <style scoped lang="scss">
-@use '../style';
+@use '@manatsu/sass/flex';
 
 .m-navbar {
-  @include style.flex-x-between-y-center;
+  @include flex.x-between-y-center;
   padding: 0 1rem;
   width: v-bind('width');
   height: v-bind('height');
@@ -60,19 +60,19 @@ const width = useToPixel(() => props.width);
 }
 
 .m-navbar > div:first-child {
-  @include style.flex-y-center;
+  @include flex.y-center;
 
   & > * {
-    @include style.flex-y-center;
+    @include flex.y-center;
   }
 }
 
 .m-navbar-content {
-  @include style.flex-x-end;
+  @include flex.x-end;
   flex: 1 1 auto;
 
   .m-navbar-social-links {
-    @include style.flex-y-center;
+    @include flex.y-center;
   }
 }
 </style>

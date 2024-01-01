@@ -22,9 +22,9 @@ defineProps<NavbarMenuProps>();
 </template>
 
 <style scoped lang="scss">
-@use '../style';
+@use '@manatsu/sass/flex';
 
 .m-navbar-menu {
-  @include style.flex-y-center;
+  @include flex.y-center;
 }
 </style>

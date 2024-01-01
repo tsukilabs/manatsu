@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/manatsujs/manatsu.git"
   },
+  "bugs": {
+    "url": "https://github.com/manatsujs/manatsu/issues"
+  },
   "contributors": [
     {
       "name": "Andrew Ferreira",

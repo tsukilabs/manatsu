@@ -19,10 +19,6 @@ defineProps<ScaffoldProps>();
 </template>
 
 <style scoped lang="scss">
-:global(:root) {
-  --m-scaffold-content-padding: 1rem;
-}
-
 .m-scaffold {
   display: flex;
   flex-direction: column;
@@ -36,6 +32,6 @@ defineProps<ScaffoldProps>();
 }
 
 .m-scaffold-content {
-  padding: var(--m-scaffold-content-padding);
+  padding: 1rem;
 }
 </style>
