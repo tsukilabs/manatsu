@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { h } from 'vue';
 import {
-  type IconLinkProps,
-  MNavbar,
-  MScaffold
-} from '@manatsu/components/src/index.ts';
-import {
   Discord,
   Facebook,
   GitHub,
   Instagram,
   Twitter
 } from '@manatsu/icons/src/index.ts';
+import {
+  type IconLinkProps,
+  MNavbar,
+  MScaffold,
+  type NavbarMenuItem
+} from '@manatsu/components/src/index.ts';
 import peach from '/peach.png';
 
 const socialLinks: IconLinkProps[] = [
@@ -20,6 +21,11 @@ const socialLinks: IconLinkProps[] = [
   { icon: () => h(Facebook), to: 'https://example.com/2' },
   { icon: () => h(Instagram), to: 'https://example.com/3' },
   { icon: () => h(Twitter), to: 'https://example.com/4' }
+];
+
+const menuItems: NavbarMenuItem[] = [
+  { key: 'first', label: () => h('div', 'First item') },
+  { key: 'second', label: 'Second item', to: 'https://example.com' }
 ];
 </script>
 
@@ -31,6 +37,7 @@ const socialLinks: IconLinkProps[] = [
         title-link="/"
         :logo="peach"
         :social-links="socialLinks"
+        :menu-items="menuItems"
       />
     </template>
 

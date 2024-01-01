@@ -41,6 +41,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@manatsu/shared": "workspace:*",
     "@tb-dev/utility-types": "^1.0.2"
   },
   "devDependencies": {

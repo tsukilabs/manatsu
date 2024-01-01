@@ -7,14 +7,24 @@ defineProps<NavbarMenuProps>();
 
 <template>
   <div class="m-navbar-menu">
-    <template v-for="item of items" :key="item.key">
-      <DynamicLink :to="item.to" />
-    </template>
+    <div
+      v-for="item of items"
+      :key="item.key"
+      class="m-navbar-menu-item"
+      role="none"
+    >
+      <DynamicLink :to="item.to">
+        <component :is="item.label" v-if="typeof item.label === 'function'" />
+        <span v-else>{{ item.label ?? item.key }}</span>
+      </DynamicLink>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+@use '../style';
+
 .m-navbar-menu {
-  display: flex;
+  @include style.flex-y-center;
 }
 </style>

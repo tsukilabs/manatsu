@@ -40,6 +40,9 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },
+  "dependencies": {
+    "@manatsu/shared": "workspace:*"
+  },
   "devDependencies": {
     "vite": "^5.0.10"
   },

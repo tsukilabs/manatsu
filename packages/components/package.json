@@ -43,6 +43,7 @@
   "dependencies": {
     "@manatsu/composables": "workspace:*",
     "@manatsu/icons": "workspace:*",
+    "@manatsu/shared": "workspace:*",
     "@tb-dev/utility-types": "^1.0.2"
   },
   "devDependencies": {

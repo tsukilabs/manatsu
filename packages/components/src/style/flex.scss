@@ -1,0 +1,31 @@
+@mixin flex($justify: null, $items: null) {
+  display: flex;
+
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @if $items {
+    align-items: $items;
+  }
+}
+
+@mixin flex-center {
+  @include flex($justify: center, $items: center);
+}
+
+@mixin flex-x-center {
+  @include flex($justify: center);
+}
+
+@mixin flex-x-end {
+  @include flex($justify: flex-end);
+}
+
+@mixin flex-x-between-y-center {
+  @include flex($justify: space-between, $items: center);
+}
+
+@mixin flex-y-center {
+  @include flex($items: center);
+}

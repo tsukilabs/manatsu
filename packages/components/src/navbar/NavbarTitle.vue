@@ -15,13 +15,8 @@ defineProps<NavbarTitleProps>();
 </template>
 
 <style scoped lang="scss">
-:global(:root) {
-  --m-navbar-title-font-size: 1.5rem;
-  --m-navbar-title-font-weight: 600;
-}
-
 .m-navbar-title {
-  font-weight: var(--m-navbar-title-font-weight);
-  font-size: var(--m-navbar-title-font-size);
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 </style>
