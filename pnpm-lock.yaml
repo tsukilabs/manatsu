@@ -20,8 +20,8 @@ importers:
         specifier: ^1.5.8
         version: 1.5.8(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.1)
       '@tb-dev/stylelint-config':
-        specifier: ^1.0.5
-        version: 1.0.5(postcss-html@1.5.0)(postcss@8.4.32)(typescript@5.3.3)
+        specifier: ^1.0.7
+        version: 1.0.7(postcss-html@1.5.0)(postcss@8.4.32)(typescript@5.3.3)
       '@tb-dev/utility-types':
         specifier: ^1.0.2
         version: 1.0.2
@@ -1639,10 +1639,10 @@ packages:
       - vitest
     dev: true
 
-  /@tb-dev/stylelint-config@1.0.5(postcss-html@1.5.0)(postcss@8.4.32)(typescript@5.3.3):
+  /@tb-dev/stylelint-config@1.0.7(postcss-html@1.5.0)(postcss@8.4.32)(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-JoTG2iB7H6aRPMreg/w22TfbUQtCvpU1VvOOr8dx5AwWhoUyWPsX6a9yEuYHLKJ/Xj9FBvLlXys1dGOiuxlrOQ==
+        integrity: sha512-YFmsdN4JVwfJ7ycsSc9aKJUi10mTCMpWu4TDpE09QitqMWXyz3sDuWlIddRFafhkpgEdo9HvjHu/LmH3ATjItA==
       }
     dependencies:
       stylelint: 16.1.0(typescript@5.3.3)

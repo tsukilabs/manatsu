@@ -28,8 +28,8 @@
     "@manatsu/components": "workspace:*",
     "@manatsu/composables": "workspace:*",
     "@manatsu/icons": "workspace:*",
-    "@manatsu/shared": "workspace:*",
     "@manatsu/sass": "workspace:*",
+    "@manatsu/shared": "workspace:*",
     "manatsu": "workspace:*"
   },
   "devDependencies": {
