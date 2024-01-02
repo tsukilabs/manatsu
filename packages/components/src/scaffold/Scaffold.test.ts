@@ -9,11 +9,12 @@ describe('scaffold', () => {
   it('should have header', () => {
     const wrapper = mount(Scaffold, {
       slots: {
-        header: () => h('div', 'Header slot')
+        header: () => h('div', { id: 'header-slot' })
       }
     });
 
     expect(wrapper.find('.m-scaffold-header').exists()).toBe(true);
+    expect(wrapper.find('#header-slot').exists()).toBe(true);
   });
 
   it('should not have header', () => {
