@@ -1,3 +1,3 @@
 export interface ScaffoldProps {
-  navbar?: boolean;
+  header?: boolean;
 }

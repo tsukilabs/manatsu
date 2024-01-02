@@ -35,7 +35,7 @@ const width = useToPixel(() => props.width);
     </div>
 
     <div class="m-navbar-content">
-      <div
+      <nav
         v-if="menuItems && menuItems.length > 0"
         class="m-navbar-menu"
         :style="menuStyle"
@@ -54,7 +54,7 @@ const width = useToPixel(() => props.width);
             <span v-else>{{ item.label ?? item.key }}</span>
           </DynamicLink>
         </div>
-      </div>
+      </nav>
 
       <div
         v-if="socialLinks && socialLinks.length > 0"

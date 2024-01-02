@@ -6,8 +6,8 @@ defineProps<ScaffoldProps>();
 
 <template>
   <div class="m-scaffold">
-    <div v-if="navbar" class="m-scaffold-header">
-      <slot name="navbar"></slot>
+    <div v-if="header" class="m-scaffold-header">
+      <slot name="header"></slot>
     </div>
 
     <div class="m-scaffold-main">

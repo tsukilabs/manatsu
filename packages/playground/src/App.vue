@@ -25,13 +25,14 @@ const socialLinks: IconLinkProps[] = [
 
 const menuItems: NavbarMenuItem[] = [
   { key: 'first', label: () => h('div', 'First item') },
-  { key: 'second', label: 'Second item', to: 'https://example.com' }
+  { key: 'second', label: 'Second item', to: 'https://example.com' },
+  { key: 'third', label: 'Third item' }
 ];
 </script>
 
 <template>
-  <MScaffold navbar>
-    <template #navbar>
+  <MScaffold header>
+    <template #header>
       <MNavbar
         title="Title"
         title-link="/"
