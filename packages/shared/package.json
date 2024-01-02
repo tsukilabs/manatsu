@@ -2,7 +2,7 @@
   "name": "@manatsu/shared",
   "version": "0.1.60",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "homepage": "https://github.com/manatsujs/manatsu",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "run-p type-check build-only",
-    "build-only": "rollup --config rollup.config.js",
+    "build-only": "vite build",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

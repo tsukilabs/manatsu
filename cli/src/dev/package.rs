@@ -3,10 +3,17 @@ use std::env;
 use std::path::PathBuf;
 
 /// Public package names.
-pub const PUBLIC_PACKAGES: [&str; 5] = ["manatsu", "components", "composables", "icons", "sass"];
+pub const PUBLIC_PACKAGES: [&str; 6] = [
+  "manatsu",
+  "components",
+  "composables",
+  "icons",
+  "sass",
+  "shared",
+];
 
 /// Private package names.
-pub const PRIVATE_PACKAGES: [&str; 2] = ["playground", "shared"];
+pub const PRIVATE_PACKAGES: [&str; 1] = ["playground"];
 
 /// Returns all package names.
 pub fn all() -> Vec<String> {
