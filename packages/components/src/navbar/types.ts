@@ -25,7 +25,7 @@ export interface NavbarProps extends NavbarChildrenProps {
   menuItems?: NavbarMenuItem[];
   menuStyle?: StyleValue;
   socialLinks?: IconLinkProps[];
-  socialLinksStyle?: StyleValue;
+  socialStyle?: StyleValue;
   style?: StyleValue;
   titleLink?: RouteLocationRaw;
   titleStyle?: StyleValue;

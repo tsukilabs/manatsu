@@ -59,7 +59,7 @@ const width = useToPixel(() => props.width);
       <div
         v-if="socialLinks && socialLinks.length > 0"
         class="m-navbar-social"
-        :style="socialLinksStyle"
+        :style="socialStyle"
       >
         <IconLink
           v-for="link of socialLinks"

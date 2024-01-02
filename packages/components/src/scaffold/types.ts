@@ -1,3 +1,7 @@
+import type { StyleValue } from 'vue';
+
 export interface ScaffoldProps {
-  header?: boolean;
+  contentStyle?: StyleValue;
+  headerStyle?: StyleValue;
+  style?: StyleValue;
 }

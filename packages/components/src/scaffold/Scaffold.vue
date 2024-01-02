@@ -5,13 +5,13 @@ defineProps<ScaffoldProps>();
 </script>
 
 <template>
-  <div class="m-scaffold">
-    <div v-if="header" class="m-scaffold-header">
+  <div class="m-scaffold" :style="style">
+    <div v-if="$slots.header" class="m-scaffold-header" :style="headerStyle">
       <slot name="header"></slot>
     </div>
 
     <div class="m-scaffold-main">
-      <div class="m-scaffold-content">
+      <div class="m-scaffold-content" :style="contentStyle">
         <slot></slot>
       </div>
     </div>

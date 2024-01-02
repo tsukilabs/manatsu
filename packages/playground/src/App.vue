@@ -31,7 +31,7 @@ const menuItems: NavbarMenuItem[] = [
 </script>
 
 <template>
-  <MScaffold header>
+  <MScaffold>
     <template #header>
       <MNavbar
         title="Title"
