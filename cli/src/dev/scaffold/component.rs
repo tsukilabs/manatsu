@@ -35,11 +35,18 @@ where
   write_typings(&pascal, &dir)?;
   write_vue(&pascal, &dir)?;
   write_test(&kebab, &pascal, dir)?;
+  write_to_src_index(&kebab)?;
 
   let glob = format!("**/components/src/{kebab}/**/*.{{ts,vue}}");
   dev::format_files(&glob)?;
 
-  let args = vec!["--rule", "@typescript-eslint/no-empty-interface: off"];
+  let index_glob = "**/components/src/index.ts";
+  let args = vec![
+    "--rule",
+    "@typescript-eslint/no-empty-interface: off",
+    index_glob,
+  ];
+  
   dev::lint(glob, Some(args))?;
 
   println!("Component {pascal} created in {:?}", start.elapsed());
@@ -111,6 +118,23 @@ where
 
   let dir = dir.as_ref();
   let path = dir.join(format!("{pascal}.test.ts"));
+  fs::write(path, cts)?;
+  Ok(())
+}
+
+pub fn write_to_src_index<K>(kebab: K) -> Result<()>
+where
+  K: AsRef<str>,
+{
+  let kebab = kebab.as_ref();
+
+  let src = package::src("components")?;
+  let path = src.join("index.ts");
+
+  let mut cts = fs::read_to_string(&path)?;
+  let export_decl = format!("export * from './{kebab}';\n");
+  cts.push_str(export_decl.as_str());
+
   fs::write(path, cts)?;
   Ok(())
 }
