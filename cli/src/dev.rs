@@ -6,9 +6,10 @@ pub mod scaffold;
 
 use anyhow::{Context, Result};
 pub use build::build;
-use miho;
+use miho::{self, MihoCommand};
 pub use release::release;
 use std::{env, fs};
+use std::process::Stdio;
 
 pub(crate) const CLI_MANIFEST: &str = "--manifest-path=cli/Cargo.toml";
 pub(crate) const PLUGIN_MANIFEST: &str = "--manifest-path=plugin/Cargo.toml";
@@ -47,7 +48,8 @@ where
   println!("Formatting files...");
   miho::Command::new("pnpm")
     .args(["exec", "prettier", glob, "--write"])
-    .stdio(miho::Stdio::Inherit)
+    .stderr(Stdio::inherit())
+    .stdout(Stdio::inherit())
     .output()
     .with_context(|| format!("Could not format files: {}", glob))?;
 
@@ -70,7 +72,8 @@ where
   println!("Linting files...");
   cmd
     .arg(glob)
-    .stdio(miho::Stdio::Inherit)
+    .stderr(Stdio::inherit())
+    .stdout(Stdio::inherit())
     .output()
     .with_context(|| format!("Could not lint files: {}", glob))?;
 

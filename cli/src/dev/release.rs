@@ -1,7 +1,8 @@
 use super::json;
 use crate::dev::{CLI_MANIFEST, PLUGIN_MANIFEST};
 use anyhow::Result;
-use miho::git::{self, GitCommit};
+use miho::git::{self, Commit};
+use miho::MihoCommand;
 use std::process::{Command, Stdio};
 
 /// Releases a new version, publishing all the public packages.
@@ -12,12 +13,11 @@ pub fn release() -> Result<()> {
   super::readme()?;
 
   if let Ok(true) = git::is_dirty() {
-    let commit_flags = GitCommit {
-      message: String::from("chore: sync readme files"),
-      no_verify: true,
-    };
-
-    git::commit(miho::Stdio::Inherit, commit_flags)?;
+    Commit::new("chore: sync readme files")
+      .no_verify()
+      .stderr(Stdio::null())
+      .stdout(Stdio::null())
+      .output()?;
   }
 
   match json::read_config().ok() {
@@ -60,7 +60,8 @@ fn create_github_release(github_token: &str) -> Result<()> {
 fn publish_to_npm() -> Result<()> {
   miho::Command::new("pnpm")
     .args(["publish", "-r", "--no-git-checks"])
-    .stdio(miho::Stdio::Inherit)
+    .stderr(Stdio::inherit())
+    .stdout(Stdio::inherit())
     .output()?;
 
   Ok(())

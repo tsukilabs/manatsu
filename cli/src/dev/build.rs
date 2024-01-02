@@ -1,7 +1,8 @@
 use super::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{anyhow, Result};
-use miho;
+use miho::{self, MihoCommand};
 use std::fs;
+use std::process::Stdio;
 use std::time::Instant;
 
 /// Build the packages.
@@ -43,7 +44,11 @@ where
 
   args.push("build");
 
-  command.args(args).stdio(miho::Stdio::Inherit).output()?;
+  command
+    .args(args)
+    .stderr(Stdio::inherit())
+    .stdout(Stdio::inherit())
+    .output()?;
 
   println!("Copying files...");
   copy_files(&packages)?;
