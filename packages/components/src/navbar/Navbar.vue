@@ -18,7 +18,7 @@ const width = useToPixel(() => props.width);
 <template>
   <header class="m-navbar" :style="style">
     <div>
-      <DynamicLink class="m-navbar-title-link" :to="titleLink">
+      <DynamicLink :to="titleLink">
         <NavbarLogo
           v-if="logo"
           class="m-navbar-logo"
@@ -58,7 +58,7 @@ const width = useToPixel(() => props.width);
 
       <div
         v-if="socialLinks && socialLinks.length > 0"
-        class="m-navbar-social-links"
+        class="m-navbar-social"
         :style="socialLinksStyle"
       >
         <IconLink
@@ -87,8 +87,14 @@ const width = useToPixel(() => props.width);
 .m-navbar > div:first-child {
   @include flex.y-center;
 
-  & > * {
+  & > :first-child {
     @include flex.y-center;
+  }
+
+  @each $name in (logo, title) {
+    .m-navbar-#{$name} {
+      @include flex.y-center;
+    }
   }
 
   .m-navbar-logo {
@@ -107,14 +113,25 @@ const width = useToPixel(() => props.width);
   gap: 1rem;
 
   & > :not(:first-child)::before {
+    margin-right: 4px;
     background-color: var(--m-color-outline);
     width: 1px;
     height: 24px;
     content: '';
   }
 
-  .m-navbar-social-links {
-    @include flex.y-center;
+  @each $name in (menu, social) {
+    .m-navbar-#{$name} {
+      @include flex.y-center;
+    }
+  }
+
+  .m-navbar-menu {
+    gap: 1.5rem;
+
+    &:not(:only-child) {
+      margin-right: 4px;
+    }
   }
 }
 </style>
