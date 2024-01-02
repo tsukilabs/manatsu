@@ -1,5 +1,6 @@
 {
   "name": "@manatsu/shared",
+  "description": "",
   "version": "0.1.60",
   "license": "MIT",
   "private": false,
