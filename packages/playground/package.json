@@ -3,6 +3,7 @@
   "version": "0.1.60",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@8.14.0",
   "homepage": "https://github.com/manatsujs/manatsu",
   "repository": {
     "type": "git",
