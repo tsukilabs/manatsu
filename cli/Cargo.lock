@@ -569,9 +569,9 @@ checksum = "523dc4f511e55ab87b694dc30d0f820d60906ef06413f93d4d7a1385599cc149"
 
 [[package]]
 name = "miho"
-version = "3.5.1"
+version = "3.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37647949301bf3d94a42a0c35ddc40335c5e34e8954d8f038c567a9de5907389"
+checksum = "3942f4cd225c7c51d0f87d64ed98803c5eb471ba2c85a74e6fdf0147973f0628"
 dependencies = [
  "anyhow",
  "clap",
@@ -582,6 +582,7 @@ dependencies = [
  "regex",
  "serde",
  "serde_json",
+ "thiserror",
  "toml",
 ]
 

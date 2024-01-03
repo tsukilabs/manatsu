@@ -1,6 +1,6 @@
 use super::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{anyhow, Result};
-use miho::{self, MihoCommand};
+use miho::util::{self, MihoCommand};
 use std::fs;
 use std::process::Stdio;
 use std::time::Instant;
@@ -13,7 +13,7 @@ where
 {
   let start = Instant::now();
 
-  let mut command = miho::Command::new("pnpm");
+  let mut command = util::Command::new("pnpm");
   let mut args = vec!["run", "--parallel"];
 
   let iter = packages.into_iter();

@@ -6,7 +6,7 @@ pub mod scaffold;
 
 use anyhow::{Context, Result};
 pub use build::build;
-use miho::{self, MihoCommand};
+use miho::util::{self, MihoCommand};
 pub use release::release;
 use std::{env, fs};
 use std::process::Stdio;
@@ -46,7 +46,7 @@ where
   let glob = glob.as_ref();
 
   println!("Formatting files...");
-  miho::Command::new("pnpm")
+  util::Command::new("pnpm")
     .args(["exec", "prettier", glob, "--write"])
     .stderr(Stdio::inherit())
     .stdout(Stdio::inherit())
@@ -62,7 +62,7 @@ where
   G: AsRef<str>,
 {
   let glob = glob.as_ref();
-  let mut cmd = miho::Command::new("pnpm");
+  let mut cmd = util::Command::new("pnpm");
   cmd.args(["exec", "eslint", "--fix"]);
 
   if let Some(args) = extra_args {
