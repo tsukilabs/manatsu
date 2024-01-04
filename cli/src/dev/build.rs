@@ -1,5 +1,5 @@
 use super::package::{self, is_standalone, PUBLIC_PACKAGES};
-use anyhow::{anyhow, Result};
+use anyhow::{bail, Result};
 use miho::win_cmd;
 use std::fs;
 use std::process::Stdio;
@@ -24,7 +24,7 @@ where
 
   let packages: Vec<String> = packages.collect();
   if packages.is_empty() {
-    return Err(anyhow!("Nothing to build"));
+    bail!("Nothing to build");
   }
 
   let filter_flag = "--filter";
@@ -38,7 +38,7 @@ where
   }
 
   if !args.contains(&filter_flag) {
-    return Err(anyhow!("Selected package(s) cannot be built"));
+    bail!("Selected package(s) cannot be built");
   }
 
   args.push("build");

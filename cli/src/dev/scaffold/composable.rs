@@ -9,8 +9,7 @@ use std::time::Instant;
 /// <https://regex101.com/r/vBQTOL>
 pub(crate) const COMPOSABLE_NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";
 
-pub fn create<T: AsRef<str>>(name: T) -> Result<()>
-{
+pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
 
   let name = name.as_ref();
@@ -76,8 +75,7 @@ where
   Ok(())
 }
 
-fn write_to_src_index<C: AsRef<str>>(camel: C) -> Result<()>
-{
+fn write_to_src_index<C: AsRef<str>>(camel: C) -> Result<()> {
   let camel = camel.as_ref();
 
   let src = package::src("composables")?;
@@ -92,8 +90,7 @@ fn write_to_src_index<C: AsRef<str>>(camel: C) -> Result<()>
 }
 
 /// Determines whether the composable name is valid.
-pub fn is_valid<T: AsRef<str>>(name: T) -> Result<bool>
-{
+pub fn is_valid<T: AsRef<str>>(name: T) -> Result<bool> {
   let name = name.as_ref();
   let regex = Regex::new(COMPOSABLE_NAME_REGEX)?;
   Ok(regex.is_match(name))

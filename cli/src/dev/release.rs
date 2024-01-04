@@ -67,10 +67,7 @@ fn publish_to_npm() -> Result<()> {
   Ok(())
 }
 
-fn publish_to_cargo<T>(manifest: T) -> Result<()>
-where
-  T: AsRef<str>,
-{
+fn publish_to_cargo<T: AsRef<str>>(manifest: T) -> Result<()> {
   let manifest = manifest.as_ref();
   Command::new("cargo")
     .args(["publish", manifest])

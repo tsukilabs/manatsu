@@ -569,9 +569,9 @@ checksum = "523dc4f511e55ab87b694dc30d0f820d60906ef06413f93d4d7a1385599cc149"
 
 [[package]]
 name = "miho"
-version = "3.7.2"
+version = "3.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be64db1590e0ac10aed6fdc7dbca017cefe6ed69a32967db49320b450e8f66bc"
+checksum = "0b7a9bcf7b1e8c7a114bd3faef3a545d935c424a4b02da6109169431e7dfefdf"
 dependencies = [
  "anyhow",
  "clap",
@@ -589,9 +589,9 @@ dependencies = [
 
 [[package]]
 name = "miho_derive"
-version = "3.7.2"
+version = "3.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8131d2eba3ebe02675cc2be0acca8be50b9f87d24d0b66613811c6dd40fd5234"
+checksum = "724b24227b46fc2334d5237921bf834a3d6427b0b0d832b31cbceb9331d9732f"
 dependencies = [
  "convert_case",
  "proc-macro2",
