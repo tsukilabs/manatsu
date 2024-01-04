@@ -1,17 +1,35 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.1.62"
+version = "0.2.0"
 description = "Manatsu plugin for Tauri"
-homepage.workspace = true
-repository.workspace = true
-authors.workspace = true
-license.workspace = true
-edition.workspace = true
-readme.workspace = true
-categories.workspace = true
+keywords = [
+    "manatsu",
+    "tauri",
+    "plugin",
+    "tauri-plugin",
+    "vue",
+]
 
-keywords = ["manatsu", "tauri", "plugin", "tauri-plugin", "vue"]
+[package.homepage]
+workspace = true
 
+[package.repository]
+workspace = true
+
+[package.authors]
+workspace = true
+
+[package.license]
+workspace = true
+
+[package.edition]
+workspace = true
+
+[package.readme]
+workspace = true
+
+[package.categories]
+workspace = true
 
 [dependencies]
 tauri = "1.5"

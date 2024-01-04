@@ -1,16 +1,35 @@
 [package]
 name = "manatsu"
-version = "0.1.62"
+version = "0.2.0"
 description = "CLI tools for Manatsu"
-homepage.workspace = true
-repository.workspace = true
-authors.workspace = true
-license.workspace = true
-edition.workspace = true
-readme.workspace = true
-categories.workspace = true
+keywords = [
+    "manatsu",
+    "vue",
+    "tauri",
+    "components",
+    "cli",
+]
 
-keywords = ["manatsu", "vue", "tauri", "components", "cli"]
+[package.homepage]
+workspace = true
+
+[package.repository]
+workspace = true
+
+[package.authors]
+workspace = true
+
+[package.license]
+workspace = true
+
+[package.edition]
+workspace = true
+
+[package.readme]
+workspace = true
+
+[package.categories]
+workspace = true
 
 [dependencies]
 anyhow = "1.0"
