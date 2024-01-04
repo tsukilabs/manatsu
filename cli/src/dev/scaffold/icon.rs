@@ -1,21 +1,18 @@
 use super::component;
 use crate::dev::{self, package};
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, bail, Result};
 use convert_case::{Case, Casing};
 use std::path::Path;
 use std::time::Instant;
 use std::{fmt, fs};
 
 /// Generates an icon template.
-pub fn create<T>(icon_type: IconType, name: T) -> Result<()>
-where
-  T: AsRef<str>,
-{
+pub fn create<T: AsRef<str>>(icon_type: IconType, name: T) -> Result<()> {
   let start = Instant::now();
 
   let name = name.as_ref();
   if !component::is_valid(name)? {
-    return Err(anyhow!("Invalid icon name: {}", name));
+    bail!("Invalid icon name: {}", name);
   }
 
   let icon_type: &str = icon_type.into();
@@ -53,7 +50,7 @@ where
 
   let path = dir.join(format!("{pascal}.vue"));
   if path.try_exists()? {
-    return Err(anyhow!("Icon {pascal} already exists"));
+    bail!("Icon {pascal} already exists");
   }
 
   let cts = "<template>\n<svg></svg>\n</template>";

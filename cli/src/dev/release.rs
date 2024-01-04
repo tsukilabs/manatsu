@@ -2,7 +2,7 @@ use super::json;
 use crate::dev::{CLI_MANIFEST, PLUGIN_MANIFEST};
 use anyhow::Result;
 use miho::git::{self, Commit};
-use miho::util::{self, MihoCommand};
+use miho::win_cmd;
 use std::process::{Command, Stdio};
 
 /// Releases a new version, publishing all the public packages.
@@ -58,7 +58,7 @@ fn create_github_release(github_token: &str) -> Result<()> {
 }
 
 fn publish_to_npm() -> Result<()> {
-  util::Command::new("pnpm")
+  win_cmd!("pnpm")
     .args(["publish", "-r", "--no-git-checks"])
     .stderr(Stdio::inherit())
     .stdout(Stdio::inherit())

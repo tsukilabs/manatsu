@@ -6,10 +6,10 @@ pub mod scaffold;
 
 use anyhow::{Context, Result};
 pub use build::build;
-use miho::util::{self, MihoCommand};
+use miho::win_cmd;
 pub use release::release;
-use std::{env, fs};
 use std::process::Stdio;
+use std::{env, fs};
 
 pub(crate) const CLI_MANIFEST: &str = "--manifest-path=cli/Cargo.toml";
 pub(crate) const PLUGIN_MANIFEST: &str = "--manifest-path=plugin/Cargo.toml";
@@ -39,14 +39,11 @@ pub fn readme() -> Result<()> {
 }
 
 /// Format files using Prettier.
-pub fn format_files<G>(glob: G) -> Result<()>
-where
-  G: AsRef<str>,
-{
+pub fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {
   let glob = glob.as_ref();
 
   println!("Formatting files...");
-  util::Command::new("pnpm")
+  win_cmd!("pnpm")
     .args(["exec", "prettier", glob, "--write"])
     .stderr(Stdio::inherit())
     .stdout(Stdio::inherit())
@@ -57,12 +54,9 @@ where
 }
 
 /// Lint files, fixing as many issues as possible.
-pub fn lint<G>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()>
-where
-  G: AsRef<str>,
-{
+pub fn lint<G: AsRef<str>>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()> {
   let glob = glob.as_ref();
-  let mut cmd = util::Command::new("pnpm");
+  let mut cmd = win_cmd!("pnpm");
   cmd.args(["exec", "eslint", "--fix"]);
 
   if let Some(args) = extra_args {

@@ -1,6 +1,6 @@
 use super::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{anyhow, Result};
-use miho::util::{self, MihoCommand};
+use miho::win_cmd;
 use std::fs;
 use std::process::Stdio;
 use std::time::Instant;
@@ -13,7 +13,6 @@ where
 {
   let start = Instant::now();
 
-  let mut command = util::Command::new("pnpm");
   let mut args = vec!["run", "--parallel"];
 
   let iter = packages.into_iter();
@@ -44,7 +43,7 @@ where
 
   args.push("build");
 
-  command
+  win_cmd!("pnpm")
     .args(args)
     .stderr(Stdio::inherit())
     .stdout(Stdio::inherit())

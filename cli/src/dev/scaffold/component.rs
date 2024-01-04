@@ -1,5 +1,5 @@
 use crate::dev::{self, package};
-use anyhow::{anyhow, Result};
+use anyhow::{bail, Result};
 use convert_case::{Case, Casing};
 use regex::Regex;
 use std::fs;
@@ -18,7 +18,7 @@ where
 
   let name = name.as_ref();
   if !is_valid(name)? {
-    return Err(anyhow!("Invalid component name: {}", name));
+    bail!("Invalid component name: {}", name);
   }
 
   let kebab = name.to_case(Case::Kebab);
@@ -28,7 +28,7 @@ where
   if !dir.try_exists()? {
     fs::create_dir_all(&dir)?;
   } else {
-    return Err(anyhow!("Component {pascal} already exists"));
+    bail!("Component {pascal} already exists");
   }
 
   write_index(&pascal, &dir)?;
@@ -46,7 +46,7 @@ where
     "@typescript-eslint/no-empty-interface: off",
     index_glob,
   ];
-  
+
   dev::lint(glob, Some(args))?;
 
   println!("Component {pascal} created in {:?}", start.elapsed());
@@ -122,10 +122,7 @@ where
   Ok(())
 }
 
-pub fn write_to_src_index<K>(kebab: K) -> Result<()>
-where
-  K: AsRef<str>,
-{
+pub fn write_to_src_index<K: AsRef<str>>(kebab: K) -> Result<()> {
   let kebab = kebab.as_ref();
 
   let src = package::src("components")?;
@@ -140,10 +137,7 @@ where
 }
 
 /// Determines whether the component name is valid.
-pub fn is_valid<T>(name: T) -> Result<bool>
-where
-  T: AsRef<str>,
-{
+pub fn is_valid<T: AsRef<str>>(name: T) -> Result<bool> {
   let name = name.as_ref();
   let regex = Regex::new(COMPONENT_NAME_REGEX)?;
   Ok(regex.is_match(name))

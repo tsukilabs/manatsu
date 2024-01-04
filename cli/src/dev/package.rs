@@ -25,10 +25,7 @@ pub fn all() -> Vec<String> {
 }
 
 /// Returns the path to a package.
-pub fn dir<P>(package: P) -> Result<PathBuf>
-where
-  P: AsRef<str>,
-{
+pub fn dir<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let cwd = env::current_dir()?;
   let path = cwd.join("packages").join(package);
@@ -36,40 +33,28 @@ where
 }
 
 /// Returns the path to the source folder of a given package.
-pub fn src<P>(package: P) -> Result<PathBuf>
-where
-  P: AsRef<str>,
-{
+pub fn src<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("src");
   Ok(path)
 }
 
 /// Returns the path to the dist folder of a given package.
-pub fn dist<P>(package: P) -> Result<PathBuf>
-where
-  P: AsRef<str>,
-{
+pub fn dist<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("dist");
   Ok(path)
 }
 
 /// Returns the path to the `index.d.ts` file of a given package.
-pub fn dts<P>(package: P) -> Result<PathBuf>
-where
-  P: AsRef<str>,
-{
+pub fn dts<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dist(package)?.join("index.d.ts");
   Ok(path)
 }
 
 /// Whether the package should be merged with the `manatsu` package.
-pub fn is_standalone<P>(package: P) -> bool
-where
-  P: AsRef<str>,
-{
+pub fn is_standalone<P: AsRef<str>>(package: P) -> bool {
   let package = package.as_ref();
   package != "components" && package != "composables"
 }

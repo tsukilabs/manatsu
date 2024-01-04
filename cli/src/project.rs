@@ -1,6 +1,6 @@
 mod template;
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use regex::Regex;
 use std::io::Cursor;
@@ -29,7 +29,7 @@ impl Project {
     let start = Instant::now();
 
     if !is_valid(&self.name)? {
-      return Err(anyhow!("Invalid project name: {}", self.name));
+      bail!("Invalid project name: {}", self.name);
     }
 
     let path = env::current_dir()?.join(&self.name);
@@ -37,7 +37,7 @@ impl Project {
       if self.force {
         fs::remove_dir_all(&path)?
       } else {
-        return Err(anyhow!("Directory already exists: {}", path.display()));
+        bail!("Directory already exists: {}", path.display());
       }
     }
 

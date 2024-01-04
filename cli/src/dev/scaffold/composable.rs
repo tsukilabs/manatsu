@@ -1,5 +1,5 @@
 use crate::dev::{self, package};
-use anyhow::{anyhow, Result};
+use anyhow::{bail, Result};
 use convert_case::{Case, Casing};
 use regex::Regex;
 use std::fs;
@@ -9,15 +9,13 @@ use std::time::Instant;
 /// <https://regex101.com/r/vBQTOL>
 pub(crate) const COMPOSABLE_NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";
 
-pub fn create<T>(name: T) -> Result<()>
-where
-  T: AsRef<str>,
+pub fn create<T: AsRef<str>>(name: T) -> Result<()>
 {
   let start = Instant::now();
 
   let name = name.as_ref();
   if !is_valid(name)? {
-    return Err(anyhow!("Invalid composable name: {}", name));
+    bail!("Invalid composable name: {}", name);
   }
 
   let camel = name.to_case(Case::Camel);
@@ -26,7 +24,7 @@ where
   if !dir.try_exists()? {
     fs::create_dir_all(&dir)?;
   } else {
-    return Err(anyhow!("Composable {camel} already exists"));
+    bail!("Composable {camel} already exists");
   }
 
   write_index(&camel, &dir)?;
@@ -78,9 +76,7 @@ where
   Ok(())
 }
 
-fn write_to_src_index<C>(camel: C) -> Result<()>
-where
-  C: AsRef<str>,
+fn write_to_src_index<C: AsRef<str>>(camel: C) -> Result<()>
 {
   let camel = camel.as_ref();
 
@@ -96,9 +92,7 @@ where
 }
 
 /// Determines whether the composable name is valid.
-pub fn is_valid<T>(name: T) -> Result<bool>
-where
-  T: AsRef<str>,
+pub fn is_valid<T: AsRef<str>>(name: T) -> Result<bool>
 {
   let name = name.as_ref();
   let regex = Regex::new(COMPOSABLE_NAME_REGEX)?;
