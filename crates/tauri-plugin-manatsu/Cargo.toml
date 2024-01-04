@@ -1,0 +1,17 @@
+[package]
+name = "tauri-plugin-manatsu"
+version = "0.1.62"
+description = "Manatsu plugin for Tauri"
+homepage.workspace = true
+repository.workspace = true
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+readme.workspace = true
+categories.workspace = true
+
+keywords = ["manatsu", "tauri", "plugin", "tauri-plugin", "vue"]
+
+
+[dependencies]
+tauri = "1.5"

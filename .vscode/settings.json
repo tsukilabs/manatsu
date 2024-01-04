@@ -3,6 +3,11 @@
     { "icon": "theme", "extensions": ["composables"], "format": "svg" },
     { "icon": "aurelia", "extensions": ["manatsu"], "format": "svg" },
     {
+      "icon": "plugin",
+      "extensions": ["tauri-plugin-manatsu"],
+      "format": "svg"
+    },
+    {
       "icon": "images",
       "extensions": ["images", "icons"],
       "format": "svg",
@@ -33,8 +38,7 @@
   },
   "rust-analyzer.showUnlinkedFileNotification": false,
   "rust-analyzer.linkedProjects": [
-    "cli/Cargo.toml",
-    "plugin/Cargo.toml",
+    "Cargo.toml",
     "packages/playground/src-tauri/Cargo.toml"
   ],
   "stylelint.snippet": ["css", "less", "postcss", "scss", "vue"],

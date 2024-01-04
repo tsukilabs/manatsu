@@ -11,9 +11,6 @@ pub use release::release;
 use std::process::Stdio;
 use std::{env, fs};
 
-pub(crate) const CLI_MANIFEST: &str = "--manifest-path=cli/Cargo.toml";
-pub(crate) const PLUGIN_MANIFEST: &str = "--manifest-path=plugin/Cargo.toml";
-
 /// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {
   let filename = "README.md";
@@ -25,13 +22,6 @@ pub fn readme() -> Result<()> {
     let dest_readme = package::dir(pkg)?.join(filename);
     fs::copy(&src_readme, &dest_readme)?;
     println!("Copied: {}", dest_readme.display());
-  }
-
-  let crates = ["cli", "plugin"];
-  for cr in crates {
-    let cr_readme = cwd.join(cr).join(filename);
-    fs::copy(&src_readme, &cr_readme)?;
-    println!("Copied: {}", cr_readme.display());
   }
 
   println!("Done!");

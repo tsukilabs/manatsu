@@ -1,5 +1,4 @@
 use super::json;
-use crate::dev::{CLI_MANIFEST, PLUGIN_MANIFEST};
 use anyhow::Result;
 use miho::git::{self, Commit};
 use miho::win_cmd;
@@ -24,8 +23,7 @@ pub fn release() -> Result<()> {
     Some(cfg) if cfg.github => create_github_release(&cfg.github_token)?,
     _ => {
       publish_to_npm()?;
-      publish_to_cargo(CLI_MANIFEST)?;
-      publish_to_cargo(PLUGIN_MANIFEST)?;
+      publish_to_cargo()?;
     }
   }
 
@@ -67,13 +65,15 @@ fn publish_to_npm() -> Result<()> {
   Ok(())
 }
 
-fn publish_to_cargo<T: AsRef<str>>(manifest: T) -> Result<()> {
-  let manifest = manifest.as_ref();
-  Command::new("cargo")
-    .args(["publish", manifest])
-    .stderr(Stdio::inherit())
-    .stdout(Stdio::inherit())
-    .output()?;
+fn publish_to_cargo() -> Result<()> {
+  let crates = ["manatsu", "tauri-plugin-manatsu"];
+  for crate_name in crates {
+    Command::new("cargo")
+      .args(["publish", "-p", crate_name])
+      .stderr(Stdio::inherit())
+      .stdout(Stdio::inherit())
+      .output()?;
+  }
 
   Ok(())
 }

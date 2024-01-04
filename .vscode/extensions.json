@@ -7,11 +7,11 @@
     "dbaeumer.vscode-eslint",
     "vue.vscode-typescript-vue-plugin",
     "donjayamanne.githistory",
-    "vue.volar",
     "redhat.vscode-yaml",
-    "rust-lang.rust-analyzer",
     "tamasfe.even-better-toml",
     "vivaxy.vscode-conventional-commits",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "tauri-apps.tauri-vscode",
+    "mhutchie.git-graph"
   ]
 }
