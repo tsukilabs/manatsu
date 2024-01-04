@@ -15,7 +15,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install
-      - run: pnpm run clippy:cli
+      - run: pnpm run clippy:manatsu
       - run: pnpm run test
 
   publish-npm:
@@ -29,8 +29,8 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
       - run: pnpm install
-      - run: pnpm cli dev build
-      - run: pnpm cli dev release
+      - run: pnpm run cli dev build
+      - run: pnpm run cli dev release
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
