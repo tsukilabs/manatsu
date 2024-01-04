@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     labels:
-      - "dependencies"
+      - 'dependencies'
       - 'typescript'
     schedule:
       interval: 'daily'
@@ -11,7 +11,7 @@ updates:
   - package-ecosystem: 'cargo'
     directory: '/'
     labels:
-      - "dependencies"
+      - 'dependencies'
       - 'rust'
     schedule:
       interval: 'daily'
@@ -19,7 +19,7 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     labels:
-      - "dependencies"
+      - 'dependencies'
       - 'github actions'
     schedule:
       interval: 'weekly'
