@@ -44,7 +44,7 @@
     "@vitejs/plugin-vue": "^5.0.2",
     "@vitest/browser": "1.1.1",
     "@vitest/coverage-istanbul": "1.1.1",
-    "@vitest/ui": "1.1.1",
+    "@vitest/ui": "1.1.2",
     "@vue/test-utils": "^2.4.3",
     "@vueuse/core": "^10.7.1",
     "eslint": "^8.56.0",
