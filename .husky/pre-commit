@@ -4,4 +4,5 @@
 nr clippy
 nr test
 nr lint
+cargo fmt
 pnpm exec lint-staged
