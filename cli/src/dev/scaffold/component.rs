@@ -33,7 +33,7 @@ where
 
   write_index(&pascal, &dir)?;
   write_typings(&pascal, &dir)?;
-  write_vue(&pascal, &dir)?;
+  write_vue(&kebab, &pascal, &dir)?;
   write_test(&kebab, &pascal, dir)?;
   write_to_src_index(&kebab)?;
 
@@ -82,18 +82,19 @@ where
   Ok(())
 }
 
-fn write_vue<P, D>(pascal: P, dir: D) -> Result<()>
+fn write_vue<P, D>(kebab: P, pascal: P, dir: D) -> Result<()>
 where
   P: AsRef<str>,
   D: AsRef<Path>,
 {
+  let kebab = kebab.as_ref();
   let pascal = pascal.as_ref();
 
   let mut cts = String::from("<script setup lang=\"ts\">\n");
   cts.push_str(format!("import type {{ {pascal}Props }} from './types';\n\n").as_str());
   cts.push_str(format!("defineProps<{pascal}Props>();\n").as_str());
   cts.push_str("</script>\n\n");
-  cts.push_str("<template>\n<div></div>\n</template>\n\n");
+  cts.push_str(format!("<template>\n<div class=\"m-{kebab}\"></div>\n</template>\n\n").as_str());
   cts.push_str("<style scoped lang=\"scss\"></style>");
 
   let dir = dir.as_ref();

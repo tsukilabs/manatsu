@@ -2,7 +2,7 @@
   "build": {
     "beforeBuildCommand": "nr build",
     "beforeDevCommand": "nr dev",
-    "devPath": "http://localhost:5175",
+    "devPath": "http://localhost:1420",
     "distDir": "../dist"
   },
   "package": {
@@ -15,7 +15,7 @@
     },
     "bundle": {
       "active": false,
-      "identifier": "manatsu.playground",
+      "identifier": "com.manatsu.dev",
       "icon": ["icons/icon.ico"]
     },
     "security": {

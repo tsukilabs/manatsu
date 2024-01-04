@@ -2,15 +2,24 @@ version: 2
 updates:
   - package-ecosystem: 'npm'
     directory: '/'
+    labels:
+      - "dependencies"
+      - 'typescript'
     schedule:
       interval: 'daily'
 
   - package-ecosystem: 'cargo'
     directory: '/'
+    labels:
+      - "dependencies"
+      - 'rust'
     schedule:
       interval: 'daily'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
+    labels:
+      - "dependencies"
+      - 'github actions'
     schedule:
       interval: 'weekly'

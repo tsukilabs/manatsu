@@ -1,6 +1,6 @@
 mod template;
 
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{bail, Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use regex::Regex;
 use std::io::Cursor;
@@ -24,6 +24,7 @@ pub struct Project {
 impl Project {
   /// Create a new Manatsu project from a template.
   ///
+  /// Tauri: <https://github.com/manatsujs/template-tauri>
   /// Vue: <https://github.com/manatsujs/template-vue>
   pub fn create(&self) -> Result<()> {
     let start = Instant::now();
@@ -93,15 +94,19 @@ fn find_extracted_folder(path: &Path, template: Template) -> Result<PathBuf> {
     remove_entry(&entry_path)?;
   }
 
-  Err(anyhow!("Could not find extracted folder"))
+  bail!("Could not find extracted folder")
 }
 
 fn build_globset() -> Result<GlobSet> {
   let mut builder = GlobSetBuilder::new();
 
-  builder.add(Glob::new("**/node_modules")?);
+  // Directories
   builder.add(Glob::new("**/dist")?);
+  builder.add(Glob::new("**/target")?);
+  builder.add(Glob::new("**/node_modules")?);
   builder.add(Glob::new("**/.github")?);
+
+  // Files
   builder.add(Glob::new("**/LICENSE")?);
   builder.add(Glob::new("**/README.md")?);
   builder.add(Glob::new("**/pnpm-lock.yaml")?);
@@ -124,10 +129,7 @@ fn remove_entry(path: &Path) -> Result<()> {
 }
 
 /// Determines whether the project name is valid.
-pub fn is_valid<T>(project_name: T) -> Result<bool>
-where
-  T: AsRef<str>,
-{
+pub fn is_valid<T: AsRef<str>>(project_name: T) -> Result<bool> {
   let project_name = project_name.as_ref();
   let regex = Regex::new(PROJECT_NAME_REGEX)?;
   Ok(regex.is_match(project_name))

@@ -1,6 +1,6 @@
 use super::component;
 use crate::dev::{self, package};
-use anyhow::{anyhow, bail, Result};
+use anyhow::{bail, Result};
 use convert_case::{Case, Casing};
 use std::path::Path;
 use std::time::Instant;
@@ -86,10 +86,12 @@ impl TryFrom<&str> for IconType {
 
   fn try_from(value: &str) -> Result<Self> {
     let value = value.to_lowercase();
-    match value.as_str() {
-      "social" => Ok(IconType::Social),
-      _ => Err(anyhow!("\"{}\" is not a valid icon type", value)),
-    }
+    let icon_type = match value.as_str() {
+      "social" => IconType::Social,
+      _ => bail!("\"{}\" is not a valid icon type", value),
+    };
+
+    Ok(icon_type)
   }
 }
 
@@ -97,26 +99,6 @@ impl From<IconType> for &str {
   fn from(icon_type: IconType) -> Self {
     match icon_type {
       IconType::Social => "social",
-    }
-  }
-}
-
-impl TryFrom<String> for IconType {
-  type Error = anyhow::Error;
-
-  fn try_from(value: String) -> Result<Self> {
-    let value = value.to_lowercase();
-    match value.as_str() {
-      "social" => Ok(IconType::Social),
-      _ => Err(anyhow!("\"{}\" is not a valid icon type", value)),
-    }
-  }
-}
-
-impl From<IconType> for String {
-  fn from(icon_type: IconType) -> Self {
-    match icon_type {
-      IconType::Social => String::from("social"),
     }
   }
 }

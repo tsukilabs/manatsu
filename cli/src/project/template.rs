@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use convert_case::{Case, Casing};
 use std::fmt;
 use std::io::Read;
@@ -7,6 +7,7 @@ use ureq::Response;
 
 #[derive(Clone, Copy)]
 pub enum Template {
+  Tauri,
   Vue,
 }
 
@@ -50,14 +51,26 @@ impl Template {
 }
 
 impl From<Template> for &str {
-  fn from(_: Template) -> Self {
-    "template-vue"
+  fn from(template: Template) -> Self {
+    match template {
+      Template::Tauri => "template-tauri",
+      Template::Vue => "template-vue",
+    }
   }
 }
 
-impl<T: AsRef<str>> From<T> for Template {
-  fn from(_: T) -> Self {
-    Template::Vue
+impl TryFrom<&str> for Template {
+  type Error = anyhow::Error;
+
+  fn try_from(value: &str) -> Result<Self> {
+    let value = value.trim().to_lowercase();
+    let template = match value.as_str() {
+      "template-tauri" => Template::Tauri,
+      "template-vue" => Template::Vue,
+      _ => bail!(format!("{value} is not a valid template name")),
+    };
+
+    Ok(template)
   }
 }
 

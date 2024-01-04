@@ -53,7 +53,7 @@ impl ManatsuCommand for CreateCommand {
 
     let description = Text::new("Description").prompt_skippable()?;
 
-    let options = vec![Template::Vue];
+    let options = vec![Template::Tauri, Template::Vue];
     let template = Select::new("Select a template", options).prompt()?;
 
     let project = Project {
