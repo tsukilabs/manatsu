@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/shared",
-  "description": "",
+  "description": "Utilities for Manatsu",
   "version": "0.2.1",
   "license": "MIT",
   "private": false,
