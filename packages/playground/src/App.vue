@@ -1,47 +1,49 @@
 <script setup lang="ts">
-import { h } from 'vue';
+import { inject, ref } from 'vue';
+import { darkModeKey } from 'manatsu/src/index.ts';
 import {
-  Discord,
-  Facebook,
-  GitHub,
-  Instagram,
-  Twitter
-} from '@manatsu/icons/src/index.ts';
-import {
-  type IconLinkProps,
+  MBrand,
+  MButton,
+  MDynamicLink,
   MNavbar,
   MScaffold,
   type NavbarMenuItem
 } from '@manatsu/components/src/index.ts';
 import peach from '/peach.png';
 
-const socialLinks: IconLinkProps[] = [
-  { icon: () => h(GitHub), to: 'https://github.com/manatsujs/manatsu' },
-  { icon: () => h(Discord), to: 'https://example.com/1' },
-  { icon: () => h(Facebook), to: 'https://example.com/2' },
-  { icon: () => h(Instagram), to: 'https://example.com/3' },
-  { icon: () => h(Twitter), to: 'https://example.com/4' }
-];
+const darkMode = inject(darkModeKey, () => ref<boolean | 'auto'>(false), true);
 
 const menuItems: NavbarMenuItem[] = [
-  { key: 'first', label: () => h('div', 'First item') },
+  { key: 'first', label: 'First item' },
   { key: 'second', label: 'Second item', to: 'https://example.com' },
   { key: 'third', label: 'Third item' }
 ];
+
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
+}
 </script>
 
 <template>
   <MScaffold>
     <template #header>
-      <MNavbar
-        title-link="/"
-        :social-links="socialLinks"
-        :menu-items="menuItems"
-      >
-        <template #logo>
-          <img :src="peach" />
+      <MNavbar :menu-items="menuItems">
+        <template #start>
+          <MBrand title-link="/">
+            <template #logo>
+              <img :src="peach" />
+            </template>
+            <template #title>Manatsu</template>
+          </MBrand>
         </template>
-        <template #title>Manatsu</template>
+
+        <template #item="{ label, to }">
+          <MDynamicLink :to="to">{{ label }}</MDynamicLink>
+        </template>
+
+        <template #end>
+          <MButton outlined @click="toggleDarkMode">Action</MButton>
+        </template>
       </MNavbar>
     </template>
 

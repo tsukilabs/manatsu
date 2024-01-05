@@ -1,22 +1,10 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue';
-import { darkModeKey } from 'manatsu/src/index.ts';
 import { MButton, MInput } from '@manatsu/components/src/index.ts';
 import LoremIpsum from './LoremIpsum.vue';
-
-const darkMode = inject(darkModeKey, () => ref<boolean | 'auto'>(false), true);
-
-function toggleDarkMode() {
-  darkMode.value = !darkMode.value;
-}
 </script>
 
 <template>
   <main>
-    <div class="dark-mode">
-      <span>Dark mode: {{ darkMode }}</span>
-      <MButton @click="toggleDarkMode">Toggle</MButton>
-    </div>
     <div>
       <MButton>Button</MButton>
       <MButton outlined>Outlined</MButton>
@@ -38,12 +26,6 @@ main {
 
 main > div {
   display: flex;
-  gap: 1rem;
-}
-
-.dark-mode {
-  display: flex;
-  align-items: center;
   gap: 1rem;
 }
 </style>

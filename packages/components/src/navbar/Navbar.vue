@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { VNode } from 'vue';
 import { useToPixel } from '@manatsu/composables/src/index.ts';
-import type { NavbarProps } from './types';
-import IconLink from '../link/IconLink.vue';
-import DynamicLink from '../link/DynamicLink.vue';
+import type { NavbarMenuItem, NavbarProps } from './types';
 
 const props = withDefaults(defineProps<NavbarProps>(), {
   height: '60px',
@@ -11,8 +9,9 @@ const props = withDefaults(defineProps<NavbarProps>(), {
 });
 
 defineSlots<{
-  logo?: () => VNode;
-  title?: () => VNode;
+  end?: () => VNode;
+  item?: (props: NavbarMenuItem) => VNode;
+  start?: () => VNode;
 }>();
 
 const height = useToPixel(() => props.height);
@@ -21,19 +20,11 @@ const width = useToPixel(() => props.width);
 
 <template>
   <header class="m-navbar" :style="style">
-    <div class="m-navbar-brand">
-      <DynamicLink :to="titleLink">
-        <div v-if="$slots.logo" class="m-navbar-logo" :style="logoStyle">
-          <slot name="logo"></slot>
-        </div>
-
-        <div v-if="$slots.title" class="m-navbar-title" :style="titleStyle">
-          <slot name="title"></slot>
-        </div>
-      </DynamicLink>
+    <div v-if="$slots.start" class="m-navbar-start" :style="startStyle">
+      <slot name="start"></slot>
     </div>
 
-    <div class="m-navbar-content">
+    <div class="m-navbar-content" :style="contentStyle">
       <nav
         v-if="menuItems && menuItems.length > 0"
         class="m-navbar-menu"
@@ -43,29 +34,13 @@ const width = useToPixel(() => props.width);
           v-for="item of menuItems"
           :key="item.key"
           class="m-navbar-menu-item"
-          role="none"
         >
-          <DynamicLink :to="item.to">
-            <component
-              :is="item.label"
-              v-if="typeof item.label === 'function'"
-            />
-            <span v-else>{{ item.label }}</span>
-          </DynamicLink>
+          <slot name="item" v-bind="item"></slot>
         </div>
       </nav>
 
-      <div
-        v-if="socialLinks && socialLinks.length > 0"
-        class="m-navbar-social"
-        :style="socialStyle"
-      >
-        <IconLink
-          v-for="link of socialLinks"
-          :key="link.to"
-          :to="link.to"
-          :icon="link.icon"
-        />
+      <div v-if="$slots.end" class="m-navbar-end" :style="endStyle">
+        <slot name="end"></slot>
       </div>
     </div>
   </header>
@@ -81,57 +56,22 @@ const width = useToPixel(() => props.width);
   height: v-bind('height');
   user-select: none;
   white-space: nowrap;
-}
 
-.m-navbar-brand {
-  @include flex.y-center;
-
-  /** Make the dynamic-link flex. */
-  & > :first-child {
-    @include flex.y-center;
-  }
-
-  @each $name in (logo, title) {
+  @each $name in (start, menu, end) {
     .m-navbar-#{$name} {
       @include flex.y-center;
     }
-  }
-
-  .m-navbar-logo {
-    margin: 0 8px 0 0;
-  }
-
-  .m-navbar-title {
-    font-weight: 600;
-    font-size: 1.5rem;
   }
 }
 
 .m-navbar-content {
   @include flex.x-end;
   flex: 1 1 auto;
-  gap: 1rem;
-
-  & > :not(:first-child)::before {
-    margin-right: 4px;
-    background-color: var(--m-color-outline);
-    width: 1px;
-    height: 24px;
-    content: '';
-  }
-
-  @each $name in (menu, social) {
-    .m-navbar-#{$name} {
-      @include flex.y-center;
-    }
-  }
+  gap: 1.5rem;
 
   .m-navbar-menu {
+    @include flex.y-center;
     gap: 1.5rem;
-
-    &:not(:only-child) {
-      margin-right: 4px;
-    }
   }
 }
 </style>

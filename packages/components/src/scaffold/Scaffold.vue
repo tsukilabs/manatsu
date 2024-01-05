@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import type { VNode } from 'vue';
 import type { ScaffoldProps } from './types';
 
 defineProps<ScaffoldProps>();
+
+defineSlots<{
+  default?: () => VNode;
+  header?: () => VNode;
+}>();
 </script>
 
 <template>
