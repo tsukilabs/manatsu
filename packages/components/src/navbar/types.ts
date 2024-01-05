@@ -1,25 +1,14 @@
-import type { StyleValue, VNodeChild } from 'vue';
+import type { StyleValue, VNode } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 import type { IconLinkProps } from '../link';
 
-export interface NavbarLogoProps {
-  logo: string | (() => VNodeChild);
-}
-
-export interface NavbarTitleProps {
-  title: string | (() => VNodeChild);
-}
-
 export interface NavbarMenuItem {
   key: string;
-  label: string | (() => VNodeChild);
+  label: string | (() => VNode);
   to?: RouteLocationRaw;
 }
 
-export type NavbarChildrenProps = Partial<NavbarLogoProps> &
-  Partial<NavbarTitleProps>;
-
-export interface NavbarProps extends NavbarChildrenProps {
+export interface NavbarProps {
   height?: string | number;
   logoStyle?: StyleValue;
   menuItems?: NavbarMenuItem[];

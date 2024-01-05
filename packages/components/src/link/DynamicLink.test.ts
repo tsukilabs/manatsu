@@ -29,7 +29,6 @@ describe('dynamic-link', () => {
     const wrapper = mount(DynamicLink, {
       props: { to: '/' },
       global: {
-        // @ts-expect-error vue@3.4
         plugins: [router]
       }
     });

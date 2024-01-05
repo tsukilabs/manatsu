@@ -64,8 +64,9 @@
     "typescript": "5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-dts": "^3.7.0",
+    "vite-plugin-vue-devtools": "^7.0.5",
     "vitest": "1.1.2",
-    "vue": "^3.4.5",
+    "vue": "~3.3.13",
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.27",
     "webdriverio": "^8.27.0"

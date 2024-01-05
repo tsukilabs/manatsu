@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import type { VNode } from 'vue';
 import { useToPixel } from '@manatsu/composables/src/index.ts';
-import NavbarLogo from './NavbarLogo.vue';
 import type { NavbarProps } from './types';
-import NavbarTitle from './NavbarTitle.vue';
 import IconLink from '../link/IconLink.vue';
 import DynamicLink from '../link/DynamicLink.vue';
 
@@ -11,26 +10,26 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   width: '100%'
 });
 
+defineSlots<{
+  logo?: () => VNode;
+  title?: () => VNode;
+}>();
+
 const height = useToPixel(() => props.height);
 const width = useToPixel(() => props.width);
 </script>
 
 <template>
   <header class="m-navbar" :style="style">
-    <div>
+    <div class="m-navbar-brand">
       <DynamicLink :to="titleLink">
-        <NavbarLogo
-          v-if="logo"
-          class="m-navbar-logo"
-          :logo="logo"
-          :style="logoStyle"
-        />
-        <NavbarTitle
-          v-if="title"
-          class="m-navbar-title"
-          :title="title"
-          :style="titleStyle"
-        />
+        <div v-if="$slots.logo" class="m-navbar-logo" :style="logoStyle">
+          <slot name="logo"></slot>
+        </div>
+
+        <div v-if="$slots.title" class="m-navbar-title" :style="titleStyle">
+          <slot name="title"></slot>
+        </div>
       </DynamicLink>
     </div>
 
@@ -51,7 +50,7 @@ const width = useToPixel(() => props.width);
               :is="item.label"
               v-if="typeof item.label === 'function'"
             />
-            <span v-else>{{ item.label ?? item.key }}</span>
+            <span v-else>{{ item.label }}</span>
           </DynamicLink>
         </div>
       </nav>
@@ -84,9 +83,10 @@ const width = useToPixel(() => props.width);
   white-space: nowrap;
 }
 
-.m-navbar > div:first-child {
+.m-navbar-brand {
   @include flex.y-center;
 
+  /** Make the dynamic-link flex. */
   & > :first-child {
     @include flex.y-center;
   }

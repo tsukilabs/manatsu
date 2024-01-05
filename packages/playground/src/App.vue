@@ -34,12 +34,15 @@ const menuItems: NavbarMenuItem[] = [
   <MScaffold>
     <template #header>
       <MNavbar
-        title="Title"
         title-link="/"
-        :logo="peach"
         :social-links="socialLinks"
         :menu-items="menuItems"
-      />
+      >
+        <template #logo>
+          <img :src="peach" />
+        </template>
+        <template #title>Manatsu</template>
+      </MNavbar>
     </template>
 
     <RouterView />
