@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<NavbarProps>(), {
 
 defineSlots<{
   end?: () => VNode;
-  item?: (props: NavbarMenuItem) => VNode;
+  'menu-item'?: (props: NavbarMenuItem) => VNode;
   start?: () => VNode;
 }>();
 
@@ -34,8 +34,9 @@ const width = useToPixel(() => props.width);
           v-for="item of menuItems"
           :key="item.key"
           class="m-navbar-menu-item"
+          :style="menuItemStyle"
         >
-          <slot name="item" v-bind="item"></slot>
+          <slot name="menu-item" v-bind="item"></slot>
         </div>
       </nav>
 

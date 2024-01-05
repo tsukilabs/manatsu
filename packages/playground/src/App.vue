@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { useDarkMode } from '@manatsu/composables/src/index.ts';
 import {
   MBrand,
   MButton,
   MDynamicLink,
   MNavbar,
   MScaffold,
-  type NavbarMenuItem
+  type NavbarMenuItem,
+  type SidebarItem
 } from '@manatsu/components/src/index.ts';
 import peach from '/peach.png';
-
-const darkMode = useDarkMode();
 
 const menuItems: NavbarMenuItem[] = [
   { key: 'first', label: 'First item' },
@@ -18,13 +16,15 @@ const menuItems: NavbarMenuItem[] = [
   { key: 'third', label: 'Third item' }
 ];
 
-function toggleDarkMode() {
-  darkMode.value = !darkMode.value;
-}
+const sidebarItems: SidebarItem[] = [
+  { key: 'first' },
+  { key: 'second' },
+  { key: 'third' }
+];
 </script>
 
 <template>
-  <MScaffold>
+  <MScaffold :sidebar-items="sidebarItems">
     <template #header>
       <MNavbar :menu-items="menuItems">
         <template #start>
@@ -36,14 +36,18 @@ function toggleDarkMode() {
           </MBrand>
         </template>
 
-        <template #item="{ label, to }">
+        <template #menu-item="{ label, to }">
           <MDynamicLink :to="to">{{ label }}</MDynamicLink>
         </template>
 
         <template #end>
-          <MButton outlined @click="toggleDarkMode">Action</MButton>
+          <MButton outlined @click="$mana.toggleDarkMode">Action</MButton>
         </template>
       </MNavbar>
+    </template>
+
+    <template #sidebar-item="{ key }">
+      <div>{{ key }}</div>
     </template>
 
     <RouterView />

@@ -10,10 +10,15 @@
   }
 }
 
-/* Justify content and align items. */
-@mixin center($inline: false) {
+/* X axis */
+@mixin x-around($inline: false) {
   $display: if($inline, inline-flex, flex);
-  @include -flex($display, $justify: center, $items: center);
+  @include -flex($display, $justify: space-around);
+}
+
+@mixin x-between($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: space-between);
 }
 
 @mixin x-center($inline: false) {
@@ -26,12 +31,69 @@
   @include -flex($display, $justify: flex-end);
 }
 
-@mixin x-between-y-center($inline: false) {
+@mixin x-evenly($inline: false) {
   $display: if($inline, inline-flex, flex);
-  @include -flex($display, $justify: space-between, $items: center);
+  @include -flex($display, $justify: space-evenly);
+}
+
+@mixin x-start($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-start);
+}
+
+@mixin x-stretch($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: stretch);
+}
+
+/* Y axis */
+@mixin y-baseline($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $items: baseline);
 }
 
 @mixin y-center($inline: false) {
   $display: if($inline, inline-flex, flex);
   @include -flex($display, $items: center);
+}
+
+@mixin y-end($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $items: flex-end);
+}
+
+@mixin y-start($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $items: flex-start);
+}
+
+@mixin y-stretch($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $items: stretch);
+}
+
+/* Both axes */
+@mixin center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: center, $items: center);
+}
+
+@mixin end($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-end, $items: flex-end);
+}
+
+@mixin start($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-start, $items: flex-start);
+}
+
+@mixin x-between-y-center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: space-between, $items: center);
+}
+
+@mixin x-start-y-stretch($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-start, $items: stretch);
 }

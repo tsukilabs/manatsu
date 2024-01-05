@@ -1,11 +1,63 @@
-import { join } from 'node:path';
-import dts from 'vite-plugin-dts';
+import { basename, join } from 'node:path';
+import { writeFile } from 'node:fs/promises';
+import prettier from 'prettier';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import dts, { type PluginOptions as DtsPluginOptions } from 'vite-plugin-dts';
+
+const dtsOptions: DtsPluginOptions = {
+  rollupTypes: true,
+  afterBuild: async (map) => {
+    const indexDts = Array.from(map).find(([filePath]) => {
+      return basename(filePath) === 'index.d.ts';
+    });
+
+    if (!indexDts) {
+      throw new Error('Could not find index.d.ts file.');
+    }
+
+    let [filePath, content] = indexDts;
+
+    // https://regex101.com/r/LomJCS
+    const packageRegex = /@manatsu\/([a-z]+)\/src\/index\.ts/gm;
+    content = content.replace(packageRegex, './$1');
+
+    if (!content.includes('ComponentCustomProperties')) {
+      const moduleDeclaration = `
+      declare module 'vue' {
+        interface ComponentCustomProperties {
+          $mana: import("@manatsu/shared").ManatsuGlobal;
+        }
+      }
+      
+      export {}`;
+
+      // https://regex101.com/r/ZIMPlK
+      const emptyExportRegex = /export\s*{\s*};?/gm;
+      content = content.replace(emptyExportRegex, moduleDeclaration);
+    }
+
+    content = await prettier.format(content, {
+      parser: 'babel-ts',
+      printWidth: 80,
+      tabWidth: 2,
+      useTabs: false,
+      endOfLine: 'lf',
+      semi: true,
+      singleQuote: false,
+      trailingComma: 'none',
+      bracketSpacing: true,
+      bracketSameLine: false,
+      arrowParens: 'always'
+    });
+
+    await writeFile(filePath, content);
+  }
+};
 
 export default defineConfig({
   root: __dirname,
-  plugins: [vue({ script: { defineModel: true } }), dts({ rollupTypes: true })],
+  plugins: [vue({ script: { defineModel: true } }), dts(dtsOptions)],
   build: {
     outDir: 'dist',
     emptyOutDir: true,

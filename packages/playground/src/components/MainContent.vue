@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GitHub } from '@manatsu/icons/src/index.ts';
+import { Discord, GitHub } from '@manatsu/icons/src/index.ts';
 import { MButton, MIcon, MInput } from '@manatsu/components/src/index.ts';
 import LoremIpsum from './LoremIpsum.vue';
 </script>
@@ -8,8 +8,7 @@ import LoremIpsum from './LoremIpsum.vue';
   <main>
     <div>
       <MIcon :component="GitHub" />
-      <MIcon><GitHub /></MIcon>
-      <MIcon :component="GitHub"><GitHub /></MIcon>
+      <MIcon><Discord /></MIcon>
     </div>
     <div>
       <MButton>Button</MButton>
@@ -19,7 +18,8 @@ import LoremIpsum from './LoremIpsum.vue';
     <div>
       <MInput placeholder="Text field" />
     </div>
-    <LoremIpsum :paragraphs="3" />
+
+    <LoremIpsum v-for="n of 5" :key="n" :paragraphs="3" />
   </main>
 </template>
 

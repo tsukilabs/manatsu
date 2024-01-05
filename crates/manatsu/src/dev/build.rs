@@ -52,9 +52,6 @@ where
   println!("Copying files...");
   copy_files(&packages)?;
 
-  println!("Fixing type exports...");
-  fix_exports(&packages)?;
-
   println!("Built in {:?}", start.elapsed());
   Ok(())
 }
@@ -81,19 +78,3 @@ fn copy_files(packages: &Vec<String>) -> Result<()> {
   Ok(())
 }
 
-fn fix_exports(packages: &Vec<String>) -> Result<()> {
-  let dts = package::dts("manatsu")?;
-  let mut content = fs::read_to_string(&dts)?;
-
-  for pkg in packages {
-    if !is_standalone(pkg) {
-      content = content.replace(
-        format!("@manatsu/{pkg}/src/index.ts").as_str(),
-        format!("./{pkg}").as_str(),
-      );
-    }
-  }
-
-  fs::write(dts, content)?;
-  Ok(())
-}
