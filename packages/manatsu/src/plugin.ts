@@ -1,6 +1,5 @@
 import { type Plugin, ref } from 'vue';
-import { darkModeKey } from '@manatsu/shared/src/symbol.ts';
-import type { ManatsuOptions } from '@manatsu/shared/src/types.ts';
+import { type ManatsuOptions, darkModeKey } from '@manatsu/shared';
 
 export function createManatsu(options: ManatsuOptions = {}): Plugin {
   const manatsu: Plugin = {

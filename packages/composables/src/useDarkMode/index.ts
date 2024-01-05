@@ -1,6 +1,5 @@
 import { usePreferredDark } from '@vueuse/core';
-import { darkModeKey } from '@manatsu/shared/src/symbol.ts';
-import type { ManatsuOptions } from '@manatsu/shared/src/types.ts';
+import { type ManatsuOptions, darkModeKey } from '@manatsu/shared';
 import { type Ref, hasInjectionContext, inject, ref, watchEffect } from 'vue';
 
 export function useDarkMode() {
