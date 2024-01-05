@@ -1,6 +1,6 @@
 [package]
 name = "playground"
-version = "0.2.1"
+version = "0.2.2"
 description = "Manatsu playground"
 homepage = "https://github.com/manatsujs/manatsu"
 repository = "https://github.com/manatsujs/manatsu"

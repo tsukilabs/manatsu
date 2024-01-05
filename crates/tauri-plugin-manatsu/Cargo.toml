@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.2.1"
+version = "0.2.2"
 description = "Manatsu plugin for Tauri"
 keywords = [
     "manatsu",
