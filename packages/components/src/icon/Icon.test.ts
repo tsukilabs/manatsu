@@ -8,15 +8,8 @@ enableAutoUnmount(afterEach);
 
 describe('icon', () => {
   it('should render icon', () => {
-    const wrapper = mount(Icon, { props: { icon: () => h(GitHub) } });
+    const wrapper = mount(Icon, { slots: { default: () => h(GitHub) } });
 
     expect(wrapper.find('svg').exists()).toBe(true);
-  });
-
-  it('should use render function', () => {
-    const wrapper = mount(Icon, { props: { icon: () => h('img') } });
-
-    expect(wrapper.find('svg').exists()).toBe(false);
-    expect(wrapper.find('img').exists()).toBe(true);
   });
 });

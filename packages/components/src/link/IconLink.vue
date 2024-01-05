@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { VNode } from 'vue';
 import { useToPixel } from '@manatsu/composables/src/index.ts';
 import Icon from '../icon/Icon.vue';
 import DynamicLink from './DynamicLink.vue';
@@ -9,13 +10,17 @@ const props = withDefaults(defineProps<IconLinkProps>(), {
   width: '36px'
 });
 
+defineSlots<{ default: () => VNode }>();
+
 const height = useToPixel(() => props.height);
 const width = useToPixel(() => props.width);
 </script>
 
 <template>
   <DynamicLink class="m-icon-link" :style="style" :to="to">
-    <Icon :icon="icon" v-bind="iconProps" />
+    <Icon v-bind="iconProps">
+      <slot></slot>
+    </Icon>
   </DynamicLink>
 </template>
 

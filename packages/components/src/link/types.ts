@@ -8,8 +8,7 @@ export interface DynamicLinkProps {
 
 export interface IconLinkProps {
   height?: string | number;
-  icon: IconProps['icon'];
-  iconProps?: Omit<IconProps, 'icon'>;
+  iconProps?: IconProps;
   style?: StyleValue;
   to: string;
   width?: string | number;

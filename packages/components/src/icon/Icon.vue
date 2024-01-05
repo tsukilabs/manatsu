@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { VNode } from 'vue';
 import { useToPixel } from '@manatsu/composables/src/index.ts';
 import type { IconProps } from './types';
 
@@ -7,13 +8,15 @@ const props = withDefaults(defineProps<IconProps>(), {
   width: '20px'
 });
 
+defineSlots<{ default: () => VNode }>();
+
 const height = useToPixel(() => props.height);
 const width = useToPixel(() => props.width);
 </script>
 
 <template>
   <span class="m-icon" :style="style" :aria-label="ariaLabel">
-    <component :is="icon" />
+    <slot></slot>
   </span>
 </template>
 
