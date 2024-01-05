@@ -8,12 +8,6 @@
       "format": "svg"
     },
     {
-      "icon": "images",
-      "extensions": ["images", "icons"],
-      "format": "svg",
-      "overrides": "images"
-    },
-    {
       "icon": "component",
       "extensions": ["components"],
       "format": "svg",

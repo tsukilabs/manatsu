@@ -3,11 +3,10 @@ use std::env;
 use std::path::PathBuf;
 
 /// Public package names.
-pub const PUBLIC_PACKAGES: [&str; 6] = [
+pub const PUBLIC_PACKAGES: [&str; 5] = [
   "manatsu",
   "components",
   "composables",
-  "icons",
   "sass",
   "shared",
 ];
