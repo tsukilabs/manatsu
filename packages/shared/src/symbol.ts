@@ -1,6 +1,6 @@
 import type { InjectionKey, Ref } from 'vue';
 import type { ExtractRequired } from '@tb-dev/utility-types';
-import type { ManatsuOptions } from './index';
+import type { ManatsuOptions } from './types';
 
 export type DarkModeSymbol = InjectionKey<
   Ref<ExtractRequired<ManatsuOptions, 'darkMode'>>

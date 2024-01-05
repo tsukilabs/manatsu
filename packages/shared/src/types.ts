@@ -1,4 +1,4 @@
-export interface ElementSize {
-  height: number;
-  width: number;
+export interface ManatsuOptions {
+  /** @default 'auto' */
+  darkMode?: boolean | 'auto';
 }

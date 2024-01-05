@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue';
-import { darkModeKey } from 'manatsu/src/index.ts';
+import { useDarkMode } from '@manatsu/composables/src/index.ts';
 import {
   MBrand,
   MButton,
@@ -11,7 +10,7 @@ import {
 } from '@manatsu/components/src/index.ts';
 import peach from '/peach.png';
 
-const darkMode = inject(darkModeKey, () => ref<boolean | 'auto'>(false), true);
+const darkMode = useDarkMode();
 
 const menuItems: NavbarMenuItem[] = [
   { key: 'first', label: 'First item' },

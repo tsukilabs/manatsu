@@ -66,7 +66,7 @@ where
   let camel = camel.as_ref();
 
   let mut cts = String::from("import { describe, it } from 'vitest';\n");
-  cts.push_str(format!("import {{ {camel} }} from '.';\n\n").as_str());
+  cts.push_str(format!("// import {{ {camel} }} from '.';\n\n").as_str());
   cts.push_str(format!("describe('{camel}', () => {{ it.todo('todo'); }});").as_str());
 
   let dir = dir.as_ref();
