@@ -19,5 +19,6 @@ jobs:
           node-version: 20.x
           cache: pnpm
       - run: pnpm install
+      - run: pnpm run -F @manatsu/shared build
       - run: pnpm run clippy:manatsu
       - run: pnpm run test
