@@ -16,4 +16,14 @@ describe('icon-link', () => {
     expect(wrapper.find('a').exists()).toBe(true);
     expect(wrapper.find('svg').exists()).toBe(true);
   });
+
+  it('should use component prop', () => {
+    const wrapper = mount(IconLink, {
+      props: { icon: GitHub, id: 'icon-prop', to: 'https://tb.dev.br/' },
+      slots: { default: () => h(GitHub, { id: 'icon-slot' }) }
+    });
+
+    expect(wrapper.find('#icon-prop').exists()).toBe(true);
+    expect(wrapper.find('#icon-slot').exists()).toBe(false);
+  });
 });

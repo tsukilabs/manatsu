@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { MButton, MInput } from '@manatsu/components/src/index.ts';
+import { GitHub } from '@manatsu/icons/src/index.ts';
+import { MButton, MIcon, MInput } from '@manatsu/components/src/index.ts';
 import LoremIpsum from './LoremIpsum.vue';
 </script>
 
 <template>
   <main>
+    <div>
+      <MIcon :component="GitHub" />
+      <MIcon><GitHub /></MIcon>
+      <MIcon :component="GitHub"><GitHub /></MIcon>
+    </div>
     <div>
       <MButton>Button</MButton>
       <MButton outlined>Outlined</MButton>

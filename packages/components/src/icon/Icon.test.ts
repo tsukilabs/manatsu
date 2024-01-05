@@ -12,4 +12,14 @@ describe('icon', () => {
 
     expect(wrapper.find('svg').exists()).toBe(true);
   });
+
+  it('should use component prop', () => {
+    const wrapper = mount(Icon, {
+      props: { component: GitHub, id: 'icon-prop' },
+      slots: { default: () => h(GitHub, { id: 'icon-slot' }) }
+    });
+
+    expect(wrapper.find('#icon-prop').exists()).toBe(true);
+    expect(wrapper.find('#icon-slot').exists()).toBe(false);
+  });
 });

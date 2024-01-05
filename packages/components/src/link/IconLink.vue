@@ -18,7 +18,7 @@ const width = useToPixel(() => props.width);
 
 <template>
   <DynamicLink class="m-icon-link" :style="style" :to="to">
-    <Icon v-bind="iconProps">
+    <Icon v-bind="iconProps" :component="icon">
       <slot></slot>
     </Icon>
   </DynamicLink>

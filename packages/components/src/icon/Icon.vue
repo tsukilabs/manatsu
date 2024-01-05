@@ -16,7 +16,8 @@ const width = useToPixel(() => props.width);
 
 <template>
   <span class="m-icon" :style="style" :aria-label="ariaLabel">
-    <slot></slot>
+    <component :is="component" v-if="component" />
+    <slot v-else></slot>
   </span>
 </template>
 
