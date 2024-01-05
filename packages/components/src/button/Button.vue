@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { type VNode, computed } from 'vue';
 import type { ButtonProps } from './types';
 
 const props = defineProps<ButtonProps>();
+
+defineSlots<{ default: () => VNode }>();
 
 const classList = computed(() => ({
   'm-button-filled': !props.outlined,

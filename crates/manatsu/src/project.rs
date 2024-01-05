@@ -107,7 +107,6 @@ fn build_globset() -> Result<GlobSet> {
   builder.add(Glob::new("**/.github")?);
 
   // Files
-  builder.add(Glob::new("**/terminal.gif")?);
   builder.add(Glob::new("**/LICENSE")?);
   builder.add(Glob::new("**/README.md")?);
   builder.add(Glob::new("**/pnpm-lock.yaml")?);

@@ -18,12 +18,12 @@ describe('navbar', () => {
   });
 
   it('should have logo', () => {
-    const wrapper = mount(Navbar, { props: { logo: () => h('img') } });
+    const wrapper = mount(Navbar, { slots: { logo: () => h('img') } });
     expect(wrapper.find('.m-navbar-logo').exists()).toBe(true);
   });
 
   it('should have title', () => {
-    const wrapper = mount(Navbar, { props: { title: 'Hello, Manatsu!' } });
+    const wrapper = mount(Navbar, { slots: { title: () => h('span') } });
     expect(wrapper.find('.m-navbar-title').exists()).toBe(true);
   });
 
