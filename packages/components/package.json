@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@manatsu/sass": "workspace:*",
-    "vite": "^5.0.10"
+    "vite": "^5.0.11"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.7.0",

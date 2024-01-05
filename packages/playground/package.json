@@ -34,6 +34,6 @@
     "manatsu": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^5.0.10"
+    "vite": "^5.0.11"
   }
 }

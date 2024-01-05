@@ -39,6 +39,6 @@
     "@tb-dev/utility-types": "^1.0.2"
   },
   "devDependencies": {
-    "vite": "^5.0.10"
+    "vite": "^5.0.11"
   }
 }
