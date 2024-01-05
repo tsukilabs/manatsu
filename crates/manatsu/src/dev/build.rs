@@ -77,4 +77,3 @@ fn copy_files(packages: &Vec<String>) -> Result<()> {
 
   Ok(())
 }
-
