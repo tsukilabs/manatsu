@@ -1,41 +1,54 @@
 <script setup lang="ts">
-import { type VNode, computed } from 'vue';
+import { type VNode, shallowRef } from 'vue';
+import { useIsEmpty, usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
 import type { ScaffoldProps, SidebarItem } from './types';
 
 const props = defineProps<ScaffoldProps>();
 
-defineSlots<{
+defineOptions({ name: 'MScaffold' });
+
+const slots = defineSlots<{
   default?: () => VNode;
   header?: () => VNode;
   'sidebar-item'?: (props: SidebarItem) => VNode;
 }>();
 
-const hasSidebar = computed(() => {
-  return props.sidebarItems && props.sidebarItems.length > 0;
-});
+const header = shallowRef<HTMLElement | null>(null);
+const headerHeight = usePixelHeight(header);
+
+const sidebar = shallowRef<HTMLElement | null>(null);
+const sidebarWidth = usePixelWidth(sidebar);
+const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
 </script>
 
 <template>
-  <div class="m-scaffold" :style="style">
-    <div v-if="$slots.header" class="m-scaffold-header" :style="headerStyle">
+  <div class="m-scaffold">
+    <div
+      v-if="$slots.header"
+      ref="header"
+      class="m-scaffold-header"
+      :class="headerClass"
+      :style="headerStyle"
+    >
       <slot name="header"></slot>
     </div>
 
-    <div class="m-scaffold-container">
-      <aside v-if="hasSidebar" class="m-scaffold-sidebar" :style="sidebarStyle">
-        <nav class="m-scaffold-sidebar-nav">
-          <div
-            v-for="item of sidebarItems"
-            :key="item.key"
-            class="m-scaffold-sidebar-item"
-            :style="sidebarItemStyle"
-          >
+    <div class="m-scaffold-content">
+      <aside
+        v-if="!isSidebarEmpty"
+        ref="sidebar"
+        class="m-scaffold-sidebar"
+        :class="sidebarClass"
+        :style="sidebarStyle"
+      >
+        <nav>
+          <div v-for="item of sidebarItems" :key="item.key" class="m-scaffold-sidebar-item">
             <slot name="sidebar-item" v-bind="item"></slot>
           </div>
         </nav>
       </aside>
 
-      <div class="m-scaffold-content" :style="contentStyle">
+      <div class="m-scaffold-content-slot" :class="contentClass" :style="contentStyle">
         <slot></slot>
       </div>
     </div>
@@ -46,26 +59,54 @@ const hasSidebar = computed(() => {
 @use '@manatsu/sass/flex';
 
 .m-scaffold {
-  display: flex;
-  flex-direction: column;
+  position: fixed;
+  inset: 0;
   background-color: var(--m-color-surface);
-  min-width: 320px;
-  min-height: 100vh;
   overflow: hidden;
 }
 
-.m-scaffold-container {
-  @include flex.x-start-y-stretch;
-  flex: 1 1 auto;
-  background-color: var(--m-color-surface-container);
+.m-scaffold-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: var(--m-color-surface);
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.m-scaffold-content {
+  position: relative;
+  top: v-bind('headerHeight');
+  bottom: 0;
+  height: v-bind('`calc(100% - ${headerHeight})`');
 
   .m-scaffold-sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 40;
     background-color: var(--m-color-surface);
-    padding: 1rem 2rem;
+    padding: 1rem;
+    overflow: hidden;
+    user-select: none;
+
+    & > nav {
+      @include flex.x-start-y-center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 
-  .m-scaffold-content {
+  .m-scaffold-content-slot {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: v-bind('sidebarWidth');
+    background-color: var(--m-color-surface-container);
     padding: 1rem;
+    overflow-x: hidden;
   }
 }
 </style>

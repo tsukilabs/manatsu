@@ -1,6 +1,9 @@
 import type { StyleValue } from 'vue';
 
+export type ButtonVariant = 'filled' | 'outlined';
+
 export interface ButtonProps {
-  outlined?: boolean;
+  buttonClass?: string[];
   style?: StyleValue;
+  variant?: ButtonVariant;
 }

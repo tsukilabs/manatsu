@@ -26,7 +26,7 @@ const dtsOptions: DtsPluginOptions = {
       const moduleDeclaration = `
       declare module 'vue' {
         interface ComponentCustomProperties {
-          $mana: import("@manatsu/shared").ManatsuGlobal;
+          readonly $mana: import("@manatsu/shared").ManatsuGlobal;
         }
       }
       

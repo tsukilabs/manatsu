@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import type { VNode } from 'vue';
-import { useToPixel } from '@manatsu/composables/src/index.ts';
+import { type VNode, shallowRef } from 'vue';
+import { usePixelWidth, useToPixel } from '@manatsu/composables/src/index.ts';
 import type { NavbarMenuItem, NavbarProps } from './types';
 
 const props = withDefaults(defineProps<NavbarProps>(), {
-  height: '60px',
-  width: '100%'
+  height: '60px'
 });
+
+defineOptions({ name: 'MNavbar' });
 
 defineSlots<{
   end?: () => VNode;
@@ -15,19 +16,33 @@ defineSlots<{
 }>();
 
 const height = useToPixel(() => props.height);
-const width = useToPixel(() => props.width);
+
+const start = shallowRef<HTMLElement | null>(null);
+const startWidth = usePixelWidth(start);
+
+const end = shallowRef<HTMLElement | null>(null);
+const endWidth = usePixelWidth(end);
+
+defineExpose({ startWidth, endWidth });
 </script>
 
 <template>
-  <header class="m-navbar" :style="style">
-    <div v-if="$slots.start" class="m-navbar-start" :style="startStyle">
+  <header class="m-navbar">
+    <div
+      v-if="$slots.start"
+      ref="start"
+      class="m-navbar-start"
+      :class="startClass"
+      :style="startStyle"
+    >
       <slot name="start"></slot>
     </div>
 
-    <div class="m-navbar-content" :style="contentStyle">
+    <div class="m-navbar-content" :class="contentClass" :style="contentStyle">
       <nav
         v-if="menuItems && menuItems.length > 0"
         class="m-navbar-menu"
+        :class="menuClass"
         :style="menuStyle"
       >
         <div
@@ -40,7 +55,7 @@ const width = useToPixel(() => props.width);
         </div>
       </nav>
 
-      <div v-if="$slots.end" class="m-navbar-end" :style="endStyle">
+      <div v-if="$slots.end" ref="end" class="m-navbar-end" :class="endClass" :style="endStyle">
         <slot name="end"></slot>
       </div>
     </div>
@@ -53,7 +68,6 @@ const width = useToPixel(() => props.width);
 .m-navbar {
   @include flex.x-between-y-center;
   padding: 0 1rem;
-  width: v-bind('width');
   height: v-bind('height');
   user-select: none;
   white-space: nowrap;
@@ -71,7 +85,6 @@ const width = useToPixel(() => props.width);
   gap: 1.5rem;
 
   .m-navbar-menu {
-    @include flex.y-center;
     gap: 1.5rem;
   }
 }

@@ -5,10 +5,11 @@ export interface SidebarItem {
 }
 
 export interface ScaffoldProps {
+  contentClass?: string[];
   contentStyle?: StyleValue;
+  headerClass?: string[];
   headerStyle?: StyleValue;
-  sidebarItemStyle?: StyleValue;
+  sidebarClass?: string[];
   sidebarItems?: SidebarItem[];
   sidebarStyle?: StyleValue;
-  style?: StyleValue;
 }

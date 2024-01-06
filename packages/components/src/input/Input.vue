@@ -3,18 +3,14 @@ import type { InputProps } from './types';
 
 defineProps<InputProps>();
 
+defineOptions({ name: 'MInput' });
+
 const value = defineModel<string | null>();
 </script>
 
 <template>
-  <div class="m-input-wrapper" role="none">
-    <input
-      v-model="value"
-      type="text"
-      class="m-input"
-      :style="style"
-      :placeholder="placeholder"
-    />
+  <div role="none">
+    <input v-model="value" type="text" class="m-input" :style="style" :placeholder="placeholder" />
   </div>
 </template>
 

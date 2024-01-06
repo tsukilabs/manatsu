@@ -2,22 +2,24 @@
 import { type VNode, computed } from 'vue';
 import type { ButtonProps } from './types';
 
-const props = defineProps<ButtonProps>();
+const props = withDefaults(defineProps<ButtonProps>(), {
+  buttonClass: () => [],
+  variant: 'filled'
+});
+
+defineOptions({ name: 'MButton' });
 
 defineSlots<{ default: () => VNode }>();
 
-const classList = computed(() => ({
-  'm-button-filled': !props.outlined,
-  'm-button-outlined': props.outlined
-}));
+const classList = computed(() => {
+  return [`m-button-${props.variant}`, ...props.buttonClass];
+});
 </script>
 
 <template>
-  <div class="m-button-wrapper" role="none">
+  <div class="m-button-container" role="none">
     <button type="button" class="m-button" :class="classList" :style="style">
-      <span class="m-button-content">
-        <slot></slot>
-      </span>
+      <slot></slot>
     </button>
   </div>
 </template>
@@ -25,7 +27,7 @@ const classList = computed(() => ({
 <style scoped lang="scss">
 @use '@manatsu/sass/flex';
 
-.m-button-wrapper {
+.m-button-container {
   @include flex.center($inline: true);
   flex-wrap: nowrap;
   max-width: max-content;

@@ -6,6 +6,7 @@ export default defineConfig({
   includeLocked: true,
   recursive: true,
   packageMode: {
-    vue: 'ignore'
+    vue: 'ignore',
+    '@vitejs/plugin-vue': 'ignore'
   }
 });

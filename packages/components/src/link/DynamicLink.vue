@@ -6,6 +6,8 @@ import type { DynamicLinkProps } from './types';
 
 const props = defineProps<DynamicLinkProps>();
 
+defineOptions({ name: 'MDynamicLink' });
+
 defineSlots<{ default: () => VNode }>();
 
 const isExternalLink = useExternalLink(() => props.to);

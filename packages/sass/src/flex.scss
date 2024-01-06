@@ -93,6 +93,11 @@
   @include -flex($display, $justify: space-between, $items: center);
 }
 
+@mixin x-start-y-center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-start, $items: center);
+}
+
 @mixin x-start-y-stretch($inline: false) {
   $display: if($inline, inline-flex, flex);
   @include -flex($display, $justify: flex-start, $items: stretch);

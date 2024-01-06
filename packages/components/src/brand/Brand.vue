@@ -5,6 +5,8 @@ import DynamicLink from '../link/DynamicLink.vue';
 
 defineProps<BrandProps>();
 
+defineOptions({ name: 'MBrand' });
+
 defineSlots<{
   logo?: () => VNode;
   title?: () => VNode;
@@ -14,11 +16,11 @@ defineSlots<{
 <template>
   <div class="m-brand" :style="style">
     <DynamicLink :to="titleLink" :style="linkStyle">
-      <div v-if="$slots.logo" class="m-brand-logo" :style="logoStyle">
+      <div v-if="$slots.logo" class="m-brand-logo" :class="logoClass" :style="logoStyle">
         <slot name="logo"></slot>
       </div>
 
-      <div v-if="$slots.title" class="m-brand-title" :style="titleStyle">
+      <div v-if="$slots.title" class="m-brand-title" :class="titleClass" :style="titleStyle">
         <slot name="title"></slot>
       </div>
     </DynamicLink>

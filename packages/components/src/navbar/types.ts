@@ -8,13 +8,15 @@ export interface NavbarMenuItem {
 }
 
 export interface NavbarProps {
+  contentClass?: string[];
   contentStyle?: StyleValue;
+  endClass?: string[];
   endStyle?: StyleValue;
   height?: string | number;
+  menuClass?: string[];
   menuItemStyle?: StyleValue;
   menuItems?: NavbarMenuItem[];
   menuStyle?: StyleValue;
+  startClass?: string[];
   startStyle?: StyleValue;
-  style?: StyleValue;
-  width?: string | number;
 }
