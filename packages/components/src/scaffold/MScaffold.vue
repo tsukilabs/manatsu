@@ -99,8 +99,7 @@ const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
 
   .m-scaffold-content-slot {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    inset: 0;
     left: v-bind('sidebarWidth');
     background-color: var(--m-color-surface-container);
     padding: 1rem;

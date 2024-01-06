@@ -1,9 +1,15 @@
 use super::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{bail, Result};
-use miho::win_cmd;
+use colored::*;
+use miho::pnpm;
 use std::fs;
-use std::process::Stdio;
 use std::time::Instant;
+
+macro_rules! print_bold {
+  ($message:expr) => {
+    println!("{}", $message.bold());
+  };
+}
 
 /// Build the packages.
 pub fn build<I, S>(packages: I) -> Result<()>
@@ -12,6 +18,12 @@ where
   S: AsRef<str>,
 {
   let start = Instant::now();
+
+  let filter_flag = "--filter";
+
+  // The shared package must be built before anyone else.
+  print_bold!("Building shared package...");
+  pnpm!(["run", filter_flag, "shared", "build"])?;
 
   let mut args = vec!["run", "--parallel"];
 
@@ -27,7 +39,6 @@ where
     bail!("Nothing to build");
   }
 
-  let filter_flag = "--filter";
   for package in &packages {
     let package = package.as_str();
 
@@ -43,13 +54,10 @@ where
 
   args.push("build");
 
-  win_cmd!("pnpm")
-    .args(args)
-    .stderr(Stdio::inherit())
-    .stdout(Stdio::inherit())
-    .output()?;
+  print_bold!("Building other packages...");
+  pnpm!(args)?;
 
-  println!("Copying files...");
+  print_bold!("Copying files...");
   copy_files(&packages)?;
 
   println!("Built in {:?}", start.elapsed());
@@ -59,7 +67,8 @@ where
 fn should_build(package: &str) -> bool {
   if PUBLIC_PACKAGES.contains(&package) {
     // The sass package doesn't need to be built.
-    package != "sass"
+    // And the shared package has already been built.
+    package != "sass" && package != "shared"
   } else {
     // We shouldn't build private packages.
     false

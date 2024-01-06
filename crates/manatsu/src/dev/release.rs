@@ -1,8 +1,8 @@
 use super::json;
 use anyhow::Result;
 use miho::git::{self, Commit};
-use miho::win_cmd;
-use std::process::{Command, Stdio};
+use miho::{cargo, pnpm};
+use std::process::Stdio;
 
 /// Releases a new version, publishing all the public packages.
 ///
@@ -22,8 +22,12 @@ pub fn release() -> Result<()> {
   match json::read_config().ok() {
     Some(cfg) if cfg.github => create_github_release(&cfg.github_token)?,
     _ => {
-      publish_to_npm()?;
-      publish_to_cargo()?;
+      pnpm!(["publish", "-r", "--no-git-checks"])?;
+      
+      let crates = ["manatsu", "tauri-plugin-manatsu"];
+      for crate_name in crates {
+        cargo!(["publish", "-p", crate_name])?;
+      }
     }
   }
 
@@ -51,29 +55,6 @@ fn create_github_release(github_token: &str) -> Result<()> {
     .set("X-GitHub-Api-Version", "2022-11-28")
     .set("accept", "application/vnd.github+json")
     .send_json(body)?;
-
-  Ok(())
-}
-
-fn publish_to_npm() -> Result<()> {
-  win_cmd!("pnpm")
-    .args(["publish", "-r", "--no-git-checks"])
-    .stderr(Stdio::inherit())
-    .stdout(Stdio::inherit())
-    .output()?;
-
-  Ok(())
-}
-
-fn publish_to_cargo() -> Result<()> {
-  let crates = ["manatsu", "tauri-plugin-manatsu"];
-  for crate_name in crates {
-    Command::new("cargo")
-      .args(["publish", "-p", crate_name])
-      .stderr(Stdio::inherit())
-      .stdout(Stdio::inherit())
-      .output()?;
-  }
 
   Ok(())
 }

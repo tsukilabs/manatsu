@@ -24,12 +24,14 @@
     "manatsu",
     "sass",
     "scss",
-    "style"
+    "style",
+    "mixin"
   ],
   "type": "module",
   "exports": {
     ".": "./src/index.scss",
-    "./flex": "./src/flex.scss"
+    "./flex": "./src/flex.scss",
+    "./util": "./src/util.scss"
   },
   "peerDependencies": {
     "sass": "^1.69.0"

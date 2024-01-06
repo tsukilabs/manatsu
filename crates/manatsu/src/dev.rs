@@ -6,9 +6,8 @@ pub mod scaffold;
 
 use anyhow::{Context, Result};
 pub use build::build;
-use miho::win_cmd;
+use miho::pnpm;
 pub use release::release;
-use std::process::Stdio;
 use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.
@@ -33,11 +32,7 @@ pub fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {
   let glob = glob.as_ref();
 
   println!("Formatting files...");
-  win_cmd!("pnpm")
-    .args(["exec", "prettier", glob, "--write"])
-    .stderr(Stdio::inherit())
-    .stdout(Stdio::inherit())
-    .output()
+  pnpm!(["exec", "prettier", glob, "--write"])
     .with_context(|| format!("Could not format files: {}", glob))?;
 
   Ok(())
@@ -45,21 +40,18 @@ pub fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {
 
 /// Lint files, fixing as many issues as possible.
 pub fn lint<G: AsRef<str>>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()> {
-  let glob = glob.as_ref();
-  let mut cmd = win_cmd!("pnpm");
-  cmd.args(["exec", "eslint", "--fix"]);
-
-  if let Some(args) = extra_args {
-    cmd.args(args);
+  let mut args = vec!["exec", "eslint", "--fix"];
+  if let Some(extra) = extra_args {
+    for arg in extra {
+      args.push(arg);
+    }
   }
 
+  let glob = glob.as_ref();
+  args.push(glob);
+
   println!("Linting files...");
-  cmd
-    .arg(glob)
-    .stderr(Stdio::inherit())
-    .stdout(Stdio::inherit())
-    .output()
-    .with_context(|| format!("Could not lint files: {}", glob))?;
+  pnpm!(args).with_context(|| format!("Could not lint files: {}", glob))?;
 
   Ok(())
 }
