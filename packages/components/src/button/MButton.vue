@@ -7,8 +7,6 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled'
 });
 
-defineOptions({ name: 'MButton' });
-
 defineSlots<{ default: () => VNode }>();
 
 const classList = computed(() => {

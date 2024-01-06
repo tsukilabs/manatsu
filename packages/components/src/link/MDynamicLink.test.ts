@@ -1,18 +1,18 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
 import { createMemoryHistory, createRouter } from 'vue-router';
-import DynamicLink from './DynamicLink.vue';
+import MDynamicLink from './MDynamicLink.vue';
 
 enableAutoUnmount(afterEach);
 
 describe('dynamic-link', () => {
   it('should render span if `to` is `undefined`', () => {
-    const wrapper = mount(DynamicLink);
+    const wrapper = mount(MDynamicLink);
     expect(wrapper.find('span').exists()).toBe(true);
   });
 
   it('should render anchor if `to` is external', () => {
-    const wrapper = mount(DynamicLink, { props: { to: 'https://tb.dev.br/' } });
+    const wrapper = mount(MDynamicLink, { props: { to: 'https://tb.dev.br/' } });
     expect(wrapper.find('a:not([class*="router-link"])').exists()).toBe(true);
   });
 
@@ -26,7 +26,7 @@ describe('dynamic-link', () => {
     await router.push('/');
     await router.isReady();
 
-    const wrapper = mount(DynamicLink, {
+    const wrapper = mount(MDynamicLink, {
       props: { to: '/' },
       global: {
         plugins: [router]

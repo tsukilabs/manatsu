@@ -1,2 +1,2 @@
-export { default as MDynamicLink } from './DynamicLink.vue';
+export { default as MDynamicLink } from './MDynamicLink.vue';
 export type * from './types';

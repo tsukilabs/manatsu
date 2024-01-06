@@ -1,2 +1,2 @@
-export { default as MButton } from './Button.vue';
+export { default as MButton } from './MButton.vue';
 export type * from './types';

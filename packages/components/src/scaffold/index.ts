@@ -1,2 +1,2 @@
-export { default as MScaffold } from './Scaffold.vue';
+export { default as MScaffold } from './MScaffold.vue';
 export type * from './types';

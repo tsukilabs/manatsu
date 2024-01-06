@@ -1,2 +1,2 @@
-export { default as MNavbar } from './Navbar.vue';
+export { default as MNavbar } from './MNavbar.vue';
 export type * from './types';

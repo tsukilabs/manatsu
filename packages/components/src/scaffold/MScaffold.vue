@@ -5,8 +5,6 @@ import type { ScaffoldProps, SidebarItem } from './types';
 
 const props = defineProps<ScaffoldProps>();
 
-defineOptions({ name: 'MScaffold' });
-
 const slots = defineSlots<{
   default?: () => VNode;
   header?: () => VNode;

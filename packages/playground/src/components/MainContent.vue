@@ -6,7 +6,7 @@ import LoremIpsum from './LoremIpsum.vue';
 <template>
   <main>
     <div>
-      <MButton>Button</MButton>
+      <MButton>MButton</MButton>
       <MButton variant="outlined">Outlined</MButton>
       <MButton>Lorem ipsum dolor</MButton>
     </div>

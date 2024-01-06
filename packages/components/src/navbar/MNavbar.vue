@@ -7,8 +7,6 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   height: '60px'
 });
 
-defineOptions({ name: 'MNavbar' });
-
 defineSlots<{
   end?: () => VNode;
   'menu-item'?: (props: NavbarMenuItem) => VNode;

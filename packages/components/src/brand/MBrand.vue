@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { VNode } from 'vue';
 import type { BrandProps } from './types';
-import DynamicLink from '../link/DynamicLink.vue';
+import MDynamicLink from '../link/MDynamicLink.vue';
 
 defineProps<BrandProps>();
-
-defineOptions({ name: 'MBrand' });
 
 defineSlots<{
   logo?: () => VNode;
@@ -15,7 +13,7 @@ defineSlots<{
 
 <template>
   <div class="m-brand" :style="style">
-    <DynamicLink :to="titleLink" :style="linkStyle">
+    <MDynamicLink :to="titleLink" :style="linkStyle">
       <div v-if="$slots.logo" class="m-brand-logo" :class="logoClass" :style="logoStyle">
         <slot name="logo"></slot>
       </div>
@@ -23,7 +21,7 @@ defineSlots<{
       <div v-if="$slots.title" class="m-brand-title" :class="titleClass" :style="titleStyle">
         <slot name="title"></slot>
       </div>
-    </DynamicLink>
+    </MDynamicLink>
   </div>
 </template>
 

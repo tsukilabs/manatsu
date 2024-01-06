@@ -59,7 +59,7 @@ where
   D: AsRef<Path>,
 {
   let pascal = pascal.as_ref();
-  let mut index = format!("export {{ default as M{pascal} }} from './{pascal}.vue';\n");
+  let mut index = format!("export {{ default as M{pascal} }} from './M{pascal}.vue';\n");
   index.push_str("export type * from './types';");
 
   let dir = dir.as_ref();
@@ -95,10 +95,10 @@ where
   cts.push_str(format!("defineProps<{pascal}Props>();\n").as_str());
   cts.push_str("</script>\n\n");
   cts.push_str(format!("<template>\n<div class=\"m-{kebab}\"></div>\n</template>\n\n").as_str());
-  cts.push_str("<style scoped lang=\"scss\"></style>");
+  cts.push_str(format!("<style scoped lang=\"scss\">\n.m-{kebab} {{}}\n</style>").as_str());
 
   let dir = dir.as_ref();
-  let path = dir.join(format!("{pascal}.vue"));
+  let path = dir.join(format!("M{pascal}.vue"));
   fs::write(path, cts)?;
   Ok(())
 }
@@ -113,12 +113,12 @@ where
 
   let mut cts = String::from("import { afterEach, describe, it } from 'vitest';\n");
   cts.push_str("import { enableAutoUnmount } from '@vue/test-utils';\n");
-  cts.push_str(format!("import {pascal} from './{pascal}.vue';\n\n").as_str());
+  cts.push_str(format!("import M{pascal} from './M{pascal}.vue';\n\n").as_str());
   cts.push_str("enableAutoUnmount(afterEach);\n\n");
   cts.push_str(format!("describe('{kebab}', () => {{ it.todo('todo'); }});").as_str());
 
   let dir = dir.as_ref();
-  let path = dir.join(format!("{pascal}.test.ts"));
+  let path = dir.join(format!("M{pascal}.test.ts"));
   fs::write(path, cts)?;
   Ok(())
 }

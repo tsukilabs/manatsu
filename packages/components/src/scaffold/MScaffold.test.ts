@@ -1,13 +1,13 @@
 import { h } from 'vue';
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
-import Scaffold from './Scaffold.vue';
+import MScaffold from './MScaffold.vue';
 
 enableAutoUnmount(afterEach);
 
 describe('scaffold', () => {
   it('should have header', () => {
-    const wrapper = mount(Scaffold, {
+    const wrapper = mount(MScaffold, {
       slots: {
         header: () => h('div', { id: 'header-slot' })
       }
@@ -18,7 +18,7 @@ describe('scaffold', () => {
   });
 
   it('should not have header', () => {
-    const wrapper = mount(Scaffold, {
+    const wrapper = mount(MScaffold, {
       slots: {
         default: () => h('div', 'Default slot')
       }

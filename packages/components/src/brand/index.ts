@@ -1,2 +1,2 @@
-export { default as MBrand } from './Brand.vue';
+export { default as MBrand } from './MBrand.vue';
 export type * from './types';

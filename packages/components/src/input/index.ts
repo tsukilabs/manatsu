@@ -1,2 +1,2 @@
-export { default as MInput } from './Input.vue';
+export { default as MInput } from './MInput.vue';
 export type * from './types';

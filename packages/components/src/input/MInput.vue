@@ -3,8 +3,6 @@ import type { InputProps } from './types';
 
 defineProps<InputProps>();
 
-defineOptions({ name: 'MInput' });
-
 const value = defineModel<string | null>();
 </script>
 
