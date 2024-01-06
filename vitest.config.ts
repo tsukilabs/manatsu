@@ -7,10 +7,7 @@ export default defineConfig({
     watch: false,
     globals: false,
     environment: 'jsdom',
-    include: [
-      'packages/components/**/*.test.ts',
-      'packages/composables/**/*.test.ts'
-    ],
+    include: ['packages/components/**/*.test.ts', 'packages/composables/**/*.test.ts'],
     coverage: {
       provider: 'istanbul',
       reporter: ['html'],
