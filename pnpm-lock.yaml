@@ -32,11 +32,11 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(postcss-html@1.5.0)(postcss@8.4.33)(typescript@5.3.3)
       '@tb-dev/utility-types':
-        specifier: ^1.0.8
-        version: 1.0.8
+        specifier: ^1.0.9
+        version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: ^1.0.10
+        version: 1.0.10
       '@types/node':
         specifier: ^20.10.6
         version: 20.10.6
@@ -146,11 +146,11 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@tb-dev/utility-types':
-        specifier: ^1.0.8
-        version: 1.0.8
+        specifier: ^1.0.9
+        version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: ^1.0.10
+        version: 1.0.10
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -174,11 +174,11 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@tb-dev/utility-types':
-        specifier: ^1.0.8
-        version: 1.0.8
+        specifier: ^1.0.9
+        version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: ^1.0.10
+        version: 1.0.10
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -205,11 +205,11 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@tb-dev/utility-types':
-        specifier: ^1.0.8
-        version: 1.0.8
+        specifier: ^1.0.9
+        version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: ^1.0.10
+        version: 1.0.10
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -258,11 +258,11 @@ importers:
   packages/shared:
     dependencies:
       '@tb-dev/utility-types':
-        specifier: ^1.0.8
-        version: 1.0.8
+        specifier: ^1.0.9
+        version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: ^1.0.10
+        version: 1.0.10
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -2095,19 +2095,19 @@ packages:
       - typescript
     dev: true
 
-  /@tb-dev/utility-types@1.0.8:
+  /@tb-dev/utility-types@1.0.9:
     resolution:
       {
-        integrity: sha512-Aw03DJIGONW9KkpgOPtz7nGxw3lzLVNsToGh6jQVGzE/EAWe0aXTchL6R+CLSoO1POBfX9PYWZ8kvoar1jUNcA==
+        integrity: sha512-A0QlD/b06bjb0S2+fZQl5tkpLqrv3QB8nEPDEpbROXsjrcjTsK6y5CCSgrv0lJbi2yz8RWcuN4XhTKMyUKG45Q==
       }
 
-  /@tb-dev/utils@1.0.7:
+  /@tb-dev/utils@1.0.10:
     resolution:
       {
-        integrity: sha512-XX1Lr3f56KJ/VDLNA5BDJ8JcXuCBpSdqiHiSg2+jmJLxRKc7S/Sp2eEjtexP9e0Sm/V4JBUwzKBsjWKrkEzh7w==
+        integrity: sha512-ZlxePZbncaaDntrY+NX7bZ2CB9zQAvx7nbVUphC5AtqaK59WO9NT55BeeZCfSDaQ1s53kfrgEnceoKLeJ6fkHg==
       }
     dependencies:
-      '@tb-dev/utility-types': 1.0.8
+      '@tb-dev/utility-types': 1.0.9
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution:

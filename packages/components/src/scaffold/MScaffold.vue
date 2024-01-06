@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type VNode, shallowRef } from 'vue';
+import { type VNode, computed, shallowRef } from 'vue';
 import { useIsEmpty, usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
 import type { ScaffoldProps, SidebarItem } from './types';
 
@@ -7,6 +7,7 @@ const props = defineProps<ScaffoldProps>();
 
 const slots = defineSlots<{
   default?: () => VNode;
+  footer?: () => VNode;
   header?: () => VNode;
   'sidebar-item'?: (props: SidebarItem) => VNode;
 }>();
@@ -17,6 +18,13 @@ const headerHeight = usePixelHeight(header);
 const sidebar = shallowRef<HTMLElement | null>(null);
 const sidebarWidth = usePixelWidth(sidebar);
 const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
+
+const footer = shallowRef<HTMLElement | null>(null);
+const footerHeight = usePixelHeight(footer);
+
+const containerHeight = computed(() => {
+  return `calc(100% - (${headerHeight.value} + ${footerHeight.value}))`;
+});
 </script>
 
 <template>
@@ -31,7 +39,7 @@ const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
       <slot name="header"></slot>
     </div>
 
-    <div class="m-scaffold-content">
+    <div class="m-scaffold-container">
       <aside
         v-if="!isSidebarEmpty"
         ref="sidebar"
@@ -46,15 +54,27 @@ const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
         </nav>
       </aside>
 
-      <div class="m-scaffold-content-slot" :class="contentClass" :style="contentStyle">
+      <div class="m-scaffold-content" :class="contentClass" :style="contentStyle">
         <slot></slot>
       </div>
+    </div>
+
+    <div
+      v-if="$slots.footer"
+      ref="footer"
+      class="m-scaffold-footer"
+      :class="footerClass"
+      :style="footerStyle"
+    >
+      <slot name="footer"></slot>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @use '@manatsu/sass/flex';
+
+$outer-z-index: 100;
 
 .m-scaffold {
   position: fixed;
@@ -63,31 +83,39 @@ const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
   overflow: hidden;
 }
 
-.m-scaffold-header {
+@mixin outside-scaffold-container {
   position: fixed;
-  top: 0;
   left: 0;
-  z-index: 50;
+  z-index: $outer-z-index;
   background-color: var(--m-color-surface);
   width: 100%;
   overflow: hidden;
   user-select: none;
 }
 
-.m-scaffold-content {
+.m-scaffold-header {
+  @include outside-scaffold-container;
+  top: 0;
+}
+
+.m-scaffold-footer {
+  @include outside-scaffold-container;
+  bottom: 0;
+}
+
+.m-scaffold-container {
   position: relative;
   top: v-bind('headerHeight');
-  bottom: 0;
-  height: v-bind('`calc(100% - ${headerHeight})`');
+  height: v-bind('containerHeight');
 
   .m-scaffold-sidebar {
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: 40;
+    z-index: $outer-z-index;
     background-color: var(--m-color-surface);
     padding: 1rem;
-    overflow: hidden;
+    overflow-x: hidden;
     user-select: none;
 
     & > nav {
@@ -97,7 +125,7 @@ const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
     }
   }
 
-  .m-scaffold-content-slot {
+  .m-scaffold-content {
     position: absolute;
     inset: 0;
     left: v-bind('sidebarWidth');

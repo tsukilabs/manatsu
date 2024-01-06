@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { repeat } from '@tb-dev/utils';
+import { computed, ref, shallowRef } from 'vue';
 import { useDarkMode } from '@manatsu/composables/src/index.ts';
 import {
   MBrand,
@@ -15,7 +16,8 @@ import peach from '/peach.png';
 const darkMode = useDarkMode();
 const darkModeLabel = computed(() => (darkMode.value ? 'Light' : 'Dark'));
 
-const navbar = ref<InstanceType<typeof MNavbar> | null>(null);
+const navbar = shallowRef<InstanceType<typeof MNavbar> | null>(null);
+const navbarHeight = ref(60);
 
 const menuItems: NavbarMenuItem[] = [
   { key: 'first', label: 'First item' },
@@ -23,13 +25,21 @@ const menuItems: NavbarMenuItem[] = [
   { key: 'third', label: 'Third item' }
 ];
 
-const sidebarItems: SidebarItem[] = [{ key: 'first' }, { key: 'second' }, { key: 'third' }];
+const sidebarItemAmount = ref(100);
+const sidebarItems = computed<SidebarItem[]>(() => {
+  const items: SidebarItem[] = [];
+  repeat(sidebarItemAmount.value, (i) => {
+    items.push({ key: String(Date.now() + i) });
+  });
+
+  return items;
+});
 </script>
 
 <template>
   <MScaffold :sidebar-items="sidebarItems">
     <template #header>
-      <MNavbar ref="navbar" :menu-items="menuItems">
+      <MNavbar ref="navbar" :menu-items="menuItems" :height="navbarHeight">
         <template #start>
           <MBrand title-link="/">
             <template #logo>
@@ -44,9 +54,12 @@ const sidebarItems: SidebarItem[] = [{ key: 'first' }, { key: 'second' }, { key:
         </template>
 
         <template #end>
-          <MButton variant="outlined" @click="$mana.toggleDarkMode">
-            {{ darkModeLabel }}
-          </MButton>
+          <div class="flex gap-2">
+            <MButton variant="outlined" @click="$mana.toggleDarkMode">
+              {{ darkModeLabel }}
+            </MButton>
+            <MButton variant="outlined" @click="sidebarItemAmount += 5">Action</MButton>
+          </div>
         </template>
       </MNavbar>
     </template>
@@ -57,6 +70,12 @@ const sidebarItems: SidebarItem[] = [{ key: 'first' }, { key: 'second' }, { key:
       </div>
     </template>
 
-    <RouterView />
+    <template #default>
+      <RouterView />
+    </template>
+
+    <template #footer>
+      <div class="w-full h-16 flex justify-center items-center">Copyright © 2024 Manatsu</div>
+    </template>
   </MScaffold>
 </template>
