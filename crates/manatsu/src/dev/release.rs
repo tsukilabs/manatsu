@@ -23,7 +23,7 @@ pub fn release() -> Result<()> {
     Some(cfg) if cfg.github => create_github_release(&cfg.github_token)?,
     _ => {
       pnpm!(["publish", "-r", "--no-git-checks"])?;
-      
+
       let crates = ["manatsu", "tauri-plugin-manatsu"];
       for crate_name in crates {
         cargo!(["publish", "-p", crate_name])?;
