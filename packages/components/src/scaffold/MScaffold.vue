@@ -29,24 +29,12 @@ const containerHeight = computed(() => {
 
 <template>
   <div class="m-scaffold">
-    <div
-      v-if="$slots.header"
-      ref="header"
-      class="m-scaffold-header"
-      :class="headerClass"
-      :style="headerStyle"
-    >
+    <div v-if="$slots.header" ref="header" class="m-scaffold-header" :style="headerStyle">
       <slot name="header"></slot>
     </div>
 
     <div class="m-scaffold-container">
-      <aside
-        v-if="!isSidebarEmpty"
-        ref="sidebar"
-        class="m-scaffold-sidebar"
-        :class="sidebarClass"
-        :style="sidebarStyle"
-      >
+      <aside v-if="!isSidebarEmpty" ref="sidebar" class="m-scaffold-sidebar" :style="sidebarStyle">
         <nav>
           <div v-for="item of sidebarItems" :key="item.key" class="m-scaffold-sidebar-item">
             <slot name="sidebar-item" v-bind="item"></slot>
@@ -54,18 +42,12 @@ const containerHeight = computed(() => {
         </nav>
       </aside>
 
-      <div class="m-scaffold-content" :class="contentClass" :style="contentStyle">
+      <div class="m-scaffold-content" :style="contentStyle">
         <slot></slot>
       </div>
     </div>
 
-    <div
-      v-if="$slots.footer"
-      ref="footer"
-      class="m-scaffold-footer"
-      :class="footerClass"
-      :style="footerStyle"
-    >
+    <div v-if="$slots.footer" ref="footer" class="m-scaffold-footer" :style="footerStyle">
       <slot name="footer"></slot>
     </div>
   </div>

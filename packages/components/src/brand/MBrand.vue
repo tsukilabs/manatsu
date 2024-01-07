@@ -14,11 +14,11 @@ defineSlots<{
 <template>
   <div class="m-brand" :style="style">
     <MDynamicLink :to="titleLink" :style="linkStyle">
-      <div v-if="$slots.logo" class="m-brand-logo" :class="logoClass" :style="logoStyle">
+      <div v-if="$slots.logo" class="m-brand-logo" :style="logoStyle">
         <slot name="logo"></slot>
       </div>
 
-      <div v-if="$slots.title" class="m-brand-title" :class="titleClass" :style="titleStyle">
+      <div v-if="$slots.title" class="m-brand-title" :style="titleStyle">
         <slot name="title"></slot>
       </div>
     </MDynamicLink>
