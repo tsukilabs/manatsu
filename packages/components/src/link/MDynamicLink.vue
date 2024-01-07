@@ -9,6 +9,8 @@ const props = defineProps<DynamicLinkProps>();
 defineSlots<{ default: () => VNode }>();
 
 const isExternalLink = useExternalLink(() => props.to);
+
+defineExpose({ isExternalLink });
 </script>
 
 <template>
