@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import type { VNode } from 'vue';
-import { RouterLink } from 'vue-router';
+import { type RouteLocationRaw, RouterLink } from 'vue-router';
 import { useExternalLink } from '@manatsu/composables/src/index.ts';
-import type { DynamicLinkProps } from './types';
-
-const props = defineProps<DynamicLinkProps>();
 
 defineSlots<{ default: () => VNode }>();
 
-const isExternalLink = useExternalLink(() => props.to);
+const to = defineModel<RouteLocationRaw>('to');
+const isExternalLink = useExternalLink(to);
 
 defineExpose({ isExternalLink });
 </script>
