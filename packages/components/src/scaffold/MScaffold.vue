@@ -41,7 +41,12 @@ const containerHeight = computed(() => {
         :style="sidebarStyle"
       >
         <nav>
-          <div v-for="item of sidebarItems" :key="item.key" class="m-scaffold-sidebar-item">
+          <div
+            v-for="item of sidebarItems"
+            :key="item.key"
+            class="m-scaffold-sidebar-item"
+            :style="sidebarItemStyle"
+          >
             <slot name="sidebar-item" v-bind="item"></slot>
           </div>
         </nav>

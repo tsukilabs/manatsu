@@ -11,5 +11,6 @@ export interface ScaffoldProps {
   contentStyle?: StyleValue;
   footerStyle?: StyleValue;
   headerStyle?: StyleValue;
+  sidebarItemStyle?: StyleValue;
   sidebarStyle?: StyleValue;
 }
