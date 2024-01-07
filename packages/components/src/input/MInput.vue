@@ -3,7 +3,7 @@ import type { InputProps } from './types';
 
 defineProps<InputProps>();
 
-const value = defineModel<string | null>();
+const value = defineModel<string | null>('value');
 </script>
 
 <template>

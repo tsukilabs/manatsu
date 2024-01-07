@@ -12,7 +12,6 @@ export interface NavbarProps {
   endStyle?: StyleValue;
   height?: string | number;
   menuItemStyle?: StyleValue;
-  menuItems?: NavbarMenuItem[];
   menuStyle?: StyleValue;
   startStyle?: StyleValue;
 }

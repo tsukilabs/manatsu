@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { type VNode, computed, shallowRef } from 'vue';
-import { useIsEmpty, usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
+import { usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
 import type { ScaffoldProps, SidebarItem } from './types';
 
-const props = defineProps<ScaffoldProps>();
+defineProps<ScaffoldProps>();
 
 const slots = defineSlots<{
   default?: () => VNode;
@@ -16,8 +16,8 @@ const header = shallowRef<HTMLElement | null>(null);
 const headerHeight = usePixelHeight(header);
 
 const sidebar = shallowRef<HTMLElement | null>(null);
+const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
 const sidebarWidth = usePixelWidth(sidebar);
-const isSidebarEmpty = useIsEmpty(() => props.sidebarItems);
 
 const footer = shallowRef<HTMLElement | null>(null);
 const footerHeight = usePixelHeight(footer);
@@ -34,7 +34,12 @@ const containerHeight = computed(() => {
     </div>
 
     <div class="m-scaffold-container">
-      <aside v-if="!isSidebarEmpty" ref="sidebar" class="m-scaffold-sidebar" :style="sidebarStyle">
+      <aside
+        v-if="sidebarItems && sidebarItems.length > 0"
+        ref="sidebar"
+        class="m-scaffold-sidebar"
+        :style="sidebarStyle"
+      >
         <nav>
           <div v-for="item of sidebarItems" :key="item.key" class="m-scaffold-sidebar-item">
             <slot name="sidebar-item" v-bind="item"></slot>

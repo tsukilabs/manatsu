@@ -5,19 +5,19 @@ import MInput from './MInput.vue';
 enableAutoUnmount(afterEach);
 
 describe('input', () => {
-  it('should update modelValue', async () => {
+  it('should update value', async () => {
     const wrapper = mount(MInput, {
       props: {
-        modelValue: 'some-text',
-        'onUpdate:modelValue': async (e: string) => {
-          await wrapper.setProps({ modelValue: e });
+        value: 'some-text',
+        'onUpdate:value': async (e: string) => {
+          await wrapper.setProps({ value: e });
         }
       }
     });
 
-    expect(wrapper.props('modelValue')).toBe('some-text');
+    expect(wrapper.props('value')).toBe('some-text');
 
     await wrapper.find('input').setValue('test');
-    expect(wrapper.props('modelValue')).toBe('test');
+    expect(wrapper.props('value')).toBe('test');
   });
 });

@@ -15,6 +15,8 @@ defineSlots<{
 
 const height = useToPixel(() => props.height);
 
+const menuItems = defineModel<NavbarMenuItem[]>('menuItems');
+
 const start = shallowRef<HTMLElement | null>(null);
 const startWidth = usePixelWidth(start);
 
