@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import type { VNode } from 'vue';
+import { type VNode, defineComponent, h } from 'vue';
 import { type RouteLocationRaw, RouterLink } from 'vue-router';
 import { useExternalLink } from '@manatsu/composables/src/index.ts';
 
-defineSlots<{ default: () => VNode }>();
+const slots = defineSlots<{ default?: () => VNode }>();
 
 const to = defineModel<RouteLocationRaw>('to');
 const isExternalLink = useExternalLink(to);
+
+const LinkComponent = defineComponent(() => {
+  if (!to.value) return () => h('span', null, slots.default?.());
+  if (typeof to.value === 'string' && isExternalLink.value) {
+    const aProps = { target: '_blank', rel: '"noopener noreferrer' };
+    return () => h('a', { href: to.value, ...aProps }, slots.default?.());
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return () => h(RouterLink, { to: to.value! }, slots.default?.());
+});
 
 defineExpose({ isExternalLink });
 </script>
 
 <template>
-  <span v-if="!to">
-    <slot></slot>
-  </span>
-
-  <a
-    v-else-if="typeof to === 'string' && isExternalLink"
-    :href="to"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <slot></slot>
-  </a>
-
-  <RouterLink v-else :to="to">
-    <slot></slot>
-  </RouterLink>
+  <component :is="LinkComponent" />
 </template>
