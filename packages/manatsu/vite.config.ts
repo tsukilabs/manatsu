@@ -68,7 +68,7 @@ export default defineConfig({
       fileName: 'index'
     },
     rollupOptions: {
-      external: ['vue', 'vue-router', /^@vueuse\//],
+      external: ['vue', 'vue-router', /^@vueuse\//, /^@tauri-apps\/api/],
       output: {
         chunkFileNames: '[name].js',
         manualChunks: {

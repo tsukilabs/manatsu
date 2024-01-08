@@ -58,6 +58,7 @@
     "vite": "^5.0.11"
   },
   "peerDependencies": {
+    "@tauri-apps/api": "^1.5.0",
     "@vueuse/core": "^10.7.0",
     "vue": "~3.3.0",
     "vue-router": "^4.2.0"
