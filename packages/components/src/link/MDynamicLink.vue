@@ -12,22 +12,20 @@ defineExpose({ isExternalLink });
 </script>
 
 <template>
-  <template v-if="to">
-    <a
-      v-if="typeof to === 'string' && isExternalLink"
-      :href="to"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <slot></slot>
-    </a>
-
-    <RouterLink v-else :to="to">
-      <slot></slot>
-    </RouterLink>
-  </template>
-
-  <span v-else>
+  <span v-if="!to">
     <slot></slot>
   </span>
+
+  <a
+    v-else-if="typeof to === 'string' && isExternalLink"
+    :href="to"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <slot></slot>
+  </a>
+
+  <RouterLink v-else :to="to">
+    <slot></slot>
+  </RouterLink>
 </template>
