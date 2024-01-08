@@ -8,7 +8,14 @@ const value = defineModel<string | null>('value');
 
 <template>
   <div role="none">
-    <input v-model="value" type="text" class="m-input" :style="style" :placeholder="placeholder" />
+    <input
+      v-model="value"
+      type="text"
+      class="m-input"
+      :class="inputClass"
+      :style="inputStyle"
+      :placeholder="placeholder"
+    />
   </div>
 </template>
 

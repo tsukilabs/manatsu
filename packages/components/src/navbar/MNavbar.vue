@@ -28,23 +28,35 @@ defineExpose({ startWidth, endWidth });
 
 <template>
   <header class="m-navbar">
-    <div v-if="$slots.start" ref="start" class="m-navbar-start" :style="startStyle">
+    <div
+      v-if="$slots.start"
+      ref="start"
+      class="m-navbar-start"
+      :class="startClass"
+      :style="startStyle"
+    >
       <slot name="start"></slot>
     </div>
 
-    <div class="m-navbar-content" :style="contentStyle">
-      <nav v-if="menuItems && menuItems.length > 0" class="m-navbar-menu" :style="menuStyle">
+    <div class="m-navbar-content" :class="contentClass" :style="contentStyle">
+      <nav
+        v-if="menuItems && menuItems.length > 0"
+        class="m-navbar-menu"
+        :class="menuClass"
+        :style="menuStyle"
+      >
         <div
           v-for="item of menuItems"
           :key="item.key"
           class="m-navbar-menu-item"
+          :class="menuItemClass"
           :style="menuItemStyle"
         >
           <slot name="menu-item" v-bind="item"></slot>
         </div>
       </nav>
 
-      <div v-if="$slots.end" ref="end" class="m-navbar-end" :style="endStyle">
+      <div v-if="$slots.end" ref="end" class="m-navbar-end" :class="endClass" :style="endStyle">
         <slot name="end"></slot>
       </div>
     </div>
