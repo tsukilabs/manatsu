@@ -1,3 +1,4 @@
+import './assets/style.css';
 import 'manatsu/src/style/main.scss';
 import { createApp } from 'vue';
 import { createManatsu } from 'manatsu/src/index.ts';

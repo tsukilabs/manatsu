@@ -3,19 +3,20 @@ import { type VNode, computed } from 'vue';
 import type { ButtonProps } from './types';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
+  buttonClass: () => [],
   variant: 'filled'
 });
 
 defineSlots<{ default: () => VNode }>();
 
 const classList = computed(() => {
-  return [`m-button-${props.variant}`];
+  return [`m-button-${props.variant}`, ...props.buttonClass];
 });
 </script>
 
 <template>
   <div class="m-button-container" role="none">
-    <button type="button" class="m-button" :class="classList" :style="style">
+    <button type="button" class="m-button" :class="classList" :style="buttonStyle">
       <slot></slot>
     </button>
   </div>
