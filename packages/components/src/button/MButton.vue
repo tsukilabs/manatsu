@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { type VNode, computed } from 'vue';
+import { splitWhitespace } from '@tb-dev/utils';
 import type { ButtonProps } from './types';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  buttonClass: () => [],
   variant: 'filled'
 });
 
 defineSlots<{ default: () => VNode }>();
 
 const classList = computed(() => {
-  return [`m-button-${props.variant}`, ...props.buttonClass];
+  return [`m-button-${props.variant}`, ...splitWhitespace(props.buttonClass)];
 });
 </script>
 

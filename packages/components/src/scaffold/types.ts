@@ -8,14 +8,14 @@ export interface SidebarItem {
 }
 
 export interface ScaffoldProps {
-  contentClass?: string[];
+  contentClass?: string;
   contentStyle?: StyleValue;
-  footerClass?: string[];
+  footerClass?: string;
   footerStyle?: StyleValue;
-  headerClass?: string[];
+  headerClass?: string;
   headerStyle?: StyleValue;
-  sidebarClass?: string[];
-  sidebarItemClass?: string[];
+  sidebarClass?: string;
+  sidebarItemClass?: string;
   sidebarItemStyle?: StyleValue;
   sidebarStyle?: StyleValue;
 }

@@ -8,15 +8,15 @@ export interface NavbarMenuItem {
 }
 
 export interface NavbarProps {
-  contentClass?: string[];
+  contentClass?: string;
   contentStyle?: StyleValue;
-  endClass?: string[];
+  endClass?: string;
   endStyle?: StyleValue;
   height?: string | number;
-  menuClass?: string[];
-  menuItemClass?: string[];
+  menuClass?: string;
+  menuItemClass?: string;
   menuItemStyle?: StyleValue;
   menuStyle?: StyleValue;
-  startClass?: string[];
+  startClass?: string;
   startStyle?: StyleValue;
 }

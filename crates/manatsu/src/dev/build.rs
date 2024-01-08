@@ -5,7 +5,7 @@ use miho::pnpm;
 use std::fs;
 use std::time::Instant;
 
-macro_rules! print_bold {
+macro_rules! bold {
   ($message:expr) => {
     println!("{}", $message.bold());
   };
@@ -22,7 +22,7 @@ where
   let filter_flag = "--filter";
 
   // The shared package must be built before anyone else.
-  print_bold!("Building shared package...");
+  bold!("Building shared package...");
   pnpm!(["run", filter_flag, "shared", "build"])?;
 
   let mut args = vec!["run", "--parallel"];
@@ -54,10 +54,10 @@ where
 
   args.push("build");
 
-  print_bold!("Building other packages...");
+  bold!("Building other packages...");
   pnpm!(args)?;
 
-  print_bold!("Copying files...");
+  bold!("Copying files...");
   copy_files(&packages)?;
 
   println!("Built in {:?}", start.elapsed());

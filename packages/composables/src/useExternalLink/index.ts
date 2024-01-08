@@ -1,8 +1,9 @@
+import { computed, toRef } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
-import { type MaybeRefOrGetter, computed, toRef } from 'vue';
+import type { MaybeNullishRef } from '@manatsu/shared';
 
-export function useExternalLink(link: MaybeRefOrGetter<Nullish<RouteLocationRaw>>) {
+export function useExternalLink(link: MaybeNullishRef<RouteLocationRaw>) {
   const linkRef = toRef(link);
   return computed(() => isExternalLink(linkRef.value));
 }

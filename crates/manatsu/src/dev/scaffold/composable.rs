@@ -50,7 +50,8 @@ where
   D: AsRef<Path>,
 {
   let camel = camel.as_ref();
-  let cts = format!("export function {camel}() {{ /* TODO */ }}");
+  let mut cts = String::from("import { type MaybeRefOrGetter, toRef } from 'vue';\n\n");
+  cts.push_str(format!("export function {camel}() {{ /* TODO */ }}").as_str());
 
   let dir = dir.as_ref();
   let path = dir.join("index.ts");

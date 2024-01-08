@@ -23,8 +23,8 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.1.3
+        version: 1.1.3
       '@types/node':
         specifier: ^20.10.7
         version: 20.10.7
@@ -128,8 +128,8 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.1.3
+        version: 1.1.3
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -156,8 +156,8 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.1.3
+        version: 1.1.3
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -187,8 +187,8 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.1.3
+        version: 1.1.3
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -249,8 +249,8 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9
       '@tb-dev/utils':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.1.3
+        version: 1.1.3
       '@vueuse/core':
         specifier: ^10.7.0
         version: 10.7.1(vue@3.3.13)
@@ -2004,10 +2004,10 @@ packages:
         integrity: sha512-A0QlD/b06bjb0S2+fZQl5tkpLqrv3QB8nEPDEpbROXsjrcjTsK6y5CCSgrv0lJbi2yz8RWcuN4XhTKMyUKG45Q==
       }
 
-  /@tb-dev/utils@1.0.10:
+  /@tb-dev/utils@1.1.3:
     resolution:
       {
-        integrity: sha512-ZlxePZbncaaDntrY+NX7bZ2CB9zQAvx7nbVUphC5AtqaK59WO9NT55BeeZCfSDaQ1s53kfrgEnceoKLeJ6fkHg==
+        integrity: sha512-esUHnt5gwtYTv7uL4vSemV5BvXMFrH0iRDci/dkGCgioHUX40kTH8h/YJkR+EOQzQHsywoAY6SjU7ZvrHffqAQ==
       }
     dependencies:
       '@tb-dev/utility-types': 1.0.9

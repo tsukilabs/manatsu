@@ -2,11 +2,11 @@ import type { StyleValue } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 
 export interface BrandProps {
-  linkClass?: string[];
+  linkClass?: string;
   linkStyle?: StyleValue;
-  logoClass?: string[];
+  logoClass?: string;
   logoStyle?: StyleValue;
-  titleClass?: string[];
+  titleClass?: string;
   titleLink?: RouteLocationRaw;
   titleStyle?: StyleValue;
 }

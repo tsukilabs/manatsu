@@ -3,3 +3,4 @@ export * from './useExternalLink';
 export * from './useDarkMode';
 export * from './useToArray';
 export * from './useElementSize';
+export * from './useSplitWhitespace';
