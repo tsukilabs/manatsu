@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { repeat } from '@tb-dev/utils';
 import { computed, ref, shallowRef } from 'vue';
-import { useDarkMode } from '@manatsu/composables/src/index.ts';
+import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
 import {
   MBrand,
   MButton,
@@ -34,6 +34,8 @@ const sidebarItems = computed<SidebarItem[]>(() => {
 
   return items;
 });
+
+const { state: footerText } = useInvoke<string>('footer_text');
 </script>
 
 <template>
@@ -75,7 +77,7 @@ const sidebarItems = computed<SidebarItem[]>(() => {
     </template>
 
     <template #footer>
-      <div class="w-full h-16 flex justify-center items-center">Copyright © 2024 Manatsu</div>
+      <div class="w-full h-16 flex justify-center items-center">{{ footerText }}</div>
     </template>
   </MScaffold>
 </template>
