@@ -7,8 +7,8 @@ const inputValue = ref<string | null>(null);
 </script>
 
 <template>
-  <main>
-    <div>
+  <main class="flex flex-col gap-4">
+    <div class="flex gap-4">
       <MButton>MButton</MButton>
       <MButton variant="outlined">Outlined</MButton>
       <MButton>Lorem ipsum dolor</MButton>
@@ -20,16 +20,3 @@ const inputValue = ref<string | null>(null);
     <LoremIpsum v-for="n of 5" :key="n" :paragraphs="3" />
   </main>
 </template>
-
-<style scoped lang="scss">
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-main > div {
-  display: flex;
-  gap: 1rem;
-}
-</style>

@@ -80,13 +80,13 @@ const containerHeight = computed(() => {
 <style scoped lang="scss">
 @use '@manatsu/sass/flex';
 
-$outer-bg-color: var(--m-color-surface);
+$bg-color: var(--m-color-surface-container);
 $outer-z-index: 100;
 
 .m-scaffold {
   position: fixed;
   inset: 0;
-  background-color: $outer-bg-color;
+  background-color: $bg-color;
   overflow: hidden;
 }
 
@@ -94,7 +94,7 @@ $outer-z-index: 100;
   position: fixed;
   left: 0;
   z-index: $outer-z-index;
-  background-color: $outer-bg-color;
+  background-color: $bg-color;
   width: 100%;
   overflow: hidden;
   user-select: none;
@@ -120,7 +120,7 @@ $outer-z-index: 100;
     top: 0;
     bottom: 0;
     z-index: $outer-z-index;
-    background-color: $outer-bg-color;
+    background-color: $bg-color;
     padding: 1rem;
     overflow-x: hidden;
     user-select: none;
