@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "pnpm run cli dev build",
+    "build:shared": "pnpm run -F @manatsu/shared build",
     "bump": "miho bump --no-ask --add .",
     "cli": "cargo run -p manatsu --",
     "clippy": "run-s clippy:*",

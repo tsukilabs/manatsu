@@ -5,6 +5,7 @@ import {
   type ManatsuGlobal,
   type ManatsuOptions,
   darkModeKey,
+  isDarkMode,
   toggleDarkMode
 } from '@manatsu/shared';
 
@@ -29,6 +30,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
 
 function generateGlobalProps(this: App): ManatsuGlobal {
   const mana: ManatsuGlobal = {
+    isDarkMode,
     setDarkMode: (darkMode) => {
       this.runWithContext(() => {
         const darkModeRef = inject(darkModeKey);
