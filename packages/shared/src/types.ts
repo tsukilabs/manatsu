@@ -2,6 +2,7 @@ import type { MaybeRefOrGetter } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
 
 export interface ManatsuGlobal {
+  isDarkMode: () => boolean;
   setDarkMode: (darkMode: DarkMode) => void;
   toggleDarkMode: () => void;
 }
