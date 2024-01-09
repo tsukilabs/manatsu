@@ -34,7 +34,7 @@
     "ui": "vitest --ui --watch"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.1.5",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@tauri-apps/api": "^1.5.3",
     "@tb-dev/eslint-config": "^1.5.12",
     "@tb-dev/stylelint-config": "^1.1.1",
