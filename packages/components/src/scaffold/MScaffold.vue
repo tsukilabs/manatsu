@@ -81,7 +81,7 @@ const containerHeight = computed(() => {
 @use '@manatsu/sass/flex';
 
 $bg-color: var(--m-color-surface-container);
-$outer-z-index: 100;
+$z-index: 100;
 
 .m-scaffold {
   position: fixed;
@@ -90,10 +90,10 @@ $outer-z-index: 100;
   overflow: hidden;
 }
 
-@mixin outside-scaffold-container {
+@mixin outside {
   position: fixed;
   left: 0;
-  z-index: $outer-z-index;
+  z-index: $z-index;
   background-color: $bg-color;
   width: 100%;
   overflow: hidden;
@@ -101,12 +101,12 @@ $outer-z-index: 100;
 }
 
 .m-scaffold-header {
-  @include outside-scaffold-container;
+  @include outside;
   top: 0;
 }
 
 .m-scaffold-footer {
-  @include outside-scaffold-container;
+  @include outside;
   bottom: 0;
 }
 
@@ -119,7 +119,7 @@ $outer-z-index: 100;
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: $outer-z-index;
+    z-index: $z-index;
     background-color: $bg-color;
     padding: 1rem;
     overflow-x: hidden;
