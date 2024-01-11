@@ -6,7 +6,7 @@ import {
   type ManatsuOptions,
   darkModeKey,
   isDarkMode,
-  toggleDarkMode
+  setDarkMode
 } from '@manatsu/shared';
 
 declare module 'vue' {
@@ -55,9 +55,9 @@ function provideDarkMode(app: App, initial: DarkMode) {
   const preferredDark = usePreferredDark();
   watchEffect(() => {
     if (darkModeRef.value === 'auto') {
-      toggleDarkMode(preferredDark.value);
+      setDarkMode(preferredDark.value);
     } else {
-      toggleDarkMode(darkModeRef.value);
+      setDarkMode(darkModeRef.value);
     }
   });
 }
