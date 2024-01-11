@@ -4,7 +4,7 @@ import { MButton, MCard, MInput } from '@manatsu/components/src/index.ts';
 import LoremIpsum from './LoremIpsum.vue';
 
 const inputValue = ref<string | null>(null);
-const cardVariants = ['filled', 'outlined'] as const;
+const cardVariants = ['filled', 'elevated', 'outlined'] as const;
 </script>
 
 <template>

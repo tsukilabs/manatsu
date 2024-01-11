@@ -2,7 +2,7 @@ import type { StyleValue } from 'vue';
 import type { MaybePromise } from '@tb-dev/utility-types';
 import type { ButtonProps } from '../button';
 
-export type CardVariant = 'filled' | 'outlined';
+export type CardVariant = 'filled' | 'elevated' | 'outlined';
 
 export interface CardHeaderProps {
   headerClass?: string;
