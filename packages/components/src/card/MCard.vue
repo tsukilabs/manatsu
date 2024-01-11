@@ -37,8 +37,6 @@ const hasFooter = computed(() => {
 const mediaOrder = computed(() => {
   return props.mediaPosition === 'before' ? -1 : 0;
 });
-
-defineExpose({ hasTitle, hasHeader, hasFooter });
 </script>
 
 <template>
@@ -131,6 +129,7 @@ defineExpose({ hasTitle, hasHeader, hasFooter });
   gap: 1rem;
   padding: 1rem;
   width: 100%;
+  user-select: none;
 
   @each $name in (start, end) {
     .m-card-header-#{$name} {
@@ -161,6 +160,7 @@ defineExpose({ hasTitle, hasHeader, hasFooter });
   order: v-bind('mediaOrder');
   width: 100%;
   overflow: hidden;
+  user-select: none;
 }
 
 .m-card-content {
@@ -177,5 +177,6 @@ defineExpose({ hasTitle, hasHeader, hasFooter });
   gap: 0.5rem;
   padding: 0.5rem;
   width: 100%;
+  user-select: none;
 }
 </style>
