@@ -3,7 +3,6 @@ import { repeat } from '@tb-dev/utils';
 import { computed, ref, shallowRef } from 'vue';
 import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
 import {
-  MBrand,
   MButton,
   MDynamicLink,
   MNavbar,
@@ -11,7 +10,6 @@ import {
   type NavbarMenuItem,
   type SidebarItem
 } from '@manatsu/components/src/index.ts';
-import peach from '/peach.png';
 
 const darkMode = useDarkMode();
 const darkModeLabel = computed(() => (darkMode.value ? 'Light' : 'Dark'));
@@ -41,16 +39,14 @@ const { state: footerText } = useInvoke<string>('footer_text');
 <template>
   <MScaffold :sidebar-items="sidebarItems">
     <template #header>
-      <MNavbar ref="navbar" :menu-items="menuItems" :height="navbarHeight">
-        <template #start>
-          <MBrand title-link="/">
-            <template #logo>
-              <img :src="peach" />
-            </template>
-            <template #title>Manatsu</template>
-          </MBrand>
-        </template>
-
+      <MNavbar
+        ref="navbar"
+        :menu-items="menuItems"
+        :height="navbarHeight"
+        logo="/peach.png"
+        title="Manatsu"
+        title-link="/"
+      >
         <template #menu-item="{ label, to }">
           <MDynamicLink :to="to">{{ label }}</MDynamicLink>
         </template>

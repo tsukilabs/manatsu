@@ -17,10 +17,10 @@ export interface CardHeaderProps {
   titleStyle?: StyleValue;
 }
 
-export type CardAction = ButtonProps & {
+export interface CardAction extends ButtonProps {
   key: string;
   onClick?: () => MaybePromise<void>;
-};
+}
 
 export interface CardFooterProps {
   actions?: CardAction[];
