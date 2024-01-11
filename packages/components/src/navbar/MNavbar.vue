@@ -55,7 +55,7 @@ defineExpose({ startWidth, endWidth });
       >
         <div v-if="hasLogo" class="m-navbar-logo" :class="logoClass" :style="logoStyle">
           <slot v-if="$slots.logo" name="logo"></slot>
-          <img v-else :src="logo" decoding="async" loading="lazy" />
+          <img v-else :src="logo" />
         </div>
 
         <div v-if="hasTitle" class="m-navbar-title" :class="titleClass" :style="titleStyle">
