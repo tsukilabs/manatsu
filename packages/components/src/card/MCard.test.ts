@@ -85,7 +85,7 @@ describe('card', () => {
     expect(wrapper.find('.custom-footer').text()).toBe('Custom Footer Content');
   });
 
-  it('calls onClick when action button is clicked', async () => {
+  it('should call onClick when action button is clicked', async () => {
     const onClick = vi.fn();
 
     const wrapper = mount(MCard, {
