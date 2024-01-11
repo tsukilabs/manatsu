@@ -93,9 +93,44 @@
   @include -flex($display, $justify: space-between, $items: center);
 }
 
+@mixin x-center-y-end($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: center, $items: flex-end);
+}
+
+@mixin x-center-y-start($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: center, $items: flex-start);
+}
+
+@mixin x-center-y-stretch($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: center, $items: stretch);
+}
+
+@mixin x-end-y-center($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-end, $items: center);
+}
+
+@mixin x-end-y-start($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-end, $items: flex-start);
+}
+
+@mixin x-end-y-stretch($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-end, $items: stretch);
+}
+
 @mixin x-start-y-center($inline: false) {
   $display: if($inline, inline-flex, flex);
   @include -flex($display, $justify: flex-start, $items: center);
+}
+
+@mixin x-start-y-end($inline: false) {
+  $display: if($inline, inline-flex, flex);
+  @include -flex($display, $justify: flex-start, $items: flex-end);
 }
 
 @mixin x-start-y-stretch($inline: false) {
