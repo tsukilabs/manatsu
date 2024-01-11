@@ -5,7 +5,7 @@ export function isDarkMode(): boolean {
   return document.body.matches('.manatsu-dark');
 }
 
-export function toggleDarkMode(darkMode: MaybeRefOrGetter<boolean>) {
+export function setDarkMode(darkMode: MaybeRefOrGetter<boolean>) {
   const active = toValue(darkMode);
 
   const body = document.body;
