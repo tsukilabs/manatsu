@@ -1689,7 +1689,7 @@ dependencies = [
 
 [[package]]
 name = "manatsu"
-version = "0.2.20"
+version = "0.2.21"
 dependencies = [
  "anyhow",
  "clap",
@@ -3103,7 +3103,7 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-manatsu"
-version = "0.2.20"
+version = "0.2.21"
 dependencies = [
  "tauri",
 ]
