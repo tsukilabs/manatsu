@@ -29,7 +29,7 @@ const sidebarItemAmount = ref(100);
 const sidebarItems = computed<SidebarItem[]>(() => {
   const items: SidebarItem[] = [];
   repeat(sidebarItemAmount.value, (i) => {
-    items.push({ key: String(Date.now() + i) });
+    items.push({ key: `Item ${i}` });
   });
 
   return items;
@@ -57,7 +57,7 @@ const { state: footerText } = useInvoke<string>('footer_text');
 
         <template #end>
           <div class="flex gap-2">
-            <MButton variant="outlined" @click="$mana.toggleDarkMode">
+            <MButton variant="outlined" @click="$mana.toggleDarkMode()">
               {{ darkModeLabel }}
             </MButton>
             <MButton variant="outlined" @click="sidebarItemAmount += 5">Action</MButton>

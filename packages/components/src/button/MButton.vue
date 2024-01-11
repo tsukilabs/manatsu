@@ -17,7 +17,7 @@ const classList = computed(() => {
 <template>
   <div class="m-button-container" role="none">
     <button type="button" class="m-button" :class="classList" :style="buttonStyle">
-      <slot></slot>
+      <slot>{{ label }}</slot>
     </button>
   </div>
 </template>
