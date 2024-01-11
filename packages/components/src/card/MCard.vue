@@ -108,6 +108,18 @@ defineExpose({ hasTitle, hasHeader, hasFooter });
   border-radius: var(--m-border-radius);
 }
 
+.m-card-filled {
+  background-color: var(--m-color-surface-container-highest);
+  color: var(--m-color-on-surface);
+}
+
+.m-card-elevated {
+  box-shadow:
+    0 1px 2px 0 rgba(0 0 0 / 30%),
+    0 1px 3px 1px rgba(0 0 0 / 15%);
+  background-color: var(--m-color-surface-container-low);
+}
+
 .m-card-outlined {
   border: 1px solid var(--m-color-outline);
   background-color: transparent;
