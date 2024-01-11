@@ -21,8 +21,13 @@ const classList = computed(() => {
   return [`m-card-${props.variant}`];
 });
 
+const hasTitle = computed(() => {
+  return Boolean(props.title ?? slots.title);
+});
+
 const hasHeader = computed(() => {
-  return Boolean(props.title ?? slots.title ?? slots['header-start'] ?? slots['header-end']);
+  if (hasTitle.value) return true;
+  return Boolean(slots['header-start'] ?? slots['header-end']);
 });
 
 const hasFooter = computed(() => {
@@ -33,7 +38,7 @@ const mediaOrder = computed(() => {
   return props.mediaPosition === 'before' ? -1 : 0;
 });
 
-defineExpose({ hasHeader, hasFooter });
+defineExpose({ hasTitle, hasHeader, hasFooter });
 </script>
 
 <template>
@@ -49,7 +54,7 @@ defineExpose({ hasHeader, hasFooter });
       </div>
 
       <div
-        v-if="title || $slots.title"
+        v-if="hasTitle"
         class="m-card-title"
         :class="titleClass"
         :style="titleStyle"
@@ -84,13 +89,11 @@ defineExpose({ hasHeader, hasFooter });
       <slot v-if="$slots.footer" name="footer"></slot>
       <template v-else-if="actions">
         <MButton
-          v-for="{ key, label, onClick, ...action } of actions"
+          v-for="{ key, onClick, ...action } of actions"
           :key="key"
           v-bind="action"
           @click="onClick"
-        >
-          {{ label }}
-        </MButton>
+        />
       </template>
     </div>
   </div>
