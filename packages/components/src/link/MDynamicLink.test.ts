@@ -28,9 +28,7 @@ describe('dynamic-link', () => {
 
     const wrapper = mount(MDynamicLink, {
       props: { to: '/' },
-      global: {
-        plugins: [router]
-      }
+      global: { plugins: [router] }
     });
 
     expect(wrapper.find('a[class*="router-link"]').exists()).toBe(true);
