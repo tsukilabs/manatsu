@@ -50,8 +50,8 @@
     "@manatsu/components": "workspace:*",
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
-    "@tb-dev/utility-types": "^1.0.9",
-    "@tb-dev/utils": "^1.1.3"
+    "@tb-dev/utility-types": "^1.0.10",
+    "@tb-dev/utils": "^1.1.4"
   },
   "devDependencies": {
     "@manatsu/sass": "workspace:*",
