@@ -11,7 +11,6 @@
     "tamasfe.even-better-toml",
     "vivaxy.vscode-conventional-commits",
     "stylelint.vscode-stylelint",
-    "tauri-apps.tauri-vscode",
-    "mhutchie.git-graph"
+    "tauri-apps.tauri-vscode"
   ]
 }
