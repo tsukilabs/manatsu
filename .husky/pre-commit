@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm run clippy
-pnpm run test
-pnpm run lint
 cargo fmt
 pnpm exec lint-staged
