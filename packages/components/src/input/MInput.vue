@@ -7,16 +7,7 @@ const value = defineModel<string | null>('value');
 </script>
 
 <template>
-  <div role="none">
-    <input
-      v-model="value"
-      type="text"
-      class="m-input"
-      :class="inputClass"
-      :style="inputStyle"
-      :placeholder="placeholder"
-    />
-  </div>
+  <input v-model="value" type="text" class="m-input" :placeholder="placeholder" />
 </template>
 
 <style lang="scss">
@@ -31,7 +22,6 @@ const value = defineModel<string | null>('value');
   font-family: inherit;
 
   &:hover,
-  &:active,
   &:focus {
     border-color: var(--m-color-primary);
   }
