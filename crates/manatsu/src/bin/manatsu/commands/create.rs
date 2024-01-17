@@ -1,9 +1,9 @@
 use super::ManatsuCommand;
+use anyhow::Result;
 use clap::Args;
 use inquire::validator::Validation;
 use inquire::{required, Select, Text};
 use manatsu::project::{self, Project, Template};
-use anyhow::Result;
 
 #[derive(Debug, Args)]
 pub struct CreateCommand {
