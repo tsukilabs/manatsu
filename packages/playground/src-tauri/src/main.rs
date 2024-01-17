@@ -15,5 +15,5 @@ fn main() {
     .plugin(tauri_plugin_manatsu::init())
     .invoke_handler(tauri::generate_handler![footer_text])
     .run(tauri::generate_context!())
-    .expect("Playground could not be started");
+    .expect("playground could not be started");
 }
