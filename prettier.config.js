@@ -4,7 +4,6 @@ export default {
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
-  endOfLine: 'crlf',
   semi: true,
   singleQuote: true,
   trailingComma: 'none',
