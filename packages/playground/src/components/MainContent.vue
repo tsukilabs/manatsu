@@ -1,29 +1,32 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { capitalize } from 'lodash-es';
 import { MButton, MCard, MInput } from '@manatsu/components/src/index.ts';
 import LoremIpsum from './LoremIpsum.vue';
 
 const inputValue = ref<string | null>(null);
-const cardVariants = ['filled', 'elevated', 'outlined'] as const;
+const variants = ['filled', 'elevated', 'outlined'] as const;
 </script>
 
 <template>
   <main class="flex flex-col gap-4">
     <div class="flex gap-4">
-      <MButton>MButton</MButton>
-      <MButton variant="outlined">Outlined</MButton>
-      <MButton>Lorem ipsum dolor</MButton>
+      <template v-for="variant of variants" :key="variant">
+        <MButton :variant="variant">{{ capitalize(variant) }}</MButton>
+        <MButton :variant="variant" disabled>{{ capitalize(variant) }}</MButton>
+      </template>
     </div>
-    <div>
+    <div class="flex gap-4 items-center">
       <MInput v-model:value="inputValue" placeholder="Text field" />
+      <span>{{ inputValue }}</span>
     </div>
 
     <div class="flex gap-8">
       <MCard
-        v-for="variant of cardVariants"
+        v-for="variant of variants"
         :key="variant"
         :variant="variant"
-        :title="variant"
+        :title="capitalize(variant)"
         subtitle="subtitle"
         class="w-72"
       >

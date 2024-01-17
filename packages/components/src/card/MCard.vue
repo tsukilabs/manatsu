@@ -18,7 +18,7 @@ const slots = defineSlots<{
 }>();
 
 const classList = computed(() => {
-  return [`m-card-${props.variant}`];
+  return ['m-card', `m-card-${props.variant}`];
 });
 
 const hasTitle = computed(() => {
@@ -40,7 +40,7 @@ const mediaOrder = computed(() => {
 </script>
 
 <template>
-  <div class="m-card" :class="classList">
+  <div :class="classList">
     <div v-if="hasHeader" class="m-card-header" :class="headerClass" :style="headerStyle">
       <div
         v-if="$slots['header-start']"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { type VNode, computed } from 'vue';
-import { splitWhitespace } from '@tb-dev/utils';
 import type { ButtonProps } from './types';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -10,29 +9,21 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 defineSlots<{ default: () => VNode }>();
 
 const classList = computed(() => {
-  return [`m-button-${props.variant}`, ...splitWhitespace(props.buttonClass)];
+  return ['m-button', `m-button-${props.variant}`];
 });
 </script>
 
 <template>
-  <div class="m-button-container" role="none">
-    <button type="button" class="m-button" :class="classList" :style="buttonStyle">
-      <slot>{{ label }}</slot>
-    </button>
-  </div>
+  <button type="button" :class="classList" :disabled="disabled">
+    <slot>{{ label }}</slot>
+  </button>
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
-
-.m-button-container {
-  @include flex.center($inline: true);
-  flex-wrap: nowrap;
-  max-width: max-content;
-  white-space: nowrap;
-}
+$transition-duration: 0.2s;
 
 .m-button {
+  transition: none;
   cursor: pointer;
   border: none;
   border-radius: var(--m-border-radius);
@@ -41,11 +32,17 @@ const classList = computed(() => {
   min-height: 32px;
   font-size: 1em;
   font-family: inherit;
+  user-select: none;
   text-align: center;
 }
 
+.m-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .m-button-filled {
-  transition: filter 0.3s ease-in-out;
+  transition: filter $transition-duration ease-in-out;
   background-color: var(--m-color-primary);
   color: var(--m-color-on-primary);
 
@@ -55,12 +52,16 @@ const classList = computed(() => {
 }
 
 .m-button-outlined {
-  transition: border-color 0.3s ease-in-out;
+  transition:
+    border-color $transition-duration ease-in-out,
+    box-shadow $transition-duration ease-in-out,
+    color $transition-duration ease-in-out;
   border: 1px solid var(--m-color-outline);
   background-color: transparent;
   color: inherit;
 
   &:hover {
+    box-shadow: 0 0 1px 1px rgb(111 219 168 / 15%);
     border-color: var(--m-color-primary);
     color: var(--m-color-primary);
   }
