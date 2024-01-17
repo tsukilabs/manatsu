@@ -1,4 +1,4 @@
-use super::ManatsuCommand;
+use super::CliCommand;
 use anyhow::Result;
 use clap::Subcommand;
 use inquire::validator::Validation;
@@ -7,7 +7,7 @@ use manatsu::dev::package;
 use manatsu::dev::scaffold::{component, composable};
 
 #[derive(Debug, Subcommand)]
-pub enum DevCommand {
+pub enum Dev {
   /// Builds all the public packages.
   Build {
     /// If present, only the indicated packages will be built.
@@ -23,17 +23,17 @@ pub enum DevCommand {
   Release,
 }
 
-impl ManatsuCommand for DevCommand {
+impl CliCommand for Dev {
   fn execute(&self) -> Result<()> {
     match self {
-      DevCommand::Build { packages } => {
+      Dev::Build { packages } => {
         let packages = packages.as_deref();
         match packages {
           Some(p) if !p.is_empty() => manatsu::dev::build(p),
           _ => manatsu::dev::build(package::PUBLIC_PACKAGES),
         }
       }
-      DevCommand::Component => {
+      Dev::Component => {
         let validator = |name: &str| {
           if component::is_valid(name)? {
             Ok(Validation::Valid)
@@ -49,7 +49,7 @@ impl ManatsuCommand for DevCommand {
 
         component::create(name)
       }
-      DevCommand::Composable => {
+      Dev::Composable => {
         let validator = |name: &str| {
           if composable::is_valid(name)? {
             Ok(Validation::Valid)
@@ -65,8 +65,8 @@ impl ManatsuCommand for DevCommand {
 
         composable::create(name)
       }
-      DevCommand::Readme => manatsu::dev::readme(),
-      DevCommand::Release => manatsu::dev::release(),
+      Dev::Readme => manatsu::dev::readme(),
+      Dev::Release => manatsu::dev::release(),
     }
   }
 }

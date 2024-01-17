@@ -1,4 +1,4 @@
-use super::ManatsuCommand;
+use super::CliCommand;
 use anyhow::Result;
 use clap::Args;
 use inquire::validator::Validation;
@@ -6,13 +6,13 @@ use inquire::{required, Select, Text};
 use manatsu::project::{self, Project, Template};
 
 #[derive(Debug, Args)]
-pub struct CreateCommand {
+pub struct Create {
   /// Overwrites the directory if it already exists.
   #[arg(short = 'f', long)]
   force: bool,
 }
 
-impl ManatsuCommand for CreateCommand {
+impl CliCommand for Create {
   fn execute(&self) -> Result<()> {
     let validator = |name: &str| {
       if project::is_valid(name)? {

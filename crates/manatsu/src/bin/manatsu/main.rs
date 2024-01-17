@@ -1,19 +1,19 @@
-mod commands;
+mod command;
 
 use anyhow::Result;
 use clap::Parser;
-use commands::*;
+use command::CliCommand;
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu")]
 #[command(version, about, long_about = None)]
 enum Cli {
   /// Easily create a new project.
-  Create(CreateCommand),
+  Create(command::Create),
 
   /// Helpful commands when contributing to Manatsu.
   #[command(subcommand)]
-  Dev(DevCommand),
+  Dev(command::Dev),
 }
 
 fn main() -> Result<()> {
