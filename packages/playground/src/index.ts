@@ -19,7 +19,8 @@ const manatsu = createManatsu();
 app.use(router);
 app.use(manatsu);
 
-void router.push('/');
-void router.isReady().then(() => {
-  app.mount('#app');
-});
+router
+  .push('/')
+  .then(() => router.isReady())
+  .then(() => app.mount('#app'))
+  .catch((err: unknown) => console.error(err));
