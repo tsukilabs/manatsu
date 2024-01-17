@@ -13,8 +13,10 @@ version = "1.5"
 features = []
 
 [dependencies]
+chrono = "0.4"
 serde_json = "1.0"
 tauri-plugin-manatsu = "*"
+tauri-plugin-window-state = "0.1"
 
 [dependencies.serde]
 version = "1.0"
