@@ -80,13 +80,12 @@ const containerHeight = computed(() => {
 <style lang="scss">
 @use '@manatsu/sass/flex';
 
-$bg-color: var(--m-color-surface-container);
 $z-index: 100;
 
 .m-scaffold {
   position: fixed;
   inset: 0;
-  background-color: $bg-color;
+  background-color: var(--m-color-surface-container);
   overflow: hidden;
 }
 
@@ -94,7 +93,7 @@ $z-index: 100;
   position: fixed;
   left: 0;
   z-index: $z-index;
-  background-color: $bg-color;
+  background-color: var(--m-color-surface-container);
   width: 100%;
   overflow: hidden;
   user-select: none;
@@ -120,7 +119,7 @@ $z-index: 100;
     top: 0;
     bottom: 0;
     z-index: $z-index;
-    background-color: $bg-color;
+    background-color: var(--m-color-background);
     padding: 1rem;
     overflow-x: hidden;
     user-select: none;
@@ -136,7 +135,7 @@ $z-index: 100;
     position: absolute;
     inset: 0;
     left: v-bind('sidebarWidth');
-    background-color: var(--m-color-surface-container);
+    background-color: var(--m-color-background);
     padding: 1rem;
     overflow-x: hidden;
   }
