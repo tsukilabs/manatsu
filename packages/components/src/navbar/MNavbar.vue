@@ -91,7 +91,7 @@ defineExpose({ startWidth, endWidth });
   </header>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@manatsu/sass/flex';
 
 .m-navbar {

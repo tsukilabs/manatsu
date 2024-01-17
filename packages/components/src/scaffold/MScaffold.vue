@@ -77,7 +77,7 @@ const containerHeight = computed(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@manatsu/sass/flex';
 
 $bg-color: var(--m-color-surface-container);

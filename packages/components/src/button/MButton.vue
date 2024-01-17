@@ -22,7 +22,7 @@ const classList = computed(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@manatsu/sass/flex';
 
 .m-button-container {

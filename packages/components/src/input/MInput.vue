@@ -19,7 +19,7 @@ const value = defineModel<string | null>('value');
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .m-input {
   outline: none;
   border: 1px solid var(--m-color-outline);
