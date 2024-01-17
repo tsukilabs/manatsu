@@ -1,7 +1,7 @@
 use super::package::{self, is_standalone, PUBLIC_PACKAGES};
+use crate::pnpm;
 use anyhow::{bail, Result};
 use colored::*;
-use miho::pnpm;
 use std::fs;
 use std::time::Instant;
 

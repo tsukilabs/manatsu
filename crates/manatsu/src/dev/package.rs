@@ -46,7 +46,7 @@ pub fn dts<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   Ok(path)
 }
 
-/// Whether the package should be merged with the `manatsu` package.
+/// Whether the package should be merged with the core package.
 pub fn is_standalone<P: AsRef<str>>(package: P) -> bool {
   let package = package.as_ref();
   package != "components" && package != "composables"

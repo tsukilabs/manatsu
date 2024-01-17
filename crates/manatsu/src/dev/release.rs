@@ -1,7 +1,7 @@
 use super::json;
 use anyhow::Result;
 use miho::git::{self, Commit};
-use miho::{cargo, pnpm};
+use crate::{cargo, pnpm};
 use std::process::Stdio;
 
 /// Releases a new version, publishing all the public packages.
