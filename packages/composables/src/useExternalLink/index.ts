@@ -9,9 +9,6 @@ export function useExternalLink(link: MaybeNullishRef<RouteLocationRaw>) {
 }
 
 function isExternalLink(url: Nullish<RouteLocationRaw>): boolean {
-  if (typeof url === 'string') {
-    return url.startsWith('http');
-  }
-
-  return false;
+  if (typeof url !== 'string') return false;
+  return url.startsWith('http');
 }
