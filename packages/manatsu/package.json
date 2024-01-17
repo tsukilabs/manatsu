@@ -64,6 +64,6 @@
     "vue-router": "^4.2.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
