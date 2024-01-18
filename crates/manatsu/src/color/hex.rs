@@ -56,14 +56,14 @@ impl TryFrom<&str> for Hex {
     let hex_regex = Regex::new(HEX_REGEX)?;
     let caps = hex_regex
       .captures(value)
-      .ok_or(anyhow!("Could not find capture groups"))
+      .ok_or_else(|| anyhow!("Could not find capture groups"))
       .with_context(|| format!("Slice does not contain a valid hex color: {}", value))?;
 
     macro_rules! to_u8 {
       ($index:literal) => {{
         let value = caps
           .get($index)
-          .ok_or(anyhow!("Could not find capture group at index {}", $index))?
+          .ok_or_else(|| anyhow!("Could not find capture group at index {}", $index))?
           .as_str();
 
         u8::from_str_radix(value, 16)

@@ -39,7 +39,7 @@ impl Template {
     if response.has(header_name) {
       let len: usize = response
         .header(header_name)
-        .ok_or(anyhow!("Header unavailable: {}", header_name))?
+        .ok_or_else(|| anyhow!("Header unavailable: {}", header_name))?
         .parse()
         .with_context(|| format!("Could not parse header: {}", header_name))?;
 

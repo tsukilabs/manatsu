@@ -5,12 +5,6 @@ use colored::*;
 use std::fs;
 use std::time::Instant;
 
-macro_rules! bold {
-  ($message:expr) => {
-    println!("{}", $message.bold());
-  };
-}
-
 /// Build the packages.
 pub fn build<I, S>(packages: I) -> Result<()>
 where
@@ -22,7 +16,7 @@ where
   let filter_flag = "--filter";
 
   // The shared package must be built before anyone else.
-  bold!("Building shared package...");
+  println!("{}", "Building shared package...".bold());
   pnpm!(["run", filter_flag, "shared", "build"])?;
 
   let mut args = vec!["run", "--parallel"];
@@ -54,10 +48,10 @@ where
 
   args.push("build");
 
-  bold!("Building other packages...");
+  println!("{}", "Building other packages...".bold());
   pnpm!(args)?;
 
-  bold!("Copying files...");
+  println!("{}", "Copying files...".bold());
   copy_files(&packages)?;
 
   println!("Built in {:?}", start.elapsed());

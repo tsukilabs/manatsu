@@ -80,9 +80,9 @@ dependencies = [
 
 [[package]]
 name = "anstream"
-version = "0.6.8"
+version = "0.6.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "628a8f9bd1e24b4e0db2b4bc2d000b001e7dd032d54afa60a68836aeec5aa54a"
+checksum = "6e2e1ebcb11de5c03c67de28a7df593d32191b44939c482e97702baaaa6ab6a5"
 dependencies = [
  "anstyle",
  "anstyle-parse",
@@ -1451,9 +1451,9 @@ checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
 
 [[package]]
 name = "hermit-abi"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d77f7ec81a6d05a3abb01ab6eb7590f6083d08449fe5a1c8b1e620283546ccb7"
+checksum = "5d3d0e0f38255e7fa3cf31335b3a56f05febd18025f4db5ef7a0cfb4f8da651f"
 
 [[package]]
 name = "hex"
@@ -1924,9 +1924,9 @@ dependencies = [
 
 [[package]]
 name = "miho"
-version = "3.7.15"
+version = "3.7.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd4716981966e0e9ba71c153c2b079d2f0d23c81294e43d1d8761267490f7927"
+checksum = "8989d54399b4fe9078232069617a98dbdf9358bcb80ae16539251aa25330dd32"
 dependencies = [
  "anyhow",
  "clap",
@@ -1944,9 +1944,9 @@ dependencies = [
 
 [[package]]
 name = "miho_derive"
-version = "3.7.15"
+version = "3.7.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d29bb3e24b00ec53f7bef1125bae912047ef9f5b0bb08718e4b7cf6d521c1c8f"
+checksum = "7dedd0bda229efb9bf00fba6af96b4697a6629b1e866fd2df90579c47e701df2"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2",
@@ -3742,9 +3742,9 @@ checksum = "42ff0bf0c66b8238c6f3b578df37d0b7848e55df8577b3f74f92a69acceeb825"
 
 [[package]]
 name = "unicode-bidi"
-version = "0.3.14"
+version = "0.3.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6f2528f27a9eb2b21e69c95319b30bd0efd85d09c379741b0f78ea1d86be2416"
+checksum = "08f95100a766bf4f8f28f90d77e0a5461bbdb219042e7679bebe79004fed8d75"
 
 [[package]]
 name = "unicode-ident"

@@ -18,6 +18,14 @@ macro_rules! win_cmd {
   }};
 }
 
+/// Executes `cargo` with the specified arguments.
+///
+/// # Examples
+///
+/// ```
+/// let output = manatsu::cargo!("--version").unwrap();
+/// assert!(output.status.success());
+/// ```
 #[macro_export]
 macro_rules! cargo {
   ($( $arg:literal ),*) => {{
@@ -39,6 +47,7 @@ macro_rules! cargo {
   }};
 }
 
+/// Executes `pnpm` with the specified arguments.
 #[macro_export]
 macro_rules! pnpm {
   ($( $arg:literal ),*) => {{
