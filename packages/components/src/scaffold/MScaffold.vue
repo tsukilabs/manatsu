@@ -82,13 +82,6 @@ const containerHeight = computed(() => {
 
 $z-index: 100;
 
-.m-scaffold {
-  position: fixed;
-  inset: 0;
-  background-color: var(--m-color-surface-container);
-  overflow: hidden;
-}
-
 @mixin outside {
   position: fixed;
   left: 0;
@@ -98,22 +91,24 @@ $z-index: 100;
   overflow: hidden;
 }
 
-.m-scaffold-header {
-  @include outside;
-  top: 0;
-}
+.m-scaffold {
+  position: fixed;
+  inset: 0;
+  background-color: var(--m-color-surface-container);
+  overflow: hidden;
 
-.m-scaffold-footer {
-  @include outside;
-  bottom: 0;
-}
+  &-header {
+    @include outside;
+    top: 0;
+  }
 
-.m-scaffold-container {
-  position: relative;
-  top: v-bind('headerHeight');
-  height: v-bind('containerHeight');
+  &-container {
+    position: relative;
+    top: v-bind('headerHeight');
+    height: v-bind('containerHeight');
+  }
 
-  .m-scaffold-sidebar {
+  &-sidebar {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -129,13 +124,18 @@ $z-index: 100;
     }
   }
 
-  .m-scaffold-content {
+  &-content {
     position: absolute;
     inset: 0;
     left: v-bind('sidebarWidth');
     background-color: var(--m-color-background);
     padding: 1rem;
     overflow-x: hidden;
+  }
+
+  &-footer {
+    @include outside;
+    bottom: 0;
   }
 }
 </style>

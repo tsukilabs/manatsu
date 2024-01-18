@@ -14,7 +14,7 @@ const router = createRouter({
 });
 
 const app = createApp(App);
-const manatsu = createManatsu();
+const manatsu = createManatsu({ darkMode: false });
 
 app.use(router);
 app.use(manatsu);

@@ -103,40 +103,40 @@ defineExpose({ startWidth, endWidth });
   overflow: hidden;
   white-space: nowrap;
 
-  @each $name in (start, end) {
-    .m-navbar-#{$name} {
+  &-brand {
+    @include flex.y-center;
+
+    & > :first-child {
       @include flex.y-center;
-      justify-content: flex-#{$name};
     }
   }
-}
 
-.m-navbar-brand {
-  @include flex.y-center;
-
-  & > :first-child {
-    @include flex.y-center;
-  }
-
-  .m-navbar-logo {
+  &-logo {
     @include flex.y-center;
     margin: 0 8px 0 0;
   }
 
-  .m-navbar-title {
+  &-title {
     @include flex.y-center;
     font-weight: 600;
     font-size: 1.5rem;
   }
-}
 
-.m-navbar-content {
-  @include flex.x-end-y-center;
-  flex: 1 0 0;
+  &-content {
+    @include flex.x-end-y-center;
+    flex: 1 0 0;
+  }
 
-  .m-navbar-menu {
+  &-menu {
     @include flex.x-end-y-center;
     gap: 1.5rem;
+  }
+
+  @each $name in (start, end) {
+    &-#{$name} {
+      @include flex.y-center;
+      justify-content: flex-#{$name};
+    }
   }
 }
 </style>
