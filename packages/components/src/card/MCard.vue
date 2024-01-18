@@ -114,11 +114,11 @@ const mediaOrder = computed(() => {
     box-shadow:
       0 1px 2px 0 rgb(0 0 0 / 30%),
       0 1px 3px 1px rgb(0 0 0 / 15%);
-    background-color: var(--m-color-surface-container-high);
+    background-color: var(--m-color-surface-container-low);
   }
 
   &-outlined {
-    border: 1px solid var(--m-color-outline);
+    border: 1px solid var(--m-color-outline-variant);
     background-color: transparent;
     color: inherit;
   }
@@ -129,11 +129,14 @@ const mediaOrder = computed(() => {
     padding: 1rem;
     width: 100%;
 
-    @each $name in (start, end) {
-      &-#{$name} {
-        @include flex.y-center;
-        justify-content: flex-#{$name};
-      }
+    &-start {
+      @include flex.y-center;
+      justify-content: flex-start;
+    }
+
+    &-end {
+      @include flex.y-center;
+      justify-content: flex-end;
     }
   }
 
