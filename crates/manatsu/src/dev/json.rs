@@ -9,6 +9,7 @@ pub(crate) struct Config {
 }
 
 #[derive(Deserialize)]
+#[serde(rename_all(serialize = "snake_case", deserialize = "camelCase"))]
 pub(crate) struct Package {
   pub version: String,
 }

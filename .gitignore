@@ -30,3 +30,4 @@ dist/
 .eslintcache
 .stylelintcache
 config.json
+tokens.css

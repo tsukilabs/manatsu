@@ -4,9 +4,9 @@ pub mod package;
 mod release;
 pub mod scaffold;
 
+use crate::pnpm;
 use anyhow::{Context, Result};
 pub use build::build;
-use miho::pnpm;
 pub use release::release;
 use std::{env, fs};
 

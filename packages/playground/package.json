@@ -30,10 +30,12 @@
     "@manatsu/composables": "workspace:*",
     "@manatsu/sass": "workspace:*",
     "@manatsu/shared": "workspace:*",
+    "lodash-es": "^4.17.21",
     "manatsu": "workspace:*"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
+    "@types/lodash-es": "^4.17.12",
+    "autoprefixer": "^10.4.17",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "vite": "^5.0.11"
