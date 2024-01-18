@@ -50,6 +50,7 @@ impl From<Rgb> for Hsl {
 
     let max = red.max(green).max(blue);
     let min = red.min(green).min(blue);
+    let delta = max - min;
     let lightness = (max + min) / 2.0;
 
     if max == min {
@@ -62,11 +63,11 @@ impl From<Rgb> for Hsl {
     }
 
     let mut hue = if max == red {
-      (green - blue) / (max - min)
+      (green - blue) / delta
     } else if max == green {
-      2.0 + (blue - red) / (max - min)
+      2.0 + (blue - red) / delta
     } else {
-      4.0 + (red - green) / (max - min)
+      4.0 + (red - green) / delta
     };
 
     hue *= 60.0;
@@ -76,9 +77,9 @@ impl From<Rgb> for Hsl {
     }
 
     let saturation = if lightness <= 0.5 {
-      (max - min) / (max + min)
+      delta / (max + min)
     } else {
-      (max - min) / (2.0 - max - min)
+      delta / (2.0 - delta)
     };
 
     Self {
