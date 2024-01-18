@@ -32,12 +32,12 @@ $transition-duration: 0.2s;
   font-family: inherit;
   text-align: center;
 
-  &:active {
-    transform: translateY(1px);
-  }
-
   &:disabled {
     opacity: 0.5;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
   }
 
   &-filled {
@@ -45,7 +45,7 @@ $transition-duration: 0.2s;
     background-color: var(--m-color-primary);
     color: var(--m-color-on-primary);
 
-    &:hover {
+    &:hover:not(:disabled) {
       box-shadow: 0 0 1px 1px rgb(0 0 0 / 30%);
     }
   }
@@ -58,7 +58,7 @@ $transition-duration: 0.2s;
     background-color: var(--m-color-surface-container-low);
     color: var(--m-color-primary);
 
-    &:hover {
+    &:hover:not(:disabled) {
       box-shadow: 0 0 1px 1px rgb(0 0 0 / 30%);
     }
   }
@@ -72,7 +72,7 @@ $transition-duration: 0.2s;
     background-color: transparent;
     color: inherit;
 
-    &:hover {
+    &:hover:not(:disabled) {
       box-shadow: 0 0 1px 1px rgb(0 0 0 / 15%);
       border-color: var(--m-color-primary);
       color: var(--m-color-primary);
