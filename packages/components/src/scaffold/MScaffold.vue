@@ -82,6 +82,7 @@ const containerHeight = computed(() => {
 
 $z-index: 100;
 
+/** This is applied to header and footer. */
 @mixin outside {
   position: fixed;
   left: 0;
@@ -113,7 +114,7 @@ $z-index: 100;
     top: 0;
     bottom: 0;
     z-index: $z-index;
-    background-color: var(--m-color-background);
+    background-color: var(--m-color-surface);
     padding: 1rem;
     overflow-x: hidden;
 
@@ -128,7 +129,7 @@ $z-index: 100;
     position: absolute;
     inset: 0;
     left: v-bind('sidebarWidth');
-    background-color: var(--m-color-background);
+    background-color: var(--m-color-surface);
     padding: 1rem;
     overflow-x: hidden;
   }

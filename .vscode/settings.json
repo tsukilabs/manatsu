@@ -36,5 +36,12 @@
   "stylelint.validate": ["css", "less", "postcss", "scss", "vue"],
   "stylelint.packageManager": "pnpm",
   "conventionalCommits.promptScopes": true,
-  "conventionalCommits.scopes": ["components", "composables", "core", "playground", "cli", "plugin"]
+  "conventionalCommits.scopes": [
+    "components",
+    "composables",
+    "core",
+    "playground",
+    "cli",
+    "tauri-plugin"
+  ]
 }
