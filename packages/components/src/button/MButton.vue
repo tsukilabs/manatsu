@@ -24,7 +24,6 @@ $transition-duration: 0.2s;
 
 .m-button {
   transition: none;
-  cursor: pointer;
   border: none;
   border-radius: var(--m-border-radius);
   padding: 0.25em 0.75em;
@@ -32,13 +31,11 @@ $transition-duration: 0.2s;
   min-height: 32px;
   font-size: 1em;
   font-family: inherit;
-  user-select: none;
   text-align: center;
 }
 
 .m-button:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .m-button-filled {

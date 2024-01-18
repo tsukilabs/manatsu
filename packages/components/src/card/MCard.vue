@@ -129,7 +129,6 @@ const mediaOrder = computed(() => {
   gap: 1rem;
   padding: 1rem;
   width: 100%;
-  user-select: none;
 
   @each $name in (start, end) {
     .m-card-header-#{$name} {
@@ -160,7 +159,6 @@ const mediaOrder = computed(() => {
   order: v-bind('mediaOrder');
   width: 100%;
   overflow: hidden;
-  user-select: none;
 }
 
 .m-card-content {
@@ -177,6 +175,5 @@ const mediaOrder = computed(() => {
   gap: 0.5rem;
   padding: 0.5rem;
   width: 100%;
-  user-select: none;
 }
 </style>

@@ -101,7 +101,6 @@ defineExpose({ startWidth, endWidth });
   width: 100%;
   height: v-bind('height');
   overflow: hidden;
-  user-select: none;
   white-space: nowrap;
 
   @each $name in (start, end) {
