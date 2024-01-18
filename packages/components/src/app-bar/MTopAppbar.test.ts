@@ -5,10 +5,10 @@ import type { TopAppbarMenuItem } from './types';
 
 enableAutoUnmount(afterEach);
 
-describe('top-app-bar', () => {
+describe('top-appbar', () => {
   it('should render menu items', () => {
     const wrapper = mount(MTopAppbar, { props: { menuItems: createMenuItems() } });
-    expect(wrapper.findAll('.m-navbar-menu-item')).toHaveLength(2);
+    expect(wrapper.findAll('.m-top-appbar-menu-item')).toHaveLength(2);
   });
 });
 

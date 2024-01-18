@@ -39,7 +39,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
 
 <template>
   <MScaffold :sidebar-items="sidebarItems">
-    <template #header>
+    <template #top-bar>
       <MTopAppbar
         ref="navbar"
         :menu-items="menuItems"
@@ -80,7 +80,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
       <RouterView />
     </template>
 
-    <template #footer>
+    <template #bottom-bar>
       <div class="w-full h-16 flex justify-center items-center">{{ footerText }}</div>
     </template>
   </MScaffold>

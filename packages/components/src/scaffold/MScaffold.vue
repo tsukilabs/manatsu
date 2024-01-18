@@ -6,37 +6,37 @@ import type { ScaffoldProps, SidebarItem } from './types';
 defineProps<ScaffoldProps>();
 
 const slots = defineSlots<{
+  'bottom-bar'?: () => VNode;
   default?: () => VNode;
-  footer?: () => VNode;
-  header?: () => VNode;
   'sidebar-item'?: (props: SidebarItem) => VNode;
+  'top-bar'?: () => VNode;
 }>();
 
-const header = shallowRef<HTMLElement | null>(null);
-const headerHeight = usePixelHeight(header);
+const topBar = shallowRef<HTMLElement | null>(null);
+const topBarHeight = usePixelHeight(topBar);
 
 const sidebar = shallowRef<HTMLElement | null>(null);
 const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
 const sidebarWidth = usePixelWidth(sidebar);
 
-const footer = shallowRef<HTMLElement | null>(null);
-const footerHeight = usePixelHeight(footer);
+const bottomBar = shallowRef<HTMLElement | null>(null);
+const bottomBarHeight = usePixelHeight(bottomBar);
 
 const containerHeight = computed(() => {
-  return `calc(100% - (${headerHeight.value} + ${footerHeight.value}))`;
+  return `calc(100% - (${topBarHeight.value} + ${bottomBarHeight.value}))`;
 });
 </script>
 
 <template>
   <div class="m-scaffold">
     <div
-      v-if="$slots.header"
-      ref="header"
-      class="m-scaffold-header"
-      :class="headerClass"
-      :style="headerStyle"
+      v-if="$slots['top-bar']"
+      ref="topBar"
+      class="m-scaffold-top-bar"
+      :class="topBarClass"
+      :style="topBarStyle"
     >
-      <slot name="header"></slot>
+      <slot name="top-bar"></slot>
     </div>
 
     <div class="m-scaffold-container">
@@ -66,13 +66,13 @@ const containerHeight = computed(() => {
     </div>
 
     <div
-      v-if="$slots.footer"
-      ref="footer"
-      class="m-scaffold-footer"
-      :class="footerClass"
-      :style="footerStyle"
+      v-if="$slots['bottom-bar']"
+      ref="bottomBar"
+      class="m-scaffold-bottom-bar"
+      :class="bottomBarClass"
+      :style="bottomBarStyle"
     >
-      <slot name="footer"></slot>
+      <slot name="bottom-bar"></slot>
     </div>
   </div>
 </template>
@@ -82,7 +82,7 @@ const containerHeight = computed(() => {
 
 $z-index: 100;
 
-/** This is applied to header and footer. */
+/** This is applied to the top and bottom bars. */
 @mixin outside {
   position: fixed;
   left: 0;
@@ -98,14 +98,14 @@ $z-index: 100;
   background-color: var(--m-color-surface-container);
   overflow: hidden;
 
-  &-header {
+  &-top-bar {
     @include outside;
     top: 0;
   }
 
   &-container {
     position: relative;
-    top: v-bind('headerHeight');
+    top: v-bind('topBarHeight');
     height: v-bind('containerHeight');
   }
 
@@ -134,7 +134,7 @@ $z-index: 100;
     overflow-x: hidden;
   }
 
-  &-footer {
+  &-bottom-bar {
     @include outside;
     bottom: 0;
   }
