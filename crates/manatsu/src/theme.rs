@@ -32,9 +32,21 @@ fn transform<C: AsRef<str>>(css: C) -> Result<String> {
     };
   }
 
-  for line in css.as_ref().lines() {
+  let skip = [
+    // Surface tint is deprecated.
+    // https://m3.material.io/styles/color/roles#22948d54-0450-4cab-8f4f-8853a8c6eccc
+    "color-surface-tint",
+  ];
+
+  'lines: for line in css.as_ref().lines() {
     if !line.contains("--md") {
       push!(result, line);
+    }
+
+    for s in &skip {
+      if line.contains(s) {
+        continue 'lines;
+      }
     }
 
     if line.contains("--md-sys-color") {
