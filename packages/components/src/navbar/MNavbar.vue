@@ -103,6 +103,13 @@ defineExpose({ startWidth, endWidth });
   overflow: hidden;
   white-space: nowrap;
 
+  @each $name in (start, end) {
+    &-#{$name} {
+      @include flex.y-center;
+      justify-content: flex-#{$name};
+    }
+  }
+
   &-brand {
     @include flex.y-center;
 
@@ -130,13 +137,6 @@ defineExpose({ startWidth, endWidth });
   &-menu {
     @include flex.x-end-y-center;
     gap: 1.5rem;
-  }
-
-  @each $name in (start, end) {
-    &-#{$name} {
-      @include flex.y-center;
-      justify-content: flex-#{$name};
-    }
   }
 }
 </style>
