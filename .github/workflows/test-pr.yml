@@ -13,6 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v4
         with:
@@ -20,6 +21,6 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm run -F @manatsu/shared build
-      - run: pnpm run clippy:manatsu
+      - run: pnpm run clippy
       - run: pnpm run lint
       - run: pnpm run test
