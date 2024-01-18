@@ -26,7 +26,7 @@
     "lint:style": "stylelint **/*.{scss,vue} --cache",
     "lint:ts": "eslint . --config eslint.config.js --cache",
     "prepare": "husky install",
-    "release": "pnpm run build && pnpm run cli dev release",
+    "release": "pnpm run test && pnpm run clippy && pnpm run build && pnpm run cli dev release",
     "test": "run-p test:*",
     "test:cli": "cargo test -p manatsu",
     "test:packages": "vitest --run",
