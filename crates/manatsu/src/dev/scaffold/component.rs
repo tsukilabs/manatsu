@@ -10,10 +10,7 @@ use std::time::Instant;
 pub(crate) const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
 /// Generates a component template.
-pub fn create<T>(name: T) -> Result<()>
-where
-  T: AsRef<str>,
-{
+pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
 
   let name = name.as_ref();
