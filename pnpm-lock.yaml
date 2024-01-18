@@ -33,7 +33,7 @@ importers:
         version: 5.0.3(vite@5.0.11)(vue@3.4.14)
       '@vitest/browser':
         specifier: 1.2.1
-        version: 1.2.1(vitest@1.2.1)(webdriverio@8.28.0)
+        version: 1.2.1(vitest@1.2.1)(webdriverio@8.28.4)
       '@vitest/coverage-istanbul':
         specifier: 1.2.1
         version: 1.2.1(vitest@1.2.1)
@@ -113,8 +113,8 @@ importers:
         specifier: ^1.8.27
         version: 1.8.27(typescript@5.3.3)
       webdriverio:
-        specifier: ^8.28.0
-        version: 8.28.0(typescript@5.3.3)
+        specifier: ^8.28.4
+        version: 8.28.4(typescript@5.3.3)
 
   packages/components:
     dependencies:
@@ -2207,7 +2207,7 @@ packages:
       vue: 3.4.14(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.2.1(vitest@1.2.1)(webdriverio@8.28.0):
+  /@vitest/browser@1.2.1(vitest@1.2.1)(webdriverio@8.28.4):
     resolution:
       {
         integrity: sha512-jhaQ15zWYAwz8anXgmLW0yAVLCXdT8RFv7LeW9bg7sMlvGJaTCTIHaHWFvCdADF/i62+22tnrzgiiqSnApjXtA==
@@ -2229,7 +2229,7 @@ packages:
       magic-string: 0.30.5
       sirv: 2.0.4
       vitest: 1.2.1(@types/node@20.11.5)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.69.7)
-      webdriverio: 8.28.0(typescript@5.3.3)
+      webdriverio: 8.28.4(typescript@5.3.3)
     dev: true
 
   /@vitest/coverage-istanbul@1.2.1(vitest@1.2.1):
@@ -9623,7 +9623,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.5
-      '@vitest/browser': 1.2.1(vitest@1.2.1)(webdriverio@8.28.0)
+      '@vitest/browser': 1.2.1(vitest@1.2.1)(webdriverio@8.28.4)
       '@vitest/expect': 1.2.1
       '@vitest/runner': 1.2.1
       '@vitest/snapshot': 1.2.1
@@ -9820,10 +9820,10 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webdriverio@8.28.0(typescript@5.3.3):
+  /webdriverio@8.28.4(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-rRVE8pvcxAEqnhhC70oMFkUZ82YWbpXYyzKgfl2LKBue13AHaiN5qWncsJv29rqREIim0dNj6q2JuuUTDFm1gg==
+        integrity: sha512-pL06nHmr5Xp6wrq8KxG7IiZgxEEoJvFqyqrZYkInmkJCS0fH+pq0UAEuX3kqC6eZBtMI2geNb8TuLJ9kpvha1g==
       }
     engines: { node: ^16.13 || >=18 }
     peerDependencies:
