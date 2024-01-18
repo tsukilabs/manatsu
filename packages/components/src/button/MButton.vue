@@ -23,7 +23,6 @@ const classList = computed(() => {
 $transition-duration: 0.2s;
 
 .m-button {
-  transition: none;
   border: none;
   border-radius: var(--m-border-radius);
   padding: 0.25em 0.75em;
@@ -32,35 +31,52 @@ $transition-duration: 0.2s;
   font-size: 1em;
   font-family: inherit;
   text-align: center;
-}
 
-.m-button:disabled {
-  opacity: 0.5;
-}
-
-.m-button-filled {
-  transition: filter $transition-duration ease-in-out;
-  background-color: var(--m-color-primary);
-  color: var(--m-color-on-primary);
-
-  &:hover {
-    filter: contrast(150%);
+  &:active {
+    transform: translateY(1px);
   }
-}
 
-.m-button-outlined {
-  transition:
-    border-color $transition-duration ease-in-out,
-    box-shadow $transition-duration ease-in-out,
-    color $transition-duration ease-in-out;
-  border: 1px solid var(--m-color-outline);
-  background-color: transparent;
-  color: inherit;
+  &:disabled {
+    opacity: 0.5;
+  }
 
-  &:hover {
-    box-shadow: 0 0 1px 1px rgb(111 219 168 / 15%);
-    border-color: var(--m-color-primary);
+  &-filled {
+    transition: box-shadow $transition-duration ease-in-out;
+    background-color: var(--m-color-primary);
+    color: var(--m-color-on-primary);
+
+    &:hover {
+      box-shadow: 0 0 1px 1px rgb(0 0 0 / 30%);
+    }
+  }
+
+  &-elevated {
+    transition:
+      box-shadow $transition-duration ease-in-out,
+      color $transition-duration ease-in-out;
+    box-shadow: 0 0 1px 1px rgb(0 0 0 / 15%);
+    background-color: var(--m-color-surface-container-low);
     color: var(--m-color-primary);
+
+    &:hover {
+      box-shadow: 0 0 1px 1px rgb(0 0 0 / 30%);
+    }
+  }
+
+  &-outlined {
+    transition:
+      border-color $transition-duration ease-in-out,
+      box-shadow $transition-duration ease-in-out,
+      color $transition-duration ease-in-out;
+    border: 1px solid var(--m-color-outline);
+    background-color: transparent;
+    color: inherit;
+
+    &:hover {
+      box-shadow: 0 0 1px 1px rgb(0 0 0 / 15%);
+      border-color: var(--m-color-primary);
+      color: var(--m-color-primary);
+    }
   }
 }
 </style>
