@@ -96,7 +96,6 @@ $z-index: 100;
   background-color: var(--m-color-surface-container);
   width: 100%;
   overflow: hidden;
-  user-select: none;
 }
 
 .m-scaffold-header {
@@ -122,7 +121,6 @@ $z-index: 100;
     background-color: var(--m-color-background);
     padding: 1rem;
     overflow-x: hidden;
-    user-select: none;
 
     & > nav {
       @include flex.x-start-y-center;
