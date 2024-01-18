@@ -120,7 +120,7 @@ where
   Ok(())
 }
 
-pub fn write_to_src_index<K: AsRef<str>>(kebab: K) -> Result<()> {
+fn write_to_src_index<K: AsRef<str>>(kebab: K) -> Result<()> {
   let kebab = kebab.as_ref();
 
   let src = package::src("components")?;
