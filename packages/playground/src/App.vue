@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { repeat } from '@tb-dev/utils';
+import { Command } from 'manatsu/src/index.ts';
 import { computed, ref, shallowRef } from 'vue';
 import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
 import {
@@ -12,7 +13,6 @@ import {
 } from '@manatsu/components/src/index.ts';
 
 const darkMode = useDarkMode();
-const darkModeLabel = computed(() => (darkMode.value ? 'Light' : 'Dark'));
 
 const navbar = shallowRef<InstanceType<typeof MNavbar> | null>(null);
 const navbarHeight = ref(60);
@@ -34,6 +34,7 @@ const sidebarItems = computed<SidebarItem[]>(() => {
 });
 
 const { state: footerText } = useInvoke<string>('footer_text');
+const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexColor);
 </script>
 
 <template>
@@ -54,9 +55,16 @@ const { state: footerText } = useInvoke<string>('footer_text');
         <template #end>
           <div class="flex gap-2">
             <MButton variant="outlined" @click="$mana.toggleDarkMode()">
-              {{ darkModeLabel }}
+              {{ darkMode ? 'Light' : 'Dark' }}
             </MButton>
-            <MButton variant="outlined" @click="sidebarItemAmount += 5">Action</MButton>
+            <MButton
+              variant="outlined"
+              class="transition-none"
+              :style="{ color }"
+              @click="getColor"
+            >
+              {{ color }}
+            </MButton>
           </div>
         </template>
       </MNavbar>

@@ -4,12 +4,13 @@
 #[macro_export]
 macro_rules! win_cmd {
   ($program:literal) => {{
-    let mut cmd = match std::env::consts::OS {
-      "windows" => std::process::Command::new("cmd"),
-      _ => std::process::Command::new($program),
+    let mut cmd = if cfg!(windows) {
+      std::process::Command::new("cmd")
+    } else {
+      std::process::Command::new($program)
     };
 
-    if std::env::consts::OS == "windows" {
+    if cfg!(windows) {
       cmd.arg("/C").arg($program);
     };
 
