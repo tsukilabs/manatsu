@@ -2,9 +2,9 @@
 import { type VNode, computed, shallowRef } from 'vue';
 import { usePixelWidth, useToPixel } from '@manatsu/composables/src/index.ts';
 import MDynamicLink from '../link/MDynamicLink.vue';
-import type { NavbarMenuItem, NavbarProps } from './types';
+import type { TopAppbarMenuItem, TopAppbarProps } from './types';
 
-const props = withDefaults(defineProps<NavbarProps>(), {
+const props = withDefaults(defineProps<TopAppbarProps>(), {
   height: '60px'
 });
 
@@ -12,13 +12,13 @@ const slots = defineSlots<{
   content?: () => VNode;
   end?: () => VNode;
   logo?: () => VNode;
-  'menu-item'?: (props: NavbarMenuItem) => VNode;
+  'menu-item'?: (props: TopAppbarMenuItem) => VNode;
   start?: () => VNode;
   title?: () => VNode;
 }>();
 
 const height = useToPixel(() => props.height);
-const menuItems = defineModel<NavbarMenuItem[]>('menuItems');
+const menuItems = defineModel<TopAppbarMenuItem[]>('menuItems');
 
 const hasLogo = computed(() => Boolean(props.logo ?? slots.logo));
 const hasTitle = computed(() => Boolean(props.title ?? slots.title));
@@ -42,41 +42,47 @@ defineExpose({ startWidth, endWidth });
 </script>
 
 <template>
-  <header class="m-navbar">
-    <div v-if="hasStart" ref="start" class="m-navbar-start" :class="startClass" :style="startStyle">
+  <header class="m-top-appbar">
+    <div
+      v-if="hasStart"
+      ref="start"
+      class="m-top-appbar-start"
+      :class="startClass"
+      :style="startStyle"
+    >
       <slot v-if="$slots.start" name="start"></slot>
 
       <MDynamicLink
         v-else
         :to="titleLink"
-        class="m-navbar-brand"
+        class="m-top-appbar-brand"
         :class="titleLinkClass"
         :style="titleLinkStyle"
       >
-        <div v-if="hasLogo" class="m-navbar-logo" :class="logoClass" :style="logoStyle">
+        <div v-if="hasLogo" class="m-top-appbar-logo" :class="logoClass" :style="logoStyle">
           <slot v-if="$slots.logo" name="logo"></slot>
           <img v-else :src="logo" />
         </div>
 
-        <div v-if="hasTitle" class="m-navbar-title" :class="titleClass" :style="titleStyle">
+        <div v-if="hasTitle" class="m-top-appbar-title" :class="titleClass" :style="titleStyle">
           <slot v-if="$slots.title" name="title"></slot>
           <span v-else>{{ title }}</span>
         </div>
       </MDynamicLink>
     </div>
 
-    <div v-if="hasContent" class="m-navbar-content" :class="contentClass" :style="contentStyle">
+    <div v-if="hasContent" class="m-top-appbar-content" :class="contentClass" :style="contentStyle">
       <slot v-if="$slots.content" name="content"></slot>
       <nav
         v-else-if="menuItems && menuItems.length > 0"
-        class="m-navbar-menu"
+        class="m-top-appbar-menu"
         :class="menuClass"
         :style="menuStyle"
       >
         <div
           v-for="item of menuItems"
           :key="item.key"
-          class="m-navbar-menu-item"
+          class="m-top-appbar-menu-item"
           :class="menuItemClass"
           :style="menuItemStyle"
         >
@@ -85,7 +91,7 @@ defineExpose({ startWidth, endWidth });
       </nav>
     </div>
 
-    <div v-if="$slots.end" ref="end" class="m-navbar-end" :class="endClass" :style="endStyle">
+    <div v-if="$slots.end" ref="end" class="m-top-appbar-end" :class="endClass" :style="endStyle">
       <slot name="end"></slot>
     </div>
   </header>
@@ -94,7 +100,7 @@ defineExpose({ startWidth, endWidth });
 <style lang="scss">
 @use '@manatsu/sass/flex';
 
-.m-navbar {
+.m-top-appbar {
   @include flex.x-between-y-center;
   gap: 1.5rem;
   padding: 0 1rem;

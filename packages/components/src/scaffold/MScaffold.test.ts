@@ -6,45 +6,45 @@ import MScaffold from './MScaffold.vue';
 enableAutoUnmount(afterEach);
 
 describe('scaffold', () => {
-  it('should have header', () => {
+  it('should have top bar', () => {
     const wrapper = mount(MScaffold, {
       slots: {
-        header: () => h('div', { id: 'header-slot' })
+        'top-bar': () => h('div', { id: 'top-bar-slot' })
       }
     });
 
-    expect(wrapper.find('.m-scaffold-header').exists()).toBe(true);
-    expect(wrapper.find('#header-slot').exists()).toBe(true);
+    expect(wrapper.find('.m-scaffold-top-bar').exists()).toBe(true);
+    expect(wrapper.find('#top-bar-slot').exists()).toBe(true);
   });
 
-  it('should not have header', () => {
+  it('should not have top bar', () => {
     const wrapper = mount(MScaffold, {
       slots: {
         default: () => h('div', 'Default slot')
       }
     });
 
-    expect(wrapper.find('.m-scaffold-header').exists()).toBe(false);
+    expect(wrapper.find('.m-scaffold-top-bar').exists()).toBe(false);
   });
 
-  it('should have footer', () => {
+  it('should have bottom bar', () => {
     const wrapper = mount(MScaffold, {
       slots: {
-        footer: () => h('div', { id: 'footer-slot' })
+        'bottom-bar': () => h('div', { id: 'bottom-bar-slot' })
       }
     });
 
-    expect(wrapper.find('.m-scaffold-footer').exists()).toBe(true);
-    expect(wrapper.find('#footer-slot').exists()).toBe(true);
+    expect(wrapper.find('.m-scaffold-bottom-bar').exists()).toBe(true);
+    expect(wrapper.find('#bottom-bar-slot').exists()).toBe(true);
   });
 
-  it('should not have footer', () => {
+  it('should not have bottom bar', () => {
     const wrapper = mount(MScaffold, {
       slots: {
         default: () => h('div', 'Default slot')
       }
     });
 
-    expect(wrapper.find('.m-scaffold-footer').exists()).toBe(false);
+    expect(wrapper.find('.m-scaffold-bottom-bar').exists()).toBe(false);
   });
 });

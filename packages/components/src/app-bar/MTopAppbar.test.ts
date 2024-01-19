@@ -1,19 +1,19 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
-import MNavbar from './MNavbar.vue';
-import type { NavbarMenuItem } from './types';
+import MTopAppbar from './MTopAppbar.vue';
+import type { TopAppbarMenuItem } from './types';
 
 enableAutoUnmount(afterEach);
 
-describe('navbar', () => {
+describe('top-appbar', () => {
   it('should render menu items', () => {
-    const wrapper = mount(MNavbar, { props: { menuItems: createMenuItems() } });
-    expect(wrapper.findAll('.m-navbar-menu-item')).toHaveLength(2);
+    const wrapper = mount(MTopAppbar, { props: { menuItems: createMenuItems() } });
+    expect(wrapper.findAll('.m-top-appbar-menu-item')).toHaveLength(2);
   });
 });
 
 function createMenuItems() {
-  const items: NavbarMenuItem[] = [
+  const items: TopAppbarMenuItem[] = [
     { key: 'first', label: 'First item' },
     { key: 'second', label: 'Second item' }
   ];

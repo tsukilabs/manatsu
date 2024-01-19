@@ -6,18 +6,18 @@ import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
 import {
   MButton,
   MDynamicLink,
-  MNavbar,
   MScaffold,
-  type NavbarMenuItem,
-  type SidebarItem
+  MTopAppbar,
+  type SidebarItem,
+  type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
 
 const darkMode = useDarkMode();
 
-const navbar = shallowRef<InstanceType<typeof MNavbar> | null>(null);
+const navbar = shallowRef<InstanceType<typeof MTopAppbar> | null>(null);
 const navbarHeight = ref(60);
 
-const menuItems: NavbarMenuItem[] = [
+const menuItems: TopAppbarMenuItem[] = [
   { key: 'first', label: 'First item' },
   { key: 'second', label: 'Second item', to: 'https://example.com' },
   { key: 'third', label: 'Third item' }
@@ -39,8 +39,8 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
 
 <template>
   <MScaffold :sidebar-items="sidebarItems">
-    <template #header>
-      <MNavbar
+    <template #top-bar>
+      <MTopAppbar
         ref="navbar"
         :menu-items="menuItems"
         :height="navbarHeight"
@@ -67,7 +67,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
             </MButton>
           </div>
         </template>
-      </MNavbar>
+      </MTopAppbar>
     </template>
 
     <template #sidebar-item="{ key }">
@@ -80,7 +80,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
       <RouterView />
     </template>
 
-    <template #footer>
+    <template #bottom-bar>
       <div class="w-full h-16 flex justify-center items-center">{{ footerText }}</div>
     </template>
   </MScaffold>
