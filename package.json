@@ -20,7 +20,7 @@
     "composable": "pnpm run cli dev composable",
     "dev": "cargo tauri dev",
     "docs:cli": "cargo doc --open -p manatsu",
-    "format": "prettier . --write",
+    "format": "prettier . --write && cargo fmt",
     "format-check": "prettier . --check",
     "lint": "run-p lint:*",
     "lint:style": "stylelint **/*.{scss,vue} --cache",
