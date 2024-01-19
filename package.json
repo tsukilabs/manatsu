@@ -28,7 +28,7 @@
     "prepare": "husky install",
     "release": "run-p test clippy && pnpm run build && pnpm run cli dev release",
     "test": "run-p test:*",
-    "test:cli": "cargo test -p manatsu",
+    "test:crates": "cargo test -p manatsu && cargo test -p tauri-plugin-manatsu",
     "test:packages": "vitest --run",
     "type-check": "vue-tsc --noEmit",
     "ui": "vitest --ui --watch"

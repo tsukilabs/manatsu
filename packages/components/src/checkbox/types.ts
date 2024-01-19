@@ -5,6 +5,4 @@ export interface CheckboxProps {
   inputClass?: string;
   inputStyle?: StyleValue;
   label?: string;
-  labelClass?: string;
-  labelStyle?: StyleValue;
 }

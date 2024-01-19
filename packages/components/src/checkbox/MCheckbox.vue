@@ -5,15 +5,23 @@ import type { CheckboxProps } from './types';
 defineProps<CheckboxProps>();
 
 defineSlots<{ default?: () => VNode }>();
+
+const checked = defineModel<boolean>('checked');
 </script>
 
 <template>
-  <div class="m-checkbox">
-    <input type="checkbox" :disabled="disabled" :class="inputClass" :style="inputStyle" />
-    <label v-if="label || $slots.default" :class="labelClass" :style="labelStyle">
+  <label class="m-checkbox">
+    <input
+      v-model="checked"
+      type="checkbox"
+      :disabled="disabled"
+      :class="inputClass"
+      :style="inputStyle"
+    />
+    <span v-if="label || $slots.default" class="m-checkbox-label">
       <slot>{{ label }}</slot>
-    </label>
-  </div>
+    </span>
+  </label>
 </template>
 
 <style scoped lang="scss">
@@ -22,7 +30,7 @@ defineSlots<{ default?: () => VNode }>();
 .m-checkbox {
   @include flex.y-center($inline: true);
 
-  &:has(> label) {
+  &:has(&-label) {
     gap: 0.5em;
   }
 
@@ -43,15 +51,21 @@ defineSlots<{ default?: () => VNode }>();
 
   & > input[type='checkbox']::before {
     scale: 0;
+    clip-path: polygon(17% 54%, 28% 43%, 38% 54%, 70% 22%, 81% 33%, 38% 75%, 17% 54%);
     transition: scale 0.1s ease-in-out;
     background-color: var(--m-color-primary);
-    width: 0.65em;
-    height: 0.65em;
+    width: inherit;
+    height: inherit;
     content: '';
   }
 
   & > input[type='checkbox']:checked::before {
     scale: 1;
+  }
+
+  & > input[type='checkbox']:disabled::before {
+    opacity: 0.5;
+    background-color: var(--m-color-on-surface);
   }
 }
 </style>
