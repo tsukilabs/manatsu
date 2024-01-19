@@ -113,7 +113,7 @@ fn build_globset() -> Result<GlobSet> {
   builder.add(Glob::new("**/pnpm-lock.yaml")?);
   builder.add(Glob::new("**/Cargo.lock")?);
   builder.add(Glob::new("**/*.log")?);
-  builder.add(Glob::new("**/taze.config.js")?);
+  builder.add(Glob::new("**/taze.config.*")?);
   builder.add(Glob::new("**/config.json")?);
 
   let globset = builder.build()?;
