@@ -8,12 +8,12 @@ export interface SidebarItem {
 }
 
 export interface ScaffoldProps {
+  border?: string;
   bottomBarBorder?: string | boolean;
   bottomBarClass?: string;
   bottomBarStyle?: StyleValue;
   contentClass?: string;
   contentStyle?: StyleValue;
-  defaultBorder?: string;
   sidebarClass?: string;
   sidebarItemClass?: string;
   sidebarItemStyle?: StyleValue;

@@ -4,7 +4,7 @@ import { useBorder, usePixelHeight, usePixelWidth } from '@manatsu/composables/s
 import type { ScaffoldProps, SidebarItem } from './types';
 
 const props = withDefaults(defineProps<ScaffoldProps>(), {
-  defaultBorder: '1px solid var(--m-color-outline-variant)',
+  border: '1px solid var(--m-color-outline-variant)',
   topBarBorder: true,
   bottomBarBorder: true
 });
@@ -20,7 +20,7 @@ const topBar = shallowRef<HTMLElement | null>(null);
 const topBarHeight = usePixelHeight(topBar);
 const topBarBorder = useBorder(
   () => props.topBarBorder,
-  () => props.defaultBorder
+  () => props.border
 );
 
 const sidebar = shallowRef<HTMLElement | null>(null);
@@ -31,7 +31,7 @@ const bottomBar = shallowRef<HTMLElement | null>(null);
 const bottomBarHeight = usePixelHeight(bottomBar);
 const bottomBarBorder = useBorder(
   () => props.bottomBarBorder,
-  () => props.defaultBorder
+  () => props.border
 );
 
 const containerHeight = computed(() => {
