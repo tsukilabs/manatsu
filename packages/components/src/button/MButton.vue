@@ -6,7 +6,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'filled'
 });
 
-defineSlots<{ default: () => VNode }>();
+defineSlots<{ default?: () => VNode }>();
 
 const classList = computed(() => {
   return ['m-button', `m-button-${props.variant}`];

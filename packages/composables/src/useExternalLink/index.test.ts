@@ -4,7 +4,7 @@ import { useExternalLink } from '.';
 
 describe('useExternalLink', () => {
   it('should work as intended', async () => {
-    const link = ref<string | null>('https://github.com/manatsujs/manatsu');
+    const link = ref<string | null>('https://github.com/tsukilabs/manatsu');
     const isExternalLink = useExternalLink(link);
 
     await nextTick();

@@ -11,7 +11,7 @@ The following tools are required when contributing to Manatsu:
 ```bash
 cargo install manatsu tauri-cli
 
-git clone https://github.com/manatsujs/manatsu.git
+git clone https://github.com/tsukilabs/manatsu.git
 cd manatsu
 pnpm install
 ```

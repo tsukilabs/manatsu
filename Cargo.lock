@@ -1924,9 +1924,9 @@ dependencies = [
 
 [[package]]
 name = "miho"
-version = "3.7.19"
+version = "3.7.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8989d54399b4fe9078232069617a98dbdf9358bcb80ae16539251aa25330dd32"
+checksum = "a7206c0058dc50bb60e8c106c53c407d09419bcbfad3aecd1e5697c96e8f0748"
 dependencies = [
  "anyhow",
  "clap",
@@ -1944,9 +1944,9 @@ dependencies = [
 
 [[package]]
 name = "miho_derive"
-version = "3.7.19"
+version = "3.7.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7dedd0bda229efb9bf00fba6af96b4697a6629b1e866fd2df90579c47e701df2"
+checksum = "e73f267140cb4c778675f872bb4566ca14c66692724191312381f6e9fc1063cd"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2",
@@ -3108,9 +3108,9 @@ dependencies = [
 
 [[package]]
 name = "smallvec"
-version = "1.13.0"
+version = "1.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b187f0231d56fe41bfb12034819dd2bf336422a5866de41bc3fec4b2e3883e8"
+checksum = "e6ecd384b10a64542d77071bd64bd7b231f4ed5940fba55e98c3de13824cf3d7"
 
 [[package]]
 name = "soup2"

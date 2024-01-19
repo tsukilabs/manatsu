@@ -14,7 +14,7 @@ pub enum Template {
 impl Template {
   pub fn url(&self) -> String {
     let name: &str = (*self).into();
-    format!("https://github.com/manatsujs/{name}/archive/refs/heads/main.zip")
+    format!("https://github.com/tsukilabs/manatsu-template-{name}/archive/refs/heads/main.zip")
   }
 
   /// Download a Manatsu template as bytes.
@@ -53,8 +53,8 @@ impl Template {
 impl From<Template> for &str {
   fn from(template: Template) -> Self {
     match template {
-      Template::Tauri => "template-tauri",
-      Template::Vue => "template-vue",
+      Template::Tauri => "tauri",
+      Template::Vue => "vue",
     }
   }
 }
@@ -65,8 +65,8 @@ impl TryFrom<&str> for Template {
   fn try_from(value: &str) -> Result<Self> {
     let value = value.trim().to_lowercase();
     let template = match value.as_str() {
-      "template-tauri" => Template::Tauri,
-      "template-vue" => Template::Vue,
+      "tauri" => Template::Tauri,
+      "vue" => Template::Vue,
       _ => bail!(format!("{value} is not a valid template name")),
     };
 
@@ -77,7 +77,6 @@ impl TryFrom<&str> for Template {
 impl fmt::Display for Template {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     let name: &str = (*self).into();
-    let name = name.replace("template-", "");
     let name = name.to_case(Case::Title);
     write!(f, "{name}")
   }

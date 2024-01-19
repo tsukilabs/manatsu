@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { capitalize } from 'lodash-es';
-import { MButton, MCard, MInput } from '@manatsu/components/src/index.ts';
+import { MButton, MCard, MCheckbox, MInput } from '@manatsu/components/src/index.ts';
 import LoremIpsum from '../components/LoremIpsum.vue';
 
 const inputValue = ref<string | null>(null);
+const checkboxValue = ref(false);
+
 const variants = ['filled', 'elevated', 'outlined'] as const;
 </script>
 
@@ -18,7 +20,8 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
     </div>
     <div class="flex gap-4 items-center">
       <MInput v-model:value="inputValue" placeholder="Text field" />
-      <span>{{ inputValue }}</span>
+      <MCheckbox v-model:checked="checkboxValue">Checkbox</MCheckbox>
+      <MCheckbox v-model:checked="checkboxValue" disabled>Disabled</MCheckbox>
     </div>
 
     <div class="flex gap-8">

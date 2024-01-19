@@ -24,9 +24,9 @@ pub struct Project {
 impl Project {
   /// Create a new Manatsu project from a template.
   ///
-  /// Tauri: <https://github.com/manatsujs/template-tauri>
+  /// Tauri: <https://github.com/tsukilabs/template-tauri>
   ///
-  /// Vue: <https://github.com/manatsujs/template-vue>
+  /// Vue: <https://github.com/tsukilabs/template-vue>
   pub fn create(&self) -> Result<()> {
     let start = Instant::now();
 
@@ -113,7 +113,7 @@ fn build_globset() -> Result<GlobSet> {
   builder.add(Glob::new("**/pnpm-lock.yaml")?);
   builder.add(Glob::new("**/Cargo.lock")?);
   builder.add(Glob::new("**/*.log")?);
-  builder.add(Glob::new("**/taze.config.js")?);
+  builder.add(Glob::new("**/taze.config.*")?);
   builder.add(Glob::new("**/config.json")?);
 
   let globset = builder.build()?;
