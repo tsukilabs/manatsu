@@ -18,9 +18,8 @@ const topAppBar = shallowRef<InstanceType<typeof MTopAppbar> | null>(null);
 const topAppBarHeight = ref(60);
 
 const menuItems: TopAppbarMenuItem[] = [
-  { key: 'first', label: 'First item' },
-  { key: 'second', label: 'Second item', to: 'https://example.com' },
-  { key: 'third', label: 'Third item' }
+  { key: 'home', label: 'Home', to: '/' },
+  { key: 'about', label: 'About', to: '/about' }
 ];
 
 const sidebarItemAmount = ref(100);
@@ -33,7 +32,6 @@ const sidebarItems = computed<SidebarItem[]>(() => {
   return items;
 });
 
-const { state: footerText } = useInvoke<string>('footer_text');
 const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexColor);
 </script>
 
@@ -81,7 +79,9 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     </template>
 
     <template #bottom-bar>
-      <div class="w-full h-16 flex justify-center items-center">{{ footerText }}</div>
+      <div class="w-full h-16 flex justify-center items-center">
+        <span>Bottom bar</span>
+      </div>
     </template>
   </MScaffold>
 </template>
