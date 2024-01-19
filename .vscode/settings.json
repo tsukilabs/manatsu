@@ -42,6 +42,7 @@
     "core",
     "playground",
     "cli",
-    "tauri-plugin"
+    "tauri-plugin",
+    "style"
   ]
 }
