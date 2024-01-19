@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@manatsu/sass": "workspace:*",
-    "vite": "^5.0.11"
+    "vite": "^5.0.12"
   },
   "peerDependencies": {
     "@tauri-apps/api": "^1.5.0",
