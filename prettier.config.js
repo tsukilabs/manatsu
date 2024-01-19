@@ -1,6 +1,6 @@
 /** @type {import('prettier').Config} */
 export default {
-  plugins: ['prettier-plugin-css-order'],
+  plugins: ['prettier-plugin-css-order', 'prettier-plugin-tailwindcss'],
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
@@ -10,5 +10,8 @@ export default {
   bracketSpacing: true,
   bracketSameLine: false,
   arrowParens: 'always',
-  vueIndentScriptAndStyle: false
+  vueIndentScriptAndStyle: false,
+
+  tailwindConfig: './packages/playground/tailwind.config.js',
+  tailwindAttributes: ['content-class', 'header-class']
 };

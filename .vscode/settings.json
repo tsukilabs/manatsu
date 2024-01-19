@@ -32,8 +32,8 @@
   },
   "rust-analyzer.showUnlinkedFileNotification": false,
   "rust-analyzer.linkedProjects": ["Cargo.toml", "packages/playground/src-tauri/Cargo.toml"],
-  "stylelint.snippet": ["css", "less", "postcss", "scss", "vue"],
-  "stylelint.validate": ["css", "less", "postcss", "scss", "vue"],
+  "stylelint.snippet": ["css", "postcss", "scss", "vue"],
+  "stylelint.validate": ["css", "postcss", "scss", "vue"],
   "stylelint.packageManager": "pnpm",
   "conventionalCommits.promptScopes": true,
   "conventionalCommits.scopes": [
@@ -44,5 +44,15 @@
     "cli",
     "tauri-plugin",
     "style"
-  ]
+  ],
+  "tailwindCSS.classAttributes": ["class", "content-class"],
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/packages/components/**",
+    "**/dist/**",
+    "**/target/**",
+    "**/packages/sass/**"
+  ],
+  "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js"
 }

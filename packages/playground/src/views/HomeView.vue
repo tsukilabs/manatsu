@@ -18,10 +18,19 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
         <MButton :variant="variant" disabled>{{ capitalize(variant) }}</MButton>
       </template>
     </div>
-    <div class="flex gap-4 items-center">
-      <MInput v-model:value="inputValue" placeholder="Text field" />
-      <MCheckbox v-model:checked="checkboxValue">Checkbox</MCheckbox>
-      <MCheckbox v-model:checked="checkboxValue" disabled>Disabled</MCheckbox>
+    <div class="flex items-stretch gap-4">
+      <MCard variant="outlined" title="Input" header-style="padding-bottom: 0;">
+        <MInput v-model:value="inputValue" placeholder="Text field" />
+      </MCard>
+      <MCard
+        variant="outlined"
+        title="Checkbox"
+        header-style="padding-bottom: 0;"
+        content-class="flex gap-4"
+      >
+        <MCheckbox v-model:checked="checkboxValue">Label</MCheckbox>
+        <MCheckbox v-model:checked="checkboxValue" disabled>Disabled</MCheckbox>
+      </MCard>
     </div>
 
     <div class="flex gap-8">
