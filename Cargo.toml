@@ -4,8 +4,8 @@ exclude = ["packages/playground/src-tauri"]
 resolver = "2"
 
 [workspace.package]
-homepage = "https://github.com/manatsujs/manatsu"
-repository = "https://github.com/manatsujs/manatsu"
+homepage = "https://github.com/tsukilabs/manatsu"
+repository = "https://github.com/tsukilabs/manatsu"
 authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
 license = "MIT"
 edition = "2021"

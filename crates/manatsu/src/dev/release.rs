@@ -38,7 +38,7 @@ fn create_github_release(github_token: &str) -> Result<()> {
   let package = json::read_package()?;
 
   let base_url = "https://api.github.com";
-  let owner_repo = "manatsujs/manatsu";
+  let owner_repo = "tsukilabs/manatsu";
   let body = ureq::json!({
     "tag_name": format!("v{}", package.version),
     "name": format!("v{}", package.version),

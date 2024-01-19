@@ -14,7 +14,7 @@ pub enum Template {
 impl Template {
   pub fn url(&self) -> String {
     let name: &str = (*self).into();
-    format!("https://github.com/manatsujs/{name}/archive/refs/heads/main.zip")
+    format!("https://github.com/tsukilabs/{name}/archive/refs/heads/main.zip")
   }
 
   /// Download a Manatsu template as bytes.

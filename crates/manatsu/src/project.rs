@@ -24,9 +24,9 @@ pub struct Project {
 impl Project {
   /// Create a new Manatsu project from a template.
   ///
-  /// Tauri: <https://github.com/manatsujs/template-tauri>
+  /// Tauri: <https://github.com/tsukilabs/template-tauri>
   ///
-  /// Vue: <https://github.com/manatsujs/template-vue>
+  /// Vue: <https://github.com/tsukilabs/template-vue>
   pub fn create(&self) -> Result<()> {
     let start = Instant::now();
 
