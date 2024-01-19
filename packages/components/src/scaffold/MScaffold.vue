@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { type VNode, computed, shallowRef } from 'vue';
-import { usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
+import { useBorder, usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
 import type { ScaffoldProps, SidebarItem } from './types';
 
-defineProps<ScaffoldProps>();
+const props = withDefaults(defineProps<ScaffoldProps>(), {
+  defaultBorder: '1px solid var(--m-color-outline-variant)',
+  topBarBorder: true,
+  bottomBarBorder: true
+});
 
 const slots = defineSlots<{
   'bottom-bar'?: () => VNode;
@@ -14,6 +18,10 @@ const slots = defineSlots<{
 
 const topBar = shallowRef<HTMLElement | null>(null);
 const topBarHeight = usePixelHeight(topBar);
+const topBarBorder = useBorder(
+  () => props.topBarBorder,
+  () => props.defaultBorder
+);
 
 const sidebar = shallowRef<HTMLElement | null>(null);
 const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
@@ -21,6 +29,10 @@ const sidebarWidth = usePixelWidth(sidebar);
 
 const bottomBar = shallowRef<HTMLElement | null>(null);
 const bottomBarHeight = usePixelHeight(bottomBar);
+const bottomBarBorder = useBorder(
+  () => props.bottomBarBorder,
+  () => props.defaultBorder
+);
 
 const containerHeight = computed(() => {
   return `calc(100% - (${topBarHeight.value} + ${bottomBarHeight.value}))`;
@@ -87,7 +99,7 @@ $z-index: 100;
   position: fixed;
   left: 0;
   z-index: $z-index;
-  background-color: var(--m-color-surface-container);
+  background-color: var(--m-color-surface);
   width: 100%;
   overflow: hidden;
 }
@@ -95,12 +107,13 @@ $z-index: 100;
 .m-scaffold {
   position: fixed;
   inset: 0;
-  background-color: var(--m-color-surface-container);
+  background-color: var(--m-color-surface);
   overflow: hidden;
 
   &-top-bar {
     @include outside;
     top: 0;
+    border-bottom: v-bind('topBarBorder');
   }
 
   &-container {
@@ -137,6 +150,7 @@ $z-index: 100;
   &-bottom-bar {
     @include outside;
     bottom: 0;
+    border-top: v-bind('bottomBarBorder');
   }
 }
 </style>

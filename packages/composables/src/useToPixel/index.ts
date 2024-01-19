@@ -2,7 +2,7 @@ import { computed, toRef } from 'vue';
 import { toPixel } from '@tb-dev/utils';
 import type { MaybeNullishRef } from '@manatsu/shared';
 
-export interface UseToPixelOptions {
+interface UseToPixelOptions {
   /**
    * Default value if nullish.
    * @default '0px'

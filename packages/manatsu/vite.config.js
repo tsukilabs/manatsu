@@ -24,13 +24,14 @@ const dtsOptions = {
 
     if (!content.includes('ComponentCustomProperties')) {
       const moduleDeclaration = `
-      declare module 'vue' {
-        interface ComponentCustomProperties {
-          readonly $mana: import("@manatsu/shared").ManatsuGlobal;
+        declare module 'vue' {
+          interface ComponentCustomProperties {
+            readonly $mana: import("@manatsu/shared").ManatsuGlobal;
+          }
         }
-      }
-      
-      export {}`;
+        
+        export {}
+      `;
 
       // https://regex101.com/r/ZIMPlK
       const emptyExportRegex = /export\s*{\s*};?/gm;
