@@ -2,13 +2,7 @@
 name = "manatsu"
 version = "0.3.5"
 description = "CLI tools for Manatsu"
-keywords = [
-    "manatsu",
-    "vue",
-    "tauri",
-    "components",
-    "cli",
-]
+keywords = ["manatsu", "vue", "tauri", "components", "cli"]
 
 [package.homepage]
 workspace = true
@@ -33,18 +27,18 @@ workspace = true
 
 [dependencies]
 anyhow = "1.0"
-colored = "2"
+colored = "2.1"
 convert_case = "0.6"
 globset = "0.4"
 inquire = "0.6"
 lightningcss = "1.0.0-alpha.52"
-miho = "3"
+miho = "3.7"
 rand = "0.8"
 regex = "1.10"
 zip = "0.6"
 
 [dependencies.clap]
-version = "4"
+version = "4.4"
 features = ["derive"]
 
 [dependencies.serde]
@@ -56,5 +50,5 @@ version = "1.0"
 features = ["preserve_order"]
 
 [dependencies.ureq]
-version = "2"
+version = "2.9"
 features = ["json"]

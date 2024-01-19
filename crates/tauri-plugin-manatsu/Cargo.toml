@@ -2,13 +2,7 @@
 name = "tauri-plugin-manatsu"
 version = "0.3.5"
 description = "Manatsu plugin for Tauri"
-keywords = [
-    "manatsu",
-    "tauri",
-    "plugin",
-    "tauri-plugin",
-    "vue",
-]
+keywords = ["manatsu", "tauri", "plugin", "tauri-plugin", "vue"]
 
 [package.homepage]
 workspace = true
