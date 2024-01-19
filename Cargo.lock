@@ -1924,9 +1924,9 @@ dependencies = [
 
 [[package]]
 name = "miho"
-version = "3.7.19"
+version = "3.7.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8989d54399b4fe9078232069617a98dbdf9358bcb80ae16539251aa25330dd32"
+checksum = "a7206c0058dc50bb60e8c106c53c407d09419bcbfad3aecd1e5697c96e8f0748"
 dependencies = [
  "anyhow",
  "clap",
