@@ -2,7 +2,7 @@ import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
 import { type UseAsyncStateOptions, useAsyncState } from '@vueuse/core';
 
 // prettier-ignore
-export interface UseInvokeOptions<Shallow extends boolean, Data = unknown> extends UseAsyncStateOptions<Shallow, Data> {
+interface UseInvokeOptions<Shallow extends boolean, Data = unknown> extends UseAsyncStateOptions<Shallow, Data> {
   initialState?: Data,
 }
 
