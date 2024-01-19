@@ -14,8 +14,8 @@ import {
 
 const darkMode = useDarkMode();
 
-const navbar = shallowRef<InstanceType<typeof MTopAppbar> | null>(null);
-const navbarHeight = ref(60);
+const topAppBar = shallowRef<InstanceType<typeof MTopAppbar> | null>(null);
+const topAppBarHeight = ref(60);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'first', label: 'First item' },
@@ -41,9 +41,9 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
   <MScaffold :sidebar-items="sidebarItems">
     <template #top-bar>
       <MTopAppbar
-        ref="navbar"
+        ref="topAppBar"
         :menu-items="menuItems"
-        :height="navbarHeight"
+        :height="topAppBarHeight"
         logo="/peach.png"
         title="Manatsu"
         title-link="/"
@@ -71,7 +71,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     </template>
 
     <template #sidebar-item="{ key }">
-      <div :style="{ width: navbar?.startWidth }">
+      <div :style="{ width: topAppBar?.startWidth }">
         {{ key }}
       </div>
     </template>
