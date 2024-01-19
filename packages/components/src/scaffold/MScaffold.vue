@@ -34,7 +34,7 @@ const bottomBarBorder = useBorder(
   () => props.defaultBorder
 );
 
-const containerHeight = computed(() => {
+const contentHeight = computed(() => {
   return `calc(100% - (${topBarHeight.value} + ${bottomBarHeight.value}))`;
 });
 </script>
@@ -51,7 +51,7 @@ const containerHeight = computed(() => {
       <slot name="top-bar"></slot>
     </div>
 
-    <div class="m-scaffold-container">
+    <div class="m-scaffold-content">
       <aside
         v-if="sidebarItems && sidebarItems.length > 0"
         ref="sidebar"
@@ -72,7 +72,7 @@ const containerHeight = computed(() => {
         </nav>
       </aside>
 
-      <div class="m-scaffold-content" :class="contentClass" :style="contentStyle">
+      <div class="m-scaffold-content-slot" :class="contentClass" :style="contentStyle">
         <slot></slot>
       </div>
     </div>
@@ -116,10 +116,10 @@ $z-index: 100;
     border-bottom: v-bind('topBarBorder');
   }
 
-  &-container {
+  &-content {
     position: relative;
     top: v-bind('topBarHeight');
-    height: v-bind('containerHeight');
+    height: v-bind('contentHeight');
   }
 
   &-sidebar {
@@ -138,7 +138,7 @@ $z-index: 100;
     }
   }
 
-  &-content {
+  &-content-slot {
     position: absolute;
     inset: 0;
     left: v-bind('sidebarWidth');
