@@ -46,7 +46,7 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
         </template>
 
         <template #default>
-          <LoremIpsum :paragraphs="1" class="h-36" />
+          <LoremIpsum class="h-36" />
         </template>
 
         <template #footer>
@@ -54,7 +54,5 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
         </template>
       </MCard>
     </div>
-
-    <LoremIpsum :paragraphs="5" />
   </main>
 </template>
