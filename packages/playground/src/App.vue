@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { repeat } from '@tb-dev/utils';
+import { useRoute } from 'vue-router';
+import { useLocalStorage } from '@vueuse/core';
 import { Command } from 'manatsu/src/index.ts';
-import { computed, ref, shallowRef } from 'vue';
+import { ref, shallowRef, watchEffect } from 'vue';
 import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
 import {
   MButton,
@@ -11,6 +12,15 @@ import {
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
+
+const route = useRoute();
+const lastRoute = useLocalStorage('playground:last-route', '/', {
+  writeDefaults: true
+});
+
+watchEffect(() => {
+  lastRoute.value = route.path;
+});
 
 const darkMode = useDarkMode();
 
@@ -22,24 +32,27 @@ const menuItems: TopAppbarMenuItem[] = [
   { key: 'about', label: 'About', to: '/about' }
 ];
 
-const sidebarItemAmount = ref(100);
-const sidebarItems = computed<SidebarItem[]>(() => {
-  const items: SidebarItem[] = [];
-  repeat(sidebarItemAmount.value, (i) => {
-    items.push({ key: `Item ${i}` });
-  });
-
-  return items;
-});
+const sidebarItems: SidebarItem[] = [
+  { key: 'button', label: 'Button', to: '/components/button' },
+  { key: 'card', label: 'Card', to: '/components/card' },
+  { key: 'checkbox', label: 'Checkbox', to: '/components/checkbox' },
+  { key: 'input', label: 'Input', to: '/components/input' },
+  { key: 'radio', label: 'Radio', to: '/components/radio' }
+];
 
 const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexColor);
 </script>
 
 <template>
-  <MScaffold :sidebar-items="sidebarItems">
+  <MScaffold
+    :sidebar-items="sidebarItems"
+    sidebar-item-class="flex items-center justify-center"
+    :sidebar-item-style="{ width: topAppBar?.startWidth }"
+  >
     <template #top-bar>
       <MTopAppbar
         ref="topAppBar"
+        content-alignment="end"
         :menu-items="menuItems"
         :height="topAppBarHeight"
         logo="/peach.png"
@@ -68,10 +81,10 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
       </MTopAppbar>
     </template>
 
-    <template #sidebar-item="{ key }">
-      <div :style="{ width: topAppBar?.startWidth }">
-        {{ key }}
-      </div>
+    <template #sidebar-item="{ to, label }">
+      <MDynamicLink :to="to">
+        <span>{{ label }}</span>
+      </MDynamicLink>
     </template>
 
     <template #default>
@@ -79,7 +92,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     </template>
 
     <template #bottom-bar>
-      <div class="w-full h-16 flex justify-center items-center">
+      <div class="flex h-16 w-full items-center justify-center">
         <span>Bottom bar</span>
       </div>
     </template>

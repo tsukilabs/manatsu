@@ -14,8 +14,8 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
       '@tb-dev/eslint-config':
-        specifier: ^1.6.3
-        version: 1.6.3(eslint@8.56.0)(typescript@5.3.3)(vitest@1.2.1)
+        specifier: ^1.6.5
+        version: 1.6.5(eslint@8.56.0)(typescript@5.3.3)(vitest@1.2.1)
       '@tb-dev/stylelint-config':
         specifier: ^1.1.4
         version: 1.1.4(postcss-html@1.6.0)(postcss@8.4.33)(typescript@5.3.3)
@@ -33,7 +33,7 @@ importers:
         version: 5.0.3(vite@5.0.12)(vue@3.4.15)
       '@vitest/browser':
         specifier: 1.2.1
-        version: 1.2.1(vitest@1.2.1)(webdriverio@8.28.6)
+        version: 1.2.1(vitest@1.2.1)(webdriverio@8.28.8)
       '@vitest/coverage-istanbul':
         specifier: 1.2.1
         version: 1.2.1(vitest@1.2.1)
@@ -116,8 +116,8 @@ importers:
         specifier: ^1.8.27
         version: 1.8.27(typescript@5.3.3)
       webdriverio:
-        specifier: ^8.28.6
-        version: 8.28.6(typescript@5.3.3)
+        specifier: ^8.28.8
+        version: 8.28.8(typescript@5.3.3)
 
   packages/components:
     dependencies:
@@ -1850,10 +1850,10 @@ packages:
       }
     engines: { node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1' }
 
-  /@tb-dev/eslint-config@1.6.3(eslint@8.56.0)(typescript@5.3.3)(vitest@1.2.1):
+  /@tb-dev/eslint-config@1.6.5(eslint@8.56.0)(typescript@5.3.3)(vitest@1.2.1):
     resolution:
       {
-        integrity: sha512-6qITOdJaPWmMduc3B73T/l/qa2CUluCTzSXZlglpWLEfNBLDIeIddqzT6lvP3bRUQVpdqednS4csTqi6N8JfCw==
+        integrity: sha512-L6HTLPrjUrQMekd43w3R3V/S3Y2flIjaLCPVPWdn0UoecR48vL1BeVsVtMbwIi8Bq2z8HqxQc+7oRVc5ShWQaQ==
       }
     peerDependencies:
       eslint: ^8.0.0
@@ -2210,7 +2210,7 @@ packages:
       vue: 3.4.15(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.2.1(vitest@1.2.1)(webdriverio@8.28.6):
+  /@vitest/browser@1.2.1(vitest@1.2.1)(webdriverio@8.28.8):
     resolution:
       {
         integrity: sha512-jhaQ15zWYAwz8anXgmLW0yAVLCXdT8RFv7LeW9bg7sMlvGJaTCTIHaHWFvCdADF/i62+22tnrzgiiqSnApjXtA==
@@ -2232,7 +2232,7 @@ packages:
       magic-string: 0.30.5
       sirv: 2.0.4
       vitest: 1.2.1(@types/node@20.11.5)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
-      webdriverio: 8.28.6(typescript@5.3.3)
+      webdriverio: 8.28.8(typescript@5.3.3)
     dev: true
 
   /@vitest/coverage-istanbul@1.2.1(vitest@1.2.1):
@@ -2611,16 +2611,16 @@ packages:
       - '@vue/composition-api'
       - vue
 
-  /@wdio/config@8.28.6:
+  /@wdio/config@8.28.8:
     resolution:
       {
-        integrity: sha512-rJ7GFnzg55MvG/CmN3rX79fFFBMcpoFZpILPTNaWJg43lBxidHue5pm7kXJT06D41sSJJPbtgoh6w4VPThIJrg==
+        integrity: sha512-+aoSuNNXZyARlx3W+lM2bykHwJ46C/W3emZLQrmweacWmOPz98mpRzUfUbk8lAdbsXFAk2rSBp8oTGwg9rjaKg==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
       '@wdio/logger': 8.28.0
       '@wdio/types': 8.28.6
-      '@wdio/utils': 8.28.6
+      '@wdio/utils': 8.28.8
       decamelize: 6.0.0
       deepmerge-ts: 5.1.0
       glob: 10.3.10
@@ -2669,10 +2669,10 @@ packages:
       '@types/node': 20.11.5
     dev: true
 
-  /@wdio/utils@8.28.6:
+  /@wdio/utils@8.28.8:
     resolution:
       {
-        integrity: sha512-EYQmGvejMiTMB18lW3CDc6cR+jXXjxDebP6ci53oK20QPx9VBuMQZdCbuoftKrKVLA+e9Fk0XfXq8xWYbjAvBQ==
+        integrity: sha512-z+8vdqIdXRA2j4O9EPHcVGffA9EzgQjN6RYPGhEZbQvpnNEDbYVlFdwX7pYocNb2G3+6RnNLnfLvepAPkoW7uw==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
@@ -9696,7 +9696,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.5
-      '@vitest/browser': 1.2.1(vitest@1.2.1)(webdriverio@8.28.6)
+      '@vitest/browser': 1.2.1(vitest@1.2.1)(webdriverio@8.28.8)
       '@vitest/expect': 1.2.1
       '@vitest/runner': 1.2.1
       '@vitest/snapshot': 1.2.1
@@ -9869,20 +9869,20 @@ packages:
     engines: { node: '>= 8' }
     dev: true
 
-  /webdriver@8.28.6:
+  /webdriver@8.28.8:
     resolution:
       {
-        integrity: sha512-qKZuG2uqGhq2xjk14vSAvE3C6TTTYQyOqDHQOSWNzPNhdBI99g2h4EUbmO3bc/5YaWRsVWWp+RB7jfQZUcE/MA==
+        integrity: sha512-cEJX/CCu91QIM4el0b3o1Yk/DI8TP79xGVVtT30zqhKUfGlvHlRr6XafFanuJkf0dPAs5DMQgN7CPtiAegCMJg==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
       '@types/node': 20.11.5
       '@types/ws': 8.5.10
-      '@wdio/config': 8.28.6
+      '@wdio/config': 8.28.8
       '@wdio/logger': 8.28.0
       '@wdio/protocols': 8.24.12
       '@wdio/types': 8.28.6
-      '@wdio/utils': 8.28.6
+      '@wdio/utils': 8.28.8
       deepmerge-ts: 5.1.0
       got: 12.6.1
       ky: 0.33.3
@@ -9893,10 +9893,10 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webdriverio@8.28.6(typescript@5.3.3):
+  /webdriverio@8.28.8(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-vWo3Qx0bWubzUBBLaLYgeQkSN63KTfW5P3IbayhJ8Qx+NVVnclG0mu4mQj00gvj8+3a8opef6T54gdzitVSHSw==
+        integrity: sha512-QFHv5FRvEcNznggxQrI256AwdClrnhL7C9Vwx5KxljEK2qw01UgW2vkCcrRYyfof3t9/N0dcybvpV09zc0XklQ==
       }
     engines: { node: ^16.13 || >=18 }
     peerDependencies:
@@ -9906,12 +9906,12 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.5
-      '@wdio/config': 8.28.6
+      '@wdio/config': 8.28.8
       '@wdio/logger': 8.28.0
       '@wdio/protocols': 8.24.12
       '@wdio/repl': 8.24.12
       '@wdio/types': 8.28.6
-      '@wdio/utils': 8.28.6
+      '@wdio/utils': 8.28.8
       archiver: 6.0.1
       aria-query: 5.3.0
       css-shorthand-properties: 1.1.1
@@ -9928,7 +9928,7 @@ packages:
       resq: 1.11.0
       rgb2hex: 0.2.5
       serialize-error: 11.0.3
-      webdriver: 8.28.6
+      webdriver: 8.28.8
     transitivePeerDependencies:
       - bufferutil
       - encoding

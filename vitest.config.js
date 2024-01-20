@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [vue({ script: { defineModel: true } })],
+  plugins: [vue()],
   test: {
     watch: false,
     globals: false,
