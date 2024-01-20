@@ -3,6 +3,8 @@ import { type VNode, computed, shallowRef } from 'vue';
 import { useBorder, usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
 import type { ScaffoldProps, SidebarItem } from './types';
 
+const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
+
 const props = withDefaults(defineProps<ScaffoldProps>(), {
   defaultBorder: '1px solid var(--m-color-outline-variant)',
   topBarBorder: true,
@@ -24,7 +26,6 @@ const topBarBorder = useBorder(
 );
 
 const sidebar = shallowRef<HTMLElement | null>(null);
-const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
 const sidebarWidth = usePixelWidth(sidebar);
 
 const bottomBar = shallowRef<HTMLElement | null>(null);

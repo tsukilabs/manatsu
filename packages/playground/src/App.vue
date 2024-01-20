@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
 import { Command } from 'manatsu/src/index.ts';
 import { ref, shallowRef, watchEffect } from 'vue';
@@ -12,6 +13,7 @@ import {
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
+import { components } from './routes';
 
 const route = useRoute();
 const lastRoute = useLocalStorage('playground:last-route', '/', {
@@ -32,13 +34,14 @@ const menuItems: TopAppbarMenuItem[] = [
   { key: 'about', label: 'About', to: '/about' }
 ];
 
-const sidebarItems: SidebarItem[] = [
-  { key: 'button', label: 'Button', to: '/components/button' },
-  { key: 'card', label: 'Card', to: '/components/card' },
-  { key: 'checkbox', label: 'Checkbox', to: '/components/checkbox' },
-  { key: 'input', label: 'Input', to: '/components/input' },
-  { key: 'radio', label: 'Radio', to: '/components/radio' }
-];
+const sidebarItems: SidebarItem[] = components.map((component) => {
+  const componentName = component.path.replace('/components/', '');
+  return {
+    key: componentName,
+    label: startCase(componentName).replaceAll(/\s/g, ''),
+    to: component.path
+  };
+});
 
 const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexColor);
 </script>

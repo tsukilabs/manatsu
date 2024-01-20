@@ -3,9 +3,10 @@ import type { VNode } from 'vue';
 import { type RouteLocationRaw, RouterLink } from 'vue-router';
 import { useExternalLink } from '@manatsu/composables/src/index.ts';
 
+const to = defineModel<RouteLocationRaw>('to');
+
 const slots = defineSlots<{ default?: () => VNode }>();
 
-const to = defineModel<RouteLocationRaw>('to');
 const isExternalLink = useExternalLink(to);
 
 defineExpose({ isExternalLink });

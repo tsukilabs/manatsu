@@ -1,6 +1,6 @@
 import { type RouteRecordRaw, createMemoryHistory, createRouter } from 'vue-router';
 
-const components: RouteRecordRaw[] = [
+export const components: RouteRecordRaw[] = [
   {
     path: '/components/button',
     component: () => import('../views/components/ButtonView.vue')
