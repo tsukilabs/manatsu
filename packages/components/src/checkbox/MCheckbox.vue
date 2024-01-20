@@ -39,8 +39,8 @@ defineSlots<{ default?: () => VNode }>();
     appearance: none;
     border: 1px solid var(--m-color-on-surface-variant);
     border-radius: var(--m-border-radius);
-    width: 1.15em;
-    height: 1.15em;
+    width: 1.1em;
+    height: 1.1em;
     font-size: inherit;
   }
 
