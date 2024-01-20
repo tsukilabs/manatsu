@@ -20,6 +20,7 @@ export interface TopAppbarMenuItem {
 }
 
 export interface TopAppbarProps extends TopAppbarBrandProps {
+  contentAlignment?: 'start' | 'center' | 'end';
   contentClass?: string;
   contentStyle?: StyleValue;
   endClass?: string;
