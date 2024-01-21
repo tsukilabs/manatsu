@@ -13,16 +13,12 @@ import {
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
+import { StorageKey } from './enum';
 import { components } from './routes';
 
 const route = useRoute();
-const lastRoute = useLocalStorage('playground:last-route', '/', {
-  writeDefaults: true
-});
-
-watchEffect(() => {
-  lastRoute.value = route.path;
-});
+const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
+watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = useDarkMode();
 

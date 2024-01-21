@@ -1,10 +1,13 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="Model">
 import type { VNode } from 'vue';
 import type { CheckboxProps } from './types';
 
-const checked = defineModel<boolean>('checked');
+const model = defineModel<Model>();
 
-defineProps<CheckboxProps>();
+withDefaults(defineProps<CheckboxProps>(), {
+  trueValue: true,
+  falseValue: false
+});
 
 defineSlots<{ default?: () => VNode }>();
 </script>
@@ -12,11 +15,15 @@ defineSlots<{ default?: () => VNode }>();
 <template>
   <label class="m-checkbox">
     <input
-      v-model="checked"
+      :id="inputId"
+      v-model="model"
       type="checkbox"
-      :disabled="disabled"
       :class="inputClass"
       :style="inputStyle"
+      :disabled="disabled"
+      :value="value"
+      :true-value="trueValue"
+      :false-value="falseValue"
     />
     <span v-if="label || $slots.default" class="m-checkbox-label">
       <slot>{{ label }}</slot>

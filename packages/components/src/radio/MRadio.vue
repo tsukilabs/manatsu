@@ -21,7 +21,6 @@ defineSlots<{ default?: () => VNode }>();
       :name="name"
       :value="value"
     />
-
     <span v-if="label || $slots.default" class="m-radio-label">
       <slot>{{ label }}</slot>
     </span>

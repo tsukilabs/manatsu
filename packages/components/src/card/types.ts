@@ -12,6 +12,8 @@ export interface CardHeaderProps {
   headerStartStyle?: StyleValue;
   headerStyle?: StyleValue;
   subtitle?: Nullish<string>;
+  subtitleClass?: string;
+  subtitleStyle?: StyleValue;
   title?: Nullish<string>;
   titleClass?: string;
   titleStyle?: StyleValue;
