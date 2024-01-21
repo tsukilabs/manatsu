@@ -2,21 +2,28 @@
 import { computed, ref } from 'vue';
 import { MCard, MCheckbox } from '@manatsu/components/src/index.ts';
 
-const first = ref('yes');
-const second = ref(0);
-const third = ref(false);
+const first = ref(false);
+const second = ref('yes');
+const third = ref(0);
+const fourth = ref({ label: 'yes' });
 
 const singleValues = computed(() => {
   const values = {
     first: first.value,
     second: second.value,
-    third: third.value
+    third: third.value,
+    fourth: fourth.value
   };
 
   return JSON.stringify(values, null, 2);
 });
 
-const group = ref([]);
+const fourthValues = {
+  trueValue: { label: 'yes' },
+  falseValue: { label: 'no' }
+};
+
+const group = ref(['label 1']);
 </script>
 
 <template>
@@ -26,9 +33,11 @@ const group = ref([]);
         <pre>{{ singleValues }}</pre>
 
         <div class="flex gap-4">
-          <MCheckbox v-model="first" true-value="yes" false-value="no">Label 1</MCheckbox>
-          <MCheckbox v-model="second" :true-value="1" :false-value="0">Label 2</MCheckbox>
-          <MCheckbox v-model="third">Label 3</MCheckbox>
+          <MCheckbox v-model="first">Label 1</MCheckbox>
+          <MCheckbox v-model="second" true-value="yes" false-value="no">Label 2</MCheckbox>
+          <MCheckbox v-model="third" :true-value="1" :false-value="0">Label 3</MCheckbox>
+          <MCheckbox v-model="fourth" v-bind="fourthValues"> Label 4 </MCheckbox>
+          <MCheckbox v-model="fourth" v-bind="fourthValues" disabled>Disabled</MCheckbox>
         </div>
       </div>
     </MCard>
