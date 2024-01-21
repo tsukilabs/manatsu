@@ -3,6 +3,8 @@ name: Test PR
 on:
   pull_request:
     branches: [main]
+  label:
+    types: [edited]
 
 jobs:
   test:
