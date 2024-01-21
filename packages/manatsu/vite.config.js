@@ -7,41 +7,25 @@ import vue from '@vitejs/plugin-vue';
 import autoprefixer from 'autoprefixer';
 
 const dtsOptions = {
-  rollupTypes: true,
+  rollupTypes: false,
   afterBuild: async (map) => {
-    const indexDts = Array.from(map).find(([filePath]) => {
+    const dts = Array.from(map).find(([filePath]) => {
       return basename(filePath) === 'index.d.ts';
     });
 
-    if (!indexDts) {
+    if (!dts) {
       throw new Error('Could not find index.d.ts file.');
     }
 
-    let [filePath, content] = indexDts;
+    let [filePath, content] = dts;
 
     // https://regex101.com/r/LomJCS
     const packageRegex = /@manatsu\/([a-z]+)\/src\/index\.ts/gm;
     content = content.replace(packageRegex, './$1');
 
-    if (!content.includes('ComponentCustomProperties')) {
-      const moduleDeclaration = `
-        declare module 'vue' {
-          interface ComponentCustomProperties {
-            readonly $mana: import("@manatsu/shared").ManatsuGlobal;
-          }
-        }
-        
-        export {}
-      `;
-
-      // https://regex101.com/r/ZIMPlK
-      const emptyExportRegex = /export\s*{\s*};?/gm;
-      content = content.replace(emptyExportRegex, moduleDeclaration);
-    }
-
     content = await prettier.format(content, {
       parser: 'babel-ts',
-      printWidth: 80,
+      printWidth: 120,
       tabWidth: 2,
       useTabs: false,
       endOfLine: 'lf',
