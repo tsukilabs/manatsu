@@ -5,14 +5,7 @@ import { useLocalStorage } from '@vueuse/core';
 import { Command } from 'manatsu/src/index.ts';
 import { ref, shallowRef, watchEffect } from 'vue';
 import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
-import {
-  MButton,
-  MDynamicLink,
-  MScaffold,
-  MTopAppbar,
-  type SidebarItem,
-  type TopAppbarMenuItem
-} from '@manatsu/components/src/index.ts';
+import type { MTopAppbar, SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
 import { StorageKey } from './enum';
 import { components } from './routes';
 

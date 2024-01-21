@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MCard, MRadio } from '@manatsu/components/src/index.ts';
 
 const group = ref<string>('label 1');
 </script>

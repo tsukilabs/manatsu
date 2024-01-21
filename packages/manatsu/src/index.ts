@@ -1,15 +1,43 @@
 import './style/main.scss';
+import type { App } from 'vue';
+import type { ManatsuGlobal } from '@manatsu/shared';
+import {
+  MButton,
+  MCard,
+  MCheckbox,
+  MDynamicLink,
+  MInput,
+  MRadio,
+  MScaffold,
+  MTopAppbar
+} from '@manatsu/components/src/index.ts';
+
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $mana: ManatsuGlobal;
+  }
+
+  interface GlobalComponents {
+    MButton: typeof MButton;
+    MCard: typeof MCard;
+    MCheckbox: typeof MCheckbox;
+    MDynamicLink: typeof MDynamicLink;
+    MInput: typeof MInput;
+    MRadio: typeof MRadio;
+    MScaffold: typeof MScaffold;
+    MTopAppbar: typeof MTopAppbar;
+  }
+}
 
 export { Command } from './enum';
 export { createManatsu } from './plugin';
 
-export * from '@manatsu/components/src/index.ts';
-
 export { type MaybeNullishRef, isDarkMode } from '@manatsu/shared';
 
-// Composables should be exported individually, because some of them are for internal use only.
-// One can still import the others directly from the @manatsu/composables package,
-// but we won't give any guarantees about their stability.
+export { MButton, MCard, MCheckbox, MDynamicLink, MInput, MRadio, MScaffold, MTopAppbar };
+
+export type { CardVariant, SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
+
 export {
   useDarkMode,
   useHeight,
@@ -18,3 +46,18 @@ export {
   usePixelWidth,
   useWidth
 } from '@manatsu/composables/src/index.ts';
+
+/**
+ * Globally registers all components.
+ * @param app Vue app instance.
+ */
+export function registerComponents(app: App) {
+  app.component('MButton', MButton);
+  app.component('MCard', MCard);
+  app.component('MCheckbox', MCheckbox);
+  app.component('MDynamicLink', MDynamicLink);
+  app.component('MInput', MInput);
+  app.component('MRadio', MRadio);
+  app.component('MScaffold', MScaffold);
+  app.component('MTopAppbar', MTopAppbar);
+}

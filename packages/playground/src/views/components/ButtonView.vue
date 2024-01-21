@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { capitalize } from 'lodash-es';
-import { MButton } from '@manatsu/components/src/index.ts';
 
 const variants = ['filled', 'elevated', 'outlined'] as const;
 </script>

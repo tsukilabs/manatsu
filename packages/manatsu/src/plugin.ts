@@ -9,12 +9,6 @@ import {
   setDarkMode
 } from '@manatsu/shared';
 
-declare module 'vue' {
-  interface ComponentCustomProperties {
-    $mana: ManatsuGlobal;
-  }
-}
-
 export function createManatsu(options: ManatsuOptions = {}): Plugin {
   const manatsu: Plugin = {
     install(app) {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { capitalize } from 'lodash-es';
-import { MButton, MCard } from '@manatsu/components/src/index.ts';
 import LoremIpsum from '../../components/LoremIpsum.vue';
 
 const variants = ['filled', 'elevated', 'outlined'] as const;
