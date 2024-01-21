@@ -14,6 +14,7 @@ const slots = defineSlots<{
   'header-end'?: () => VNode;
   'header-start'?: () => VNode;
   media?: () => VNode;
+  subtitle?: () => VNode;
   title?: () => VNode;
 }>();
 
@@ -23,6 +24,10 @@ const classList = computed(() => {
 
 const hasTitle = computed(() => {
   return Boolean(props.title ?? slots.title);
+});
+
+const hasSubtitle = computed(() => {
+  return Boolean(props.subtitle ?? slots.subtitle);
 });
 
 const hasHeader = computed(() => {
@@ -61,7 +66,10 @@ const mediaOrder = computed(() => {
         <slot v-if="$slots.title" name="title"></slot>
         <template v-else>
           <span>{{ title }}</span>
-          <span v-if="subtitle">{{ subtitle }}</span>
+          <div v-if="hasSubtitle">
+            <slot v-if="$slots.subtitle" name="subtitle"></slot>
+            <span v-else>{{ subtitle }}</span>
+          </div>
         </template>
       </div>
 
