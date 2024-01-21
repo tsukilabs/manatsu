@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { InputProps } from './types';
 
-defineProps<InputProps>();
-
 const value = defineModel<string | null>('value');
+
+defineProps<InputProps>();
 </script>
 
 <template>

@@ -18,7 +18,7 @@ jobs:
       - run: pnpm run -F @manatsu/shared build
       - run: pnpm run clippy:manatsu
       - run: pnpm run lint
-      - run: pnpm run test
+      - run: pnpm run test-ci
 
   publish-npm:
     needs: test

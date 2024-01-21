@@ -24,7 +24,8 @@ export default config({
             allowNoLang: false
           }
         }
-      ]
+      ],
+      'vue/enforce-style-attribute': ['error', { allow: ['plain'] }]
     }
   }
 });

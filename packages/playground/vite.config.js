@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import dev from 'vite-plugin-vue-devtools';
 
 export default defineConfig({
-  plugins: [vue({ script: { defineModel: true } }), dev()],
+  plugins: [vue(), dev()],
   clearScreen: false,
   server: {
     port: 1420,

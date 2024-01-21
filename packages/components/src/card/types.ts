@@ -1,5 +1,5 @@
 import type { StyleValue } from 'vue';
-import type { MaybePromise } from '@tb-dev/utility-types';
+import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import type { ButtonProps } from '../button';
 
 export type CardVariant = 'filled' | 'elevated' | 'outlined';
@@ -11,8 +11,10 @@ export interface CardHeaderProps {
   headerStartClass?: string;
   headerStartStyle?: StyleValue;
   headerStyle?: StyleValue;
-  subtitle?: string;
-  title?: string;
+  subtitle?: Nullish<string>;
+  subtitleClass?: string;
+  subtitleStyle?: StyleValue;
+  title?: Nullish<string>;
   titleClass?: string;
   titleStyle?: StyleValue;
 }

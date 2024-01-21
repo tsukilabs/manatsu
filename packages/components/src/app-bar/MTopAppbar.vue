@@ -4,7 +4,10 @@ import { usePixelWidth, useToPixel } from '@manatsu/composables/src/index.ts';
 import MDynamicLink from '../link/MDynamicLink.vue';
 import type { TopAppbarMenuItem, TopAppbarProps } from './types';
 
+const menuItems = defineModel<TopAppbarMenuItem[]>('menuItems');
+
 const props = withDefaults(defineProps<TopAppbarProps>(), {
+  contentAlignment: 'end',
   height: '60px'
 });
 
@@ -18,7 +21,6 @@ const slots = defineSlots<{
 }>();
 
 const height = useToPixel(() => props.height);
-const menuItems = defineModel<TopAppbarMenuItem[]>('menuItems');
 
 const hasLogo = computed(() => Boolean(props.logo ?? slots.logo));
 const hasTitle = computed(() => Boolean(props.title ?? slots.title));
@@ -30,6 +32,12 @@ const hasStart = computed(() => {
 const hasContent = computed(() => {
   if (menuItems.value && menuItems.value.length > 0) return true;
   return Boolean(slots.content);
+});
+
+const alignment = computed(() => {
+  if (props.contentAlignment === 'start') return 'flex-start';
+  if (props.contentAlignment === 'center') return 'center';
+  return 'flex-end';
 });
 
 const start = shallowRef<HTMLElement | null>(null);
@@ -139,8 +147,9 @@ defineExpose({ startWidth, endWidth });
   }
 
   &-content {
-    @include flex.x-end-y-center;
+    @include flex.y-center;
     flex: 1 0 0;
+    justify-content: v-bind('alignment');
   }
 
   &-menu {

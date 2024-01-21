@@ -58,7 +58,7 @@ const dtsOptions = {
 
 export default defineConfig({
   root: __dirname,
-  plugins: [vue({ script: { defineModel: true } }), dts(dtsOptions)],
+  plugins: [vue(), dts(dtsOptions)],
   build: {
     outDir: 'dist',
     emptyOutDir: true,

@@ -14,6 +14,7 @@ const slots = defineSlots<{
   'header-end'?: () => VNode;
   'header-start'?: () => VNode;
   media?: () => VNode;
+  subtitle?: () => VNode;
   title?: () => VNode;
 }>();
 
@@ -59,10 +60,17 @@ const mediaOrder = computed(() => {
         role="heading"
       >
         <slot v-if="$slots.title" name="title"></slot>
-        <template v-else>
-          <span>{{ title }}</span>
-          <span v-if="subtitle">{{ subtitle }}</span>
-        </template>
+        <span v-else>{{ title }}</span>
+
+        <div
+          v-if="subtitle || $slots.subtitle"
+          class="m-card-subtitle"
+          :class="subtitleClass"
+          :style="subtitleStyle"
+        >
+          <slot v-if="$slots.subtitle" name="subtitle"></slot>
+          <span v-else>{{ subtitle }}</span>
+        </div>
       </div>
 
       <div
@@ -146,15 +154,15 @@ const mediaOrder = computed(() => {
     flex-direction: column;
     gap: 0.25rem;
 
-    & > span:first-of-type {
+    & > :not(.m-card-subtitle) {
       font-weight: 500;
       font-size: 1rem;
     }
+  }
 
-    & > span:first-of-type + span {
-      font-weight: 400;
-      font-size: 0.875rem;
-    }
+  &-subtitle > * {
+    font-weight: 400;
+    font-size: 0.875rem;
   }
 
   &-media {

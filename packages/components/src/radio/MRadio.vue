@@ -1,31 +1,27 @@
-<script setup lang="ts" generic="Model">
+<script setup lang="ts" generic="Value">
 import type { VNode } from 'vue';
-import type { CheckboxProps } from './types';
+import type { RadioProps } from './types';
 
-const model = defineModel<Model>();
+const model = defineModel<Value>();
 
-withDefaults(defineProps<CheckboxProps>(), {
-  trueValue: true,
-  falseValue: false
-});
+defineProps<RadioProps<Value>>();
 
 defineSlots<{ default?: () => VNode }>();
 </script>
 
 <template>
-  <label class="m-checkbox">
+  <label class="m-radio">
     <input
       :id="inputId"
       v-model="model"
-      type="checkbox"
+      type="radio"
       :class="inputClass"
       :style="inputStyle"
       :disabled="disabled"
+      :name="name"
       :value="value"
-      :true-value="trueValue"
-      :false-value="falseValue"
     />
-    <span v-if="label || $slots.default" class="m-checkbox-label">
+    <span v-if="label || $slots.default" class="m-radio-label">
       <slot>{{ label }}</slot>
     </span>
   </label>
@@ -34,43 +30,43 @@ defineSlots<{ default?: () => VNode }>();
 <style lang="scss">
 @use '@manatsu/sass/flex';
 
-.m-checkbox {
+.m-radio {
   @include flex.y-center($inline: true);
 
   &:has(&-label) {
     gap: 0.5em;
   }
 
-  & > input[type='checkbox'] {
+  & > input[type='radio'] {
     @include flex.center($inline: true);
     appearance: none;
     border: 1px solid var(--m-color-on-surface-variant);
-    border-radius: var(--m-border-radius);
+    border-radius: 50%;
     width: 1.1em;
     height: 1.1em;
     font-size: inherit;
   }
 
-  & > input[type='checkbox']:hover:not(:disabled) {
+  & > input[type='radio']:hover:not(:disabled) {
     box-shadow: 0 0 1px 1px rgb(0 0 0 / 15%);
     border-color: var(--m-color-primary);
   }
 
-  & > input[type='checkbox']::before {
+  & > input[type='radio']::before {
     scale: 0;
-    clip-path: polygon(17% 54%, 28% 43%, 38% 54%, 70% 22%, 81% 33%, 38% 75%, 17% 54%);
     transition: scale 0.1s ease-in-out;
+    border-radius: 50%;
     background-color: var(--m-color-primary);
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     content: '';
   }
 
-  & > input[type='checkbox']:checked::before {
+  & > input[type='radio']:checked::before {
     scale: 1;
   }
 
-  & > input[type='checkbox']:disabled::before {
+  & > input[type='radio']:disabled::before {
     opacity: 0.5;
     background-color: var(--m-color-on-surface);
   }
