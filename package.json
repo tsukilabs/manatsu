@@ -11,7 +11,6 @@
     "build": "pnpm run cli dev build",
     "build:shared": "pnpm run -F @manatsu/shared build",
     "bump": "miho bump --no-ask --add .",
-    "ci": "pnpm install && pnpm build:shared && run-p clippy test-ci lint type-check",
     "cli": "cargo run -p manatsu --",
     "clippy": "run-s clippy:*",
     "clippy:manatsu": "cargo clippy -p manatsu -- -D warnings",
