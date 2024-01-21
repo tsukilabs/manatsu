@@ -4,6 +4,7 @@ import prettier from 'prettier';
 import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import autoprefixer from 'autoprefixer';
 
 const dtsOptions = {
   rollupTypes: true,
@@ -59,6 +60,11 @@ const dtsOptions = {
 export default defineConfig({
   root: __dirname,
   plugins: [vue(), dts(dtsOptions)],
+  css: {
+    postcss: {
+      plugins: [autoprefixer()]
+    }
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
