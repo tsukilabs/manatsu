@@ -27,6 +27,7 @@ target/
 **/node_modules
 coverage/
 dist/
+.temp
 .eslintcache
 .stylelintcache
 config.json

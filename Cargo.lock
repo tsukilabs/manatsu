@@ -1874,7 +1874,9 @@ dependencies = [
  "regex",
  "serde",
  "serde_json",
+ "toml 0.8.8",
  "ureq",
+ "walkdir",
  "zip",
 ]
 

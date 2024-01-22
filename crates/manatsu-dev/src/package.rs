@@ -17,9 +17,9 @@ pub struct Package {
 
 impl Package {
   pub fn read() -> Result<Package> {
-    let json = env::current_dir()?.join("package.json");
-    let content = fs::read_to_string(json)?;
-    let package: Package = serde_json::from_str(&content)?;
+    let path: PathBuf = env::current_dir()?.join("package.json");
+    let package = fs::read_to_string(path)?;
+    let package: Package = serde_json::from_str(&package)?;
     Ok(package)
   }
 }

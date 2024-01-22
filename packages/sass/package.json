@@ -4,7 +4,7 @@
   "description": "SCSS utilities",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@8.14.1",
+  "packageManager": "pnpm@8.14.2",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",

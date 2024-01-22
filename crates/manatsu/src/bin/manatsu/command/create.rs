@@ -18,7 +18,7 @@ impl CliCommand for Create {
       if project::is_valid(name)? {
         Ok(Validation::Valid)
       } else {
-        Ok(Validation::Invalid("Invalid component name".into()))
+        Ok(Validation::Invalid("Invalid project name".into()))
       }
     };
 
