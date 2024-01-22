@@ -41,7 +41,6 @@ jobs:
         with:
           run_install: true
 
-      - run: pnpm install
       - run: pnpm run cli dev build
       - run: pnpm run cli dev release
         env:
