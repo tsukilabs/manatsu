@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 20.x
           cache: pnpm
-          
+
       - run: pnpm install
       - run: pnpm run build:shared
       - run: pnpm run type-check
