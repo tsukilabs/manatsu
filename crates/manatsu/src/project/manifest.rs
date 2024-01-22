@@ -77,7 +77,7 @@ impl Manifest for CargoToml {
     for entry in WalkDir::new(dir_path).into_iter().filter_map(|e| e.ok()) {
       let path = entry.path();
 
-      if glob.is_match(&path) {
+      if glob.is_match(path) {
         let cargo_toml = fs::read_to_string(path)?;
         let mut cargo_toml: toml::Value = toml::from_str(&cargo_toml)?;
 
