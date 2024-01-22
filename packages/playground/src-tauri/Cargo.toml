@@ -16,7 +16,7 @@ features = []
 [dependencies]
 chrono = "0.4"
 serde_json = "1.0"
-tauri-plugin-manatsu = "0.3"
+tauri-plugin-manatsu = "0.4"
 tauri-plugin-window-state = "0.1"
 
 [dependencies.serde]
