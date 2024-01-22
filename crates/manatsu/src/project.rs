@@ -4,7 +4,6 @@ mod util;
 
 use anyhow::{bail, Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
-use manifest::{CargoToml, Manifest, PackageJson};
 use regex::Regex;
 use std::io::Cursor;
 use std::path::{Path, PathBuf};
@@ -105,20 +104,26 @@ fn find_extracted_folder(path: &Path, template: Template) -> Result<PathBuf> {
 fn build_globset() -> Result<GlobSet> {
   let mut builder = GlobSetBuilder::new();
 
+  macro_rules! add {
+    ($glob:expr) => {
+      builder.add(Glob::new($glob)?);
+    };
+  }
+
   // Directories
-  builder.add(Glob::new("**/dist")?);
-  builder.add(Glob::new("**/target")?);
-  builder.add(Glob::new("**/node_modules")?);
-  builder.add(Glob::new("**/.github")?);
+  add!("**/dist");
+  add!("**/target");
+  add!("**/node_modules");
+  add!("**/.github");
 
   // Files
-  builder.add(Glob::new("**/LICENSE")?);
-  builder.add(Glob::new("**/README.md")?);
-  builder.add(Glob::new("**/pnpm-lock.yaml")?);
-  builder.add(Glob::new("**/*.lock")?);
-  builder.add(Glob::new("**/*.log")?);
-  builder.add(Glob::new("**/taze.config.*")?);
-  builder.add(Glob::new("**/config.json")?);
+  add!("**/LICENSE");
+  add!("**/README.md");
+  add!("**/pnpm-lock.yaml");
+  add!("**/*.lock");
+  add!("**/*.log");
+  add!("**/taze.config.*");
+  add!("**/config.json");
 
   let globset = builder.build()?;
   Ok(globset)
@@ -136,10 +141,11 @@ fn remove_entry(path: &Path) -> Result<()> {
 }
 
 fn update_project_metadata(dir_path: &Path, project: &Project) -> Result<()> {
-  PackageJson::update_metadata(dir_path, project)?;
+  manifest::update_package_json(dir_path, project)?;
 
   if matches!(&project.template, Template::Tauri) {
-    CargoToml::update_metadata(dir_path, project)?;
+    manifest::update_cargo_toml(dir_path, project)?;
+    manifest::update_tauri_conf(dir_path, project)?;
   }
 
   util::update_index_metadata(dir_path, &project.name)?;

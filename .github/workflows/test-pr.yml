@@ -14,13 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.x
-          cache: pnpm
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
 
-      - run: pnpm install
       - run: pnpm run build:shared
       - run: pnpm run type-check
       - run: pnpm run lint

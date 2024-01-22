@@ -15,7 +15,7 @@
     },
     "bundle": {
       "active": false,
-      "identifier": "com.manatsu.dev",
+      "identifier": "tsukilabs.manatsu.dev",
       "icon": ["icons/icon.ico"]
     },
     "security": {
