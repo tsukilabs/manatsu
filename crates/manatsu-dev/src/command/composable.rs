@@ -1,4 +1,4 @@
-use crate::dev::{self, package};
+use crate::{package, util};
 use anyhow::{bail, Result};
 use convert_case::{Case, Casing};
 use regex::Regex;
@@ -31,14 +31,14 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
 
   // Formats the files to ensure their structure is correct.
   let glob = format!("**/composables/src/{camel}/**/*.ts");
-  dev::format_files(&glob)?;
+  util::format_files(&glob)?;
 
   // Adds an export declaration to the src index.
   write_to_src_index(&camel)?;
 
   // Lint the files to ensure that the exports are sorted.
   let index_glob = vec!["**/composables/src/index.ts"];
-  dev::lint(glob, Some(index_glob))?;
+  util::lint(glob, Some(index_glob))?;
 
   println!("Composable {camel} created in {:?}", start.elapsed());
   Ok(())

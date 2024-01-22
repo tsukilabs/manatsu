@@ -1,31 +1,5 @@
-mod build;
-mod json;
-pub mod package;
-mod release;
-pub mod scaffold;
-
-use crate::pnpm;
 use anyhow::{Context, Result};
-pub use build::build;
-pub use release::release;
-use std::{env, fs};
-
-/// Synchronizes all README files of the monorepo.
-pub fn readme() -> Result<()> {
-  let filename = "README.md";
-  let cwd = env::current_dir()?;
-  let src_readme = cwd.join(filename);
-
-  println!("Copying README files...");
-  for pkg in package::all() {
-    let dest_readme = package::dir(pkg)?.join(filename);
-    fs::copy(&src_readme, &dest_readme)?;
-    println!("Copied: {}", dest_readme.display());
-  }
-
-  println!("Done!");
-  Ok(())
-}
+use manatsu::pnpm;
 
 /// Format files using Prettier.
 pub fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {

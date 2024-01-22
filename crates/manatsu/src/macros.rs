@@ -1,6 +1,7 @@
 /// Wrap [std::process::Command], executing `cmd` as the program if the current OS is Windows.
 ///
 /// This is only useful in some very specific cases.
+#[doc(hidden)]
 #[macro_export]
 macro_rules! win_cmd {
   ($program:literal) => {{

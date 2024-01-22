@@ -1,6 +1,7 @@
-use super::json;
-use crate::{cargo, pnpm};
+use crate::config::Config;
+use crate::package::Package;
 use anyhow::Result;
+use manatsu::{cargo, pnpm};
 use miho::git::{self, Commit};
 use std::process::Stdio;
 
@@ -19,7 +20,7 @@ pub fn release() -> Result<()> {
       .output()?;
   }
 
-  match json::read_config().ok() {
+  match Config::read().ok() {
     Some(cfg) if cfg.github => create_github_release(&cfg.github_token)?,
     _ => {
       pnpm!(["publish", "-r", "--no-git-checks"])?;
@@ -35,7 +36,7 @@ pub fn release() -> Result<()> {
 }
 
 fn create_github_release(github_token: &str) -> Result<()> {
-  let package = json::read_package()?;
+  let package = Package::read()?;
 
   let base_url = "https://api.github.com";
   let owner_repo = "tsukilabs/manatsu";
