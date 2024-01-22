@@ -1,0 +1,38 @@
+[package]
+name = "manatsu-dev"
+version = "0.3.8"
+homepage.workspace = true
+repository.workspace = true
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+readme.workspace = true
+categories.workspace = true
+publish = false
+
+[dependencies]
+anyhow = "1.0"
+colored = "2.1"
+convert_case = "0.6"
+inquire = "0.6"
+miho = "3.7"
+regex = "1.10"
+
+[dependencies.clap]
+version = "4.4"
+features = ["derive"]
+
+[dependencies.manatsu]
+version = "0.3"
+path = "../manatsu"
+
+[dependencies.serde]
+version = "1.0"
+features = ["derive"]
+
+[dependencies.serde_json]
+version = "1.0"
+
+[dependencies.ureq]
+version = "2.9"
+features = ["json"]

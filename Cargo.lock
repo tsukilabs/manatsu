@@ -1879,6 +1879,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "manatsu-dev"
+version = "0.3.8"
+dependencies = [
+ "anyhow",
+ "clap",
+ "colored",
+ "convert_case 0.6.0",
+ "inquire",
+ "manatsu",
+ "miho",
+ "regex",
+ "serde",
+ "serde_json",
+ "ureq",
+]
+
+[[package]]
 name = "markup5ever"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

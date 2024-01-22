@@ -1,4 +1,4 @@
-use crate::dev::{self, package};
+use crate::{package, util};
 use anyhow::{bail, Result};
 use convert_case::{Case, Casing};
 use regex::Regex;
@@ -7,10 +7,10 @@ use std::path::Path;
 use std::time::Instant;
 
 /// <https://regex101.com/r/igEb6A>
-pub(crate) const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
+const COMPONENT_NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
 /// Generates a component template.
-pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
+pub(crate) fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
 
   let name = name.as_ref();
@@ -35,7 +35,7 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   write_to_src_index(&kebab)?;
 
   let glob = format!("**/components/src/{kebab}/**/*.{{ts,vue}}");
-  dev::format_files(&glob)?;
+  util::format_files(&glob)?;
 
   let index_glob = "**/components/src/index.ts";
   let args = vec![
@@ -44,7 +44,7 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
     index_glob,
   ];
 
-  dev::lint(glob, Some(args))?;
+  util::lint(glob, Some(args))?;
 
   println!("Component {pascal} created in {:?}", start.elapsed());
   Ok(())

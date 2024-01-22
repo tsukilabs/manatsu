@@ -1,12 +1,28 @@
 use anyhow::Result;
-use std::env;
+use serde::Deserialize;
 use std::path::PathBuf;
+use std::{env, fs};
 
 /// Public package names.
 pub const PUBLIC_PACKAGES: [&str; 5] = ["manatsu", "components", "composables", "sass", "shared"];
 
 /// Private package names.
 pub const PRIVATE_PACKAGES: [&str; 1] = ["playground"];
+
+#[derive(Deserialize)]
+#[serde(rename_all(serialize = "snake_case", deserialize = "camelCase"))]
+pub struct Package {
+  pub version: String,
+}
+
+impl Package {
+  pub fn read() -> Result<Package> {
+    let json = env::current_dir()?.join("package.json");
+    let content = fs::read_to_string(json)?;
+    let package: Package = serde_json::from_str(&content)?;
+    Ok(package)
+  }
+}
 
 /// Returns all package names.
 pub fn all() -> Vec<String> {
