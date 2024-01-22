@@ -1,7 +1,10 @@
+mod manifest;
 mod template;
+mod util;
 
 use anyhow::{bail, Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
+use manifest::{CargoToml, Manifest, PackageJson};
 use regex::Regex;
 use std::io::Cursor;
 use std::path::{Path, PathBuf};
@@ -11,8 +14,7 @@ pub use template::Template;
 use zip::ZipArchive;
 
 /// <https://regex101.com/r/9dSatE>
-pub(crate) const PROJECT_NAME_REGEX: &str =
-  r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
+const PROJECT_NAME_REGEX: &str = r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
 
 pub struct Project {
   pub name: String,
@@ -52,7 +54,9 @@ impl Project {
     let cursor = Cursor::new(bytes);
     let mut zip = ZipArchive::new(cursor)?;
     zip.extract(&path)?;
+
     hoist_extracted_files(&path, self.template)?;
+    update_project_metadata(&path, self)?;
 
     println!("Built {} in {:?}", self.name, start.elapsed());
     Ok(())
@@ -111,7 +115,7 @@ fn build_globset() -> Result<GlobSet> {
   builder.add(Glob::new("**/LICENSE")?);
   builder.add(Glob::new("**/README.md")?);
   builder.add(Glob::new("**/pnpm-lock.yaml")?);
-  builder.add(Glob::new("**/Cargo.lock")?);
+  builder.add(Glob::new("**/*.lock")?);
   builder.add(Glob::new("**/*.log")?);
   builder.add(Glob::new("**/taze.config.*")?);
   builder.add(Glob::new("**/config.json")?);
@@ -127,6 +131,18 @@ fn remove_entry(path: &Path) -> Result<()> {
   } else if metadata.is_file() {
     fs::remove_file(path)?;
   }
+
+  Ok(())
+}
+
+fn update_project_metadata(dir_path: &Path, project: &Project) -> Result<()> {
+  PackageJson::update_metadata(dir_path, project)?;
+
+  if matches!(&project.template, Template::Tauri) {
+    CargoToml::update_metadata(dir_path, project)?;
+  }
+
+  util::update_index_metadata(dir_path, &project.name)?;
 
   Ok(())
 }
