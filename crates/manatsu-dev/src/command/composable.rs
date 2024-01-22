@@ -7,7 +7,7 @@ use std::path::Path;
 use std::time::Instant;
 
 /// <https://regex101.com/r/vBQTOL>
-pub(crate) const COMPOSABLE_NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";
+const COMPOSABLE_NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";
 
 pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();

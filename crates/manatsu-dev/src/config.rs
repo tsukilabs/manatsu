@@ -3,7 +3,7 @@ use serde::Deserialize;
 use std::{env, fs};
 
 #[derive(Deserialize)]
-pub(crate) struct Config {
+pub struct Config {
   pub github: bool,
   pub github_token: String,
 }
