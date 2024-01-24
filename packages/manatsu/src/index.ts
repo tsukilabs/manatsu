@@ -36,7 +36,12 @@ export { type MaybeNullishRef, isDarkMode } from '@manatsu/shared';
 
 export { MButton, MCard, MCheckbox, MDynamicLink, MInput, MRadio, MScaffold, MTopAppbar };
 
-export type { CardVariant, SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
+export type {
+  ButtonVariant,
+  CardVariant,
+  SidebarItem,
+  TopAppbarMenuItem
+} from '@manatsu/components/src/index.ts';
 
 export {
   useDarkMode,
