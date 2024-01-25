@@ -48,7 +48,7 @@
     "@vitest/browser": "1.2.1",
     "@vitest/coverage-istanbul": "1.2.1",
     "@vitest/ui": "1.2.1",
-    "@vue/test-utils": "^2.4.3",
+    "@vue/test-utils": "^2.4.4",
     "@vueuse/core": "^10.7.2",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
