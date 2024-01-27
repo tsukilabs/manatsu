@@ -33,8 +33,8 @@ importers:
         specifier: ^5.0.3
         version: 5.0.3(vite@5.0.12)(vue@3.4.15)
       '@vitest/browser':
-        specifier: 1.2.1
-        version: 1.2.1(vitest@1.2.1)(webdriverio@8.29.1)
+        specifier: 1.2.2
+        version: 1.2.2(vitest@1.2.1)(webdriverio@8.29.1)
       '@vitest/coverage-istanbul':
         specifier: 1.2.1
         version: 1.2.1(vitest@1.2.1)
@@ -112,7 +112,7 @@ importers:
         version: 7.0.12(rollup@4.9.6)(vite@5.0.12)
       vitest:
         specifier: 1.2.1
-        version: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
+        version: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.2)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
       vue:
         specifier: ^3.4.15
         version: 3.4.15(typescript@5.3.3)
@@ -1889,8 +1889,8 @@ packages:
       vue: 3.4.15(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.2.1(vitest@1.2.1)(webdriverio@8.29.1):
-    resolution: {integrity: sha512-jhaQ15zWYAwz8anXgmLW0yAVLCXdT8RFv7LeW9bg7sMlvGJaTCTIHaHWFvCdADF/i62+22tnrzgiiqSnApjXtA==}
+  /@vitest/browser@1.2.2(vitest@1.2.1)(webdriverio@8.29.1):
+    resolution: {integrity: sha512-N8myxNVLbS9AbZ7B2cK33HTGYVzUTDArbMh3hLojOxaj7s7ZrBYYmzs0Q5J2wyDrOgs51p6OUrrzAIb1Z+Ck3A==}
     peerDependencies:
       playwright: '*'
       safaridriver: '*'
@@ -1904,10 +1904,10 @@ packages:
       webdriverio:
         optional: true
     dependencies:
-      '@vitest/utils': 1.2.1
+      '@vitest/utils': 1.2.2
       magic-string: 0.30.5
       sirv: 2.0.4
-      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
+      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.2)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
       webdriverio: 8.29.1(typescript@5.3.3)
     dev: true
 
@@ -1925,7 +1925,7 @@ packages:
       magicast: 0.3.3
       picocolors: 1.0.0
       test-exclude: 6.0.0
-      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
+      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.2)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1972,11 +1972,20 @@ packages:
       pathe: 1.1.2
       picocolors: 1.0.0
       sirv: 2.0.4
-      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
+      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.2)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
     dev: true
 
   /@vitest/utils@1.2.1:
     resolution: {integrity: sha512-bsH6WVZYe/J2v3+81M5LDU8kW76xWObKIURpPrOXm2pjBniBu2MERI/XP60GpS4PHU3jyK50LUutOwrx4CyHUg==}
+    dependencies:
+      diff-sequences: 29.6.3
+      estree-walker: 3.0.3
+      loupe: 2.3.7
+      pretty-format: 29.7.0
+    dev: true
+
+  /@vitest/utils@1.2.2:
+    resolution: {integrity: sha512-WKITBHLsBHlpjnDQahr+XK6RE7MiAsgrIkr0pGhQ9ygoxBfUeG0lUG5iLlzqjmKSlBv3+j5EGsriBzh+C3Tq9g==}
     dependencies:
       diff-sequences: 29.6.3
       estree-walker: 3.0.3
@@ -3376,7 +3385,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/utils': 6.19.0(eslint@8.56.0)(typescript@5.3.3)
       eslint: 8.56.0
-      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
+      vitest: 1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.2)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -7121,7 +7130,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.1)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0):
+  /vitest@1.2.1(@types/node@20.11.6)(@vitest/browser@1.2.2)(@vitest/ui@1.2.1)(jsdom@23.2.0)(sass@1.70.0):
     resolution: {integrity: sha512-TRph8N8rnSDa5M2wKWJCMnztCZS9cDcgVTQ6tsTFTG/odHJ4l5yNVqvbeDJYJRZ6is3uxaEpFs8LL6QM+YFSdA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -7147,7 +7156,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.6
-      '@vitest/browser': 1.2.1(vitest@1.2.1)(webdriverio@8.29.1)
+      '@vitest/browser': 1.2.2(vitest@1.2.1)(webdriverio@8.29.1)
       '@vitest/expect': 1.2.1
       '@vitest/runner': 1.2.1
       '@vitest/snapshot': 1.2.1
