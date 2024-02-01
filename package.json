@@ -52,7 +52,7 @@
     "@vueuse/core": "^10.7.2",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.7",
     "jsdom": "^23.2.0",
     "lint-staged": "^15.2.1",
     "npm-run-all2": "^6.1.1",
