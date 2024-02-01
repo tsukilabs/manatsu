@@ -43,7 +43,7 @@
     "@tb-dev/stylelint-config": "^1.1.5",
     "@tb-dev/utility-types": "^1.1.0",
     "@tb-dev/utils": "^1.2.1",
-    "@types/node": "^20.11.10",
+    "@types/node": "^20.11.15",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vitest/browser": "1.2.2",
     "@vitest/coverage-istanbul": "1.2.2",
