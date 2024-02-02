@@ -62,7 +62,7 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "rollup": "^4.9.6",
     "sass": "^1.70.0",
-    "stylelint": "^16.2.0",
+    "stylelint": "^16.2.1",
     "stylelint-config-standard-scss": "^13.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
     "taze": "^0.13.1",
