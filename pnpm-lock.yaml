@@ -21,8 +21,8 @@ importers:
         specifier: ^1.1.7
         version: 1.1.7(postcss-html@1.6.0)(postcss@8.4.33)(typescript@5.3.3)
       '@tb-dev/utility-types':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@tb-dev/utils':
         specifier: ^1.2.1
         version: 1.2.1
@@ -138,8 +138,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.3
       '@tb-dev/utility-types':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@tb-dev/utils':
         specifier: ^1.2.1
         version: 1.2.1
@@ -169,8 +169,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.3
       '@tb-dev/utility-types':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@tb-dev/utils':
         specifier: ^1.2.1
         version: 1.2.1
@@ -203,8 +203,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.3
       '@tb-dev/utility-types':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@tb-dev/utils':
         specifier: ^1.2.1
         version: 1.2.1
@@ -265,8 +265,8 @@ importers:
   packages/shared:
     dependencies:
       '@tb-dev/utility-types':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       '@tb-dev/utils':
         specifier: ^1.2.1
         version: 1.2.1
@@ -1594,13 +1594,13 @@ packages:
       - typescript
     dev: true
 
-  /@tb-dev/utility-types@1.1.0:
-    resolution: {integrity: sha512-naBCrC3/3HkkQ5RUEr52m8rzHLSParSZaj3l8kbZXX7MqJS0UiG77A1Za+4uqGlKfGOAnudaZlgg6iqaURTI6Q==}
+  /@tb-dev/utility-types@1.1.1:
+    resolution: {integrity: sha512-CeR2ErBAtjQudZcsTU0v1yp1VV3qvkl/8hotKG3AJ/kRCRPEcrZwNaqlzP+9OfbYrHAC/d4D11iekmUJVCmZKA==}
 
   /@tb-dev/utils@1.2.1:
     resolution: {integrity: sha512-FnKTT2Lr0q4mXUg7JdGYJbSWSLKEXi40zJZ0IKu8Ol1D+KcW49FCft34Z6uirMqDaQotGTpAbcN2f7Md37YztA==}
     dependencies:
-      '@tb-dev/utility-types': 1.1.0
+      '@tb-dev/utility-types': 1.1.1
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
