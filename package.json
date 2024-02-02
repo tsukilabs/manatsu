@@ -39,7 +39,7 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
     "@tauri-apps/api": "^1.5.3",
-    "@tb-dev/eslint-config": "^1.6.9",
+    "@tb-dev/eslint-config": "^1.7.0",
     "@tb-dev/stylelint-config": "^1.1.7",
     "@tb-dev/utility-types": "^1.1.1",
     "@tb-dev/utils": "^1.2.1",
