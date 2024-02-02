@@ -34,7 +34,7 @@ importers:
         version: 5.0.3(vite@5.0.12)(vue@3.4.15)
       '@vitest/browser':
         specifier: 1.2.2
-        version: 1.2.2(vitest@1.2.2)(webdriverio@8.29.3)
+        version: 1.2.2(vitest@1.2.2)(webdriverio@8.29.7)
       '@vitest/coverage-istanbul':
         specifier: 1.2.2
         version: 1.2.2(vitest@1.2.2)
@@ -123,8 +123,8 @@ importers:
         specifier: ^1.8.27
         version: 1.8.27(typescript@5.3.3)
       webdriverio:
-        specifier: ^8.29.3
-        version: 8.29.3(typescript@5.3.3)
+        specifier: ^8.29.7
+        version: 8.29.7(typescript@5.3.3)
 
   packages/components:
     dependencies:
@@ -1889,7 +1889,7 @@ packages:
       vue: 3.4.15(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.2.2(vitest@1.2.2)(webdriverio@8.29.3):
+  /@vitest/browser@1.2.2(vitest@1.2.2)(webdriverio@8.29.7):
     resolution: {integrity: sha512-N8myxNVLbS9AbZ7B2cK33HTGYVzUTDArbMh3hLojOxaj7s7ZrBYYmzs0Q5J2wyDrOgs51p6OUrrzAIb1Z+Ck3A==}
     peerDependencies:
       playwright: '*'
@@ -1908,7 +1908,7 @@ packages:
       magic-string: 0.30.5
       sirv: 2.0.4
       vitest: 1.2.2(@types/node@20.11.16)(@vitest/browser@1.2.2)(@vitest/ui@1.2.2)(jsdom@23.2.0)(sass@1.70.0)
-      webdriverio: 8.29.3(typescript@5.3.3)
+      webdriverio: 8.29.7(typescript@5.3.3)
     dev: true
 
   /@vitest/coverage-istanbul@1.2.2(vitest@1.2.2):
@@ -2220,8 +2220,8 @@ packages:
       strip-ansi: 7.1.0
     dev: true
 
-  /@wdio/protocols@8.24.12:
-    resolution: {integrity: sha512-QnVj3FkapmVD3h2zoZk+ZQ8gevSj9D9MiIQIy8eOnY4FAneYZ9R9GvoW+mgNcCZO8S8++S/jZHetR8n+8Q808g==}
+  /@wdio/protocols@8.29.7:
+    resolution: {integrity: sha512-9hhEePMLmI8fm9F2v4jlg9x4w4jEoZmY3vT6fXy90ne1DFaGWfy/a853nKEagQe/ZzxkN3/cpMBh8mryv9BVjw==}
     dev: true
 
   /@wdio/repl@8.24.12:
@@ -7113,7 +7113,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.16
-      '@vitest/browser': 1.2.2(vitest@1.2.2)(webdriverio@8.29.3)
+      '@vitest/browser': 1.2.2(vitest@1.2.2)(webdriverio@8.29.7)
       '@vitest/expect': 1.2.2
       '@vitest/runner': 1.2.2
       '@vitest/snapshot': 1.2.2
@@ -7253,15 +7253,15 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /webdriver@8.29.3:
-    resolution: {integrity: sha512-VL9SNV4FBX/8ak45aS35SYYDWc6HLXsfbnhVJnPSku8DgfDbfG8g9bCKQckpQcP7Te8a81/XbbrCjZfuqhVHfA==}
+  /webdriver@8.29.7:
+    resolution: {integrity: sha512-V9Wc2kXoK7sRbCJV6wzrOgbV2ZfWxYfCHbZZRCUuZxnAVhSrhWtciGND7F8nuZpoVXM4Hbr54hXulEl8Z6oWQg==}
     engines: {node: ^16.13 || >=18}
     dependencies:
       '@types/node': 20.11.16
       '@types/ws': 8.5.10
       '@wdio/config': 8.29.3
       '@wdio/logger': 8.28.0
-      '@wdio/protocols': 8.24.12
+      '@wdio/protocols': 8.29.7
       '@wdio/types': 8.29.1
       '@wdio/utils': 8.29.3
       deepmerge-ts: 5.1.0
@@ -7274,8 +7274,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webdriverio@8.29.3(typescript@5.3.3):
-    resolution: {integrity: sha512-U8JQuBXSJhdSdSnDttekN3o6WCTf3o805HDncOYtRebFd3/4vy2PmYBOOhbY5lmEq7/ROA8KSbe7TfogWskzTQ==}
+  /webdriverio@8.29.7(typescript@5.3.3):
+    resolution: {integrity: sha512-MyWbPB7rEat8I8nb4h8u+GjUA5KCQty9S/9tl/8AYV8Ar8o7hFv71lCnLCKzDZZoUzio7cF17r+hUHoRq/gRdQ==}
     engines: {node: ^16.13 || >=18}
     peerDependencies:
       devtools: ^8.14.0
@@ -7286,7 +7286,7 @@ packages:
       '@types/node': 20.11.16
       '@wdio/config': 8.29.3
       '@wdio/logger': 8.28.0
-      '@wdio/protocols': 8.24.12
+      '@wdio/protocols': 8.29.7
       '@wdio/repl': 8.24.12
       '@wdio/types': 8.29.1
       '@wdio/utils': 8.29.3
@@ -7306,7 +7306,7 @@ packages:
       resq: 1.11.0
       rgb2hex: 0.2.5
       serialize-error: 11.0.3
-      webdriver: 8.29.3
+      webdriver: 8.29.7
     transitivePeerDependencies:
       - bufferutil
       - encoding
