@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@manatsu/shared": "workspace:*",
-    "@tb-dev/utility-types": "^1.1.0",
+    "@tb-dev/utility-types": "^1.1.1",
     "@tb-dev/utils": "^1.2.1"
   },
   "devDependencies": {
