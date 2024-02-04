@@ -4,7 +4,7 @@
   "description": "Manatsu components",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@8.15.0",
+  "packageManager": "pnpm@8.15.1",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
@@ -47,8 +47,8 @@
   "dependencies": {
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
-    "@tb-dev/utility-types": "^1.1.1",
-    "@tb-dev/utils": "^1.2.1"
+    "@tb-dev/utility-types": "^1.1.2",
+    "@tb-dev/utils": "^1.2.3"
   },
   "devDependencies": {
     "@manatsu/sass": "workspace:*",
