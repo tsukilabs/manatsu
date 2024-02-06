@@ -1972,9 +1972,9 @@ dependencies = [
 
 [[package]]
 name = "miho"
-version = "3.7.21"
+version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a7206c0058dc50bb60e8c106c53c407d09419bcbfad3aecd1e5697c96e8f0748"
+checksum = "ea92a5f9d393a2654beea8aa355ea9ca9ff26f7c510d75cd8d7f024a70f44bdf"
 dependencies = [
  "anyhow",
  "clap",
@@ -1984,17 +1984,17 @@ dependencies = [
  "inquire",
  "miho_derive",
  "regex",
+ "semver",
  "serde",
  "serde_json",
- "thiserror",
  "toml 0.8.9",
 ]
 
 [[package]]
 name = "miho_derive"
-version = "3.7.21"
+version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e73f267140cb4c778675f872bb4566ca14c66692724191312381f6e9fc1063cd"
+checksum = "c4c94e6435bdc311a5bc9b944169c611542fa23ce183ae78575694ffb3d03f41"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2",
