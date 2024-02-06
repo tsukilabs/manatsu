@@ -42,7 +42,7 @@
     "@tb-dev/eslint-config": "^1.7.1",
     "@tb-dev/stylelint-config": "^1.1.7",
     "@tb-dev/utility-types": "^1.1.2",
-    "@tb-dev/utils": "^1.2.3",
+    "@tb-dev/utils": "^1.2.4",
     "@types/node": "^20.11.16",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vitest/browser": "1.2.2",
