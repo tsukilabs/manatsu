@@ -33,7 +33,7 @@ miho = "3.7"
 regex = "1.10"
 
 [dependencies.clap]
-version = "4.4"
+version = "4.5"
 features = ["derive"]
 
 [dependencies.manatsu]
