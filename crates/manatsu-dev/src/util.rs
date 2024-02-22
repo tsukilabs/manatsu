@@ -1,18 +1,21 @@
 use anyhow::Result;
+use colored::Colorize;
 use manatsu::pnpm;
 
 /// Format files using Prettier.
-pub fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {
-  let glob = glob.as_ref();
+pub async fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {
+  println!("{}", "formatting files...".bright_cyan());
 
-  println!("Formatting files...");
-  pnpm!(["exec", "prettier", glob, "--write"])?;
+  pnpm!(["exec", "prettier", glob.as_ref(), "--write"])
+    .spawn()?
+    .wait()
+    .await?;
 
   Ok(())
 }
 
 /// Lint files, fixing as many issues as possible.
-pub fn lint<G: AsRef<str>>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()> {
+pub async fn lint<G: AsRef<str>>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()> {
   let mut args = vec!["exec", "eslint", "--fix"];
   if let Some(extra) = extra_args {
     for arg in extra {
@@ -20,11 +23,10 @@ pub fn lint<G: AsRef<str>>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()>
     }
   }
 
-  let glob = glob.as_ref();
-  args.push(glob);
+  args.push(glob.as_ref());
 
-  println!("Linting files...");
-  pnpm!(args)?;
+  println!("{}", "linting files...".bright_cyan());
+  pnpm!(args).spawn()?.wait().await?;
 
   Ok(())
 }

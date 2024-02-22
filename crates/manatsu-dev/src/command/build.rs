@@ -6,7 +6,7 @@ use std::fs;
 use std::time::Instant;
 
 /// Build the packages.
-pub fn build<I, S>(packages: I) -> Result<()>
+pub async fn build<I, S>(packages: I) -> Result<()>
 where
   I: IntoIterator<Item = S>,
   S: AsRef<str>,
@@ -16,8 +16,11 @@ where
   let filter_flag = "--filter";
 
   // The shared package must be built before anyone else.
-  println!("{}", "Building shared package...".bold());
-  pnpm!(["run", filter_flag, "shared", "build"])?;
+  println!("{}", "building shared package...".bold());
+  pnpm!(["run", filter_flag, "shared", "build"])
+    .spawn()?
+    .wait()
+    .await?;
 
   let mut args = vec!["run", "--parallel"];
 
@@ -49,7 +52,7 @@ where
   args.push("build");
 
   println!("{}", "Building other packages...".bold());
-  pnpm!(args)?;
+  pnpm!(args).spawn()?.wait().await?;
 
   println!("{}", "Copying files...".bold());
   copy_files(&packages)?;

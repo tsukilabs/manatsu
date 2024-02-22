@@ -36,8 +36,8 @@ async fn main() -> Result<()> {
     Cli::Build { packages } => {
       let packages = packages.as_deref();
       match packages {
-        Some(p) if !p.is_empty() => command::build(p),
-        _ => command::build(package::PUBLIC_PACKAGES),
+        Some(p) if !p.is_empty() => command::build(p).await,
+        _ => command::build(package::PUBLIC_PACKAGES).await,
       }
     }
     Cli::Component => {
@@ -54,7 +54,7 @@ async fn main() -> Result<()> {
         .with_validator(validator)
         .prompt()?;
 
-      component::create(name)
+      component::create(name).await
     }
     Cli::Composable => {
       let validator = |name: &str| {
@@ -70,7 +70,7 @@ async fn main() -> Result<()> {
         .with_validator(validator)
         .prompt()?;
 
-      composable::create(name)
+      composable::create(name).await
     }
     Cli::Readme => command::readme(),
     Cli::Release => command::release().await,

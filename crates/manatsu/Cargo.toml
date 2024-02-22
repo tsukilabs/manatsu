@@ -61,4 +61,4 @@ features = ["gzip", "json"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["process", "macros", "rt-multi-thread"]
+features = ["process", "rt-multi-thread", "macros"]

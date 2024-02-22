@@ -27,11 +27,17 @@ pub async fn release() -> Result<()> {
       create_github_release(&cfg.github_token).await?;
     }
     _ => {
-      pnpm!(["publish", "-r", "--no-git-checks"])?;
+      pnpm!(["publish", "-r", "--no-git-checks"])
+        .spawn()?
+        .wait()
+        .await?;
 
       let crates = ["manatsu", "tauri-plugin-manatsu"];
       for crate_name in crates {
-        cargo!(["publish", "-p", crate_name])?;
+        cargo!(["publish", "-p", crate_name])
+          .spawn()?
+          .wait()
+          .await?;
       }
     }
   }
