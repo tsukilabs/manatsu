@@ -1,4 +1,4 @@
-import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
+import { type InvokeArgs, invoke } from '@tauri-apps/api/core';
 import { type UseAsyncStateOptions, useAsyncState } from '@vueuse/core';
 
 // prettier-ignore

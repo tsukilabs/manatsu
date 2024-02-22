@@ -31,16 +31,16 @@ workspace = true
 [package.categories]
 workspace = true
 
-[dependencies]
-tauri = "1.5"
+[dependencies.tauri]
+version = "2.0.0-beta.4"
 
 [dependencies.manatsu]
-version = "0.4"
+version = "0.4.0"
 path = "../manatsu"
 
 [dependencies.serde]
-version = "1.0"
+version = "1.0.197"
 features = ["derive"]
 
 [dependencies.serde_json]
-version = "1.0"
+version = "1.0.114"
