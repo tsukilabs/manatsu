@@ -28,7 +28,8 @@ enum Cli {
   Release,
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
   let cli = Cli::parse();
 
   match cli {
@@ -72,6 +73,6 @@ fn main() -> Result<()> {
       composable::create(name)
     }
     Cli::Readme => command::readme(),
-    Cli::Release => command::release(),
+    Cli::Release => command::release().await,
   }
 }

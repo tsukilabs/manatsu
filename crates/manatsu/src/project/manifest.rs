@@ -13,7 +13,7 @@ macro_rules! clone_or_empty {
     if let Some(value) = $value {
       value.clone()
     } else {
-      String::from("")
+      String::default()
     }
   };
 }

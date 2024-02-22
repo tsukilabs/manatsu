@@ -29,7 +29,7 @@ anyhow = "1.0.80"
 colored = "2.1.0"
 convert_case = "0.6.0"
 inquire = "0.6.2"
-miho = "4.1.3"
+miho = "4.1.4"
 regex = "1.10.3"
 
 [dependencies.clap]
@@ -47,6 +47,10 @@ features = ["derive"]
 [dependencies.serde_json]
 version = "1.0.114"
 
-[dependencies.ureq]
-version = "2.9.6"
-features = ["json"]
+[dependencies.reqwest]
+version = "0.11.24"
+features = ["gzip", "json"]
+
+[dependencies.tokio]
+version = "1.36.0"
+features = ["macros", "rt-multi-thread"]

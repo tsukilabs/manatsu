@@ -24,7 +24,7 @@ pub struct Theme {
 }
 
 impl CliCommand for Theme {
-  fn execute(&self) -> Result<()> {
+  async fn execute(self) -> Result<()> {
     let output = if let Some(output) = &self.output {
       output.to_case(Case::Kebab)
     } else {

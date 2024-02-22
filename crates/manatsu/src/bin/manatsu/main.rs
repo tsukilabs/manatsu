@@ -15,11 +15,12 @@ enum Cli {
   Theme(command::Theme),
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
   let cli = Cli::parse();
 
   match cli {
-    Cli::Create(cmd) => cmd.execute(),
-    Cli::Theme(cmd) => cmd.execute(),
+    Cli::Create(cmd) => cmd.execute().await,
+    Cli::Theme(cmd) => cmd.execute().await,
   }
 }

@@ -12,9 +12,6 @@ use std::{env, fs};
 pub use template::Template;
 use zip::ZipArchive;
 
-/// <https://regex101.com/r/9dSatE>
-const PROJECT_NAME_REGEX: &str = r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
-
 pub struct Project {
   pub name: String,
   pub description: Option<String>,
@@ -23,12 +20,15 @@ pub struct Project {
 }
 
 impl Project {
+  /// <https://regex101.com/r/9dSatE>
+  const NAME_REGEX: &'static str = r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
+
   /// Create a new Manatsu project from a template.
   ///
   /// Tauri: <https://github.com/tsukilabs/template-tauri>
   ///
   /// Vue: <https://github.com/tsukilabs/template-vue>
-  pub fn create(&self) -> Result<()> {
+  pub async fn create(&self) -> Result<()> {
     let start = Instant::now();
 
     if !is_valid(&self.name)? {
@@ -45,7 +45,7 @@ impl Project {
     }
 
     println!("Downloading template...");
-    let bytes = self.template.download()?;
+    let bytes = self.template.download().await?;
 
     println!("Building project...");
     fs::create_dir_all(&path).with_context(|| "Could not create project folder")?;
@@ -156,14 +156,13 @@ fn update_project_metadata(dir_path: &Path, project: &Project) -> Result<()> {
 /// Determines whether the project name is valid.
 pub fn is_valid<T: AsRef<str>>(project_name: T) -> Result<bool> {
   let project_name = project_name.as_ref();
-  let regex = Regex::new(PROJECT_NAME_REGEX)?;
+  let regex = Regex::new(Project::NAME_REGEX)?;
   Ok(regex.is_match(project_name))
 }
 
 #[cfg(test)]
 mod tests {
-  use super::template::Template;
-  use super::*;
+  use super::is_valid;
 
   #[test]
   fn should_determine_if_name_is_valid() {
@@ -172,12 +171,5 @@ mod tests {
 
     let name = "真夏";
     assert!(!is_valid(name).unwrap());
-  }
-
-  #[test]
-  fn should_return_status_200() {
-    let template_url = Template::Vue.url();
-    let response = ureq::get(&template_url).call().unwrap();
-    assert_eq!(200, response.status());
   }
 }
