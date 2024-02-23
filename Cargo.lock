@@ -40,6 +40,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "ahash"
+version = "0.8.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d713b3834d76b85304d4d525563c1276e2e30dc97cc67bfb4585a4a29fc2c89f"
+dependencies = [
+ "cfg-if",
+ "getrandom 0.2.12",
+ "once_cell",
+ "version_check",
+ "zerocopy",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1425,7 +1438,7 @@ version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
 dependencies = [
- "ahash",
+ "ahash 0.7.7",
 ]
 
 [[package]]
@@ -1804,17 +1817,18 @@ dependencies = [
 
 [[package]]
 name = "lightningcss"
-version = "1.0.0-alpha.52"
+version = "1.0.0-alpha.54"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "771a62dedf5ec563bbfea9760f6c6a6bc546e67355eba0cd7d00c0dc34b11d90"
+checksum = "07d306844e5af1753490c420c0d6ae3d814b00725092d106332762827ca8f0fe"
 dependencies = [
- "ahash",
+ "ahash 0.8.9",
  "bitflags 2.4.2",
  "const-str",
  "cssparser 0.33.0",
  "cssparser-color",
  "dashmap",
  "data-encoding",
+ "getrandom 0.2.12",
  "itertools",
  "lazy_static",
  "parcel_selectors",
@@ -4431,6 +4445,26 @@ dependencies = [
  "libc",
  "linux-raw-sys",
  "rustix",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74d4d3961e53fa4c9a25a8637fc2bfaf2595b3d3ae34875568a5cf64787716be"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.48",
 ]
 
 [[package]]
