@@ -1,5 +1,4 @@
 mod command;
-mod config;
 mod package;
 mod util;
 
@@ -34,7 +33,7 @@ async fn main() -> Result<()> {
 
   match cli {
     Cli::Build { packages } => {
-      let packages = packages.as_deref();
+      let packages = packages;
       match packages {
         Some(p) if !p.is_empty() => command::build(p).await,
         _ => command::build(package::PUBLIC_PACKAGES).await,
@@ -42,15 +41,15 @@ async fn main() -> Result<()> {
     }
     Cli::Component => {
       let validator = |name: &str| {
-        if component::is_valid(name)? {
+        if component::is_valid(name) {
           Ok(Validation::Valid)
         } else {
-          Ok(Validation::Invalid("Invalid component name".into()))
+          Ok(Validation::Invalid("invalid component name".into()))
         }
       };
 
       let name = Text::new("Component name")
-        .with_validator(required!("Component name is required"))
+        .with_validator(required!("component name is required"))
         .with_validator(validator)
         .prompt()?;
 
@@ -58,15 +57,15 @@ async fn main() -> Result<()> {
     }
     Cli::Composable => {
       let validator = |name: &str| {
-        if composable::is_valid(name)? {
+        if composable::is_valid(name) {
           Ok(Validation::Valid)
         } else {
-          Ok(Validation::Invalid("Invalid composable name".into()))
+          Ok(Validation::Invalid("invalid composable name".into()))
         }
       };
 
       let name = Text::new("Composable name")
-        .with_validator(required!("Composable name is required"))
+        .with_validator(required!("composable name is required"))
         .with_validator(validator)
         .prompt()?;
 

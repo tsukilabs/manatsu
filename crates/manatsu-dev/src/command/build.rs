@@ -1,4 +1,4 @@
-use crate::package::{self, is_standalone, PUBLIC_PACKAGES};
+use crate::package::{self, PUBLIC_PACKAGES};
 use anyhow::{bail, Result};
 use colored::Colorize;
 use manatsu::pnpm;
@@ -16,7 +16,7 @@ where
   let filter_flag = "--filter";
 
   // The shared package must be built before anyone else.
-  println!("{}", "building shared package...".bold());
+  println!("{}", "building shared package...".bright_cyan());
   pnpm!(["run", filter_flag, "shared", "build"])
     .spawn()?
     .wait()
@@ -24,16 +24,13 @@ where
 
   let mut args = vec!["run", "--parallel"];
 
-  let iter = packages.into_iter();
-  let packages = iter.map(|pkg| -> String {
-    let pkg = pkg.as_ref();
-    let pkg = pkg.trim().to_lowercase();
-    pkg.replace("@manatsu/", "")
-  });
+  let packages: Vec<String> = packages
+    .into_iter()
+    .map(|pkg| pkg.as_ref().trim().to_lowercase().replace("@manatsu/", ""))
+    .collect();
 
-  let packages: Vec<String> = packages.collect();
   if packages.is_empty() {
-    bail!("Nothing to build");
+    bail!("{}", "nothing to build".red());
   }
 
   for package in &packages {
@@ -46,18 +43,18 @@ where
   }
 
   if !args.contains(&filter_flag) {
-    bail!("Selected package(s) cannot be built");
+    bail!("{}", "selected package(s) cannot be built".red());
   }
 
   args.push("build");
 
-  println!("{}", "Building other packages...".bold());
+  println!("{}", "building other packages...".bright_cyan());
   pnpm!(args).spawn()?.wait().await?;
 
-  println!("{}", "Copying files...".bold());
+  println!("{}", "copying files...".bright_cyan());
   copy_files(&packages)?;
 
-  println!("Built in {:?}", start.elapsed());
+  println!("built in {:?}", start.elapsed());
   Ok(())
 }
 
@@ -67,7 +64,6 @@ fn should_build(package: &str) -> bool {
     // And the shared package has already been built.
     package != "sass" && package != "shared"
   } else {
-    // We shouldn't build private packages.
     false
   }
 }
@@ -75,7 +71,7 @@ fn should_build(package: &str) -> bool {
 fn copy_files(packages: &Vec<String>) -> Result<()> {
   let dist = package::dist("manatsu")?;
   for pkg in packages {
-    if !is_standalone(pkg) {
+    if !package::is_standalone(pkg) {
       let to = dist.join(format!("{pkg}.d.ts"));
       fs::copy(package::dts(pkg)?, to)?;
     }

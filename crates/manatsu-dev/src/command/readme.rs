@@ -1,20 +1,20 @@
 use crate::package;
 use anyhow::Result;
+use colored::Colorize;
 use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {
   let filename = "README.md";
-  let cwd = env::current_dir()?;
-  let src_readme = cwd.join(filename);
+  let root_readme = env::current_dir()?.join(filename);
 
-  println!("Copying README files...");
+  println!("{}", "copying README files...".bright_cyan());
   for pkg in package::all() {
-    let dest_readme = package::dir(pkg)?.join(filename);
-    fs::copy(&src_readme, &dest_readme)?;
-    println!("Copied: {}", dest_readme.display());
+    let readme = package::dir(pkg)?.join(filename);
+    fs::copy(&root_readme, &readme)?;
+    println!("copied: {}", readme.display());
   }
 
-  println!("Done!");
+  println!("{}", "done!".bright_green());
   Ok(())
 }

@@ -29,7 +29,7 @@ pub fn all() -> Vec<String> {
   let mut packages = PUBLIC_PACKAGES.to_vec();
   packages.extend_from_slice(&PRIVATE_PACKAGES);
 
-  packages.iter().map(ToString::to_string).collect()
+  packages.into_iter().map(ToString::to_string).collect()
 }
 
 /// Returns the path to a package.
@@ -40,14 +40,14 @@ pub fn dir<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   Ok(path)
 }
 
-/// Returns the path to the source folder of a given package.
+/// Returns the path to the source dir of a given package.
 pub fn src<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("src");
   Ok(path)
 }
 
-/// Returns the path to the dist folder of a given package.
+/// Returns the path to the dist dir of a given package.
 pub fn dist<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("dist");

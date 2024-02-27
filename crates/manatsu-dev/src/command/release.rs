@@ -1,5 +1,5 @@
-use crate::config::Config;
 use crate::package::Package;
+use crate::util::Config;
 use anyhow::Result;
 use manatsu::{cargo, pnpm};
 use miho::git::{Commit, Git, Status};

@@ -22,6 +22,7 @@
     "docs:cli": "cargo doc --open -p manatsu",
     "format": "prettier . --write && cargo fmt --all",
     "format-check": "prettier . --check",
+    "install-dev": "cargo install --path crates/manatsu-dev --force",
     "lint": "run-p lint:*",
     "lint:es": "eslint . --config eslint.config.js --cache",
     "lint:style": "stylelint **/*.{scss,vue} --cache",

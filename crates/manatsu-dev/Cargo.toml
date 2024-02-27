@@ -3,6 +3,10 @@ name = "manatsu-dev"
 version = "0.4.1"
 publish = false
 
+[[bin]]
+name = "mana-dev"
+path = "src/main.rs"
+
 [package.homepage]
 workspace = true
 

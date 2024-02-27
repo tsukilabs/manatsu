@@ -1,32 +1,84 @@
 use anyhow::Result;
 use colored::Colorize;
 use manatsu::pnpm;
+use serde::Deserialize;
+use std::{env, fs, mem};
 
-/// Format files using Prettier.
-pub async fn format_files<G: AsRef<str>>(glob: G) -> Result<()> {
-  println!("{}", "formatting files...".bright_cyan());
-
-  pnpm!(["exec", "prettier", glob.as_ref(), "--write"])
-    .spawn()?
-    .wait()
-    .await?;
-
-  Ok(())
+#[derive(Deserialize)]
+pub struct Config {
+  pub github: bool,
+  pub github_token: String,
 }
 
-/// Lint files, fixing as many issues as possible.
-pub async fn lint<G: AsRef<str>>(glob: G, extra_args: Option<Vec<&str>>) -> Result<()> {
-  let mut args = vec!["exec", "eslint", "--fix"];
-  if let Some(extra) = extra_args {
-    for arg in extra {
-      args.push(arg);
+impl Config {
+  /// Read the local configuration file.
+  pub fn read() -> Result<Config> {
+    let path = env::current_dir()?.join("config.json");
+    let content = fs::read_to_string(path)?;
+    serde_json::from_str::<Config>(&content).map_err(Into::into)
+  }
+}
+
+pub struct Formatter<'a> {
+  glob: &'a str,
+}
+
+impl<'a> Formatter<'a> {
+  pub fn new(glob: &'a str) -> Self {
+    Self { glob }
+  }
+
+  /// Format files using Prettier.
+  pub async fn format(&self) -> Result<()> {
+    let mut args = vec!["exec", "prettier", "--write"];
+    args.push(self.glob);
+
+    println!("{}", "formatting files...".bright_cyan());
+    pnpm!(args).spawn()?.wait().await?;
+
+    Ok(())
+  }
+}
+
+impl Default for Formatter<'_> {
+  fn default() -> Self {
+    Self::new(".")
+  }
+}
+
+pub struct Linter<'a> {
+  glob: &'a str,
+  args: Vec<&'a str>,
+}
+
+impl<'a> Linter<'a> {
+  pub fn new(glob: &'a str) -> Self {
+    Self {
+      glob,
+      args: Vec::default(),
     }
   }
 
-  args.push(glob.as_ref());
+  pub fn arg(&mut self, arg: &'a str) -> &mut Self {
+    self.args.push(arg);
+    self
+  }
 
-  println!("{}", "linting files...".bright_cyan());
-  pnpm!(args).spawn()?.wait().await?;
+  /// Lint files, fixing as many issues as possible.
+  pub async fn lint(&mut self) -> Result<()> {
+    let mut args = vec!["exec", "eslint", "--fix"];
+    args.extend(mem::take(&mut self.args));
+    args.push(self.glob);
 
-  Ok(())
+    println!("{}", "linting files...".bright_cyan());
+    pnpm!(args).spawn()?.wait().await?;
+
+    Ok(())
+  }
+}
+
+impl Default for Linter<'_> {
+  fn default() -> Self {
+    Self::new(".")
+  }
 }
