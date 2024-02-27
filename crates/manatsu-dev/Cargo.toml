@@ -1,11 +1,11 @@
-[package]
-name = "manatsu-dev"
-version = "0.4.1"
-publish = false
-
 [[bin]]
 name = "mana-dev"
 path = "src/main.rs"
+
+[package]
+name = "manatsu-dev"
+version = "0.4.2"
+publish = false
 
 [package.homepage]
 workspace = true
@@ -53,8 +53,14 @@ version = "1.0.114"
 
 [dependencies.reqwest]
 version = "0.11.24"
-features = ["gzip", "json"]
+features = [
+    "gzip",
+    "json",
+]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["macros", "rt-multi-thread"]
+features = [
+    "macros",
+    "rt-multi-thread",
+]
