@@ -14,8 +14,8 @@ impl Config {
   /// Read the local configuration file.
   pub fn read() -> Result<Config> {
     let path = env::current_dir()?.join("config.json");
-    let content = fs::read_to_string(path)?;
-    serde_json::from_str::<Config>(&content).map_err(Into::into)
+    let config = fs::read_to_string(path)?;
+    serde_json::from_str::<Config>(&config).map_err(Into::into)
   }
 }
 

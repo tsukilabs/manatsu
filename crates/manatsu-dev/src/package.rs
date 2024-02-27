@@ -16,11 +16,11 @@ pub struct Package {
 }
 
 impl Package {
-  pub fn read() -> Result<Package> {
+  /// Read the root `package.json` file.
+  pub fn read_root() -> Result<Package> {
     let path: PathBuf = env::current_dir()?.join("package.json");
     let package = fs::read_to_string(path)?;
-    let package: Package = serde_json::from_str(&package)?;
-    Ok(package)
+    serde_json::from_str::<Package>(&package).map_err(Into::into)
   }
 }
 

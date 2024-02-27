@@ -1,6 +1,6 @@
 use crate::package::Package;
 use crate::util::Config;
-use anyhow::Result;
+use anyhow::{bail, Result};
 use manatsu::{cargo, pnpm};
 use miho::git::{Commit, Git, Status};
 use reqwest::Client;
@@ -46,7 +46,7 @@ pub async fn release() -> Result<()> {
 }
 
 async fn create_github_release(github_token: &str) -> Result<()> {
-  let package = Package::read()?;
+  let package = Package::read_root()?;
   let client = Client::builder().build()?;
 
   let base_url = "https://api.github.com";
@@ -62,7 +62,7 @@ async fn create_github_release(github_token: &str) -> Result<()> {
     "generate_release_notes": true
   });
 
-  client
+  let response = client
     .post(&endpoint)
     .header("Authorization", &github_token)
     .header("X-GitHub-Api-Version", "2022-11-28")
@@ -70,6 +70,11 @@ async fn create_github_release(github_token: &str) -> Result<()> {
     .json(&body)
     .send()
     .await?;
+
+  if !response.status().is_success() {
+    let message = response.text().await?;
+    bail!("failed to create a GitHub release:\n{message}");
+  }
 
   Ok(())
 }

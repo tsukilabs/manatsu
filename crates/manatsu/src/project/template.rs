@@ -19,7 +19,6 @@ impl Template {
   }
 
   /// Download a Manatsu template as bytes.
-  #[must_use]
   pub async fn download(&self) -> Result<Bytes> {
     let client = Client::builder().gzip(true).build()?;
     let template_url = self.url();
