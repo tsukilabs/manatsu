@@ -15,18 +15,18 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
 
   let name = name.as_ref();
   if !is_valid(name)? {
-    bail!("Invalid component name: {}", name);
+    bail!("invalid component name: {}", name);
   }
 
   let kebab = name.to_case(Case::Kebab);
   let pascal = name.to_case(Case::Pascal);
   let dir = package::src("components")?.join(&kebab);
 
-  if !dir.try_exists()? {
-    fs::create_dir_all(&dir)?;
-  } else {
-    bail!("Component {pascal} already exists");
+  if dir.try_exists()? {
+    bail!("component {pascal} already exists");
   }
+
+  fs::create_dir_all(&dir)?;
 
   write_index(&pascal, &dir)?;
   write_typings(&pascal, &dir)?;

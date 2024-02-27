@@ -29,8 +29,7 @@ pub fn all() -> Vec<String> {
   let mut packages = PUBLIC_PACKAGES.to_vec();
   packages.extend_from_slice(&PRIVATE_PACKAGES);
 
-  let packages = packages.iter().map(|p| p.to_string());
-  packages.collect()
+  packages.iter().map(ToString::to_string).collect()
 }
 
 /// Returns the path to a package.

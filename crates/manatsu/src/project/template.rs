@@ -12,12 +12,14 @@ pub enum Template {
 }
 
 impl Template {
+  #[must_use]
   pub fn url(&self) -> String {
     let name: &str = (*self).into();
     format!("https://github.com/tsukilabs/manatsu-template-{name}/archive/refs/heads/main.zip")
   }
 
   /// Download a Manatsu template as bytes.
+  #[must_use]
   pub async fn download(&self) -> Result<Bytes> {
     let client = Client::builder().gzip(true).build()?;
     let template_url = self.url();
@@ -27,7 +29,7 @@ impl Template {
       .timeout(Duration::from_secs(10))
       .send()
       .await
-      .with_context(|| format!("could not fetch: {}", template_url))?;
+      .with_context(|| format!("could not fetch: {template_url}"))?;
 
     let bytes = response.bytes().await?;
 

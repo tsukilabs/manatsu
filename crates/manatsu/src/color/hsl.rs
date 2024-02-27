@@ -44,16 +44,16 @@ impl Color for Hsl {
 
 impl From<Rgb> for Hsl {
   fn from(rgb: Rgb) -> Self {
-    let red = rgb.r as f64 / 255.0;
-    let green = rgb.g as f64 / 255.0;
-    let blue = rgb.b as f64 / 255.0;
+    let red = f64::from(rgb.r) / 255.0;
+    let green = f64::from(rgb.g) / 255.0;
+    let blue = f64::from(rgb.b) / 255.0;
 
     let max = red.max(green).max(blue);
     let min = red.min(green).min(blue);
     let delta = max - min;
     let lightness = (max + min) / 2.0;
 
-    if max == min {
+    if (max - min).abs() < f64::EPSILON {
       return Self {
         h: 0.0,
         s: 0.0,
@@ -62,9 +62,9 @@ impl From<Rgb> for Hsl {
       };
     }
 
-    let mut hue = if max == red {
+    let mut hue = if (max - red).abs() < f64::EPSILON {
       (green - blue) / delta
-    } else if max == green {
+    } else if (max - green).abs() < f64::EPSILON {
       2.0 + (blue - red) / delta
     } else {
       4.0 + (red - green) / delta

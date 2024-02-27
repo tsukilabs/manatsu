@@ -20,11 +20,11 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let camel = name.to_case(Case::Camel);
   let dir = package::src("composables")?.join(&camel);
 
-  if !dir.try_exists()? {
-    fs::create_dir_all(&dir)?;
-  } else {
-    bail!("Composable {camel} already exists");
+  if dir.try_exists()? {
+    bail!("Composable {camel} already exists"); 
   }
+
+  fs::create_dir_all(&dir)?;
 
   write_index(&camel, &dir)?;
   write_test(&camel, dir)?;

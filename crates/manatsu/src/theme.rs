@@ -11,8 +11,7 @@ where
   O: AsRef<Path>,
 {
   let source = env::current_dir()?.join(source.as_ref());
-  let source = fs::read_to_string(source)?;
-  let source = transform(source)?;
+  let source = transform(fs::read_to_string(source)?);
 
   let stylesheet = StyleSheet::parse(&source, ParserOptions::default())
     .map_err(|err| anyhow!("{:?}", err))
@@ -24,7 +23,7 @@ where
   Ok(())
 }
 
-fn transform<C: AsRef<str>>(css: C) -> Result<String> {
+fn transform<C: AsRef<str>>(css: C) -> String {
   let mut result = String::new();
   let mut dark_colors = String::from("\n\n[class~=manatsu-dark] {\n");
 
@@ -68,5 +67,5 @@ fn transform<C: AsRef<str>>(css: C) -> Result<String> {
   dark_colors.push_str("}\n");
   result.push_str(&dark_colors);
 
-  Ok(result)
+  result
 }

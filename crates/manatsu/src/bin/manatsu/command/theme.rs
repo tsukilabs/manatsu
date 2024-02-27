@@ -34,7 +34,7 @@ impl CliCommand for Theme {
     let output = env::current_dir()?.join(output);
     if output.try_exists()? {
       if self.force {
-        fs::remove_file(&output)?
+        fs::remove_file(&output)?;
       } else {
         bail!("File already exists: {}", output.display());
       }

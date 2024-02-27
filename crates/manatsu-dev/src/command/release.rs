@@ -52,7 +52,7 @@ async fn create_github_release(github_token: &str) -> Result<()> {
   let base_url = "https://api.github.com";
   let owner_repo = "tsukilabs/manatsu";
   let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
-  let github_token = format!("Bearer {}", github_token);
+  let github_token = format!("Bearer {github_token}");
 
   let body = serde_json::json!({
     "tag_name": format!("v{}", package.version),

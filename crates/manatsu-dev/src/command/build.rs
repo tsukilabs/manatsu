@@ -1,6 +1,6 @@
 use crate::package::{self, is_standalone, PUBLIC_PACKAGES};
 use anyhow::{bail, Result};
-use colored::*;
+use colored::Colorize;
 use manatsu::pnpm;
 use std::fs;
 use std::time::Instant;

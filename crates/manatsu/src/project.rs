@@ -38,7 +38,7 @@ impl Project {
     let path = env::current_dir()?.join(&self.name);
     if path.try_exists()? {
       if self.force {
-        fs::remove_dir_all(&path)?
+        fs::remove_dir_all(&path)?;
       } else {
         bail!("Directory already exists: {}", path.display());
       }

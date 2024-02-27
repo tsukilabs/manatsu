@@ -41,9 +41,13 @@ pub fn update_package_json<P: AsRef<Path>>(dir_path: P, project: &Project) -> Re
 
 pub fn update_cargo_toml<P: AsRef<Path>>(dir_path: P, project: &Project) -> Result<()> {
   let glob = Glob::new("**/Cargo.toml")?.compile_matcher();
-  for entry in WalkDir::new(dir_path).into_iter().filter_map(|e| e.ok()) {
-    let path = entry.path();
+  let entries = WalkDir::new(dir_path)
+    .into_iter()
+    .filter_map(std::result::Result::ok);
 
+  for entry in entries {
+    let path = entry.path();
+    
     if glob.is_match(path) {
       let cargo_toml = fs::read_to_string(path)?;
       let mut cargo_toml: toml::Value = toml::from_str(&cargo_toml)?;

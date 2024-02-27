@@ -57,7 +57,7 @@ impl TryFrom<&str> for Hex {
     let caps = hex_regex
       .captures(value)
       .ok_or_else(|| anyhow!("Could not find capture groups"))
-      .with_context(|| format!("Slice does not contain a valid hex color: {}", value))?;
+      .with_context(|| format!("Slice does not contain a valid hex color: {value}"))?;
 
     macro_rules! to_u8 {
       ($index:literal) => {{
@@ -74,7 +74,7 @@ impl TryFrom<&str> for Hex {
     let r = to_u8!(1)?;
     let g = to_u8!(2)?;
     let b = to_u8!(3)?;
-    let a = to_u8!(4).ok().map(|a| a as f64 / 255.0);
+    let a = to_u8!(4).ok().map(|a| f64::from(a) / 255.0);
 
     Ok(Hex { r, g, b, a })
   }
@@ -86,7 +86,7 @@ impl From<Hex> for String {
 
     if let Some(a) = hex.a {
       let a = (a * 255.0) as u8;
-      let a = format!("{:02x}", a);
+      let a = format!("{a:02x}");
       result.push_str(&a);
     }
 
