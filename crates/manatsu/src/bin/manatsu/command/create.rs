@@ -1,9 +1,8 @@
-use super::CliCommand;
 use anyhow::Result;
 use clap::Args;
 use inquire::validator::Validation;
 use inquire::{required, Select, Text};
-use manatsu::project::{self, Project, Template};
+use manatsu::project::{Project, Template};
 
 #[derive(Debug, Args)]
 pub struct Create {
@@ -12,18 +11,18 @@ pub struct Create {
   force: bool,
 }
 
-impl CliCommand for Create {
+impl super::Command for Create {
   async fn execute(self) -> Result<()> {
     let validator = |name: &str| {
-      if project::is_valid(name)? {
+      if Project::is_valid(name) {
         Ok(Validation::Valid)
       } else {
-        Ok(Validation::Invalid("Invalid project name".into()))
+        Ok(Validation::Invalid("invalid project name".into()))
       }
     };
 
     let project_name = Text::new("Project name")
-      .with_validator(required!("Project name is required"))
+      .with_validator(required!("project name is required"))
       .with_validator(validator)
       .prompt()?;
 

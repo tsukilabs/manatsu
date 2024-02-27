@@ -6,6 +6,6 @@ pub use create::Create;
 use std::future::Future;
 pub use theme::Theme;
 
-pub trait CliCommand {
+pub trait Command {
   fn execute(self) -> impl Future<Output = Result<()>>;
 }

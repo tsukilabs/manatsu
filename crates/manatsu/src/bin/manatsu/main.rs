@@ -2,7 +2,7 @@ mod command;
 
 use anyhow::Result;
 use clap::Parser;
-use command::CliCommand;
+use command::Command;
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu")]

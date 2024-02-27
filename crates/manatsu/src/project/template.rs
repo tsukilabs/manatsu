@@ -31,9 +31,7 @@ impl Template {
       .await
       .with_context(|| format!("could not fetch: {template_url}"))?;
 
-    let bytes = response.bytes().await?;
-
-    Ok(bytes)
+    response.bytes().await.map_err(Into::into)
   }
 }
 
@@ -54,7 +52,7 @@ impl TryFrom<&str> for Template {
     let template = match value.as_str() {
       "tauri" => Template::Tauri,
       "vue" => Template::Vue,
-      _ => bail!(format!("{value} is not a valid template name")),
+      _ => bail!("{value} is not a valid template name"),
     };
 
     Ok(template)

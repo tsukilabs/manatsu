@@ -30,15 +30,10 @@ impl Color for Rgb {
   fn random_with_alpha() -> Self {
     use rand::Rng;
 
-    let rgb = Self::random();
-    let a: f64 = rand::thread_rng().gen_range(0.0..=1.0);
+    let mut rgb = Self::random();
+    rgb.a = Some(rand::thread_rng().gen_range(0.0..=1.0));
 
-    Rgb {
-      r: rgb.r,
-      g: rgb.g,
-      b: rgb.b,
-      a: Some(a),
-    }
+    rgb
   }
 }
 
