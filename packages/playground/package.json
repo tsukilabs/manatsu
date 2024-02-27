@@ -3,7 +3,7 @@
   "version": "0.4.1",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@8.15.2",
+  "packageManager": "pnpm@8.15.4",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@
 name = "manatsu"
 version = "0.4.1"
 description = "CLI tools for Manatsu"
-keywords = ["manatsu", "vue", "tauri", "components", "cli"]
+keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
 [package.homepage]
 workspace = true
@@ -30,9 +30,9 @@ anyhow = "1.0.80"
 colored = "2.1.0"
 convert_case = "0.6.0"
 globset = "0.4.14"
-inquire = "0.6.2"
-lightningcss = "1.0.0-alpha.53"
-miho = "4.1.4"
+inquire = "0.7.0"
+lightningcss = "1.0.0-alpha.54"
+miho = "4.1.6"
 rand = "0.8.5"
 regex = "1.10.3"
 zip = "0.6.6"
@@ -61,4 +61,4 @@ features = ["gzip", "json"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["process", "rt-multi-thread", "macros"]
+features = ["macros", "process", "rt-multi-thread"]

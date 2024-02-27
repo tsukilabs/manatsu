@@ -4,7 +4,7 @@
   "description": "Manatsu components",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@8.15.2",
+  "packageManager": "pnpm@8.15.4",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
@@ -55,9 +55,9 @@
     "vite": "^5.1.4"
   },
   "peerDependencies": {
-    "@tauri-apps/api": "2.0.0-beta.0",
-    "@vueuse/core": "^10.7.2",
-    "vue": "^3.4.17",
-    "vue-router": "^4.2.5"
+    "@tauri-apps/api": "^1.5.3",
+    "@vueuse/core": "^10.9.0",
+    "vue": "^3.4.20",
+    "vue-router": "^4.3.0"
   }
 }

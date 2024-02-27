@@ -28,8 +28,8 @@ workspace = true
 anyhow = "1.0.80"
 colored = "2.1.0"
 convert_case = "0.6.0"
-inquire = "0.6.2"
-miho = "4.1.4"
+inquire = "0.7.0"
+miho = "4.1.6"
 regex = "1.10.3"
 
 [dependencies.clap]
@@ -37,7 +37,7 @@ version = "4.5.1"
 features = ["derive"]
 
 [dependencies.manatsu]
-version = "0.4.0"
+version = "0.4"
 path = "../manatsu"
 
 [dependencies.serde]

@@ -1,34 +1,39 @@
 {
-  "productName": "playground",
-  "version": "0.4.1",
-  "identifier": "tsukilabs.manatsu",
+  "package": {
+    "productName": "playground",
+    "version": "0.4.1"
+  },
   "build": {
     "beforeBuildCommand": "pnpm run build",
     "beforeDevCommand": "pnpm run dev",
-    "devUrl": "http://localhost:1420",
-    "frontendDist": "../dist"
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
   },
-  "app": {
+  "tauri": {
+    "allowlist": {
+      "all": false
+    },
+    "bundle": {
+      "active": false,
+      "identifier": "tsukilabs.manatsu",
+      "icon": ["icons/icon.ico"]
+    },
     "security": {
       "csp": null
+    },
+    "updater": {
+      "active": false
     },
     "windows": [
       {
         "label": "main",
         "title": "Playground",
-        "height": 600,
         "width": 800,
+        "height": 600,
+        "visible": false,
         "fullscreen": false,
-        "resizable": true,
-        "visible": false
+        "resizable": true
       }
     ]
-  },
-  "bundle": {
-    "active": false,
-    "icon": ["icons/icon.ico"]
-  },
-  "plugins": {
-    "updater": {}
   }
 }
