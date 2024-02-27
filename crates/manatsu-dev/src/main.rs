@@ -32,12 +32,10 @@ async fn main() -> Result<()> {
   let cli = Cli::parse();
 
   match cli {
-    Cli::Build { packages } => {
-      match packages {
-        Some(p) if !p.is_empty() => command::build(p).await,
-        _ => command::build(package::PUBLIC_PACKAGES).await,
-      }
-    }
+    Cli::Build { packages } => match packages {
+      Some(p) if !p.is_empty() => command::build(p).await,
+      _ => command::build(package::PUBLIC_PACKAGES).await,
+    },
     Cli::Component => {
       let validator = |name: &str| {
         if component::is_valid(name) {
