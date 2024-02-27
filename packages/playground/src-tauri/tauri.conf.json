@@ -1,13 +1,13 @@
 {
-  "build": {
-    "beforeBuildCommand": "nr build",
-    "beforeDevCommand": "nr dev",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
-  },
   "package": {
     "productName": "playground",
     "version": "0.4.1"
+  },
+  "build": {
+    "beforeBuildCommand": "pnpm run build",
+    "beforeDevCommand": "pnpm run dev",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
   },
   "tauri": {
     "allowlist": {
@@ -15,7 +15,7 @@
     },
     "bundle": {
       "active": false,
-      "identifier": "tsukilabs.manatsu.dev",
+      "identifier": "tsukilabs.manatsu",
       "icon": ["icons/icon.ico"]
     },
     "security": {

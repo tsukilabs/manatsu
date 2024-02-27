@@ -1,14 +1,8 @@
 [package]
+description = "Manatsu plugin for Tauri"
+keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 name = "tauri-plugin-manatsu"
 version = "0.4.1"
-description = "Manatsu plugin for Tauri"
-keywords = [
-    "manatsu",
-    "tauri",
-    "plugin",
-    "tauri-plugin",
-    "vue",
-]
 
 [package.homepage]
 workspace = true
@@ -31,16 +25,16 @@ workspace = true
 [package.categories]
 workspace = true
 
-[dependencies]
-tauri = "1.5"
+[dependencies.tauri]
+version = "1.6.0"
 
 [dependencies.manatsu]
-version = "0.4"
 path = "../manatsu"
+version = "0.4"
 
 [dependencies.serde]
-version = "1.0"
 features = ["derive"]
+version = "1.0.197"
 
 [dependencies.serde_json]
-version = "1.0"
+version = "1.0.114"

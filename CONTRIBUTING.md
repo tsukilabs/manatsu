@@ -2,9 +2,9 @@
 
 The following tools are required when contributing to Manatsu:
 
+- [Rust](https://www.rust-lang.org/tools/install)
 - [Node](https://nodejs.org) (version 20 or higher)
 - [pnpm](https://pnpm.io/) (version 8 or higher)
-- [Rust](https://www.rust-lang.org/tools/install)
 
 ### Setup
 

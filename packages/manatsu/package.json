@@ -4,7 +4,7 @@
   "description": "Vue component library for Tauri apps",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@8.15.4",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
@@ -50,18 +50,18 @@
     "@manatsu/components": "workspace:*",
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
-    "@tb-dev/utility-types": "^1.1.2",
-    "@tb-dev/utils": "^1.2.3"
+    "@tb-dev/utility-types": "^1.1.6",
+    "@tb-dev/utils": "^1.2.8"
   },
   "devDependencies": {
     "@manatsu/sass": "workspace:*",
-    "vite": "^5.0.12"
+    "vite": "^5.1.4"
   },
   "peerDependencies": {
-    "@tauri-apps/api": "^1.5.0",
-    "@vueuse/core": "^10.7.2",
-    "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "@tauri-apps/api": "^1.5.3",
+    "@vueuse/core": "^10.9.0",
+    "vue": "^3.4.20",
+    "vue-router": "^4.3.0"
   },
   "engines": {
     "node": ">=20"

@@ -9,7 +9,7 @@ use std::time::Instant;
 /// <https://regex101.com/r/vBQTOL>
 const COMPOSABLE_NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";
 
-pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
+pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
 
   let name = name.as_ref();
@@ -31,14 +31,14 @@ pub fn create<T: AsRef<str>>(name: T) -> Result<()> {
 
   // Formats the files to ensure their structure is correct.
   let glob = format!("**/composables/src/{camel}/**/*.ts");
-  util::format_files(&glob)?;
+  util::format_files(&glob).await?;
 
   // Adds an export declaration to the src index.
   write_to_src_index(&camel)?;
 
   // Lint the files to ensure that the exports are sorted.
   let index_glob = vec!["**/composables/src/index.ts"];
-  util::lint(glob, Some(index_glob))?;
+  util::lint(glob, Some(index_glob)).await?;
 
   println!("Composable {camel} created in {:?}", start.elapsed());
   Ok(())

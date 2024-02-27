@@ -17,10 +17,10 @@ describe('dynamic-link', () => {
   });
 
   it('should render router-link if `to` is a route', async () => {
-    const Home = { template: '<div>Home</div>' };
+    const home = { template: '<div>Home</div>' };
     const router = createRouter({
       history: createMemoryHistory(),
-      routes: [{ path: '/', component: Home }]
+      routes: [{ path: '/', component: home }]
     });
 
     await router.push('/');

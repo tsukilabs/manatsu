@@ -13,7 +13,7 @@ pub struct Create {
 }
 
 impl CliCommand for Create {
-  fn execute(&self) -> Result<()> {
+  async fn execute(self) -> Result<()> {
     let validator = |name: &str| {
       if project::is_valid(name)? {
         Ok(Validation::Valid)
@@ -39,6 +39,6 @@ impl CliCommand for Create {
       template,
     };
 
-    project.create()
+    project.create().await
   }
 }

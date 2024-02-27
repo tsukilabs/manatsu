@@ -10,22 +10,25 @@ edition = "2021"
 publish = false
 
 [build-dependencies.tauri-build]
-version = "1.5"
+version = "1.5.1"
 features = []
 
 [dependencies]
-chrono = "0.4"
-serde_json = "1.0"
-tauri-plugin-manatsu = "0.4"
-tauri-plugin-window-state = "0.1"
-
-[dependencies.serde]
-version = "1.0"
-features = ["derive"]
+chrono = "0.4.34"
+serde_json = "1.0.114"
+tauri-plugin-window-state = "0.1.0"
 
 [dependencies.tauri]
-version = "1.5"
+version = "1.6.0"
 features = []
+
+[dependencies.serde]
+version = "1.0.197"
+features = ["derive"]
+
+[dependencies.tauri-plugin-manatsu]
+version = "0.4"
+path = "../../../crates/tauri-plugin-manatsu"
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]
