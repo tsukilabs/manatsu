@@ -21,7 +21,7 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let dir = package::src("composables")?.join(&camel);
 
   if dir.try_exists()? {
-    bail!("Composable {camel} already exists"); 
+    bail!("Composable {camel} already exists");
   }
 
   fs::create_dir_all(&dir)?;

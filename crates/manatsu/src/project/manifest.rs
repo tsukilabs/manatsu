@@ -47,7 +47,7 @@ pub fn update_cargo_toml<P: AsRef<Path>>(dir_path: P, project: &Project) -> Resu
 
   for entry in entries {
     let path = entry.path();
-    
+
     if glob.is_match(path) {
       let cargo_toml = fs::read_to_string(path)?;
       let mut cargo_toml: toml::Value = toml::from_str(&cargo_toml)?;
