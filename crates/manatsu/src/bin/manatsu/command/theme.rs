@@ -43,11 +43,7 @@ impl super::Command for Theme {
 }
 
 fn resolve_path(path: Option<PathBuf>, default_name: impl FnOnce() -> String) -> Result<PathBuf> {
-  let mut path = path.unwrap_or_else(|| {
-    let mut path = default_name();
-    path.push_str(".css");
-    PathBuf::from(path)
-  });
+  let mut path = path.unwrap_or_else(|| PathBuf::from(default_name()));
 
   if path.is_relative() {
     let current_dir = env::current_dir()?;
