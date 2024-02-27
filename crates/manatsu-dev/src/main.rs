@@ -33,7 +33,6 @@ async fn main() -> Result<()> {
 
   match cli {
     Cli::Build { packages } => {
-      let packages = packages;
       match packages {
         Some(p) if !p.is_empty() => command::build(p).await,
         _ => command::build(package::PUBLIC_PACKAGES).await,
