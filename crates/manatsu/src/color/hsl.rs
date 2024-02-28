@@ -14,7 +14,7 @@ pub struct Hsl {
 }
 
 impl Color for Hsl {
-  /// Generates a random HSL color.
+  /// Generate a random HSL color.
   fn random() -> Self {
     use rand::Rng;
 
@@ -26,7 +26,7 @@ impl Color for Hsl {
     Hsl { h, s, l, a: None }
   }
 
-  /// Generates a random HSL color with an alpha value.
+  /// Generate a random HSL color with an alpha value.
   fn random_with_alpha() -> Self {
     use rand::Rng;
 

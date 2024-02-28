@@ -19,12 +19,12 @@ pub struct Hex {
 }
 
 impl Color for Hex {
-  /// Generates a random hex color.
+  /// Generate a random hex color.
   fn random() -> Self {
     Rgb::random().into()
   }
 
-  /// Generates a random hex color with an alpha value.
+  /// Generate a random hex color with an alpha value.
   fn random_with_alpha() -> Self {
     Rgb::random_with_alpha().into()
   }

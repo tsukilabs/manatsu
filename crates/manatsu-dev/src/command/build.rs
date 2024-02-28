@@ -13,11 +13,9 @@ where
 {
   let start = Instant::now();
 
-  let filter_flag = "--filter";
-
   // The shared package must be built before anyone else.
   println!("{}", "building shared package...".bright_cyan());
-  pnpm!(["run", filter_flag, "shared", "build"])
+  pnpm!(["run", "-F", "shared", "build"])
     .spawn()?
     .wait()
     .await?;
@@ -37,12 +35,12 @@ where
     let package = package.as_str();
 
     if should_build(package) {
-      args.push(filter_flag);
+      args.push("-F");
       args.push(package);
     }
   }
 
-  if !args.contains(&filter_flag) {
+  if !args.contains(&"-F") {
     bail!("{}", "selected package(s) cannot be built".red());
   }
 

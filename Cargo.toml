@@ -9,5 +9,6 @@ repository = "https://github.com/tsukilabs/manatsu"
 authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
 license = "MIT"
 edition = "2021"
+rust-version = "1.76"
 readme = "README.md"
 categories = ["gui", "web-programming"]

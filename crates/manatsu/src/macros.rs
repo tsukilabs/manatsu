@@ -1,4 +1,4 @@
-/// Executes `cargo` with the specified arguments.
+/// Execute `cargo` with the specified arguments.
 #[macro_export]
 macro_rules! cargo {
   ($args:expr) => {{
@@ -13,7 +13,7 @@ macro_rules! cargo {
   }};
 }
 
-/// Executes `pnpm` with the specified arguments.
+/// Execute `pnpm` with the specified arguments.
 #[macro_export]
 macro_rules! pnpm {
   ($args:expr) => {{

@@ -14,7 +14,7 @@ pub struct Rgb {
 }
 
 impl Color for Rgb {
-  /// Generates a random RGB color.
+  /// Generate a random RGB color.
   fn random() -> Self {
     use rand::Rng;
 
@@ -26,7 +26,7 @@ impl Color for Rgb {
     Rgb { r, g, b, a: None }
   }
 
-  /// Generates a random RGB color with an alpha value.
+  /// Generate a random RGB color with an alpha value.
   fn random_with_alpha() -> Self {
     use rand::Rng;
 
