@@ -25,6 +25,9 @@ workspace = true
 [package.edition]
 workspace = true
 
+[package.rust-version]
+workspace = true
+
 [package.readme]
 workspace = true
 

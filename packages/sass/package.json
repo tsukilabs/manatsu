@@ -28,6 +28,9 @@
     "mixin"
   ],
   "type": "module",
+  "files": [
+    "src"
+  ],
   "exports": {
     ".": "./src/index.scss",
     "./flex": "./src/flex.scss",
@@ -36,7 +39,7 @@
   "peerDependencies": {
     "sass": "^1.71.1"
   },
-  "files": [
-    "src"
-  ]
+  "engines": {
+    "node": ">=20"
+  }
 }
