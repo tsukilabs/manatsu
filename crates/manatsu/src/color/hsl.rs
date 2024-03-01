@@ -1,11 +1,11 @@
 use super::hex::Hex;
 use super::rgb::Rgb;
 use super::Color;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::fmt;
 
 /// Represents an HSL color.
-#[derive(Clone, Serialize)]
+#[derive(Clone, Deserialize, Serialize)]
 pub struct Hsl {
   pub h: f64,
   pub s: f64,

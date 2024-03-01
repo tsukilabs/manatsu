@@ -1,11 +1,11 @@
 use super::hex::Hex;
 use super::hsl::Hsl;
 use super::Color;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::fmt;
 
 /// Represents an RGB color.
-#[derive(Clone, Serialize)]
+#[derive(Clone, Deserialize, Serialize)]
 pub struct Rgb {
   pub r: u8,
   pub g: u8,
