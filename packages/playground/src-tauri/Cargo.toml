@@ -20,7 +20,7 @@ serde_json = "1.0.114"
 tauri-plugin-window-state = "0.1.0"
 
 [dependencies.tauri]
-version = "1.6.0"
+version = "1.6.1"
 features = []
 
 [dependencies.serde]

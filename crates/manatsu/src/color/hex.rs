@@ -3,14 +3,14 @@ use super::rgb::Rgb;
 use super::Color;
 use anyhow::{anyhow, Context, Result};
 use regex::Regex;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::fmt;
 
 /// <https://regex101.com/r/OKsEXy>
 const HEX_REGEX: &str = r"#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?";
 
 /// Represents a hex color.
-#[derive(Clone, Serialize)]
+#[derive(Clone, Deserialize, Serialize)]
 pub struct Hex {
   pub r: u8,
   pub g: u8,
