@@ -6,6 +6,6 @@ const inputValue = ref<string | null>(null);
 
 <template>
   <div>
-    <MInput v-model:value="inputValue" placeholder="Text field" />
+    <m-input-text v-model:value="inputValue" placeholder="Text field" />
   </div>
 </template>

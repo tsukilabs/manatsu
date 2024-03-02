@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
-import MInput from './MInput.vue';
+import MInputText from './MInputText.vue';
 
 enableAutoUnmount(afterEach);
 
-describe('input', () => {
+describe('input-text', () => {
   it('should update value', async () => {
-    const wrapper = mount(MInput, {
+    const wrapper = mount(MInputText, {
       props: {
         value: 'some-text',
         'onUpdate:value': async (e: string) => {
