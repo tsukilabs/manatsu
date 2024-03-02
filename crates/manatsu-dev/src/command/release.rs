@@ -3,7 +3,7 @@ use crate::util::Config;
 use anyhow::{bail, Result};
 use manatsu::{cargo, pnpm};
 use miho::git::{Commit, Git, Status};
-use reqwest::Client;
+use reqwest::{header, Client};
 use std::process::Stdio;
 
 /// Releases a new version, publishing all the public packages.
@@ -64,9 +64,10 @@ async fn create_github_release(github_token: &str) -> Result<()> {
 
   let response = client
     .post(&endpoint)
-    .header("Authorization", &github_token)
+    .header(header::AUTHORIZATION, &github_token)
+    .header(header::ACCEPT, "application/vnd.github+json")
+    .header(header::USER_AGENT, "tsukilabs/manatsu")
     .header("X-GitHub-Api-Version", "2022-11-28")
-    .header("accept", "application/vnd.github+json")
     .json(&body)
     .send()
     .await?;
