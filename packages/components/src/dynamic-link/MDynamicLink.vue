@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import type { VNode } from 'vue';
+import { type VNode, computed } from 'vue';
 import { type RouteLocationRaw, RouterLink } from 'vue-router';
-import { useExternalLink } from '@manatsu/composables/src/index.ts';
 
 const to = defineModel<RouteLocationRaw>('to');
 
 const slots = defineSlots<{ default?: () => VNode }>();
 
-const isExternalLink = useExternalLink(to);
+const isExternalLink = computed(() => {
+  if (typeof to.value !== 'string') return false;
+  return to.value.startsWith('http');
+});
 
 defineExpose({ isExternalLink });
 </script>

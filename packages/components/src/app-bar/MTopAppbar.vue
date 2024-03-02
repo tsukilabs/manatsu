@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type VNode, computed, shallowRef } from 'vue';
 import { usePixelWidth, useToPixel } from '@manatsu/composables/src/index.ts';
-import MDynamicLink from '../link/MDynamicLink.vue';
+import MDynamicLink from '../dynamic-link/MDynamicLink.vue';
 import type { TopAppbarMenuItem, TopAppbarProps } from './types';
 
 const menuItems = defineModel<TopAppbarMenuItem[]>('menuItems');
@@ -158,3 +158,4 @@ defineExpose({ startWidth, endWidth });
   }
 }
 </style>
+../dynamic-link/MDynamicLink.vue

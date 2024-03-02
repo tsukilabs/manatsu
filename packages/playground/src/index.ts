@@ -7,7 +7,7 @@ import { router } from './routes';
 import { StorageKey } from './enum';
 
 const app = createApp(App);
-const manatsu = createManatsu({ darkMode: false });
+const manatsu = createManatsu({ darkMode: true });
 
 registerComponents(app);
 
