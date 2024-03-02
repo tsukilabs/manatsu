@@ -7,7 +7,7 @@
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tsukilabs/manatsu.git"
+    "url": "git+https://github.com/tsukilabs/manatsu.git"
   },
   "bugs": {
     "url": "https://github.com/tsukilabs/manatsu/issues"
