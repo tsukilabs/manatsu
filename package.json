@@ -27,6 +27,7 @@
     "test": "run-p test:crates test:packages",
     "test:crates": "cargo test -p manatsu && cargo test -p manatsu-dev",
     "test:packages": "vitest --run",
+    "type-check": "pnpm run -r --parallel --aggregate-output type-check",
     "ui": "vitest --ui --watch"
   },
   "devDependencies": {
