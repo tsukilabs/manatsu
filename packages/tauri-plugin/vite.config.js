@@ -13,9 +13,6 @@ export default defineConfig({
       entry: join(__dirname, 'src/index.ts'),
       formats: ['es'],
       fileName: 'index'
-    },
-    rollupOptions: {
-      external: ['vue']
     }
   }
 });
