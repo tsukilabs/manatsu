@@ -4,7 +4,7 @@
     { "icon": "aurelia", "extensions": ["manatsu"], "format": "svg" },
     {
       "icon": "plugin",
-      "extensions": ["tauri-plugin-manatsu"],
+      "extensions": ["tauri-plugin", "tauri-plugin-manatsu"],
       "format": "svg"
     },
     {

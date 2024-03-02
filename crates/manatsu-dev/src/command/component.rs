@@ -1,6 +1,7 @@
 use crate::package;
 use crate::util::{Formatter, Linter};
 use anyhow::{bail, Result};
+use colored::Colorize;
 use convert_case::{Case, Casing};
 use regex::Regex;
 use std::fs;
@@ -16,7 +17,7 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
 
   let name = name.as_ref();
   if !is_valid(name) {
-    bail!("invalid component name: {}", name);
+    bail!("invalid component name: {name}");
   }
 
   let kebab = name.to_case(Case::Kebab);
@@ -45,7 +46,9 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
     .lint()
     .await?;
 
-  println!("component {pascal} created in {:?}", start.elapsed());
+  let message = format!("component {pascal} created in {:?}", start.elapsed());
+  println!("{}", message.bright_green());
+
   Ok(())
 }
 

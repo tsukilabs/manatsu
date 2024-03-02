@@ -1,0 +1,44 @@
+{
+  "name": "@manatsu/tauri-plugin",
+  "description": "Tauri plugin for Manatsu",
+  "version": "0.4.2",
+  "license": "MIT",
+  "private": false,
+  "packageManager": "pnpm@8.15.4",
+  "homepage": "https://github.com/tsukilabs/manatsu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsukilabs/manatsu.git"
+  },
+  "contributors": [
+    {
+      "name": "Andrew Ferreira",
+      "email": "andrew.shien2@gmail.com",
+      "url": "https://tb.dev.br/"
+    }
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "build": "run-p type-check build-only",
+    "build-only": "vite build",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "vite": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

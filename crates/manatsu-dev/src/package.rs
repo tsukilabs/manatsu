@@ -4,7 +4,14 @@ use std::path::PathBuf;
 use std::{env, fs};
 
 /// Public package names.
-pub const PUBLIC_PACKAGES: [&str; 5] = ["manatsu", "components", "composables", "sass", "shared"];
+pub const PUBLIC_PACKAGES: [&str; 6] = [
+  "manatsu",
+  "components",
+  "composables",
+  "sass",
+  "shared",
+  "tauri-plugin",
+];
 
 /// Private package names.
 pub const PRIVATE_PACKAGES: [&str; 1] = ["playground"];
