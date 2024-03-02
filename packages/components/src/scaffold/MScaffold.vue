@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type VNode, computed, shallowRef } from 'vue';
-import { useBorder, usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
+import { usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
+import { type MaybeRefOrGetter, type VNode, computed, shallowRef, toRef } from 'vue';
 import type { ScaffoldProps, SidebarItem } from './types';
 
 const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
@@ -20,24 +20,27 @@ const slots = defineSlots<{
 
 const topBar = shallowRef<HTMLElement | null>(null);
 const topBarHeight = usePixelHeight(topBar);
-const topBarBorder = useBorder(
-  () => props.topBarBorder,
-  () => props.defaultBorder
-);
+const topBarBorder = useBorder(() => props.topBarBorder);
 
 const sidebar = shallowRef<HTMLElement | null>(null);
 const sidebarWidth = usePixelWidth(sidebar);
 
 const bottomBar = shallowRef<HTMLElement | null>(null);
 const bottomBarHeight = usePixelHeight(bottomBar);
-const bottomBarBorder = useBorder(
-  () => props.bottomBarBorder,
-  () => props.defaultBorder
-);
+const bottomBarBorder = useBorder(() => props.bottomBarBorder);
 
 const contentHeight = computed(() => {
   return `calc(100% - (${topBarHeight.value} + ${bottomBarHeight.value}))`;
 });
+
+function useBorder(border: MaybeRefOrGetter<string | boolean>) {
+  const borderRef = toRef(border);
+  return computed(() => {
+    if (!borderRef.value) return 'none';
+    if (typeof borderRef.value === 'string') return borderRef.value;
+    return props.defaultBorder;
+  });
+}
 </script>
 
 <template>
