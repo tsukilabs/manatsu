@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-expect-error duplicated type definition
 import { useRoute } from 'vue-router';
 import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
@@ -15,8 +16,8 @@ watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = useDarkMode();
 
-type TopBar = InstanceType<typeof import('@manatsu/components/src/index.ts').MTopAppbar>;
-const topAppBar = shallowRef<TopBar | null>(null);
+type TopBar = typeof import('@manatsu/components/src/appbar/index.ts').MTopAppbar;
+const topAppBar = shallowRef<InstanceType<TopBar> | null>(null);
 const topAppBarHeight = ref(60);
 
 const menuItems: TopAppbarMenuItem[] = [
@@ -42,7 +43,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     sidebar-item-class="flex items-center justify-center"
     :sidebar-item-style="{ width: topAppBar?.startWidth }"
   >
-    <template #top-bar>
+    <template #top>
       <m-top-appbar
         ref="topAppBar"
         content-alignment="end"
@@ -84,9 +85,9 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
       <router-view />
     </template>
 
-    <template #bottom-bar>
+    <template #bottom>
       <div class="flex h-16 w-full items-center justify-center">
-        <span>Bottom bar</span>
+        <span>Scaffold bottom</span>
       </div>
     </template>
   </m-scaffold>

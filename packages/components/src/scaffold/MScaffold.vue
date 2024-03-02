@@ -7,30 +7,30 @@ const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
 
 const props = withDefaults(defineProps<ScaffoldProps>(), {
   defaultBorder: '1px solid var(--m-color-outline-variant)',
-  topBarBorder: true,
-  bottomBarBorder: true
+  topBorder: true,
+  bottomBorder: true
 });
 
 const slots = defineSlots<{
-  'bottom-bar'?: () => VNode;
+  bottom?: () => VNode;
   default?: () => VNode;
   'sidebar-item'?: (props: SidebarItem) => VNode;
-  'top-bar'?: () => VNode;
+  top?: () => VNode;
 }>();
 
-const topBar = shallowRef<HTMLElement | null>(null);
-const topBarHeight = usePixelHeight(topBar);
-const topBarBorder = useBorder(() => props.topBarBorder);
+const top = shallowRef<HTMLElement | null>(null);
+const topHeight = usePixelHeight(top);
+const topBorder = useBorder(() => props.topBorder);
 
 const sidebar = shallowRef<HTMLElement | null>(null);
 const sidebarWidth = usePixelWidth(sidebar);
 
-const bottomBar = shallowRef<HTMLElement | null>(null);
-const bottomBarHeight = usePixelHeight(bottomBar);
-const bottomBarBorder = useBorder(() => props.bottomBarBorder);
+const bottom = shallowRef<HTMLElement | null>(null);
+const bottomHeight = usePixelHeight(bottom);
+const bottomBorder = useBorder(() => props.bottomBorder);
 
 const contentHeight = computed(() => {
-  return `calc(100% - (${topBarHeight.value} + ${bottomBarHeight.value}))`;
+  return `calc(100% - (${topHeight.value} + ${bottomHeight.value}))`;
 });
 
 function useBorder(border: MaybeRefOrGetter<string | boolean>) {
@@ -45,14 +45,8 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 
 <template>
   <div class="m-scaffold">
-    <div
-      v-if="$slots['top-bar']"
-      ref="topBar"
-      class="m-scaffold-top-bar"
-      :class="topBarClass"
-      :style="topBarStyle"
-    >
-      <slot name="top-bar"></slot>
+    <div v-if="$slots.top" ref="top" class="m-scaffold-top" :class="topClass" :style="topStyle">
+      <slot name="top"></slot>
     </div>
 
     <div class="m-scaffold-content">
@@ -82,13 +76,13 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
     </div>
 
     <div
-      v-if="$slots['bottom-bar']"
-      ref="bottomBar"
-      class="m-scaffold-bottom-bar"
-      :class="bottomBarClass"
-      :style="bottomBarStyle"
+      v-if="$slots.bottom"
+      ref="bottom"
+      class="m-scaffold-bottom"
+      :class="bottomClass"
+      :style="bottomStyle"
     >
-      <slot name="bottom-bar"></slot>
+      <slot name="bottom"></slot>
     </div>
   </div>
 </template>
@@ -114,15 +108,15 @@ $z-index: 100;
   background-color: var(--m-color-surface);
   overflow: hidden;
 
-  &-top-bar {
+  &-top {
     @include outside;
     top: 0;
-    border-bottom: v-bind('topBarBorder');
+    border-bottom: v-bind('topBorder');
   }
 
   &-content {
     position: relative;
-    top: v-bind('topBarHeight');
+    top: v-bind('topHeight');
     height: v-bind('contentHeight');
   }
 
@@ -151,10 +145,10 @@ $z-index: 100;
     overflow-x: hidden;
   }
 
-  &-bottom-bar {
+  &-bottom {
     @include outside;
     bottom: 0;
-    border-top: v-bind('bottomBarBorder');
+    border-top: v-bind('bottomBorder');
   }
 }
 </style>
