@@ -20,6 +20,6 @@ pub fn readme() -> Result<()> {
 
   let message = format!("done in {:?}", start.elapsed());
   println!("{}", message.bright_green());
-  
+
   Ok(())
 }
