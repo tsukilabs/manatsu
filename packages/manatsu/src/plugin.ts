@@ -1,13 +1,17 @@
 import { usePreferredDark } from '@vueuse/core';
 import { type App, type Plugin, inject, ref, watchEffect } from 'vue';
-import {
-  type DarkMode,
-  type ManatsuGlobal,
-  type ManatsuOptions,
-  darkModeKey,
-  isDarkMode,
-  setDarkMode
-} from '@manatsu/shared';
+import { type DarkMode, darkModeKey, isDarkMode, setDarkMode } from '@manatsu/shared';
+
+interface ManatsuOptions {
+  /** @default 'auto' */
+  darkMode?: DarkMode;
+}
+
+export interface ManatsuGlobal {
+  isDarkMode: () => boolean;
+  setDarkMode: (darkMode: DarkMode) => void;
+  toggleDarkMode: () => void;
+}
 
 export function createManatsu(options: ManatsuOptions = {}): Plugin {
   const manatsu: Plugin = {

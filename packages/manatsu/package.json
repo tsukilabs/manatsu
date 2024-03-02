@@ -1,6 +1,6 @@
 {
   "name": "manatsu",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Vue component library for Tauri apps",
   "license": "MIT",
   "private": false,
@@ -8,7 +8,7 @@
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tsukilabs/manatsu.git"
+    "url": "git+https://github.com/tsukilabs/manatsu.git"
   },
   "bugs": {
     "url": "https://github.com/tsukilabs/manatsu/issues"
@@ -42,7 +42,7 @@
     "./style": "./dist/style.css"
   },
   "scripts": {
-    "build": "run-p type-check build-only",
+    "build": "pnpm run \"/^(type-check|build-only)$/\"",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
   },

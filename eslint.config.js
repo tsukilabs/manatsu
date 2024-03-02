@@ -9,7 +9,8 @@ export default config({
     'packages/composables/tsconfig.json',
     'packages/manatsu/tsconfig.json',
     'packages/playground/tsconfig.json',
-    'packages/shared/tsconfig.json'
+    'packages/shared/tsconfig.json',
+    'packages/tauri-plugin/tsconfig.json'
   ],
   overrides: {
     vue: {

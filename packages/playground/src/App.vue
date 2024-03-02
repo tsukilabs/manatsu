@@ -2,8 +2,8 @@
 import { useRoute } from 'vue-router';
 import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
-import { Command } from 'manatsu/src/index.ts';
 import { ref, shallowRef, watchEffect } from 'vue';
+import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
 import type { MTopAppbar, SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
 import { StorageKey } from './enum';

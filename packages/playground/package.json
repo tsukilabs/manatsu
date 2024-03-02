@@ -1,13 +1,13 @@
 {
   "name": "@manatsu/playground",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.15.4",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tsukilabs/manatsu.git"
+    "url": "git+https://github.com/tsukilabs/manatsu.git"
   },
   "bugs": {
     "url": "https://github.com/tsukilabs/manatsu/issues"
@@ -20,7 +20,7 @@
     }
   ],
   "scripts": {
-    "build": "run-p type-check build-only",
+    "build": "pnpm run \"/^(type-check|build-only)$/\"",
     "build-only": "vite build",
     "dev": "vite",
     "type-check": "vue-tsc --noEmit"
@@ -30,6 +30,7 @@
     "@manatsu/composables": "workspace:*",
     "@manatsu/sass": "workspace:*",
     "@manatsu/shared": "workspace:*",
+    "@manatsu/tauri-plugin": "workspace:*",
     "lodash-es": "^4.17.21",
     "manatsu": "workspace:*"
   },

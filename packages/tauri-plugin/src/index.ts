@@ -1,3 +1,5 @@
+export * from './types';
+
 /** Commands for the Tauri plugin, so one can easily `invoke` them. */
 export enum Command {
   HexToHsl = 'plugin:manatsu|hex_to_hsl',

@@ -1,6 +1,5 @@
 import './style/main.scss';
 import type { App } from 'vue';
-import type { ManatsuGlobal } from '@manatsu/shared';
 import {
   MButton,
   MCard,
@@ -14,7 +13,7 @@ import {
 
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $mana: ManatsuGlobal;
+    $mana: import('./plugin').ManatsuGlobal;
   }
 
   interface GlobalComponents {
@@ -29,7 +28,6 @@ declare module 'vue' {
   }
 }
 
-export { Command } from './enum';
 export { createManatsu } from './plugin';
 
 export { type MaybeNullishRef, isDarkMode } from '@manatsu/shared';

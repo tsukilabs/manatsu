@@ -1,10 +1,13 @@
 use crate::package;
 use anyhow::Result;
 use colored::Colorize;
+use std::time::Instant;
 use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {
+  let start = Instant::now();
+
   let filename = "README.md";
   let root_readme = env::current_dir()?.join(filename);
 
@@ -15,6 +18,8 @@ pub fn readme() -> Result<()> {
     println!("copied: {}", readme.display());
   }
 
-  println!("{}", "done!".bright_green());
+  let message = format!("done in {:?}", start.elapsed());
+  println!("{}", message.bright_green());
+
   Ok(())
 }

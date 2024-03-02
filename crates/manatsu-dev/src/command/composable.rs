@@ -1,6 +1,7 @@
 use crate::package;
 use crate::util::{Formatter, Linter};
 use anyhow::{bail, Result};
+use colored::Colorize;
 use convert_case::{Case, Casing};
 use regex::Regex;
 use std::fs;
@@ -15,7 +16,7 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
 
   let name = name.as_ref();
   if !is_valid(name) {
-    bail!("invalid composable name: {}", name);
+    bail!("invalid composable name: {name}");
   }
 
   let camel = name.to_case(Case::Camel);
@@ -43,7 +44,9 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
     .lint()
     .await?;
 
-  println!("composable {camel} created in {:?}", start.elapsed());
+  let message = format!("composable {camel} created in {:?}", start.elapsed());
+  println!("{}", message.bright_green());
+
   Ok(())
 }
 

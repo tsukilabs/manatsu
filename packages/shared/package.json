@@ -1,14 +1,14 @@
 {
   "name": "@manatsu/shared",
   "description": "Utilities for Manatsu",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@8.15.4",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tsukilabs/manatsu.git"
+    "url": "git+https://github.com/tsukilabs/manatsu.git"
   },
   "contributors": [
     {
@@ -31,7 +31,7 @@
     "./*": "./*"
   },
   "scripts": {
-    "build": "run-p type-check build-only",
+    "build": "pnpm run \"/^(type-check|build-only)$/\"",
     "build-only": "vite build",
     "type-check": "tsc --noEmit"
   },
