@@ -5,7 +5,7 @@ import {
   MCard,
   MCheckbox,
   MDynamicLink,
-  MInput,
+  MInputText,
   MRadio,
   MScaffold,
   MTopAppbar
@@ -21,7 +21,7 @@ declare module 'vue' {
     MCard: typeof MCard;
     MCheckbox: typeof MCheckbox;
     MDynamicLink: typeof MDynamicLink;
-    MInput: typeof MInput;
+    MInputText: typeof MInputText;
     MRadio: typeof MRadio;
     MScaffold: typeof MScaffold;
     MTopAppbar: typeof MTopAppbar;
@@ -32,7 +32,7 @@ export { createManatsu } from './plugin';
 
 export { type MaybeNullishRef, isDarkMode } from '@manatsu/shared';
 
-export { MButton, MCard, MCheckbox, MDynamicLink, MInput, MRadio, MScaffold, MTopAppbar };
+export { MButton, MCard, MCheckbox, MDynamicLink, MInputText, MRadio, MScaffold, MTopAppbar };
 
 export type {
   ButtonVariant,
@@ -59,7 +59,7 @@ export function registerComponents(app: App) {
   app.component('MCard', MCard);
   app.component('MCheckbox', MCheckbox);
   app.component('MDynamicLink', MDynamicLink);
-  app.component('MInput', MInput);
+  app.component('MInputText', MInputText);
   app.component('MRadio', MRadio);
   app.component('MScaffold', MScaffold);
   app.component('MTopAppbar', MTopAppbar);
