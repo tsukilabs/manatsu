@@ -28,7 +28,7 @@ jobs:
       - run: pnpm run test
       - run: pnpm run clippy
 
-  publish-npm:
+  publish:
     needs: test
     runs-on: ubuntu-latest
     steps:
