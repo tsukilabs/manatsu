@@ -20,15 +20,14 @@ const classList = computed(() => {
 </template>
 
 <style lang="scss">
-$transition-duration: 0.2s;
-
 .m-button {
   border: none;
   border-radius: var(--m-border-radius);
   padding: 0.25em 0.75em;
   min-width: 10ch;
   min-height: 32px;
-  font-size: 1em;
+  font-weight: 500;
+  font-size: 1rem;
   font-family: inherit;
   text-align: center;
 
@@ -41,7 +40,7 @@ $transition-duration: 0.2s;
   }
 
   &-filled {
-    transition: box-shadow $transition-duration ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
     background-color: var(--m-color-primary);
     color: var(--m-color-on-primary);
 
@@ -52,8 +51,8 @@ $transition-duration: 0.2s;
 
   &-elevated {
     transition:
-      box-shadow $transition-duration ease-in-out,
-      color $transition-duration ease-in-out;
+      box-shadow 0.2s ease-in-out,
+      color 0.2s ease-in-out;
     box-shadow: 0 0 1px 1px rgb(0 0 0 / 15%);
     background-color: var(--m-color-surface-container-low);
     color: var(--m-color-primary);
@@ -65,9 +64,9 @@ $transition-duration: 0.2s;
 
   &-outlined {
     transition:
-      border-color $transition-duration ease-in-out,
-      box-shadow $transition-duration ease-in-out,
-      color $transition-duration ease-in-out;
+      border-color 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out,
+      color 0.2s ease-in-out;
     border: 1px solid var(--m-color-outline);
     background-color: transparent;
     color: inherit;
