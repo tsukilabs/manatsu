@@ -1,13 +1,13 @@
 use super::hsl::Hsl;
 use super::rgb::Rgb;
 use super::Color;
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, Result};
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
 /// <https://regex101.com/r/OKsEXy>
-const HEX_REGEX: &str = r"#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?";
+const HEX_REGEX: &str = r"#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?";
 
 /// Represents a hex color.
 #[derive(Clone, Deserialize, Serialize)]
@@ -52,22 +52,18 @@ impl TryFrom<&str> for Hex {
 
   fn try_from(value: &str) -> Result<Self, Self::Error> {
     let value = value.trim();
+    let err = || anyhow!("{value} is not a valid hex color");
 
-    let hex_regex = Regex::new(HEX_REGEX)?;
-    let caps = hex_regex
-      .captures(value)
-      .ok_or_else(|| anyhow!("could not find capture groups"))
-      .with_context(|| format!("slice does not contain a valid hex color: {value}"))?;
+    let hex_regex = Regex::new(HEX_REGEX).expect("hardcoded regex should be valid");
+    let caps = hex_regex.captures(value).ok_or_else(err)?;
 
     macro_rules! to_u8 {
       ($index:literal) => {{
-        let value = caps
+        caps
           .get($index)
-          .ok_or_else(|| anyhow!("could not find capture group at index {}", $index))?
-          .as_str();
-
-        u8::from_str_radix(value, 16)
-          .with_context(|| format!("could not parse hex value: {}", value))
+          .map(|m| u8::from_str_radix(m.as_str(), 16).ok())
+          .flatten()
+          .ok_or_else(err)
       }};
     }
 
@@ -96,7 +92,7 @@ impl From<Hex> for String {
 
 impl fmt::Display for Hex {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    write!(f, "{}", String::from(self.clone()))
+    write!(f, "{}", self.clone().to_string())
   }
 }
 
@@ -118,5 +114,23 @@ mod tests {
     let regex = Regex::new(HEX_REGEX).unwrap();
     let hex = String::from(Hex::random_with_alpha());
     assert!(regex.is_match(&hex));
+  }
+
+  #[test]
+  fn should_convert_string_to_hex() {
+    let hex = Hex::try_from("#ff00ff").unwrap();
+    assert_eq!(hex.r, 255);
+    assert_eq!(hex.g, 0);
+    assert_eq!(hex.b, 255);
+    assert!(hex.a.is_none());
+  }
+
+  #[test]
+  fn should_convert_string_to_hex_with_alpha() {
+    let hex = Hex::try_from("#ff00ffaa").unwrap();
+    assert_eq!(hex.r, 255);
+    assert_eq!(hex.g, 0);
+    assert_eq!(hex.b, 255);
+    assert!(hex.a.is_some());
   }
 }
