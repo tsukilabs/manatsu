@@ -3,8 +3,8 @@ use crate::Result;
 use manatsu::color::{Color, Hex, Hsl, Rgb};
 
 #[tauri::command]
-pub fn string_to_hex(value: String) -> Result<Hex> {
-  Hex::try_from(value.as_str()).map_err(|e| Error::Color(e.to_string()))
+pub fn string_to_hex(color: String) -> Result<Hex> {
+  Hex::try_from(color.as_str()).map_err(|e| Error::Color(e.to_string()))
 }
 
 #[tauri::command]
