@@ -7,7 +7,7 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
 
 <template>
   <div class="flex gap-8">
-    <MCard
+    <m-card
       v-for="variant of variants"
       :key="variant"
       :variant="variant"
@@ -20,7 +20,7 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
       </template>
 
       <template #header-end>
-        <MButton variant="outlined">Action</MButton>
+        <m-button variant="outlined">Action</m-button>
       </template>
 
       <template #media>
@@ -32,8 +32,8 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
       </template>
 
       <template #footer>
-        <MButton variant="outlined">Action</MButton>
+        <m-button variant="outlined">Action</m-button>
       </template>
-    </MCard>
+    </m-card>
   </div>
 </template>

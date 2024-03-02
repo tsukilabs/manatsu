@@ -7,8 +7,8 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
 <template>
   <div class="flex gap-4">
     <template v-for="variant of variants" :key="variant">
-      <MButton :variant="variant">{{ capitalize(variant) }}</MButton>
-      <MButton :variant="variant" disabled>{{ capitalize(variant) }}</MButton>
+      <m-button :variant="variant">{{ capitalize(variant) }}</m-button>
+      <m-button :variant="variant" disabled>{{ capitalize(variant) }}</m-button>
     </template>
   </div>
 </template>

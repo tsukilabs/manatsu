@@ -5,7 +5,7 @@ import { useLocalStorage } from '@vueuse/core';
 import { ref, shallowRef, watchEffect } from 'vue';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
-import type { MTopAppbar, SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
+import type { SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
 import { StorageKey } from './enum';
 import { components } from './routes';
 
@@ -15,7 +15,8 @@ watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = useDarkMode();
 
-const topAppBar = shallowRef<InstanceType<typeof MTopAppbar> | null>(null);
+type TopBar = InstanceType<typeof import('@manatsu/components/src/index.ts').MTopAppbar>;
+const topAppBar = shallowRef<TopBar | null>(null);
 const topAppBarHeight = ref(60);
 
 const menuItems: TopAppbarMenuItem[] = [
@@ -36,13 +37,13 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
 </script>
 
 <template>
-  <MScaffold
+  <m-scaffold
     :sidebar-items="sidebarItems"
     sidebar-item-class="flex items-center justify-center"
     :sidebar-item-style="{ width: topAppBar?.startWidth }"
   >
     <template #top-bar>
-      <MTopAppbar
+      <m-top-appbar
         ref="topAppBar"
         content-alignment="end"
         :menu-items="menuItems"
@@ -52,35 +53,35 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
         title-link="/"
       >
         <template #menu-item="{ label, to }">
-          <MDynamicLink :to="to">{{ label }}</MDynamicLink>
+          <m-dynamic-link :to="to">{{ label }}</m-dynamic-link>
         </template>
 
         <template #end>
           <div class="flex gap-2">
-            <MButton variant="outlined" @click="$mana.toggleDarkMode()">
+            <m-button variant="outlined" @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}
-            </MButton>
-            <MButton
+            </m-button>
+            <m-button
               variant="outlined"
               class="transition-none"
               :style="{ color }"
               @click="getColor"
             >
               {{ color }}
-            </MButton>
+            </m-button>
           </div>
         </template>
-      </MTopAppbar>
+      </m-top-appbar>
     </template>
 
     <template #sidebar-item="{ to, label }">
-      <MDynamicLink :to="to">
+      <m-dynamic-link :to="to">
         <span>{{ label }}</span>
-      </MDynamicLink>
+      </m-dynamic-link>
     </template>
 
     <template #default>
-      <RouterView />
+      <router-view />
     </template>
 
     <template #bottom-bar>
@@ -88,5 +89,5 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
         <span>Bottom bar</span>
       </div>
     </template>
-  </MScaffold>
+  </m-scaffold>
 </template>
