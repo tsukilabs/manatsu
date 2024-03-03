@@ -45,7 +45,14 @@
     "cli",
     "plugin"
   ],
-  "tailwindCSS.classAttributes": ["class", "content-class", "header-class", "sidebar-item-class"],
+  "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js",
+  "tailwindCSS.classAttributes": [
+    "class",
+    "content-class",
+    "footer-class",
+    "header-class",
+    "sidebar-item-class"
+  ],
   "tailwindCSS.files.exclude": [
     "**/.git/**",
     "**/node_modules/**",
@@ -53,6 +60,5 @@
     "**/target/**",
     "**/packages/components/**",
     "**/packages/sass/**"
-  ],
-  "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js"
+  ]
 }

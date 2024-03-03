@@ -8,7 +8,7 @@ const visible = defineModel<boolean>('visible', { required: true });
 const props = withDefaults(defineProps<DialogProps>(), {
   appendTo: 'body',
   draggable: true,
-  positionStorageType: 'session'
+  storageType: 'session'
 });
 
 const slots = defineSlots<{
@@ -17,11 +17,13 @@ const slots = defineSlots<{
   header?: () => VNode;
 }>();
 
-const mask = shallowRef<HTMLElement | null>(null);
-const dialog = shallowRef<HTMLElement | null>(null);
+const maskRef = shallowRef<HTMLElement | null>(null);
+const dialogRef = shallowRef<HTMLElement | null>(null);
+const headerRef = shallowRef<HTMLElement | null>(null);
 
-const { position, style: draggableStyle } = useDraggable(dialog, {
-  containerElement: mask,
+const { position, style: draggableStyle } = useDraggable(dialogRef, {
+  containerElement: maskRef,
+  handle: computed(() => headerRef.value ?? dialogRef.value),
   disabled: computed(() => !props.draggable),
   initialValue: getInitialPosition()
 });
@@ -35,36 +37,37 @@ const dialogComputedStyle = computed(() => {
   return styles;
 });
 
-onClickOutside(dialog, () => {
-  if (props.closeOnClickOutside && visible.value) {
+const hasHeader = computed(() => {
+  return Boolean(slots.header ?? props.header);
+});
+
+onClickOutside(dialogRef, () => {
+  if (props.clickOutside) {
     visible.value = false;
   }
 });
 
 onKeyStroke('Escape', (e) => {
-  if (props.closeOnEsc && visible.value) {
+  if (props.esc && visible.value) {
     e.preventDefault();
     visible.value = false;
   }
 });
 
 watchEffect(() => {
-  if (visible.value && props.positionStorageKey) {
+  if (visible.value && props.storageKey) {
     const storage = getStorage();
-    storage.setItem(
-      props.positionStorageKey,
-      JSON.stringify({ x: position.value.x, y: position.value.y })
-    );
+    storage.setItem(props.storageKey, JSON.stringify({ x: position.value.x, y: position.value.y }));
   }
 });
 
 function getInitialPosition() {
-  if (typeof props.positionStorageKey !== 'string') {
+  if (typeof props.storageKey !== 'string') {
     return getDefaultPosition();
   }
 
   const storage = getStorage();
-  const previousPosition = storage.getItem(props.positionStorageKey);
+  const previousPosition = storage.getItem(props.storageKey);
   if (!previousPosition) return getDefaultPosition();
 
   try {
@@ -87,16 +90,23 @@ function getDefaultPosition() {
 }
 
 function getStorage() {
-  return props.positionStorageType === 'session' ? sessionStorage : localStorage;
+  return props.storageType === 'session' ? sessionStorage : localStorage;
 }
 </script>
 
 <template>
   <Teleport :to="appendTo">
-    <div v-if="visible" ref="mask" class="m-dialog-mask" :class="{ 'm-dialog-backdrop': modal }">
-      <div ref="dialog" class="m-dialog" :class="dialogClass" :style="dialogComputedStyle">
-        <div v-if="$slots.header" class="m-dialog-header" :class="headerClass" :style="headerStyle">
-          <slot name="header"></slot>
+    <div v-if="visible" ref="maskRef" class="m-dialog-mask" :class="{ 'm-dialog-backdrop': modal }">
+      <div ref="dialogRef" class="m-dialog" :class="dialogClass" :style="dialogComputedStyle">
+        <div
+          v-if="hasHeader"
+          ref="headerRef"
+          class="m-dialog-header"
+          :class="headerClass"
+          :style="headerStyle"
+        >
+          <slot v-if="$slots.header" name="header"></slot>
+          <span v-else>{{ header }}</span>
         </div>
         <div class="m-dialog-content" :class="contentClass" :style="contentStyle">
           <slot></slot>
@@ -132,9 +142,28 @@ function getStorage() {
   box-shadow:
     0 1px 2px 0 rgb(0 0 0 / 30%),
     0 1px 3px 1px rgb(0 0 0 / 15%);
-  border-radius: var(--m-border-radius);
+  border-radius: 6px;
   background-color: var(--m-color-surface-container-high);
-  padding: 1rem;
   pointer-events: auto;
+
+  &-header {
+    @include flex.x-start-y-center;
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.25rem;
+  }
+
+  &-content {
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  &-footer {
+    @include flex.x-end-y-center;
+    padding: 1rem;
+    width: 100%;
+  }
 }
 </style>

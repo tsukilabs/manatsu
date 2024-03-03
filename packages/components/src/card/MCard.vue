@@ -23,7 +23,7 @@ const classList = computed(() => {
 });
 
 const hasTitle = computed(() => {
-  return Boolean(props.title ?? slots.title);
+  return Boolean(slots.title ?? props.title);
 });
 
 const hasHeader = computed(() => {
