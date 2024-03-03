@@ -118,13 +118,11 @@ defineExpose({ startWidth, endWidth });
   white-space: nowrap;
 
   &-start {
-    @include flex.y-center;
-    justify-content: flex-start;
+    @include flex.x-start-y-center;
   }
 
   &-end {
-    @include flex.y-center;
-    justify-content: flex-end;
+    @include flex.x-end-y-center;
   }
 
   &-brand {

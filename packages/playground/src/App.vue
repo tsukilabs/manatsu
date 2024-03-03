@@ -81,7 +81,11 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     </template>
 
     <template #default>
-      <router-view />
+      <router-view #default="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </template>
 
     <template #bottom>

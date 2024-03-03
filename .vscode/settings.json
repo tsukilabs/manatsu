@@ -48,10 +48,13 @@
   "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js",
   "tailwindCSS.classAttributes": [
     "class",
+    "center-class",
     "content-class",
+    "end-class",
     "footer-class",
     "header-class",
-    "sidebar-item-class"
+    "sidebar-item-class",
+    "start-class"
   ],
   "tailwindCSS.files.exclude": [
     "**/.git/**",

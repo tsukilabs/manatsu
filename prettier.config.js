@@ -13,5 +13,13 @@ export default {
   vueIndentScriptAndStyle: false,
 
   tailwindConfig: './packages/playground/tailwind.config.js',
-  tailwindAttributes: ['content-class', 'footer-class', 'header-class', 'sidebar-item-class']
+  tailwindAttributes: [
+    'center-class',
+    'content-class',
+    'end-class',
+    'footer-class',
+    'header-class',
+    'sidebar-item-class',
+    'start-class'
+  ]
 };
