@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// @ts-expect-error duplicated type definition
 import { useRoute } from 'vue-router';
 import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
