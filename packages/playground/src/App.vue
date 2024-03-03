@@ -16,8 +16,8 @@ watchEffect(() => (lastRoute.value = route.path));
 const darkMode = useDarkMode();
 
 type TopBar = typeof import('@manatsu/components/src/appbar/index.ts').MTopAppbar;
-const topAppBar = shallowRef<InstanceType<TopBar> | null>(null);
-const topAppBarHeight = ref(60);
+const topBarRef = shallowRef<InstanceType<TopBar> | null>(null);
+const topBarHeight = ref(60);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
@@ -40,14 +40,14 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
   <m-scaffold
     :sidebar-items="sidebarItems"
     sidebar-item-class="flex items-center justify-center"
-    :sidebar-item-style="{ width: topAppBar?.startWidth }"
+    :sidebar-item-style="{ width: `${topBarRef?.startWidth ?? 0}px` }"
   >
     <template #top>
       <m-top-appbar
-        ref="topAppBar"
+        ref="topBarRef"
         content-alignment="end"
         :menu-items="menuItems"
-        :height="topAppBarHeight"
+        :height="topBarHeight"
         logo="/peach.png"
         title="Manatsu"
         title-link="/"

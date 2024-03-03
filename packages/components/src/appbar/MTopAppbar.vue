@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type VNode, computed, shallowRef } from 'vue';
-import { usePixelWidth, useToPixel } from '@manatsu/composables/src/index.ts';
+import { useToPixel, useWidth } from '@manatsu/composables/src/index.ts';
 import MDynamicLink from '../dynamic-link/MDynamicLink.vue';
 import type { TopAppbarMenuItem, TopAppbarProps } from './types';
 
@@ -40,11 +40,11 @@ const alignment = computed(() => {
   return 'flex-end';
 });
 
-const start = shallowRef<HTMLElement | null>(null);
-const startWidth = usePixelWidth(start);
+const startRef = shallowRef<HTMLElement | null>(null);
+const startWidth = useWidth(startRef);
 
-const end = shallowRef<HTMLElement | null>(null);
-const endWidth = usePixelWidth(end);
+const endRef = shallowRef<HTMLElement | null>(null);
+const endWidth = useWidth(endRef);
 
 defineExpose({ startWidth, endWidth });
 </script>
@@ -53,7 +53,7 @@ defineExpose({ startWidth, endWidth });
   <header class="m-top-appbar">
     <div
       v-if="hasStart"
-      ref="start"
+      ref="startRef"
       class="m-top-appbar-start"
       :class="startClass"
       :style="startStyle"
@@ -99,7 +99,13 @@ defineExpose({ startWidth, endWidth });
       </nav>
     </div>
 
-    <div v-if="$slots.end" ref="end" class="m-top-appbar-end" :class="endClass" :style="endStyle">
+    <div
+      v-if="$slots.end"
+      ref="endRef"
+      class="m-top-appbar-end"
+      :class="endClass"
+      :style="endStyle"
+    >
       <slot name="end"></slot>
     </div>
   </header>
