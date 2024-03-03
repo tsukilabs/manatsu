@@ -9,8 +9,9 @@ describe('button', () => {
     const onClick = vi.fn();
     const wrapper = mount(MButton, { props: { onClick } });
 
-    await wrapper.trigger('click');
+    expect(onClick).not.toHaveBeenCalled();
 
+    await wrapper.trigger('click');
     expect(onClick).toHaveBeenCalled();
   });
 });

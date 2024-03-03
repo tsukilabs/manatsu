@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { type VNode, computed, shallowRef, watchEffect } from 'vue';
 import { onClickOutside, onKeyStroke, useDraggable } from '@vueuse/core';
+import { type VNode, computed, shallowRef, watch, watchEffect } from 'vue';
 import type { DialogProps } from './types';
 
 const visible = defineModel<boolean>('visible', { required: true });
@@ -10,6 +10,11 @@ const props = withDefaults(defineProps<DialogProps>(), {
   draggable: true,
   storageType: 'session'
 });
+
+const emit = defineEmits<{
+  // eslint-disable-next-line @typescript-eslint/prefer-function-type
+  (e: 'hide' | 'show'): void;
+}>();
 
 const slots = defineSlots<{
   default?: () => VNode;
@@ -51,6 +56,14 @@ onKeyStroke('Escape', (e) => {
   if (props.esc && visible.value) {
     e.preventDefault();
     visible.value = false;
+  }
+});
+
+watch(visible, (value) => {
+  if (value) {
+    emit('show');
+  } else {
+    emit('hide');
   }
 });
 

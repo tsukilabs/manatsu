@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import MDialog from './MDialog.vue';
 
 enableAutoUnmount(afterEach);
@@ -66,7 +66,36 @@ describe('dialog', () => {
     expect(wrapper.find('.m-dialog').exists()).toBe(true);
 
     await wrapper.trigger('keydown', { key: 'Escape' });
-
     expect(wrapper.find('.m-dialog').exists()).toBe(false);
+  });
+
+  it('should emit event on show', async () => {
+    const onShow = vi.fn();
+    const wrapper = mount(MDialog, {
+      global: {
+        stubs: { teleport: true }
+      },
+      props: { onShow, visible: false }
+    });
+
+    expect(onShow).not.toHaveBeenCalled();
+
+    await wrapper.setProps({ visible: true });
+    expect(onShow).toHaveBeenCalled();
+  });
+
+  it('should emit event on hide', async () => {
+    const onHide = vi.fn();
+    const wrapper = mount(MDialog, {
+      global: {
+        stubs: { teleport: true }
+      },
+      props: { onHide, visible: true }
+    });
+
+    expect(onHide).not.toHaveBeenCalled();
+
+    await wrapper.setProps({ visible: false });
+    expect(onHide).toHaveBeenCalled();
   });
 });
