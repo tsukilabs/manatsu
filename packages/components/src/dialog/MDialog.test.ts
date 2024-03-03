@@ -55,7 +55,7 @@ describe('dialog', () => {
         stubs: { teleport: true }
       },
       props: {
-        closeOnEsc: true,
+        esc: true,
         visible: true,
         'onUpdate:visible': async (value: boolean) => {
           await wrapper.setProps({ visible: value });
