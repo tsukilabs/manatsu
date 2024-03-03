@@ -6,7 +6,7 @@ import MScaffold from './MScaffold.vue';
 enableAutoUnmount(afterEach);
 
 describe('scaffold', () => {
-  it('should have top', () => {
+  it('should render top slot', () => {
     const wrapper = mount(MScaffold, {
       slots: {
         top: () => h('div', { id: 'top-slot' })
@@ -17,7 +17,7 @@ describe('scaffold', () => {
     expect(wrapper.find('#top-slot').exists()).toBe(true);
   });
 
-  it('should not have top', () => {
+  it('should not render top slot', () => {
     const wrapper = mount(MScaffold, {
       slots: {
         default: () => h('div', 'Default slot')
@@ -27,7 +27,7 @@ describe('scaffold', () => {
     expect(wrapper.find('.m-scaffold-top').exists()).toBe(false);
   });
 
-  it('should have bottom', () => {
+  it('should render bottom slot', () => {
     const wrapper = mount(MScaffold, {
       slots: {
         bottom: () => h('div', { id: 'bottom-slot' })
@@ -38,7 +38,7 @@ describe('scaffold', () => {
     expect(wrapper.find('#bottom-slot').exists()).toBe(true);
   });
 
-  it('should not have bottom', () => {
+  it('should not render bottom slot', () => {
     const wrapper = mount(MScaffold, {
       slots: {
         default: () => h('div', 'Default slot')
