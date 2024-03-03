@@ -4,12 +4,14 @@ import LoremIpsum from '../../components/LoremIpsum.vue';
 
 const visible = ref(false);
 const visibleModal = ref(false);
+const visibleNoStorage = ref(false);
 </script>
 
 <template>
   <div class="flex gap-4">
     <m-button @click="visible = !visible">Show</m-button>
     <m-button @click="visibleModal = !visibleModal">Show modal</m-button>
+    <m-button @click="visibleNoStorage = !visibleNoStorage">Show no storage</m-button>
 
     <m-dialog
       v-model:visible="visible"
@@ -51,6 +53,19 @@ const visibleModal = ref(false);
         <div class="flex justify-end gap-2">
           <m-button @click="visibleModal = false">Close</m-button>
           <m-button @click="visibleModal = false">Save</m-button>
+        </div>
+      </template>
+    </m-dialog>
+
+    <m-dialog v-model:visible="visibleNoStorage" click-outside esc header="No Storage">
+      <template #default>
+        <LoremIpsum :paragraphs="2" class="h-48 w-48" />
+      </template>
+
+      <template #footer>
+        <div class="flex justify-end gap-2">
+          <m-button @click="visibleNoStorage = false">Close</m-button>
+          <m-button @click="visibleNoStorage = false">Save</m-button>
         </div>
       </template>
     </m-dialog>

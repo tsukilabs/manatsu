@@ -99,7 +99,7 @@ function getInitialPosition() {
 }
 
 function getDefaultPosition() {
-  return { x: screen.width / 2, y: screen.height / 2 };
+  return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 }
 
 function getStorage() {
