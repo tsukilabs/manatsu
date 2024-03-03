@@ -47,4 +47,26 @@ describe('dialog', () => {
 
     expect(wrapper.find('.footer-slot').exists()).toBe(true);
   });
+
+  it('should close when escape key is pressed', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      global: {
+        stubs: { teleport: true }
+      },
+      props: {
+        closeOnEsc: true,
+        visible: true,
+        'onUpdate:visible': async (value: boolean) => {
+          await wrapper.setProps({ visible: value });
+        }
+      }
+    });
+
+    expect(wrapper.find('.m-dialog').exists()).toBe(true);
+
+    await wrapper.trigger('keydown', { key: 'Escape' });
+
+    expect(wrapper.find('.m-dialog').exists()).toBe(false);
+  });
 });
