@@ -12,6 +12,7 @@ defineProps<InputTextProps>();
 
 <style lang="scss">
 .m-input {
+  cursor: initial;
   outline: none;
   border: 1px solid var(--m-color-outline);
   border-radius: var(--m-border-radius);

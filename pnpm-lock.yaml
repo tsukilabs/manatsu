@@ -17,8 +17,8 @@ importers:
         specifier: ^1.1.11
         version: 1.1.11(postcss-html@1.6.0)(postcss@8.4.35)(typescript@5.3.3)
       '@tb-dev/utility-types':
-        specifier: ^1.1.7
-        version: 1.1.7
+        specifier: ^1.2.0
+        version: 1.2.0
       '@tb-dev/utils':
         specifier: ^1.2.9
         version: 1.2.9
@@ -107,8 +107,8 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(vue@3.4.21)
       vue-tsc:
-        specifier: ^2.0.2
-        version: 2.0.2(typescript@5.3.3)
+        specifier: ^2.0.3
+        version: 2.0.3(typescript@5.3.3)
       webdriverio:
         specifier: ^8.32.3
         version: 8.32.3(typescript@5.3.3)
@@ -125,8 +125,8 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
       '@tb-dev/utility-types':
-        specifier: ^1.1.7
-        version: 1.1.7
+        specifier: ^1.2.0
+        version: 1.2.0
       '@tb-dev/utils':
         specifier: ^1.2.9
         version: 1.2.9
@@ -156,8 +156,8 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
       '@tb-dev/utility-types':
-        specifier: ^1.1.7
-        version: 1.1.7
+        specifier: ^1.2.0
+        version: 1.2.0
       '@tb-dev/utils':
         specifier: ^1.2.9
         version: 1.2.9
@@ -190,8 +190,8 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
       '@tb-dev/utility-types':
-        specifier: ^1.1.7
-        version: 1.1.7
+        specifier: ^1.2.0
+        version: 1.2.0
       '@tb-dev/utils':
         specifier: ^1.2.9
         version: 1.2.9
@@ -255,8 +255,8 @@ importers:
   packages/shared:
     dependencies:
       '@tb-dev/utility-types':
-        specifier: ^1.1.7
-        version: 1.1.7
+        specifier: ^1.2.0
+        version: 1.2.0
       '@tb-dev/utils':
         specifier: ^1.2.9
         version: 1.2.9
@@ -1654,10 +1654,10 @@ packages:
       - typescript
     dev: true
 
-  /@tb-dev/utility-types@1.1.7:
+  /@tb-dev/utility-types@1.2.0:
     resolution:
       {
-        integrity: sha512-cml1/LDZ1ZLvoEyDiSsnixbwd/Uq/M4WeTh9Joqic65bMpvO4YSBgPLfSme1Efotnh8IoI2ubxQFQwsMLi2I+A==
+        integrity: sha512-7U9O43uPnYNQvI/I9JtVV6iP/jvJe93w2kZ9bg/y2Dqqm2sapFHoT7TNPFs+/YdnE4YrdlxS0osDoxGK7AUqyw==
       }
 
   /@tb-dev/utils@1.2.9:
@@ -1666,7 +1666,7 @@ packages:
         integrity: sha512-ekDejNDGVRY3WUb6/D55zBTs6TNFiwnrcx3jqeCZh7uyK+QwMgJRuTp3MvwmKmKU0d2aZR+03XYexTcSCUvboA==
       }
     dependencies:
-      '@tb-dev/utility-types': 1.1.7
+      '@tb-dev/utility-types': 1.2.0
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution:
@@ -2371,10 +2371,10 @@ packages:
       vue-template-compiler: 2.7.16
     dev: true
 
-  /@vue/language-core@2.0.2(typescript@5.3.3):
+  /@vue/language-core@2.0.3(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-MT8pGTFouwDOS/ton1OqyW2MtTv02I8kEymvD05lW3NM8HJf63Xu9sZc0nh5SGZN35EFdnSsD+emhRKRzHLEug==
+        integrity: sha512-hnVF/Q3cD2v+EFD4pD1YdITGBcdM38P18SYqilVQDezKw5RobWny4BwIckWGS1fJmUstsO9mTX30ZOyzyR2Q+Q==
       }
     peerDependencies:
       typescript: '*'
@@ -8859,17 +8859,17 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /vue-tsc@2.0.2(typescript@5.3.3):
+  /vue-tsc@2.0.3(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-y/McoUhK62cJdI9m8xTCADOELPczi/EhLcjwq84xTqmsqEFugM7vOy5l7X/2ZNdMKopg74jVn2Nd4GdUxPMGWw==
+        integrity: sha512-aMJqbgLiKDAwAglWqMoGf1Ez6Wwqhlk2MDxEjFGziiLW0A+tHOWE1+YQJZQ1Vm6zaENPA2KJAubFhaR988UvGg==
       }
     hasBin: true
     peerDependencies:
       typescript: '*'
     dependencies:
       '@volar/typescript': 2.1.0
-      '@vue/language-core': 2.0.2(typescript@5.3.3)
+      '@vue/language-core': 2.0.3(typescript@5.3.3)
       semver: 7.6.0
       typescript: 5.3.3
     dev: true

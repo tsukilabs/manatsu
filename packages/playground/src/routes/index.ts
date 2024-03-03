@@ -14,6 +14,10 @@ export const components: RouteRecordRaw[] = [
     component: () => import('../views/components/CheckboxView.vue')
   },
   {
+    path: '/components/dialog',
+    component: () => import('../views/components/DialogView.vue')
+  },
+  {
     path: '/components/input-text',
     component: () => import('../views/components/InputTextView.vue')
   },
