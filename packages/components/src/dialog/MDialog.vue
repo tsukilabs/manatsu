@@ -28,7 +28,7 @@ const headerRef = shallowRef<HTMLElement | null>(null);
 
 const { position, style: draggableStyle } = useDraggable(dialogRef, {
   containerElement: maskRef,
-  handle: computed(() => headerRef.value ?? dialogRef.value),
+  handle: computed(() => props.handle ?? headerRef.value ?? dialogRef.value),
   disabled: computed(() => !props.draggable),
   initialValue: getInitialPosition()
 });

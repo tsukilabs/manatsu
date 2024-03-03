@@ -1,4 +1,5 @@
 import type { StyleValue } from 'vue';
+import type { Nullish } from '@tb-dev/utility-types';
 
 export interface DialogProps {
   appendTo?: string | HTMLElement;
@@ -13,6 +14,8 @@ export interface DialogProps {
   esc?: boolean;
   footerClass?: string;
   footerStyle?: StyleValue;
+  /** Handle that triggers the dialog drag event. */
+  handle?: Nullish<HTMLElement>;
   header?: string;
   headerClass?: string;
   headerStyle?: StyleValue;
