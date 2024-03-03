@@ -24,6 +24,10 @@ export const components: RouteRecordRaw[] = [
   {
     path: '/components/radio',
     component: () => import('../views/components/RadioView.vue')
+  },
+  {
+    path: '/components/toolbar',
+    component: () => import('../views/components/ToolbarView.vue')
   }
 ];
 

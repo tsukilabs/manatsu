@@ -18,15 +18,15 @@ const slots = defineSlots<{
   top?: () => VNode;
 }>();
 
-const top = shallowRef<HTMLElement | null>(null);
-const topHeight = usePixelHeight(top);
+const topRef = shallowRef<HTMLElement | null>(null);
+const topHeight = usePixelHeight(topRef);
 const topBorder = useBorder(() => props.topBorder);
 
-const sidebar = shallowRef<HTMLElement | null>(null);
-const sidebarWidth = usePixelWidth(sidebar);
+const sidebarRef = shallowRef<HTMLElement | null>(null);
+const sidebarWidth = usePixelWidth(sidebarRef);
 
-const bottom = shallowRef<HTMLElement | null>(null);
-const bottomHeight = usePixelHeight(bottom);
+const bottomRef = shallowRef<HTMLElement | null>(null);
+const bottomHeight = usePixelHeight(bottomRef);
 const bottomBorder = useBorder(() => props.bottomBorder);
 
 const contentHeight = computed(() => {
@@ -45,14 +45,14 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 
 <template>
   <div class="m-scaffold">
-    <div v-if="$slots.top" ref="top" class="m-scaffold-top" :class="topClass" :style="topStyle">
+    <div v-if="$slots.top" ref="topRef" class="m-scaffold-top" :class="topClass" :style="topStyle">
       <slot name="top"></slot>
     </div>
 
     <div class="m-scaffold-content">
       <aside
         v-if="sidebarItems && sidebarItems.length > 0"
-        ref="sidebar"
+        ref="sidebarRef"
         class="m-scaffold-sidebar"
         :class="sidebarClass"
         :style="sidebarStyle"
@@ -77,7 +77,7 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 
     <div
       v-if="$slots.bottom"
-      ref="bottom"
+      ref="bottomRef"
       class="m-scaffold-bottom"
       :class="bottomClass"
       :style="bottomStyle"
