@@ -31,5 +31,23 @@
         <m-button>Bar</m-button>
       </template>
     </m-toolbar>
+
+    <m-toolbar>
+      <template #start>
+        <span>Only start slot</span>
+      </template>
+    </m-toolbar>
+
+    <m-toolbar>
+      <template #center>
+        <span>Only center slot</span>
+      </template>
+    </m-toolbar>
+
+    <m-toolbar>
+      <template #end>
+        <span>Only end slot</span>
+      </template>
+    </m-toolbar>
   </div>
 </template>

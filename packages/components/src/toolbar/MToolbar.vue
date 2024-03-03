@@ -71,14 +71,17 @@ defineExpose({ startWidth, centerWidth, endWidth });
 
   &-start {
     @include flex.x-start-y-center;
+    width: 100%;
   }
 
   &-center {
     @include flex.center;
+    width: 100%;
   }
 
   &-end {
     @include flex.x-end-y-center;
+    width: 100%;
   }
 
   &-border {
