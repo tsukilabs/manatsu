@@ -1,48 +1,64 @@
 use crate::package::Package;
 use crate::util::Config;
 use anyhow::{bail, Result};
+use clap::Args;
 use manatsu::{cargo, pnpm};
 use miho::git::{Commit, Git, Status};
 use reqwest::{header, Client};
 use std::process::Stdio;
 
-/// Releases a new version, publishing all the public packages.
-///
-/// It is not necessary to synchronize the README files before
-/// calling this function, as it will already do that.
-pub async fn release() -> Result<()> {
-  super::readme()?;
+#[derive(Debug, Args)]
+pub struct Release {
+  #[arg(long)]
+  only_crate: bool,
 
-  if let Ok(true) = Status::is_dirty().await {
-    Commit::new("chore: sync readme files")
-      .no_verify()
-      .stderr(Stdio::null())
-      .stdout(Stdio::null())
-      .spawn()
-      .await?;
-  }
+  #[arg(long)]
+  only_package: bool,
+}
 
-  match Config::read().ok() {
-    Some(cfg) if cfg.github => {
-      create_github_release(&cfg.github_token).await?;
-    }
-    _ => {
-      pnpm!(["publish", "-r", "--no-git-checks"])
-        .spawn()?
-        .wait()
+impl super::Command for Release {
+  /// Releases a new version, publishing all the public packages.
+  ///
+  /// It is not necessary to synchronize the README files before
+  /// calling this function, as it will already do that.
+  async fn execute(self) -> Result<()> {
+    super::readme()?;
+
+    if let Ok(true) = Status::is_dirty().await {
+      Commit::new("chore: sync readme files")
+        .no_verify()
+        .stderr(Stdio::null())
+        .stdout(Stdio::null())
+        .spawn()
         .await?;
+    }
 
-      let crates = ["manatsu", "tauri-plugin-manatsu"];
-      for crate_name in crates {
-        cargo!(["publish", "-p", crate_name])
-          .spawn()?
-          .wait()
-          .await?;
+    match Config::read().ok() {
+      Some(cfg) if cfg.github => {
+        create_github_release(&cfg.github_token).await?;
+      }
+      _ => {
+        if !self.only_crate {
+          pnpm!(["publish", "-r", "--no-git-checks"])
+            .spawn()?
+            .wait()
+            .await?;
+        }
+
+        if !self.only_package {
+          let crates = ["manatsu", "tauri-plugin-manatsu"];
+          for crate_name in crates {
+            cargo!(["publish", "-p", crate_name])
+              .spawn()?
+              .wait()
+              .await?;
+          }
+        }
       }
     }
-  }
 
-  Ok(())
+    Ok(())
+  }
 }
 
 async fn create_github_release(github_token: &str) -> Result<()> {

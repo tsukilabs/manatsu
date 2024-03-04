@@ -43,6 +43,7 @@
     "core",
     "playground",
     "cli",
+    "cli-dev",
     "plugin"
   ],
   "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js",

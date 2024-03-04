@@ -4,7 +4,7 @@ mod util;
 
 use anyhow::Result;
 use clap::Parser;
-use command::{component, composable};
+use command::{component, composable, Build, Command, Release};
 use inquire::validator::Validation;
 use inquire::{required, Text};
 
@@ -12,19 +12,16 @@ use inquire::{required, Text};
 #[command(name = "manatsu-dev")]
 #[command(version, about, long_about = None)]
 enum Cli {
-  /// Builds all the public packages.
-  Build {
-    /// If present, only the indicated packages will be built.
-    packages: Option<Vec<String>>,
-  },
-  /// Generates a component template.
+  /// Build all the public packages.
+  Build(Build),
+  /// Generate a component template.
   Component,
-  /// Generates a composable template.
+  /// Generate a composable template.
   Composable,
-  /// Synchronizes all README files of the monorepo.
+  /// Synchronize all README files of the monorepo.
   Readme,
-  /// Releases a new version, publishing all the public packages.
-  Release,
+  /// Release a new version, publishing all the public packages.
+  Release(Release),
 }
 
 #[tokio::main]
@@ -32,10 +29,7 @@ async fn main() -> Result<()> {
   let cli = Cli::parse();
 
   match cli {
-    Cli::Build { packages } => match packages {
-      Some(p) if !p.is_empty() => command::build(p).await,
-      _ => command::build(package::PUBLIC_PACKAGES).await,
-    },
+    Cli::Build(cmd) => cmd.execute().await,
     Cli::Component => {
       let validator = |name: &str| {
         if component::is_valid(name) {
@@ -69,6 +63,6 @@ async fn main() -> Result<()> {
       composable::create(name).await
     }
     Cli::Readme => command::readme(),
-    Cli::Release => command::release().await,
+    Cli::Release(cmd) => cmd.execute().await,
   }
 }

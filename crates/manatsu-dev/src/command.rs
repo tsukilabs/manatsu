@@ -4,6 +4,11 @@ pub mod composable;
 mod readme;
 mod release;
 
-pub use build::build;
+use anyhow::Result;
+pub use build::Build;
 pub use readme::readme;
-pub use release::release;
+pub use release::Release;
+
+pub trait Command {
+  async fn execute(self) -> Result<()>;
+}

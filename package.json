@@ -22,6 +22,7 @@
     "lint": "pnpm run \"/^lint:.*/\"",
     "lint:es": "eslint . --config eslint.config.js --cache",
     "lint:style": "stylelint **/*.{scss,vue} --cache",
+    "pedantic": "cargo clippy -- -W clippy::pedantic",
     "prepare": "husky",
     "release": "pnpm run \"/^(test|clippy)$/\" && pnpm run build && mana-dev release",
     "test": "pnpm run \"/^test:.*/\"",
