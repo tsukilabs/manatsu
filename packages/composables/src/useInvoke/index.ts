@@ -8,12 +8,12 @@ interface UseInvokeOptions<Shallow extends boolean = true, Data = unknown> exten
 
 export function useInvoke<Data = unknown, Shallow extends boolean = true>(
   cmd: string,
-  args?: InvokeArgs | null,
+  args: InvokeArgs | null = null,
   options: UseInvokeOptions<Shallow, Data> = {}
 ) {
-  const { initialState, ...asyncStateOptions } = options;
+  const { initialState = null, ...asyncStateOptions } = options;
 
-  const cb = args ? () => invoke<Data>(cmd, args) : () => invoke<Data>(cmd);
+  const cb = invoke<Data>(cmd, args ?? {});
   const state = useAsyncState(cb, initialState, asyncStateOptions);
   return state;
 }
