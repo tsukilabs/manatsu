@@ -154,6 +154,7 @@ defineExpose({ startWidth, endWidth });
     @include flex.y-center;
     flex: 1 0 0;
     justify-content: v-bind('alignment');
+    width: 100%;
   }
 
   &-menu {
