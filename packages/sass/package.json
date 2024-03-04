@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/sass",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "description": "SCSS utilities",
   "license": "MIT",
   "private": false,
