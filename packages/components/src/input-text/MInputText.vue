@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { InputTextProps } from './types';
 
-const value = defineModel<string | null>('value');
+const model = defineModel<string | null>();
 
 defineProps<InputTextProps>();
 </script>
 
 <template>
-  <input v-model="value" type="text" class="m-input" :placeholder="placeholder" />
+  <input v-model="model" type="text" class="m-input" :placeholder="placeholder" />
 </template>
 
 <style lang="scss">

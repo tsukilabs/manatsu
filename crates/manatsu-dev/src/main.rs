@@ -39,7 +39,7 @@ async fn main() -> Result<()> {
         }
       };
 
-      let name = Text::new("Component name")
+      let name = Text::new("component name: ")
         .with_validator(required!("component name is required"))
         .with_validator(validator)
         .prompt()?;
@@ -55,7 +55,7 @@ async fn main() -> Result<()> {
         }
       };
 
-      let name = Text::new("Composable name")
+      let name = Text::new("composable name: ")
         .with_validator(required!("composable name is required"))
         .with_validator(validator)
         .prompt()?;

@@ -26,8 +26,8 @@
     "prepare": "husky",
     "release": "pnpm run \"/^(test|clippy)$/\" && pnpm run build && mana-dev release",
     "test": "pnpm run \"/^test:.*/\"",
-    "test:crates": "cargo test -p manatsu && cargo test -p manatsu-dev",
-    "test:packages": "vitest --run",
+    "test:crate": "cargo test -p manatsu && cargo test -p manatsu-dev",
+    "test:package": "vitest --run",
     "type-check": "pnpm run -r --parallel --aggregate-output type-check",
     "ui": "vitest --ui --watch"
   },

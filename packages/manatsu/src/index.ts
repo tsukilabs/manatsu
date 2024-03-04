@@ -9,6 +9,8 @@ import {
   MInputText,
   MRadio,
   MScaffold,
+  MTable,
+  MTableColumn,
   MToolbar,
   MTopAppbar
 } from '@manatsu/components/src/index.ts';
@@ -27,6 +29,8 @@ declare module 'vue' {
     MInputText: typeof MInputText;
     MRadio: typeof MRadio;
     MScaffold: typeof MScaffold;
+    MTable: typeof MTable;
+    MTableColumn: typeof MTableColumn;
     MToolbar: typeof MToolbar;
     MTopAppbar: typeof MTopAppbar;
   }
@@ -45,6 +49,8 @@ export {
   MInputText,
   MRadio,
   MScaffold,
+  MTable,
+  MTableColumn,
   MToolbar,
   MTopAppbar
 };
@@ -78,6 +84,8 @@ export function registerComponents(app: App) {
   app.component('MInputText', MInputText);
   app.component('MRadio', MRadio);
   app.component('MScaffold', MScaffold);
+  app.component('MTable', MTable);
+  app.component('MTableColumn', MTableColumn);
   app.component('MToolbar', MToolbar);
   app.component('MTopAppbar', MTopAppbar);
 }
