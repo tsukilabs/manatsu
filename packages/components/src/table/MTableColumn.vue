@@ -1,11 +1,11 @@
-<script setup lang="ts" generic="T extends Record<string, unknown>">
+<script setup lang="ts">
 import { defineComponent, inject, onMounted, onUnmounted, triggerRef } from 'vue';
 import { getTableColumnMapKey } from './utils';
 import type { TableColumnProps } from './types';
 
-const props = defineProps<TableColumnProps<T>>();
+const props = defineProps<TableColumnProps>();
 
-const columns = inject(getTableColumnMapKey<T>(), null);
+const columns = inject(getTableColumnMapKey(), null);
 const columnSymbol = Symbol('manatsu-table-column');
 
 const column = defineComponent({
