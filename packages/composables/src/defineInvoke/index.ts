@@ -22,14 +22,14 @@ export interface UseInvokeOptions<D> {
  * @param commands The commands that can be invoked.
  */
 export function defineInvoke<T extends Record<string, string>>(commands: T) {
-  return function <D>(command: keyof T, options?: UseInvokeOptions<D>) {
+  return function <D>(command: keyof T, options: UseInvokeOptions<D>) {
     const {
       args = {},
       immediate = true,
       initial = null,
       resetOnExecute = true,
       shallow = true
-    } = options ?? {};
+    } = options;
 
     const state = shallow ? shallowRef(initial) : ref(initial);
     const isLoading = ref(false);
@@ -40,18 +40,18 @@ export function defineInvoke<T extends Record<string, string>>(commands: T) {
         if (resetOnExecute) state.value = initial;
         state.value = await invoke<D>(commands[command], args);
       } catch (err) {
-        await options?.onError?.(err);
+        await options.onError?.(err);
       } finally {
         isLoading.value = false;
       }
     }
 
     if (immediate) {
-      execute().catch((err) => options?.onError?.(err));
+      execute().catch((err) => options.onError?.(err));
     }
 
     return {
-      state: state as Ref<D | null>,
+      state: state as Ref<D>,
       isLoading: readonly(isLoading),
       execute
     };
