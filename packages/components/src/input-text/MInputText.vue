@@ -7,7 +7,7 @@ defineProps<InputTextProps>();
 </script>
 
 <template>
-  <input v-model="model" type="text" class="m-input" :placeholder="placeholder" />
+  <input v-model="model" type="text" class="m-input" :placeholder />
 </template>
 
 <style lang="scss">

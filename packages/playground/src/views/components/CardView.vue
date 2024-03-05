@@ -8,10 +8,10 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
 <template>
   <div class="flex gap-8">
     <m-card
-      v-for="variant of variants"
-      :key="variant"
-      :variant="variant"
-      :title="capitalize(variant)"
+      v-for="cardVariant of variants"
+      :key="cardVariant"
+      :variant="cardVariant"
+      :title="capitalize(cardVariant)"
       subtitle="subtitle"
       class="w-72"
     >

@@ -80,6 +80,7 @@ function sort(field: unknown) {
       <tbody class="m-table-tbody" :class="tbodyClass" :style="tbodyStyle">
         <tr v-for="row of rows" :key="rowKey(row)" :class="tbodyRowClass" :style="tbodyRowStyle">
           <td v-for="column of columns" :key="column.props.field">
+            <!-- eslint-disable-next-line vue/v-bind-style -->
             <component :is="column.slots.body" v-if="column.slots.body" :row="row" />
             <span v-else>{{ row[column.props.field] }}</span>
           </td>

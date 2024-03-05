@@ -96,7 +96,7 @@ const mediaOrder = computed(() => {
       <template v-else-if="actions">
         <MButton
           v-for="{ key, onClick, ...action } of actions"
-          :key="key"
+          :key
           v-bind="action"
           @click="onClick"
         />

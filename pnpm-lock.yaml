@@ -305,7 +305,7 @@ packages:
     engines: { node: '>=6.0.0' }
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
-      '@jridgewell/trace-mapping': 0.3.24
+      '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
   /@antfu/utils@0.7.7:
@@ -369,7 +369,7 @@ packages:
     dependencies:
       '@babel/types': 7.24.0
       '@jridgewell/gen-mapping': 0.3.5
-      '@jridgewell/trace-mapping': 0.3.24
+      '@jridgewell/trace-mapping': 0.3.25
       jsesc: 2.5.2
     dev: true
 
@@ -1186,7 +1186,7 @@ packages:
     dependencies:
       '@jridgewell/set-array': 1.2.1
       '@jridgewell/sourcemap-codec': 1.4.15
-      '@jridgewell/trace-mapping': 0.3.24
+      '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
   /@jridgewell/resolve-uri@3.1.2:
@@ -1211,10 +1211,10 @@ packages:
         integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
       }
 
-  /@jridgewell/trace-mapping@0.3.24:
+  /@jridgewell/trace-mapping@0.3.25:
     resolution:
       {
-        integrity: sha512-+VaWXDa6+l6MhflBvVXjIEAzb59nQ2JUK3bwRp2zRpPtU+8TFRy9Gg/5oIcNlkEL5PGlBFGfemUVvIgLnTzq7Q==
+        integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==
       }
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
@@ -2048,7 +2048,7 @@ packages:
         optional: true
     dependencies:
       '@vitest/utils': 1.3.1
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       sirv: 2.0.4
       vitest: 1.3.1(@types/node@20.11.24)(@vitest/browser@1.3.1)(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.71.1)
       webdriverio: 8.32.4(typescript@5.3.3)
@@ -2104,7 +2104,7 @@ packages:
         integrity: sha512-EF++BZbt6RZmOlE3SuTPu/NfwBF6q4ABS37HHXzs2LUVPBLx2QoY/K0fKpRChSo8eLiuxcbCVfqKgx/dplCDuQ==
       }
     dependencies:
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       pathe: 1.1.2
       pretty-format: 29.7.0
     dev: true
@@ -2287,7 +2287,7 @@ packages:
       '@vue/compiler-ssr': 3.4.21
       '@vue/shared': 3.4.21
       estree-walker: 2.0.2
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       postcss: 8.4.35
       source-map-js: 1.0.2
 
@@ -2559,7 +2559,7 @@ packages:
       geckodriver: 4.3.3
       get-port: 7.0.0
       import-meta-resolve: 4.0.0
-      locate-app: 2.2.20
+      locate-app: 2.2.21
       safaridriver: 0.1.2
       split2: 4.2.0
       wait-port: 1.1.0
@@ -2839,7 +2839,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001591
+      caniuse-lite: 1.0.30001594
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3001,8 +3001,8 @@ packages:
     engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001591
-      electron-to-chromium: 1.4.690
+      caniuse-lite: 1.0.30001594
+      electron-to-chromium: 1.4.692
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
     dev: true
@@ -3114,10 +3114,10 @@ packages:
     engines: { node: '>=10' }
     dev: true
 
-  /caniuse-lite@1.0.30001591:
+  /caniuse-lite@1.0.30001594:
     resolution:
       {
-        integrity: sha512-PCzRMei/vXjJyL5mJtzNiUCKP59dm8Apqc3PH8gJkMnMXZGox93RbE76jHsmLwmIo6/3nsYIpJtx0O7u5PqFuQ==
+        integrity: sha512-VblSX6nYqyJVs8DKFMldE2IVCJjZ225LW00ydtUWwh5hk9IfkTOffO6r8gJNsH0qqqeAF8KrbMYA2VEwTlGW5g==
       }
     dev: true
 
@@ -3869,10 +3869,10 @@ packages:
       semver: 7.6.0
     dev: true
 
-  /electron-to-chromium@1.4.690:
+  /electron-to-chromium@1.4.692:
     resolution:
       {
-        integrity: sha512-+2OAGjUx68xElQhydpcbqH50hE8Vs2K6TkAeLhICYfndb67CVH0UsZaijmRUE3rHlIxU1u0jxwhgVe6fK3YANA==
+        integrity: sha512-d5rZRka9n2Y3MkWRN74IoAsxR0HK3yaAt7T50e3iT9VZmCCQDT3geXUO5ZRMhDToa1pkCeQXuNo+0g+NfDOVPA==
       }
     dev: true
 
@@ -4422,7 +4422,7 @@ packages:
       }
     engines: { node: '>=16.0.0' }
     dependencies:
-      flat-cache: 4.0.0
+      flat-cache: 4.0.1
     dev: true
 
   /fill-range@7.0.1:
@@ -4468,16 +4468,15 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /flat-cache@4.0.0:
+  /flat-cache@4.0.1:
     resolution:
       {
-        integrity: sha512-EryKbCE/wxpxKniQlyas6PY1I9vwtF3uCBweX+N8KYTCn3Y12RTGtQAJ/bd5pl7kxUAc8v/R3Ake/N17OZiFqA==
+        integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==
       }
     engines: { node: '>=16' }
     dependencies:
       flatted: 3.3.1
       keyv: 4.5.4
-      rimraf: 5.0.5
     dev: true
 
   /flatted@3.3.1:
@@ -5723,13 +5722,13 @@ packages:
       pkg-types: 1.0.3
     dev: true
 
-  /locate-app@2.2.20:
+  /locate-app@2.2.21:
     resolution:
       {
-        integrity: sha512-TOCp8H9l75GhNtd+BgyUnLMNzR+IpYge7cWjxELsyDlqH+MyYWxq+NfyjQ+o6oRAORzOs3IfMM6KAR6q3JNfhg==
+        integrity: sha512-qfrmdm3ilqm6d8bE+KiGDOLvFMQvOMB6Gb/LGYQbW1XEyB9LXhX/gMx35pjCmCrpTzKNjBPhUo1nPCt+I2yVKw==
       }
     dependencies:
-      n12: 1.8.23
+      n12: 1.8.24
       type-fest: 2.13.0
       userhome: 1.0.0
     dev: true
@@ -5891,10 +5890,10 @@ packages:
     engines: { node: '>=12' }
     dev: true
 
-  /magic-string@0.30.7:
+  /magic-string@0.30.8:
     resolution:
       {
-        integrity: sha512-8vBuFF/I/+OSLRmdf2wwFCJCz+nSn0m6DPvGH1fS/KiQoSaR+sETbov0eIk9KhEKy8CYqIkIAnbohxT/4H0kuA==
+        integrity: sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ==
       }
     engines: { node: '>=12' }
     dependencies:
@@ -6164,10 +6163,10 @@ packages:
       thenify-all: 1.6.0
     dev: true
 
-  /n12@1.8.23:
+  /n12@1.8.24:
     resolution:
       {
-        integrity: sha512-kQITb5LlO0Gk8rmbMAkfbmhs+QlXZ5SRHsx6YcG++3yc57iolbiQuo5rsfu3dkB7Qw3jKCqntsZvNNgvdfotkA==
+        integrity: sha512-3km+qUA4l0Idf3Z2u4b7AyN8x6dNZbb5oL6n654Bk7z2rG4IcEPuPQxD8lMkFQxtSLQH/jodKLNYQXOizM+j3w==
       }
     dev: true
 
@@ -7331,17 +7330,6 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rimraf@5.0.5:
-    resolution:
-      {
-        integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==
-      }
-    engines: { node: '>=14' }
-    hasBin: true
-    dependencies:
-      glob: 10.3.10
-    dev: true
-
   /rollup@4.12.0:
     resolution:
       {
@@ -7877,7 +7865,7 @@ packages:
       postcss-scss: 4.0.9(postcss@8.4.35)
       stylelint: 16.2.1(typescript@5.3.3)
       stylelint-config-recommended: 14.0.0(stylelint@16.2.1)
-      stylelint-scss: 6.1.0(stylelint@16.2.1)
+      stylelint-scss: 6.2.0(stylelint@16.2.1)
     dev: true
 
   /stylelint-config-recommended-vue@1.5.0(postcss-html@1.6.0)(stylelint@16.2.1):
@@ -7958,10 +7946,10 @@ packages:
       stylelint-config-recommended: 14.0.0(stylelint@16.2.1)
     dev: true
 
-  /stylelint-scss@6.1.0(stylelint@16.2.1):
+  /stylelint-scss@6.2.0(stylelint@16.2.1):
     resolution:
       {
-        integrity: sha512-kCfK8TQzthGwb4vaZniZgxRsVbCM4ZckmT1b/H5m4FU3I8Dz0id9llKsy1NMp3XXqC8+OPD4rVKtUbSxXlJb5g==
+        integrity: sha512-ktYsWKNN+zh4VlpdNMajYCOREwaPI9xZLVue/H5vX4f4v7Kg+ej9Bj0b7fG41J2UboNujZNU9qi0yM/KK3KhOQ==
       }
     engines: { node: '>=18.12.0' }
     peerDependencies:
@@ -8670,7 +8658,7 @@ packages:
       '@vue/babel-plugin-jsx': 1.2.1(@babel/core@7.24.0)
       '@vue/compiler-dom': 3.4.21
       kolorist: 1.8.0
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
@@ -8758,7 +8746,7 @@ packages:
       execa: 8.0.1
       jsdom: 24.0.0
       local-pkg: 0.5.0
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       pathe: 1.1.2
       picocolors: 1.0.0
       std-env: 3.7.0

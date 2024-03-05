@@ -38,7 +38,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
 
 <template>
   <m-scaffold
-    :sidebar-items="sidebarItems"
+    :sidebar-items
     sidebar-item-class="flex items-center justify-center"
     :sidebar-item-style="{ width: `${topBarRef?.startWidth ?? 0}px` }"
   >
@@ -46,13 +46,14 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
       <m-top-appbar
         ref="topBarRef"
         content-alignment="end"
-        :menu-items="menuItems"
+        :menu-items
         :height="60"
         logo="/peach.png"
         title="Manatsu"
         title-link="/"
       >
         <template #menu-item="{ label, to }">
+          <!-- eslint-disable-next-line vue/v-bind-style -->
           <m-dynamic-link :to="to">{{ label }}</m-dynamic-link>
         </template>
 
@@ -75,6 +76,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     </template>
 
     <template #sidebar-item="{ to, label }">
+      <!-- eslint-disable-next-line vue/v-bind-style -->
       <m-dynamic-link :to="to">
         <span>{{ label }}</span>
       </m-dynamic-link>

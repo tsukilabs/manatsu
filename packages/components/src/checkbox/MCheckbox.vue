@@ -20,10 +20,10 @@ defineSlots<{ default?: () => VNode }>();
       type="checkbox"
       :class="inputClass"
       :style="inputStyle"
-      :disabled="disabled"
-      :value="value"
-      :true-value="trueValue"
-      :false-value="falseValue"
+      :disabled
+      :value
+      :true-value
+      :false-value
     />
     <span v-if="label || $slots.default" class="m-checkbox-label">
       <slot>{{ label }}</slot>

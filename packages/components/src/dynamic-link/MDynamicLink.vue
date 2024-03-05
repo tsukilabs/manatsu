@@ -28,7 +28,7 @@ defineExpose({ isExternalLink });
     <slot></slot>
   </a>
 
-  <RouterLink v-else :to="to">
+  <RouterLink v-else :to>
     <slot></slot>
   </RouterLink>
 </template>
