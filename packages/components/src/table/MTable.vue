@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T extends TableRow">
 import { toPixel } from '@tb-dev/utils';
+import { whenever } from '@vueuse/core';
 import { symbols } from '@manatsu/shared';
 import { computed, inject, isRef, provide, shallowRef } from 'vue';
 import { columnMapKey } from './symbols';
@@ -9,6 +10,7 @@ const rows = defineModel<T[]>({ required: true });
 
 const props = withDefaults(defineProps<TableProps<T>>(), {
   scrollable: true,
+  sortOrder: 'asc',
   striped: true,
   tableLayout: 'fixed'
 });
@@ -41,6 +43,22 @@ const columnMap = shallowRef<TableColumnMap>(new Map());
 provide(columnMapKey, columnMap);
 
 const columns = computed(() => Array.from(columnMap.value.values()));
+
+whenever(() => props.sortField, sort, { immediate: true, once: true });
+
+function sort(field: unknown) {
+  if (typeof field !== 'string') return;
+  rows.value.sort((a, b) => {
+    const first = (props.sortOrder === 'asc' ? a : b)[field];
+    const second = (props.sortOrder === 'asc' ? b : a)[field];
+
+    if (typeof first === 'number' && typeof second === 'number') {
+      return first - second;
+    }
+
+    return String(first).localeCompare(String(second));
+  });
+}
 </script>
 
 <template>

@@ -16,6 +16,10 @@ export interface TableProps<T extends TableRow> {
   maxHeight?: string | number;
   rowKey: (row: T) => string | number;
   scrollable?: boolean;
+  /** Field used to sort the table by default. */
+  sortField?: keyof T;
+  /** Order to sort the table by default. */
+  sortOrder?: 'asc' | 'desc';
   striped?: boolean;
   tableClass?: string;
   tableLayout?: 'auto' | 'fixed';
