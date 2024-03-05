@@ -4,11 +4,9 @@ import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
 import { symbols } from 'manatsu/src/index.ts';
 import { inject, shallowRef, watchEffect } from 'vue';
-import { Command } from '@manatsu/tauri-plugin/src/index.ts';
-import { useInvoke } from '@manatsu/composables/src/index.ts';
 import type { SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
-import { StorageKey } from './enum';
 import { components } from './routes';
+import { StorageKey, useInvoke } from './utils';
 
 const route = useRoute();
 const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
@@ -33,7 +31,7 @@ const sidebarItems: SidebarItem[] = components.map((component) => {
   };
 });
 
-const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexColor);
+const { state: color, execute: getColor } = useInvoke<string>('RandomHexColor');
 </script>
 
 <template>
@@ -97,3 +95,4 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
     </template>
   </m-scaffold>
 </template>
+./utils

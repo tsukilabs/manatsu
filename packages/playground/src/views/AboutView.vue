@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useInvoke } from '@manatsu/composables/src/index.ts';
+import { useInvoke } from '../utils';
 
 const { state: copyright } = useInvoke<string>('copyright');
 </script>

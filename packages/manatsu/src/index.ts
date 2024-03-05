@@ -38,8 +38,9 @@ declare module 'vue' {
 
 export { createManatsu } from './plugin';
 
-export { useInvoke } from '@manatsu/composables/src/index.ts';
 export { type MaybeNullishRef, isDarkMode, symbols } from '@manatsu/shared';
+
+export { defineInvoke, useElementSize } from '@manatsu/composables/src/index.ts';
 
 export {
   MButton,
