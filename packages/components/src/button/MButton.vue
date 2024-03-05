@@ -14,7 +14,7 @@ const classList = computed(() => {
 </script>
 
 <template>
-  <button type="button" :class="classList" :disabled="disabled">
+  <button type="button" :class="classList" :disabled>
     <slot>{{ label }}</slot>
   </button>
 </template>
