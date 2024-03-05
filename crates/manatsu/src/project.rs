@@ -257,7 +257,6 @@ fn build_globset() -> GlobSet {
 
   // Files
   add!("**/LICENSE");
-  add!("**/README.md");
   add!("**/pnpm-lock.yaml");
   add!("**/*.lock");
   add!("**/*.log");
