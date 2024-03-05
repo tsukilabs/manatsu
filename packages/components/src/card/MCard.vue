@@ -94,9 +94,10 @@ const mediaOrder = computed(() => {
     <div v-if="hasFooter" class="m-card-footer" :class="footerClass" :style="footerStyle">
       <slot v-if="$slots.footer" name="footer"></slot>
       <template v-else-if="actions">
+        <!-- https://github.com/tsukilabs/manatsu/issues/113#issuecomment-1979046526 -->
         <MButton
-          v-for="{ key, onClick, ...action } of actions"
-          :key
+          v-for="{ key: actionKey, onClick, ...action } of actions"
+          :key="actionKey"
           v-bind="action"
           @click="onClick"
         />

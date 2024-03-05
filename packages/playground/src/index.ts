@@ -4,7 +4,7 @@ import { createApp } from 'vue';
 import { createManatsu, registerComponents } from 'manatsu/src/index.ts';
 import App from './App.vue';
 import { router } from './routes';
-import { StorageKey } from './enum';
+import { StorageKey } from './utils';
 
 const app = createApp(App);
 const manatsu = createManatsu({ darkMode: true });
