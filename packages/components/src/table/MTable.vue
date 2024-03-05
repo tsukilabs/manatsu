@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   scrollable: true,
   sortOrder: 'asc',
   striped: true,
-  tableLayout: 'fixed'
+  tableLayout: 'auto'
 });
 
 const containerClassList = computed(() => {
