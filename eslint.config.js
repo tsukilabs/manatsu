@@ -13,18 +13,13 @@ export default config({
     'packages/tauri-plugin/tsconfig.json'
   ],
   overrides: {
+    typescript: {
+      '@typescript-eslint/no-explicit-any': 'off'
+    },
     vue: {
       'vue/block-lang': [
         'error',
-        {
-          script: {
-            lang: 'ts'
-          },
-          style: {
-            lang: 'scss',
-            allowNoLang: false
-          }
-        }
+        { script: { lang: 'ts' }, style: { lang: 'scss', allowNoLang: false } }
       ],
       'vue/enforce-style-attribute': ['error', { allow: ['plain'] }]
     }

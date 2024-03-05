@@ -1,6 +1,6 @@
 import { usePreferredDark } from '@vueuse/core';
 import { type App, type Plugin, inject, ref, watchEffect } from 'vue';
-import { type DarkMode, darkModeKey, isDarkMode, setDarkMode } from '@manatsu/shared';
+import { type DarkMode, isDarkMode, setDarkMode, symbols } from '@manatsu/shared';
 
 interface ManatsuOptions {
   /** @default 'auto' */
@@ -31,13 +31,13 @@ function generateGlobalProps(this: App): ManatsuGlobal {
     isDarkMode,
     setDarkMode: (darkMode) => {
       this.runWithContext(() => {
-        const darkModeRef = inject(darkModeKey);
+        const darkModeRef = inject(symbols.darkMode);
         if (darkModeRef) darkModeRef.value = darkMode;
       });
     },
     toggleDarkMode: () => {
       this.runWithContext(() => {
-        const darkMode = inject(darkModeKey);
+        const darkMode = inject(symbols.darkMode);
         if (darkMode) darkMode.value = !darkMode.value;
       });
     }
@@ -48,7 +48,7 @@ function generateGlobalProps(this: App): ManatsuGlobal {
 
 function provideDarkMode(app: App, initial: DarkMode) {
   const darkModeRef = ref(initial);
-  app.provide(darkModeKey, darkModeRef);
+  app.provide(symbols.darkMode, darkModeRef);
 
   const preferredDark = usePreferredDark();
   watchEffect(() => {

@@ -9,6 +9,8 @@ import {
   MInputText,
   MRadio,
   MScaffold,
+  MTable,
+  MTableColumn,
   MToolbar,
   MTopAppbar
 } from '@manatsu/components/src/index.ts';
@@ -27,6 +29,8 @@ declare module 'vue' {
     MInputText: typeof MInputText;
     MRadio: typeof MRadio;
     MScaffold: typeof MScaffold;
+    MTable: typeof MTable;
+    MTableColumn: typeof MTableColumn;
     MToolbar: typeof MToolbar;
     MTopAppbar: typeof MTopAppbar;
   }
@@ -34,7 +38,8 @@ declare module 'vue' {
 
 export { createManatsu } from './plugin';
 
-export { type MaybeNullishRef, isDarkMode } from '@manatsu/shared';
+export { useInvoke } from '@manatsu/composables/src/index.ts';
+export { type MaybeNullishRef, isDarkMode, symbols } from '@manatsu/shared';
 
 export {
   MButton,
@@ -45,6 +50,8 @@ export {
   MInputText,
   MRadio,
   MScaffold,
+  MTable,
+  MTableColumn,
   MToolbar,
   MTopAppbar
 };
@@ -55,15 +62,6 @@ export type {
   SidebarItem,
   TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
-
-export {
-  useDarkMode,
-  useHeight,
-  useInvoke,
-  usePixelHeight,
-  usePixelWidth,
-  useWidth
-} from '@manatsu/composables/src/index.ts';
 
 /**
  * Globally registers all components.
@@ -78,6 +76,8 @@ export function registerComponents(app: App) {
   app.component('MInputText', MInputText);
   app.component('MRadio', MRadio);
   app.component('MScaffold', MScaffold);
+  app.component('MTable', MTable);
+  app.component('MTableColumn', MTableColumn);
   app.component('MToolbar', MToolbar);
   app.component('MTopAppbar', MTopAppbar);
 }

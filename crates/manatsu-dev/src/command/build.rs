@@ -37,6 +37,10 @@ impl super::Command for Build {
       bail!("{}", "nothing to build".red());
     }
 
+    if packages.len() == 1 && packages[0] == "shared" {
+      return Ok(());
+    }
+
     for package in &packages {
       let package = package.as_str();
 

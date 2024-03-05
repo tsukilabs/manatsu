@@ -2,9 +2,10 @@
 import { useRoute } from 'vue-router';
 import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
-import { ref, shallowRef, watchEffect } from 'vue';
+import { symbols } from 'manatsu/src/index.ts';
+import { inject, shallowRef, watchEffect } from 'vue';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
-import { useDarkMode, useInvoke } from '@manatsu/composables/src/index.ts';
+import { useInvoke } from '@manatsu/composables/src/index.ts';
 import type { SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
 import { StorageKey } from './enum';
 import { components } from './routes';
@@ -13,11 +14,10 @@ const route = useRoute();
 const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
 watchEffect(() => (lastRoute.value = route.path));
 
-const darkMode = useDarkMode();
+const darkMode = inject(symbols.darkMode);
 
 type TopBar = typeof import('@manatsu/components/src/appbar/index.ts').MTopAppbar;
 const topBarRef = shallowRef<InstanceType<TopBar> | null>(null);
-const topBarHeight = ref(60);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
@@ -47,7 +47,7 @@ const { state: color, execute: getColor } = useInvoke<string>(Command.RandomHexC
         ref="topBarRef"
         content-alignment="end"
         :menu-items="menuItems"
-        :height="topBarHeight"
+        :height="60"
         logo="/peach.png"
         title="Manatsu"
         title-link="/"

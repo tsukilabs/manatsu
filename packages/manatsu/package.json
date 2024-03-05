@@ -1,6 +1,6 @@
 {
   "name": "manatsu",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "description": "Vue component library for Tauri apps",
   "license": "MIT",
   "private": false,
@@ -51,11 +51,11 @@
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
     "@tb-dev/utility-types": "^1.2.0",
-    "@tb-dev/utils": "^1.2.9"
+    "@tb-dev/utils": "^1.3.1"
   },
   "devDependencies": {
     "@manatsu/sass": "workspace:*",
-    "vite": "^5.1.4"
+    "vite": "^5.1.5"
   },
   "peerDependencies": {
     "@tauri-apps/api": "^1.5.3",
