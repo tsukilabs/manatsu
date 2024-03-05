@@ -48,4 +48,3 @@ onUnmounted(() => {
 <template>
   <empty-component />
 </template>
-./symbols

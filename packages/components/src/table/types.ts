@@ -10,14 +10,12 @@ export interface TableColumn {
 
 export type TableColumnMap = Map<symbol, TableColumn>;
 
-export type TableRow = Record<string, unknown>;
-
-export interface TableProps<T extends TableRow> {
+export interface TableProps {
   maxHeight?: string | number;
-  rowKey: (row: T) => string | number;
+  rowKey: (row: any) => string | number;
   scrollable?: boolean;
   /** Field used to sort the table by default. */
-  sortField?: keyof T;
+  sortField?: string;
   /** Order to sort the table by default. */
   sortOrder?: 'asc' | 'desc';
   striped?: boolean;

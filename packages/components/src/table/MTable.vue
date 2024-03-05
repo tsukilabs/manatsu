@@ -1,14 +1,14 @@
-<script setup lang="ts" generic="T extends TableRow">
+<script setup lang="ts">
 import { toPixel } from '@tb-dev/utils';
 import { whenever } from '@vueuse/core';
 import { symbols } from '@manatsu/shared';
 import { computed, inject, isRef, provide, shallowRef } from 'vue';
 import { columnMapKey } from './symbols';
-import type { TableColumnMap, TableProps, TableRow } from './types';
+import type { TableColumnMap, TableProps } from './types';
 
-const rows = defineModel<T[]>({ required: true });
+const rows = defineModel<any[]>({ required: true });
 
-const props = withDefaults(defineProps<TableProps<T>>(), {
+const props = withDefaults(defineProps<TableProps>(), {
   scrollable: true,
   sortOrder: 'asc',
   striped: true,
