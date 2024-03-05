@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { usePixelHeight, usePixelWidth } from '@manatsu/composables/src/index.ts';
-import { type MaybeRefOrGetter, type VNode, computed, shallowRef, toRef } from 'vue';
+import { symbols } from '@manatsu/shared';
+import { useElementSize } from '@manatsu/composables/src/index.ts';
+import { type MaybeRefOrGetter, type VNode, computed, provide, shallowRef, toRef } from 'vue';
 import type { ScaffoldProps, SidebarItem } from './types';
 
 const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
@@ -19,19 +20,28 @@ const slots = defineSlots<{
 }>();
 
 const topRef = shallowRef<HTMLElement | null>(null);
-const topHeight = usePixelHeight(topRef);
-const topBorder = useBorder(() => props.topBorder);
+const { height: topHeight } = useElementSize(topRef);
+provide(symbols.scaffoldTopHeight, topHeight);
 
 const sidebarRef = shallowRef<HTMLElement | null>(null);
-const sidebarWidth = usePixelWidth(sidebarRef);
+const { width: sidebarWidth } = useElementSize(sidebarRef);
+provide(symbols.scaffoldSidebarWidth, sidebarWidth);
 
 const bottomRef = shallowRef<HTMLElement | null>(null);
-const bottomHeight = usePixelHeight(bottomRef);
-const bottomBorder = useBorder(() => props.bottomBorder);
+const { height: bottomHeight } = useElementSize(bottomRef);
+provide(symbols.scaffoldBottomHeight, bottomHeight);
 
-const contentHeight = computed(() => {
-  return `calc(100% - (${topHeight.value} + ${bottomHeight.value}))`;
+const contentRef = shallowRef<HTMLElement | null>(null);
+const { height: contentHeight } = useElementSize(contentRef);
+provide(symbols.scaffoldContentHeight, contentHeight);
+
+const contentHeightStyle = computed(() => {
+  return `calc(100% - (${topHeight.value}px + ${bottomHeight.value}px))`;
 });
+
+// Border
+const topBorder = useBorder(() => props.topBorder);
+const bottomBorder = useBorder(() => props.bottomBorder);
 
 function useBorder(border: MaybeRefOrGetter<string | boolean>) {
   const borderRef = toRef(border);
@@ -41,6 +51,8 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
     return props.defaultBorder;
   });
 }
+
+defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
 </script>
 
 <template>
@@ -49,7 +61,7 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
       <slot name="top"></slot>
     </div>
 
-    <div class="m-scaffold-content">
+    <div ref="contentRef" class="m-scaffold-content">
       <aside
         v-if="sidebarItems && sidebarItems.length > 0"
         ref="sidebarRef"
@@ -90,13 +102,11 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 <style lang="scss">
 @use '@manatsu/sass/flex';
 
-$z-index: 100;
-
 /** This is applied to the top and bottom bars. */
 @mixin outside {
   position: fixed;
   left: 0;
-  z-index: $z-index;
+  z-index: 200;
   background-color: var(--m-color-surface);
   width: 100%;
   overflow: hidden;
@@ -116,15 +126,15 @@ $z-index: 100;
 
   &-content {
     position: relative;
-    top: v-bind('topHeight');
-    height: v-bind('contentHeight');
+    top: v-bind('`${topHeight}px`');
+    height: v-bind('contentHeightStyle');
   }
 
   &-sidebar {
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: $z-index;
+    z-index: 200;
     background-color: var(--m-color-surface);
     padding: 1rem;
     overflow-x: hidden;
@@ -139,9 +149,9 @@ $z-index: 100;
   &-content-slot {
     position: absolute;
     inset: 0;
-    left: v-bind('sidebarWidth');
+    left: v-bind('`${sidebarWidth}px`');
     background-color: var(--m-color-surface);
-    padding: 1rem;
+    padding: var(--m-scaffold-content-padding);
     overflow-x: hidden;
   }
 

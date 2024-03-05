@@ -38,7 +38,8 @@ declare module 'vue' {
 
 export { createManatsu } from './plugin';
 
-export { type MaybeNullishRef, isDarkMode } from '@manatsu/shared';
+export { useInvoke } from '@manatsu/composables/src/index.ts';
+export { type MaybeNullishRef, isDarkMode, symbols } from '@manatsu/shared';
 
 export {
   MButton,
@@ -61,15 +62,6 @@ export type {
   SidebarItem,
   TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
-
-export {
-  useDarkMode,
-  useHeight,
-  useInvoke,
-  usePixelHeight,
-  usePixelWidth,
-  useWidth
-} from '@manatsu/composables/src/index.ts';
 
 /**
  * Globally registers all components.

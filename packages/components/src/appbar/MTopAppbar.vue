@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { toPixel } from '@tb-dev/utils';
 import { type VNode, computed, shallowRef } from 'vue';
-import { useToPixel, useWidth } from '@manatsu/composables/src/index.ts';
+import { useElementSize } from '@manatsu/composables/src/index.ts';
 import MDynamicLink from '../dynamic-link/MDynamicLink.vue';
 import type { TopAppbarMenuItem, TopAppbarProps } from './types';
 
@@ -15,12 +16,12 @@ const slots = defineSlots<{
   content?: () => VNode;
   end?: () => VNode;
   logo?: () => VNode;
-  'menu-item'?: (props: TopAppbarMenuItem) => VNode;
+  'menu-item'?: (slotProps: TopAppbarMenuItem) => VNode;
   start?: () => VNode;
   title?: () => VNode;
 }>();
 
-const height = useToPixel(() => props.height);
+const appbarHeight = computed(() => toPixel(props.height));
 
 const hasLogo = computed(() => Boolean(props.logo ?? slots.logo));
 const hasTitle = computed(() => Boolean(props.title ?? slots.title));
@@ -41,10 +42,10 @@ const alignment = computed(() => {
 });
 
 const startRef = shallowRef<HTMLElement | null>(null);
-const startWidth = useWidth(startRef);
+const { width: startWidth } = useElementSize(startRef);
 
 const endRef = shallowRef<HTMLElement | null>(null);
-const endWidth = useWidth(endRef);
+const { width: endWidth } = useElementSize(endRef);
 
 defineExpose({ startWidth, endWidth });
 </script>
@@ -119,7 +120,7 @@ defineExpose({ startWidth, endWidth });
   gap: 1.5rem;
   padding: 0 1rem;
   width: 100%;
-  height: v-bind('height');
+  height: v-bind('appbarHeight');
   overflow: hidden;
   white-space: nowrap;
 

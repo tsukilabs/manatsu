@@ -20,17 +20,17 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@tb-dev/utils':
-        specifier: ^1.2.9
-        version: 1.2.9
+        specifier: ^1.3.1
+        version: 1.3.1
       '@types/node':
         specifier: ^20.11.24
         version: 20.11.24
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
-        version: 5.0.4(vite@5.1.4)(vue@3.4.21)
+        version: 5.0.4(vite@5.1.5)(vue@3.4.21)
       '@vitest/browser':
         specifier: ^1.3.1
-        version: 1.3.1(vitest@1.3.1)(webdriverio@8.32.3)
+        version: 1.3.1(vitest@1.3.1)(webdriverio@8.32.4)
       '@vitest/coverage-istanbul':
         specifier: ^1.3.1
         version: 1.3.1(vitest@1.3.1)
@@ -89,14 +89,14 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
       vite-plugin-dts:
         specifier: ^3.7.3
-        version: 3.7.3(@types/node@20.11.24)(typescript@5.3.3)(vite@5.1.4)
+        version: 3.7.3(@types/node@20.11.24)(typescript@5.3.3)(vite@5.1.5)
       vite-plugin-vue-devtools:
         specifier: ^7.0.16
-        version: 7.0.16(vite@5.1.4)(vue@3.4.21)
+        version: 7.0.16(vite@5.1.5)(vue@3.4.21)
       vitest:
         specifier: ^1.3.1
         version: 1.3.1(@types/node@20.11.24)(@vitest/browser@1.3.1)(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.71.1)
@@ -107,11 +107,11 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(vue@3.4.21)
       vue-tsc:
-        specifier: ^2.0.3
-        version: 2.0.3(typescript@5.3.3)
+        specifier: ^2.0.4
+        version: 2.0.4(typescript@5.3.3)
       webdriverio:
-        specifier: ^8.32.3
-        version: 8.32.3(typescript@5.3.3)
+        specifier: ^8.32.4
+        version: 8.32.4(typescript@5.3.3)
 
   packages/components:
     dependencies:
@@ -128,8 +128,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@tb-dev/utils':
-        specifier: ^1.2.9
-        version: 1.2.9
+        specifier: ^1.3.1
+        version: 1.3.1
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -144,8 +144,8 @@ importers:
         specifier: workspace:*
         version: link:../sass
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
 
   packages/composables:
     dependencies:
@@ -159,8 +159,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@tb-dev/utils':
-        specifier: ^1.2.9
-        version: 1.2.9
+        specifier: ^1.3.1
+        version: 1.3.1
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -172,8 +172,8 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
 
   packages/manatsu:
     dependencies:
@@ -193,8 +193,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@tb-dev/utils':
-        specifier: ^1.2.9
-        version: 1.2.9
+        specifier: ^1.3.1
+        version: 1.3.1
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -209,8 +209,8 @@ importers:
         specifier: workspace:*
         version: link:../sass
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
 
   packages/playground:
     dependencies:
@@ -243,8 +243,8 @@ importers:
         specifier: ^3.4.1
         version: 3.4.1
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
 
   packages/sass:
     dependencies:
@@ -258,8 +258,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@tb-dev/utils':
-        specifier: ^1.2.9
-        version: 1.2.9
+        specifier: ^1.3.1
+        version: 1.3.1
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -271,14 +271,14 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
 
   packages/tauri-plugin:
     devDependencies:
       vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
 
 packages:
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -1660,10 +1660,10 @@ packages:
         integrity: sha512-7U9O43uPnYNQvI/I9JtVV6iP/jvJe93w2kZ9bg/y2Dqqm2sapFHoT7TNPFs+/YdnE4YrdlxS0osDoxGK7AUqyw==
       }
 
-  /@tb-dev/utils@1.2.9:
+  /@tb-dev/utils@1.3.1:
     resolution:
       {
-        integrity: sha512-ekDejNDGVRY3WUb6/D55zBTs6TNFiwnrcx3jqeCZh7uyK+QwMgJRuTp3MvwmKmKU0d2aZR+03XYexTcSCUvboA==
+        integrity: sha512-Exn66jl6IIUm2DPOStI/+R4srhDov3MoHalctOahkUzuAbUFNwKSkI9Eh0dX10/wx6rfOMSj8J9up8xmbkTzOA==
       }
     dependencies:
       '@tb-dev/utility-types': 1.2.0
@@ -2015,7 +2015,7 @@ packages:
       }
     dev: true
 
-  /@vitejs/plugin-vue@5.0.4(vite@5.1.4)(vue@3.4.21):
+  /@vitejs/plugin-vue@5.0.4(vite@5.1.5)(vue@3.4.21):
     resolution:
       {
         integrity: sha512-WS3hevEszI6CEVEx28F8RjTX97k3KsrcY6kvTg7+Whm5y3oYvcqzVeGCU3hxSAn4uY2CLCkeokkGKpoctccilQ==
@@ -2025,11 +2025,11 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
       vue: 3.4.21(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.3.1(vitest@1.3.1)(webdriverio@8.32.3):
+  /@vitest/browser@1.3.1(vitest@1.3.1)(webdriverio@8.32.4):
     resolution:
       {
         integrity: sha512-pRof8G8nqRWwg3ouyIctyhfIVk5jXgF056uF//sqdi37+pVtDz9kBI/RMu0xlc8tgCyJ2aEMfbgJZPUydlEVaQ==
@@ -2051,7 +2051,7 @@ packages:
       magic-string: 0.30.7
       sirv: 2.0.4
       vitest: 1.3.1(@types/node@20.11.24)(@vitest/browser@1.3.1)(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.71.1)
-      webdriverio: 8.32.3(typescript@5.3.3)
+      webdriverio: 8.32.4(typescript@5.3.3)
     dev: true
 
   /@vitest/coverage-istanbul@1.3.1(vitest@1.3.1):
@@ -2306,7 +2306,7 @@ packages:
         integrity: sha512-LgPscpE3Vs0x96PzSSB4IGVSZXZBZHpfxs+ZA1d+VEPwHdOXowy/Y2CsvCAIFrf+ssVU1pD1jidj505EpUnfbA==
       }
 
-  /@vue/devtools-core@7.0.16(vite@5.1.4)(vue@3.4.21):
+  /@vue/devtools-core@7.0.16(vite@5.1.5)(vue@3.4.21):
     resolution:
       {
         integrity: sha512-GGHZSvQcVyBYzkBOOBwA+xKtG2DCA7InFxjbaTfUERRDPFWFOOBdf1xe1FtiZRkU+vHnF8NqKnz+78HpnzD02w==
@@ -2317,7 +2317,7 @@ packages:
       mitt: 3.0.1
       nanoid: 3.3.7
       pathe: 1.1.2
-      vite-hot-client: 0.2.3(vite@5.1.4)
+      vite-hot-client: 0.2.3(vite@5.1.5)
     transitivePeerDependencies:
       - vite
       - vue
@@ -2371,10 +2371,10 @@ packages:
       vue-template-compiler: 2.7.16
     dev: true
 
-  /@vue/language-core@2.0.3(typescript@5.3.3):
+  /@vue/language-core@2.0.4(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-hnVF/Q3cD2v+EFD4pD1YdITGBcdM38P18SYqilVQDezKw5RobWny4BwIckWGS1fJmUstsO9mTX30ZOyzyR2Q+Q==
+        integrity: sha512-IYlVEICXKRWYjRQ4JyPlXhydU/p0C7uY5LpqXyJzzJHWo44LWHZtTP3USfWNQif3VAK5QZpdZKQ5HYIeQL3BJQ==
       }
     peerDependencies:
       typescript: '*'
@@ -2485,16 +2485,16 @@ packages:
       - '@vue/composition-api'
       - vue
 
-  /@wdio/config@8.32.3:
+  /@wdio/config@8.32.4:
     resolution:
       {
-        integrity: sha512-hZkaz5Fd8830uniQvRgPus8yp9rp50MAsHa5kZ2Jt8y++Rp330FyJpQZE5oPjTATuz35G5Anprk2Q3fmFd0Ifw==
+        integrity: sha512-bXgvDdkD7OWvH9dtl59hh77DQYWIqqJbosEaaTdXT3I2TRNn1gA3VkzgEUB7wy3x0wXV/uefn4hgkDHdAhRTlw==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
       '@wdio/logger': 8.28.0
-      '@wdio/types': 8.32.2
-      '@wdio/utils': 8.32.3
+      '@wdio/types': 8.32.4
+      '@wdio/utils': 8.32.4
       decamelize: 6.0.0
       deepmerge-ts: 5.1.0
       glob: 10.3.10
@@ -2533,26 +2533,26 @@ packages:
       '@types/node': 20.11.24
     dev: true
 
-  /@wdio/types@8.32.2:
+  /@wdio/types@8.32.4:
     resolution:
       {
-        integrity: sha512-jq8LcBBQpBP9ZF5kECKEpXv8hN7irCGCjLFAN0Bd5ScRR6qu6MGWvwkDkau2sFPr0b++sKDCEaMzQlwrGFjZXg==
+        integrity: sha512-pDPGcCvq0MQF8u0sjw9m4aMI2gAKn6vphyBB2+1IxYriL777gbbxd7WQ+PygMBvYVprCYIkLPvhUFwF85WakmA==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
       '@types/node': 20.11.24
     dev: true
 
-  /@wdio/utils@8.32.3:
+  /@wdio/utils@8.32.4:
     resolution:
       {
-        integrity: sha512-UnR9rPpR1W9U5wz2TU+6BQ2rlxtuK/e3fvdaiWIMZKleB/OCcEQFGiGPAGGVi4ShfaTPwz6hK1cTTgj1OtMXkg==
+        integrity: sha512-5GO8RF/q+/JmmO0+3jphialn0CzsSW1PhCUBfk6a5VMkvyUmbbe7ad+6HQergug38apPH/4EuENwOOwUIzUQHQ==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
       '@puppeteer/browsers': 1.9.1
       '@wdio/logger': 8.28.0
-      '@wdio/types': 8.32.2
+      '@wdio/types': 8.32.4
       decamelize: 6.0.0
       deepmerge-ts: 5.1.0
       edgedriver: 5.3.10
@@ -3724,10 +3724,10 @@ packages:
       }
     dev: true
 
-  /devtools-protocol@0.0.1262051:
+  /devtools-protocol@0.0.1263784:
     resolution:
       {
-        integrity: sha512-YJe4CT5SA8on3Spa+UDtNhEqtuV6Epwz3OZ4HQVLhlRccpZ9/PAYk0/cy/oKxFKRrZPBUPyxympQci4yWNWZ9g==
+        integrity: sha512-k0SCZMwj587w4F8QYbP5iIbSonL6sd3q8aVJch036r9Tv2t9b5/Oq7AiJ/FJvRuORm/pJNXZtrdNNWlpRnl56A==
       }
     dev: true
 
@@ -8540,7 +8540,7 @@ packages:
     engines: { node: '>= 0.10' }
     dev: true
 
-  /vite-hot-client@0.2.3(vite@5.1.4):
+  /vite-hot-client@0.2.3(vite@5.1.5):
     resolution:
       {
         integrity: sha512-rOGAV7rUlUHX89fP2p2v0A2WWvV3QMX2UYq0fRqsWSvFvev4atHWqjwGoKaZT1VTKyLGk533ecu3eyd0o59CAg==
@@ -8548,7 +8548,7 @@ packages:
     peerDependencies:
       vite: ^2.6.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
     dev: true
 
   /vite-node@1.3.1(@types/node@20.11.24)(sass@1.71.1):
@@ -8563,7 +8563,7 @@ packages:
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -8575,7 +8575,7 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-dts@3.7.3(@types/node@20.11.24)(typescript@5.3.3)(vite@5.1.4):
+  /vite-plugin-dts@3.7.3(@types/node@20.11.24)(typescript@5.3.3)(vite@5.1.5):
     resolution:
       {
         integrity: sha512-26eTlBYdpjRLWCsTJebM8vkCieE+p9gP3raf+ecDnzzK5E3FG6VE1wcy55OkRpfWWVlVvKkYFe6uvRHYWx7Nog==
@@ -8594,7 +8594,7 @@ packages:
       debug: 4.3.4
       kolorist: 1.8.0
       typescript: 5.3.3
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
       vue-tsc: 1.8.27(typescript@5.3.3)
     transitivePeerDependencies:
       - '@types/node'
@@ -8602,7 +8602,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-inspect@0.8.3(vite@5.1.4):
+  /vite-plugin-inspect@0.8.3(vite@5.1.5):
     resolution:
       {
         integrity: sha512-SBVzOIdP/kwe6hjkt7LSW4D0+REqqe58AumcnCfRNw4Kt3mbS9pEBkch+nupu2PBxv2tQi69EQHQ1ZA1vgB/Og==
@@ -8624,13 +8624,13 @@ packages:
       perfect-debounce: 1.0.0
       picocolors: 1.0.0
       sirv: 2.0.4
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
     dev: true
 
-  /vite-plugin-vue-devtools@7.0.16(vite@5.1.4)(vue@3.4.21):
+  /vite-plugin-vue-devtools@7.0.16(vite@5.1.5)(vue@3.4.21):
     resolution:
       {
         integrity: sha512-M7TPQhTGlz33TdHkZRSwe4ZfA+aAsy3vlvnOqxVtPCj9aEtaqhgKgbQidImAMd6BgTgSwZ/ga/iHWhwABDrdNQ==
@@ -8639,14 +8639,14 @@ packages:
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0-0 || ^5.0.0-0
     dependencies:
-      '@vue/devtools-core': 7.0.16(vite@5.1.4)(vue@3.4.21)
+      '@vue/devtools-core': 7.0.16(vite@5.1.5)(vue@3.4.21)
       '@vue/devtools-kit': 7.0.16(vue@3.4.21)
       '@vue/devtools-shared': 7.0.16
       execa: 8.0.1
       sirv: 2.0.4
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
-      vite-plugin-inspect: 0.8.3(vite@5.1.4)
-      vite-plugin-vue-inspector: 4.0.2(vite@5.1.4)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
+      vite-plugin-inspect: 0.8.3(vite@5.1.5)
+      vite-plugin-vue-inspector: 4.0.2(vite@5.1.5)
     transitivePeerDependencies:
       - '@nuxt/kit'
       - rollup
@@ -8654,7 +8654,7 @@ packages:
       - vue
     dev: true
 
-  /vite-plugin-vue-inspector@4.0.2(vite@5.1.4):
+  /vite-plugin-vue-inspector@4.0.2(vite@5.1.5):
     resolution:
       {
         integrity: sha512-KPvLEuafPG13T7JJuQbSm5PwSxKFnVS965+MP1we2xGw9BPkkc/+LPix5MMWenpKWqtjr0ws8THrR+KuoDC8hg==
@@ -8671,15 +8671,15 @@ packages:
       '@vue/compiler-dom': 3.4.21
       kolorist: 1.8.0
       magic-string: 0.30.7
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite@5.1.4(@types/node@20.11.24)(sass@1.71.1):
+  /vite@5.1.5(@types/node@20.11.24)(sass@1.71.1):
     resolution:
       {
-        integrity: sha512-n+MPqzq+d9nMVTKyewqw6kSt+R3CkvF9QAKY8obiQn8g1fwTscKxyfaYnC632HtBXAQGc1Yjomphwn1dtwGAHg==
+        integrity: sha512-BdN1xh0Of/oQafhU+FvopafUp6WaYenLU/NFoL5WyJL++GxkNfieKzBhM24H3HVsPQrlAqB7iJYTHabzaRed5Q==
       }
     engines: { node: ^18.0.0 || >=20.0.0 }
     hasBin: true
@@ -8745,7 +8745,7 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.24
-      '@vitest/browser': 1.3.1(vitest@1.3.1)(webdriverio@8.32.3)
+      '@vitest/browser': 1.3.1(vitest@1.3.1)(webdriverio@8.32.4)
       '@vitest/expect': 1.3.1
       '@vitest/runner': 1.3.1
       '@vitest/snapshot': 1.3.1
@@ -8765,7 +8765,7 @@ packages:
       strip-literal: 2.0.0
       tinybench: 2.6.0
       tinypool: 0.8.2
-      vite: 5.1.4(@types/node@20.11.24)(sass@1.71.1)
+      vite: 5.1.5(@types/node@20.11.24)(sass@1.71.1)
       vite-node: 1.3.1(@types/node@20.11.24)(sass@1.71.1)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
@@ -8859,17 +8859,17 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /vue-tsc@2.0.3(typescript@5.3.3):
+  /vue-tsc@2.0.4(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-aMJqbgLiKDAwAglWqMoGf1Ez6Wwqhlk2MDxEjFGziiLW0A+tHOWE1+YQJZQ1Vm6zaENPA2KJAubFhaR988UvGg==
+        integrity: sha512-FJk+F1QhqROr6DK8raTuWk5ezNw1/kZ+7TYhc08k+cpvb1fmi7wguPZHX0svIhT4bAxCGDtF8534It8fiAkScg==
       }
     hasBin: true
     peerDependencies:
       typescript: '*'
     dependencies:
       '@volar/typescript': 2.1.0
-      '@vue/language-core': 2.0.3(typescript@5.3.3)
+      '@vue/language-core': 2.0.4(typescript@5.3.3)
       semver: 7.6.0
       typescript: 5.3.3
     dev: true
@@ -8925,20 +8925,20 @@ packages:
     engines: { node: '>= 8' }
     dev: true
 
-  /webdriver@8.32.3:
+  /webdriver@8.32.4:
     resolution:
       {
-        integrity: sha512-1/kpZvuftt59oikHs+6FvWXNfOM5tgMMMAk3LnMe7D938dVOoNGAe46fq0oL/xsxxPicbMRTRgIy1OifLiglaA==
+        integrity: sha512-4J3ddiW6JJMm0bSdpqcsD/ek+HI+qLWOx/0Hwf+ecfj+Lf+CyKBmv5u8vdjZcLq9pUllhFSZWeiBpnxbU3hqzA==
       }
     engines: { node: ^16.13 || >=18 }
     dependencies:
       '@types/node': 20.11.24
       '@types/ws': 8.5.10
-      '@wdio/config': 8.32.3
+      '@wdio/config': 8.32.4
       '@wdio/logger': 8.28.0
       '@wdio/protocols': 8.32.0
-      '@wdio/types': 8.32.2
-      '@wdio/utils': 8.32.3
+      '@wdio/types': 8.32.4
+      '@wdio/utils': 8.32.4
       deepmerge-ts: 5.1.0
       got: 12.6.1
       ky: 0.33.3
@@ -8949,10 +8949,10 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webdriverio@8.32.3(typescript@5.3.3):
+  /webdriverio@8.32.4(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-SupbQKMtUZHSH7lmF5xaJPgxsn8sIBNAjs1CyPI33u30eY9VcVQ4CJQ818ZS3FLxR0q2XdWk9lsQNyhZwlN3RA==
+        integrity: sha512-w9LCyLFEgGtp23/xN/hmYd1FFlXCRnZeH0BhHcDAiDNttIXTQ7Wcl2kSrb92JyJMZxhq33sL3zoMys9AMYTWxw==
       }
     engines: { node: ^16.13 || >=18 }
     peerDependencies:
@@ -8962,17 +8962,17 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.24
-      '@wdio/config': 8.32.3
+      '@wdio/config': 8.32.4
       '@wdio/logger': 8.28.0
       '@wdio/protocols': 8.32.0
       '@wdio/repl': 8.24.12
-      '@wdio/types': 8.32.2
-      '@wdio/utils': 8.32.3
+      '@wdio/types': 8.32.4
+      '@wdio/utils': 8.32.4
       archiver: 6.0.2
       aria-query: 5.3.0
       css-shorthand-properties: 1.1.1
       css-value: 0.0.1
-      devtools-protocol: 0.0.1262051
+      devtools-protocol: 0.0.1263784
       grapheme-splitter: 1.0.4
       import-meta-resolve: 4.0.0
       is-plain-obj: 4.1.0
@@ -8984,7 +8984,7 @@ packages:
       resq: 1.11.0
       rgb2hex: 0.2.5
       serialize-error: 11.0.3
-      webdriver: 8.32.3
+      webdriver: 8.32.4
     transitivePeerDependencies:
       - bufferutil
       - encoding

@@ -1,48 +1,116 @@
-<script setup lang="ts" generic="T extends Record<string, unknown>">
-import { computed, provide, shallowRef } from 'vue';
-import type { TableProps } from './types';
-import { type TableColumnMap, getTableColumnMapKey } from './utils';
+<script setup lang="ts" generic="T extends TableRow">
+import { toPixel } from '@tb-dev/utils';
+import { symbols } from '@manatsu/shared';
+import { computed, inject, isRef, provide, shallowRef } from 'vue';
+import { columnMapKey } from './symbols';
+import type { TableColumnMap, TableProps, TableRow } from './types';
 
 const rows = defineModel<T[]>({ required: true });
 
-defineProps<TableProps<T>>();
+const props = withDefaults(defineProps<TableProps<T>>(), {
+  scrollable: true,
+  striped: true,
+  tableLayout: 'fixed'
+});
 
-const columnMap = shallowRef<TableColumnMap<T>>(new Map());
-provide(getTableColumnMapKey<T>(), columnMap);
+const containerClassList = computed(() => {
+  const classes = ['m-table-container'];
+  if (props.scrollable) classes.push('m-table-container-scrollable');
+  return classes;
+});
+
+const tableClassList = computed(() => {
+  const classes = ['m-table'];
+  if (props.striped) classes.push('m-table-striped');
+  if (props.tableClass) classes.push(props.tableClass);
+  return classes;
+});
+
+const scaffoldContentHeight = inject(symbols.scaffoldContentHeight);
+const tableMaxHeight = computed(() => {
+  if (props.maxHeight) return toPixel(props.maxHeight);
+  if (isRef(scaffoldContentHeight)) {
+    const height = toPixel(scaffoldContentHeight.value);
+    return `calc(${height} - (var(--m-scaffold-content-padding) * 2))`;
+  }
+
+  return 'auto';
+});
+
+const columnMap = shallowRef<TableColumnMap>(new Map());
+provide(columnMapKey, columnMap);
 
 const columns = computed(() => Array.from(columnMap.value.values()));
 </script>
 
 <template>
-  <table class="m-table">
-    <thead>
-      <tr>
-        <th v-for="column of columns" :key="column.field">
-          {{ column.name }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="row of rows" :key="rowKey(row)">
-        <td v-for="column of columns" :key="column.field">
-          {{ row[column.field] }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div :class="containerClassList">
+    <table :class="tableClassList" :style="tableStyle">
+      <thead class="m-table-thead" :class="theadClass" :style="theadStyle">
+        <tr :class="theadRowClass" :style="theadRowStyle">
+          <th v-for="column of columns" :key="column.props.field">
+            <component
+              :is="column.slots.header"
+              v-if="column.slots.header"
+              :column="column.props"
+            />
+            <span v-else>{{ column.props.name }}</span>
+          </th>
+        </tr>
+      </thead>
 
-  <slot></slot>
+      <tbody class="m-table-tbody" :class="tbodyClass" :style="tbodyStyle">
+        <tr v-for="row of rows" :key="rowKey(row)" :class="tbodyRowClass" :style="tbodyRowStyle">
+          <td v-for="column of columns" :key="column.props.field">
+            <component :is="column.slots.body" v-if="column.slots.body" :row="row" />
+            <span v-else>{{ row[column.props.field] }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <slot></slot>
+  </div>
 </template>
 
 <style lang="scss">
-.m-table {
-  border-collapse: collapse;
+.m-table-container {
   width: 100%;
+  overflow-y: auto;
+}
 
-  th {
-    border-bottom: 1px solid #ddd;
+.m-table-container-scrollable {
+  max-height: v-bind('tableMaxHeight');
+
+  & thead {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.m-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  table-layout: v-bind('tableLayout');
+
+  &-thead {
+    background-color: var(--m-color-surface-container-highest);
+  }
+
+  &-thead th {
+    border-bottom: 1px solid var(--m-color-outline-variant);
     padding: 8px;
     text-align: left;
+  }
+
+  &-tbody td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  &-striped tr:nth-child(odd) {
+    background-color: var(--m-color-surface-container);
   }
 }
 </style>

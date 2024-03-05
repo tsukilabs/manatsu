@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type VNode, computed, shallowRef } from 'vue';
-import { useWidth } from '@manatsu/composables/src/index.ts';
+import { useElementSize } from '@manatsu/composables/src/index.ts';
 import type { ToolbarProps } from './types';
 
 const props = withDefaults(defineProps<ToolbarProps>(), {
@@ -21,13 +21,13 @@ const classList = computed(() => {
 });
 
 const startRef = shallowRef<HTMLElement | null>(null);
-const startWidth = useWidth(startRef);
+const { width: startWidth } = useElementSize(startRef);
 
 const centerRef = shallowRef<HTMLElement | null>(null);
-const centerWidth = useWidth(centerRef);
+const { width: centerWidth } = useElementSize(centerRef);
 
 const endRef = shallowRef<HTMLElement | null>(null);
-const endWidth = useWidth(endRef);
+const { width: endWidth } = useElementSize(endRef);
 
 defineExpose({ startWidth, centerWidth, endWidth });
 </script>

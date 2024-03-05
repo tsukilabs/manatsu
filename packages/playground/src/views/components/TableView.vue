@@ -31,6 +31,15 @@ function generateRows(amount: number) {
     <m-table-column field="id" name="ID" />
     <m-table-column field="name" name="Name" />
     <m-table-column field="age" name="Age" />
-    <m-table-column field="email" name="Email" />
+
+    <m-table-column field="email" name="Email">
+      <template #header="{ column }">
+        <span>{{ column.name }}</span>
+      </template>
+
+      <template #body="{ row }: { row: Row }">
+        <a href="example.com">{{ row.email }}</a>
+      </template>
+    </m-table-column>
   </m-table>
 </template>

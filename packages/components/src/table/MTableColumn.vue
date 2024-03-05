@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { defineComponent, inject, onMounted, onUnmounted, triggerRef } from 'vue';
-import { getTableColumnMapKey } from './utils';
-import type { TableColumnProps } from './types';
+import { type VNode, defineComponent, inject, onMounted, onUnmounted, triggerRef } from 'vue';
+import { columnMapKey } from './symbols';
+import type { TableColumn, TableColumnProps } from './types';
 
 const props = defineProps<TableColumnProps>();
 
-const columns = inject(getTableColumnMapKey(), null);
-const columnSymbol = Symbol('manatsu-table-column');
+const slots = defineSlots<{
+  body?: (slotProps: { row: any }) => VNode;
+  header?: (slotProps: { column: TableColumnProps }) => VNode;
+}>();
 
-const column = defineComponent({
+const columns = inject(columnMapKey, null);
+const columnSymbol = Symbol('m-table-column');
+
+const emptyComponent = defineComponent({
   render() {
     return null;
   }
@@ -16,11 +21,18 @@ const column = defineComponent({
 
 onMounted(() => {
   if (columns) {
-    columns.value.set(columnSymbol, {
-      field: props.field,
-      name: props.name
-    });
+    const column: TableColumn = {
+      props: {
+        field: props.field,
+        name: props.name
+      },
+      slots: {
+        body: slots.body,
+        header: slots.header
+      }
+    };
 
+    columns.value.set(columnSymbol, column);
     triggerRef(columns);
   }
 });
@@ -34,5 +46,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <column />
+  <empty-component />
 </template>
+./symbols
