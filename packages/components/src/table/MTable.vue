@@ -127,7 +127,7 @@ function sort(field: unknown) {
     text-align: left;
   }
 
-  &-striped tr:nth-child(odd) {
+  &-striped tr:nth-child(even) {
     background-color: var(--m-color-surface-container);
   }
 }
