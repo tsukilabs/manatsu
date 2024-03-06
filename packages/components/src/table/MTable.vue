@@ -4,6 +4,7 @@ import { whenever } from '@vueuse/core';
 import { symbols } from '@manatsu/shared';
 import { computed, inject, isRef, provide, shallowRef } from 'vue';
 import { columnMapKey } from './symbols';
+import { intoNestedValue } from './utils';
 import type { TableColumnMap, TableProps } from './types';
 
 const rows = defineModel<any[]>({ required: true });
@@ -49,8 +50,8 @@ whenever(() => props.sortField, sort, { immediate: true, once: true });
 function sort(field: unknown) {
   if (typeof field !== 'string') return;
   rows.value.sort((a, b) => {
-    const first = (props.sortOrder === 'asc' ? a : b)[field];
-    const second = (props.sortOrder === 'asc' ? b : a)[field];
+    const first = intoNestedValue(props.sortOrder === 'asc' ? a : b, field);
+    const second = intoNestedValue(props.sortOrder === 'asc' ? b : a, field);
 
     if (typeof first === 'number' && typeof second === 'number') {
       return first - second;
@@ -82,7 +83,7 @@ function sort(field: unknown) {
           <td v-for="column of columns" :key="column.props.field">
             <!-- eslint-disable-next-line vue/v-bind-style -->
             <component :is="column.slots.body" v-if="column.slots.body" :row="row" />
-            <span v-else>{{ row[column.props.field] }}</span>
+            <span v-else>{{ intoNestedValue(row, column.props.field) }}</span>
           </td>
         </tr>
       </tbody>

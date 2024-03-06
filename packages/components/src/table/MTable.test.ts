@@ -2,6 +2,7 @@ import { nextTick } from 'vue';
 import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
 import MTable from './MTable.vue';
+import { intoNestedValue } from './utils';
 import MTableColumn from './MTableColumn.vue';
 import MScaffold from '../scaffold/MScaffold.vue';
 
@@ -135,6 +136,46 @@ describe('table', () => {
         expect(tdElements[cellIndex].find('.custom-cell').text()).toBe(
           String((row as any)[column.field])
         );
+      }
+    }
+  });
+
+  it('should render table rows with nested fields', async () => {
+    const nestedColumns = [
+      { field: 'name', name: 'Name' },
+      { field: 'info.age', name: 'Age' },
+      { field: 'info.country', name: 'Country' }
+    ];
+
+    const nestedRows = [
+      { name: 'John', info: { age: 30, country: 'Japan' } },
+      { name: 'Jane', info: { age: 25, country: 'Spain' } },
+      { name: 'Joe', info: { age: 35, country: 'Brazil' } }
+    ];
+
+    const wrapper = mount({
+      components: { MScaffold, MTable, MTableColumn },
+      template: `
+        <m-scaffold>
+          <m-table v-model="rows" :row-key="(row) => row.name">
+            <m-table-column v-for="c in columns" :key="c.field" :field="c.field" :name="c.name" />
+          </m-table>
+        </m-scaffold>
+      `,
+      data() {
+        return { columns: nestedColumns, rows: nestedRows };
+      }
+    });
+
+    await nextTick();
+
+    const tdElements = wrapper.findAll('td');
+    expect(tdElements).toHaveLength(nestedColumns.length * nestedRows.length);
+
+    for (const [rowIndex, row] of nestedRows.entries()) {
+      for (const [columnIndex, column] of nestedColumns.entries()) {
+        const cellIndex = rowIndex * nestedColumns.length + columnIndex;
+        expect(tdElements[cellIndex].text()).toBe(String(intoNestedValue(row, column.field)));
       }
     }
   });
