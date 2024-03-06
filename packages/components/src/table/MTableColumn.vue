@@ -23,7 +23,11 @@ onMounted(() => {
   if (columns) {
     const column: TableColumn = {
       props: {
+        bodyClass: props.bodyClass,
+        bodyStyle: props.bodyStyle,
         field: props.field,
+        headerClass: props.headerClass,
+        headerStyle: props.headerStyle,
         name: props.name
       },
       slots: {

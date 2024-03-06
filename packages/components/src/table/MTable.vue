@@ -2,7 +2,7 @@
 import { toPixel } from '@tb-dev/utils';
 import { whenever } from '@vueuse/core';
 import { symbols } from '@manatsu/shared';
-import { computed, inject, isRef, provide, shallowRef } from 'vue';
+import { computed, inject, isRef, onUnmounted, provide, shallowRef } from 'vue';
 import { columnMapKey } from './symbols';
 import { intoNestedValue } from './utils';
 import type { TableColumnMap, TableProps } from './types';
@@ -60,6 +60,10 @@ function sort(field: unknown) {
     return String(first).localeCompare(String(second));
   });
 }
+
+onUnmounted(() => {
+  columnMap.value.clear();
+});
 </script>
 
 <template>
@@ -67,7 +71,12 @@ function sort(field: unknown) {
     <table :class="tableClassList" :style="tableStyle">
       <thead class="m-table-thead" :class="theadClass" :style="theadStyle">
         <tr :class="theadRowClass" :style="theadRowStyle">
-          <th v-for="column of columns" :key="column.props.field">
+          <th
+            v-for="column of columns"
+            :key="column.props.field"
+            :class="column.props.headerClass"
+            :style="column.props.headerStyle"
+          >
             <component
               :is="column.slots.header"
               v-if="column.slots.header"
@@ -80,7 +89,12 @@ function sort(field: unknown) {
 
       <tbody class="m-table-tbody" :class="tbodyClass" :style="tbodyStyle">
         <tr v-for="row of rows" :key="rowKey(row)" :class="tbodyRowClass" :style="tbodyRowStyle">
-          <td v-for="column of columns" :key="column.props.field">
+          <td
+            v-for="column of columns"
+            :key="column.props.field"
+            :class="column.props.bodyClass"
+            :style="column.props.bodyStyle"
+          >
             <!-- eslint-disable-next-line vue/v-bind-style -->
             <component :is="column.slots.body" v-if="column.slots.body" :row="row" />
             <span v-else>{{ intoNestedValue(row, column.props.field) }}</span>

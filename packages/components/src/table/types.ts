@@ -33,6 +33,10 @@ export interface TableProps {
 }
 
 export interface TableColumnProps {
+  bodyClass?: string;
+  bodyStyle?: StyleValue;
   field: string;
+  headerClass?: string;
+  headerStyle?: StyleValue;
   name: string;
 }
