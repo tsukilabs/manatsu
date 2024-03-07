@@ -14,13 +14,13 @@ const dtsOptions = {
     });
 
     if (!dts) {
-      throw new Error('Could not find index.d.ts file.');
+      throw new Error('could not find index.d.ts file.');
     }
 
     let [filePath, content] = dts;
 
     // https://regex101.com/r/LomJCS
-    const packageRegex = /@manatsu\/([a-z]+)\/src\/index\.ts/gm;
+    const packageRegex = /@manatsu\/([a-z-]+)\/src\/index\.ts/gm;
     content = content.replace(packageRegex, './$1');
 
     content = await prettier.format(content, {
@@ -64,7 +64,8 @@ export default defineConfig({
         chunkFileNames: '[name].js',
         manualChunks: {
           components: ['@manatsu/components/src/index.ts'],
-          composables: ['@manatsu/composables/src/index.ts']
+          composables: ['@manatsu/composables/src/index.ts'],
+          'vue-plugin': ['@manatsu/vue-plugin/src/index.ts']
         }
       }
     }

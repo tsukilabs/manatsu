@@ -1,7 +1,5 @@
-use crate::package::Package;
 use crate::prelude::*;
 use crate::util::Config;
-use colored::Colorize;
 use miho::git::{self, Commit, Git};
 use reqwest::{header, Client};
 use std::process::Stdio;

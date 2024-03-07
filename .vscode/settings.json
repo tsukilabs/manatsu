@@ -12,7 +12,7 @@
     },
     {
       "icon": "plugin",
-      "extensions": ["tauri-plugin", "tauri-plugin-manatsu"],
+      "extensions": ["tauri-plugin", "tauri-plugin-manatsu", "vue-plugin"],
       "format": "svg"
     },
     {
@@ -52,7 +52,8 @@
     "playground",
     "cli",
     "cli-dev",
-    "plugin"
+    "tauri-plugin",
+    "vue-plugin"
   ],
   "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js",
   "tailwindCSS.classAttributes": [

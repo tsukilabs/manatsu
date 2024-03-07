@@ -1,10 +1,12 @@
 import './style/main.scss';
 import type { App } from 'vue';
+import type { ManatsuGlobal } from '@manatsu/vue-plugin/src/index.ts';
 import {
   MButton,
   MCard,
   MCheckbox,
   MDialog,
+  MDynamicDialog,
   MDynamicLink,
   MInputText,
   MRadio,
@@ -16,15 +18,16 @@ import {
 } from '@manatsu/components/src/index.ts';
 
 declare module 'vue' {
-  interface ComponentCustomProperties {
-    $mana: import('./plugin').ManatsuGlobal;
+  export interface ComponentCustomProperties {
+    readonly $mana: ManatsuGlobal;
   }
 
-  interface GlobalComponents {
+  export interface GlobalComponents {
     MButton: typeof MButton;
     MCard: typeof MCard;
     MCheckbox: typeof MCheckbox;
     MDialog: typeof MDialog;
+    MDynamicDialog: typeof MDynamicDialog;
     MDynamicLink: typeof MDynamicLink;
     MInputText: typeof MInputText;
     MRadio: typeof MRadio;
@@ -36,9 +39,9 @@ declare module 'vue' {
   }
 }
 
-export { createManatsu } from './plugin';
+export { type MaybeNullishRef, symbols } from '@manatsu/shared';
 
-export { type MaybeNullishRef, isDarkMode, symbols } from '@manatsu/shared';
+export { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 
 export { defineInvoke, useElementSize } from '@manatsu/composables/src/index.ts';
 
@@ -47,6 +50,7 @@ export {
   MCard,
   MCheckbox,
   MDialog,
+  MDynamicDialog,
   MDynamicLink,
   MInputText,
   MRadio,
@@ -73,6 +77,7 @@ export function registerComponents(app: App) {
   app.component('MCard', MCard);
   app.component('MCheckbox', MCheckbox);
   app.component('MDialog', MDialog);
+  app.component('MDynamicDialog', MDynamicDialog);
   app.component('MDynamicLink', MDynamicLink);
   app.component('MInputText', MInputText);
   app.component('MRadio', MRadio);

@@ -134,7 +134,7 @@ importers:
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
       vue:
-        specifier: ^3.4.20
+        specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.2)
       vue-router:
         specifier: ^4.3.0
@@ -165,7 +165,7 @@ importers:
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
       vue:
-        specifier: ^3.4.20
+        specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.2)
       vue-router:
         specifier: ^4.3.0
@@ -186,6 +186,9 @@ importers:
       '@manatsu/shared':
         specifier: workspace:*
         version: link:../shared
+      '@manatsu/vue-plugin':
+        specifier: workspace:*
+        version: link:../vue-plugin
       '@tauri-apps/api':
         specifier: ^1.5.3
         version: 1.5.3
@@ -199,7 +202,7 @@ importers:
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
       vue:
-        specifier: ^3.4.20
+        specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.2)
       vue-router:
         specifier: ^4.3.0
@@ -264,7 +267,7 @@ importers:
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
       vue:
-        specifier: ^3.4.20
+        specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.2)
       vue-router:
         specifier: ^4.3.0
@@ -275,6 +278,25 @@ importers:
         version: 5.1.5(@types/node@20.11.25)(sass@1.71.1)
 
   packages/tauri-plugin:
+    devDependencies:
+      vite:
+        specifier: ^5.1.5
+        version: 5.1.5(@types/node@20.11.25)(sass@1.71.1)
+
+  packages/vue-plugin:
+    dependencies:
+      '@manatsu/shared':
+        specifier: workspace:*
+        version: link:../shared
+      '@tb-dev/utils':
+        specifier: ^1.3.1
+        version: 1.3.1
+      '@vueuse/core':
+        specifier: ^10.9.0
+        version: 10.9.0(vue@3.4.21)
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.21(typescript@5.4.2)
     devDependencies:
       vite:
         specifier: ^5.1.5

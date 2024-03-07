@@ -1,14 +1,7 @@
 use crate::prelude::*;
-use colored::Colorize;
-use convert_case::{Case, Casing};
-use globset::Glob;
-use regex::Regex;
 use std::collections::HashSet;
 use std::{env, fs};
 use walkdir::WalkDir;
-
-/// <https://regex101.com/r/mdP6Q7>
-const CLASS_REGEX: &str = r#":class="([a-zA-Z]+Class)"#;
 
 /// Collect all non-standard class attributes used by Manatsu.
 pub fn tailwind() -> Result<()> {
@@ -21,9 +14,11 @@ pub fn tailwind() -> Result<()> {
     .filter_map(std::result::Result::ok)
     .filter(|e| glob.is_match(e.path()));
 
+  // https://regex101.com/r/mdP6Q7
+  const CLASS_REGEX: &str = r#":class="([a-zA-Z]+Class)"#;
   let regex = Regex::new(CLASS_REGEX)?;
-  let mut classes = HashSet::new();
 
+  let mut classes = HashSet::new();
   println!("{}", "collecting class attributes...".bright_cyan());
 
   for file in files {
