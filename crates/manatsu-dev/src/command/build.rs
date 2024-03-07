@@ -63,7 +63,7 @@ impl super::Command for Build {
 }
 
 fn should_build(package: &str) -> bool {
-  if Package::is_private(&package) {
+  if Package::is_private(package) {
     return false;
   }
 
