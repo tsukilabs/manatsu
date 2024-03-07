@@ -2,7 +2,7 @@ use crate::package::Package;
 use crate::prelude::*;
 use crate::util::Config;
 use colored::Colorize;
-use miho::git::{Commit, Git, Status};
+use miho::git::{self, Commit, Git};
 use reqwest::{header, Client};
 use std::process::Stdio;
 
@@ -18,7 +18,7 @@ pub struct Release {
 impl super::Command for Release {
   /// Release a new version, publishing all the public packages.
   async fn execute(self) -> Result<()> {
-    if let Ok(true) = Status::is_dirty().await {
+    if let Ok(true) = git::is_dirty().await {
       bail!("{}", "working directory is dirty".red());
     }
 
@@ -94,7 +94,7 @@ async fn create_github_release(github_token: &str) -> Result<()> {
 }
 
 async fn commit_if_dirty(message: &str) -> Result<()> {
-  if let Ok(true) = Status::is_dirty().await {
+  if let Ok(true) = git::is_dirty().await {
     Commit::new(message)
       .no_verify()
       .stderr(Stdio::null())
