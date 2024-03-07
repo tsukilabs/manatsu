@@ -37,7 +37,7 @@ colored = "2.1.0"
 convert_case = "0.6.0"
 globset = "0.4.14"
 inquire = "0.7.0"
-miho = "4.1.6"
+miho = "4.2.0"
 regex = "1.10.3"
 walkdir = "2.5.0"
 
