@@ -23,10 +23,9 @@ fn transform<C: AsRef<str>>(css: C) -> String {
   let mut dark_colors = String::from("\n\n[class~=manatsu-dark] {\n");
 
   macro_rules! push {
-    ($vec:expr, $val:expr) => {
-      $vec.push_str($val);
-      $vec.push('\n');
-      continue;
+    ($string:expr, $slice:expr) => {
+      $string.push_str($slice);
+      $string.push('\n');
     };
   }
 
@@ -39,6 +38,7 @@ fn transform<C: AsRef<str>>(css: C) -> String {
   'lines: for line in css.lines() {
     if !line.contains("--md") {
       push!(result, line);
+      continue;
     }
 
     for s in &skip {
@@ -52,11 +52,13 @@ fn transform<C: AsRef<str>>(css: C) -> String {
       if line.contains("-light") {
         let line = line.replace("-light", "");
         push!(result, &line);
+        continue;
       }
 
       if line.contains("-dark") && !line.contains("fixed") {
         let line = line.replace("-dark", "");
         push!(dark_colors, &line);
+        continue;
       }
     }
   }

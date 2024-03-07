@@ -15,12 +15,8 @@ defineExpose({ isExternalLink });
 </script>
 
 <template>
-  <span v-if="!to">
-    <slot></slot>
-  </span>
-
   <a
-    v-else-if="typeof to === 'string' && isExternalLink"
+    v-if="typeof to === 'string' && isExternalLink"
     :href="to"
     target="_blank"
     rel="noopener noreferrer"
@@ -28,7 +24,7 @@ defineExpose({ isExternalLink });
     <slot></slot>
   </a>
 
-  <RouterLink v-else :to>
+  <component :is="to ? RouterLink : 'span'" v-else :to>
     <slot></slot>
-  </RouterLink>
+  </component>
 </template>

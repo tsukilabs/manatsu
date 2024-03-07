@@ -7,12 +7,11 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
 
 <template>
   <div class="flex gap-8">
-    <!-- https://github.com/tsukilabs/manatsu/issues/113#issuecomment-1979046526 -->
     <m-card
-      v-for="cardVariant of variants"
-      :key="cardVariant"
-      :variant="cardVariant"
-      :title="capitalize(cardVariant)"
+      v-for="variant of variants"
+      :key="variant"
+      :variant
+      :title="capitalize(variant)"
       subtitle="subtitle"
       class="w-72"
     >

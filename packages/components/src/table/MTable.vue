@@ -95,8 +95,7 @@ onUnmounted(() => {
             :class="column.props.bodyClass"
             :style="column.props.bodyStyle"
           >
-            <!-- eslint-disable-next-line vue/v-bind-style -->
-            <component :is="column.slots.body" v-if="column.slots.body" :row="row" />
+            <component :is="column.slots.body" v-if="column.slots.body" :row />
             <span v-else>{{ intoNestedValue(row, column.props.field) }}</span>
           </td>
         </tr>
