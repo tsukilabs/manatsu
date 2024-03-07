@@ -69,7 +69,7 @@ onUnmounted(() => {
 <template>
   <div :class="containerClassList">
     <table :class="tableClassList" :style="tableStyle">
-      <thead class="m-table-thead" :class="theadClass" :style="theadStyle">
+      <thead class="m-table-head" :class="theadClass" :style="theadStyle">
         <tr :class="theadRowClass" :style="theadRowStyle">
           <th
             v-for="column of columns"
@@ -87,7 +87,7 @@ onUnmounted(() => {
         </tr>
       </thead>
 
-      <tbody class="m-table-tbody" :class="tbodyClass" :style="tbodyStyle">
+      <tbody class="m-table-body" :class="tbodyClass" :style="tbodyStyle">
         <tr v-for="row of rows" :key="rowKey(row)" :class="tbodyRowClass" :style="tbodyRowStyle">
           <td
             v-for="column of columns"
@@ -128,17 +128,17 @@ onUnmounted(() => {
   width: 100%;
   table-layout: v-bind('tableLayout');
 
-  &-thead {
+  &-head {
     background-color: var(--m-color-surface-container-highest);
   }
 
-  &-thead th {
+  &-head th {
     border-bottom: 1px solid var(--m-color-outline-variant);
     padding: 8px;
     text-align: left;
   }
 
-  &-tbody td {
+  &-body td {
     padding: 8px;
     text-align: left;
   }

@@ -1,11 +1,10 @@
 use anyhow::{bail, Result};
-use clap::Args;
 use convert_case::{Case, Casing};
 use manatsu::theme;
 use std::path::PathBuf;
 use std::{env, fs};
 
-#[derive(Debug, Args)]
+#[derive(Debug, clap::Args)]
 pub struct Theme {
   /// Theme name.
   name: String,

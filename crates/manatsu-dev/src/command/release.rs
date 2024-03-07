@@ -1,13 +1,12 @@
 use crate::package::Package;
+use crate::prelude::*;
 use crate::util::Config;
-use anyhow::{bail, Result};
-use clap::Args;
-use manatsu::{cargo, pnpm};
+use colored::Colorize;
 use miho::git::{Commit, Git, Status};
 use reqwest::{header, Client};
 use std::process::Stdio;
 
-#[derive(Debug, Args)]
+#[derive(Debug, clap::Args)]
 pub struct Release {
   #[arg(long)]
   only_crate: bool,
@@ -17,21 +16,20 @@ pub struct Release {
 }
 
 impl super::Command for Release {
-  /// Releases a new version, publishing all the public packages.
-  ///
-  /// It is not necessary to synchronize the README files before
-  /// calling this function, as it will already do that.
+  /// Release a new version, publishing all the public packages.
   async fn execute(self) -> Result<()> {
-    super::readme()?;
-
     if let Ok(true) = Status::is_dirty().await {
-      Commit::new("chore: sync readme files")
-        .no_verify()
-        .stderr(Stdio::null())
-        .stdout(Stdio::null())
-        .spawn()
-        .await?;
+      bail!("{}", "working directory is dirty".red());
     }
+
+    super::readme()?;
+    commit_if_dirty("chore: sync readme files").await?;
+
+    super::tailwind()?;
+    commit_if_dirty("chore: update tailwind classes").await?;
+
+    pnpm!("run", "format").spawn()?.wait().await?;
+    commit_if_dirty("style: format files").await?;
 
     match Config::read().ok() {
       Some(cfg) if cfg.github => {
@@ -65,10 +63,9 @@ async fn create_github_release(github_token: &str) -> Result<()> {
   let package = Package::read_root()?;
   let client = Client::builder().build()?;
 
-  let base_url = "https://api.github.com";
   let owner_repo = "tsukilabs/manatsu";
-  let endpoint = format!("{base_url}/repos/{owner_repo}/releases");
-  let github_token = format!("Bearer {github_token}");
+  let endpoint = format!("https://api.github.com/repos/{owner_repo}/releases");
+  let auth = format!("Bearer {github_token}");
 
   let body = serde_json::json!({
     "tag_name": format!("v{}", package.version),
@@ -80,9 +77,9 @@ async fn create_github_release(github_token: &str) -> Result<()> {
 
   let response = client
     .post(&endpoint)
-    .header(header::AUTHORIZATION, &github_token)
     .header(header::ACCEPT, "application/vnd.github+json")
-    .header(header::USER_AGENT, "tsukilabs/manatsu")
+    .header(header::AUTHORIZATION, &auth)
+    .header(header::USER_AGENT, owner_repo)
     .header("X-GitHub-Api-Version", "2022-11-28")
     .json(&body)
     .send()
@@ -91,6 +88,19 @@ async fn create_github_release(github_token: &str) -> Result<()> {
   if !response.status().is_success() {
     let message = response.text().await?;
     bail!("failed to create a GitHub release:\n{message}");
+  }
+
+  Ok(())
+}
+
+async fn commit_if_dirty(message: &str) -> Result<()> {
+  if let Ok(true) = Status::is_dirty().await {
+    Commit::new(message)
+      .no_verify()
+      .stderr(Stdio::null())
+      .stdout(Stdio::null())
+      .spawn()
+      .await?;
   }
 
   Ok(())

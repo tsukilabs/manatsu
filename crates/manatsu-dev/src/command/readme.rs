@@ -1,7 +1,5 @@
-use crate::package;
-use anyhow::Result;
+use crate::prelude::*;
 use colored::Colorize;
-use std::time::Instant;
 use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.

@@ -14,4 +14,5 @@ cargo install manatsu tauri-cli
 git clone https://github.com/tsukilabs/manatsu.git
 cd manatsu
 pnpm install
+pnpm run install-dev
 ```

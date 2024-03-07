@@ -1,12 +1,9 @@
-use crate::package;
-use crate::util::{Formatter, Linter};
-use anyhow::{bail, Result};
+use crate::prelude::*;
 use colored::Colorize;
 use convert_case::{Case, Casing};
 use regex::Regex;
 use std::fs;
 use std::path::Path;
-use std::time::Instant;
 
 /// <https://regex101.com/r/vBQTOL>
 const NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";

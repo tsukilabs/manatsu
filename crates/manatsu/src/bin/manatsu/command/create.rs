@@ -1,10 +1,9 @@
 use anyhow::Result;
-use clap::Args;
 use inquire::validator::Validation;
 use inquire::{required, Select, Text};
 use manatsu::project::{Project, Template};
 
-#[derive(Debug, Args)]
+#[derive(Debug, clap::Args)]
 pub struct Create {
   /// Overwrites the directory if it already exists.
   #[arg(short = 'f', long)]

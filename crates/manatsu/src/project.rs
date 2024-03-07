@@ -152,48 +152,46 @@ impl Project {
     let glob = Glob::new("**/Cargo.toml")?.compile_matcher();
     let entries = WalkDir::new(dir_path)
       .into_iter()
-      .filter_map(std::result::Result::ok);
+      .filter_map(std::result::Result::ok)
+      .filter(|e| glob.is_match(e.path()));
 
     for entry in entries {
       let path = entry.path();
+      let cargo_toml = fs::read_to_string(path)?;
+      let mut cargo_toml: toml::Value = toml::from_str(&cargo_toml)?;
 
-      if glob.is_match(path) {
-        let cargo_toml = fs::read_to_string(path)?;
-        let mut cargo_toml: toml::Value = toml::from_str(&cargo_toml)?;
-
-        macro_rules! update {
-          ($key:literal, $value:expr) => {
-            if cargo_toml["package"].get($key).is_some() {
-              cargo_toml["package"][$key] = toml::Value::String($value);
-            }
-          };
-        }
-
-        macro_rules! update_workspace {
-          ($key:literal, $value:expr) => {
-            if cargo_toml["workspace"]["package"].get($key).is_some() {
-              cargo_toml["workspace"]["package"][$key] = toml::Value::String($value);
-            }
-          };
-        }
-
-        if cargo_toml.get("package").is_some() {
-          update!("name", self.name.clone());
-          update!("version", DEFAULT_VERSION.to_string());
-          update!("description", clone_or_empty_string!(&self.description));
-        }
-
-        if let Some(workspace) = cargo_toml.get("workspace") {
-          if workspace.get("package").is_some() {
-            update_workspace!("name", self.name.clone());
-            update_workspace!("version", DEFAULT_VERSION.to_string());
-            update_workspace!("description", clone_or_empty_string!(&self.description));
+      macro_rules! update {
+        ($key:literal, $value:expr) => {
+          if cargo_toml["package"].get($key).is_some() {
+            cargo_toml["package"][$key] = toml::Value::String($value);
           }
-        }
-
-        let cargo_toml = toml::to_string_pretty(&cargo_toml)?;
-        fs::write(path, cargo_toml)?;
+        };
       }
+
+      macro_rules! update_workspace {
+        ($key:literal, $value:expr) => {
+          if cargo_toml["workspace"]["package"].get($key).is_some() {
+            cargo_toml["workspace"]["package"][$key] = toml::Value::String($value);
+          }
+        };
+      }
+
+      if cargo_toml.get("package").is_some() {
+        update!("name", self.name.clone());
+        update!("version", DEFAULT_VERSION.to_string());
+        update!("description", clone_or_empty_string!(&self.description));
+      }
+
+      if let Some(workspace) = cargo_toml.get("workspace") {
+        if workspace.get("package").is_some() {
+          update_workspace!("name", self.name.clone());
+          update_workspace!("version", DEFAULT_VERSION.to_string());
+          update_workspace!("description", clone_or_empty_string!(&self.description));
+        }
+      }
+
+      let cargo_toml = toml::to_string_pretty(&cargo_toml)?;
+      fs::write(path, cargo_toml)?;
     }
 
     Ok(())
@@ -232,7 +230,7 @@ impl Project {
     Ok(())
   }
 
-  /// Determines whether the project name is valid.
+  /// Determine whether the project name is valid.
   pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
     let regex = Regex::new(Project::NAME_REGEX).expect("hardcoded regex should be valid");
     regex.is_match(name.as_ref())

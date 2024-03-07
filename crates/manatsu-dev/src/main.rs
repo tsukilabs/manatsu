@@ -1,5 +1,6 @@
 mod command;
 mod package;
+mod prelude;
 mod util;
 
 use anyhow::Result;
@@ -22,6 +23,8 @@ enum Cli {
   Readme,
   /// Release a new version, publishing all the public packages.
   Release(Release),
+  /// Collect all non-standard class attributes used by Manatsu.
+  Tailwind,
 }
 
 #[tokio::main]
@@ -64,5 +67,6 @@ async fn main() -> Result<()> {
     }
     Cli::Readme => command::readme(),
     Cli::Release(cmd) => cmd.execute().await,
+    Cli::Tailwind => command::tailwind(),
   }
 }
