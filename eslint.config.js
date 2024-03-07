@@ -10,7 +10,8 @@ export default config({
     'packages/manatsu/tsconfig.json',
     'packages/playground/tsconfig.json',
     'packages/shared/tsconfig.json',
-    'packages/tauri-plugin/tsconfig.json'
+    'packages/tauri-plugin/tsconfig.json',
+    'packages/vue-plugin/tsconfig.json'
   ],
   overrides: {
     typescript: {

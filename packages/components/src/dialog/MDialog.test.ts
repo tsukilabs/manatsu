@@ -5,11 +5,11 @@ import MDialog from './MDialog.vue';
 enableAutoUnmount(afterEach);
 
 describe('dialog', () => {
+  const stubs = { teleport: true };
+
   it('should render dialog when visible', async () => {
     const wrapper = mount(MDialog, {
-      global: {
-        stubs: { teleport: true }
-      },
+      global: { stubs },
       props: {
         visible: false,
         'onUpdate:visible': async (value: boolean) => {
@@ -26,9 +26,7 @@ describe('dialog', () => {
 
   it('should render header slot when provided', () => {
     const wrapper = mount(MDialog, {
-      global: {
-        stubs: { teleport: true }
-      },
+      global: { stubs },
       props: { visible: true },
       slots: { header: '<div class="header-slot">Header</div>' }
     });
@@ -38,9 +36,7 @@ describe('dialog', () => {
 
   it('should render footer slot when provided', () => {
     const wrapper = mount(MDialog, {
-      global: {
-        stubs: { teleport: true }
-      },
+      global: { stubs },
       props: { visible: true },
       slots: { footer: '<div class="footer-slot">Footer</div>' }
     });
@@ -51,9 +47,7 @@ describe('dialog', () => {
   it('should close when escape key is pressed', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      global: {
-        stubs: { teleport: true }
-      },
+      global: { stubs },
       props: {
         esc: true,
         visible: true,
@@ -72,9 +66,7 @@ describe('dialog', () => {
   it('should emit event on show', async () => {
     const onShow = vi.fn();
     const wrapper = mount(MDialog, {
-      global: {
-        stubs: { teleport: true }
-      },
+      global: { stubs },
       props: { onShow, visible: false }
     });
 
@@ -87,9 +79,7 @@ describe('dialog', () => {
   it('should emit event on hide', async () => {
     const onHide = vi.fn();
     const wrapper = mount(MDialog, {
-      global: {
-        stubs: { teleport: true }
-      },
+      global: { stubs },
       props: { onHide, visible: true }
     });
 

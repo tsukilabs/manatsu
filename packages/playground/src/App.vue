@@ -93,4 +93,3 @@ const { state: color, execute: getColor } = useInvoke<string>('RandomHexColor', 
     </template>
   </m-scaffold>
 </template>
-./utils

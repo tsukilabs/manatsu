@@ -1,7 +1,4 @@
 use crate::prelude::*;
-use colored::Colorize;
-use convert_case::{Case, Casing};
-use regex::Regex;
 use std::fs;
 use std::path::Path;
 

@@ -1,5 +1,4 @@
 use crate::prelude::*;
-use colored::Colorize;
 use std::fs;
 
 #[derive(Debug, clap::Args)]
@@ -24,9 +23,9 @@ impl super::Command for Build {
 
     let packages: Vec<String> = self
       .package
-      .unwrap_or_else(|| PUBLIC_PACKAGES.iter().map(ToString::to_string).collect())
+      .unwrap_or_else(|| Package::PUBLIC.iter().map(ToString::to_string).collect())
       .into_iter()
-      .map(|pkg| pkg.trim().to_lowercase().replace("@manatsu/", ""))
+      .map(|pkg| pkg.trim().replace("@manatsu/", "").to_case(Case::Kebab))
       .collect();
 
     if packages.is_empty() {
@@ -55,7 +54,7 @@ impl super::Command for Build {
     println!("{}", "building other packages...".bright_cyan());
     pnpm!(args).spawn()?.wait().await?;
 
-    println!("{}", "copying files...".bright_cyan());
+    println!("{}", "copying built files...".bright_cyan());
     copy_files(&packages)?;
 
     println!("built in {:?}", start.elapsed());
@@ -64,19 +63,19 @@ impl super::Command for Build {
 }
 
 fn should_build(package: &str) -> bool {
-  if PUBLIC_PACKAGES.contains(&package) {
-    // The sass package doesn't need to be built.
-    // And the shared package has already been built.
-    package != "sass" && package != "shared"
-  } else {
-    false
+  if Package::is_private(&package) {
+    return false;
   }
+
+  // The sass package doesn't need to be built.
+  // And the shared package has already been built.
+  package != "sass" && package != "shared"
 }
 
 fn copy_files(packages: &Vec<String>) -> Result<()> {
   let dist = package::dist("manatsu")?;
   for pkg in packages {
-    if !package::is_standalone(pkg) {
+    if Package::is_manual_chunk(pkg) {
       let to = dist.join(format!("{pkg}.d.ts"));
       fs::copy(package::dts(pkg)?, to)?;
     }

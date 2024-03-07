@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { symbols } from '@manatsu/shared';
+import { privateSymbols, symbols } from '@manatsu/shared';
 import { useElementSize } from '@manatsu/composables/src/index.ts';
-import { type MaybeRefOrGetter, type VNode, computed, provide, shallowRef, toRef } from 'vue';
+import {
+  type MaybeRefOrGetter,
+  type VNode,
+  computed,
+  inject,
+  provide,
+  shallowRef,
+  toRef
+} from 'vue';
 import type { ScaffoldProps, SidebarItem } from './types';
+import MDynamicDialog from '../dialog/MDynamicDialog.vue';
 
 const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
 
@@ -52,6 +61,9 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
   });
 }
 
+// Dialog
+const dialog = inject(privateSymbols.scaffoldDialog);
+
 defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
 </script>
 
@@ -96,6 +108,8 @@ defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
     >
       <slot name="bottom"></slot>
     </div>
+
+    <m-dynamic-dialog v-if="dialog" />
   </div>
 </template>
 

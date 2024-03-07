@@ -1,5 +1,7 @@
 import { splitWhitespace } from '@tb-dev/utils';
-import { type MaybeRefOrGetter, toValue } from 'vue';
+import { usePreferredDark } from '@vueuse/core';
+import { type DarkMode, symbols } from '@manatsu/shared';
+import { type App, type MaybeRefOrGetter, ref, toValue, watchEffect } from 'vue';
 
 export function isDarkMode(): boolean {
   return document.body.matches('.manatsu-dark');
@@ -19,4 +21,18 @@ export function setDarkMode(darkMode: MaybeRefOrGetter<boolean>) {
   }
 
   body.setAttribute('class', classes.join(' '));
+}
+
+export function provideDarkMode(app: App, initial: DarkMode = 'auto') {
+  const darkModeRef = ref(initial);
+  app.provide(symbols.darkMode, darkModeRef);
+
+  const preferredDark = usePreferredDark();
+  watchEffect(() => {
+    if (darkModeRef.value === 'auto') {
+      setDarkMode(preferredDark.value);
+    } else {
+      setDarkMode(darkModeRef.value);
+    }
+  });
 }

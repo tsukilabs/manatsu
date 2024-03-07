@@ -3,38 +3,51 @@ use serde::Deserialize;
 use std::path::PathBuf;
 use std::{env, fs};
 
-/// Public package names.
-pub const PUBLIC_PACKAGES: [&str; 6] = [
-  "manatsu",
-  "components",
-  "composables",
-  "sass",
-  "shared",
-  "tauri-plugin",
-];
-
-/// Private package names.
-pub const PRIVATE_PACKAGES: [&str; 1] = ["playground"];
-
 #[derive(Deserialize)]
 #[serde(rename_all(serialize = "snake_case", deserialize = "camelCase"))]
 pub struct Package {
   pub version: String,
 }
 
-impl Package {
+impl<'a> Package {
+  /// Private package names.
+  pub const PRIVATE: [&'a str; 1] = ["playground"];
+
+  /// Public package names.
+  pub const PUBLIC: [&'a str; 7] = [
+    "manatsu",
+    "components",
+    "composables",
+    "sass",
+    "shared",
+    "tauri-plugin",
+    "vue-plugin",
+  ];
+
+  pub const MANUAL_CHUNK: [&'a str; 3] = ["components", "composables", "vue-plugin"];
+
   /// Read the root `package.json` file.
   pub fn read_root() -> Result<Package> {
     let path: PathBuf = env::current_dir()?.join("package.json");
     let package = fs::read_to_string(path)?;
     serde_json::from_str::<Package>(&package).map_err(Into::into)
   }
+
+  pub fn is_manual_chunk<P: AsRef<str>>(package: P) -> bool {
+    let package = package.as_ref();
+    Package::MANUAL_CHUNK.contains(&package)
+  }
+
+  pub fn is_private<P: AsRef<str>>(package: P) -> bool {
+    let package = package.as_ref();
+    Package::PRIVATE.contains(&package)
+  }
 }
 
 /// Returns all package names.
 pub fn all() -> Vec<String> {
-  let mut packages = PUBLIC_PACKAGES.to_vec();
-  packages.extend_from_slice(&PRIVATE_PACKAGES);
+  let mut packages = Package::PUBLIC.to_vec();
+  packages.extend_from_slice(&Package::PRIVATE);
 
   packages.into_iter().map(ToString::to_string).collect()
 }
@@ -66,10 +79,4 @@ pub fn dts<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dist(package)?.join("index.d.ts");
   Ok(path)
-}
-
-/// Whether the package should be merged with the core package.
-pub fn is_standalone<P: AsRef<str>>(package: P) -> bool {
-  let package = package.as_ref();
-  package != "components" && package != "composables"
 }
