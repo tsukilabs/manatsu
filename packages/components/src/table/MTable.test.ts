@@ -1,6 +1,6 @@
 import { nextTick } from 'vue';
-import { afterEach, describe, expect, it } from 'vitest';
 import { enableAutoUnmount, mount } from '@vue/test-utils';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import MTable from './MTable.vue';
 import { intoNestedValue } from './utils';
 import MTableColumn from './MTableColumn.vue';
@@ -178,5 +178,57 @@ describe('table', () => {
         expect(tdElements[cellIndex].text()).toBe(String(intoNestedValue(row, column.field)));
       }
     }
+  });
+
+  it('should emit event on row click', async () => {
+    const onRowClick = vi.fn();
+
+    const wrapper = mount({
+      components: { MScaffold, MTable, MTableColumn },
+      template: `
+        <m-scaffold>
+          <m-table v-model="rows" :row-key="(row) => row.name" @row-click="onRowClick">
+            <m-table-column v-for="c in columns" :key="c.field" :field="c.field" :name="c.name" />
+          </m-table>
+        </m-scaffold>
+      `,
+      data() {
+        return { columns, rows };
+      },
+      methods: { onRowClick }
+    });
+
+    await nextTick();
+
+    const trElement = wrapper.find('.m-table-body tr');
+    await trElement.trigger('click');
+
+    expect(onRowClick).toHaveBeenCalled();
+  });
+
+  it('should emit event on row double click', async () => {
+    const onRowDblClick = vi.fn();
+
+    const wrapper = mount({
+      components: { MScaffold, MTable, MTableColumn },
+      template: `
+        <m-scaffold>
+          <m-table v-model="rows" :row-key="(row) => row.name" @row-dblclick="onRowDblClick">
+            <m-table-column v-for="c in columns" :key="c.field" :field="c.field" :name="c.name" />
+          </m-table>
+        </m-scaffold>
+      `,
+      data() {
+        return { columns, rows };
+      },
+      methods: { onRowDblClick }
+    });
+
+    await nextTick();
+
+    const trElement = wrapper.find('.m-table-body tr');
+    await trElement.trigger('dblclick');
+
+    expect(onRowDblClick).toHaveBeenCalled();
   });
 });
