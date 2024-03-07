@@ -1,7 +1,15 @@
 {
   "vsicons.associations.folders": [
-    { "icon": "theme", "extensions": ["composables"], "format": "svg" },
-    { "icon": "aurelia", "extensions": ["manatsu"], "format": "svg" },
+    {
+      "icon": "theme",
+      "extensions": ["composables"],
+      "format": "svg"
+    },
+    {
+      "icon": "aurelia",
+      "extensions": ["manatsu"],
+      "format": "svg"
+    },
     {
       "icon": "plugin",
       "extensions": ["tauri-plugin", "tauri-plugin-manatsu"],
@@ -48,14 +56,33 @@
   ],
   "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js",
   "tailwindCSS.classAttributes": [
-    "class",
-    "center-class",
-    "content-class",
-    "end-class",
-    "footer-class",
-    "header-class",
-    "sidebar-item-class",
-    "start-class"
+    "bottomClass",
+    "centerClass",
+    "containerClass",
+    "contentClass",
+    "dialogClass",
+    "endClass",
+    "footerClass",
+    "headerClass",
+    "headerEndClass",
+    "headerStartClass",
+    "inputClass",
+    "logoClass",
+    "mediaClass",
+    "menuClass",
+    "menuItemClass",
+    "sidebarClass",
+    "sidebarItemClass",
+    "startClass",
+    "subtitleClass",
+    "tableClass",
+    "tbodyClass",
+    "tbodyRowClass",
+    "theadClass",
+    "theadRowClass",
+    "titleClass",
+    "titleLinkClass",
+    "topClass"
   ],
   "tailwindCSS.files.exclude": [
     "**/.git/**",

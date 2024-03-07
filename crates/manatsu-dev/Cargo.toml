@@ -35,12 +35,14 @@ workspace = true
 anyhow = "1.0.80"
 colored = "2.1.0"
 convert_case = "0.6.0"
+globset = "0.4.14"
 inquire = "0.7.0"
 miho = "4.1.6"
 regex = "1.10.3"
+walkdir = "2.5.0"
 
 [dependencies.clap]
-version = "4.5.1"
+version = "4.5.2"
 features = ["derive"]
 
 [dependencies.manatsu]
@@ -53,17 +55,12 @@ features = ["derive"]
 
 [dependencies.serde_json]
 version = "1.0.114"
+features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.11.24"
-features = [
-    "gzip",
-    "json",
-]
+features = ["gzip", "json"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = [
-    "macros",
-    "rt-multi-thread",
-]
+features = ["macros", "rt-multi-thread"]
