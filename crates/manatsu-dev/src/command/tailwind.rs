@@ -40,7 +40,7 @@ pub fn tailwind() -> Result<()> {
       .into_iter()
       .map(|c| c.to_case(Case::Kebab))
       .collect();
-    
+
     classes.sort_unstable();
     classes
   };
