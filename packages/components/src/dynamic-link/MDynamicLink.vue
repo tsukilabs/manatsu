@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import { type VNode, computed } from 'vue';
-import { type RouteLocationRaw, RouterLink } from 'vue-router';
+import type { DynamicLinkProps } from './types';
 
-const to = defineModel<RouteLocationRaw>('to');
+const props = defineProps<DynamicLinkProps>();
 
 const slots = defineSlots<{ default?: () => VNode }>();
 
 const isExternalLink = computed(() => {
-  if (typeof to.value !== 'string') return false;
-  return to.value.startsWith('http');
+  if (typeof props.to !== 'string') return false;
+  return props.to.startsWith('http');
 });
 
 defineExpose({ isExternalLink });

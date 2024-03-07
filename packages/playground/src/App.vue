@@ -53,8 +53,7 @@ const { state: color, execute: getColor } = useInvoke<string>('RandomHexColor', 
         title-link="/"
       >
         <template #menu-item="{ label, to }">
-          <!-- eslint-disable-next-line vue/v-bind-style -->
-          <m-dynamic-link :to="to">{{ label }}</m-dynamic-link>
+          <m-dynamic-link :to>{{ label }}</m-dynamic-link>
         </template>
 
         <template #end>
@@ -76,10 +75,7 @@ const { state: color, execute: getColor } = useInvoke<string>('RandomHexColor', 
     </template>
 
     <template #sidebar-item="{ to, label }">
-      <!-- eslint-disable-next-line vue/v-bind-style -->
-      <m-dynamic-link :to="to">
-        <span>{{ label }}</span>
-      </m-dynamic-link>
+      <m-dynamic-link :to>{{ label }}</m-dynamic-link>
     </template>
 
     <template #default>
