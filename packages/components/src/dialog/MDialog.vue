@@ -108,7 +108,7 @@ function getStorage() {
 </script>
 
 <template>
-  <Teleport :to="appendTo">
+  <teleport :to="appendTo">
     <div v-if="visible" ref="maskRef" class="m-dialog-mask" :class="{ 'm-dialog-backdrop': modal }">
       <div ref="dialogRef" class="m-dialog" :class="dialogClass" :style="dialogComputedStyle">
         <div
@@ -129,7 +129,7 @@ function getStorage() {
         </div>
       </div>
     </div>
-  </Teleport>
+  </teleport>
 </template>
 
 <style lang="scss">

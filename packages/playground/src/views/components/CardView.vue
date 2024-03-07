@@ -28,7 +28,7 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
       </template>
 
       <template #default>
-        <LoremIpsum class="h-36" />
+        <lorem-ipsum class="h-36" />
       </template>
 
       <template #footer>

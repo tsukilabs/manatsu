@@ -27,7 +27,7 @@ const visibleInput = ref(false);
       </template>
 
       <template #default>
-        <LoremIpsum class="h-48 w-48" />
+        <lorem-ipsum class="h-48 w-48" />
       </template>
 
       <template #footer>
@@ -48,7 +48,7 @@ const visibleInput = ref(false);
       storage-type="local"
     >
       <template #default>
-        <LoremIpsum :paragraphs="2" class="h-48 w-48" />
+        <lorem-ipsum :paragraphs="2" class="h-48 w-48" />
       </template>
 
       <template #footer>
@@ -61,7 +61,7 @@ const visibleInput = ref(false);
 
     <m-dialog v-model:visible="visibleNoStorage" click-outside esc header="No Storage">
       <template #default>
-        <LoremIpsum :paragraphs="2" class="h-48 w-48" />
+        <lorem-ipsum :paragraphs="2" class="h-48 w-48" />
       </template>
 
       <template #footer>

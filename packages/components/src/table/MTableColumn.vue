@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { type VNode, defineComponent, inject, onMounted, onUnmounted, triggerRef } from 'vue';
 import { columnMapKey } from './symbols';
-import type { TableColumn, TableColumnProps } from './types';
+import type {
+  TableColumn,
+  TableColumnBodySlotProps,
+  TableColumnHeaderSlotProps,
+  TableColumnProps
+} from './types';
 
 const props = defineProps<TableColumnProps>();
 
 const slots = defineSlots<{
-  body?: (slotProps: { row: any }) => VNode;
-  header?: (slotProps: { column: TableColumnProps }) => VNode;
+  body?: (slotProps: TableColumnBodySlotProps) => VNode;
+  header?: (slotProps: TableColumnHeaderSlotProps) => VNode;
 }>();
 
 const columns = inject(columnMapKey, null);

@@ -61,7 +61,7 @@ defineExpose({ startWidth, endWidth });
     >
       <slot v-if="$slots.start" name="start"></slot>
 
-      <MDynamicLink
+      <m-dynamic-link
         v-else
         :to="titleLink"
         class="m-top-appbar-brand"
@@ -77,7 +77,7 @@ defineExpose({ startWidth, endWidth });
           <slot v-if="$slots.title" name="title"></slot>
           <span v-else>{{ title }}</span>
         </div>
-      </MDynamicLink>
+      </m-dynamic-link>
     </div>
 
     <div v-if="hasContent" class="m-top-appbar-content" :class="contentClass" :style="contentStyle">

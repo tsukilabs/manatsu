@@ -1,10 +1,19 @@
 import type { StyleValue, VNode } from 'vue';
 
+export interface TableColumnBodySlotProps {
+  index: number;
+  row: any;
+}
+
+export interface TableColumnHeaderSlotProps {
+  column: TableColumnProps;
+}
+
 export interface TableColumn {
   props: TableColumnProps;
   slots: {
-    body?: (slotProps: { row: any }) => VNode;
-    header?: (slotProps: { column: TableColumnProps }) => VNode;
+    body?: (slotProps: TableColumnBodySlotProps) => VNode;
+    header?: (slotProps: TableColumnHeaderSlotProps) => VNode;
   };
 }
 
@@ -39,4 +48,13 @@ export interface TableColumnProps {
   headerClass?: string;
   headerStyle?: StyleValue;
   name: string;
+}
+
+export interface TableClickEvent {
+  /** Clicked row data. */
+  data: any;
+  /** Original DOM event. */
+  event: MouseEvent;
+  /** Row index. */
+  index: number;
 }

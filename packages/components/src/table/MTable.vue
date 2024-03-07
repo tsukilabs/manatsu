@@ -2,10 +2,10 @@
 import { toPixel } from '@tb-dev/utils';
 import { whenever } from '@vueuse/core';
 import { symbols } from '@manatsu/shared';
-import { computed, inject, isRef, onUnmounted, provide, shallowRef } from 'vue';
+import { type VNode, computed, inject, isRef, onUnmounted, provide, shallowRef } from 'vue';
 import { columnMapKey } from './symbols';
 import { intoNestedValue } from './utils';
-import type { TableColumnMap, TableProps } from './types';
+import type { TableClickEvent, TableColumnMap, TableProps } from './types';
 
 const rows = defineModel<any[]>({ required: true });
 
@@ -15,6 +15,13 @@ const props = withDefaults(defineProps<TableProps>(), {
   striped: true,
   tableLayout: 'auto'
 });
+
+defineEmits<{
+  (e: 'row-click', value: TableClickEvent): void;
+  (e: 'row-dblclick', value: TableClickEvent): void;
+}>();
+
+defineSlots<{ default?: () => VNode }>();
 
 const containerClassList = computed(() => {
   const classes = ['m-table-container'];
@@ -52,6 +59,7 @@ function sort(field: unknown) {
   rows.value.sort((a, b) => {
     const first = intoNestedValue(props.sortOrder === 'asc' ? a : b, field);
     const second = intoNestedValue(props.sortOrder === 'asc' ? b : a, field);
+    console.log(first, second);
 
     if (typeof first === 'number' && typeof second === 'number') {
       return first - second;
@@ -88,14 +96,21 @@ onUnmounted(() => {
       </thead>
 
       <tbody class="m-table-body" :class="tbodyClass" :style="tbodyStyle">
-        <tr v-for="row of rows" :key="rowKey(row)" :class="tbodyRowClass" :style="tbodyRowStyle">
+        <tr
+          v-for="(row, index) of rows"
+          :key="rowKey(row)"
+          :class="tbodyRowClass"
+          :style="tbodyRowStyle"
+          @click="$emit('row-click', { index, data: row, event: $event })"
+          @dblclick="$emit('row-dblclick', { index, data: row, event: $event })"
+        >
           <td
             v-for="column of columns"
             :key="column.props.field"
             :class="column.props.bodyClass"
             :style="column.props.bodyStyle"
           >
-            <component :is="column.slots.body" v-if="column.slots.body" :row />
+            <component :is="column.slots.body" v-if="column.slots.body" :index :row />
             <span v-else>{{ intoNestedValue(row, column.props.field) }}</span>
           </td>
         </tr>

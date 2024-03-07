@@ -15,7 +15,8 @@ export default config({
   overrides: {
     typescript: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off'
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/unified-signatures': 'off'
     },
     vue: {
       'vue/block-lang': [
