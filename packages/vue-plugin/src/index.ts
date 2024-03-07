@@ -10,7 +10,7 @@ interface ManatsuOptions {
    * Automatically place a `m-dynamic-dialog` component inside the `m-scaffold`.
    * @default true
    */
-  scaffoldDialog?: boolean;
+  placeDialogOnScaffold?: boolean;
 }
 
 export interface ManatsuGlobal {
@@ -23,7 +23,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
   const manatsu: Plugin = {
     install(app) {
       provideDarkMode(app, options.darkMode);
-      provideDialog(app, options.scaffoldDialog);
+      provideDialog(app, options.placeDialogOnScaffold);
 
       // Using `any` so we can let `$mana` remain read-only.
       const globalProps = createGlobalProps.bind(app);

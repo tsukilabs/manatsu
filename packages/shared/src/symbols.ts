@@ -1,15 +1,15 @@
 import type { InjectionKey, Ref } from 'vue';
 import type { DarkMode } from './types';
 
-type BooleanSymbol = InjectionKey<Readonly<Ref<boolean>>>;
-type NumberSymbol = InjectionKey<Readonly<Ref<number>>>;
+type RefSymbol<T> = InjectionKey<Readonly<Ref<T>>>;
+type WritableRefSymbol<T> = InjectionKey<Ref<T>>;
 
-const darkMode = Symbol('m-options-dark-mode') as InjectionKey<Ref<DarkMode>>;
+const darkMode = Symbol('m-options-dark-mode') as WritableRefSymbol<DarkMode>;
 
-const scaffoldBottomHeight = Symbol('m-scaffold-bottom-height') as NumberSymbol;
-const scaffoldContentHeight = Symbol('m-scaffold-content-height') as NumberSymbol;
-const scaffoldSidebarWidth = Symbol('m-scaffold-sidebar-width') as NumberSymbol;
-const scaffoldTopHeight = Symbol('m-scaffold-top-height') as NumberSymbol;
+const scaffoldBottomHeight = Symbol('m-scaffold-bottom-height') as RefSymbol<number>;
+const scaffoldContentHeight = Symbol('m-scaffold-content-height') as RefSymbol<number>;
+const scaffoldSidebarWidth = Symbol('m-scaffold-sidebar-width') as RefSymbol<number>;
+const scaffoldTopHeight = Symbol('m-scaffold-top-height') as RefSymbol<number>;
 
 export const symbols = {
   darkMode,
@@ -19,8 +19,10 @@ export const symbols = {
   scaffoldTopHeight
 } as const;
 
-const scaffoldDialog = Symbol('m-options-scaffold-dialog') as BooleanSymbol;
+const placeDialogOnScaffold = Symbol('m-options-dialog-on-scaffold') as RefSymbol<boolean>;
+const dynamicDialogVisible = Symbol('m-options-dialog-visible') as WritableRefSymbol<boolean>;
 
 export const privateSymbols = {
-  scaffoldDialog
+  dynamicDialogVisible,
+  placeDialogOnScaffold
 } as const;

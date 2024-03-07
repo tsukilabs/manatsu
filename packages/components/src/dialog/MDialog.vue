@@ -12,8 +12,8 @@ const props = withDefaults(defineProps<DialogProps>(), {
 });
 
 const emit = defineEmits<{
-  // eslint-disable-next-line @typescript-eslint/prefer-function-type
-  (e: 'hide' | 'show'): void;
+  (e: 'hide'): void;
+  (e: 'show'): void;
 }>();
 
 const slots = defineSlots<{
