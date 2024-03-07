@@ -1,12 +1,6 @@
 [package]
 description = "Manatsu plugin for Tauri"
-keywords = [
-    "manatsu",
-    "plugin",
-    "tauri",
-    "tauri-plugin",
-    "vue",
-]
+keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 name = "tauri-plugin-manatsu"
 version = "0.4.23"
 
