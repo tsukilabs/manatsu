@@ -23,24 +23,13 @@ impl super::Command for Release {
     }
 
     super::readme()?;
-    if let Ok(true) = Status::is_dirty().await {
-      Commit::new("chore: sync readme files")
-        .no_verify()
-        .stderr(Stdio::null())
-        .stdout(Stdio::null())
-        .spawn()
-        .await?;
-    }
+    commit_if_dirty("chore: sync readme files").await?;
 
     super::tailwind()?;
-    if let Ok(true) = Status::is_dirty().await {
-      Commit::new("chore: update tailwind class attributes")
-        .no_verify()
-        .stderr(Stdio::null())
-        .stdout(Stdio::null())
-        .spawn()
-        .await?;
-    }
+    commit_if_dirty("chore: update tailwind classes").await?;
+
+    pnpm!("run", "format").spawn()?.wait().await?;
+    commit_if_dirty("style: format files").await?;
 
     match Config::read().ok() {
       Some(cfg) if cfg.github => {
@@ -99,6 +88,19 @@ async fn create_github_release(github_token: &str) -> Result<()> {
   if !response.status().is_success() {
     let message = response.text().await?;
     bail!("failed to create a GitHub release:\n{message}");
+  }
+
+  Ok(())
+}
+
+async fn commit_if_dirty(message: &str) -> Result<()> {
+  if let Ok(true) = Status::is_dirty().await {
+    Commit::new(message)
+      .no_verify()
+      .stderr(Stdio::null())
+      .stdout(Stdio::null())
+      .spawn()
+      .await?;
   }
 
   Ok(())

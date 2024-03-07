@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use colored::Colorize;
+use convert_case::{Case, Casing};
 use globset::Glob;
 use regex::Regex;
 use std::collections::HashSet;
@@ -35,7 +36,11 @@ pub fn tailwind() -> Result<()> {
   }
 
   let classes = {
-    let mut classes: Vec<String> = classes.into_iter().collect();
+    let mut classes: Vec<String> = classes
+      .into_iter()
+      .map(|c| c.to_case(Case::Kebab))
+      .collect();
+    
     classes.sort_unstable();
     classes
   };
@@ -56,7 +61,7 @@ pub fn tailwind() -> Result<()> {
   let vscode = env::current_dir()?.join(".vscode/settings.json");
   if let Ok(true) = vscode.try_exists() {
     let content = fs::read_to_string(&vscode)?;
-    let mut value = serde_json::from_str::<serde_json::Value>(&content)?;
+    let mut value: serde_json::Value = serde_json::from_str(&content)?;
     value["tailwindCSS.classAttributes"] = serde_json::to_value(classes)?;
 
     let content = serde_json::to_string_pretty(&value)?;
