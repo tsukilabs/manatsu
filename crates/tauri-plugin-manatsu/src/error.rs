@@ -1,10 +1,12 @@
 use serde::ser::Serializer;
 use serde::Serialize;
 
+pub type Result<T> = std::result::Result<T, Error>;
+
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
-  #[error("{0}")]
-  Color(String),
+  #[error(transparent)]
+  Unknown(#[from] anyhow::Error),
 }
 
 impl Serialize for Error {
