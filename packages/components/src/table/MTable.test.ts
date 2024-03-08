@@ -1,12 +1,15 @@
 import { nextTick } from 'vue';
-import { enableAutoUnmount, mount } from '@vue/test-utils';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
+import { config, enableAutoUnmount, mount } from '@vue/test-utils';
 import MTable from './MTable.vue';
 import { intoNestedValue } from './utils';
 import MTableColumn from './MTableColumn.vue';
 import MScaffold from '../scaffold/MScaffold.vue';
 
 enableAutoUnmount(afterEach);
+
+config.global.plugins = [createManatsu()];
 
 describe('table', () => {
   const columns = [

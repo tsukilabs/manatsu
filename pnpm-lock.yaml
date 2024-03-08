@@ -121,6 +121,9 @@ importers:
       '@manatsu/shared':
         specifier: workspace:*
         version: link:../shared
+      '@manatsu/vue-plugin':
+        specifier: workspace:*
+        version: link:../vue-plugin
       '@tauri-apps/api':
         specifier: ^1.5.3
         version: 1.5.3

@@ -1,9 +1,12 @@
 import { h } from 'vue';
 import { afterEach, describe, expect, it } from 'vitest';
-import { enableAutoUnmount, mount } from '@vue/test-utils';
+import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
+import { config, enableAutoUnmount, mount } from '@vue/test-utils';
 import MScaffold from './MScaffold.vue';
 
 enableAutoUnmount(afterEach);
+
+config.global.plugins = [createManatsu()];
 
 describe('scaffold', () => {
   it('should render top slot', () => {
