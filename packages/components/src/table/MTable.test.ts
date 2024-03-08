@@ -181,7 +181,6 @@ describe('table', () => {
 
   it('should emit event on row click', async () => {
     const onRowClick = vi.fn();
-
     const wrapper = mount({
       template: `
         <m-scaffold>
@@ -206,7 +205,6 @@ describe('table', () => {
 
   it('should emit event on row double click', async () => {
     const onRowDblClick = vi.fn();
-
     const wrapper = mount({
       template: `
         <m-scaffold>

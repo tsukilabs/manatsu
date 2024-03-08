@@ -1,11 +1,15 @@
+import { h } from 'vue';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { useDialog } from '@manatsu/composables/src/index.ts';
 import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 import { config, enableAutoUnmount, mount } from '@vue/test-utils';
 import MDialog from './MDialog.vue';
+import MScaffold from '../scaffold/MScaffold.vue';
 
 enableAutoUnmount(afterEach);
 
-config.global.plugins = [createManatsu()];
+config.global.plugins = [createManatsu({ placeDialogOnScaffold: true })];
+config.global.components = { MScaffold };
 config.global.stubs = { teleport: true };
 
 describe('dialog', () => {
@@ -83,5 +87,60 @@ describe('dialog', () => {
 
     await wrapper.setProps({ visible: false });
     expect(onHide).toHaveBeenCalled();
+  });
+
+  it('should mount with dynamic dialog closed', () => {
+    const wrapper = mount(MScaffold);
+    expect(wrapper.findComponent(MDialog).props('visible')).toBe(false);
+  });
+
+  it('should open dynamic dialog', () => {
+    const wrapper = mount({
+      template: '<m-scaffold />',
+      setup() {
+        useDialog().show();
+      }
+    });
+
+    expect(wrapper.findComponent(MDialog).props('visible')).toBe(true);
+  });
+
+  it('should open dynamic dialog with header', () => {
+    const wrapper = mount({
+      template: '<m-scaffold />',
+      setup() {
+        const dialog = useDialog();
+        dialog.setHeader(() => h('div', 'header'));
+        dialog.show();
+      }
+    });
+
+    expect(wrapper.find('.m-dialog-header').text()).toBe('header');
+  });
+
+  it('should open dynamic dialog with footer', () => {
+    const wrapper = mount({
+      template: '<m-scaffold />',
+      setup() {
+        const dialog = useDialog();
+        dialog.setFooter(() => h('div', 'footer'));
+        dialog.show();
+      }
+    });
+
+    expect(wrapper.find('.m-dialog-footer').text()).toBe('footer');
+  });
+
+  it('should open dynamic dialog with content', () => {
+    const wrapper = mount({
+      template: '<m-scaffold />',
+      setup() {
+        const dialog = useDialog();
+        dialog.setContent(() => h('div', 'content'));
+        dialog.show();
+      }
+    });
+
+    expect(wrapper.find('.m-dialog-content').text()).toBe('content');
   });
 });
