@@ -7,6 +7,7 @@ import {
   type Ref,
   type ShallowRef,
   type VNodeProps,
+  hasInjectionContext,
   inject,
   isRef
 } from 'vue';
@@ -39,6 +40,10 @@ interface UseDialogReturn {
 }
 
 export function useDialog(options: Nullish<DialogOptions> = null): UseDialogReturn {
+  if (!hasInjectionContext()) {
+    throw new DialogError('useDialog must be called inside a component');
+  }
+
   const visible = inject(privateSymbols.dynDialogVisible);
   const optionsRef = inject(privateSymbols.dynDialogOptions);
 

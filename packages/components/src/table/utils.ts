@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-undefined
-export const collator = new Intl.Collator(undefined, {
+export const collator = new Intl.Collator(void 0, {
   usage: 'sort',
   numeric: true,
   sensitivity: 'variant'

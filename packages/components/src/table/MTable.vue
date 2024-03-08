@@ -9,7 +9,8 @@ import {
   onBeforeMount,
   onUnmounted,
   provide,
-  shallowRef
+  shallowRef,
+  triggerRef
 } from 'vue';
 import { columnMapKey } from './symbols';
 import { collator, intoNestedValue } from './utils';
@@ -74,6 +75,9 @@ function onColumnClick(column: TableColumn) {
     const order: SortOrder = column.order ?? 'asc';
     column.order = order === 'asc' ? 'desc' : 'asc';
     sort(column.props.field, order);
+
+    // We manually trigger the model so ShallowRefs can detect the change.
+    triggerRef(rows);
   }
 }
 
