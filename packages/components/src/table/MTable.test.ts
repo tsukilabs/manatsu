@@ -10,6 +10,7 @@ import MScaffold from '../scaffold/MScaffold.vue';
 enableAutoUnmount(afterEach);
 
 config.global.plugins = [createManatsu()];
+config.global.components = { MScaffold, MTable, MTableColumn };
 
 describe('table', () => {
   const columns = [
@@ -26,7 +27,6 @@ describe('table', () => {
 
   it('should render table headers', async () => {
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name">
@@ -54,7 +54,6 @@ describe('table', () => {
 
   it('should render table headers with custom slots', async () => {
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name">
@@ -83,7 +82,6 @@ describe('table', () => {
 
   it('should render table rows', async () => {
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name">
@@ -111,7 +109,6 @@ describe('table', () => {
 
   it('should render table rows with custom slots', async () => {
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name">
@@ -157,7 +154,6 @@ describe('table', () => {
     ];
 
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name">
@@ -187,7 +183,6 @@ describe('table', () => {
     const onRowClick = vi.fn();
 
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name" @row-click="onRowClick">
@@ -213,7 +208,6 @@ describe('table', () => {
     const onRowDblClick = vi.fn();
 
     const wrapper = mount({
-      components: { MScaffold, MTable, MTableColumn },
       template: `
         <m-scaffold>
           <m-table v-model="rows" :row-key="(row) => row.name" @row-dblclick="onRowDblClick">

@@ -75,9 +75,11 @@ fn write_vue(kebab: &str, pascal: &str, dir: &Path) -> Result<()> {
 
 fn write_test(kebab: &str, pascal: &str, dir: &Path) -> Result<()> {
   let mut cts = String::from("import { afterEach, describe, it } from 'vitest';\n");
-  cts.push_str("import { enableAutoUnmount } from '@vue/test-utils';\n");
+  cts.push_str("import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';\n");
+  cts.push_str("import { config, enableAutoUnmount } from '@vue/test-utils';\n");
   cts.push_str(format!("// import M{pascal} from './M{pascal}.vue';\n\n").as_str());
   cts.push_str("enableAutoUnmount(afterEach);\n\n");
+  cts.push_str("config.global.plugins = [createManatsu()];\n\n");
   cts.push_str(format!("describe('{kebab}', () => {{ it.todo('todo'); }});").as_str());
 
   let path = dir.join(format!("M{pascal}.test.ts"));

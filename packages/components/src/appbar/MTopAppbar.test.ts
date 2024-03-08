@@ -1,9 +1,12 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { enableAutoUnmount, mount } from '@vue/test-utils';
+import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
+import { config, enableAutoUnmount, mount } from '@vue/test-utils';
 import MTopAppbar from './MTopAppbar.vue';
 import type { TopAppbarMenuItem } from './types';
 
 enableAutoUnmount(afterEach);
+
+config.global.plugins = [createManatsu()];
 
 describe('top-appbar', () => {
   it('should render menu items', () => {
