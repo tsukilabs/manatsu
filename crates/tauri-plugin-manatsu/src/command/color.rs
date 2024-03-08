@@ -54,17 +54,17 @@ pub async fn hsl_to_string(hsl: Hsl) -> String {
 /// Generate a random hex color.
 #[tauri::command]
 pub async fn random_hex_color() -> Hex {
-  Hex::random().into()
+  Hex::random()
 }
 
 /// Generate a random HSL color.
 #[tauri::command]
 pub async fn random_hsl_color() -> Hsl {
-  Hsl::random().into()
+  Hsl::random()
 }
 
 /// Generate a random RGB color.
 #[tauri::command]
 pub async fn random_rgb_color() -> Rgb {
-  Rgb::random().into()
+  Rgb::random()
 }
