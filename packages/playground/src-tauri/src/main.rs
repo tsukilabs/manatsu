@@ -6,7 +6,7 @@ fn copyright() -> String {
 
   let current_date = chrono::Local::now();
   let year = current_date.year();
-  format!("Copyright © {} Manatsu", year)
+  format!("Copyright © {year} Manatsu")
 }
 
 fn main() {
