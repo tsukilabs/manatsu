@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { toPixel } from '@tb-dev/utils';
-import { type SortOrder, symbols } from '@manatsu/shared';
+import type { Nullish } from '@tb-dev/utility-types';
+import { type SortOrder, compare, symbols } from '@manatsu/shared';
 import {
   type VNode,
   computed,
@@ -13,8 +14,8 @@ import {
   triggerRef
 } from 'vue';
 import { columnMapKey } from './symbols';
-import { collator, intoNestedValue } from './utils';
-import type { ColumnMap, TableColumn, TableProps, TableRowClickEvent } from './types';
+import { intoNestedValue } from './utils';
+import type { ColumnMap, ColumnSortFn, TableColumn, TableProps, TableRowClickEvent } from './types';
 
 const rows = defineModel<any[]>({ required: true });
 
@@ -61,12 +62,17 @@ provide(columnMapKey, columnMap);
 
 const columns = computed(() => Array.from(columnMap.value.values()));
 
-function sort(field: unknown, order: SortOrder) {
+function sort(field: unknown, order: SortOrder, sortFn: Nullish<ColumnSortFn>) {
   if (typeof field !== 'string') return;
   rows.value.sort((a, b) => {
+    if (typeof sortFn === 'function') {
+      const result = sortFn(a, b, compare);
+      return order === 'asc' ? result : -result;
+    }
+
     const first = intoNestedValue(order === 'asc' ? a : b, field);
     const second = intoNestedValue(order === 'asc' ? b : a, field);
-    return collator.compare(String(first), String(second));
+    return compare(first, second);
   });
 }
 
@@ -74,7 +80,7 @@ function onColumnClick(column: TableColumn) {
   if (column.props.sortable) {
     const order: SortOrder = column.order ?? 'asc';
     column.order = order === 'asc' ? 'desc' : 'asc';
-    sort(column.props.field, order);
+    sort(column.props.field, order, column.props.sortFn);
 
     // We manually trigger the model so ShallowRefs can detect the change.
     triggerRef(rows);
@@ -83,7 +89,7 @@ function onColumnClick(column: TableColumn) {
 
 onBeforeMount(() => {
   if (props.sortField) {
-    sort(props.sortField, props.sortOrder);
+    sort(props.sortField, props.sortOrder, null);
   }
 });
 

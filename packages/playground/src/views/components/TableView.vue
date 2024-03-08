@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { shallowRef } from 'vue';
+import type { ColumnSortFn } from 'manatsu/src/index.ts';
 
 interface Row {
   age: number;
   email: { address: string };
   id: number;
-  name: string;
+  name: [symbol, string[]];
 }
 
-const rows = ref(generateRows(100));
+const rows = shallowRef(generateRows(100));
 
 function generateRows(amount: number) {
   const newRows: Row[] = [];
@@ -16,11 +17,11 @@ function generateRows(amount: number) {
   const random = () => Math.floor(Math.random() * hiragana.length);
 
   for (let i = 0; i < amount; i++) {
-    const name = `${hiragana[random()]}${hiragana[random()]}${hiragana[random()]}`;
+    const name = [hiragana[random()], hiragana[random()], hiragana[random()]];
     const address = `${crypto.randomUUID().slice(0, 8)}@example.com`;
     newRows.push({
       id: i + 1,
-      name,
+      name: [Symbol(), name],
       age: amount - i,
       email: { address }
     });
@@ -28,6 +29,10 @@ function generateRows(amount: number) {
 
   return newRows;
 }
+
+const sortName: ColumnSortFn = (a: Row, b: Row, compare) => {
+  return compare(a.name[1].join(''), b.name[1].join(''));
+};
 </script>
 
 <template>
@@ -39,13 +44,13 @@ function generateRows(amount: number) {
     @row-dblclick="console.log('row-dbclick', $event)"
   >
     <m-table-column field="id" name="ID" />
-    <m-table-column field="name" name="Name">
+    <m-table-column field="name" name="Name" :sort-fn="sortName">
       <template #header="{ column }">
         <span>{{ column.name }}</span>
       </template>
 
       <template #body="{ row }: { row: Row }">
-        <strong>{{ row.name }}</strong>
+        <span>{{ row.name[1].join('') }}</span>
       </template>
     </m-table-column>
     <m-table-column field="age" name="Age" />

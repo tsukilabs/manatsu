@@ -36,6 +36,7 @@ onMounted(() => {
         headerClass: props.headerClass,
         headerStyle: props.headerStyle,
         name: props.name,
+        sortFn: props.sortFn,
         sortable: props.sortable
       },
       slots: {

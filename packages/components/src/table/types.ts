@@ -1,18 +1,9 @@
 import type { StyleValue, VNode } from 'vue';
-import type { SortOrder } from '@manatsu/shared';
 import type { Nullish } from '@tb-dev/utility-types';
-
-export interface TableColumn {
-  props: TableColumnProps;
-  slots: {
-    body?: (slotProps: TableColumnBodySlotProps) => VNode;
-    header?: (slotProps: TableColumnHeaderSlotProps) => VNode;
-  };
-
-  order?: Nullish<SortOrder>;
-}
+import type { SortOrder, compare } from '@manatsu/shared';
 
 export type ColumnMap = Map<symbol, TableColumn>;
+export type ColumnSortFn = (a: any, b: any, compareFn: typeof compare) => number;
 
 export interface TableProps {
   maxHeight?: string | number;
@@ -43,6 +34,7 @@ export interface TableColumnProps {
   headerClass?: string;
   headerStyle?: StyleValue;
   name: string;
+  sortFn?: Nullish<ColumnSortFn>;
   sortable?: boolean;
 }
 
@@ -53,6 +45,16 @@ export interface TableColumnBodySlotProps {
 
 export interface TableColumnHeaderSlotProps {
   column: TableColumnProps;
+}
+
+export interface TableColumn {
+  props: TableColumnProps;
+  slots: {
+    body?: (slotProps: TableColumnBodySlotProps) => VNode;
+    header?: (slotProps: TableColumnHeaderSlotProps) => VNode;
+  };
+
+  order?: Nullish<SortOrder>;
 }
 
 export interface TableRowClickEvent {

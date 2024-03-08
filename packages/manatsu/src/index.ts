@@ -64,6 +64,7 @@ export {
 export type {
   ButtonVariant,
   CardVariant,
+  ColumnSortFn,
   SidebarItem,
   TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
