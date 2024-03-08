@@ -17,6 +17,11 @@
       "url": "https://tb.dev.br/"
     }
   ],
+  "keywords": [
+    "manatsu",
+    "tauri",
+    "plugin"
+  ],
   "type": "module",
   "files": [
     "dist"

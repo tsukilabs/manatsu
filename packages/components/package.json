@@ -23,7 +23,8 @@
   "keywords": [
     "manatsu",
     "components",
-    "vue"
+    "vue",
+    "tauri"
   ],
   "type": "module",
   "files": [

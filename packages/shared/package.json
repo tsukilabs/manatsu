@@ -17,6 +17,9 @@
       "url": "https://tb.dev.br/"
     }
   ],
+  "keywords": [
+    "manatsu"
+  ],
   "type": "module",
   "files": [
     "dist"
