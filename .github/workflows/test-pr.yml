@@ -21,6 +21,17 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+          cache: 'pnpm'
+
+      - uses: actions/cache@v4
+        with:
+          key: cargo-${{ matrix.os }}
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            .cargo-cache
+            target/
 
       - if: matrix.os == 'ubuntu-latest'
         run: |
