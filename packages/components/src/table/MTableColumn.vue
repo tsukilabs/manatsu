@@ -16,7 +16,7 @@ const slots = defineSlots<{
 }>();
 
 const columns = inject(columnMapKey, null);
-const columnSymbol = Symbol('m-table-column');
+const columnSymbol = Symbol();
 
 const emptyComponent = defineComponent({
   render() {

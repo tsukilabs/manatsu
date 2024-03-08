@@ -8,6 +8,7 @@ const visible = defineModel<boolean>('visible', { required: true });
 const props = withDefaults(defineProps<DialogProps>(), {
   appendTo: 'body',
   draggable: true,
+  esc: true,
   storageType: 'session'
 });
 
@@ -174,7 +175,7 @@ function getStorage() {
   }
 
   &-footer {
-    @include flex.x-end-y-center;
+    @include flex.center;
     padding: 1rem;
     width: 100%;
   }

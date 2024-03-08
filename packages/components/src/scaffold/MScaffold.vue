@@ -62,7 +62,7 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 }
 
 // Dialog
-const dialog = inject(privateSymbols.scaffoldDialog);
+const shouldPlaceDialog = inject(privateSymbols.placeDialogOnScaffold);
 
 defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
 </script>
@@ -109,7 +109,7 @@ defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
       <slot name="bottom"></slot>
     </div>
 
-    <m-dynamic-dialog v-if="dialog" />
+    <m-dynamic-dialog v-if="shouldPlaceDialog" />
   </div>
 </template>
 

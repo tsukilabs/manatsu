@@ -3,8 +3,12 @@ import { useRoute } from 'vue-router';
 import { startCase } from 'lodash-es';
 import { useLocalStorage } from '@vueuse/core';
 import { symbols } from 'manatsu/src/index.ts';
-import { inject, shallowRef, watchEffect } from 'vue';
-import type { SidebarItem, TopAppbarMenuItem } from '@manatsu/components/src/index.ts';
+import { type ComponentInstance, inject, shallowRef, watchEffect } from 'vue';
+import {
+  MTopAppbar,
+  type SidebarItem,
+  type TopAppbarMenuItem
+} from '@manatsu/components/src/index.ts';
 import { components } from './routes';
 import { StorageKey, useInvoke } from './utils';
 
@@ -14,8 +18,7 @@ watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = inject(symbols.darkMode);
 
-type TopBar = typeof import('@manatsu/components/src/appbar/index.ts').MTopAppbar;
-const topBarRef = shallowRef<InstanceType<TopBar> | null>(null);
+const topBarRef = shallowRef<ComponentInstance<typeof MTopAppbar> | null>(null);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
