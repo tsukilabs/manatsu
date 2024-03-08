@@ -80,3 +80,10 @@ pub fn dts<P: AsRef<str>>(package: P) -> Result<PathBuf> {
   let path = dist(package)?.join("index.d.ts");
   Ok(path)
 }
+
+/// Returns the path to the `index.ts` file of a given package.
+pub fn index<P: AsRef<str>>(package: P) -> Result<PathBuf> {
+  let package = package.as_ref();
+  let path = src(package)?.join("index.ts");
+  Ok(path)
+}

@@ -1,5 +1,4 @@
 use crate::prelude::*;
-use std::fs;
 
 #[derive(Debug, clap::Args)]
 pub struct Build {

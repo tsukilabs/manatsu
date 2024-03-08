@@ -1,9 +1,8 @@
 use crate::prelude::*;
-use std::fs;
-use std::path::Path;
+use indoc::formatdoc;
 
 /// <https://regex101.com/r/vBQTOL>
-const NAME_REGEX: &str = r"^use(?:-?[a-zA-Z])*$";
+const NAME_REGEX: &str = r"^(define|use)(?:-?[a-zA-Z])*$";
 
 pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
@@ -30,7 +29,7 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   Formatter::new(&glob).format().await?;
 
   // Adds an export declaration to the src index.
-  write_to_src_index(&camel)?;
+  update_src_index()?;
 
   // Lint the files to ensure that the exports are sorted.
   Linter::new(&glob)
@@ -45,31 +44,54 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
 }
 
 fn write_index(camel: &str, dir: &Path) -> Result<()> {
-  let mut cts = String::from("import { type MaybeRefOrGetter, toRef } from 'vue';\n\n");
-  cts.push_str(format!("export function {camel}() {{ /* TODO */ }}").as_str());
+  let contents = formatdoc! {"
+    import {{ type MaybeRefOrGetter, toRef }} from 'vue';
+
+    export function {camel}() {{ /* TODO */ }}
+  "};
 
   let path = dir.join("index.ts");
-  fs::write(path, cts).map_err(Into::into)
+  fs::write(path, contents).map_err(Into::into)
 }
 
 fn write_test(camel: &str, dir: &Path) -> Result<()> {
-  let mut cts = String::from("import { describe, it } from 'vitest';\n");
-  cts.push_str(format!("// import {{ {camel} }} from '.';\n\n").as_str());
-  cts.push_str(format!("describe('{camel}', () => {{ it.todo('todo'); }});").as_str());
+  let contents = formatdoc! {"
+    import {{ describe, it }} from 'vitest';
+
+    // import {{ {camel} }} from '.';
+
+    describe('{camel}', () => {{
+      it.todo('todo');
+    }});
+  "};
 
   let path = dir.join("index.test.ts");
-  fs::write(path, cts).map_err(Into::into)
+  fs::write(path, contents).map_err(Into::into)
 }
 
-fn write_to_src_index(camel: &str) -> Result<()> {
+fn update_src_index() -> Result<()> {
   let src = package::src("composables")?;
-  let path = src.join("index.ts");
+  let mut composables = Vec::new();
 
-  let mut cts = fs::read_to_string(&path)?;
-  let export_decl = format!("export * from './{camel}';\n");
-  cts.push_str(export_decl.as_str());
+  for entry in fs::read_dir(&src)? {
+    if matches!(entry, Ok(ref e) if e.file_type().map(|t| t.is_dir()).unwrap_or(false)) {
+      if let Ok(name) = entry?.file_name().into_string() {
+        composables.push(name);
+      }
+    }
+  }
 
-  fs::write(path, cts).map_err(Into::into)
+  composables.sort_unstable();
+
+  let index = package::index("composables")?;
+  let mut cts = String::with_capacity(composables.len() * 30);
+
+  for composable in composables {
+    let export_decl = format!("export * from './{composable}';\n");
+    cts.push_str(export_decl.as_str());
+  }
+
+  fs::write(index, cts).map_err(Into::into)
 }
 
 /// Determines whether the composable name is valid.

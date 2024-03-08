@@ -1,6 +1,5 @@
 use crate::prelude::*;
-use std::fs;
-use std::path::Path;
+use indoc::formatdoc;
 
 /// <https://regex101.com/r/igEb6A>
 const NAME_REGEX: &str = r"^[a-z][a-z-]*$";
@@ -28,7 +27,8 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   write_typings(&pascal, &dir)?;
   write_vue(&kebab, &pascal, &dir)?;
   write_test(&kebab, &pascal, &dir)?;
-  write_to_src_index(&kebab)?;
+
+  update_src_index()?;
 
   let glob = format!("**/components/src/{kebab}/**/*.{{ts,vue}}");
   Formatter::new(&glob).format().await?;
@@ -47,54 +47,84 @@ pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
 }
 
 fn write_index(pascal: &str, dir: &Path) -> Result<()> {
-  let mut index = format!("export {{ default as M{pascal} }} from './M{pascal}.vue';\n");
-  index.push_str("export type * from './types';");
+  let contents = formatdoc! {"
+    export {{ default as M{pascal} }} from './M{pascal}.vue';
+    export type * from './types';
+  "};
 
   let path = dir.join("index.ts");
-  fs::write(path, index).map_err(Into::into)
+  fs::write(path, contents).map_err(Into::into)
 }
 
 fn write_typings(pascal: &str, dir: &Path) -> Result<()> {
-  let cts = format!("export interface {pascal}Props {{}}");
+  let contents = format!("export interface {pascal}Props {{}}");
 
   let path = dir.join("types.ts");
-  fs::write(path, cts).map_err(Into::into)
+  fs::write(path, contents).map_err(Into::into)
 }
 
 fn write_vue(kebab: &str, pascal: &str, dir: &Path) -> Result<()> {
-  let mut cts = String::from("<script setup lang=\"ts\">\n");
-  cts.push_str(format!("import type {{ {pascal}Props }} from './types';\n\n").as_str());
-  cts.push_str(format!("defineProps<{pascal}Props>();\n").as_str());
-  cts.push_str("</script>\n\n");
-  cts.push_str(format!("<template>\n<div class=\"m-{kebab}\"></div>\n</template>\n\n").as_str());
-  cts.push_str(format!("<style lang=\"scss\">\n.m-{kebab} {{}}\n</style>").as_str());
+  let contents = formatdoc! {"
+    <script setup lang=\"ts\">
+    import type {{ {pascal}Props }} from './types';
+
+    defineProps<{pascal}Props>();
+    </script>
+
+    <template>
+      <div class=\"m-{kebab}\"></div>
+    </template>
+
+    <style lang=\"scss\">
+    .m-{kebab} {{}}
+    </style>
+  "};
 
   let path = dir.join(format!("M{pascal}.vue"));
-  fs::write(path, cts).map_err(Into::into)
+  fs::write(path, contents).map_err(Into::into)
 }
 
 fn write_test(kebab: &str, pascal: &str, dir: &Path) -> Result<()> {
-  let mut cts = String::from("import { afterEach, describe, it } from 'vitest';\n");
-  cts.push_str("import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';\n");
-  cts.push_str("import { config, enableAutoUnmount } from '@vue/test-utils';\n");
-  cts.push_str(format!("// import M{pascal} from './M{pascal}.vue';\n\n").as_str());
-  cts.push_str("enableAutoUnmount(afterEach);\n\n");
-  cts.push_str("config.global.plugins = [createManatsu()];\n\n");
-  cts.push_str(format!("describe('{kebab}', () => {{ it.todo('todo'); }});").as_str());
+  let contents = formatdoc! {"
+    import {{ afterEach, describe, it }} from 'vitest';
+    import {{ createManatsu }} from '@manatsu/vue-plugin/src/index.ts';
+    import {{ config, enableAutoUnmount }} from '@vue/test-utils';
+    // import M{pascal} from './M{pascal}.vue';
+
+    enableAutoUnmount(afterEach);
+
+    config.global.plugins = [createManatsu()];
+    
+    describe('{kebab}', () => {{ it.todo('todo'); }});
+  "};
 
   let path = dir.join(format!("M{pascal}.test.ts"));
-  fs::write(path, cts).map_err(Into::into)
+  fs::write(path, contents).map_err(Into::into)
 }
 
-fn write_to_src_index(kebab: &str) -> Result<()> {
+fn update_src_index() -> Result<()> {
   let src = package::src("components")?;
-  let path = src.join("index.ts");
+  let mut components = Vec::new();
 
-  let mut cts = fs::read_to_string(&path)?;
-  let export_decl = format!("export * from './{kebab}';\n");
-  cts.push_str(export_decl.as_str());
+  for entry in fs::read_dir(&src)? {
+    if matches!(entry, Ok(ref e) if e.file_type().map(|t| t.is_dir()).unwrap_or(false)) {
+      if let Ok(name) = entry?.file_name().into_string() {
+        components.push(name);
+      }
+    }
+  }
 
-  fs::write(path, cts).map_err(Into::into)
+  components.sort_unstable();
+
+  let index = package::index("components")?;
+  let mut cts = String::with_capacity(components.len() * 30);
+
+  for component in components {
+    let export_decl = format!("export * from './{component}';\n");
+    cts.push_str(export_decl.as_str());
+  }
+
+  fs::write(index, cts).map_err(Into::into)
 }
 
 /// Determines whether the component name is valid.

@@ -1,6 +1,5 @@
 use crate::prelude::*;
 use std::collections::HashSet;
-use std::{env, fs};
 use walkdir::WalkDir;
 
 // https://regex101.com/r/mdP6Q7

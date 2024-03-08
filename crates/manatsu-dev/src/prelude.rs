@@ -6,4 +6,6 @@ pub use convert_case::{Case, Casing};
 pub use globset::Glob;
 pub use manatsu::{cargo, pnpm};
 pub use regex::Regex;
+pub use std::path::Path;
 pub use std::time::Instant;
+pub use std::{env, fs};

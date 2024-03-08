@@ -1,5 +1,4 @@
 use crate::prelude::*;
-use std::{env, fs};
 
 /// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {
