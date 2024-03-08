@@ -106,7 +106,7 @@ fn update_src_index() -> Result<()> {
   let src = package::src("components")?;
   let mut components = Vec::new();
 
-  for entry in fs::read_dir(&src)? {
+  for entry in fs::read_dir(src)? {
     if matches!(entry, Ok(ref e) if e.file_type().map(|t| t.is_dir()).unwrap_or(false)) {
       if let Ok(name) = entry?.file_name().into_string() {
         components.push(name);
