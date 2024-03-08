@@ -1,13 +1,6 @@
 import type { StyleValue, VNode } from 'vue';
-
-export interface TableColumnBodySlotProps {
-  index: number;
-  row: any;
-}
-
-export interface TableColumnHeaderSlotProps {
-  column: TableColumnProps;
-}
+import type { SortOrder } from '@manatsu/shared';
+import type { Nullish } from '@tb-dev/utility-types';
 
 export interface TableColumn {
   props: TableColumnProps;
@@ -15,9 +8,11 @@ export interface TableColumn {
     body?: (slotProps: TableColumnBodySlotProps) => VNode;
     header?: (slotProps: TableColumnHeaderSlotProps) => VNode;
   };
+
+  order?: Nullish<SortOrder>;
 }
 
-export type TableColumnMap = Map<symbol, TableColumn>;
+export type ColumnMap = Map<symbol, TableColumn>;
 
 export interface TableProps {
   maxHeight?: string | number;
@@ -26,7 +21,7 @@ export interface TableProps {
   /** Field used to sort the table by default. */
   sortField?: string;
   /** Order to sort the table by default. */
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: SortOrder;
   striped?: boolean;
   tableClass?: string;
   tableLayout?: 'auto' | 'fixed';
@@ -48,9 +43,19 @@ export interface TableColumnProps {
   headerClass?: string;
   headerStyle?: StyleValue;
   name: string;
+  sortable?: boolean;
 }
 
-export interface TableClickEvent {
+export interface TableColumnBodySlotProps {
+  index: number;
+  row: any;
+}
+
+export interface TableColumnHeaderSlotProps {
+  column: TableColumnProps;
+}
+
+export interface TableRowClickEvent {
   /** Clicked row data. */
   data: any;
   /** Original DOM event. */

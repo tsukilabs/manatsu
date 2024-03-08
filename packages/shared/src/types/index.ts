@@ -1,9 +1,7 @@
+import type { StyleValue } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
-import type { MaybeRefOrGetter, StyleValue } from 'vue';
 
-export type DarkMode = boolean | 'auto';
-
-export type MaybeNullishRef<T> = MaybeRefOrGetter<Nullish<T>>;
+export * from './utils';
 
 export interface DialogOptions {
   /** @default 'body' */

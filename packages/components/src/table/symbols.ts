@@ -1,4 +1,4 @@
 import type { InjectionKey, ShallowRef } from 'vue';
-import type { TableColumnMap } from './types';
+import type { ColumnMap } from './types';
 
-export const columnMapKey = Symbol() as InjectionKey<ShallowRef<TableColumnMap>>;
+export const columnMapKey = Symbol() as InjectionKey<ShallowRef<ColumnMap>>;

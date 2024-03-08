@@ -8,7 +8,9 @@ import type {
   TableColumnProps
 } from './types';
 
-const props = defineProps<TableColumnProps>();
+const props = withDefaults(defineProps<TableColumnProps>(), {
+  sortable: true
+});
 
 const slots = defineSlots<{
   body?: (slotProps: TableColumnBodySlotProps) => VNode;
@@ -33,7 +35,8 @@ onMounted(() => {
         field: props.field,
         headerClass: props.headerClass,
         headerStyle: props.headerStyle,
-        name: props.name
+        name: props.name,
+        sortable: props.sortable
       },
       slots: {
         body: slots.body,

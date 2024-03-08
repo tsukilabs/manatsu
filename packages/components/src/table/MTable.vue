@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { toPixel } from '@tb-dev/utils';
-import { whenever } from '@vueuse/core';
-import { symbols } from '@manatsu/shared';
-import { type VNode, computed, inject, isRef, onUnmounted, provide, shallowRef } from 'vue';
+import { type SortOrder, symbols } from '@manatsu/shared';
+import {
+  type VNode,
+  computed,
+  inject,
+  isRef,
+  onBeforeMount,
+  onUnmounted,
+  provide,
+  shallowRef
+} from 'vue';
 import { columnMapKey } from './symbols';
-import { intoNestedValue } from './utils';
-import type { TableClickEvent, TableColumnMap, TableProps } from './types';
+import { collator, intoNestedValue } from './utils';
+import type { ColumnMap, TableColumn, TableProps, TableRowClickEvent } from './types';
 
 const rows = defineModel<any[]>({ required: true });
 
@@ -17,8 +25,8 @@ const props = withDefaults(defineProps<TableProps>(), {
 });
 
 defineEmits<{
-  (e: 'row-click', value: TableClickEvent): void;
-  (e: 'row-dblclick', value: TableClickEvent): void;
+  (e: 'row-click', value: TableRowClickEvent): void;
+  (e: 'row-dblclick', value: TableRowClickEvent): void;
 }>();
 
 defineSlots<{ default?: () => VNode }>();
@@ -47,27 +55,33 @@ const tableMaxHeight = computed(() => {
   return 'auto';
 });
 
-const columnMap = shallowRef<TableColumnMap>(new Map());
+const columnMap = shallowRef<ColumnMap>(new Map());
 provide(columnMapKey, columnMap);
 
 const columns = computed(() => Array.from(columnMap.value.values()));
 
-whenever(() => props.sortField, sort, { immediate: true, once: true });
-
-function sort(field: unknown) {
+function sort(field: unknown, order: SortOrder) {
   if (typeof field !== 'string') return;
   rows.value.sort((a, b) => {
-    const first = intoNestedValue(props.sortOrder === 'asc' ? a : b, field);
-    const second = intoNestedValue(props.sortOrder === 'asc' ? b : a, field);
-    console.log(first, second);
-
-    if (typeof first === 'number' && typeof second === 'number') {
-      return first - second;
-    }
-
-    return String(first).localeCompare(String(second));
+    const first = intoNestedValue(order === 'asc' ? a : b, field);
+    const second = intoNestedValue(order === 'asc' ? b : a, field);
+    return collator.compare(String(first), String(second));
   });
 }
+
+function onColumnClick(column: TableColumn) {
+  if (column.props.sortable) {
+    const order: SortOrder = column.order ?? 'asc';
+    column.order = order === 'asc' ? 'desc' : 'asc';
+    sort(column.props.field, order);
+  }
+}
+
+onBeforeMount(() => {
+  if (props.sortField) {
+    sort(props.sortField, props.sortOrder);
+  }
+});
 
 onUnmounted(() => {
   columnMap.value.clear();
@@ -84,6 +98,7 @@ onUnmounted(() => {
             :key="column.props.field"
             :class="column.props.headerClass"
             :style="column.props.headerStyle"
+            @click="onColumnClick(column)"
           >
             <component
               :is="column.slots.header"
@@ -97,12 +112,12 @@ onUnmounted(() => {
 
       <tbody class="m-table-body" :class="tbodyClass" :style="tbodyStyle">
         <tr
-          v-for="(row, index) of rows"
-          :key="rowKey(row)"
+          v-for="(data, index) of rows"
+          :key="rowKey(data)"
           :class="tbodyRowClass"
           :style="tbodyRowStyle"
-          @click="$emit('row-click', { index, data: row, event: $event })"
-          @dblclick="$emit('row-dblclick', { index, data: row, event: $event })"
+          @click="$emit('row-click', { index, data, event: $event })"
+          @dblclick="$emit('row-dblclick', { index, data, event: $event })"
         >
           <td
             v-for="column of columns"
@@ -110,8 +125,8 @@ onUnmounted(() => {
             :class="column.props.bodyClass"
             :style="column.props.bodyStyle"
           >
-            <component :is="column.slots.body" v-if="column.slots.body" :index :row />
-            <span v-else>{{ intoNestedValue(row, column.props.field) }}</span>
+            <component :is="column.slots.body" v-if="column.slots.body" :index :row="data" />
+            <span v-else>{{ intoNestedValue(data, column.props.field) }}</span>
           </td>
         </tr>
       </tbody>
