@@ -1,10 +1,9 @@
 mod command;
 mod error;
+mod prelude;
 
 use tauri::plugin::{Builder, TauriPlugin};
 use tauri::Runtime;
-
-type Result<T> = std::result::Result<T, error::Error>;
 
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
   Builder::new("manatsu")

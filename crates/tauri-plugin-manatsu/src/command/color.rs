@@ -1,10 +1,9 @@
-use crate::error::Error;
-use crate::Result;
+use crate::prelude::*;
 use manatsu::color::{Color, Hex, Hsl, Rgb};
 
 #[tauri::command]
 pub async fn string_to_hex(color: String) -> Result<Hex> {
-  Hex::try_from(color.as_str()).map_err(|e| Error::Color(e.to_string()))
+  Hex::try_from(color.as_str()).map_err(Into::into)
 }
 
 #[tauri::command]
@@ -54,18 +53,18 @@ pub async fn hsl_to_string(hsl: Hsl) -> String {
 
 /// Generate a random hex color.
 #[tauri::command]
-pub async fn random_hex_color() -> String {
-  Hex::random().into()
+pub async fn random_hex_color() -> Hex {
+  Hex::random()
 }
 
 /// Generate a random HSL color.
 #[tauri::command]
-pub async fn random_hsl_color() -> String {
-  Hsl::random().into()
+pub async fn random_hsl_color() -> Hsl {
+  Hsl::random()
 }
 
 /// Generate a random RGB color.
 #[tauri::command]
-pub async fn random_rgb_color() -> String {
-  Rgb::random().into()
+pub async fn random_rgb_color() -> Rgb {
+  Rgb::random()
 }
