@@ -28,7 +28,7 @@ version = "1.0.197"
 features = ["derive"]
 
 [dependencies.tauri-plugin-manatsu]
-version = "0.4"
+version = "0.5"
 path = "../../../crates/tauri-plugin-manatsu"
 
 [features]

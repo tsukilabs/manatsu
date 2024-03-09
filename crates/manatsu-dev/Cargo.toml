@@ -47,7 +47,7 @@ version = "4.5.2"
 features = ["derive"]
 
 [dependencies.manatsu]
-version = "0.4"
+version = "0.5"
 path = "../manatsu"
 
 [dependencies.serde]
@@ -60,14 +60,8 @@ features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.11.25"
-features = [
-    "gzip",
-    "json",
-]
+features = ["gzip", "json"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = [
-    "macros",
-    "rt-multi-thread",
-]
+features = ["macros", "rt-multi-thread"]
