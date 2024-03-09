@@ -11,8 +11,8 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
       '@tb-dev/auto-import-config':
-        specifier: ^1.0.2
-        version: 1.0.2(@tb-dev/utility-types@1.2.0)(@vueuse/core@10.9.0)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21)
+        specifier: ^1.0.3
+        version: 1.0.3(@tb-dev/utility-types@1.2.0)(@vueuse/core@10.9.0)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21)
       '@tb-dev/eslint-config':
         specifier: ^3.0.1
         version: 3.0.1(eslint@8.57.0)(typescript@5.4.2)(vitest@1.3.1)
@@ -1643,10 +1643,10 @@ packages:
       }
     engines: { node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1' }
 
-  /@tb-dev/auto-import-config@1.0.2(@tb-dev/utility-types@1.2.0)(@vueuse/core@10.9.0)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21):
+  /@tb-dev/auto-import-config@1.0.3(@tb-dev/utility-types@1.2.0)(@vueuse/core@10.9.0)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-tdUglYht8L+6+Vbo/ABpGZm8HJTf5/4lQlR5j03v2QZbIPTNM0J0g8wNV8HfNwu1/GkjUjNKmF1iEFZNziuQyw==
+        integrity: sha512-WoqgZJWfWfLuiUUHEU/jlRfjUfev/o87kFdF2nbnpDxvmpaTo83uboNdcETvnPgBnZdTxIF6OEPLhyGCYD0GEQ==
       }
     engines: { node: '>=20' }
     peerDependencies:
