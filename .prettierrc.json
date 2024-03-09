@@ -12,9 +12,9 @@
   "vueIndentScriptAndStyle": false,
   "tailwindConfig": "./packages/playground/tailwind.config.js",
   "tailwindAttributes": [
+    "body-class",
     "bottom-class",
     "center-class",
-    "container-class",
     "content-class",
     "dialog-class",
     "end-class",
@@ -31,7 +31,6 @@
     "sidebar-item-class",
     "start-class",
     "subtitle-class",
-    "table-class",
     "tbody-class",
     "tbody-row-class",
     "thead-class",

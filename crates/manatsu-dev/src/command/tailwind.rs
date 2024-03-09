@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use walkdir::WalkDir;
 
 // https://regex101.com/r/mdP6Q7
-const CLASS_REGEX: &str = r#":class="([a-zA-Z]+Class)"#;
+const CLASS_REGEX: &str = r#":class="(?:.*\.)?([a-zA-Z]+Class)""#;
 
 /// Collect all non-standard class attributes used by Manatsu.
 pub fn tailwind() -> Result<()> {
@@ -43,7 +43,6 @@ pub fn tailwind() -> Result<()> {
   println!("{}", "writing class attributes...".bright_cyan());
 
   let prettier = env::current_dir()?.join(".prettierrc.json");
-  println!("writing: {}", prettier.display());
   if let Ok(true) = prettier.try_exists() {
     let content = fs::read_to_string(&prettier)?;
     let mut value = serde_json::from_str::<serde_json::Value>(&content)?;
