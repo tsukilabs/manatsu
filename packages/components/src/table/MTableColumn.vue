@@ -32,6 +32,7 @@ onMounted(() => {
       props: {
         bodyClass: props.bodyClass,
         bodyStyle: props.bodyStyle,
+        columnKey: props.columnKey,
         field: props.field,
         headerClass: props.headerClass,
         headerStyle: props.headerStyle,

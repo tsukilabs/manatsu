@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toPixel } from '@tb-dev/utils';
+import { isNullish, toPixel } from '@tb-dev/utils';
 import type { Nullish } from '@tb-dev/utility-types';
 import { type SortOrder, compare, symbols } from '@manatsu/shared';
 import {
@@ -104,8 +104,8 @@ onUnmounted(() => {
       <thead class="m-table-head" :class="theadClass" :style="theadStyle">
         <tr :class="theadRowClass" :style="theadRowStyle">
           <th
-            v-for="column of columns"
-            :key="column.props.field"
+            v-for="(column, index) of columns"
+            :key="column.props.columnKey ?? column.props.field ?? index"
             :class="column.props.headerClass"
             :style="column.props.headerStyle"
             @click="onColumnClick(column)"
@@ -115,7 +115,9 @@ onUnmounted(() => {
               v-if="column.slots.header"
               :column="column.props"
             />
-            <span v-else>{{ column.props.name }}</span>
+            <span v-else-if="!isNullish(column.props.name)">
+              {{ column.props.name }}
+            </span>
           </th>
         </tr>
       </thead>
@@ -131,12 +133,14 @@ onUnmounted(() => {
         >
           <td
             v-for="column of columns"
-            :key="column.props.field"
+            :key="column.props.columnKey ?? column.props.field ?? index"
             :class="column.props.bodyClass"
             :style="column.props.bodyStyle"
           >
             <component :is="column.slots.body" v-if="column.slots.body" :index :row="data" />
-            <span v-else>{{ intoNestedValue(data, column.props.field) }}</span>
+            <span v-else-if="!isNullish(column.props.field)">
+              {{ intoNestedValue(data, column.props.field) }}
+            </span>
           </td>
         </tr>
       </tbody>

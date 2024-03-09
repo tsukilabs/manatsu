@@ -30,10 +30,11 @@ export interface TableProps {
 export interface TableColumnProps {
   bodyClass?: string;
   bodyStyle?: StyleValue;
-  field: string;
+  columnKey?: Nullish<string>;
+  field?: Nullish<string>;
   headerClass?: string;
   headerStyle?: StyleValue;
-  name: string;
+  name?: Nullish<string>;
   sortFn?: Nullish<ColumnSortFn>;
   sortable?: boolean;
 }

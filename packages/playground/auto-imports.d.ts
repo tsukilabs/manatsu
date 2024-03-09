@@ -67,15 +67,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type {
-    Component,
-    ComponentInstance,
-    MaybeRefOrGetter,
-    Ref,
-    ShallowRef,
-    VNode,
-    VNodeProps
-  } from 'vue';
+  export type { Component, ComponentInstance, MaybeRefOrGetter, Ref, ShallowRef, VNode } from 'vue';
   import('vue');
   // @ts-ignore
   export type { MaybeArray, MaybePromise, Nullish, PartialNullish } from '@tb-dev/utility-types';
