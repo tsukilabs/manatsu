@@ -43,6 +43,7 @@ declare global {
   const tryOnUnmounted: (typeof import('@vueuse/core'))['tryOnUnmounted'];
   const unref: (typeof import('vue'))['unref'];
   const useAsyncState: (typeof import('@vueuse/core'))['useAsyncState'];
+  const useElementSize: (typeof import('@vueuse/core'))['useElementSize'];
   const useIntersectionObserver: (typeof import('@vueuse/core'))['useIntersectionObserver'];
   const useLocalStorage: (typeof import('@vueuse/core'))['useLocalStorage'];
   const useMutationObserver: (typeof import('@vueuse/core'))['useMutationObserver'];
