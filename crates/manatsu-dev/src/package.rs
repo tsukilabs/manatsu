@@ -18,8 +18,8 @@ impl<'a> Package {
     "manatsu",
     "components",
     "composables",
-    "sass",
     "shared",
+    "style",
     "tauri-plugin",
     "vue-plugin",
   ];

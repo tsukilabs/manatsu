@@ -45,13 +45,13 @@
   "stylelint.packageManager": "pnpm",
   "conventionalCommits.promptScopes": true,
   "conventionalCommits.scopes": [
-    "css",
+    "cli",
+    "cli-dev",
     "components",
     "composables",
     "core",
     "playground",
-    "cli",
-    "cli-dev",
+    "style",
     "tauri-plugin",
     "vue-plugin"
   ],
@@ -90,6 +90,6 @@
     "**/dist/**",
     "**/target/**",
     "**/packages/components/**",
-    "**/packages/sass/**"
+    "**/packages/style/**"
   ]
 }

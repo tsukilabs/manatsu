@@ -59,7 +59,7 @@ defineExpose({ startWidth, centerWidth, endWidth });
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
+@use '@manatsu/style/mixins/flex';
 
 .m-toolbar {
   @include flex.x-between-y-center;

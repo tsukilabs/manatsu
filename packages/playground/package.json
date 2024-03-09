@@ -28,7 +28,7 @@
   "dependencies": {
     "@manatsu/components": "workspace:*",
     "@manatsu/composables": "workspace:*",
-    "@manatsu/sass": "workspace:*",
+    "@manatsu/style": "workspace:*",
     "@manatsu/shared": "workspace:*",
     "@manatsu/tauri-plugin": "workspace:*",
     "lodash-es": "^4.17.21",

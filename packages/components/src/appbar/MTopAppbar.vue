@@ -113,7 +113,7 @@ defineExpose({ startWidth, endWidth });
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
+@use '@manatsu/style/mixins/flex';
 
 .m-top-appbar {
   @include flex.x-between-y-center;
