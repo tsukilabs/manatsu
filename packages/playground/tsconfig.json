@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*", "src/**/*.vue"],
+  "include": ["src/**/*", "src/**/*.vue", "auto-imports.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",

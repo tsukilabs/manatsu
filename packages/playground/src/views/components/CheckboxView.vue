@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
 const first = ref(false);
 const second = ref('yes');
 const third = ref(0);

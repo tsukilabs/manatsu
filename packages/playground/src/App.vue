@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
 import { startCase } from 'lodash-es';
-import { useLocalStorage } from '@vueuse/core';
 import { symbols } from 'manatsu/src/index.ts';
-import { type ComponentInstance, inject, shallowRef, watchEffect } from 'vue';
 import {
   MTopAppbar,
   type SidebarItem,

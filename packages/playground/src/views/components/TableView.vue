@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue';
 import type { ColumnSortFn } from 'manatsu/src/index.ts';
 
 interface Row {

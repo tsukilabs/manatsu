@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { h, ref } from 'vue';
 import { useDialog } from '@manatsu/composables/src/index.ts';
 import LoremIpsum from '../../components/LoremIpsum.vue';
 
