@@ -66,9 +66,8 @@ fn should_build(package: &str) -> bool {
     return false;
   }
 
-  // The sass package doesn't need to be built.
-  // And the shared package has already been built.
-  package != "sass" && package != "shared"
+  // The shared package has already been built.
+  package != "shared"
 }
 
 fn copy_files(packages: &Vec<String>) -> Result<()> {

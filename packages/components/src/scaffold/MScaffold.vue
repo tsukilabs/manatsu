@@ -114,7 +114,7 @@ defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
+@use '@manatsu/style/mixins/flex';
 
 /** This is applied to the top and bottom bars. */
 @mixin outside {

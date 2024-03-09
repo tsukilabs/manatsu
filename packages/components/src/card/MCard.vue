@@ -106,7 +106,7 @@ const mediaOrder = computed(() => {
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
+@use '@manatsu/style/mixins/flex';
 
 .m-card {
   @include flex.center;

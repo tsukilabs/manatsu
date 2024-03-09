@@ -28,7 +28,7 @@ defineSlots<{ default?: () => VNode }>();
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
+@use '@manatsu/style/mixins/flex';
 
 .m-radio {
   @include flex.y-center($inline: true);

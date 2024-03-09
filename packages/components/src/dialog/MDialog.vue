@@ -134,7 +134,7 @@ function getStorage() {
 </template>
 
 <style lang="scss">
-@use '@manatsu/sass/flex';
+@use '@manatsu/style/mixins/flex';
 
 .m-dialog-mask {
   @include flex.center;

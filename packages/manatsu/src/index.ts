@@ -1,4 +1,3 @@
-import './style/main.scss';
 import type { App } from 'vue';
 import type { ManatsuGlobal } from '@manatsu/vue-plugin/src/index.ts';
 import {

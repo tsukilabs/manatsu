@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { startCase } from 'lodash-es';
 import { symbols } from 'manatsu/src/index.ts';
+import { css } from '@manatsu/style/src/index.ts';
 import {
   MTopAppbar,
   type SidebarItem,
@@ -40,7 +41,11 @@ const { state: color, execute: getColor } = useInvoke<string>('RandomStringHexCo
   <m-scaffold
     :sidebar-items
     sidebar-item-class="flex items-center justify-center"
-    :sidebar-item-style="{ width: `${topBarRef?.startWidth ?? 0}px` }"
+    :sidebar-item-style="
+      css`
+        width: ${topBarRef?.startWidth ?? 0}px;
+      `
+    "
   >
     <template #top>
       <m-top-appbar

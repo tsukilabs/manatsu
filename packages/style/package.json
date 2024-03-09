@@ -1,7 +1,7 @@
 {
-  "name": "@manatsu/sass",
+  "name": "@manatsu/style",
   "version": "0.4.31",
-  "description": "SCSS utilities",
+  "description": "CSS utilities",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@8.15.4",
@@ -22,19 +22,34 @@
   ],
   "keywords": [
     "manatsu",
-    "sass",
     "scss",
-    "style",
-    "mixin"
+    "style"
   ],
   "type": "module",
   "files": [
-    "src"
+    "dist",
+    "src/mixins",
+    "src/themes"
   ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.scss",
-    "./flex": "./src/flex.scss",
-    "./util": "./src/util.scss"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": "./*",
+    "./themes/mana": "./src/themes/mana/index.scss",
+    "./mixins/flex": "./src/mixins/flex.scss",
+    "./mixins/util": "./src/mixins/util.scss"
+  },
+  "scripts": {
+    "build": "pnpm run \"/^(type-check|build-only)$/\"",
+    "build-only": "vite build",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tb-dev/utils": "^1.3.1"
   },
   "peerDependencies": {
     "sass": "^1.71.1"
