@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 const group = ref<string>('label 1');
 </script>
 

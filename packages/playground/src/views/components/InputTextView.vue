@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 const first = ref<string>('manatsu');
 const second = ref<string | null>(null);
 </script>
