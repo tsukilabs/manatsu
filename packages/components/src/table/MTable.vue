@@ -89,7 +89,7 @@ function onColumnClick(column: TableColumn) {
 
 onBeforeMount(() => {
   if (props.sortField) {
-    sort(props.sortField, props.sortOrder, null);
+    sort(props.sortField, props.sortOrder ?? 'asc', null);
   }
 });
 

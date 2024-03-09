@@ -10,9 +10,9 @@ export interface TableProps {
   rowKey: (row: any) => string | number;
   scrollable?: boolean;
   /** Field used to sort the table by default. */
-  sortField?: string;
+  sortField?: Nullish<string>;
   /** Order to sort the table by default. */
-  sortOrder?: SortOrder;
+  sortOrder?: Nullish<SortOrder>;
   striped?: boolean;
   tableClass?: string;
   tableLayout?: 'auto' | 'fixed';
