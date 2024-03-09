@@ -14,3 +14,9 @@ export function css(text: TemplateStringsArray, ...subs: unknown[]): Record<stri
 
   return result;
 }
+
+export function tw(text: TemplateStringsArray, ...subs: unknown[]): string {
+  return String.raw(text, ...subs)
+    .replace(/\s+/g, ' ')
+    .trim();
+}

@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.4.32"
+version = "0.4.33"
 publish = false
 
 [package.homepage]
