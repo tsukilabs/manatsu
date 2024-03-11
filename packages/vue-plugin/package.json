@@ -45,7 +45,7 @@
     "@tb-dev/utility-types": "^1.2.0"
   },
   "devDependencies": {
-    "vite": "^5.1.5"
+    "vite": "^5.1.6"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.9.0",
