@@ -35,8 +35,8 @@ workspace = true
 workspace = true
 
 [dependencies]
-anyhow = "1.0.80"
-thiserror = "1.0.57"
+anyhow = "1.0.81"
+thiserror = "1.0.58"
 
 [dependencies.tauri]
 version = "1.6.1"
