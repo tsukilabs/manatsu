@@ -19,6 +19,8 @@ pub fn tailwind() -> Result<()> {
   let regex = Regex::new(CLASS_REGEX)?;
 
   let mut classes = HashSet::new();
+  classes.insert("class".to_owned());
+
   println!("{}", "collecting class attributes...".bright_cyan());
 
   for file in files {
