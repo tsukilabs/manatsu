@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@tauri-apps/api": "^1.5.3",
-    "@tb-dev/auto-import-config": "^1.0.12",
+    "@tb-dev/auto-import-config": "^1.1.1",
     "@tb-dev/eslint-config": "^3.0.2",
     "@tb-dev/stylelint-config": "^1.1.12",
     "@tb-dev/utility-types": "^1.2.1",
@@ -72,6 +72,6 @@
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "vue-tsc": "^2.0.6",
-    "webdriverio": "^8.34.0"
+    "webdriverio": "^8.34.1"
   }
 }

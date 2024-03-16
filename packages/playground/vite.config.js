@@ -8,7 +8,9 @@ import vueImportConfig from '@tb-dev/vue-import-config';
 import autoImportConfig from '@tb-dev/auto-import-config';
 
 const autoImportOptions = autoImportConfig({
-  manatsu: false
+  presets: {
+    tauri: true
+  }
 });
 
 export default defineConfig({

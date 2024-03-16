@@ -1,7 +1,8 @@
 import { extendRef } from '@vueuse/core';
-import { type Ref, ref, shallowRef } from 'vue';
-import type { MaybePromise } from '@tb-dev/utility-types';
+import { type Ref, inject, ref, shallowRef } from 'vue';
 import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
+import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
+import { type ErrorHandler, privateSymbols } from '@manatsu/shared';
 
 export interface UseInvokeOptions {
   /** Arguments to pass to the command. */
@@ -13,7 +14,7 @@ export interface UseInvokeOptions {
   /** @default true */
   readonly shallow?: boolean;
 
-  readonly onError?: (error: unknown) => MaybePromise<void>;
+  readonly onError?: Nullish<ErrorHandler>;
 }
 
 export type UseInvokeReturn<Data> = Ref<Data> & {
@@ -30,17 +31,23 @@ export function defineInvoke<T extends Record<string, string>>(commands: T) {
 
     const state = shallow ? shallowRef(initial) : ref(initial);
 
+    const app = globalThis.__MANATSU__.app;
+    let onError = options.onError;
+    onError ??= app.runWithContext(() => {
+      return inject(privateSymbols.errorHandler);
+    });
+
     async function execute() {
       try {
         if (resetOnExecute) state.value = initial;
         state.value = await invoke<Data>(commands[command], args);
       } catch (err) {
-        await options.onError?.(err);
+        onError?.call(app, err);
       }
     }
 
     if (immediate) {
-      execute().catch((err) => options.onError?.(err));
+      execute().catch((err: unknown) => onError?.call(app, err));
     }
 
     return extendRef(state, { execute }) as UseInvokeReturn<Data>;

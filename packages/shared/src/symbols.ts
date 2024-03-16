@@ -1,6 +1,6 @@
 import type { Nullish } from '@tb-dev/utility-types';
 import type { Component, InjectionKey, Ref, ShallowRef } from 'vue';
-import type { DarkMode, DialogOptions } from './types';
+import type { DarkMode, DialogOptions, ErrorHandler } from './types';
 
 type RefSymbol<T> = InjectionKey<Readonly<Ref<T>>>;
 type WritableRefSymbol<T> = InjectionKey<Ref<T>>;
@@ -9,7 +9,9 @@ type WritableShallowRefSymbol<T> = InjectionKey<ShallowRef<T>>;
 type ComponentSymbol = WritableShallowRefSymbol<Nullish<Component>>;
 type ComponentPropsSymbol = WritableShallowRefSymbol<Nullish<Record<string, unknown>>>;
 
+// App
 const darkMode = Symbol() as WritableRefSymbol<DarkMode>;
+const errorHandler = Symbol() as InjectionKey<Nullish<ErrorHandler>>;
 
 // Scaffold
 const scaffoldBottomHeight = Symbol() as RefSymbol<number>;
@@ -53,5 +55,6 @@ export const privateSymbols = {
   dynDialogOnShow,
   dynDialogOptions,
   dynDialogVisible,
+  errorHandler,
   placeDialogOnScaffold
 } as const;

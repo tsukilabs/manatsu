@@ -37,6 +37,10 @@ const color = useInvoke<string>('RandomStringHexColor', 'initial');
 function getColor() {
   void color.execute();
 }
+
+function createUnhandledError() {
+  return invoke('unhandled_error');
+}
 </script>
 
 <template>
@@ -65,6 +69,7 @@ function getColor() {
 
         <template #end>
           <div class="flex gap-2">
+            <m-button variant="outlined" @click="createUnhandledError">Error</m-button>
             <m-button variant="outlined" @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}
             </m-button>

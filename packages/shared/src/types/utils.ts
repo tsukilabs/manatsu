@@ -1,5 +1,7 @@
-import type { MaybeRefOrGetter } from 'vue';
+import type { App, MaybeRefOrGetter } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
+
+export type ErrorHandler = (this: App, err: unknown) => void;
 
 // Manatsu
 export type DarkMode = boolean | 'auto';
