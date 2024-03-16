@@ -15,7 +15,7 @@ export default defineConfig({
       fileName: 'index'
     },
     rollupOptions: {
-      external: ['vue', '@vueuse/core', /^@tauri-apps\/api/]
+      external: ['vue', 'vue-router', '@vueuse/core', /^@tauri-apps\/api/]
     }
   }
 });

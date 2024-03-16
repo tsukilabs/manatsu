@@ -1,5 +1,5 @@
-import { ref, shallowRef } from 'vue';
 import { extendRef } from '@vueuse/core';
+import { type Ref, ref, shallowRef } from 'vue';
 import type { MaybePromise } from '@tb-dev/utility-types';
 import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
 
@@ -16,12 +16,16 @@ export interface UseInvokeOptions {
   readonly onError?: (error: unknown) => MaybePromise<void>;
 }
 
+export type UseInvokeReturn<Data> = Ref<Data> & {
+  readonly execute: () => MaybePromise<void>;
+};
+
 /**
  * Define a composable function to invoke a Tauri command.
  * @param commands The commands that can be invoked.
  */
 export function defineInvoke<T extends Record<string, string>>(commands: T) {
-  return function <D>(command: keyof T, initial: D, options: UseInvokeOptions = {}) {
+  return function <Data>(command: keyof T, initial: Data, options: UseInvokeOptions = {}) {
     const { args, immediate = true, resetOnExecute = true, shallow = true } = options;
 
     const state = shallow ? shallowRef(initial) : ref(initial);
@@ -29,7 +33,7 @@ export function defineInvoke<T extends Record<string, string>>(commands: T) {
     async function execute() {
       try {
         if (resetOnExecute) state.value = initial;
-        state.value = await invoke<D>(commands[command], args);
+        state.value = await invoke<Data>(commands[command], args);
       } catch (err) {
         await options.onError?.(err);
       }
@@ -39,6 +43,6 @@ export function defineInvoke<T extends Record<string, string>>(commands: T) {
       execute().catch((err) => options.onError?.(err));
     }
 
-    return extendRef(state, { execute });
+    return extendRef(state, { execute }) as UseInvokeReturn<Data>;
   };
 }
