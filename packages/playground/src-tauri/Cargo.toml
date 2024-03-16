@@ -1,6 +1,6 @@
 [package]
 name = "playground"
-version = "0.5.2"
+version = "0.5.3"
 description = "Manatsu playground"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -31,7 +31,10 @@ features = ["derive"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["macros", "rt-multi-thread"]
+features = [
+    "macros",
+    "rt-multi-thread",
+]
 
 [dependencies.tauri-plugin-manatsu]
 version = "0.5"
