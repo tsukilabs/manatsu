@@ -1,6 +1,6 @@
 import { extendRef } from '@vueuse/core';
-import { type Ref, inject, ref, shallowRef } from 'vue';
 import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
+import { type App, type Ref, inject, ref, shallowRef } from 'vue';
 import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import { type ErrorHandler, privateSymbols } from '@manatsu/shared';
 
@@ -31,7 +31,9 @@ export function defineInvoke<T extends Record<string, string>>(commands: T) {
 
     const state = shallow ? shallowRef(initial) : ref(initial);
 
-    const app = globalThis.__MANATSU__.app;
+    // @ts-expect-error - No typings for __MANATSU__
+    const app: App = globalThis.__MANATSU__.app;
+
     let onError = options.onError;
     onError ??= app.runWithContext(() => {
       return inject(privateSymbols.errorHandler);

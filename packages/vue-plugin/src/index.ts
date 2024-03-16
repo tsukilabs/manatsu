@@ -34,6 +34,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       const errorHandler = options.errorHandler ?? handleError;
       app.config.errorHandler = errorHandler.bind(app);
 
+      // @ts-expect-error - No typings for __MANATSU__
       globalThis.__MANATSU__ = { app };
     }
   };
