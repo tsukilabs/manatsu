@@ -16,13 +16,6 @@ import {
   MTopAppbar
 } from '@manatsu/components/src/index.ts';
 
-declare global {
-  // eslint-disable-next-line no-inner-declarations, no-var, @typescript-eslint/naming-convention
-  var __MANATSU__: {
-    readonly app: App;
-  };
-}
-
 declare module 'vue' {
   export interface ComponentCustomProperties {
     readonly $mana: ManatsuGlobal;
@@ -43,26 +36,6 @@ declare module 'vue' {
     MToolbar: typeof MToolbar;
     MTopAppbar: typeof MTopAppbar;
   }
-}
-
-/**
- * Globally registers all components.
- * @param app Vue app instance.
- */
-export function registerComponents(app: App) {
-  app.component('MButton', MButton);
-  app.component('MCard', MCard);
-  app.component('MCheckbox', MCheckbox);
-  app.component('MDialog', MDialog);
-  app.component('MDynamicDialog', MDynamicDialog);
-  app.component('MDynamicLink', MDynamicLink);
-  app.component('MInputText', MInputText);
-  app.component('MRadio', MRadio);
-  app.component('MScaffold', MScaffold);
-  app.component('MTable', MTable);
-  app.component('MTableColumn', MTableColumn);
-  app.component('MToolbar', MToolbar);
-  app.component('MTopAppbar', MTopAppbar);
 }
 
 export { type DialogOptions, type MaybeNullishRef, symbols } from '@manatsu/shared';
@@ -99,3 +72,23 @@ export type {
   SidebarItem,
   TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
+
+/**
+ * Globally registers all components.
+ * @param app Vue app instance.
+ */
+export function registerComponents(app: App) {
+  app.component('MButton', MButton);
+  app.component('MCard', MCard);
+  app.component('MCheckbox', MCheckbox);
+  app.component('MDialog', MDialog);
+  app.component('MDynamicDialog', MDynamicDialog);
+  app.component('MDynamicLink', MDynamicLink);
+  app.component('MInputText', MInputText);
+  app.component('MRadio', MRadio);
+  app.component('MScaffold', MScaffold);
+  app.component('MTable', MTable);
+  app.component('MTableColumn', MTableColumn);
+  app.component('MToolbar', MToolbar);
+  app.component('MTopAppbar', MTopAppbar);
+}
