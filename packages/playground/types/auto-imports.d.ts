@@ -12,6 +12,7 @@ declare global {
   const customRef: (typeof import('vue'))['customRef'];
   const defineComponent: (typeof import('vue'))['defineComponent'];
   const effectScope: (typeof import('vue'))['effectScope'];
+  const getActivePinia: (typeof import('pinia'))['getActivePinia'];
   const h: (typeof import('vue'))['h'];
   const hasInjectionContext: (typeof import('vue'))['hasInjectionContext'];
   const inject: (typeof import('vue'))['inject'];
@@ -32,6 +33,7 @@ declare global {
   const ref: (typeof import('vue'))['ref'];
   const shallowReactive: (typeof import('vue'))['shallowReactive'];
   const shallowRef: (typeof import('vue'))['shallowRef'];
+  const storeToRefs: (typeof import('pinia'))['storeToRefs'];
   const toRaw: (typeof import('vue'))['toRaw'];
   const toRef: (typeof import('vue'))['toRef'];
   const toValue: (typeof import('vue'))['toValue'];
@@ -68,7 +70,15 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, ComponentInstance, MaybeRefOrGetter, Ref, ShallowRef, VNode } from 'vue';
+  export type {
+    CSSProperties,
+    Component,
+    ComponentInstance,
+    MaybeRefOrGetter,
+    Ref,
+    ShallowRef,
+    VNode
+  } from 'vue';
   import('vue');
   // @ts-ignore
   export type { MaybeArray, MaybePromise, Nullish, PartialNullish } from '@tb-dev/utility-types';

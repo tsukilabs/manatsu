@@ -32,9 +32,11 @@ const sidebarItems: SidebarItem[] = components.map((component) => {
   };
 });
 
-const { state: color, execute: getColor } = useInvoke<string>('RandomStringHexColor', {
-  initial: 'initial'
-});
+const color = useInvoke<string>('RandomStringHexColor', 'initial');
+
+function getColor() {
+  void color.execute();
+}
 </script>
 
 <template>

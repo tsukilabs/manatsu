@@ -26,10 +26,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   tableLayout: 'auto'
 });
 
-defineEmits<{
-  (e: 'row-click', value: TableRowClickEvent): void;
-  (e: 'row-dblclick', value: TableRowClickEvent): void;
-}>();
+defineEmits<(e: 'row-click' | 'row-dblclick', value: TableRowClickEvent) => void>();
 
 defineSlots<{ default?: () => VNode }>();
 
