@@ -1,6 +1,6 @@
 import { type App, type Plugin, inject } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
-import { type DarkMode, type ErrorHandler, symbols } from '@manatsu/shared';
+import { type DarkMode, type ErrorHandler, privateSymbols, symbols } from '@manatsu/shared';
 import { provideDialog } from './dialog';
 import { isDarkMode, provideDarkMode } from './dark-mode';
 
@@ -31,8 +31,10 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       const globalProps = createGlobalProps;
       (app.config.globalProperties.$mana as any) = globalProps(app);
 
-      const errorHandler = options.errorHandler ?? handleError;
-      app.config.errorHandler = errorHandler.bind(app);
+      // Error handling
+      const errorHandler = (options.errorHandler ?? handleError).bind(app);
+      app.config.errorHandler = errorHandler;
+      app.provide(privateSymbols.errorHandler, errorHandler);
 
       // @ts-expect-error - No typings for __MANATSU__
       globalThis.__MANATSU__ = { app };

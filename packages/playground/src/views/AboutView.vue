@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useInvoke } from '../utils';
 
-const { state: copyright } = useInvoke<string | null>('copyright', {
-  initial: null
-});
+const copyright = useInvoke<string | null>('copyright', null);
 </script>
 
 <template>
