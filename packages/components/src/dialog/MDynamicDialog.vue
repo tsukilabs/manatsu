@@ -3,10 +3,7 @@ import { inject, isRef, ref } from 'vue';
 import { privateSymbols } from '@manatsu/shared';
 import MDialog from './MDialog.vue';
 
-const emit = defineEmits<{
-  (e: 'hide'): void;
-  (e: 'show'): void;
-}>();
+const emit = defineEmits<(e: 'hide' | 'show') => void>();
 
 const visible = inject(privateSymbols.dynDialogVisible, () => ref(false), true);
 const dialogProps = inject(privateSymbols.dynDialogOptions);

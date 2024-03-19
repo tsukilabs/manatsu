@@ -12,10 +12,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   storageType: 'session'
 });
 
-const emit = defineEmits<{
-  (e: 'hide'): void;
-  (e: 'show'): void;
-}>();
+const emit = defineEmits<(e: 'hide' | 'show') => void>();
 
 const slots = defineSlots<{
   default?: () => VNode;
