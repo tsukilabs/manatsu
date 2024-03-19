@@ -1,10 +1,10 @@
 {
   "name": "@manatsu/components",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Manatsu components",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "homepage": "https://github.com/tsukilabs/manatsu",
   "repository": {
     "type": "git",
@@ -49,8 +49,8 @@
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
     "@manatsu/vue-plugin": "workspace:*",
-    "@tb-dev/utility-types": "^1.2.1",
-    "@tb-dev/utils": "^1.3.1"
+    "@tb-dev/utility-types": "^1.2.2",
+    "@tb-dev/utils": "^1.3.2"
   },
   "devDependencies": {
     "@manatsu/style": "workspace:*",

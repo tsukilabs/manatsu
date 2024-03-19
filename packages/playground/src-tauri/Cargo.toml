@@ -1,6 +1,6 @@
 [package]
 name = "playground"
-version = "0.5.6"
+version = "0.5.7"
 description = "Manatsu playground"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -18,7 +18,7 @@ features = []
 anyhow = "1.0.81"
 chrono = "0.4.35"
 serde_json = "1.0.114"
-tauri-plugin-window-state = "0.1.0"
+tauri-plugin-window-state = "0.1.1"
 thiserror = "1.0.58"
 
 [dependencies.tauri]

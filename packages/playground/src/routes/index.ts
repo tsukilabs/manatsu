@@ -1,4 +1,4 @@
-import { type RouteRecordRaw, createMemoryHistory, createRouter } from 'vue-router';
+import { type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 
 export const components: RouteRecordRaw[] = [
   {
@@ -36,7 +36,7 @@ export const components: RouteRecordRaw[] = [
 ];
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes: [
     { path: '/', component: () => import('../views/HomeView.vue') },
     { path: '/about', component: () => import('../views/AboutView.vue') },

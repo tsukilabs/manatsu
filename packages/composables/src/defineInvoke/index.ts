@@ -1,57 +1,100 @@
-import { extendRef } from '@vueuse/core';
+import type { Nullish } from '@tb-dev/utility-types';
 import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
-import { type App, type Ref, inject, ref, shallowRef } from 'vue';
-import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
-import { type ErrorHandler, privateSymbols } from '@manatsu/shared';
+import { extendRef, tryOnScopeDispose, watchTriggerable } from '@vueuse/core';
+import { type ErrorHandler, type MaybeNullishRef, privateSymbols } from '@manatsu/shared';
+import {
+  type App,
+  type MaybeRefOrGetter,
+  type Ref,
+  inject,
+  isRef,
+  ref,
+  shallowRef,
+  toRef,
+  toValue
+} from 'vue';
+
+type CommandRecord = Record<string, string>;
 
 export interface UseInvokeOptions {
   /** Arguments to pass to the command. */
-  readonly args?: InvokeArgs;
+  readonly args?: MaybeNullishRef<InvokeArgs>;
   /** @default true */
-  readonly immediate?: boolean;
-  /** @default true */
-  readonly resetOnExecute?: boolean;
+  readonly lazy?: boolean;
   /** @default true */
   readonly shallow?: boolean;
+
+  /** A ref to indicate if the command is currently loading. */
+  readonly loading?: Ref<boolean>;
 
   readonly onError?: Nullish<ErrorHandler>;
 }
 
 export type UseInvokeReturn<Data> = Ref<Data> & {
-  readonly execute: () => MaybePromise<void>;
+  readonly execute: () => Promise<void>;
 };
 
 /**
  * Define a composable function to invoke a Tauri command.
  * @param commands The commands that can be invoked.
  */
-export function defineInvoke<T extends Record<string, string>>(commands: T) {
-  return function <Data>(command: keyof T, initial: Data, options: UseInvokeOptions = {}) {
-    const { args, immediate = true, resetOnExecute = true, shallow = true } = options;
+export function defineInvoke<T extends CommandRecord>(commands: T) {
+  return function <Data>(
+    command: MaybeRefOrGetter<keyof T>,
+    initial: Data,
+    options: UseInvokeOptions = {}
+  ) {
+    let id = Symbol('useInvoke');
+    const commandRef = toRef(command);
+    const argsRef = toRef(options.args);
+    const state = options.shallow ? shallowRef(initial) : ref(initial);
 
-    const state = shallow ? shallowRef(initial) : ref(initial);
+    const { stop, trigger } = watchTriggerable(
+      [commandRef, argsRef],
+      async () => {
+        const current = Symbol('useInvoke');
+        id = current;
 
-    // @ts-expect-error - No typings for __MANATSU__
-    const app: App = globalThis.__MANATSU__.app;
+        try {
+          if (isRef(options.loading)) {
+            options.loading.value = true;
+          }
 
-    let onError = options.onError;
-    onError ??= app.runWithContext(() => {
-      return inject(privateSymbols.errorHandler);
-    });
+          const cmd = commands[toValue(commandRef as Ref<keyof T>)];
+          if (typeof cmd !== 'string' || cmd.length === 0) {
+            throw new TypeError(`invalid command: ${cmd}`);
+          }
 
-    async function execute() {
-      try {
-        if (resetOnExecute) state.value = initial;
-        state.value = await invoke<Data>(commands[command], args);
-      } catch (err) {
-        onError?.call(app, err);
+          const result = await invoke<Data>(cmd, toValue(argsRef) ?? void 0);
+          if (current === id) state.value = result;
+        } catch (err) {
+          onError(options, err);
+        } finally {
+          if (isRef(options.loading) && current === id) {
+            options.loading.value = false;
+          }
+        }
+      },
+      {
+        deep: true,
+        immediate: !options.lazy
       }
-    }
+    );
 
-    if (immediate) {
-      execute().catch((err: unknown) => onError?.call(app, err));
-    }
+    tryOnScopeDispose(stop);
 
-    return extendRef(state, { execute }) as UseInvokeReturn<Data>;
+    return extendRef(state, { execute: trigger }) as UseInvokeReturn<Data>;
   };
+}
+
+function onError(options: UseInvokeOptions, err: unknown) {
+  // @ts-expect-error - No typings for __MANATSU__
+  const app: App = globalThis.__MANATSU__.app;
+
+  let fn = options.onError;
+  fn ??= app.runWithContext(() => {
+    return inject(privateSymbols.errorHandler);
+  });
+
+  fn?.call(app, err);
 }
