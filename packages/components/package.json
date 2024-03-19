@@ -49,8 +49,8 @@
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
     "@manatsu/vue-plugin": "workspace:*",
-    "@tb-dev/utility-types": "^1.2.1",
-    "@tb-dev/utils": "^1.3.1"
+    "@tb-dev/utility-types": "^1.2.2",
+    "@tb-dev/utils": "^1.3.2"
   },
   "devDependencies": {
     "@manatsu/style": "workspace:*",
