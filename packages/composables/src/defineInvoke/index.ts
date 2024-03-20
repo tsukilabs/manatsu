@@ -16,7 +16,7 @@ import {
 
 type CommandRecord = Record<string, string>;
 
-export interface UseInvokeOptions {
+export interface UseInvokeOptions<Data> {
   /** Arguments to pass to the command. */
   readonly args?: MaybeNullishRef<InvokeArgs>;
   /** @default true */
@@ -28,6 +28,7 @@ export interface UseInvokeOptions {
   readonly loading?: Ref<boolean>;
 
   readonly onError?: Nullish<ErrorHandler>;
+  readonly transform?: (value: Data) => Data;
 }
 
 export type UseInvokeReturn<Data> = Ref<Data> & {
@@ -42,7 +43,7 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
   return function <Data>(
     command: MaybeRefOrGetter<keyof T>,
     initial: Data,
-    options: UseInvokeOptions = {}
+    options: UseInvokeOptions<Data> = {}
   ) {
     let id = Symbol('useInvoke');
     const commandRef = toRef(command);
@@ -66,7 +67,13 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
           }
 
           const result = await invoke<Data>(cmd, toValue(argsRef) ?? void 0);
-          if (current === id) state.value = result;
+          if (current === id) {
+            if (options.transform) {
+              state.value = options.transform(result);
+            } else {
+              state.value = result;
+            }
+          }
         } catch (err) {
           onError(options, err);
         } finally {
@@ -87,7 +94,7 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
   };
 }
 
-function onError(options: UseInvokeOptions, err: unknown) {
+function onError(options: UseInvokeOptions<unknown>, err: unknown) {
   // @ts-expect-error - No typings for __MANATSU__
   const app: App = globalThis.__MANATSU__.app;
 
