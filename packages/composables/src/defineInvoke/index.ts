@@ -1,5 +1,5 @@
-import type { Nullish } from '@tb-dev/utility-types';
 import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
+import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import { extendRef, tryOnScopeDispose, watchTriggerable } from '@vueuse/core';
 import { type ErrorHandler, type MaybeNullishRef, privateSymbols } from '@manatsu/shared';
 import {
@@ -28,7 +28,7 @@ export interface UseInvokeOptions<Data> {
   readonly loading?: Ref<boolean>;
 
   readonly onError?: Nullish<ErrorHandler>;
-  readonly transform?: (value: Data) => Data;
+  readonly transform?: (value: Data) => MaybePromise<Data>;
 }
 
 export type UseInvokeReturn<Data> = Ref<Data> & {
@@ -66,13 +66,11 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
             throw new TypeError(`invalid command: ${cmd}`);
           }
 
-          const result = await invoke<Data>(cmd, toValue(argsRef) ?? void 0);
+          let result = await invoke<Data>(cmd, toValue(argsRef) ?? void 0);
+          if (options.transform) result = await options.transform(result);
+
           if (current === id) {
-            if (options.transform) {
-              state.value = options.transform(result);
-            } else {
-              state.value = result;
-            }
+            state.value = result;
           }
         } catch (err) {
           onError(options, err);

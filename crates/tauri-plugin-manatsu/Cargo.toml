@@ -8,7 +8,7 @@ keywords = [
     "vue",
 ]
 name = "tauri-plugin-manatsu"
-version = "0.5.8"
+version = "0.5.9"
 
 [package.homepage]
 workspace = true
