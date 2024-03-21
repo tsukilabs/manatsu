@@ -1,8 +1,9 @@
-import { type App, type Plugin, inject } from 'vue';
+import type { App, Plugin } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
 import {
   type DarkMode,
   type ErrorHandler,
+  injectStrict,
   privateSymbols,
   setGlobalManatsu,
   symbols
@@ -34,7 +35,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       provideDialog(app, options.placeDialogOnScaffold);
 
       // Using `any` so we can let `$mana` remain read-only.
-      (app.config.globalProperties.$mana as any) = createGlobalProps(app);
+      (app.config.globalProperties.$mana as any) = createGlobalProps();
 
       // Error handling
       const errorHandler = (options.errorHandler ?? handleError).bind(app);
@@ -48,20 +49,16 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
   return manatsu;
 }
 
-function createGlobalProps(app: App): ManatsuPluginGlobal {
+function createGlobalProps(): ManatsuPluginGlobal {
   const mana: ManatsuPluginGlobal = {
     isDarkMode,
     setDarkMode: (darkMode) => {
-      app.runWithContext(() => {
-        const darkModeRef = inject(symbols.darkMode);
-        if (darkModeRef) darkModeRef.value = darkMode;
-      });
+      const darkModeRef = injectStrict(symbols.darkMode);
+      darkModeRef.value = darkMode;
     },
     toggleDarkMode: () => {
-      app.runWithContext(() => {
-        const darkModeRef = inject(symbols.darkMode);
-        if (darkModeRef) darkModeRef.value = !darkModeRef.value;
-      });
+      const darkModeRef = injectStrict(symbols.darkMode);
+      darkModeRef.value = !darkModeRef.value;
     }
   };
 

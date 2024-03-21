@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { type VNode, defineComponent, inject, onMounted, onUnmounted, triggerRef } from 'vue';
+import { injectStrict } from '@manatsu/shared';
+import { type VNode, defineComponent, onMounted, onUnmounted, triggerRef } from 'vue';
 import { columnMapKey } from './symbols';
 import type {
   TableColumn,
@@ -17,7 +18,7 @@ const slots = defineSlots<{
   header?: (slotProps: TableColumnHeaderSlotProps) => VNode;
 }>();
 
-const columns = inject(columnMapKey, null);
+const columns = injectStrict(columnMapKey);
 const columnSymbol = Symbol();
 
 const emptyComponent = defineComponent({
@@ -27,35 +28,31 @@ const emptyComponent = defineComponent({
 });
 
 onMounted(() => {
-  if (columns) {
-    const column: TableColumn = {
-      props: {
-        bodyClass: props.bodyClass,
-        bodyStyle: props.bodyStyle,
-        columnKey: props.columnKey,
-        field: props.field,
-        headerClass: props.headerClass,
-        headerStyle: props.headerStyle,
-        name: props.name,
-        sortFn: props.sortFn,
-        sortable: props.sortable
-      },
-      slots: {
-        body: slots.body,
-        header: slots.header
-      }
-    };
+  const column: TableColumn = {
+    props: {
+      bodyClass: props.bodyClass,
+      bodyStyle: props.bodyStyle,
+      columnKey: props.columnKey,
+      field: props.field,
+      headerClass: props.headerClass,
+      headerStyle: props.headerStyle,
+      name: props.name,
+      sortFn: props.sortFn,
+      sortable: props.sortable
+    },
+    slots: {
+      body: slots.body,
+      header: slots.header
+    }
+  };
 
-    columns.value.set(columnSymbol, column);
-    triggerRef(columns);
-  }
+  columns.value.set(columnSymbol, column);
+  triggerRef(columns);
 });
 
 onUnmounted(() => {
-  if (columns) {
-    columns.value.delete(columnSymbol);
-    triggerRef(columns);
-  }
+  columns.value.delete(columnSymbol);
+  triggerRef(columns);
 });
 </script>
 

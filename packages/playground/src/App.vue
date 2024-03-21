@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { startCase } from 'lodash-es';
-import { symbols } from 'manatsu/src/index.ts';
+import { injectStrict, symbols } from 'manatsu/src/index.ts';
 import {
   MScaffold,
   MTopAppbar,
@@ -14,7 +14,7 @@ const route = useRoute();
 const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
 watchEffect(() => (lastRoute.value = route.path));
 
-const darkMode = inject(symbols.darkMode);
+const darkMode = injectStrict(symbols.darkMode);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
