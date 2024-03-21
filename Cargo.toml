@@ -1,5 +1,9 @@
 [workspace]
-members = ["crates/manatsu", "crates/manatsu-dev", "crates/tauri-plugin-manatsu"]
+members = [
+  "crates/manatsu",
+  "crates/manatsu-dev",
+  "crates/tauri-plugin-manatsu",
+]
 exclude = ["packages/playground/src-tauri"]
 resolver = "2"
 

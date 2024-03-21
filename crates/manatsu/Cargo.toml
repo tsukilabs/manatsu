@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.5.14"
+version = "0.6.0"
 description = "CLI tools for Manatsu"
 keywords = [
     "cli",
@@ -41,7 +41,7 @@ convert_case = "0.6.0"
 globset = "0.4.14"
 inquire = "0.7.3"
 lightningcss = "1.0.0-alpha.55"
-miho = "4.2.1"
+miho = "4.3.0"
 rand = "0.8.5"
 regex = "1.10.3"
 zip = "0.6.6"

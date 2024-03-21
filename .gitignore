@@ -24,6 +24,9 @@ target/
 # Vite timestamps
 **/*vite*timestamp*
 
+# Tauri
+**/gen/schemas
+
 # Misc
 **/node_modules
 coverage/
