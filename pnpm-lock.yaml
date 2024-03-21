@@ -11,14 +11,14 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
       '@tb-dev/auto-import-config':
-        specifier: ^1.1.1
-        version: 1.1.1(@manatsu/style@0.5.9)(@tauri-apps/api@1.5.3)(@tb-dev/utility-types@1.2.2)(@tb-dev/utils@1.3.2)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.5.9)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21)
+        specifier: ^1.1.2
+        version: 1.1.2(@manatsu/style@0.5.9)(@tauri-apps/api@1.5.3)(@tb-dev/utility-types@1.2.2)(@tb-dev/utils@1.3.2)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.5.9)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21)
       '@tb-dev/eslint-config':
         specifier: ^3.2.2
         version: 3.2.2(eslint@8.57.0)(typescript@5.4.3)(vitest@1.4.0)
       '@tb-dev/stylelint-config':
-        specifier: ^1.1.12
-        version: 1.1.12(postcss-html@1.6.0)(postcss@8.4.38)(typescript@5.4.3)
+        specifier: ^1.1.13
+        version: 1.1.13(postcss-html@1.6.0)(postcss@8.4.38)(typescript@5.4.3)
       '@tb-dev/utility-types':
         specifier: ^1.2.2
         version: 1.2.2
@@ -1810,10 +1810,10 @@ packages:
       }
     engines: { node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1' }
 
-  /@tb-dev/auto-import-config@1.1.1(@manatsu/style@0.5.9)(@tauri-apps/api@1.5.3)(@tb-dev/utility-types@1.2.2)(@tb-dev/utils@1.3.2)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.5.9)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21):
+  /@tb-dev/auto-import-config@1.1.2(@manatsu/style@0.5.9)(@tauri-apps/api@1.5.3)(@tb-dev/utility-types@1.2.2)(@tb-dev/utils@1.3.2)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.5.9)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-rcc5Dhjz02D1t6OyDNMDr+I5Dcghe0YJLT+650zrFCf4cZ5ZCVmuv0dxgbfqb2CyfrAgmtYEz87VHfyBgz0M3Q==
+        integrity: sha512-ExYta86G60az2i5w5i9OaoMJw5Kj8zN43vwGFrh+Lkc2QpRVp/ORXWiDvVkNVpjDsHjmAx0U3GplKuhCwlnzRA==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -1873,10 +1873,10 @@ packages:
       - vitest
     dev: true
 
-  /@tb-dev/stylelint-config@1.1.12(postcss-html@1.6.0)(postcss@8.4.38)(typescript@5.4.3):
+  /@tb-dev/stylelint-config@1.1.13(postcss-html@1.6.0)(postcss@8.4.38)(typescript@5.4.3):
     resolution:
       {
-        integrity: sha512-IvoCcejcAc421lG6G3MjZt9+7SfJjc3pgOxrYQbqaTDUQ8ryShcmBCnDNVvwAnKUNF5y5BCAFEIDeblhtO1L+g==
+        integrity: sha512-dQ7umoHofIx7L3NVqWgtch1nyJWvfV0sNV+m3OcgCvdhy4ZkDRGdi44VqYHMbf8UgPcX/faXi3VATDcETTC/LQ==
       }
     dependencies:
       stylelint: 16.2.1(typescript@5.4.3)

@@ -14,6 +14,7 @@ import type { ScaffoldProps, SidebarItem } from './types';
 import MDynamicDialog from '../dialog/MDynamicDialog.vue';
 
 const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
+const showSidebar = defineModel<boolean>('showSidebar', { default: true });
 
 const props = withDefaults(defineProps<ScaffoldProps>(), {
   defaultBorder: '1px solid var(--m-color-outline-variant)',
@@ -61,10 +62,21 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
   });
 }
 
+// Sidebar
+function toggleSidebar() {
+  showSidebar.value = !showSidebar.value;
+}
+
 // Dialog
 const shouldPlaceDialog = inject(privateSymbols.placeDialogOnScaffold);
 
-defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
+defineExpose({
+  sidebarWidth,
+  topHeight,
+  bottomHeight,
+  contentHeight,
+  toggleSidebar
+});
 </script>
 
 <template>
@@ -81,7 +93,7 @@ defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
         :class="sidebarClass"
         :style="sidebarStyle"
       >
-        <nav>
+        <nav v-show="showSidebar">
           <div
             v-for="item of sidebarItems"
             :key="item.key"
@@ -116,7 +128,7 @@ defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
 <style lang="scss">
 @use '@manatsu/style/mixins/flex';
 
-/** This is applied to the top and bottom bars. */
+/* This is applied to the top and bottom bars. */
 @mixin outside {
   position: fixed;
   left: 0;
@@ -150,7 +162,7 @@ defineExpose({ sidebarWidth, topHeight, bottomHeight, contentHeight });
     bottom: 0;
     z-index: 200;
     background-color: var(--m-color-surface);
-    padding: 1rem;
+    padding: v-bind("showSidebar ? 'var(--m-scaffold-sidebar-padding)' : '0'");
     overflow-x: hidden;
 
     & > nav {

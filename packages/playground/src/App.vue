@@ -3,6 +3,7 @@ import { startCase } from 'lodash-es';
 import { symbols } from 'manatsu/src/index.ts';
 import { css } from '@manatsu/style/src/index.ts';
 import {
+  MScaffold,
   MTopAppbar,
   type SidebarItem,
   type TopAppbarMenuItem
@@ -16,6 +17,7 @@ watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = inject(symbols.darkMode);
 
+const scaffoldRef = shallowRef<ComponentInstance<typeof MScaffold> | null>(null);
 const topBarRef = shallowRef<ComponentInstance<typeof MTopAppbar> | null>(null);
 
 const menuItems: TopAppbarMenuItem[] = [
@@ -45,6 +47,7 @@ function createUnhandledError() {
 
 <template>
   <m-scaffold
+    ref="scaffoldRef"
     :sidebar-items
     sidebar-item-class="flex items-center justify-center"
     :sidebar-item-style="
@@ -69,6 +72,7 @@ function createUnhandledError() {
 
         <template #end>
           <div class="flex gap-2">
+            <m-button variant="outlined" @click="scaffoldRef?.toggleSidebar()">Sidebar</m-button>
             <m-button variant="outlined" @click="createUnhandledError">Error</m-button>
             <m-button variant="outlined" @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}
