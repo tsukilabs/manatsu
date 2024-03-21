@@ -5,8 +5,11 @@ import { type MaybeRefOrGetter, type VNode, computed, inject, shallowRef, toRef 
 import type { ScaffoldProps, SidebarItem } from './types';
 import MDynamicDialog from '../dialog/MDynamicDialog.vue';
 
-const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
+const showTop = defineModel<boolean>('showTop', { default: true });
 const showSidebar = defineModel<boolean>('showSidebar', { default: true });
+const showBottom = defineModel<boolean>('showBottom', { default: true });
+const showOnlyContent = defineModel<boolean>('showOnlyContent', { default: false });
+const sidebarItems = defineModel<SidebarItem[]>('sidebarItems');
 
 const props = withDefaults(defineProps<ScaffoldProps>(), {
   defaultBorder: '1px solid var(--m-color-outline-variant)',
@@ -23,13 +26,17 @@ const slots = defineSlots<{
 
 const app = getCurrentApp();
 
+// Top
 const topRef = shallowRef<HTMLElement | null>(null);
 const { height: topHeight } = useElementSize(topRef);
 app.provide(symbols.scaffoldTopHeight, topHeight);
+app.provide(symbols.showScaffoldTop, showTop);
 
+// Bottom
 const bottomRef = shallowRef<HTMLElement | null>(null);
 const { height: bottomHeight } = useElementSize(bottomRef);
 app.provide(symbols.scaffoldBottomHeight, bottomHeight);
+app.provide(symbols.showScaffoldBottom, showBottom);
 
 // Content
 const contentRef = shallowRef<HTMLElement | null>(null);
@@ -46,10 +53,6 @@ const { width: sidebarWidth } = useElementSize(sidebarRef);
 app.provide(symbols.scaffoldSidebarWidth, sidebarWidth);
 app.provide(symbols.showScaffoldSidebar, showSidebar);
 
-function toggleSidebar() {
-  showSidebar.value = !showSidebar.value;
-}
-
 // Border
 const topBorder = useBorder(() => props.topBorder);
 const bottomBorder = useBorder(() => props.bottomBorder);
@@ -65,56 +68,60 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 
 // Dialog
 const shouldPlaceDialog = inject(privateSymbols.placeDialogOnScaffold);
-
-defineExpose({
-  sidebarWidth,
-  topHeight,
-  bottomHeight,
-  contentHeight,
-  toggleSidebar
-});
 </script>
 
 <template>
   <div class="m-scaffold">
-    <div v-if="$slots.top" ref="topRef" class="m-scaffold-top" :class="topClass" :style="topStyle">
-      <slot name="top"></slot>
+    <div v-if="$slots.top">
+      <div
+        v-show="showTop && !showOnlyContent"
+        ref="topRef"
+        class="m-scaffold-top"
+        :class="topClass"
+        :style="topStyle"
+      >
+        <slot name="top"></slot>
+      </div>
     </div>
 
     <div ref="contentRef" class="m-scaffold-content">
-      <aside
-        v-if="sidebarItems && sidebarItems.length > 0"
-        ref="sidebarRef"
-        class="m-scaffold-sidebar"
-        :class="sidebarClass"
-        :style="sidebarStyle"
-      >
-        <nav v-show="showSidebar">
-          <div
-            v-for="item of sidebarItems"
-            :key="item.key"
-            class="m-scaffold-sidebar-item"
-            :class="sidebarItemClass"
-            :style="sidebarItemStyle"
-          >
-            <slot name="sidebar-item" v-bind="item"></slot>
-          </div>
-        </nav>
-      </aside>
+      <div v-if="sidebarItems && sidebarItems.length > 0">
+        <aside
+          v-show="showSidebar && !showOnlyContent"
+          ref="sidebarRef"
+          class="m-scaffold-sidebar"
+          :class="sidebarClass"
+          :style="sidebarStyle"
+        >
+          <nav>
+            <div
+              v-for="item of sidebarItems"
+              :key="item.key"
+              class="m-scaffold-sidebar-item"
+              :class="sidebarItemClass"
+              :style="sidebarItemStyle"
+            >
+              <slot name="sidebar-item" v-bind="item"></slot>
+            </div>
+          </nav>
+        </aside>
+      </div>
 
       <div class="m-scaffold-content-slot" :class="contentClass" :style="contentStyle">
         <slot></slot>
       </div>
     </div>
 
-    <div
-      v-if="$slots.bottom"
-      ref="bottomRef"
-      class="m-scaffold-bottom"
-      :class="bottomClass"
-      :style="bottomStyle"
-    >
-      <slot name="bottom"></slot>
+    <div v-if="$slots.bottom">
+      <div
+        v-show="showBottom && !showOnlyContent"
+        ref="bottomRef"
+        class="m-scaffold-bottom"
+        :class="bottomClass"
+        :style="bottomStyle"
+      >
+        <slot name="bottom"></slot>
+      </div>
     </div>
 
     <m-dynamic-dialog v-if="shouldPlaceDialog" />

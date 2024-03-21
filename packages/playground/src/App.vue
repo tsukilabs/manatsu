@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { startCase } from 'lodash-es';
 import { symbols } from 'manatsu/src/index.ts';
-import { css } from '@manatsu/style/src/index.ts';
 import {
   MScaffold,
   MTopAppbar,
@@ -16,9 +15,7 @@ const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
 watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = inject(symbols.darkMode);
-
-const scaffoldRef = shallowRef<ComponentInstance<typeof MScaffold> | null>(null);
-const topBarRef = shallowRef<ComponentInstance<typeof MTopAppbar> | null>(null);
+const topAppbarStartWidth = inject(symbols.topAppbarStartWidth);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
@@ -31,6 +28,12 @@ const sidebarItems: SidebarItem[] = components.map((component) => {
     key: componentName,
     label: startCase(componentName).replaceAll(/\s/g, ''),
     to: component.path
+  };
+});
+
+const sidebarItemStyle = computed(() => {
+  return {
+    width: `${topAppbarStartWidth?.value ?? 0}px`
   };
 });
 
@@ -47,18 +50,12 @@ function createUnhandledError() {
 
 <template>
   <m-scaffold
-    ref="scaffoldRef"
     :sidebar-items
     sidebar-item-class="flex items-center justify-center"
-    :sidebar-item-style="
-      css`
-        width: ${topBarRef?.startWidth ?? 0}px;
-      `
-    "
+    :sidebar-item-style
   >
     <template #top>
       <m-top-appbar
-        ref="topBarRef"
         content-alignment="end"
         :menu-items
         :height="60"
@@ -72,7 +69,6 @@ function createUnhandledError() {
 
         <template #end>
           <div class="flex gap-2">
-            <m-button variant="outlined" @click="scaffoldRef?.toggleSidebar()">Sidebar</m-button>
             <m-button variant="outlined" @click="createUnhandledError">Error</m-button>
             <m-button variant="outlined" @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}

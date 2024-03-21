@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { toPixel } from '@tb-dev/utils';
 import { type VNode, computed, shallowRef } from 'vue';
+import { getCurrentApp, symbols } from '@manatsu/shared';
 import { useElementSize } from '@manatsu/composables/src/index.ts';
 import MDynamicLink from '../dynamic-link/MDynamicLink.vue';
 import type { TopAppbarMenuItem, TopAppbarProps } from './types';
@@ -20,6 +21,8 @@ const slots = defineSlots<{
   start?: () => VNode;
   title?: () => VNode;
 }>();
+
+const app = getCurrentApp();
 
 const appbarHeight = computed(() => toPixel(props.height));
 
@@ -43,11 +46,11 @@ const alignment = computed(() => {
 
 const startRef = shallowRef<HTMLElement | null>(null);
 const { width: startWidth } = useElementSize(startRef);
+app.provide(symbols.topAppbarStartWidth, startWidth);
 
 const endRef = shallowRef<HTMLElement | null>(null);
 const { width: endWidth } = useElementSize(endRef);
-
-defineExpose({ startWidth, endWidth });
+app.provide(symbols.topAppbarEndWidth, endWidth);
 </script>
 
 <template>
