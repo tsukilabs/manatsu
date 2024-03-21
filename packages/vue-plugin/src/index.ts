@@ -34,8 +34,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       provideDialog(app, options.placeDialogOnScaffold);
 
       // Using `any` so we can let `$mana` remain read-only.
-      const globalProps = createGlobalProps;
-      (app.config.globalProperties.$mana as any) = globalProps(app);
+      (app.config.globalProperties.$mana as any) = createGlobalProps(app);
 
       // Error handling
       const errorHandler = (options.errorHandler ?? handleError).bind(app);
