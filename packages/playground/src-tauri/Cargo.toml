@@ -1,6 +1,6 @@
 [package]
 name = "playground"
-version = "0.5.14"
+version = "0.6.0"
 description = "Manatsu playground"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -11,18 +11,18 @@ rust-version = "1.76"
 publish = false
 
 [build-dependencies.tauri-build]
-version = "1.5.1"
+version = "2.0.0-beta.10"
 features = []
 
 [dependencies]
 anyhow = "1.0.81"
 chrono = "0.4.35"
 serde_json = "1.0.114"
-tauri-plugin-window-state = "0.1.1"
+tauri-plugin-window-state = "2.0.0-beta.3"
 thiserror = "1.0.58"
 
 [dependencies.tauri]
-version = "1.6.1"
+version = "2.0.0-beta.13"
 features = []
 
 [dependencies.serde]
@@ -31,13 +31,10 @@ features = ["derive"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = [
-    "macros",
-    "rt-multi-thread",
-]
+features = ["macros", "rt-multi-thread"]
 
 [dependencies.tauri-plugin-manatsu]
-version = "0.5"
+version = "*"
 path = "../../../crates/tauri-plugin-manatsu"
 
 [features]

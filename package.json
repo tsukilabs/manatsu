@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.5.14",
+  "version": "0.6.0",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.15.5",
@@ -34,8 +34,8 @@
     "ui": "vitest --ui --watch"
   },
   "devDependencies": {
-    "@tauri-apps/api": "^1.5.3",
-    "@tb-dev/auto-import-config": "^1.1.2",
+    "@tauri-apps/api": "^2.0.0-beta.6",
+    "@tb-dev/auto-import-config": "^1.2.7",
     "@tb-dev/eslint-config": "^3.2.2",
     "@tb-dev/stylelint-config": "^1.1.13",
     "@tb-dev/utility-types": "^1.2.2",

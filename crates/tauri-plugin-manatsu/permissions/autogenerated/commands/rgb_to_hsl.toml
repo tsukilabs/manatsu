@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-rgb-to-hsl"
+description = "Enables the rgb_to_hsl command without any pre-configured scope."
+commands.allow = ["rgb_to_hsl"]
+
+[[permission]]
+identifier = "deny-rgb-to-hsl"
+description = "Denies the rgb_to_hsl command without any pre-configured scope."
+commands.deny = ["rgb_to_hsl"]

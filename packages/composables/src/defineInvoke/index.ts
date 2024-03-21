@@ -1,4 +1,4 @@
-import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
+import { type InvokeArgs, invoke } from '@tauri-apps/api/core';
 import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import { extendRef, tryOnScopeDispose, watchTriggerable } from '@vueuse/core';
 import {

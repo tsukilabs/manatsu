@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/composables",
-  "version": "0.5.14",
+  "version": "0.6.0",
   "description": "Manatsu composables",
   "license": "MIT",
   "private": false,
@@ -55,7 +55,7 @@
     "vite": "^5.2.2"
   },
   "peerDependencies": {
-    "@tauri-apps/api": "^1.5.3",
+    "@tauri-apps/api": "^2.0.0-beta.6",
     "@vueuse/core": "^10.9.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
