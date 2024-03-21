@@ -1,5 +1,5 @@
 import type { App } from 'vue';
-import type { ManatsuGlobal } from '@manatsu/vue-plugin/src/index.ts';
+import type { ManatsuPluginGlobal } from '@manatsu/vue-plugin/src/index.ts';
 import {
   MButton,
   MCard,
@@ -18,7 +18,7 @@ import {
 
 declare module 'vue' {
   export interface ComponentCustomProperties {
-    readonly $mana: ManatsuGlobal;
+    readonly $mana: ManatsuPluginGlobal;
   }
 
   export interface GlobalComponents {
@@ -38,9 +38,9 @@ declare module 'vue' {
   }
 }
 
-export { type DialogOptions, type MaybeNullishRef, symbols } from '@manatsu/shared';
-
 export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/index.ts';
+
+export { type DialogOptions, type MaybeNullishRef, getCurrentApp, symbols } from '@manatsu/shared';
 
 export {
   type UseInvokeOptions,

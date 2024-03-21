@@ -19,6 +19,8 @@ const scaffoldContentHeight = Symbol() as RefSymbol<number>;
 const scaffoldSidebarWidth = Symbol() as RefSymbol<number>;
 const scaffoldTopHeight = Symbol() as RefSymbol<number>;
 
+const showScaffoldSidebar = Symbol() as WritableRefSymbol<boolean>;
+
 // Dialog
 const dynDialogDefault = Symbol() as ComponentSymbol;
 const dynDialogDefaultProps = Symbol() as ComponentPropsSymbol;
@@ -41,9 +43,11 @@ export const symbols = {
   scaffoldBottomHeight,
   scaffoldContentHeight,
   scaffoldSidebarWidth,
-  scaffoldTopHeight
+  scaffoldTopHeight,
+  showScaffoldSidebar
 } as const;
 
+/** @internal */
 export const privateSymbols = {
   dynDialogDefault,
   dynDialogDefaultProps,

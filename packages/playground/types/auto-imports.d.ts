@@ -9,6 +9,7 @@ declare global {
   const computedAsync: (typeof import('@vueuse/core'))['computedAsync'];
   const computedInject: (typeof import('@vueuse/core'))['computedInject'];
   const computedWithControl: (typeof import('@vueuse/core'))['computedWithControl'];
+  const convertFileSrc: (typeof import('@tauri-apps/api/tauri'))['convertFileSrc'];
   const customRef: (typeof import('vue'))['customRef'];
   const defineComponent: (typeof import('vue'))['defineComponent'];
   const effectScope: (typeof import('vue'))['effectScope'];

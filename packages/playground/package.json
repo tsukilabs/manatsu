@@ -20,8 +20,10 @@
     }
   ],
   "scripts": {
-    "build": "vite build",
-    "dev": "vite"
+    "build": "pnpm run \"/^(type-check|build-only)$/\"",
+    "dev": "vite",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@manatsu/components": "workspace:*",

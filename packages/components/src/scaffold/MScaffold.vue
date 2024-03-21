@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import { privateSymbols, symbols } from '@manatsu/shared';
 import { useElementSize } from '@manatsu/composables/src/index.ts';
-import {
-  type MaybeRefOrGetter,
-  type VNode,
-  computed,
-  inject,
-  provide,
-  shallowRef,
-  toRef
-} from 'vue';
+import { getCurrentApp, privateSymbols, symbols } from '@manatsu/shared';
+import { type MaybeRefOrGetter, type VNode, computed, inject, shallowRef, toRef } from 'vue';
 import type { ScaffoldProps, SidebarItem } from './types';
 import MDynamicDialog from '../dialog/MDynamicDialog.vue';
 
@@ -29,25 +21,34 @@ const slots = defineSlots<{
   top?: () => VNode;
 }>();
 
+const app = getCurrentApp();
+
 const topRef = shallowRef<HTMLElement | null>(null);
 const { height: topHeight } = useElementSize(topRef);
-provide(symbols.scaffoldTopHeight, topHeight);
-
-const sidebarRef = shallowRef<HTMLElement | null>(null);
-const { width: sidebarWidth } = useElementSize(sidebarRef);
-provide(symbols.scaffoldSidebarWidth, sidebarWidth);
+app.provide(symbols.scaffoldTopHeight, topHeight);
 
 const bottomRef = shallowRef<HTMLElement | null>(null);
 const { height: bottomHeight } = useElementSize(bottomRef);
-provide(symbols.scaffoldBottomHeight, bottomHeight);
+app.provide(symbols.scaffoldBottomHeight, bottomHeight);
 
+// Content
 const contentRef = shallowRef<HTMLElement | null>(null);
 const { height: contentHeight } = useElementSize(contentRef);
-provide(symbols.scaffoldContentHeight, contentHeight);
+app.provide(symbols.scaffoldContentHeight, contentHeight);
 
 const contentHeightStyle = computed(() => {
   return `calc(100% - (${topHeight.value}px + ${bottomHeight.value}px))`;
 });
+
+// Sidebar
+const sidebarRef = shallowRef<HTMLElement | null>(null);
+const { width: sidebarWidth } = useElementSize(sidebarRef);
+app.provide(symbols.scaffoldSidebarWidth, sidebarWidth);
+app.provide(symbols.showScaffoldSidebar, showSidebar);
+
+function toggleSidebar() {
+  showSidebar.value = !showSidebar.value;
+}
 
 // Border
 const topBorder = useBorder(() => props.topBorder);
@@ -60,11 +61,6 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
     if (typeof borderRef.value === 'string') return borderRef.value;
     return props.defaultBorder;
   });
-}
-
-// Sidebar
-function toggleSidebar() {
-  showSidebar.value = !showSidebar.value;
 }
 
 // Dialog

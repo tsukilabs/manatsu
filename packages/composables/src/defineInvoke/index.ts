@@ -1,9 +1,13 @@
 import { type InvokeArgs, invoke } from '@tauri-apps/api/tauri';
 import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import { extendRef, tryOnScopeDispose, watchTriggerable } from '@vueuse/core';
-import { type ErrorHandler, type MaybeNullishRef, privateSymbols } from '@manatsu/shared';
 import {
-  type App,
+  type ErrorHandler,
+  type MaybeNullishRef,
+  getGlobalManatsu,
+  privateSymbols
+} from '@manatsu/shared';
+import {
   type MaybeRefOrGetter,
   type Ref,
   inject,
@@ -93,8 +97,7 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
 }
 
 function onError(options: UseInvokeOptions<unknown>, err: unknown) {
-  // @ts-expect-error - No typings for __MANATSU__
-  const app: App = globalThis.__MANATSU__.app;
+  const app = getGlobalManatsu().app;
 
   let fn = options.onError;
   fn ??= app.runWithContext(() => {
