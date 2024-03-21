@@ -24,10 +24,6 @@ const showScaffoldBottom = Symbol() as WritableRefSymbol<boolean>;
 const showScaffoldSidebar = Symbol() as WritableRefSymbol<boolean>;
 const showScaffoldTop = Symbol() as WritableRefSymbol<boolean>;
 
-// TopAppbar
-const topAppbarStartWidth = Symbol() as RefSymbol<number>;
-const topAppbarEndWidth = Symbol() as RefSymbol<number>;
-
 // Dialog
 const dynDialogDefault = Symbol() as ComponentSymbol;
 const dynDialogDefaultProps = Symbol() as ComponentPropsSymbol;
@@ -54,9 +50,7 @@ export const symbols = {
   showOnlyScaffoldContent,
   showScaffoldBottom,
   showScaffoldSidebar,
-  showScaffoldTop,
-  topAppbarStartWidth,
-  topAppbarEndWidth
+  showScaffoldTop
 } as const;
 
 export const privateSymbols = {

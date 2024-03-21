@@ -42,6 +42,7 @@ app.provide(symbols.showScaffoldBottom, showBottom);
 const contentRef = shallowRef<HTMLElement | null>(null);
 const { height: contentHeight } = useElementSize(contentRef);
 app.provide(symbols.scaffoldContentHeight, contentHeight);
+app.provide(symbols.showOnlyScaffoldContent, showOnlyContent);
 
 const contentHeightStyle = computed(() => {
   return `calc(100% - (${topHeight.value}px + ${bottomHeight.value}px))`;

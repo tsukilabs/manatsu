@@ -15,7 +15,6 @@ const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
 watchEffect(() => (lastRoute.value = route.path));
 
 const darkMode = inject(symbols.darkMode);
-const topAppbarStartWidth = inject(symbols.topAppbarStartWidth);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
@@ -31,10 +30,12 @@ const sidebarItems: SidebarItem[] = components.map((component) => {
   };
 });
 
-const sidebarItemStyle = computed(() => {
-  return {
-    width: `${topAppbarStartWidth?.value ?? 0}px`
-  };
+const topBarRef = shallowRef<ComponentInstance<typeof MTopAppbar> | null>(null);
+const sidebarItemStyle = computed<CSSProperties | null>(() => {
+  const width = topBarRef.value?.startWidth ?? 0;
+  if (width === 0) return null;
+
+  return { width: `${width}px` };
 });
 
 const color = useInvoke<string>('RandomStringHexColor', 'initial');
@@ -56,6 +57,7 @@ function createUnhandledError() {
   >
     <template #top>
       <m-top-appbar
+        ref="topBarRef"
         content-alignment="end"
         :menu-items
         :height="60"

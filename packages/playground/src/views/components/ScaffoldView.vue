@@ -9,6 +9,7 @@ const scaffoldSidebarWidth = inject(symbols.scaffoldSidebarWidth);
 const showBottom = inject(symbols.showScaffoldBottom);
 const showSidebar = inject(symbols.showScaffoldSidebar);
 const showTop = inject(symbols.showScaffoldTop);
+const showOnlyContent = inject(symbols.showOnlyScaffoldContent);
 </script>
 
 <template>
@@ -17,6 +18,7 @@ const showTop = inject(symbols.showScaffoldTop);
       <m-button variant="outlined" @click="showTop = !showTop">Top</m-button>
       <m-button variant="outlined" @click="showSidebar = !showSidebar">Sidebar</m-button>
       <m-button variant="outlined" @click="showBottom = !showBottom">Bottom</m-button>
+      <m-button variant="outlined" @click="showOnlyContent = !showOnlyContent">Content</m-button>
     </div>
 
     <m-card variant="outlined" class="w-max">
