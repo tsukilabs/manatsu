@@ -31,10 +31,7 @@ features = ["derive"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = [
-    "macros",
-    "rt-multi-thread",
-]
+features = ["macros", "rt-multi-thread"]
 
 [dependencies.tauri-plugin-manatsu]
 version = "*"

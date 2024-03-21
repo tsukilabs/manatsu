@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-rgb-to-hex"
+description = "Enables the rgb_to_hex command without any pre-configured scope."
+commands.allow = ["rgb_to_hex"]
+
+[[permission]]
+identifier = "deny-rgb-to-hex"
+description = "Denies the rgb_to_hex command without any pre-configured scope."
+commands.deny = ["rgb_to_hex"]

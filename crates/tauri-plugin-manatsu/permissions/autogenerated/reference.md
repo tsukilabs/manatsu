@@ -1,0 +1,34 @@
+| Permission | Description |
+|------|-----|
+|`allow-hex-to-hsl`|Enables the hex_to_hsl command without any pre-configured scope.|
+|`deny-hex-to-hsl`|Denies the hex_to_hsl command without any pre-configured scope.|
+|`allow-hex-to-rgb`|Enables the hex_to_rgb command without any pre-configured scope.|
+|`deny-hex-to-rgb`|Denies the hex_to_rgb command without any pre-configured scope.|
+|`allow-hex-to-string`|Enables the hex_to_string command without any pre-configured scope.|
+|`deny-hex-to-string`|Denies the hex_to_string command without any pre-configured scope.|
+|`allow-hsl-to-hex`|Enables the hsl_to_hex command without any pre-configured scope.|
+|`deny-hsl-to-hex`|Denies the hsl_to_hex command without any pre-configured scope.|
+|`allow-hsl-to-rgb`|Enables the hsl_to_rgb command without any pre-configured scope.|
+|`deny-hsl-to-rgb`|Denies the hsl_to_rgb command without any pre-configured scope.|
+|`allow-hsl-to-string`|Enables the hsl_to_string command without any pre-configured scope.|
+|`deny-hsl-to-string`|Denies the hsl_to_string command without any pre-configured scope.|
+|`allow-random-hex-color`|Enables the random_hex_color command without any pre-configured scope.|
+|`deny-random-hex-color`|Denies the random_hex_color command without any pre-configured scope.|
+|`allow-random-hsl-color`|Enables the random_hsl_color command without any pre-configured scope.|
+|`deny-random-hsl-color`|Denies the random_hsl_color command without any pre-configured scope.|
+|`allow-random-rgb-color`|Enables the random_rgb_color command without any pre-configured scope.|
+|`deny-random-rgb-color`|Denies the random_rgb_color command without any pre-configured scope.|
+|`allow-random-string-hex-color`|Enables the random_string_hex_color command without any pre-configured scope.|
+|`deny-random-string-hex-color`|Denies the random_string_hex_color command without any pre-configured scope.|
+|`allow-random-string-hsl-color`|Enables the random_string_hsl_color command without any pre-configured scope.|
+|`deny-random-string-hsl-color`|Denies the random_string_hsl_color command without any pre-configured scope.|
+|`allow-random-string-rgb-color`|Enables the random_string_rgb_color command without any pre-configured scope.|
+|`deny-random-string-rgb-color`|Denies the random_string_rgb_color command without any pre-configured scope.|
+|`allow-rgb-to-hex`|Enables the rgb_to_hex command without any pre-configured scope.|
+|`deny-rgb-to-hex`|Denies the rgb_to_hex command without any pre-configured scope.|
+|`allow-rgb-to-hsl`|Enables the rgb_to_hsl command without any pre-configured scope.|
+|`deny-rgb-to-hsl`|Denies the rgb_to_hsl command without any pre-configured scope.|
+|`allow-rgb-to-string`|Enables the rgb_to_string command without any pre-configured scope.|
+|`deny-rgb-to-string`|Denies the rgb_to_string command without any pre-configured scope.|
+|`allow-string-to-hex`|Enables the string_to_hex command without any pre-configured scope.|
+|`deny-string-to-hex`|Denies the string_to_hex command without any pre-configured scope.|
