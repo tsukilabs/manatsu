@@ -47,7 +47,6 @@ export const symbols = {
   showScaffoldSidebar
 } as const;
 
-/** @internal */
 export const privateSymbols = {
   dynDialogDefault,
   dynDialogDefaultProps,

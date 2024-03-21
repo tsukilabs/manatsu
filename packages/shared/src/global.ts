@@ -11,7 +11,6 @@ declare global {
   var __MANATSU__: Nullish<ManatsuGlobal>;
 }
 
-/** @internal */
 export function getGlobalManatsu(): ManatsuGlobal {
   const globalManatsu = globalThis.__MANATSU__;
   if (!globalManatsu) {
@@ -21,7 +20,6 @@ export function getGlobalManatsu(): ManatsuGlobal {
   return globalManatsu;
 }
 
-/** @internal */
 export function setGlobalManatsu(manatsu: ManatsuGlobal) {
   globalThis.__MANATSU__ = manatsu;
 }
