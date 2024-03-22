@@ -41,7 +41,7 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "vite": "^5.2.2"
+    "vite": "^5.2.3"
   },
   "engines": {
     "node": ">=20"

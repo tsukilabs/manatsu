@@ -21,13 +21,11 @@ target/
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
 
-# Vite timestamps
-**/*vite*timestamp*
-
 # Tauri
-**/gen/schemas
+**/gen
 
 # Misc
+**/*vite*timestamp*
 **/node_modules
 coverage/
 dist/

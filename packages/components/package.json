@@ -49,12 +49,12 @@
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
     "@manatsu/vue-plugin": "workspace:*",
-    "@tb-dev/utility-types": "^1.2.2",
-    "@tb-dev/utils": "^1.3.2"
+    "@tb-dev/utility-types": "^1.2.3",
+    "@tb-dev/utils": "^1.3.3"
   },
   "devDependencies": {
     "@manatsu/style": "workspace:*",
-    "vite": "^5.2.2"
+    "vite": "^5.2.3"
   },
   "peerDependencies": {
     "@tauri-apps/api": "^2.0.0-beta.6",

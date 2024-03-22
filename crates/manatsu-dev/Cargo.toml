@@ -59,9 +59,15 @@ version = "1.0.114"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
-version = "0.12.0"
-features = ["gzip", "json"]
+version = "0.12.1"
+features = [
+    "gzip",
+    "json",
+]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["macros", "rt-multi-thread"]
+features = [
+    "macros",
+    "rt-multi-thread",
+]

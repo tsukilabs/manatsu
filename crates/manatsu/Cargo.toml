@@ -2,7 +2,13 @@
 name = "manatsu"
 version = "0.6.0"
 description = "CLI tools for Manatsu"
-keywords = ["cli", "components", "manatsu", "tauri", "vue"]
+keywords = [
+    "cli",
+    "components",
+    "manatsu",
+    "tauri",
+    "vue",
+]
 
 [package.homepage]
 workspace = true
@@ -59,9 +65,16 @@ version = "0.8.12"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
-version = "0.12.0"
-features = ["gzip", "json"]
+version = "0.12.1"
+features = [
+    "gzip",
+    "json",
+]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["macros", "process", "rt-multi-thread"]
+features = [
+    "macros",
+    "process",
+    "rt-multi-thread",
+]
