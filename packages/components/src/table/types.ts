@@ -13,6 +13,7 @@ export interface TableProps {
   sortField?: Nullish<string>;
   /** Order to sort the table by default. */
   sortOrder?: Nullish<SortOrder>;
+  sortable?: boolean;
   striped?: boolean;
   tableClass?: string;
   tableLayout?: 'auto' | 'fixed';

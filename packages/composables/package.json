@@ -52,7 +52,7 @@
   "devDependencies": {
     "@manatsu/tauri-plugin": "workspace:*",
     "@manatsu/vue-plugin": "workspace:*",
-    "vite": "^5.2.3"
+    "vite": "^5.2.4"
   },
   "peerDependencies": {
     "@tauri-apps/api": "^2.0.0-beta.6",

@@ -21,6 +21,7 @@ const rows = defineModel<any[]>({ required: true });
 
 const props = withDefaults(defineProps<TableProps>(), {
   scrollable: true,
+  sortable: true,
   sortOrder: 'asc',
   striped: true,
   tableLayout: 'auto'
@@ -74,7 +75,7 @@ function sort(field: unknown, order: SortOrder, sortFn: Nullish<ColumnSortFn>) {
 }
 
 function onColumnClick(column: TableColumn) {
-  if (column.props.sortable) {
+  if (props.sortable && column.props.sortable) {
     const order: SortOrder = column.order ?? 'asc';
     column.order = order === 'asc' ? 'desc' : 'asc';
     sort(column.props.field, order, column.props.sortFn);
