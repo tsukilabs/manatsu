@@ -1,22 +1,13 @@
 import { type InvokeArgs, invoke } from '@tauri-apps/api/core';
 import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import { extendRef, tryOnScopeDispose, watchTriggerable } from '@vueuse/core';
+import { type MaybeRefOrGetter, type Ref, isRef, ref, shallowRef, toRef, toValue } from 'vue';
 import {
   type ErrorHandler,
   type MaybeNullishRef,
   getGlobalManatsu,
-  privateSymbols
+  handleError
 } from '@manatsu/shared';
-import {
-  type MaybeRefOrGetter,
-  type Ref,
-  inject,
-  isRef,
-  ref,
-  shallowRef,
-  toRef,
-  toValue
-} from 'vue';
 
 type CommandRecord = Record<string, string>;
 
@@ -77,7 +68,7 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
             state.value = result;
           }
         } catch (err) {
-          onError(options, err);
+          onError(options.onError, err);
         } finally {
           if (isRef(options.loading) && current === id) {
             options.loading.value = false;
@@ -96,13 +87,10 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
   };
 }
 
-function onError(options: UseInvokeOptions<unknown>, err: unknown) {
-  const app = getGlobalManatsu().app;
-
-  let fn = options.onError;
-  fn ??= app.runWithContext(() => {
-    return inject(privateSymbols.errorHandler);
-  });
-
-  fn?.call(app, err);
+function onError(fn: Nullish<ErrorHandler>, err: unknown) {
+  if (fn) {
+    fn.call(getGlobalManatsu().app, err);
+  } else {
+    handleError(err);
+  }
 }

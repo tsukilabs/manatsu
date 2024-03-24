@@ -38,7 +38,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       (app.config.globalProperties.$mana as any) = createGlobalProps();
 
       // Error handling
-      const errorHandler = (options.errorHandler ?? handleError).bind(app);
+      const errorHandler = (options.errorHandler ?? defaultErrorHandler).bind(app);
       app.config.errorHandler = errorHandler;
       app.provide(privateSymbols.errorHandler, errorHandler);
 
@@ -65,7 +65,7 @@ function createGlobalProps(): ManatsuPluginGlobal {
   return mana;
 }
 
-// This will be changed to something more useful once Tauri v2 is released.
-function handleError(this: App, err: unknown) {
+// This will be changed to something useful once Tauri v2 is released.
+function defaultErrorHandler(this: App, err: unknown) {
   console.error(err);
 }

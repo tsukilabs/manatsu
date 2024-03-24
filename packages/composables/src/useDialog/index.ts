@@ -1,5 +1,10 @@
 import type { Nullish } from '@tb-dev/utility-types';
-import { DialogError, type DialogOptions, privateSymbols } from '@manatsu/shared';
+import {
+  type DialogOptions,
+  type InjectStrictOptions,
+  injectStrict,
+  privateSymbols
+} from '@manatsu/shared';
 import {
   type AllowedComponentProps,
   type Component,
@@ -7,8 +12,6 @@ import {
   type Ref,
   type ShallowRef,
   type VNodeProps,
-  hasInjectionContext,
-  inject,
   isRef
 } from 'vue';
 
@@ -39,22 +42,20 @@ interface UseDialogReturn {
   on: (event: 'hide' | 'show', fn: Nullish<() => void>) => void;
 }
 
+function createInjectOptions(): InjectStrictOptions {
+  return {
+    error: 'useDialog must be called within a provider'
+  };
+}
+
 export function useDialog(options: Nullish<DialogOptions> = null): UseDialogReturn {
-  if (!hasInjectionContext()) {
-    throw new DialogError('useDialog must be called inside a component');
-  }
-
-  const visible = inject(privateSymbols.dynDialogVisible);
-  const optionsRef = inject(privateSymbols.dynDialogOptions);
-
-  if (!isRef(visible) || !isRef(optionsRef)) {
-    throw new DialogError('no dialog provider found');
-  }
+  const injectOptions = createInjectOptions();
+  const visible = injectStrict(privateSymbols.dynDialogVisible, injectOptions);
+  const optionsRef = injectStrict(privateSymbols.dynDialogOptions, injectOptions);
+  const onHideRef = injectStrict(privateSymbols.dynDialogOnHide, injectOptions);
+  const onShowRef = injectStrict(privateSymbols.dynDialogOnShow, injectOptions);
 
   optionsRef.value = options;
-
-  const onHideRef = inject(privateSymbols.dynDialogOnHide);
-  const onShowRef = inject(privateSymbols.dynDialogOnShow);
 
   const closeFn = close(visible);
   const showFn = show(visible);
@@ -67,10 +68,10 @@ export function useDialog(options: Nullish<DialogOptions> = null): UseDialogRetu
   const listener: UseDialogReturn['on'] = (event, fn) => {
     switch (event) {
       case 'hide':
-        if (isRef(onHideRef)) onHideRef.value = fn;
+        onHideRef.value = fn;
         break;
       case 'show':
-        if (isRef(onShowRef)) onShowRef.value = fn;
+        onShowRef.value = fn;
         break;
     }
   };
@@ -114,58 +115,55 @@ function close(visible: Ref<boolean>) {
 }
 
 function setHeader() {
-  const headerSlot = inject(privateSymbols.dynDialogHeader);
-  const headerSlotProps = inject(privateSymbols.dynDialogHeaderProps);
+  const injectOptions = createInjectOptions();
+  const headerSlot = injectStrict(privateSymbols.dynDialogHeader, injectOptions);
+  const headerSlotProps = injectStrict(privateSymbols.dynDialogHeaderProps, injectOptions);
 
   return function <C extends Component>(
     component: Nullish<C>,
     props: Nullish<ComponentProps<C>> = null
   ) {
-    if (isRef(headerSlot)) headerSlot.value = component;
-    if (isRef(headerSlotProps)) {
-      if (component) {
-        headerSlotProps.value = props;
-      } else {
-        headerSlotProps.value = null;
-      }
+    headerSlot.value = component;
+    if (component) {
+      headerSlotProps.value = props;
+    } else {
+      headerSlotProps.value = null;
     }
   };
 }
 
 function setContent() {
-  const defaultSlot = inject(privateSymbols.dynDialogDefault);
-  const defaultSlotProps = inject(privateSymbols.dynDialogDefaultProps);
+  const injectOptions = createInjectOptions();
+  const defaultSlot = injectStrict(privateSymbols.dynDialogDefault, injectOptions);
+  const defaultSlotProps = injectStrict(privateSymbols.dynDialogDefaultProps, injectOptions);
 
   return function <C extends Component>(
     component: Nullish<C>,
     props: Nullish<ComponentProps<C>> = null
   ) {
-    if (isRef(defaultSlot)) defaultSlot.value = component;
-    if (isRef(defaultSlotProps)) {
-      if (component) {
-        defaultSlotProps.value = props;
-      } else {
-        defaultSlotProps.value = null;
-      }
+    defaultSlot.value = component;
+    if (component) {
+      defaultSlotProps.value = props;
+    } else {
+      defaultSlotProps.value = null;
     }
   };
 }
 
 function setFooter() {
-  const footerSlot = inject(privateSymbols.dynDialogFooter);
-  const footerSlotProps = inject(privateSymbols.dynDialogFooterProps);
+  const injectOptions = createInjectOptions();
+  const footerSlot = injectStrict(privateSymbols.dynDialogFooter, injectOptions);
+  const footerSlotProps = injectStrict(privateSymbols.dynDialogFooterProps, injectOptions);
 
   return function <C extends Component>(
     component: Nullish<C>,
     props: Nullish<ComponentProps<C>> = null
   ) {
-    if (isRef(footerSlot)) footerSlot.value = component;
-    if (isRef(footerSlotProps)) {
-      if (component) {
-        footerSlotProps.value = props;
-      } else {
-        footerSlotProps.value = null;
-      }
+    footerSlot.value = component;
+    if (component) {
+      footerSlotProps.value = props;
+    } else {
+      footerSlotProps.value = null;
     }
   };
 }

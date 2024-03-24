@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { until } from '@vueuse/core';
 import { isNullish, toPixel } from '@tb-dev/utils';
 import type { Nullish } from '@tb-dev/utility-types';
-import { type SortOrder, compare, symbols } from '@manatsu/shared';
+import { type SortOrder, compare, handleError, symbols } from '@manatsu/shared';
 import {
   type VNode,
   computed,
   inject,
   isRef,
-  onBeforeMount,
   onUnmounted,
   provide,
   shallowRef,
@@ -55,15 +55,16 @@ const tableMaxHeight = computed(() => {
   return 'auto';
 });
 
+// Columns
 const columnMap = shallowRef<ColumnMap>(new Map());
+const columns = computed(() => Array.from(columnMap.value.values()));
 provide(columnMapKey, columnMap);
 
-const columns = computed(() => Array.from(columnMap.value.values()));
-
+// Sort
 function sort(field: unknown, order: SortOrder, sortFn: Nullish<ColumnSortFn>) {
   if (typeof field !== 'string') return;
   rows.value.sort((a, b) => {
-    if (typeof sortFn === 'function') {
+    if (sortFn) {
       const result = sortFn(a, b, compare);
       return order === 'asc' ? result : -result;
     }
@@ -72,6 +73,9 @@ function sort(field: unknown, order: SortOrder, sortFn: Nullish<ColumnSortFn>) {
     const second = intoNestedValue(order === 'asc' ? b : a, field);
     return compare(first, second);
   });
+
+  // We manually trigger the model so ShallowRefs can detect the change.
+  triggerRef(rows);
 }
 
 function onColumnClick(column: TableColumn) {
@@ -79,17 +83,17 @@ function onColumnClick(column: TableColumn) {
     const order: SortOrder = column.order ?? 'asc';
     column.order = order === 'asc' ? 'desc' : 'asc';
     sort(column.props.field, order, column.props.sortFn);
-
-    // We manually trigger the model so ShallowRefs can detect the change.
-    triggerRef(rows);
   }
 }
 
-onBeforeMount(() => {
-  if (props.sortField) {
-    sort(props.sortField, props.sortOrder ?? 'asc', null);
-  }
-});
+until(rows)
+  .toMatch((r) => r.length > 0, { deep: false })
+  .then(() => {
+    if (props.sortField) {
+      sort(props.sortField, props.sortOrder ?? 'asc', null);
+    }
+  })
+  .catch(handleError);
 
 onUnmounted(() => {
   columnMap.value.clear();

@@ -41,19 +41,20 @@ declare module 'vue' {
 export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 
 export {
-  type DialogOptions,
-  type MaybeNullishRef,
-  getCurrentApp,
-  injectStrict,
-  symbols
-} from '@manatsu/shared';
-
-export {
   type UseInvokeOptions,
   type UseInvokeReturn,
   defineInvoke,
   useElementSize
 } from '@manatsu/composables/src/index.ts';
+
+export {
+  type DialogOptions,
+  type MaybeNullishRef,
+  getCurrentApp,
+  handleError,
+  injectStrict,
+  symbols
+} from '@manatsu/shared';
 
 export {
   MButton,

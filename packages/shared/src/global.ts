@@ -1,6 +1,5 @@
 import type { App } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
-import { ManatsuError } from './error';
 
 export interface ManatsuGlobal {
   readonly app: App;
@@ -14,7 +13,7 @@ declare global {
 export function getGlobalManatsu(): ManatsuGlobal {
   const globalManatsu = globalThis.__MANATSU__;
   if (!globalManatsu) {
-    throw new ManatsuError('manatsu plugin must be installed');
+    throw new Error('manatsu plugin must be installed');
   }
 
   return globalManatsu;
