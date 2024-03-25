@@ -1,15 +1,19 @@
 use crate::prelude::*;
-use chrono::{DateTime, FixedOffset, Local};
+use chrono::{DateTime, FixedOffset};
 use std::cmp::Ordering;
 use std::fs;
 use tauri::{AppHandle, Manager, Runtime};
 
-/// <https://docs.rs/chrono/latest/chrono/format/strftime/index.html>
-pub const TIMESTAMP: &str = "%F %T%.3f %:z";
+pub mod date {
+  use chrono::Local;
 
-#[must_use]
-pub fn now() -> String {
-  Local::now().format(TIMESTAMP).to_string()
+  /// <https://docs.rs/chrono/latest/chrono/format/strftime/index.html>
+  pub const TIMESTAMP: &str = "%F %T%.3f %:z";
+
+  #[must_use]
+  pub fn now() -> String {
+    Local::now().format(TIMESTAMP).to_string()
+  }
 }
 
 #[derive(Deserialize, Serialize, PartialEq, Eq)]
@@ -60,7 +64,7 @@ pub struct Error {
 impl Error {
   fn datetime_or_default(&self) -> DateTime<FixedOffset> {
     if let Some(timestamp) = &self.timestamp {
-      DateTime::parse_from_str(timestamp, TIMESTAMP).unwrap_or_default()
+      DateTime::parse_from_str(timestamp, date::TIMESTAMP).unwrap_or_default()
     } else {
       DateTime::default()
     }
@@ -114,7 +118,7 @@ impl Log for Error {
     R: Runtime,
   {
     if self.timestamp.is_none() {
-      self.timestamp = Some(now());
+      self.timestamp = Some(date::now());
     }
 
     if self.version.manatsu.is_none() {
