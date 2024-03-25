@@ -1,11 +1,12 @@
 use crate::package::Package;
 use crate::prelude::*;
 use crate::utils::Config;
+use clap::Args;
 use miho::git::{self, Commit, Git};
 use reqwest::{header, Client};
 use std::process::Stdio;
 
-#[derive(Debug, clap::Args)]
+#[derive(Debug, Args)]
 pub struct Release {
   #[arg(long)]
   only_crate: bool,
@@ -33,26 +34,24 @@ impl super::Command for Release {
     pnpm!("run", "format").spawn()?.wait().await?;
     commit_if_dirty("style: format files").await?;
 
-    match Config::read().ok() {
-      Some(cfg) if cfg.github => {
-        create_github_release(&cfg.github_token).await?;
+    let config = Config::read().ok();
+    if matches!(config, Some(ref c) if c.github) {
+      create_github_release(config.unwrap().github_token).await?;
+    } else {
+      if !self.only_crate {
+        pnpm!(["publish", "-r", "--no-git-checks"])
+          .spawn()?
+          .wait()
+          .await?;
       }
-      _ => {
-        if !self.only_crate {
-          pnpm!(["publish", "-r", "--no-git-checks"])
+
+      if !self.only_package {
+        let crates = ["manatsu", "tauri-plugin-manatsu"];
+        for crate_name in crates {
+          cargo!(["publish", "-p", crate_name])
             .spawn()?
             .wait()
             .await?;
-        }
-
-        if !self.only_package {
-          let crates = ["manatsu", "tauri-plugin-manatsu"];
-          for crate_name in crates {
-            cargo!(["publish", "-p", crate_name])
-              .spawn()?
-              .wait()
-              .await?;
-          }
         }
       }
     }
@@ -61,13 +60,16 @@ impl super::Command for Release {
   }
 }
 
-async fn create_github_release(github_token: &str) -> Result<()> {
+async fn create_github_release<T>(github_token: T) -> Result<()>
+where
+  T: AsRef<str>,
+{
   let package = Package::read_root()?;
   let client = Client::builder().build()?;
 
   let owner_repo = "tsukilabs/manatsu";
   let endpoint = format!("https://api.github.com/repos/{owner_repo}/releases");
-  let auth = format!("Bearer {github_token}");
+  let auth = format!("Bearer {}", github_token.as_ref());
 
   let body = serde_json::json!({
     "tag_name": format!("v{}", package.version),

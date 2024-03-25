@@ -1,7 +1,8 @@
 use crate::package::{self, Package};
 use crate::prelude::*;
+use clap::Args;
 
-#[derive(Debug, clap::Args)]
+#[derive(Debug, Args)]
 pub struct Build {
   #[arg(short = 'p', long, value_name = "PACKAGE")]
   package: Option<Vec<String>>,
