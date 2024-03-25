@@ -10,7 +10,7 @@ use tauri::Runtime;
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
   Builder::new("manatsu")
     .invoke_handler(tauri::generate_handler![
-      command::version,
+      command::manatsu_version,
       command::color::hex_to_hsl,
       command::color::hex_to_rgb,
       command::color::hex_to_string,

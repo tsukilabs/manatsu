@@ -6,6 +6,7 @@ const COMMANDS: &[&str] = &[
   "hsl_to_rgb",
   "hsl_to_string",
   "log_error",
+  "manatsu_version",
   "random_hex_color",
   "random_hsl_color",
   "random_rgb_color",
