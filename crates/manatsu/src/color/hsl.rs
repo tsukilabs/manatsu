@@ -1,7 +1,7 @@
 use super::hex::Hex;
 use super::rgb::Rgb;
 use super::Color;
-use serde::{Deserialize, Serialize};
+use crate::prelude::*;
 use std::fmt;
 
 /// Represents an HSL color.

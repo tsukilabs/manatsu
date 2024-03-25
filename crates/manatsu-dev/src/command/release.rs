@@ -1,5 +1,6 @@
+use crate::package::Package;
 use crate::prelude::*;
-use crate::util::Config;
+use crate::utils::Config;
 use miho::git::{self, Commit, Git};
 use reqwest::{header, Client};
 use std::process::Stdio;
@@ -22,6 +23,9 @@ impl super::Command for Release {
 
     super::readme()?;
     commit_if_dirty("chore: sync readme files").await?;
+
+    super::plugin().await?;
+    commit_if_dirty("chore: update plugin commands").await?;
 
     super::tailwind()?;
     commit_if_dirty("chore: update tailwind classes").await?;

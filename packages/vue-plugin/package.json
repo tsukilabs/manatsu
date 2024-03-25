@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@manatsu/shared": "workspace:*",
+    "@manatsu/tauri-plugin": "workspace:*",
     "@tb-dev/utility-types": "^1.2.4",
     "@tb-dev/utils": "^1.3.4"
   },

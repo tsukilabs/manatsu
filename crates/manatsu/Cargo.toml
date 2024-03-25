@@ -2,37 +2,14 @@
 name = "manatsu"
 version = "0.6.3"
 description = "CLI tools for Manatsu"
-keywords = [
-    "cli",
-    "components",
-    "manatsu",
-    "tauri",
-    "vue",
-]
-
-[package.homepage]
-workspace = true
-
-[package.repository]
-workspace = true
-
-[package.authors]
-workspace = true
-
-[package.license]
-workspace = true
-
-[package.edition]
-workspace = true
-
-[package.rust-version]
-workspace = true
-
-[package.readme]
-workspace = true
-
-[package.categories]
-workspace = true
+homepage = "https://github.com/tsukilabs/manatsu"
+repository = "https://github.com/tsukilabs/manatsu"
+authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.76"
+categories = ["gui", "web-programming"]
+keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
 [dependencies]
 anyhow = "1.0.81"
@@ -44,9 +21,12 @@ lightningcss = "1.0.0-alpha.55"
 miho = "4.3.2"
 rand = "0.8.5"
 regex = "1.10.4"
+chrono = "0.4.35"
 zip = "0.6.6"
 walkdir = "2.5.0"
 bytes = "1.6.0"
+tempfile = "3.10.1"
+tauri = "2.0.0-beta.13"
 
 [dependencies.clap]
 version = "4.5.3"
@@ -60,21 +40,18 @@ features = ["derive"]
 version = "1.0.114"
 features = ["preserve_order"]
 
+[dependencies.strum]
+version = "0.26.2"
+features = ["derive"]
+
 [dependencies.toml]
 version = "0.8.12"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.12.1"
-features = [
-    "gzip",
-    "json",
-]
+features = ["gzip", "json"]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = [
-    "macros",
-    "process",
-    "rt-multi-thread",
-]
+features = ["macros", "process", "rt-multi-thread"]

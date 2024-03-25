@@ -306,6 +306,9 @@ importers:
       '@manatsu/shared':
         specifier: workspace:*
         version: link:../shared
+      '@manatsu/tauri-plugin':
+        specifier: workspace:*
+        version: link:../tauri-plugin
       '@tb-dev/utility-types':
         specifier: ^1.2.4
         version: 1.2.4

@@ -379,6 +379,20 @@
           ]
         },
         {
+          "description": "allow-log-error -> Enables the log_error command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-log-error"
+          ]
+        },
+        {
+          "description": "deny-log-error -> Denies the log_error command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-log-error"
+          ]
+        },
+        {
           "description": "allow-random-hex-color -> Enables the random_hex_color command without any pre-configured scope.",
           "type": "string",
           "enum": [

@@ -2,38 +2,15 @@
 name = "tauri-plugin-manatsu"
 version = "0.6.3"
 description = "Manatsu plugin for Tauri"
-keywords = [
-    "manatsu",
-    "plugin",
-    "tauri",
-    "tauri-plugin",
-    "vue",
-]
 links = "tauri-plugin-manatsu"
-
-[package.homepage]
-workspace = true
-
-[package.repository]
-workspace = true
-
-[package.authors]
-workspace = true
-
-[package.license]
-workspace = true
-
-[package.edition]
-workspace = true
-
-[package.rust-version]
-workspace = true
-
-[package.readme]
-workspace = true
-
-[package.categories]
-workspace = true
+homepage = "https://github.com/tsukilabs/manatsu"
+repository = "https://github.com/tsukilabs/manatsu"
+authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.76"
+categories = ["gui", "web-programming"]
+keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 
 [dependencies]
 anyhow = "1.0.81"
