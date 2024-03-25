@@ -1,12 +1,8 @@
 mod template;
 
-use anyhow::{anyhow, bail, Context, Result};
-use convert_case::{Case, Casing};
+use crate::prelude::*;
 use globset::{Glob, GlobSet, GlobSetBuilder};
-use regex::Regex;
 use std::io::Cursor;
-use std::path::{Path, PathBuf};
-use std::time::Instant;
 use std::{env, fs};
 pub use template::Template;
 use walkdir::WalkDir;
@@ -96,14 +92,14 @@ impl Project {
   }
 
   fn find_extracted_dir(&self, path: &Path) -> Result<PathBuf> {
-    let template_name: &str = self.template.into();
+    let template_name = self.template.to_string();
     for entry in fs::read_dir(path)? {
       let entry = entry?;
       let entry_path = entry.path();
 
       if entry.metadata()?.is_dir() {
         let file_name = entry.file_name();
-        if matches!(file_name.to_str(), Some(n) if n.contains(template_name)) {
+        if matches!(file_name.to_str(), Some(n) if n.contains(&template_name)) {
           return Ok(entry_path);
         }
       }
@@ -204,7 +200,7 @@ impl Project {
 
     macro_rules! update {
       ($key:literal, $value:expr) => {
-        tauri_conf["package"][$key] = serde_json::Value::String($value);
+        tauri_conf[$key] = serde_json::Value::String($value);
       };
     }
 
@@ -231,8 +227,9 @@ impl Project {
   }
 
   /// Determine whether the project name is valid.
+  #[allow(clippy::missing_panics_doc)]
   pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
-    let regex = Regex::new(Project::NAME_REGEX).expect("hardcoded regex should be valid");
+    let regex = Regex::new(Project::NAME_REGEX).unwrap();
     regex.is_match(name.as_ref())
   }
 }
@@ -243,7 +240,7 @@ fn build_globset() -> GlobSet {
 
   macro_rules! add {
     ($glob:expr) => {
-      builder.add(Glob::new($glob).expect("hardcoded glob should be valid"));
+      builder.add(Glob::new($glob).unwrap());
     };
   }
 

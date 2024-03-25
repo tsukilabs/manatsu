@@ -1,5 +1,5 @@
+use crate::package;
 use crate::prelude::*;
-use std::collections::HashSet;
 use walkdir::WalkDir;
 
 // https://regex101.com/r/mdP6Q7
@@ -33,10 +33,10 @@ pub fn tailwind() -> Result<()> {
   }
 
   let classes = {
-    let mut classes: Vec<String> = classes
+    let mut classes = classes
       .into_iter()
       .map(|c| c.to_case(Case::Kebab))
-      .collect();
+      .collect_vec();
 
     classes.sort_unstable();
     classes

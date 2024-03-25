@@ -12,6 +12,10 @@
 |`deny-hsl-to-rgb`|Denies the hsl_to_rgb command without any pre-configured scope.|
 |`allow-hsl-to-string`|Enables the hsl_to_string command without any pre-configured scope.|
 |`deny-hsl-to-string`|Denies the hsl_to_string command without any pre-configured scope.|
+|`allow-log-error`|Enables the log_error command without any pre-configured scope.|
+|`deny-log-error`|Denies the log_error command without any pre-configured scope.|
+|`allow-manatsu-version`|Enables the manatsu_version command without any pre-configured scope.|
+|`deny-manatsu-version`|Denies the manatsu_version command without any pre-configured scope.|
 |`allow-random-hex-color`|Enables the random_hex_color command without any pre-configured scope.|
 |`deny-random-hex-color`|Denies the random_hex_color command without any pre-configured scope.|
 |`allow-random-hsl-color`|Enables the random_hsl_color command without any pre-configured scope.|

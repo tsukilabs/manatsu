@@ -1,3 +1,4 @@
+use crate::package;
 use crate::prelude::*;
 
 /// Synchronizes all README files of the monorepo.

@@ -1,11 +1,10 @@
-use anyhow::{bail, Context, Result};
+use crate::prelude::*;
 use bytes::Bytes;
-use convert_case::{Case, Casing};
 use reqwest::Client;
-use std::fmt;
-use std::time::Duration;
+use strum::{Display, EnumString};
 
-#[derive(Clone, Copy)]
+#[derive(Display, EnumString)]
+#[strum(serialize_all = "kebab-case")]
 pub enum Template {
   Tauri,
   Vue,
@@ -14,7 +13,7 @@ pub enum Template {
 impl Template {
   #[must_use]
   pub fn url(&self) -> String {
-    let name: &str = (*self).into();
+    let name = self.to_string();
     format!("https://github.com/tsukilabs/manatsu-template-{name}/archive/refs/heads/main.zip")
   }
 
@@ -31,37 +30,5 @@ impl Template {
       .with_context(|| format!("could not fetch: {template_url}"))?;
 
     response.bytes().await.map_err(Into::into)
-  }
-}
-
-impl From<Template> for &str {
-  fn from(template: Template) -> Self {
-    match template {
-      Template::Tauri => "tauri",
-      Template::Vue => "vue",
-    }
-  }
-}
-
-impl TryFrom<&str> for Template {
-  type Error = anyhow::Error;
-
-  fn try_from(value: &str) -> Result<Self> {
-    let value = value.trim().to_lowercase();
-    let template = match value.as_str() {
-      "tauri" => Template::Tauri,
-      "vue" => Template::Vue,
-      _ => bail!("{value} is not a valid template name"),
-    };
-
-    Ok(template)
-  }
-}
-
-impl fmt::Display for Template {
-  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    let name: &str = (*self).into();
-    let name = name.to_case(Case::Title);
-    write!(f, "{name}")
   }
 }

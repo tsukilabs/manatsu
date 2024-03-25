@@ -1,15 +1,17 @@
-import type { App, Plugin } from 'vue';
+import type { Plugin } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
 import {
   type DarkMode,
   type ErrorHandler,
   injectStrict,
-  privateSymbols,
   setGlobalManatsu,
   symbols
 } from '@manatsu/shared';
 import { provideDialog } from './dialog';
+import { provideErrorHandler } from './error';
 import { isDarkMode, provideDarkMode } from './dark-mode';
+
+export type { ErrorLog, VersionSnapshot } from './error';
 
 export interface ManatsuOptions {
   /** @default 'auto' */
@@ -33,14 +35,10 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
     install(app) {
       provideDarkMode(app, options.darkMode);
       provideDialog(app, options.placeDialogOnScaffold);
+      provideErrorHandler(app, options.errorHandler);
 
       // Using `any` so we can let `$mana` remain read-only.
       (app.config.globalProperties.$mana as any) = createGlobalProps();
-
-      // Error handling
-      const errorHandler = (options.errorHandler ?? defaultErrorHandler).bind(app);
-      app.config.errorHandler = errorHandler;
-      app.provide(privateSymbols.errorHandler, errorHandler);
 
       setGlobalManatsu({ app });
     }
@@ -63,9 +61,4 @@ function createGlobalProps(): ManatsuPluginGlobal {
   };
 
   return mana;
-}
-
-// This will be changed to something useful once Tauri v2 is released.
-function defaultErrorHandler(this: App, err: unknown) {
-  console.error(err);
 }

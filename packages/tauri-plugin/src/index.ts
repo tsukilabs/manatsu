@@ -8,6 +8,7 @@ export enum Command {
   HslToHex = 'plugin:manatsu|hsl_to_hex',
   HslToRgb = 'plugin:manatsu|hsl_to_rgb',
   HslToString = 'plugin:manatsu|hsl_to_string',
+  LogError = 'plugin:manatsu|log_error',
   RandomHexColor = 'plugin:manatsu|random_hex_color',
   RandomHslColor = 'plugin:manatsu|random_hsl_color',
   RandomRgbColor = 'plugin:manatsu|random_rgb_color',

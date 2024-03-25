@@ -1,3 +1,4 @@
+use crate::package::{self, Package};
 use crate::prelude::*;
 
 #[derive(Debug, clap::Args)]
@@ -20,12 +21,12 @@ impl super::Command for Build {
 
     let mut args = vec!["run", "--parallel"];
 
-    let packages: Vec<String> = self
+    let packages = self
       .package
       .unwrap_or_else(|| Package::PUBLIC.iter().map(ToString::to_string).collect())
       .into_iter()
       .map(|pkg| pkg.trim().replace("@manatsu/", "").to_case(Case::Kebab))
-      .collect();
+      .collect_vec();
 
     if packages.is_empty() {
       bail!("{}", "nothing to build".red());

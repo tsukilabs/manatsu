@@ -1,9 +1,7 @@
 use super::hsl::Hsl;
 use super::rgb::Rgb;
 use super::Color;
-use anyhow::{anyhow, Result};
-use regex::Regex;
-use serde::{Deserialize, Serialize};
+use crate::prelude::*;
 use std::fmt;
 
 /// <https://regex101.com/r/OKsEXy>

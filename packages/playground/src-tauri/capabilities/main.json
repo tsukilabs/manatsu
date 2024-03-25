@@ -2,5 +2,5 @@
   "identifier": "main",
   "description": "main window",
   "windows": ["main"],
-  "permissions": ["manatsu:allow-random-string-hex-color"]
+  "permissions": ["manatsu:allow-log-error", "manatsu:allow-random-string-hex-color"]
 }

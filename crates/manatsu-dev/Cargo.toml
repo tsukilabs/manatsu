@@ -4,32 +4,14 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.6.3"
+version = "0.6.4"
 publish = false
-
-[package.homepage]
-workspace = true
-
-[package.repository]
-workspace = true
-
-[package.authors]
-workspace = true
-
-[package.license]
-workspace = true
-
-[package.edition]
-workspace = true
-
-[package.rust-version]
-workspace = true
-
-[package.readme]
-workspace = true
-
-[package.categories]
-workspace = true
+homepage = "https://github.com/tsukilabs/manatsu"
+repository = "https://github.com/tsukilabs/manatsu"
+authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.76"
 
 [dependencies]
 anyhow = "1.0.81"
@@ -38,6 +20,7 @@ convert_case = "0.6.0"
 globset = "0.4.14"
 indoc = "2.0.5"
 inquire = "0.7.3"
+itertools = "0.12.1"
 miho = "4.3.2"
 regex = "1.10.4"
 walkdir = "2.5.0"

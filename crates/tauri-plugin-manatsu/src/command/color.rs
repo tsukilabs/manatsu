@@ -1,5 +1,3 @@
-#![allow(clippy::module_name_repetitions)]
-
 use crate::prelude::*;
 use manatsu::color::{Color, Hex, Hsl, Rgb};
 

@@ -1,13 +1,15 @@
+#![allow(clippy::missing_panics_doc)]
+
 mod command;
 mod package;
 mod prelude;
-mod util;
+mod utils;
 
-use anyhow::Result;
 use clap::Parser;
 use command::{component, composable, Build, Command, Release};
 use inquire::validator::Validation;
 use inquire::{required, Text};
+use prelude::*;
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu-dev")]
@@ -19,6 +21,8 @@ enum Cli {
   Component,
   /// Generate a composable template.
   Composable,
+  /// Update plugin commands.
+  Plugin,
   /// Synchronize all README files of the monorepo.
   Readme,
   /// Release a new version, publishing all the public packages.
@@ -65,6 +69,7 @@ async fn main() -> Result<()> {
 
       composable::create(name).await
     }
+    Cli::Plugin => command::plugin().await,
     Cli::Readme => command::readme(),
     Cli::Release(cmd) => cmd.execute().await,
     Cli::Tailwind => command::tailwind(),

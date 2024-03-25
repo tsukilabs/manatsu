@@ -1,7 +1,7 @@
 use super::hex::Hex;
 use super::hsl::Hsl;
 use super::Color;
-use serde::{Deserialize, Serialize};
+use crate::prelude::*;
 use std::fmt;
 
 /// Represents an RGB color.
@@ -38,6 +38,7 @@ impl Color for Rgb {
 }
 
 impl From<Hsl> for Rgb {
+  #[allow(clippy::cast_possible_truncation)]
   fn from(hsl: Hsl) -> Self {
     if hsl.s == 0.0 {
       let lightness = (hsl.l * 255.0) as u8;
