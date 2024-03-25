@@ -1,24 +1,12 @@
 import type { App } from 'vue';
-import { invoke } from '@tauri-apps/api/core';
 import type { Nullish } from '@tb-dev/utility-types';
-import { Command } from '@manatsu/tauri-plugin/src/index.ts';
-import { type ErrorHandler, privateSymbols } from '@manatsu/shared';
-
-export interface VersionSnapshot {
-  app?: Nullish<string>;
-  manatsu?: Nullish<string>;
-  tauri?: Nullish<string>;
-  vue: string;
-  webview?: Nullish<string>;
-}
-
-export interface ErrorLog {
-  message: string;
-  name: string;
-  stack?: Nullish<string>;
-  timestamp?: Nullish<string>;
-  version: VersionSnapshot;
-}
+import { saveErrorLog } from '@manatsu/tauri-plugin/src/index.ts';
+import {
+  type ErrorHandler,
+  type ErrorLog,
+  type VersionSnapshot,
+  privateSymbols
+} from '@manatsu/shared';
 
 export function provideErrorHandler(app: App, errorHandler?: Nullish<ErrorHandler>) {
   const fn = (errorHandler ?? defaultErrorHandler).bind(app);
@@ -36,7 +24,7 @@ function defaultErrorHandler(this: App, err: unknown) {
     version
   };
 
-  void invoke(Command.LogError, { log });
+  void saveErrorLog(log);
 
   console.error(err);
 }

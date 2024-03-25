@@ -19,7 +19,7 @@ colored = "2.1.0"
 convert_case = "0.6.0"
 globset = "0.4.14"
 indoc = "2.0.5"
-inquire = "0.7.3"
+inquire = "0.7.4"
 itertools = "0.12.1"
 miho = "4.3.2"
 regex = "1.10.4"
@@ -42,7 +42,7 @@ version = "1.0.114"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
-version = "0.12.1"
+version = "0.12.2"
 features = [
     "gzip",
     "json",

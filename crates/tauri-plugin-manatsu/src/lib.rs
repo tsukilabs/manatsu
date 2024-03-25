@@ -11,6 +11,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
   Builder::new("manatsu")
     .invoke_handler(tauri::generate_handler![
       command::manatsu_version,
+      command::version_snapshot,
       command::color::hex_to_hsl,
       command::color::hex_to_rgb,
       command::color::hex_to_string,
@@ -27,7 +28,9 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
       command::color::rgb_to_hsl,
       command::color::rgb_to_string,
       command::color::string_to_hex,
-      command::log::log_error,
+      command::log::error_log_path,
+      command::log::read_error_logs,
+      command::log::save_error_log,
     ])
     .build()
 }

@@ -2,16 +2,16 @@ use crate::prelude::*;
 use manatsu::log::{self, Log};
 
 #[tauri::command]
-pub async fn log_error<R: Runtime>(app: AppHandle<R>, mut log: log::Error) -> Result<()> {
-  let log_dir = app.path().app_log_dir()?;
-  match log_dir.try_exists() {
-    Ok(true) => {}
-    Ok(false) => fs::create_dir_all(&log_dir)?,
-    Err(e) => return Err(e.into()),
-  }
+pub async fn error_log_path<R: Runtime>(app: AppHandle<R>) -> Result<PathBuf> {
+  log::Error::path(&app).map_err(Into::into)
+}
 
-  log.version.app = app.config().version.clone();
+#[tauri::command]
+pub async fn read_error_logs<R: Runtime>(app: AppHandle<R>) -> Result<Vec<log::Error>> {
+  log::Error::read(&app).map_err(Into::into)
+}
 
-  let path = log_dir.join("error.json");
-  log.save(path).map_err(Into::into)
+#[tauri::command]
+pub async fn save_error_log<R: Runtime>(app: AppHandle<R>, log: log::Error) -> Result<()> {
+  log.save(&app).map_err(Into::into)
 }

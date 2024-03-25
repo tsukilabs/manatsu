@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-read-error-logs"
+description = "Enables the read_error_logs command without any pre-configured scope."
+commands.allow = ["read_error_logs"]
+
+[[permission]]
+identifier = "deny-read-error-logs"
+description = "Denies the read_error_logs command without any pre-configured scope."
+commands.deny = ["read_error_logs"]

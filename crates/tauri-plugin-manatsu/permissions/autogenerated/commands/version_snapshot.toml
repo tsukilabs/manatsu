@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-version-snapshot"
+description = "Enables the version_snapshot command without any pre-configured scope."
+commands.allow = ["version_snapshot"]
+
+[[permission]]
+identifier = "deny-version-snapshot"
+description = "Denies the version_snapshot command without any pre-configured scope."
+commands.deny = ["version_snapshot"]

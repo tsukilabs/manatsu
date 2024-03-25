@@ -38,12 +38,7 @@ declare module 'vue' {
   }
 }
 
-export {
-  type ErrorLog,
-  type ManatsuOptions,
-  type VersionSnapshot,
-  createManatsu
-} from '@manatsu/vue-plugin/src/index.ts';
+export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 
 export {
   type UseInvokeOptions,
@@ -52,14 +47,13 @@ export {
   useElementSize
 } from '@manatsu/composables/src/index.ts';
 
-export {
-  type DialogOptions,
-  type MaybeNullishRef,
-  getCurrentApp,
-  handleError,
-  injectStrict,
-  symbols
-} from '@manatsu/shared';
+export type {
+  ButtonVariant,
+  CardVariant,
+  ColumnSortFn,
+  SidebarItem,
+  TopAppbarMenuItem
+} from '@manatsu/components/src/index.ts';
 
 export {
   MButton,
@@ -77,13 +71,16 @@ export {
   MTopAppbar
 };
 
-export type {
-  ButtonVariant,
-  CardVariant,
-  ColumnSortFn,
-  SidebarItem,
-  TopAppbarMenuItem
-} from '@manatsu/components/src/index.ts';
+export {
+  type DialogOptions,
+  type ErrorLog,
+  type MaybeNullishRef,
+  type VersionSnapshot,
+  getCurrentApp,
+  handleError,
+  injectStrict,
+  symbols
+} from '@manatsu/shared';
 
 /**
  * Globally registers all components.
