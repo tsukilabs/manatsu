@@ -38,7 +38,12 @@ declare module 'vue' {
   }
 }
 
-export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/index.ts';
+export {
+  type ErrorLog,
+  type ManatsuOptions,
+  type VersionSnapshot,
+  createManatsu
+} from '@manatsu/vue-plugin/src/index.ts';
 
 export {
   type UseInvokeOptions,

@@ -4,7 +4,7 @@ import type { Nullish } from '@tb-dev/utility-types';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { type ErrorHandler, privateSymbols } from '@manatsu/shared';
 
-interface Version {
+export interface VersionSnapshot {
   app?: Nullish<string>;
   manatsu?: Nullish<string>;
   tauri?: Nullish<string>;
@@ -12,12 +12,12 @@ interface Version {
   webview?: Nullish<string>;
 }
 
-interface ErrorLog {
+export interface ErrorLog {
   message: string;
   name: string;
   stack?: Nullish<string>;
   timestamp?: Nullish<string>;
-  version: Version;
+  version: VersionSnapshot;
 }
 
 export function provideErrorHandler(app: App, errorHandler?: Nullish<ErrorHandler>) {
@@ -27,7 +27,7 @@ export function provideErrorHandler(app: App, errorHandler?: Nullish<ErrorHandle
 }
 
 function defaultErrorHandler(this: App, err: unknown) {
-  const version: Version = { vue: this.version };
+  const version: VersionSnapshot = { vue: this.version };
   const log: ErrorLog = {
     message: err instanceof Error ? err.message : String(err),
     name: err instanceof Error ? err.name : 'Error',

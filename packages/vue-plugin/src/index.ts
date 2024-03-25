@@ -11,6 +11,8 @@ import { provideDialog } from './dialog';
 import { provideErrorHandler } from './error';
 import { isDarkMode, provideDarkMode } from './dark-mode';
 
+export type { ErrorLog, VersionSnapshot } from './error';
+
 export interface ManatsuOptions {
   /** @default 'auto' */
   darkMode?: DarkMode;
