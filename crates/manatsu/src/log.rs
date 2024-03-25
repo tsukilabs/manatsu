@@ -101,7 +101,7 @@ impl Log for Error {
     Self: for<'de> Deserialize<'de>,
   {
     let path = Self::path(app)?;
-    let logs = fs::read(&path).unwrap_or_default();
+    let logs = fs::read(path).unwrap_or_default();
 
     let mut logs: Vec<Self> = serde_json::from_slice(&logs)?;
     logs.sort_unstable_by(|a, b| b.cmp(a));
@@ -136,7 +136,7 @@ impl Log for Error {
 
     match log_dir.try_exists() {
       Ok(true) => {}
-      Ok(false) => fs::create_dir_all(&log_dir)?,
+      Ok(false) => fs::create_dir_all(log_dir)?,
       Err(e) => return Err(e.into()),
     }
 
