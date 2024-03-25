@@ -3,7 +3,7 @@ use crate::prelude::*;
 use crate::utils::{Formatter, Linter};
 
 /// <https://regex101.com/r/vBQTOL>
-const NAME_REGEX: &str = r"^(define|use)(?:-?[a-zA-Z])*$";
+const NAME_REGEX: &str = r"^(define|on|use)(?:-?[a-zA-Z])*$";
 
 pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
