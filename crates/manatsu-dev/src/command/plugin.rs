@@ -9,6 +9,7 @@ const COMMAND_PREFIX: &str = "plugin:manatsu|";
 pub async fn plugin() -> Result<()> {
   let start = Instant::now();
 
+  println!("{}", "updating plugin commands...".bright_cyan());
   let index = package::index("tauri-plugin")?;
   let contents = fs::read_to_string(&index)?;
 
