@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.6.3"
+version = "0.6.4"
 publish = false
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -43,8 +43,14 @@ features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.12.1"
-features = ["gzip", "json"]
+features = [
+    "gzip",
+    "json",
+]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["macros", "rt-multi-thread"]
+features = [
+    "macros",
+    "rt-multi-thread",
+]

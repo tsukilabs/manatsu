@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.6.3"
+version = "0.6.4"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -8,8 +8,17 @@ authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
 license = "MIT"
 edition = "2021"
 rust-version = "1.76"
-categories = ["gui", "web-programming"]
-keywords = ["cli", "components", "manatsu", "tauri", "vue"]
+categories = [
+    "gui",
+    "web-programming",
+]
+keywords = [
+    "cli",
+    "components",
+    "manatsu",
+    "tauri",
+    "vue",
+]
 
 [dependencies]
 anyhow = "1.0.81"
@@ -50,8 +59,15 @@ features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.12.1"
-features = ["gzip", "json"]
+features = [
+    "gzip",
+    "json",
+]
 
 [dependencies.tokio]
 version = "1.36.0"
-features = ["macros", "process", "rt-multi-thread"]
+features = [
+    "macros",
+    "process",
+    "rt-multi-thread",
+]

@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.6.3"
+version = "0.6.4"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
@@ -9,8 +9,17 @@ authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
 license = "MIT"
 edition = "2021"
 rust-version = "1.76"
-categories = ["gui", "web-programming"]
-keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
+categories = [
+    "gui",
+    "web-programming",
+]
+keywords = [
+    "manatsu",
+    "plugin",
+    "tauri",
+    "tauri-plugin",
+    "vue",
+]
 
 [dependencies]
 anyhow = "1.0.81"
