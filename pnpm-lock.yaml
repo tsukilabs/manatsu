@@ -80,7 +80,7 @@ importers:
         specifier: ^1.72.0
         version: 1.72.0
       stylelint:
-        specifier: ^16.2.1
+        specifier: ~16.2.1
         version: 16.2.1(typescript@5.4.3)
       stylelint-config-standard-scss:
         specifier: ^13.0.0
