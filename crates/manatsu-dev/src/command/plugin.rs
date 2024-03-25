@@ -27,7 +27,7 @@ pub async fn plugin() -> Result<()> {
   fs::write(index, contents.into_owned())?;
 
   let glob = "**/tauri-plugin/src/index.ts";
-  Formatter::new(&glob).format().await?;
+  Formatter::new(glob).format().await?;
 
   let message = format!("done in {:?}", start.elapsed());
   println!("{}", message.bright_green());
@@ -51,6 +51,7 @@ fn get_commands() -> Result<Vec<String>> {
   Ok(commands)
 }
 
+#[allow(clippy::needless_pass_by_value)]
 fn to_enum_variant(command: String) -> String {
   let pascal = command.to_case(Case::Pascal);
   format!("{pascal} = '{COMMAND_PREFIX}{command}'")

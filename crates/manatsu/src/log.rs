@@ -5,6 +5,7 @@ use std::fs;
 /// <https://docs.rs/chrono/latest/chrono/format/strftime/index.html>
 pub const TIMESTAMP: &str = "%F %T%.3f %:z";
 
+#[must_use]
 pub fn now() -> String {
   Local::now().format(TIMESTAMP).to_string()
 }
@@ -29,14 +30,17 @@ impl Version {
     }
   }
 
+  #[must_use]
   pub fn manatsu() -> String {
     crate::VERSION.into()
   }
 
+  #[must_use]
   pub fn tauri() -> String {
     tauri::VERSION.into()
   }
 
+  #[must_use]
   pub fn webview() -> Option<String> {
     tauri::webview_version().ok()
   }
@@ -74,12 +78,12 @@ impl Log for Error {
     }
 
     let path = path.as_ref();
-    let logs = fs::read(&path).unwrap_or_default();
+    let logs = fs::read(path).unwrap_or_default();
     let mut logs: Vec<Error> = serde_json::from_slice(&logs).unwrap_or_default();
     logs.push(self);
 
     let logs = serde_json::to_vec_pretty(&logs)?;
-    fs::write(&path, logs)?;
+    fs::write(path, logs)?;
 
     Ok(())
   }

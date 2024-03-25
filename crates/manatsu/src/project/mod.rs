@@ -227,6 +227,7 @@ impl Project {
   }
 
   /// Determine whether the project name is valid.
+  #[allow(clippy::missing_panics_doc)]
   pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
     let regex = Regex::new(Project::NAME_REGEX).unwrap();
     regex.is_match(name.as_ref())
