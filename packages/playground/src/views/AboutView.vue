@@ -2,7 +2,7 @@
 import { PlaygroundCommand } from '@/utils';
 import { useInvoke } from '@manatsu/composables/src/index.ts';
 
-const copyright = useInvoke<string | null>(PlaygroundCommand.Copyright, null);
+const { state: copyright } = useInvoke<string | null>(PlaygroundCommand.Copyright, null);
 </script>
 
 <template>

@@ -40,11 +40,10 @@ const sidebarItemStyle = computed<CSSProperties | null>(() => {
   return { width: `${width}px` };
 });
 
-const color = useInvoke<string>(Command.RandomStringHexColor, 'initial');
-
-function getColor() {
-  void color.execute();
-}
+const { state: color, execute: getColor } = useInvoke<string>(
+  Command.RandomStringHexColor,
+  'initial'
+);
 
 function createUnhandledError() {
   return invoke('unhandled_error');

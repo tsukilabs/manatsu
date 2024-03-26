@@ -1,6 +1,6 @@
 {
   "name": "manatsu",
-  "version": "0.6.13",
+  "version": "0.6.14",
   "description": "Vue component library for Tauri apps",
   "license": "MIT",
   "private": false,
