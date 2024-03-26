@@ -1,4 +1,5 @@
 import type { Plugin } from 'vue';
+import type { Router } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
 import {
   type DarkMode,
@@ -16,10 +17,11 @@ export interface ManatsuOptions {
   darkMode?: DarkMode;
   errorHandler?: Nullish<ErrorHandler>;
   /**
-   * Automatically place a `m-dynamic-dialog` component inside the `m-scaffold`.
+   * Automatically place a dynamic dialog inside the scaffold.
    * @default true
    */
   placeDialogOnScaffold?: boolean;
+  router?: Router;
 }
 
 export interface ManatsuPluginGlobal {
@@ -38,7 +40,10 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       // Using `any` so we can let `$mana` remain read-only.
       (app.config.globalProperties.$mana as any) = createGlobalProps();
 
-      setGlobalManatsu({ app });
+      setGlobalManatsu({
+        app,
+        router: options.router
+      });
     }
   };
 

@@ -1,8 +1,10 @@
 import type { App } from 'vue';
+import type { Router } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
 
 export interface ManatsuGlobal {
   readonly app: App;
+  readonly router?: Router;
 }
 
 declare global {
@@ -29,4 +31,17 @@ export function setGlobalManatsu(manatsu: ManatsuGlobal) {
  */
 export function getCurrentApp(): App {
   return getGlobalManatsu().app;
+}
+
+/**
+ * Get the current router instance.
+ * This will throw if the router was not provided to the manatsu plugin.
+ */
+export function getRouter(): Router {
+  const router = getGlobalManatsu().router;
+  if (!router) {
+    throw new Error('manatsu plugin was not initialized with a router');
+  }
+
+  return router;
 }

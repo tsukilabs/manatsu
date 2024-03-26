@@ -14,6 +14,9 @@ export default config({
     'packages/vue-plugin/tsconfig.json'
   ],
   overrides: {
+    javascript: {
+      'no-undefined': 'off'
+    },
     typescript: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off'

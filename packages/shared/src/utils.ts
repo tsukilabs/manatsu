@@ -3,7 +3,7 @@ import { type InjectionKey, inject } from 'vue';
 import { getCurrentApp } from './global';
 import { privateSymbols } from './symbols';
 
-const sortCollator = new Intl.Collator(void 0, {
+const sortCollator = new Intl.Collator(undefined, {
   usage: 'sort',
   numeric: true,
   sensitivity: 'variant'

@@ -54,6 +54,7 @@ export {
   type MaybeNullishRef,
   type VersionSnapshot,
   getCurrentApp,
+  getRouter,
   handleError,
   injectStrict,
   symbols
@@ -79,10 +80,19 @@ export {
   type UseInvokeOptions,
   type UseInvokeReturn,
   defineInvoke,
+  invokeOnKeyDown,
+  invokeOnKeyPressed,
+  invokeOnKeyStroke,
+  invokeOnKeyUp,
+  navigateOnKeyDown,
+  navigateOnKeyPressed,
+  navigateOnKeyStroke,
+  navigateOnKeyUp,
   onKeyDown,
   onKeyPressed,
   onKeyStroke,
   onKeyUp,
+  useDialog,
   useElementSize
 } from '@manatsu/composables/src/index.ts';
 

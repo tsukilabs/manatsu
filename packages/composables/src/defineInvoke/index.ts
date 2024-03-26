@@ -61,7 +61,7 @@ export function defineInvoke<T extends CommandRecord>(commands: T) {
             throw new TypeError(`invalid command: ${cmd}`);
           }
 
-          let result = await invoke<Data>(cmd, toValue(argsRef) ?? void 0);
+          let result = await invoke<Data>(cmd, toValue(argsRef) ?? undefined);
           if (options.transform) result = await options.transform(result);
 
           if (current === id) {
