@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { startCase } from 'lodash-es';
 import { injectStrict, symbols } from 'manatsu/src/index.ts';
+import { Command } from '@manatsu/tauri-plugin/src/index.ts';
+import { useInvoke } from '@manatsu/composables/src/index.ts';
 import {
   MScaffold,
   MTopAppbar,
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
+import { StorageKey } from './utils';
 import { components } from './routes';
-import { StorageKey, useInvoke } from './utils';
 
 const route = useRoute();
 const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
@@ -38,7 +40,7 @@ const sidebarItemStyle = computed<CSSProperties | null>(() => {
   return { width: `${width}px` };
 });
 
-const color = useInvoke<string>('RandomStringHexColor', 'initial');
+const color = useInvoke<string>(Command.RandomStringHexColor, 'initial');
 
 function getColor() {
   void color.execute();

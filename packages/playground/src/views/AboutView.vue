@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useInvoke } from '../utils';
+import { PlaygroundCommand } from '@/utils';
+import { useInvoke } from '@manatsu/composables/src/index.ts';
 
-const copyright = useInvoke<string | null>('copyright', null);
+const copyright = useInvoke<string | null>(PlaygroundCommand.Copyright, null);
 </script>
 
 <template>

@@ -5,7 +5,7 @@ import { clearMocks, mockIPC } from '@tauri-apps/api/mocks';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { defineInvoke } from '.';
+import { useInvoke } from '.';
 
 declare global {
   interface Window {
@@ -13,9 +13,9 @@ declare global {
   }
 }
 
-describe('defineInvoke', () => {
+describe('useInvoke', () => {
   beforeAll(() => {
-    void createApp({}).use(createManatsu());
+    createApp({}).use(createManatsu());
 
     Object.defineProperty(window, 'crypto', {
       value: {
@@ -29,55 +29,53 @@ describe('defineInvoke', () => {
   beforeEach(() => mockIPC(handleCommand));
   afterEach(() => clearMocks());
 
-  const useInvoke = defineInvoke(Command);
-
   it('should invoke a command', async () => {
     const loading = ref(false);
-    const result = useInvoke('RandomStringHexColor', '#FFFFFF', { loading });
+    const result = useInvoke(Command.RandomStringHexColor, '#FFFFFF', { loading });
     expect(result.value).toBe('#FFFFFF');
 
     await nextTick();
-    await until(loading).not.toBeTruthy({ timeout: 100, throwOnTimeout: true });
+    await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
     expect(result.value).toBe('#000000');
   });
 
   it('should not execute immediately', async () => {
     const loading = ref(false);
-    const result = useInvoke('RandomStringHexColor', null, { loading, lazy: true });
+    const result = useInvoke(Command.RandomStringHexColor, null, { loading, lazy: true });
     expect(result.value).toBeNull();
 
     await nextTick();
-    await until(loading).not.toBeTruthy({ timeout: 100, throwOnTimeout: true });
+    await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
     expect(result.value).toBeNull();
   });
 
   it('should execute manually', async () => {
     const loading = ref(false);
-    const result = useInvoke('RandomStringHexColor', null, { loading, lazy: true });
+    const result = useInvoke(Command.RandomStringHexColor, null, { loading, lazy: true });
     expect(result.value).toBeNull();
 
     await result.execute();
     await nextTick();
-    await until(loading).not.toBeTruthy({ timeout: 100, throwOnTimeout: true });
+    await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
     expect(result.value).toBe('#000000');
   });
 
   it('should invoke again if the command changes', async () => {
     const loading = ref(false);
-    const command = ref<keyof typeof Command>('RandomStringHexColor');
+    const command = ref<Command>(Command.RandomStringHexColor);
     const result = useInvoke(command, '#FFFFFF', { loading });
 
     await nextTick();
-    await until(loading).not.toBeTruthy({ timeout: 100, throwOnTimeout: true });
+    await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
     expect(result.value).toBe('#000000');
 
-    command.value = 'RandomStringRgbColor';
+    command.value = Command.RandomStringRgbColor;
     await nextTick();
-    await until(loading).not.toBeTruthy({ timeout: 100, throwOnTimeout: true });
+    await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
     expect(result.value).toBe('rgb(0, 0, 0)');
   });
@@ -89,7 +87,7 @@ describe('defineInvoke', () => {
     useInvoke(null as any, null, { loading, onError });
 
     await nextTick();
-    await until(loading).not.toBeTruthy({ timeout: 100, throwOnTimeout: true });
+    await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
     expect(onError).toHaveBeenCalledOnce();
   });
@@ -102,6 +100,6 @@ function handleCommand<T>(command: string): T {
     case Command.RandomStringRgbColor:
       return 'rgb(0, 0, 0)' as T;
     default:
-      return '' as T;
+      throw new Error('invalid command');
   }
 }

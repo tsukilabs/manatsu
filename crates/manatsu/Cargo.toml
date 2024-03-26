@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.6.9"
+version = "0.6.10"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -30,7 +30,7 @@ lightningcss = "1.0.0-alpha.55"
 miho = "4.3.2"
 rand = "0.8.5"
 regex = "1.10.4"
-chrono = "0.4.35"
+chrono = "0.4.36"
 zip = "0.6.6"
 walkdir = "2.5.0"
 bytes = "1.6.0"
@@ -46,7 +46,7 @@ version = "1.0.197"
 features = ["derive"]
 
 [dependencies.serde_json]
-version = "1.0.114"
+version = "1.0.115"
 features = ["preserve_order"]
 
 [dependencies.strum]

@@ -79,7 +79,6 @@ export {
 export {
   type UseInvokeOptions,
   type UseInvokeReturn,
-  defineInvoke,
   invokeOnKeyDown,
   invokeOnKeyPressed,
   invokeOnKeyStroke,
@@ -93,7 +92,8 @@ export {
   onKeyStroke,
   onKeyUp,
   useDialog,
-  useElementSize
+  useElementSize,
+  useInvoke
 } from '@manatsu/composables/src/index.ts';
 
 /**

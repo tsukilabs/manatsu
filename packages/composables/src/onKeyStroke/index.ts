@@ -8,12 +8,12 @@ import {
   onKeyStroke as original,
   tryOnScopeDispose
 } from '@vueuse/core';
-import type { EventHandler } from './types';
+import type { KeyStrokeEventHandler } from './types';
 import { executeHandler, invokeCommand, pushRoute } from './utils';
 
 export function onKeyStroke(
   key: KeyFilter,
-  handler?: EventHandler,
+  handler?: KeyStrokeEventHandler,
   options: OnKeyStrokeOptions = {}
 ) {
   const stop = original(
@@ -32,7 +32,7 @@ export function onKeyStroke(
 
 export function onKeyDown(
   key: KeyFilter,
-  handler?: EventHandler,
+  handler?: KeyStrokeEventHandler,
   options: Omit<OnKeyStrokeOptions, 'eventName'> = {}
 ) {
   return onKeyStroke(key, handler, { ...options, eventName: 'keydown' });
@@ -40,7 +40,7 @@ export function onKeyDown(
 
 export function onKeyPressed(
   key: KeyFilter,
-  handler?: EventHandler,
+  handler?: KeyStrokeEventHandler,
   options: Omit<OnKeyStrokeOptions, 'eventName'> = {}
 ) {
   return onKeyStroke(key, handler, { ...options, eventName: 'keypress' });
@@ -48,7 +48,7 @@ export function onKeyPressed(
 
 export function onKeyUp(
   key: KeyFilter,
-  handler?: EventHandler,
+  handler?: KeyStrokeEventHandler,
   options: Omit<OnKeyStrokeOptions, 'eventName'> = {}
 ) {
   return onKeyStroke(key, handler, { ...options, eventName: 'keyup' });
