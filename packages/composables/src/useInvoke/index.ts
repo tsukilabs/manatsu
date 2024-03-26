@@ -25,11 +25,17 @@ export interface UseInvokeOptions<Data> {
   readonly transform?: (value: Data) => MaybePromise<Data>;
 }
 
+export interface UseInvokeReturn<Data> {
+  readonly execute: () => Promise<void>;
+  readonly state: Ref<Data>;
+  readonly stop: () => void;
+}
+
 export function useInvoke<Data>(
   command: MaybeRefOrGetter<string>,
   initial: Data,
   options: UseInvokeOptions<Data> = {}
-) {
+): UseInvokeReturn<Data> {
   const { deep = false, lazy = false, loading, shallow = true, transform } = options;
 
   let id: symbol | null = null;
@@ -76,7 +82,7 @@ export function useInvoke<Data>(
   tryOnScopeDispose(stop);
 
   return {
-    state,
+    state: state as Ref<Data>,
     execute: trigger,
     stop
   };

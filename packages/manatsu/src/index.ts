@@ -78,6 +78,7 @@ export {
 
 export {
   type UseInvokeOptions,
+  type UseInvokeReturn,
   invokeOnKeyDown,
   invokeOnKeyPressed,
   invokeOnKeyStroke,
