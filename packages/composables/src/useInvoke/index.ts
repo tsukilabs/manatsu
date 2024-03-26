@@ -5,7 +5,7 @@ import { type MaybeRefOrGetter, type Ref, isRef, ref, shallowRef, toRef, toValue
 import {
   type ErrorHandler,
   type MaybeNullishRef,
-  getGlobalManatsu,
+  getCurrentApp,
   handleError
 } from '@manatsu/shared';
 
@@ -28,10 +28,6 @@ export type UseInvokeReturn<Data> = Ref<Data> & {
   readonly execute: () => Promise<void>;
 };
 
-/**
- * Define a composable function to invoke a Tauri command.
- * @param commands The commands that can be invoked.
- */
 export function useInvoke<Data>(
   command: MaybeRefOrGetter<string>,
   initial: Data,
@@ -80,7 +76,7 @@ export function useInvoke<Data>(
 
 function onError(fn: Nullish<ErrorHandler>, err: unknown) {
   if (fn) {
-    fn.call(getGlobalManatsu().app, err);
+    fn.call(getCurrentApp(), err);
   } else {
     handleError(err);
   }

@@ -93,7 +93,8 @@ export {
   onKeyUp,
   useDialog,
   useElementSize,
-  useInvoke
+  useInvoke,
+  useListen
 } from '@manatsu/composables/src/index.ts';
 
 /**
