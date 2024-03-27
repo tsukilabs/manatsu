@@ -91,7 +91,7 @@ describe('dialog', () => {
 
   it('should mount with dynamic dialog closed', () => {
     const wrapper = mount(MScaffold);
-    expect(wrapper.findComponent(MDialog).props('visible')).toBe(false);
+    expect(wrapper.findComponent(MDialog).exists()).toBe(false);
   });
 
   it('should open dynamic dialog', () => {
@@ -110,7 +110,7 @@ describe('dialog', () => {
       template: '<m-scaffold />',
       setup() {
         const dialog = useDialog();
-        dialog.setHeader(() => h('div', 'header'));
+        dialog.header(() => h('div', 'header'));
         dialog.show();
       }
     });
@@ -123,7 +123,7 @@ describe('dialog', () => {
       template: '<m-scaffold />',
       setup() {
         const dialog = useDialog();
-        dialog.setFooter(() => h('div', 'footer'));
+        dialog.footer(() => h('div', 'footer'));
         dialog.show();
       }
     });
@@ -136,7 +136,7 @@ describe('dialog', () => {
       template: '<m-scaffold />',
       setup() {
         const dialog = useDialog();
-        dialog.setContent(() => h('div', 'content'));
+        dialog.content(() => h('div', 'content'));
         dialog.show();
       }
     });

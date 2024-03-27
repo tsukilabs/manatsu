@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.6.17",
+  "version": "0.6.18",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.15.5",
@@ -31,7 +31,7 @@
     "test": "pnpm run \"/^test:.*/\"",
     "test:crate": "cargo test -p manatsu && cargo test -p manatsu-dev",
     "test:package": "vitest --run",
-    "type-check": "pnpm run -r --parallel --aggregate-output type-check",
+    "type-check": "pnpm run -r --bail --parallel --aggregate-output type-check",
     "ui": "vitest --ui --watch",
     "update": "miho update major -t"
   },
