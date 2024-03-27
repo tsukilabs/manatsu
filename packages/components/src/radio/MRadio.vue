@@ -1,10 +1,10 @@
-<script setup lang="ts" generic="Value">
+<script setup lang="ts">
 import type { VNode } from 'vue';
 import type { RadioProps } from './types';
 
-const model = defineModel<Value>();
+const model = defineModel<any>();
 
-defineProps<RadioProps<Value>>();
+defineProps<RadioProps>();
 
 defineSlots<{ default?: () => VNode }>();
 </script>

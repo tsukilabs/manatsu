@@ -1,4 +1,4 @@
-import { trimArray } from '@tb-dev/utils';
+import { trimArray } from '@tb-dev/utils/array';
 
 export function css(text: TemplateStringsArray, ...subs: unknown[]): Record<string, string> {
   const result: Record<string, string> = {};

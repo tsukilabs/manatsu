@@ -38,7 +38,7 @@ pub fn tailwind() -> Result<()> {
       .map(|c| c.to_case(Case::Kebab))
       .collect_vec();
 
-    classes.sort_unstable();
+    classes.sort_unstable_by(|a, b| natord::compare(a, b));
     classes
   };
 

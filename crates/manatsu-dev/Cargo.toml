@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.6.15"
+version = "0.6.16"
 publish = false
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -24,6 +24,7 @@ itertools = "0.12.1"
 miho = "4.3.2"
 regex = "1.10.4"
 walkdir = "2.5.0"
+natord = "1.0.9"
 
 [dependencies.clap]
 version = "4.5.4"

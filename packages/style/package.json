@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/style",
-  "version": "0.6.15",
+  "version": "0.6.16",
   "description": "CSS utilities",
   "license": "MIT",
   "private": false,
@@ -44,7 +44,7 @@
     "./mixins/util": "./src/mixins/util.scss"
   },
   "scripts": {
-    "build": "pnpm run \"/^(type-check|build-only)$/\"",
+    "build": "pnpm run --bail \"/^(type-check|build-only)$/\"",
     "build-only": "vite build",
     "type-check": "tsc --noEmit"
   },

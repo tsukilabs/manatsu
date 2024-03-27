@@ -18,46 +18,64 @@ pub struct Release {
 impl super::Command for Release {
   /// Release a new version, publishing all the public packages.
   async fn execute(self) -> Result<()> {
-    if let Ok(true) = git::is_dirty().await {
-      bail!("{}", "working directory is dirty".red());
-    }
-
-    super::readme()?;
-    commit_if_dirty("chore: sync readme files").await?;
-
-    super::plugin().await?;
-    commit_if_dirty("chore: update plugin commands").await?;
-
-    super::tailwind()?;
-    commit_if_dirty("chore: update tailwind classes").await?;
-
-    pnpm!("run", "format").spawn()?.wait().await?;
-    commit_if_dirty("style: format files").await?;
+    prepare().await?;
 
     let config = Config::read().ok();
     if matches!(config, Some(ref c) if c.github) {
       create_github_release(config.unwrap().github_token).await?;
     } else {
       if !self.only_crate {
-        pnpm!(["publish", "-r", "--no-git-checks"])
+        let status = pnpm!(["publish", "-r", "--no-git-checks"])
           .spawn()?
           .wait()
           .await?;
+
+        if !status.success() {
+          bail!("{}", "failed to publish packages".red());
+        }
       }
 
       if !self.only_package {
         let crates = ["manatsu", "tauri-plugin-manatsu"];
         for crate_name in crates {
-          cargo!(["publish", "-p", crate_name])
+          let status = cargo!(["publish", "-p", crate_name])
             .spawn()?
             .wait()
             .await?;
+
+          if !status.success() {
+            bail!("{}", "failed to publish crates".red());
+          }
         }
       }
     }
 
     Ok(())
   }
+}
+
+async fn prepare() -> Result<()> {
+  if let Ok(true) = git::is_dirty().await {
+    bail!("{}", "working directory is dirty".red());
+  }
+
+  super::readme()?;
+  commit_if_dirty("chore: sync readme files").await?;
+
+  super::plugin().await?;
+  commit_if_dirty("chore: update plugin commands").await?;
+
+  super::tailwind()?;
+  commit_if_dirty("chore: update tailwind classes").await?;
+
+  let status = pnpm!("run", "format").spawn()?.wait().await?;
+  if !status.success() {
+    bail!("{}", "failed to format files".red());
+  }
+
+  commit_if_dirty("style: format files").await?;
+
+  Ok(())
 }
 
 async fn create_github_release<T>(github_token: T) -> Result<()>

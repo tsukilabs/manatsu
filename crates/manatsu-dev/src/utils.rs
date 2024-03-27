@@ -1,8 +1,4 @@
-use anyhow::Result;
-use colored::Colorize;
-use manatsu::pnpm;
-use serde::Deserialize;
-use std::{env, fs, mem};
+use crate::prelude::*;
 
 #[derive(Deserialize)]
 pub struct Config {
@@ -34,7 +30,11 @@ impl<'a> Formatter<'a> {
     args.push(self.glob);
 
     println!("{}", "formatting files...".bright_cyan());
-    pnpm!(args).spawn()?.wait().await?;
+    let status = pnpm!(args).spawn()?.wait().await?;
+
+    if !status.success() {
+      bail!("{}", "failed to format files".red());
+    }
 
     Ok(())
   }
@@ -71,7 +71,11 @@ impl<'a> Linter<'a> {
     args.push(self.glob);
 
     println!("{}", "linting files...".bright_cyan());
-    pnpm!(args).spawn()?.wait().await?;
+    let status = pnpm!(args).spawn()?.wait().await?;
+
+    if !status.success() {
+      bail!("{}", "failed to lint files".red());
+    }
 
     Ok(())
   }

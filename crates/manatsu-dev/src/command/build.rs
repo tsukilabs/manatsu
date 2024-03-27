@@ -13,14 +13,10 @@ impl super::Command for Build {
   async fn execute(self) -> Result<()> {
     let start = Instant::now();
 
-    // The shared package must be built before anyone else.
-    println!("{}", "building shared package...".bright_cyan());
-    pnpm!(["run", "-F", "shared", "build"])
-      .spawn()?
-      .wait()
-      .await?;
+    // The shared package must be built before the others.
+    build_shared().await?;
 
-    let mut args = vec!["run", "--parallel"];
+    let mut args = vec!["run", "--parallel", "--bail"];
 
     let packages = self
       .package
@@ -52,8 +48,12 @@ impl super::Command for Build {
 
     args.push("build");
 
-    println!("{}", "building other packages...".bright_cyan());
-    pnpm!(args).spawn()?.wait().await?;
+    println!("{}", "building packages...".bright_cyan());
+    let status = pnpm!(args).spawn()?.wait().await?;
+
+    if !status.success() {
+      bail!("{}", "failed to build packages".red().bold());
+    }
 
     println!("{}", "copying built files...".bright_cyan());
     copy_files(&packages)?;
@@ -61,6 +61,20 @@ impl super::Command for Build {
     println!("built in {:?}", start.elapsed());
     Ok(())
   }
+}
+
+async fn build_shared() -> Result<()> {
+  println!("{}", "building shared package...".bright_cyan());
+  let status = pnpm!(["run", "-F", "shared", "build"])
+    .spawn()?
+    .wait()
+    .await?;
+
+  if !status.success() {
+    bail!("{}", "failed to build shared package".red());
+  }
+
+  Ok(())
 }
 
 fn should_build(package: &str) -> bool {

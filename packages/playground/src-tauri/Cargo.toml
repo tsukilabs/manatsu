@@ -1,6 +1,6 @@
 [package]
 name = "playground"
-version = "0.6.15"
+version = "0.6.16"
 description = "Manatsu playground"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -16,7 +16,7 @@ features = []
 
 [dependencies]
 anyhow = "1.0.81"
-chrono = "0.4.35"
+chrono = "0.4.37"
 futures = "0.3.30"
 itertools = "0.12.1"
 serde_json = "1.0.115"

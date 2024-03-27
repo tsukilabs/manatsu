@@ -1,8 +1,8 @@
-<script setup lang="ts" generic="Model">
+<script setup lang="ts">
 import type { VNode } from 'vue';
 import type { CheckboxProps } from './types';
 
-const model = defineModel<Model>();
+const model = defineModel<any>();
 
 withDefaults(defineProps<CheckboxProps>(), {
   trueValue: true,
@@ -14,6 +14,9 @@ defineSlots<{ default?: () => VNode }>();
 
 <template>
   <label class="m-checkbox">
+    <!-- For some reason, using the v-bind shorthand causes the dts generation to fail. -->
+    <!-- This only happens with the `true-value` and `false-value` props. -->
+    <!-- eslint-disable vue/v-bind-style -->
     <input
       :id="inputId"
       v-model="model"
@@ -22,8 +25,8 @@ defineSlots<{ default?: () => VNode }>();
       :style="inputStyle"
       :disabled
       :value
-      :true-value
-      :false-value
+      :true-value="trueValue"
+      :false-value="falseValue"
     />
     <span v-if="label || $slots.default" class="m-checkbox-label">
       <slot>{{ label }}</slot>

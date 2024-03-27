@@ -1,5 +1,5 @@
-import { splitWhitespace } from '@tb-dev/utils';
 import { usePreferredDark } from '@vueuse/core';
+import { splitWhitespace } from '@tb-dev/utils/array';
 import { type DarkMode, symbols } from '@manatsu/shared';
 import { type App, type MaybeRefOrGetter, ref, toValue, watchEffect } from 'vue';
 

@@ -23,6 +23,7 @@ declare global {
   const isNavigationFailure: typeof import('vue-router')['isNavigationFailure']
   const isNullish: typeof import('@tb-dev/utils')['isNullish']
   const isRef: typeof import('vue')['isRef']
+  const listen: typeof import('@tauri-apps/api/event')['listen']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']

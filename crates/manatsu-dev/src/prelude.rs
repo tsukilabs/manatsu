@@ -10,4 +10,4 @@ pub use serde::Deserialize;
 pub use std::collections::HashSet;
 pub use std::path::{Path, PathBuf};
 pub use std::time::Instant;
-pub use std::{env, fs};
+pub use std::{env, fs, mem};

@@ -8,6 +8,7 @@ import autoprefixer from 'autoprefixer';
 
 const dtsOptions = {
   rollupTypes: false,
+  exclude: ['node_modules/**', 'dist/**', '**/*.{spec,test}.ts'],
   afterBuild: async (map) => {
     const dts = Array.from(map).find(([filePath]) => {
       return basename(filePath) === 'index.d.ts';

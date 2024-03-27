@@ -4,9 +4,14 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import autoprefixer from 'autoprefixer';
 
+const dtsOptions = {
+  rollupTypes: true,
+  exclude: ['node_modules/**', 'dist/**', '**/*.{spec,test}.ts']
+};
+
 export default defineConfig({
   root: __dirname,
-  plugins: [vue(), dts({ rollupTypes: true })],
+  plugins: [vue(), dts(dtsOptions)],
   css: {
     postcss: {
       plugins: [autoprefixer()]

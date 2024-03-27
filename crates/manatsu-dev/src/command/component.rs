@@ -130,7 +130,7 @@ fn update_src_index() -> Result<()> {
 
 /// Determines whether the component name is valid.
 pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
-  let regex = Regex::new(NAME_REGEX).expect("hardcoded regex should be valid");
+  let regex = Regex::new(NAME_REGEX).unwrap();
   regex.is_match(name.as_ref())
 }
 
