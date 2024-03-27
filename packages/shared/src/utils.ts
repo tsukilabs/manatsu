@@ -1,4 +1,4 @@
-import { type InjectionKey, inject } from 'vue';
+import { type InjectionKey, defineComponent, inject } from 'vue';
 import { getCurrentApp } from './global';
 import { privateSymbols } from './symbols';
 
@@ -15,6 +15,14 @@ const sortCollator = new Intl.Collator(undefined, {
  */
 export function compare(a: unknown, b: unknown): number {
   return sortCollator.compare(String(a), String(b));
+}
+
+export function defineEmptyComponent() {
+  return defineComponent({
+    render() {
+      return null;
+    }
+  });
 }
 
 /**

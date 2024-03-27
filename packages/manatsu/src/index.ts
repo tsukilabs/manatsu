@@ -53,6 +53,7 @@ export {
   type ErrorLog,
   type MaybeNullishRef,
   type VersionSnapshot,
+  defineEmptyComponent,
   getCurrentApp,
   getRouter,
   handleError,

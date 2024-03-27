@@ -8,32 +8,38 @@ const visibleModal = ref(false);
 const visibleNoStorage = ref(false);
 const visibleInput = ref(false);
 
-const dialog = useDialog({
+const dialog1 = useDialog({
   clickOutside: false,
-  dialogClass: 'w-96 h-60'
+  dialogClass: 'w-96 h-60',
+  storageKey: 'dyn-dialog-1'
 });
 
-function showDialog() {
-  dialog.setHeader(() => h('span', 'Dynamic Dialog'));
-  dialog.setContent(() => h(LoremIpsum, { paragraphs: 2 }));
-  dialog.setFooter(() =>
-    h('div', { class: 'flex justify-end gap-2' }, [
-      h(MButton, { onClick: () => dialog.close() }, 'Close'),
-      h(MButton, 'Button')
-    ])
-  );
+const dialog2 = useDialog({
+  clickOutside: true,
+  dialogClass: 'w-96 h-60',
+  storageKey: 'dyn-dialog-2'
+});
 
-  const interval = setInterval(() => {
-    dialog.setHeader(() => h('span', new Date().toLocaleTimeString()));
-  }, 100);
+const showDialog1 = showDialog(1);
+const showDialog2 = showDialog(2);
 
-  dialog.on('show', () => console.log('showing dynamic dialog'));
-  dialog.on('hide', () => {
-    clearInterval(interval);
-    console.log('hiding dynamic dialog');
-  });
+function showDialog(id: number) {
+  return function () {
+    const dialog = id === 1 ? dialog1 : dialog2;
+    dialog.header(() => h('span', `Dynamic Dialog ${id}`));
+    dialog.content(() => h(LoremIpsum, { paragraphs: 2 }));
+    dialog.footer(() =>
+      h('div', { class: 'flex justify-end gap-2' }, [
+        h(MButton, { onClick: () => dialog.close() }, 'Close'),
+        h(MButton, { variant: 'outlined' }, `Dialog ${id}`)
+      ])
+    );
 
-  dialog.show();
+    dialog.on('show', () => console.log(`showing dynamic dialog ${id}`));
+    dialog.on('hide', () => console.log(`hiding dynamic dialog ${id}`));
+
+    dialog.show();
+  };
 }
 </script>
 
@@ -44,7 +50,8 @@ function showDialog() {
     <m-button @click="visibleNoStorage = !visibleNoStorage">Show no storage</m-button>
     <m-button @click="visibleInput = !visibleInput">Show input</m-button>
 
-    <m-button @click="showDialog">Show dynamic</m-button>
+    <m-button @click="showDialog1">Show dynamic 1</m-button>
+    <m-button @click="showDialog2">Show dynamic 2</m-button>
 
     <m-dialog
       v-model:visible="visible"

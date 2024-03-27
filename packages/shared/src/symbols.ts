@@ -37,6 +37,7 @@ const dynDialogHeaderProps = Symbol() as ComponentPropsSymbol;
 const dynDialogOnHide = Symbol() as WritableShallowRefSymbol<Nullish<() => void>>;
 const dynDialogOnShow = Symbol() as WritableShallowRefSymbol<Nullish<() => void>>;
 
+const dynDialogId = Symbol() as WritableShallowRefSymbol<symbol | null>;
 const dynDialogOptions = Symbol() as WritableShallowRefSymbol<Nullish<DialogOptions>>;
 const dynDialogVisible = Symbol() as WritableRefSymbol<boolean>;
 const placeDialogOnScaffold = Symbol() as RefSymbol<boolean>;
@@ -62,6 +63,7 @@ export const privateSymbols = {
   dynDialogHeaderProps,
   dynDialogOnHide,
   dynDialogOnShow,
+  dynDialogId,
   dynDialogOptions,
   dynDialogVisible,
   errorHandler,

@@ -38,7 +38,7 @@
   "devDependencies": {
     "@tauri-apps/api": "^2.0.0-beta.6",
     "@tb-dev/auto-import-config": "^1.2.13",
-    "@tb-dev/eslint-config": "^3.3.0",
+    "@tb-dev/eslint-config": "^3.3.1",
     "@tb-dev/stylelint-config": "^1.1.14",
     "@tb-dev/utility-types": "^1.2.4",
     "@tb-dev/utils": "^1.4.2",

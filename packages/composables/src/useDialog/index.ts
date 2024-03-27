@@ -18,33 +18,28 @@ interface UseDialogReturn {
 
   on: (event: DialogEvent, fn: Nullish<() => void>) => void;
 
-  setContent: <C extends Component>(
-    component: Nullish<C>,
-    props?: Nullish<ComponentProps<C>>
-  ) => void;
-  setFooter: <C extends Component>(
-    component: Nullish<C>,
-    props?: Nullish<ComponentProps<C>>
-  ) => void;
-  setHeader: <C extends Component>(
-    component: Nullish<C>,
-    props?: Nullish<ComponentProps<C>>
-  ) => void;
-  setOptions: (options: Nullish<DialogOptions>) => void;
+  content: <C extends Component>(component: Nullish<C>, props?: Nullish<ComponentProps<C>>) => void;
+  footer: <C extends Component>(component: Nullish<C>, props?: Nullish<ComponentProps<C>>) => void;
+  header: <C extends Component>(component: Nullish<C>, props?: Nullish<ComponentProps<C>>) => void;
+  options: (options: Nullish<DialogOptions>) => void;
 }
 
 class Dialog {
-  private defaultSlot: Nullish<Component> = null;
-  private defaultSlotProps: Nullish<Record<string, unknown>> = null;
-  private footerSlot: Nullish<Component> = null;
-  private footerSlotProps: Nullish<Record<string, unknown>> = null;
-  private headerSlot: Nullish<Component> = null;
-  private headerSlotProps: Nullish<Record<string, unknown>> = null;
+  readonly #id = Symbol();
+  #options: Nullish<DialogOptions>;
 
-  private onHide: Nullish<() => void> = null;
-  private onShow: Nullish<() => void> = null;
+  #defaultSlot: Nullish<Component> = null;
+  #defaultSlotProps: Nullish<Record<string, unknown>> = null;
+  #footerSlot: Nullish<Component> = null;
+  #footerSlotProps: Nullish<Record<string, unknown>> = null;
+  #headerSlot: Nullish<Component> = null;
+  #headerSlotProps: Nullish<Record<string, unknown>> = null;
 
-  private readonly refs = {
+  #onHide: Nullish<() => void> = null;
+  #onShow: Nullish<() => void> = null;
+
+  readonly #refs = {
+    id: injectStrict(privateSymbols.dynDialogId),
     visible: injectStrict(privateSymbols.dynDialogVisible),
     options: injectStrict(privateSymbols.dynDialogOptions),
     headerSlot: injectStrict(privateSymbols.dynDialogHeader),
@@ -57,75 +52,116 @@ class Dialog {
     onShowRef: injectStrict(privateSymbols.dynDialogOnShow)
   };
 
-  constructor(private options: Nullish<DialogOptions>) {}
+  constructor(options: Nullish<DialogOptions>) {
+    this.#options = options;
+  }
+
+  public show() {
+    this.setContent();
+    this.setHeader();
+    this.setFooter();
+    this.setListeners();
+    this.setOptions();
+
+    this.#refs.visible.value = true;
+    this.#refs.id.value = this.#id;
+  }
 
   public close() {
-    this.refs.visible.value = false;
-    this.refs.options.value = null;
+    if (this.#refs.id.value !== this.#id) return;
 
-    this.refs.defaultSlot.value = null;
-    this.refs.defaultSlotProps.value = null;
-    this.refs.headerSlot.value = null;
-    this.refs.headerSlotProps.value = null;
-    this.refs.footerSlot.value = null;
-    this.refs.footerSlotProps.value = null;
+    this.#refs.id.value = null;
+    this.#refs.visible.value = false;
+    this.unsetAll();
+  }
 
-    this.refs.onHideRef.value = null;
-    this.refs.onShowRef.value = null;
+  private unsetAll() {
+    this.#refs.options.value = null;
+
+    this.#refs.defaultSlot.value = null;
+    this.#refs.defaultSlotProps.value = null;
+    this.#refs.headerSlot.value = null;
+    this.#refs.headerSlotProps.value = null;
+    this.#refs.footerSlot.value = null;
+    this.#refs.footerSlotProps.value = null;
+
+    this.#refs.onHideRef.value = null;
+    this.#refs.onShowRef.value = null;
   }
 
   public on(event: DialogEvent, fn: Nullish<() => void>) {
     switch (event) {
       case 'hide':
-        this.onHide = fn;
+        this.#onHide = fn;
         break;
       case 'show':
-        this.onShow = fn;
+        this.#onShow = fn;
         break;
     }
   }
 
-  public setContent<C extends Component>(
+  private setListeners() {
+    this.#refs.onHideRef.value = this.#onHide;
+    this.#refs.onShowRef.value = this.#onShow;
+  }
+
+  public content<C extends Component>(
     component: Nullish<C>,
     props: Nullish<ComponentProps<C>> = null
   ) {
-    this.defaultSlot = component;
-    this.defaultSlotProps = component ? props : null;
+    this.#defaultSlot = component;
+    this.#defaultSlotProps = component ? props : null;
+
+    if (this.#refs.id.value === this.#id) {
+      this.setContent();
+    }
   }
 
-  public setFooter<C extends Component>(
+  private setContent() {
+    this.#refs.defaultSlot.value = this.#defaultSlot;
+    this.#refs.defaultSlotProps.value = this.#defaultSlotProps;
+  }
+
+  public header<C extends Component>(
     component: Nullish<C>,
     props: Nullish<ComponentProps<C>> = null
   ) {
-    this.footerSlot = component;
-    this.footerSlotProps = component ? props : null;
+    this.#headerSlot = component;
+    this.#headerSlotProps = component ? props : null;
+
+    if (this.#refs.id.value === this.#id) {
+      this.setHeader();
+    }
   }
 
-  public setHeader<C extends Component>(
+  private setHeader() {
+    this.#refs.headerSlot.value = this.#headerSlot;
+    this.#refs.headerSlotProps.value = this.#headerSlotProps;
+  }
+
+  public footer<C extends Component>(
     component: Nullish<C>,
     props: Nullish<ComponentProps<C>> = null
   ) {
-    this.headerSlot = component;
-    this.headerSlotProps = component ? props : null;
+    this.#footerSlot = component;
+    this.#footerSlotProps = component ? props : null;
+
+    if (this.#refs.id.value === this.#id) {
+      this.setFooter();
+    }
   }
 
-  public setOptions(options: Nullish<DialogOptions>) {
-    this.options = options;
+  private setFooter() {
+    this.#refs.footerSlot.value = this.#footerSlot;
+    this.#refs.footerSlotProps.value = this.#footerSlotProps;
   }
 
-  public show() {
-    this.refs.defaultSlot.value = this.defaultSlot;
-    this.refs.defaultSlotProps.value = this.defaultSlotProps;
-    this.refs.headerSlot.value = this.headerSlot;
-    this.refs.headerSlotProps.value = this.headerSlotProps;
-    this.refs.footerSlot.value = this.footerSlot;
-    this.refs.footerSlotProps.value = this.footerSlotProps;
+  public options(options: Nullish<DialogOptions>) {
+    this.#options = options;
+  }
 
-    this.refs.onShowRef.value = this.onShow;
-    this.refs.onHideRef.value = this.onHide;
-
-    this.refs.options.value = this.options;
-    this.refs.visible.value = true;
+  private setOptions() {
+    this.#refs.options.value = this.#options;
   }
 }
 
@@ -134,10 +170,10 @@ export function useDialog(options: Nullish<DialogOptions> = null): UseDialogRetu
   return {
     close: dialog.close.bind(dialog),
     on: dialog.on.bind(dialog),
-    setContent: dialog.setContent.bind(dialog),
-    setFooter: dialog.setFooter.bind(dialog),
-    setHeader: dialog.setHeader.bind(dialog),
-    setOptions: dialog.setOptions.bind(dialog),
+    content: dialog.content.bind(dialog),
+    footer: dialog.footer.bind(dialog),
+    header: dialog.header.bind(dialog),
+    options: dialog.options.bind(dialog),
     show: dialog.show.bind(dialog)
   };
 }

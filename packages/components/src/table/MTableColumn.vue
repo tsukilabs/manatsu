@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { injectStrict } from '@manatsu/shared';
-import { type VNode, defineComponent, onMounted, onUnmounted, triggerRef } from 'vue';
+import { defineEmptyComponent, injectStrict } from '@manatsu/shared';
+import { type VNode, onMounted, onUnmounted, triggerRef } from 'vue';
 import { columnMapKey } from './symbols';
 import type {
   TableColumn,
@@ -21,11 +21,7 @@ const slots = defineSlots<{
 const columns = injectStrict(columnMapKey);
 const columnSymbol = Symbol();
 
-const emptyComponent = defineComponent({
-  render() {
-    return null;
-  }
-});
+const emptyComponent = defineEmptyComponent();
 
 onMounted(() => {
   const column: TableColumn = {

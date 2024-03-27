@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { injectStrict, privateSymbols } from '@manatsu/shared';
+import { defineEmptyComponent, injectStrict, privateSymbols } from '@manatsu/shared';
 import MDialog from './MDialog.vue';
 
 const emit = defineEmits<(e: 'hide' | 'show') => void>();
@@ -19,6 +19,8 @@ const footerSlotProps = injectStrict(privateSymbols.dynDialogFooterProps);
 const onHideRef = injectStrict(privateSymbols.dynDialogOnHide);
 const onShowRef = injectStrict(privateSymbols.dynDialogOnShow);
 
+const emptyComponent = defineEmptyComponent();
+
 function onHide() {
   emit('hide');
   onHideRef.value?.();
@@ -31,7 +33,13 @@ function onShow() {
 </script>
 
 <template>
-  <m-dialog v-model:visible="visible" v-bind="dialogProps" @hide="onHide" @show="onShow">
+  <m-dialog
+    v-if="visible"
+    v-model:visible="visible"
+    v-bind="dialogProps"
+    @hide="onHide"
+    @show="onShow"
+  >
     <template v-if="headerSlot" #header>
       <component :is="headerSlot" v-bind="headerSlotProps" />
     </template>
@@ -44,4 +52,5 @@ function onShow() {
       <component :is="footerSlot" v-bind="footerSlotProps" />
     </template>
   </m-dialog>
+  <empty-component v-else />
 </template>

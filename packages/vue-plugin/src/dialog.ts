@@ -8,6 +8,9 @@ export function provideDialog(app: App, placeDialogOnScaffold = true) {
   const scaffold = ref(placeDialogOnScaffold);
   app.provide(privateSymbols.placeDialogOnScaffold, readonly(scaffold));
 
+  const id = shallowRef<symbol | null>(null);
+  app.provide(privateSymbols.dynDialogId, id);
+
   const visible = ref(false);
   app.provide(privateSymbols.dynDialogVisible, visible);
 
