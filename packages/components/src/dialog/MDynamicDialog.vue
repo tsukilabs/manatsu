@@ -1,37 +1,32 @@
 <script setup lang="ts">
-import { inject, isRef, ref } from 'vue';
-import { privateSymbols } from '@manatsu/shared';
+import { injectStrict, privateSymbols } from '@manatsu/shared';
 import MDialog from './MDialog.vue';
 
 const emit = defineEmits<(e: 'hide' | 'show') => void>();
 
-const visible = inject(privateSymbols.dynDialogVisible, () => ref(false), true);
-const dialogProps = inject(privateSymbols.dynDialogOptions);
+const visible = injectStrict(privateSymbols.dynDialogVisible);
+const dialogProps = injectStrict(privateSymbols.dynDialogOptions);
 
-const defaultSlot = inject(privateSymbols.dynDialogDefault);
-const defaultSlotProps = inject(privateSymbols.dynDialogDefaultProps);
+const defaultSlot = injectStrict(privateSymbols.dynDialogDefault);
+const defaultSlotProps = injectStrict(privateSymbols.dynDialogDefaultProps);
 
-const headerSlot = inject(privateSymbols.dynDialogHeader);
-const headerSlotProps = inject(privateSymbols.dynDialogHeaderProps);
+const headerSlot = injectStrict(privateSymbols.dynDialogHeader);
+const headerSlotProps = injectStrict(privateSymbols.dynDialogHeaderProps);
 
-const footerSlot = inject(privateSymbols.dynDialogFooter);
-const footerSlotProps = inject(privateSymbols.dynDialogFooterProps);
+const footerSlot = injectStrict(privateSymbols.dynDialogFooter);
+const footerSlotProps = injectStrict(privateSymbols.dynDialogFooterProps);
 
-const onHideRef = inject(privateSymbols.dynDialogOnHide);
-const onShowRef = inject(privateSymbols.dynDialogOnShow);
+const onHideRef = injectStrict(privateSymbols.dynDialogOnHide);
+const onShowRef = injectStrict(privateSymbols.dynDialogOnShow);
 
 function onHide() {
   emit('hide');
-  if (isRef(onHideRef)) {
-    onHideRef.value?.();
-  }
+  onHideRef.value?.();
 }
 
 function onShow() {
   emit('show');
-  if (isRef(onShowRef)) {
-    onShowRef.value?.();
-  }
+  onShowRef.value?.();
 }
 </script>
 

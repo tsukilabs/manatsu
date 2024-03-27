@@ -1,13 +1,11 @@
 import type { Nullish } from '@tb-dev/utility-types';
-import { type DialogOptions, injectStrict, privateSymbols } from '@manatsu/shared';
+import type { AllowedComponentProps, Component, ComponentInstance, VNodeProps } from 'vue';
 import {
-  type AllowedComponentProps,
-  type Component,
-  type ComponentInstance,
-  type ShallowRef,
-  type VNodeProps,
-  isRef
-} from 'vue';
+  type DialogEvent,
+  type DialogOptions,
+  injectStrict,
+  privateSymbols
+} from '@manatsu/shared';
 
 type ComponentProps<C extends Component> = Omit<
   ComponentInstance<C>['$props'],
@@ -17,6 +15,8 @@ type ComponentProps<C extends Component> = Omit<
 interface UseDialogReturn {
   close: () => void;
   show: () => void;
+
+  on: (event: DialogEvent, fn: Nullish<() => void>) => void;
 
   setContent: <C extends Component>(
     component: Nullish<C>,
@@ -31,104 +31,113 @@ interface UseDialogReturn {
     props?: Nullish<ComponentProps<C>>
   ) => void;
   setOptions: (options: Nullish<DialogOptions>) => void;
+}
 
-  on: (event: 'hide' | 'show', fn: Nullish<() => void>) => void;
+class Dialog {
+  private defaultSlot: Nullish<Component> = null;
+  private defaultSlotProps: Nullish<Record<string, unknown>> = null;
+  private footerSlot: Nullish<Component> = null;
+  private footerSlotProps: Nullish<Record<string, unknown>> = null;
+  private headerSlot: Nullish<Component> = null;
+  private headerSlotProps: Nullish<Record<string, unknown>> = null;
+
+  private onHide: Nullish<() => void> = null;
+  private onShow: Nullish<() => void> = null;
+
+  private readonly refs = {
+    visible: injectStrict(privateSymbols.dynDialogVisible),
+    options: injectStrict(privateSymbols.dynDialogOptions),
+    headerSlot: injectStrict(privateSymbols.dynDialogHeader),
+    headerSlotProps: injectStrict(privateSymbols.dynDialogHeaderProps),
+    defaultSlot: injectStrict(privateSymbols.dynDialogDefault),
+    defaultSlotProps: injectStrict(privateSymbols.dynDialogDefaultProps),
+    footerSlot: injectStrict(privateSymbols.dynDialogFooter),
+    footerSlotProps: injectStrict(privateSymbols.dynDialogFooterProps),
+    onHideRef: injectStrict(privateSymbols.dynDialogOnHide),
+    onShowRef: injectStrict(privateSymbols.dynDialogOnShow)
+  };
+
+  constructor(private options: Nullish<DialogOptions>) {}
+
+  public close() {
+    this.refs.visible.value = false;
+    this.refs.options.value = null;
+
+    this.refs.defaultSlot.value = null;
+    this.refs.defaultSlotProps.value = null;
+    this.refs.headerSlot.value = null;
+    this.refs.headerSlotProps.value = null;
+    this.refs.footerSlot.value = null;
+    this.refs.footerSlotProps.value = null;
+
+    this.refs.onHideRef.value = null;
+    this.refs.onShowRef.value = null;
+  }
+
+  public on(event: DialogEvent, fn: Nullish<() => void>) {
+    switch (event) {
+      case 'hide':
+        this.onHide = fn;
+        break;
+      case 'show':
+        this.onShow = fn;
+        break;
+    }
+  }
+
+  public setContent<C extends Component>(
+    component: Nullish<C>,
+    props: Nullish<ComponentProps<C>> = null
+  ) {
+    this.defaultSlot = component;
+    this.defaultSlotProps = component ? props : null;
+  }
+
+  public setFooter<C extends Component>(
+    component: Nullish<C>,
+    props: Nullish<ComponentProps<C>> = null
+  ) {
+    this.footerSlot = component;
+    this.footerSlotProps = component ? props : null;
+  }
+
+  public setHeader<C extends Component>(
+    component: Nullish<C>,
+    props: Nullish<ComponentProps<C>> = null
+  ) {
+    this.headerSlot = component;
+    this.headerSlotProps = component ? props : null;
+  }
+
+  public setOptions(options: Nullish<DialogOptions>) {
+    this.options = options;
+  }
+
+  public show() {
+    this.refs.defaultSlot.value = this.defaultSlot;
+    this.refs.defaultSlotProps.value = this.defaultSlotProps;
+    this.refs.headerSlot.value = this.headerSlot;
+    this.refs.headerSlotProps.value = this.headerSlotProps;
+    this.refs.footerSlot.value = this.footerSlot;
+    this.refs.footerSlotProps.value = this.footerSlotProps;
+
+    this.refs.onShowRef.value = this.onShow;
+    this.refs.onHideRef.value = this.onHide;
+
+    this.refs.options.value = this.options;
+    this.refs.visible.value = true;
+  }
 }
 
 export function useDialog(options: Nullish<DialogOptions> = null): UseDialogReturn {
-  const visible = injectStrict(privateSymbols.dynDialogVisible);
-  const optionsRef = injectStrict(privateSymbols.dynDialogOptions);
-  const onHideRef = injectStrict(privateSymbols.dynDialogOnHide);
-  const onShowRef = injectStrict(privateSymbols.dynDialogOnShow);
-
-  optionsRef.value = options;
-
-  const setContentFn = setContent();
-  const setFooterFn = setFooter();
-  const setHeaderFn = setHeader();
-  const setOptionsFn = setOptions(optionsRef);
-
-  const listener: UseDialogReturn['on'] = (event, fn) => {
-    switch (event) {
-      case 'hide':
-        onHideRef.value = fn;
-        break;
-      case 'show':
-        onShowRef.value = fn;
-        break;
-    }
-  };
-
-  function show() {
-    visible.value = true;
-  }
-
-  function close() {
-    visible.value = false;
-
-    setContentFn(null);
-    setFooterFn(null);
-    setHeaderFn(null);
-    setOptionsFn(null);
-
-    if (isRef(onHideRef)) onHideRef.value = null;
-    if (isRef(onShowRef)) onShowRef.value = null;
-  }
-
+  const dialog = new Dialog(options);
   return {
-    close,
-    show,
-
-    setContent: setContentFn,
-    setFooter: setFooterFn,
-    setHeader: setHeaderFn,
-    setOptions: setOptionsFn,
-
-    on: listener
-  };
-}
-
-function setHeader() {
-  const headerSlot = injectStrict(privateSymbols.dynDialogHeader);
-  const headerSlotProps = injectStrict(privateSymbols.dynDialogHeaderProps);
-
-  return function <C extends Component>(
-    component: Nullish<C>,
-    props: Nullish<ComponentProps<C>> = null
-  ) {
-    headerSlot.value = component;
-    headerSlotProps.value = component ? props : null;
-  };
-}
-
-function setContent() {
-  const defaultSlot = injectStrict(privateSymbols.dynDialogDefault);
-  const defaultSlotProps = injectStrict(privateSymbols.dynDialogDefaultProps);
-
-  return function <C extends Component>(
-    component: Nullish<C>,
-    props: Nullish<ComponentProps<C>> = null
-  ) {
-    defaultSlot.value = component;
-    defaultSlotProps.value = component ? props : null;
-  };
-}
-
-function setFooter() {
-  const footerSlot = injectStrict(privateSymbols.dynDialogFooter);
-  const footerSlotProps = injectStrict(privateSymbols.dynDialogFooterProps);
-
-  return function <C extends Component>(
-    component: Nullish<C>,
-    props: Nullish<ComponentProps<C>> = null
-  ) {
-    footerSlot.value = component;
-    footerSlotProps.value = component ? props : null;
-  };
-}
-
-function setOptions(optionsRef: ShallowRef<Nullish<DialogOptions>>) {
-  return function (options: Nullish<DialogOptions>) {
-    optionsRef.value = options;
+    close: dialog.close.bind(dialog),
+    on: dialog.on.bind(dialog),
+    setContent: dialog.setContent.bind(dialog),
+    setFooter: dialog.setFooter.bind(dialog),
+    setHeader: dialog.setHeader.bind(dialog),
+    setOptions: dialog.setOptions.bind(dialog),
+    show: dialog.show.bind(dialog)
   };
 }

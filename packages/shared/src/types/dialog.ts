@@ -1,6 +1,8 @@
 import type { StyleValue } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
 
+export type DialogEvent = 'hide' | 'show';
+
 export interface DialogOptions {
   /** @default 'body' */
   appendTo?: string | HTMLElement;

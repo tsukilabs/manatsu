@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { MButton } from 'manatsu/src/index.ts';
 import { useDialog } from '@manatsu/composables/src/index.ts';
 import LoremIpsum from '../../components/LoremIpsum.vue';
 
@@ -17,8 +18,8 @@ function showDialog() {
   dialog.setContent(() => h(LoremIpsum, { paragraphs: 2 }));
   dialog.setFooter(() =>
     h('div', { class: 'flex justify-end gap-2' }, [
-      h('m-button', { onClick: () => dialog.close() }, 'Close'),
-      h('m-button', 'Button')
+      h(MButton, { onClick: () => dialog.close() }, 'Close'),
+      h(MButton, 'Button')
     ])
   );
 

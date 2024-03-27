@@ -9,7 +9,8 @@ The following tools are required when contributing to Manatsu:
 ### Setup
 
 ```bash
-cargo install manatsu tauri-cli
+cargo install tauri-cli --version "^2.0.0-beta"
+cargo install manatsu
 
 git clone https://github.com/tsukilabs/manatsu.git
 cd manatsu
