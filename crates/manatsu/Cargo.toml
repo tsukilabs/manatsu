@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.6.18"
+version = "0.6.19"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -8,6 +8,7 @@ authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
 license = "MIT"
 edition = "2021"
 rust-version = "1.76"
+readme = "../../README.md"
 categories = [
     "gui",
     "web-programming",
