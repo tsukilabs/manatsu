@@ -31,7 +31,7 @@ export interface DialogOptions {
   storageKey?: string;
   /**
    * Which storage to use when saving the position of the dialog.
-   * @default 'session'
+   * @default 'local'
    */
   storageType?: 'local' | 'session';
 }

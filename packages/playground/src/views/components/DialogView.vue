@@ -17,8 +17,8 @@ function showDialog() {
   dialog.setContent(() => h(LoremIpsum, { paragraphs: 2 }));
   dialog.setFooter(() =>
     h('div', { class: 'flex justify-end gap-2' }, [
-      h('button', { onClick: () => dialog.close() }, 'Close'),
-      h('button', { onClick: () => dialog.reset() }, 'Reset')
+      h('m-button', { onClick: () => dialog.close() }, 'Close'),
+      h('m-button', 'Button')
     ])
   );
 

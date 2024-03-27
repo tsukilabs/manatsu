@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   appendTo: 'body',
   draggable: true,
   esc: true,
-  storageType: 'session'
+  storageType: 'local'
 });
 
 const emit = defineEmits<(e: 'hide' | 'show') => void>();
@@ -68,7 +68,8 @@ watch(visible, (value) => {
 watchEffect(() => {
   if (visible.value && props.storageKey) {
     const storage = getStorage();
-    storage.setItem(props.storageKey, JSON.stringify({ x: position.value.x, y: position.value.y }));
+    const dimensions = JSON.stringify({ x: position.value.x, y: position.value.y });
+    storage.setItem(props.storageKey, dimensions);
   }
 });
 
