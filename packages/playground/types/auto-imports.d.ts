@@ -123,6 +123,6 @@ declare global {
   export type { MaybeArray, MaybePromise, Nullish, PartialNullish } from '@tb-dev/utility-types'
   import('@tb-dev/utility-types')
   // @ts-ignore
-  export type { CSSProperties, Component, ComponentInstance, MaybeRefOrGetter, Ref, ShallowRef, VNode } from 'vue'
+  export type { CSSProperties, Component, ComponentInstance, ComputedRef, InjectionKey, MaybeRefOrGetter, Ref, ShallowRef, VNode } from 'vue'
   import('vue')
 }

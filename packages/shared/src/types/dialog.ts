@@ -10,17 +10,17 @@ export interface DialogOptions {
    * Whether to close the dialog when clicking outside.
    * @default false
    */
-  clickOutside?: boolean;
+  closeOnClickOutside?: boolean;
+  /**
+   * Whether to close the dialog when pressing the escape key.
+   * @default true
+   */
+  closeOnEsc?: boolean;
   contentClass?: string;
   contentStyle?: StyleValue;
   dialogClass?: string;
   dialogStyle?: StyleValue;
   draggable?: boolean;
-  /**
-   * Whether to close the dialog when pressing the escape key.
-   * @default true
-   */
-  esc?: boolean;
   footerClass?: string;
   footerStyle?: StyleValue;
   /** Handle that triggers the dialog drag event. */

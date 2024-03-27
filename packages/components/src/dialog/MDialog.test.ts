@@ -2,7 +2,7 @@ import { h } from 'vue';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { useDialog } from '@manatsu/composables/src/index.ts';
 import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
-import { config, enableAutoUnmount, mount } from '@vue/test-utils';
+import { config, enableAutoUnmount, flushPromises, mount } from '@vue/test-utils';
 import MDialog from './MDialog.vue';
 import MScaffold from '../scaffold/MScaffold.vue';
 
@@ -51,7 +51,7 @@ describe('dialog', () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
       props: {
-        esc: true,
+        closeOnEsc: true,
         visible: true,
         'onUpdate:visible': async (value: boolean) => {
           await wrapper.setProps({ visible: value });
@@ -94,7 +94,7 @@ describe('dialog', () => {
     expect(wrapper.findComponent(MDialog).exists()).toBe(false);
   });
 
-  it('should open dynamic dialog', () => {
+  it('should open dynamic dialog', async () => {
     const wrapper = mount({
       template: '<m-scaffold />',
       setup() {
@@ -102,10 +102,11 @@ describe('dialog', () => {
       }
     });
 
+    await flushPromises();
     expect(wrapper.findComponent(MDialog).props('visible')).toBe(true);
   });
 
-  it('should open dynamic dialog with header', () => {
+  it('should open dynamic dialog with header', async () => {
     const wrapper = mount({
       template: '<m-scaffold />',
       setup() {
@@ -115,10 +116,11 @@ describe('dialog', () => {
       }
     });
 
+    await flushPromises();
     expect(wrapper.find('.m-dialog-header').text()).toBe('header');
   });
 
-  it('should open dynamic dialog with footer', () => {
+  it('should open dynamic dialog with footer', async () => {
     const wrapper = mount({
       template: '<m-scaffold />',
       setup() {
@@ -128,10 +130,11 @@ describe('dialog', () => {
       }
     });
 
+    await flushPromises();
     expect(wrapper.find('.m-dialog-footer').text()).toBe('footer');
   });
 
-  it('should open dynamic dialog with content', () => {
+  it('should open dynamic dialog with content', async () => {
     const wrapper = mount({
       template: '<m-scaffold />',
       setup() {
@@ -141,6 +144,7 @@ describe('dialog', () => {
       }
     });
 
+    await flushPromises();
     expect(wrapper.find('.m-dialog-content').text()).toBe('content');
   });
 });

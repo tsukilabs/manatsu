@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import { defineEmptyComponent } from '@manatsu/shared';
 import { onClickOutside, onKeyStroke, useDraggable } from '@vueuse/core';
-import { type VNode, computed, shallowRef, watch, watchEffect } from 'vue';
+import { type StyleValue, type VNode, computed, shallowRef, watch, watchEffect } from 'vue';
 import type { DialogProps } from './types';
 
 const visible = defineModel<boolean>('visible', { required: true });
 
 const props = withDefaults(defineProps<DialogProps>(), {
   appendTo: 'body',
+  closeOnEsc: true,
   draggable: true,
-  esc: true,
   storageType: 'local'
 });
 
@@ -20,51 +21,40 @@ const slots = defineSlots<{
   header?: () => VNode;
 }>();
 
+const emptyComponent = defineEmptyComponent();
+
 const maskRef = shallowRef<HTMLElement | null>(null);
 const dialogRef = shallowRef<HTMLElement | null>(null);
 const headerRef = shallowRef<HTMLElement | null>(null);
 
-const dialogHandle = computed(() => {
+const dragHandle = computed(() => {
+  if (!props.draggable) return null;
   return props.handle ?? headerRef.value ?? dialogRef.value;
 });
 
 const { position, style: draggableStyle } = useDraggable(dialogRef, {
   containerElement: maskRef,
-  handle: dialogHandle,
+  handle: dragHandle,
   disabled: computed(() => !props.draggable),
   initialValue: getInitialPosition()
 });
 
-const dialogComputedStyle = computed(() => {
-  const styles = [props.dialogStyle];
-  if (props.draggable) {
-    styles.push(draggableStyle.value, { position: 'fixed' });
-  }
-
-  return styles.filter(Boolean);
+const draggableComputedStyle = computed<StyleValue>(() => {
+  return props.draggable ? [draggableStyle.value, { position: 'fixed' }] : null;
 });
 
 const hasHeader = computed(() => {
   return Boolean(slots.header ?? props.header);
 });
 
-const headerComputedStyle = computed(() => {
-  const styles = [props.headerStyle];
-  if (props.draggable && headerRef.value && dialogHandle.value === headerRef.value) {
-    styles.push({ cursor: 'move' });
-  }
-
-  return styles.filter(Boolean);
-});
-
 onClickOutside(dialogRef, () => {
-  if (props.clickOutside) {
+  if (props.closeOnClickOutside) {
     visible.value = false;
   }
 });
 
 onKeyStroke('Escape', (e) => {
-  if (props.esc && visible.value) {
+  if (props.closeOnEsc && visible.value) {
     e.preventDefault();
     visible.value = false;
   }
@@ -122,25 +112,33 @@ function getStorage() {
 <template>
   <teleport :to="appendTo">
     <div v-if="visible" ref="maskRef" class="m-dialog-mask" :class="{ 'm-dialog-backdrop': modal }">
-      <div ref="dialogRef" class="m-dialog" :class="dialogClass" :style="dialogComputedStyle">
-        <div
-          v-if="hasHeader"
-          ref="headerRef"
-          class="m-dialog-header"
-          :class="headerClass"
-          :style="headerComputedStyle"
-        >
-          <slot v-if="$slots.header" name="header"></slot>
-          <span v-else>{{ header }}</span>
-        </div>
-        <div class="m-dialog-content" :class="contentClass" :style="contentStyle">
-          <slot></slot>
-        </div>
-        <div v-if="$slots.footer" class="m-dialog-footer" :class="footerClass" :style="footerStyle">
-          <slot name="footer"></slot>
+      <div :style="draggableComputedStyle">
+        <div ref="dialogRef" class="m-dialog" :class="dialogClass" :style="dialogStyle">
+          <div
+            v-if="hasHeader"
+            ref="headerRef"
+            class="m-dialog-header"
+            :class="headerClass"
+            :style="headerStyle"
+          >
+            <slot v-if="$slots.header" name="header"></slot>
+            <span v-else>{{ header }}</span>
+          </div>
+          <div class="m-dialog-content" :class="contentClass" :style="contentStyle">
+            <slot></slot>
+          </div>
+          <div
+            v-if="$slots.footer"
+            class="m-dialog-footer"
+            :class="footerClass"
+            :style="footerStyle"
+          >
+            <slot name="footer"></slot>
+          </div>
         </div>
       </div>
     </div>
+    <empty-component v-else />
   </teleport>
 </template>
 
@@ -173,6 +171,7 @@ function getStorage() {
 
   &-header {
     @include flex.x-start-y-center;
+    cursor: v-bind("dragHandle === headerRef ? 'move' : 'auto'");
     padding: 1rem;
     width: 100%;
     font-size: 1.25rem;

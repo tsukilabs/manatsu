@@ -1,11 +1,17 @@
 import type { Nullish } from '@tb-dev/utility-types';
-import type { AllowedComponentProps, Component, ComponentInstance, VNodeProps } from 'vue';
 import {
   type DialogEvent,
   type DialogOptions,
   injectStrict,
   privateSymbols
 } from '@manatsu/shared';
+import {
+  type AllowedComponentProps,
+  type Component,
+  type ComponentInstance,
+  type VNodeProps,
+  nextTick
+} from 'vue';
 
 type ComponentProps<C extends Component> = Omit<
   ComponentInstance<C>['$props'],
@@ -57,19 +63,29 @@ class Dialog {
   }
 
   public show() {
-    this.setContent();
-    this.setHeader();
-    this.setFooter();
-    this.setListeners();
-    this.setOptions();
+    if (this.#refs.visible.value) {
+      this.forceClose();
+    }
 
-    this.#refs.visible.value = true;
-    this.#refs.id.value = this.#id;
+    void nextTick(async () => {
+      this.setContent();
+      this.setHeader();
+      this.setFooter();
+      this.setListeners();
+      this.setOptions();
+
+      await nextTick();
+      this.#refs.visible.value = true;
+      this.#refs.id.value = this.#id;
+    });
   }
 
   public close() {
     if (this.#refs.id.value !== this.#id) return;
+    this.forceClose();
+  }
 
+  private forceClose() {
     this.#refs.id.value = null;
     this.#refs.visible.value = false;
     this.unsetAll();

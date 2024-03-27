@@ -9,13 +9,13 @@ const visibleNoStorage = ref(false);
 const visibleInput = ref(false);
 
 const dialog1 = useDialog({
-  clickOutside: false,
+  closeOnClickOutside: false,
   dialogClass: 'w-96 h-60',
   storageKey: 'dyn-dialog-1'
 });
 
 const dialog2 = useDialog({
-  clickOutside: true,
+  closeOnClickOutside: true,
   dialogClass: 'w-96 h-60',
   storageKey: 'dyn-dialog-2'
 });
@@ -29,7 +29,7 @@ function showDialog(id: number) {
     dialog.header(() => h('span', `Dynamic Dialog ${id}`));
     dialog.content(() => h(LoremIpsum, { paragraphs: 2 }));
     dialog.footer(() =>
-      h('div', { class: 'flex justify-end gap-2' }, [
+      h('div', { class: 'flex justify-end gap-2' }, () => [
         h(MButton, { onClick: () => dialog.close() }, 'Close'),
         h(MButton, { variant: 'outlined' }, `Dialog ${id}`)
       ])
@@ -55,7 +55,7 @@ function showDialog(id: number) {
 
     <m-dialog
       v-model:visible="visible"
-      click-outside
+      close-on-click-outside
       storage-key="dialog-position"
       storage-type="local"
     >
@@ -78,7 +78,7 @@ function showDialog(id: number) {
     <m-dialog
       v-model:visible="visibleModal"
       modal
-      click-outside
+      close-on-click-outside
       header="Modal Dialog"
       storage-key="dialog-modal-position"
       storage-type="local"
@@ -95,7 +95,7 @@ function showDialog(id: number) {
       </template>
     </m-dialog>
 
-    <m-dialog v-model:visible="visibleNoStorage" click-outside header="No Storage">
+    <m-dialog v-model:visible="visibleNoStorage" close-on-click-outside header="No Storage">
       <template #default>
         <lorem-ipsum :paragraphs="2" class="h-48 w-48" />
       </template>
@@ -108,7 +108,7 @@ function showDialog(id: number) {
       </template>
     </m-dialog>
 
-    <m-dialog v-model:visible="visibleInput" click-outside>
+    <m-dialog v-model:visible="visibleInput" close-on-click-outside>
       <template #default>
         <div class="flex flex-col gap-4">
           <m-input-text v-for="i of 5" :key="i" />
