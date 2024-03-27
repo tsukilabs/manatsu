@@ -49,10 +49,15 @@ export type {
 } from '@manatsu/components/src/index.ts';
 
 export {
+  type ComputedSymbol,
   type DialogOptions,
   type ErrorLog,
   type MaybeNullishRef,
+  type RefSymbol,
+  type ShallowRefSymbol,
   type VersionSnapshot,
+  type WritableRefSymbol,
+  type WritableShallowRefSymbol,
   defineEmptyComponent,
   getCurrentApp,
   getRouter,

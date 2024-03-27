@@ -1,10 +1,12 @@
 import type { Nullish } from '@tb-dev/utility-types';
-import type { Component, InjectionKey, Ref, ShallowRef } from 'vue';
+import type { Component, ComputedRef, InjectionKey, Ref, ShallowRef } from 'vue';
 import type { DarkMode, DialogOptions, ErrorHandler } from './types';
 
-type RefSymbol<T> = InjectionKey<Readonly<Ref<T>>>;
-type WritableRefSymbol<T> = InjectionKey<Ref<T>>;
-type WritableShallowRefSymbol<T> = InjectionKey<ShallowRef<T>>;
+export type ComputedSymbol<T> = InjectionKey<ComputedRef<T>>;
+export type RefSymbol<T> = InjectionKey<Readonly<Ref<T>>>;
+export type ShallowRefSymbol<T> = InjectionKey<Readonly<ShallowRef<T>>>;
+export type WritableRefSymbol<T> = InjectionKey<Ref<T>>;
+export type WritableShallowRefSymbol<T> = InjectionKey<ShallowRef<T>>;
 
 type ComponentSymbol = WritableShallowRefSymbol<Nullish<Component>>;
 type ComponentPropsSymbol = WritableShallowRefSymbol<Nullish<Record<string, unknown>>>;
