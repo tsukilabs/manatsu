@@ -24,24 +24,37 @@ const maskRef = shallowRef<HTMLElement | null>(null);
 const dialogRef = shallowRef<HTMLElement | null>(null);
 const headerRef = shallowRef<HTMLElement | null>(null);
 
+const dialogHandle = computed(() => {
+  return props.handle ?? headerRef.value ?? dialogRef.value;
+});
+
 const { position, style: draggableStyle } = useDraggable(dialogRef, {
   containerElement: maskRef,
-  handle: computed(() => props.handle ?? headerRef.value ?? dialogRef.value),
+  handle: dialogHandle,
   disabled: computed(() => !props.draggable),
   initialValue: getInitialPosition()
 });
 
 const dialogComputedStyle = computed(() => {
-  const styles = [props.dialogStyle].filter(Boolean);
+  const styles = [props.dialogStyle];
   if (props.draggable) {
     styles.push(draggableStyle.value, { position: 'fixed' });
   }
 
-  return styles;
+  return styles.filter(Boolean);
 });
 
 const hasHeader = computed(() => {
   return Boolean(slots.header ?? props.header);
+});
+
+const headerComputedStyle = computed(() => {
+  const styles = [props.headerStyle];
+  if (props.draggable && headerRef.value && dialogHandle.value === headerRef.value) {
+    styles.push({ cursor: 'move' });
+  }
+
+  return styles.filter(Boolean);
 });
 
 onClickOutside(dialogRef, () => {
@@ -115,7 +128,7 @@ function getStorage() {
           ref="headerRef"
           class="m-dialog-header"
           :class="headerClass"
-          :style="headerStyle"
+          :style="headerComputedStyle"
         >
           <slot v-if="$slots.header" name="header"></slot>
           <span v-else>{{ header }}</span>
