@@ -11,7 +11,8 @@ import type { SelectOption, SelectProps } from './types';
 const model = defineModel<any>();
 
 const props = withDefaults(defineProps<SelectProps>(), {
-  hideOnWindowBlur: true
+  hideOnWindowBlur: true,
+  transform: String
 });
 
 const slots = defineSlots<{
@@ -27,8 +28,8 @@ const { width, bottom, left, update } = useElementBounding(selectRef);
 const label = computed(() => {
   const value = toValue(model.value);
   if (isEmpty(value)) return props.placeholder;
-  if (Array.isArray(value)) return value.join(', ');
-  return String(value);
+  if (Array.isArray(value)) return value.map(props.transform).join(', ');
+  return props.transform(value);
 });
 
 const classList = computed(() => {
@@ -119,7 +120,7 @@ function isSelected(option: SelectOption) {
           @click="updateValue(option)"
         >
           <slot name="option" v-bind="option">
-            <span>{{ option.value }}</span>
+            <span>{{ transform(option.value) }}</span>
           </slot>
         </li>
       </ul>

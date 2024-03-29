@@ -14,6 +14,8 @@ export interface SelectProps {
   optionsClass?: string;
   optionsStyle?: StyleValue;
   placeholder?: string;
+  /** Transform the value of each option to a string. */
+  transform?: (value: any) => string;
 }
 
 export interface SelectOption<T = any> {

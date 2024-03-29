@@ -46,6 +46,7 @@ function generateOptions(amount: number, long = false) {
           v-model="value2"
           :options="options2"
           :hide-on-window-blur="false"
+          :transform="(value: string) => value.toUpperCase()"
           placeholder="Select a value"
           class="w-56"
         />
