@@ -13,10 +13,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
       // Using `any` so we can let `$mana` remain read-only.
       (app.config.globalProperties.$mana as any) = createGlobalProps();
 
-      setGlobalManatsu({
-        app,
-        router: options.router
-      });
+      setGlobalManatsu({ app });
     }
   };
 
