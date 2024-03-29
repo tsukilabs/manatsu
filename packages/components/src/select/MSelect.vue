@@ -150,6 +150,10 @@ function isSelected(option: SelectOption) {
   white-space: nowrap;
 }
 
+:root {
+  --m-select-dropdown-z-index: 1100;
+}
+
 .m-select {
   @include container;
   @include flex.x-between-y-center($inline: true);
@@ -175,7 +179,7 @@ function isSelected(option: SelectOption) {
     position: fixed;
     top: v-bind('toPixel(bottom + 1)');
     left: v-bind('toPixel(left)');
-    z-index: 1000;
+    z-index: var(--m-select-dropdown-z-index);
     box-shadow:
       0 4px 6px -1px rgba(0 0 0 / 10%),
       0 2px 4px -2px rgba(0 0 0 / 10%);

@@ -3,6 +3,7 @@ import { defineEmptyComponent } from '@manatsu/shared';
 import { onClickOutside, onKeyStroke, useDraggable } from '@vueuse/core';
 import { type StyleValue, type VNode, computed, shallowRef, watch, watchEffect } from 'vue';
 import type { DialogProps } from './types';
+import { defaultStorage, getInitialPosition, getStorage, ignore } from './utils';
 
 const visible = defineModel<boolean>('visible', { required: true });
 
@@ -10,7 +11,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   appendTo: 'body',
   closeOnEsc: true,
   draggable: true,
-  storageType: 'local'
+  storageType: defaultStorage
 });
 
 const emit = defineEmits<(e: 'hide' | 'show') => void>();
@@ -36,7 +37,7 @@ const { position, style: draggableStyle } = useDraggable(dialogRef, {
   containerElement: maskRef,
   handle: dragHandle,
   disabled: computed(() => !props.draggable),
-  initialValue: getInitialPosition()
+  initialValue: getInitialPosition(props)
 });
 
 const draggableComputedStyle = computed<StyleValue>(() => {
@@ -47,11 +48,15 @@ const hasHeader = computed(() => {
   return Boolean(slots.header ?? props.header);
 });
 
-onClickOutside(dialogRef, () => {
-  if (props.closeOnClickOutside) {
-    visible.value &&= false;
-  }
-});
+onClickOutside(
+  dialogRef,
+  () => {
+    if (props.closeOnClickOutside) {
+      visible.value &&= false;
+    }
+  },
+  { ignore }
+);
 
 onKeyStroke('Escape', (e) => {
   if (props.closeOnEsc && visible.value) {
@@ -70,43 +75,11 @@ watch(visible, (value) => {
 
 watchEffect(() => {
   if (visible.value && props.storageKey) {
-    const storage = getStorage();
+    const storage = getStorage(props.storageType);
     const dimensions = JSON.stringify({ x: position.value.x, y: position.value.y });
     storage.setItem(props.storageKey, dimensions);
   }
 });
-
-function getInitialPosition() {
-  if (typeof props.storageKey !== 'string') {
-    return getDefaultPosition();
-  }
-
-  const storage = getStorage();
-  const previousPosition = storage.getItem(props.storageKey);
-  if (!previousPosition) return getDefaultPosition();
-
-  try {
-    const parsed = JSON.parse(previousPosition) as { x: string; y: string };
-    const x = Number.parseFloat(parsed.x);
-    const y = Number.parseFloat(parsed.y);
-
-    if (!Number.isFinite(x) || !Number.isFinite(y)) {
-      return getDefaultPosition();
-    }
-
-    return { x, y };
-  } catch {
-    return getDefaultPosition();
-  }
-}
-
-function getDefaultPosition() {
-  return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-}
-
-function getStorage() {
-  return props.storageType === 'session' ? sessionStorage : localStorage;
-}
 </script>
 
 <template>
@@ -145,10 +118,14 @@ function getStorage() {
 <style lang="scss">
 @use '@manatsu/style/mixins/flex';
 
+:root {
+  --m-dialog-z-index: 1000;
+}
+
 .m-dialog-mask {
   @include flex.center;
   position: fixed;
-  z-index: 9000;
+  z-index: var(--m-dialog-z-index);
   inset: 0;
   width: 100%;
   height: 100%;
