@@ -15,9 +15,7 @@ const slots = defineSlots<{
 }>();
 
 const classList = computed(() => {
-  const classes = ['m-toolbar'];
-  if (props.border) classes.push('m-toolbar-border');
-  return classes;
+  return ['m-toolbar', props.border && 'm-toolbar-border'];
 });
 
 const startRef = shallowRef<HTMLElement | null>(null);

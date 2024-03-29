@@ -5,6 +5,10 @@ export interface SelectProps {
   disabled?: boolean;
   dropdownClass?: string;
   dropdownStyle?: StyleValue;
+  /** @default true */
+  hideOnWindowBlur?: boolean;
+  labelClass?: string;
+  labelStyle?: StyleValue;
   multiple?: boolean;
   options?: SelectOption[];
   optionsClass?: string;

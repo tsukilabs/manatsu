@@ -42,7 +42,13 @@ function generateOptions(amount: number, long = false) {
     <div class="flex flex-col gap-2">
       <div>{{ value2 }}</div>
       <div>
-        <m-select v-model="value2" :options="options2" placeholder="Select a value" class="w-56" />
+        <m-select
+          v-model="value2"
+          :options="options2"
+          :hide-on-window-blur="false"
+          placeholder="Select a value"
+          class="w-56"
+        />
       </div>
     </div>
     <div class="flex flex-col gap-2">

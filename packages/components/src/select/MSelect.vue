@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { toPixel } from '@tb-dev/utils';
 import { toArray } from '@tb-dev/utils/array';
+import { isEmpty, toPixel } from '@tb-dev/utils';
 import { injectStrict, symbols } from '@manatsu/shared';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
-import { type VNode, computed, ref, shallowRef, watch } from 'vue';
+import { type VNode, computed, ref, shallowRef, toValue, watch } from 'vue';
 import { getUniqueId } from './utils';
 import MSelectTrigger from './MSelectTrigger.vue';
 import type { SelectOption, SelectProps } from './types';
 
 const model = defineModel<any>();
 
-const props = defineProps<SelectProps>();
+const props = withDefaults(defineProps<SelectProps>(), {
+  hideOnWindowBlur: true
+});
 
 const slots = defineSlots<{
   option?: (slotProps: SelectOption) => VNode;
@@ -22,9 +24,12 @@ const id = getUniqueId();
 const selectRef = shallowRef<HTMLElement | null>(null);
 const { width, bottom, left, update } = useElementBounding(selectRef);
 
-const windowHeight = injectStrict(symbols.windowHeight);
-const windowWidth = injectStrict(symbols.windowWidth);
-watch([model, windowHeight, windowWidth], () => update(), { deep: false });
+const label = computed(() => {
+  const value = toValue(model.value);
+  if (isEmpty(value)) return props.placeholder;
+  if (Array.isArray(value)) return value.join(', ');
+  return String(value);
+});
 
 const classList = computed(() => {
   return ['m-select', props.disabled && 'm-select-disabled'];
@@ -37,16 +42,19 @@ onClickOutside(dropdownRef, () => (visible.value &&= false));
 
 const windowFocus = injectStrict(symbols.windowFocus);
 watch(windowFocus, (hasFocus) => {
-  if (!hasFocus) visible.value &&= false;
+  if (!hasFocus && props.hideOnWindowBlur) visible.value &&= false;
 });
 
+const windowHeight = injectStrict(symbols.windowHeight);
+const windowWidth = injectStrict(symbols.windowWidth);
+watch([visible, model, label, windowHeight, windowWidth], () => update(), { deep: false });
+
 function toggle() {
-  update();
   if (props.disabled) return;
   visible.value = !visible.value;
 }
 
-function setValue(option: SelectOption) {
+function updateValue(option: SelectOption) {
   if (props.multiple) {
     const value = toArray(model.value);
 
@@ -83,9 +91,11 @@ function isSelected(option: SelectOption) {
       :aria-controls="`m-select-dropdown-${id}`"
       :aria-label="ariaLabel"
       class="m-select-label"
+      :class="labelClass"
+      :style="labelStyle"
       @click="toggle"
     >
-      {{ model ?? placeholder }}
+      {{ label }}
     </span>
 
     <m-select-trigger @click="toggle" />
@@ -106,7 +116,7 @@ function isSelected(option: SelectOption) {
           role="option"
           :class="getOptionClassList(option)"
           :style="optionsStyle"
-          @click="setValue(option)"
+          @click="updateValue(option)"
         >
           <slot name="option" v-bind="option">
             <span>{{ option.value }}</span>
@@ -165,6 +175,9 @@ function isSelected(option: SelectOption) {
     top: v-bind('toPixel(bottom + 1)');
     left: v-bind('toPixel(left)');
     z-index: 1000;
+    box-shadow:
+      0 4px 6px -1px rgba(0 0 0 / 10%),
+      0 2px 4px -2px rgba(0 0 0 / 10%);
     padding: 0.2rem;
     width: v-bind('toPixel(width)');
     max-height: 200px;
@@ -181,8 +194,7 @@ function isSelected(option: SelectOption) {
   }
 
   &-selected {
-    background-color: var(--m-color-primary);
-    color: var(--m-color-on-primary);
+    color: var(--m-color-primary);
   }
 }
 </style>

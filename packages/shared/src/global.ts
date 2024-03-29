@@ -2,32 +2,40 @@ import { type App, inject } from 'vue';
 import { type Router, routerKey } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
 
-const symbol: unique symbol = Symbol();
-const map = new WeakMap<symbol, ManatsuGlobal>();
-
 export interface ManatsuGlobal {
   readonly app: App;
 }
 
-function getGlobalManatsu(): ManatsuGlobal {
-  const globalManatsu = map.get(symbol);
-  if (!globalManatsu) {
-    throw new Error('manatsu plugin must be installed');
+function createScope() {
+  const symbol: unique symbol = Symbol();
+  const map = new WeakMap<symbol, ManatsuGlobal>();
+
+  function get(): ManatsuGlobal {
+    const globalManatsu = map.get(symbol);
+    if (!globalManatsu) {
+      throw new Error('manatsu plugin must be installed');
+    }
+
+    return globalManatsu;
   }
 
-  return globalManatsu;
+  function set(manatsu: ManatsuGlobal) {
+    map.set(symbol, manatsu);
+  }
+
+  return { get, set };
 }
 
-export function setGlobalManatsu(manatsu: ManatsuGlobal) {
-  map.set(symbol, manatsu);
-}
+const { get, set } = createScope();
+
+export { set as setGlobalManatsu };
 
 /**
  * Get the current app instance.
  * This should be called only after the manatsu plugin has been installed.
  */
 export function getCurrentApp(): App {
-  return getGlobalManatsu().app;
+  return get().app;
 }
 
 /** Get the current router instance. */

@@ -52,7 +52,7 @@
     "@manatsu/shared": "workspace:*",
     "@manatsu/vue-plugin": "workspace:*",
     "@tb-dev/utility-types": "^1.2.4",
-    "@tb-dev/utils": "^1.4.2"
+    "@tb-dev/utils": "^1.4.3"
   },
   "devDependencies": {
     "vite": "^5.2.7"
