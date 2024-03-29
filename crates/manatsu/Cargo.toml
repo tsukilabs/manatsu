@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.6.21"
+version = "0.6.22"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -66,7 +66,7 @@ features = [
 ]
 
 [dependencies.tokio]
-version = "1.36.0"
+version = "1.37.0"
 features = [
     "macros",
     "process",

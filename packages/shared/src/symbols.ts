@@ -15,6 +15,11 @@ type ComponentPropsSymbol = WritableShallowRefSymbol<Nullish<Record<string, unkn
 const darkMode = Symbol() as WritableRefSymbol<DarkMode>;
 const errorHandler = Symbol() as InjectionKey<Nullish<ErrorHandler>>;
 
+// Window
+const windowFocus = Symbol() as RefSymbol<boolean>;
+const windowHeight = Symbol() as RefSymbol<number>;
+const windowWidth = Symbol() as RefSymbol<number>;
+
 // Scaffold
 const scaffoldBottomHeight = Symbol() as RefSymbol<number>;
 const scaffoldContentHeight = Symbol() as RefSymbol<number>;
@@ -53,7 +58,10 @@ export const symbols = {
   showOnlyScaffoldContent,
   showScaffoldBottom,
   showScaffoldSidebar,
-  showScaffoldTop
+  showScaffoldTop,
+  windowFocus,
+  windowHeight,
+  windowWidth
 } as const;
 
 export const privateSymbols = {

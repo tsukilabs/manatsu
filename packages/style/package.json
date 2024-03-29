@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/style",
-  "version": "0.6.21",
+  "version": "0.6.22",
   "description": "CSS utilities",
   "license": "MIT",
   "private": false,
@@ -41,7 +41,9 @@
     "./*": "./*",
     "./themes/mana": "./src/themes/mana/index.scss",
     "./mixins/flex": "./src/mixins/flex.scss",
-    "./mixins/util": "./src/mixins/util.scss"
+    "./mixins/shadow": "./src/mixins/shadow.scss",
+    "./mixins/transition": "./src/mixins/transition.scss",
+    "./mixins/utils": "./src/mixins/utils.scss"
   },
   "scripts": {
     "build": "pnpm run --bail \"/^(type-check|build-only)$/\"",

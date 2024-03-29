@@ -2,17 +2,8 @@
 import { until } from '@vueuse/core';
 import { isNullish, toPixel } from '@tb-dev/utils';
 import type { Nullish } from '@tb-dev/utility-types';
-import { type SortOrder, compare, handleError, symbols } from '@manatsu/shared';
-import {
-  type VNode,
-  computed,
-  inject,
-  isRef,
-  onUnmounted,
-  provide,
-  shallowRef,
-  triggerRef
-} from 'vue';
+import { type VNode, computed, onUnmounted, provide, shallowRef, triggerRef } from 'vue';
+import { type SortOrder, compare, handleError, injectStrict, symbols } from '@manatsu/shared';
 import { columnMapKey } from './symbols';
 import { intoNestedValue } from './utils';
 import type { ColumnMap, ColumnSortFn, TableColumn, TableProps, TableRowClickEvent } from './types';
@@ -32,27 +23,18 @@ defineEmits<(e: 'row-click' | 'row-dblclick', value: TableRowClickEvent) => void
 defineSlots<{ default?: () => VNode }>();
 
 const containerClassList = computed(() => {
-  const classes = ['m-table-container'];
-  if (props.scrollable) classes.push('m-table-container-scrollable');
-  return classes;
+  return ['m-table-container', props.scrollable && 'm-table-container-scrollable'];
 });
 
 const tableClassList = computed(() => {
-  const classes = ['m-table'];
-  if (props.striped) classes.push('m-table-striped');
-  if (props.tableClass) classes.push(props.tableClass);
-  return classes;
+  return ['m-table', props.striped && 'm-table-striped', props.tableClass];
 });
 
-const scaffoldContentHeight = inject(symbols.scaffoldContentHeight);
+const scaffoldContentHeight = injectStrict(symbols.scaffoldContentHeight);
 const tableMaxHeight = computed(() => {
   if (props.maxHeight) return toPixel(props.maxHeight);
-  if (isRef(scaffoldContentHeight)) {
-    const height = toPixel(scaffoldContentHeight.value);
-    return `calc(${height} - (var(--m-scaffold-content-padding) * 2))`;
-  }
-
-  return 'auto';
+  const height = toPixel(scaffoldContentHeight.value);
+  return `calc(${height} - (var(--m-scaffold-content-padding) * 2))`;
 });
 
 // Columns
@@ -88,16 +70,10 @@ function onColumnClick(column: TableColumn) {
 
 until(rows)
   .toMatch((r) => r.length > 0, { deep: false })
-  .then(() => {
-    if (props.sortField) {
-      sort(props.sortField, props.sortOrder ?? 'asc', null);
-    }
-  })
+  .then(() => props.sortField && sort(props.sortField, props.sortOrder ?? 'asc', null))
   .catch(handleError);
 
-onUnmounted(() => {
-  columnMap.value.clear();
-});
+onUnmounted(() => columnMap.value.clear());
 </script>
 
 <template>
@@ -164,6 +140,7 @@ onUnmounted(() => {
   & thead {
     position: sticky;
     top: 0;
+    z-index: 200;
   }
 }
 

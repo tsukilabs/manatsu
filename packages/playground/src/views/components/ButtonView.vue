@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { capitalize } from 'lodash-es';
+import type { ButtonVariant } from 'manatsu/src/index.ts';
 
-const variants = ['filled', 'elevated', 'outlined'] as const;
+const variants: ButtonVariant[] = ['filled', 'elevated', 'outlined'];
 </script>
 
 <template>

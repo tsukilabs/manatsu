@@ -30,6 +30,10 @@ export const components: RouteRecordRaw[] = [
     component: () => import('../views/components/ScaffoldView.vue')
   },
   {
+    path: '/components/select',
+    component: () => import('../views/components/SelectView.vue')
+  },
+  {
     path: '/components/table',
     component: () => import('../views/components/TableView.vue')
   },

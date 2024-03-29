@@ -13,7 +13,8 @@ export function invokeCommand(command: string, args?: Nullish<InvokeArgs>) {
   };
 }
 
-export function pushRoute(router: Router, to: RouteLocationRaw) {
+export function pushRoute(router: Nullish<Router>, to: RouteLocationRaw) {
+  if (!router) throw new Error('router is not available');
   return async function () {
     await router.push(to);
   };

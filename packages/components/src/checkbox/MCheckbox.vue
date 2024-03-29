@@ -14,8 +14,6 @@ defineSlots<{ default?: () => VNode }>();
 
 <template>
   <label class="m-checkbox">
-    <!-- For some reason, using the v-bind shorthand causes the dts generation to fail. -->
-    <!-- This only happens with the `true-value` and `false-value` props. -->
     <!-- eslint-disable vue/v-bind-style -->
     <input
       :id="inputId"
@@ -36,6 +34,8 @@ defineSlots<{ default?: () => VNode }>();
 
 <style lang="scss">
 @use '@manatsu/style/mixins/flex';
+@use '@manatsu/style/mixins/shadow';
+@use '@manatsu/style/mixins/utils';
 
 .m-checkbox {
   @include flex.y-center($inline: true);
@@ -48,14 +48,13 @@ defineSlots<{ default?: () => VNode }>();
     @include flex.center($inline: true);
     appearance: none;
     border: 1px solid var(--m-color-on-surface-variant);
-    border-radius: var(--m-border-radius);
     width: 1.1em;
     height: 1.1em;
     font-size: inherit;
   }
 
   & > input[type='checkbox']:hover:not(:disabled) {
-    box-shadow: 0 0 1px 1px rgb(0 0 0 / 15%);
+    @include shadow.box-15;
     border-color: var(--m-color-primary);
   }
 

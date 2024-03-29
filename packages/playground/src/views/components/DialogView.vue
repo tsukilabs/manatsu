@@ -9,13 +9,15 @@ const visibleNoStorage = ref(false);
 const visibleInput = ref(false);
 
 const dialog1 = useDialog({
-  closeOnClickOutside: false,
+  closeOnClickOutside: true,
+  closeOnEsc: true,
   dialogClass: 'w-96 h-60',
   storageKey: 'dyn-dialog-1'
 });
 
 const dialog2 = useDialog({
   closeOnClickOutside: true,
+  closeOnEsc: true,
   dialogClass: 'w-96 h-60',
   storageKey: 'dyn-dialog-2'
 });

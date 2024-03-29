@@ -11,8 +11,8 @@ importers:
         specifier: ^2.0.0-beta.6
         version: 2.0.0-beta.6
       '@tb-dev/auto-import-config':
-        specifier: ^1.2.15
-        version: 1.2.15(@manatsu/style@0.6.19)(@tauri-apps/api@2.0.0-beta.6)(@tb-dev/utility-types@1.2.4)(@tb-dev/utils@1.4.2)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.6.19)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21)
+        specifier: ^1.2.17
+        version: 1.2.17(@manatsu/style@0.6.21)(@tauri-apps/api@2.0.0-beta.6)(@tb-dev/utility-types@1.2.4)(@tb-dev/utils@1.4.3)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.6.21)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21)
       '@tb-dev/eslint-config':
         specifier: ^3.3.1
         version: 3.3.1(eslint@8.57.0)(typescript@5.4.3)(vitest@1.4.0)
@@ -23,8 +23,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@tb-dev/utils':
-        specifier: ^1.4.2
-        version: 1.4.2
+        specifier: ^1.4.3
+        version: 1.4.3
       '@tb-dev/vue-import-config':
         specifier: ^1.0.5
         version: 1.0.5(unplugin-vue-components@0.26.0)
@@ -33,7 +33,7 @@ importers:
         version: 20.11.30
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
-        version: 5.0.4(vite@5.2.6)(vue@3.4.21)
+        version: 5.0.4(vite@5.2.7)(vue@3.4.21)
       '@vitest/browser':
         specifier: ^1.4.0
         version: 1.4.0(vitest@1.4.0)(webdriverio@8.35.1)
@@ -101,14 +101,14 @@ importers:
         specifier: ^0.26.0
         version: 0.26.0(vue@3.4.21)
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
       vite-plugin-dts:
-        specifier: ^3.8.0
-        version: 3.8.0(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.6)
+        specifier: ^3.8.1
+        version: 3.8.1(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.7)
       vite-plugin-vue-devtools:
-        specifier: ^7.0.24
-        version: 7.0.24(vite@5.2.6)(vue@3.4.21)
+        specifier: ^7.0.25
+        version: 7.0.25(vite@5.2.7)(vue@3.4.21)
       vitest:
         specifier: ^1.4.0
         version: 1.4.0(@types/node@20.11.30)(@vitest/browser@1.4.0)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.72.0)
@@ -143,8 +143,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@tb-dev/utils':
-        specifier: ^1.4.2
-        version: 1.4.2
+        specifier: ^1.4.3
+        version: 1.4.3
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -159,8 +159,8 @@ importers:
         specifier: workspace:*
         version: link:../style
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
   packages/composables:
     dependencies:
@@ -174,8 +174,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@tb-dev/utils':
-        specifier: ^1.4.2
-        version: 1.4.2
+        specifier: ^1.4.3
+        version: 1.4.3
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -193,8 +193,8 @@ importers:
         specifier: workspace:*
         version: link:../vue-plugin
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
   packages/manatsu:
     dependencies:
@@ -217,8 +217,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@tb-dev/utils':
-        specifier: ^1.4.2
-        version: 1.4.2
+        specifier: ^1.4.3
+        version: 1.4.3
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -230,8 +230,8 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
   packages/playground:
     dependencies:
@@ -264,8 +264,8 @@ importers:
         specifier: ^3.4.3
         version: 3.4.3
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
   packages/shared:
     dependencies:
@@ -273,8 +273,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@tb-dev/utils':
-        specifier: ^1.4.2
-        version: 1.4.2
+        specifier: ^1.4.3
+        version: 1.4.3
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -286,8 +286,8 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
   packages/style:
     dependencies:
@@ -308,8 +308,8 @@ importers:
         version: 1.2.4
     devDependencies:
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
   packages/vue-plugin:
     dependencies:
@@ -326,8 +326,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@tb-dev/utils':
-        specifier: ^1.4.2
-        version: 1.4.2
+        specifier: ^1.4.3
+        version: 1.4.3
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -339,8 +339,8 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       vite:
-        specifier: ^5.2.6
-        version: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+        specifier: ^5.2.7
+        version: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
 
 packages:
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -1355,10 +1355,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@manatsu/components@0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
+  /@manatsu/components@0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-+i5KzQkvqv+9HJ0UHRbUFJiyIWDVWeBMjOu2a7PK3g17t6NGIk42QsBMd7u8W9EAmodA4NDB4dFKZ4jscxisqg==
+        integrity: sha512-U4ZzYzMm6ZyElPFXbanZNhqGMfQIf6qWQBSKdF5l/6wSrj77xgvZy3QXwsbqwOahVGHxPmHEjF7gShOrWKobSA==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -1367,21 +1367,21 @@ packages:
       vue: ^3.4.21
       vue-router: ^4.3.0
     dependencies:
-      '@manatsu/composables': 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
-      '@manatsu/shared': 0.6.19(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
-      '@manatsu/vue-plugin': 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/composables': 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/shared': 0.6.21(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/vue-plugin': 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
       '@tauri-apps/api': 2.0.0-beta.6
       '@tb-dev/utility-types': 1.2.4
-      '@tb-dev/utils': 1.4.2
+      '@tb-dev/utils': 1.4.3
       '@vueuse/core': 10.9.0(vue@3.4.21)
       vue: 3.4.21(typescript@5.4.3)
       vue-router: 4.3.0(vue@3.4.21)
     dev: true
 
-  /@manatsu/composables@0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
+  /@manatsu/composables@0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-fSFJP5okkhKKEaKhlwSX+8VIp8OUQVaxI9L4Cm4c4lQEjPXEo8vIz2F8GDuJ2aJ3kpBqyCEC7JB5qS+V9mc72w==
+        integrity: sha512-mahZFpb563SVJXkATXV81aghDlOaU5t6oXb+jzmACHJfNGor5LGzuY0zGUV5cySDUJyCEPbrTvqu6kM7VInB7g==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -1390,19 +1390,19 @@ packages:
       vue: ^3.4.21
       vue-router: ^4.3.0
     dependencies:
-      '@manatsu/shared': 0.6.19(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/shared': 0.6.21(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
       '@tauri-apps/api': 2.0.0-beta.6
       '@tb-dev/utility-types': 1.2.4
-      '@tb-dev/utils': 1.4.2
+      '@tb-dev/utils': 1.4.3
       '@vueuse/core': 10.9.0(vue@3.4.21)
       vue: 3.4.21(typescript@5.4.3)
       vue-router: 4.3.0(vue@3.4.21)
     dev: true
 
-  /@manatsu/shared@0.6.19(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
+  /@manatsu/shared@0.6.21(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-BxH5N42iLs+M8QB4/44ZN5nsjcVOP2/0YaUuiUao4h3N41D+LPv8YAWiMNyEVwFwRqG1Q9q+qg06iv9Azjx9Gw==
+        integrity: sha512-oCemacwbiR2UcdXRmGIgLXdmgv/EGQib+WQme9JuHduVPYQC0soSojGWjlqNoOdVvUrNDOpbE4YhW9+xafAPow==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -1411,34 +1411,34 @@ packages:
       vue-router: ^4.3.0
     dependencies:
       '@tb-dev/utility-types': 1.2.4
-      '@tb-dev/utils': 1.4.2
+      '@tb-dev/utils': 1.4.3
       '@vueuse/core': 10.9.0(vue@3.4.21)
       vue: 3.4.21(typescript@5.4.3)
       vue-router: 4.3.0(vue@3.4.21)
     dev: true
 
-  /@manatsu/style@0.6.19(sass@1.72.0):
+  /@manatsu/style@0.6.21(sass@1.72.0):
     resolution:
       {
-        integrity: sha512-Axoct9ku8u/XaoDKD6C+i3TO+kWYPTIB3qiN67RiOTswCWnYaPT+33Zw4gK/NQNmX0GvNjtK+oVxsyxM9wdHFg==
+        integrity: sha512-+a8ItYS4N+EHrTg02GABupKqVVBzDJj1AqkS8X0e3ESfUpo6W4Hv7B3uceUbWmjEg1sgGkgrhuk/UZuEFtENVg==
       }
     engines: { node: '>=20' }
     peerDependencies:
-      sass: ^1.71.1
+      sass: ^1.72.0
     dependencies:
       sass: 1.72.0
     dev: true
 
-  /@manatsu/tauri-plugin@0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
+  /@manatsu/tauri-plugin@0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-DgronO7Z1sX8lTtmolbtdqZhXzi3L9Uov4Ue0u/oa++PmtfidsJ4twBVa2k1vD/Twu3lrgccB1lVxvg9P428og==
+        integrity: sha512-geO3KSEILfh0/AMIn+DrEYB0sJOEJ9ofZghQcTGLD9/Z2HkiqAOu47r6f9ji9rD3yVyTF2lKnebgxSdeSb5Ewg==
       }
     engines: { node: '>=20' }
     peerDependencies:
       '@tauri-apps/api': ^2.0.0-beta.6
     dependencies:
-      '@manatsu/shared': 0.6.19(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/shared': 0.6.21(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
       '@tauri-apps/api': 2.0.0-beta.6
       '@tb-dev/utility-types': 1.2.4
     transitivePeerDependencies:
@@ -1447,10 +1447,10 @@ packages:
       - vue-router
     dev: true
 
-  /@manatsu/vue-plugin@0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
+  /@manatsu/vue-plugin@0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-MNj9yEjj4s2QqfoexS+FlrN9UtDqMGvGRCewk5zVrT7NOZ1Ei/GuTCnzyYsTQEcwJwUqilgs4L4dFEhDtGFOnQ==
+        integrity: sha512-vJ5S/+rt7phKdLAYBLqFtVElbXktwkhWlCvyrb0bKbTsACyUC1e8isMzBJ9IJJmOkssPrnl5dXs95GFT+xXPZg==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -1459,11 +1459,11 @@ packages:
       vue: ^3.4.21
       vue-router: ^4.3.0
     dependencies:
-      '@manatsu/shared': 0.6.19(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
-      '@manatsu/tauri-plugin': 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/shared': 0.6.21(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/tauri-plugin': 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
       '@tauri-apps/api': 2.0.0-beta.6
       '@tb-dev/utility-types': 1.2.4
-      '@tb-dev/utils': 1.4.2
+      '@tb-dev/utils': 1.4.3
       '@vueuse/core': 10.9.0(vue@3.4.21)
       vue: 3.4.21(typescript@5.4.3)
       vue-router: 4.3.0(vue@3.4.21)
@@ -1875,34 +1875,34 @@ packages:
       }
     engines: { node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1' }
 
-  /@tb-dev/auto-import-config@1.2.15(@manatsu/style@0.6.19)(@tauri-apps/api@2.0.0-beta.6)(@tb-dev/utility-types@1.2.4)(@tb-dev/utils@1.4.2)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.6.19)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21):
+  /@tb-dev/auto-import-config@1.2.17(@manatsu/style@0.6.21)(@tauri-apps/api@2.0.0-beta.6)(@tb-dev/utility-types@1.2.4)(@tb-dev/utils@1.4.3)(@vueuse/core@10.9.0)(@vueuse/math@10.9.0)(@vueuse/router@10.9.0)(manatsu@0.6.21)(pinia@2.1.7)(unplugin-auto-import@0.17.5)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-HXjRMLXDLw7NjYVQYqE3bsShmeKiNB01Cxl9flIKiHfZb4hC6pRkL3jKowF2CgFhPF7tgv2JPv/eOmuUaYkPKQ==
+        integrity: sha512-YMdCAKxQv33bg4dc5Qk8Wm5Jkg4M4y6gTnreVtLv3kwAECJZVH7oNb3GFqQXdFsGFVKJKTRowEteyJDHUrRQbQ==
       }
     engines: { node: '>=20' }
     peerDependencies:
-      '@manatsu/style': ^0.6.19
+      '@manatsu/style': ^0.6.20
       '@tauri-apps/api': ^2.0.0-beta.6
       '@tb-dev/utility-types': ^1.2.4
       '@tb-dev/utils': ^1.4.2
       '@vueuse/core': ^10.9.0
       '@vueuse/math': ^10.9.0
       '@vueuse/router': ^10.9.0
-      manatsu: ^0.6.19
+      manatsu: ^0.6.20
       pinia: ^2.1.7
       unplugin-auto-import: ^0.17.5
       vue: ^3.4.21
       vue-router: ^4.3.0
     dependencies:
-      '@manatsu/style': 0.6.19(sass@1.72.0)
+      '@manatsu/style': 0.6.21(sass@1.72.0)
       '@tauri-apps/api': 2.0.0-beta.6
       '@tb-dev/utility-types': 1.2.4
-      '@tb-dev/utils': 1.4.2
+      '@tb-dev/utils': 1.4.3
       '@vueuse/core': 10.9.0(vue@3.4.21)
       '@vueuse/math': 10.9.0(vue@3.4.21)
       '@vueuse/router': 10.9.0(vue-router@4.3.0)(vue@3.4.21)
-      manatsu: 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      manatsu: 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
       pinia: 2.1.7(typescript@5.4.3)(vue@3.4.21)
       unplugin-auto-import: 0.17.5(@vueuse/core@10.9.0)
       vue: 3.4.21(typescript@5.4.3)
@@ -1960,10 +1960,10 @@ packages:
         integrity: sha512-PwtTD7m8aS1wuuJTB6euSHgdlmmbYht7OsIV4unzrqSvL5Ln4CjJE5fWiv12DNdkq68XPXDhGSspzpqK3lUGSA==
       }
 
-  /@tb-dev/utils@1.4.2:
+  /@tb-dev/utils@1.4.3:
     resolution:
       {
-        integrity: sha512-m3DeQuaVApqAP4yEdRsqeLOBJnG9JE5Fvb7kEBpuORPxC18DCv0ESkfwrOvSYhrliIvcXxGFmxPg/brhg9ZUMA==
+        integrity: sha512-sE78hPHhSwDhffM2m2XrF8YhTrcQz5PtOujXj7kINsEn4fV4lfzdbFO64Je/rZnWii175ZX1cE3A5xf5hAObQw==
       }
     dependencies:
       '@tb-dev/utility-types': 1.2.4
@@ -2327,7 +2327,7 @@ packages:
       }
     dev: true
 
-  /@vitejs/plugin-vue@5.0.4(vite@5.2.6)(vue@3.4.21):
+  /@vitejs/plugin-vue@5.0.4(vite@5.2.7)(vue@3.4.21):
     resolution:
       {
         integrity: sha512-WS3hevEszI6CEVEx28F8RjTX97k3KsrcY6kvTg7+Whm5y3oYvcqzVeGCU3hxSAn4uY2CLCkeokkGKpoctccilQ==
@@ -2337,7 +2337,7 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
       vue: 3.4.21(typescript@5.4.3)
     dev: true
 
@@ -2618,32 +2618,32 @@ packages:
         integrity: sha512-LgPscpE3Vs0x96PzSSB4IGVSZXZBZHpfxs+ZA1d+VEPwHdOXowy/Y2CsvCAIFrf+ssVU1pD1jidj505EpUnfbA==
       }
 
-  /@vue/devtools-core@7.0.24(vite@5.2.6)(vue@3.4.21):
+  /@vue/devtools-core@7.0.25(vite@5.2.7)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-zIuVF0dEmiqmgHTPCXfvZXpASssdvA9Kv2guPKcb1d4nC26/+cVo11CV9h5GBY6O4LS04bS6M4hPnE8Y+x/w1Q==
+        integrity: sha512-aCsY4J6SvSBDuGdYADszByT0wy0GgpgdCApxcZzQEqYlyVchX7vqznJQrm7Y1GCLqAvoLaxsQqew7Cz+KQ3Idg==
       }
     dependencies:
-      '@vue/devtools-kit': 7.0.24(vue@3.4.21)
-      '@vue/devtools-shared': 7.0.24
+      '@vue/devtools-kit': 7.0.25(vue@3.4.21)
+      '@vue/devtools-shared': 7.0.25
       mitt: 3.0.1
       nanoid: 3.3.7
       pathe: 1.1.2
-      vite-hot-client: 0.2.3(vite@5.2.6)
+      vite-hot-client: 0.2.3(vite@5.2.7)
     transitivePeerDependencies:
       - vite
       - vue
     dev: true
 
-  /@vue/devtools-kit@7.0.24(vue@3.4.21):
+  /@vue/devtools-kit@7.0.25(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-6XD4ZRjbnk8XC5IM/GfuqB9O9UlmUU53pybuxg0/xBI9pxQfH3mOu5Gpyb55cG18uMW4c7hdEOgkxwFpUgYIrg==
+        integrity: sha512-wbLkSnOTsKHPb1mB9koFHUoSAF8Dp6Ii/ocR2+DeXFY4oKqIjCeJb/4Lihk4rgqEhCy1WwxLfTgNDo83VvDYkQ==
       }
     peerDependencies:
       vue: ^3.0.0
     dependencies:
-      '@vue/devtools-shared': 7.0.24
+      '@vue/devtools-shared': 7.0.25
       hookable: 5.5.3
       mitt: 3.0.1
       perfect-debounce: 1.0.0
@@ -2651,10 +2651,10 @@ packages:
       vue: 3.4.21(typescript@5.4.3)
     dev: true
 
-  /@vue/devtools-shared@7.0.24:
+  /@vue/devtools-shared@7.0.25:
     resolution:
       {
-        integrity: sha512-hocNGlaQuc0s3hLNky64zXQK6DjQcIGEI0TJbizEAH7l5eZ6BCPB3P19ofu9HyUbbIn/PTJWqyLT8clzWqo0Xw==
+        integrity: sha512-5+XYhcHSXuJSguYnNwL6/e6VTmXwCfryWQOkffh9ZU2zMByybqqqBrMWqvBkqTmMFCjPdzulo66xXbVbwLaElQ==
       }
     dependencies:
       rfdc: 1.3.1
@@ -6310,10 +6310,10 @@ packages:
       semver: 7.6.0
     dev: true
 
-  /manatsu@0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
+  /manatsu@0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-Mwac8czeOYClMjiYnXJ3yjon0/qne455I4r+yN2YGP7rqUOnoF1h5T+DbXTBPKhRsq1YKjtLAAbiP71ht/bRAQ==
+        integrity: sha512-x1xa71b1qnZv+NPFS+iS8uJj0Mt7r7D6S8ZjBmzr8bmUtAzsMRqWhLjKj9h4y16mK4RGcSWlkPKeYxQPr1WEYA==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -6322,13 +6322,13 @@ packages:
       vue: ^3.4.21
       vue-router: ^4.3.0
     dependencies:
-      '@manatsu/components': 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
-      '@manatsu/composables': 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
-      '@manatsu/shared': 0.6.19(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
-      '@manatsu/vue-plugin': 0.6.19(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/components': 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/composables': 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/shared': 0.6.21(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
+      '@manatsu/vue-plugin': 0.6.21(@tauri-apps/api@2.0.0-beta.6)(@vueuse/core@10.9.0)(vue-router@4.3.0)(vue@3.4.21)
       '@tauri-apps/api': 2.0.0-beta.6
       '@tb-dev/utility-types': 1.2.4
-      '@tb-dev/utils': 1.4.2
+      '@tb-dev/utils': 1.4.3
       '@vueuse/core': 10.9.0(vue@3.4.21)
       vue: 3.4.21(typescript@5.4.3)
       vue-router: 4.3.0(vue@3.4.21)
@@ -9137,7 +9137,7 @@ packages:
     engines: { node: '>= 0.10' }
     dev: true
 
-  /vite-hot-client@0.2.3(vite@5.2.6):
+  /vite-hot-client@0.2.3(vite@5.2.7):
     resolution:
       {
         integrity: sha512-rOGAV7rUlUHX89fP2p2v0A2WWvV3QMX2UYq0fRqsWSvFvev4atHWqjwGoKaZT1VTKyLGk533ecu3eyd0o59CAg==
@@ -9145,7 +9145,7 @@ packages:
     peerDependencies:
       vite: ^2.6.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
     dev: true
 
   /vite-node@1.4.0(@types/node@20.11.30)(sass@1.72.0):
@@ -9160,7 +9160,7 @@ packages:
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -9172,10 +9172,10 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-dts@3.8.0(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.6):
+  /vite-plugin-dts@3.8.1(@types/node@20.11.30)(typescript@5.4.3)(vite@5.2.7):
     resolution:
       {
-        integrity: sha512-wt9ST1MwS5lkxHtA3M30+lSA3TO8RnaUu3YUPmGgY1iKm+vWZmB7KBss6qspyUlto9ynLNHYG2eJ09d2Q4/7Qg==
+        integrity: sha512-zEYyQxH7lKto1VTKZHF3ZZeOPkkJgnMrePY4VxDHfDSvDjmYMMfWjZxYmNwW8QxbaItWJQhhXY+geAbyNphI7g==
       }
     engines: { node: ^14.18.0 || >=16.0.0 }
     peerDependencies:
@@ -9192,7 +9192,7 @@ packages:
       kolorist: 1.8.0
       magic-string: 0.30.8
       typescript: 5.4.3
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
       vue-tsc: 1.8.27(typescript@5.4.3)
     transitivePeerDependencies:
       - '@types/node'
@@ -9200,7 +9200,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-inspect@0.8.3(vite@5.2.6):
+  /vite-plugin-inspect@0.8.3(vite@5.2.7):
     resolution:
       {
         integrity: sha512-SBVzOIdP/kwe6hjkt7LSW4D0+REqqe58AumcnCfRNw4Kt3mbS9pEBkch+nupu2PBxv2tQi69EQHQ1ZA1vgB/Og==
@@ -9222,29 +9222,29 @@ packages:
       perfect-debounce: 1.0.0
       picocolors: 1.0.0
       sirv: 2.0.4
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
     transitivePeerDependencies:
       - rollup
       - supports-color
     dev: true
 
-  /vite-plugin-vue-devtools@7.0.24(vite@5.2.6)(vue@3.4.21):
+  /vite-plugin-vue-devtools@7.0.25(vite@5.2.7)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-q9+S5UP6303+ZE2t9GOMVsKoo/1yR2dvgt/6crLS3dK3HKFw/Sgkw8A+wqOPr9P3ZtI0PygHBm2OL0V3nEoPVQ==
+        integrity: sha512-u2n9gvH+M/mtlU6nGMkFV70t9In5qhUd+8HdzAT7qudMJBk2PmyWgQzUZ3JCDc0pQmJliYXToF27DdnJKkUa0g==
       }
     engines: { node: '>=v14.21.3' }
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0-0 || ^5.0.0-0
     dependencies:
-      '@vue/devtools-core': 7.0.24(vite@5.2.6)(vue@3.4.21)
-      '@vue/devtools-kit': 7.0.24(vue@3.4.21)
-      '@vue/devtools-shared': 7.0.24
+      '@vue/devtools-core': 7.0.25(vite@5.2.7)(vue@3.4.21)
+      '@vue/devtools-kit': 7.0.25(vue@3.4.21)
+      '@vue/devtools-shared': 7.0.25
       execa: 8.0.1
       sirv: 2.0.4
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
-      vite-plugin-inspect: 0.8.3(vite@5.2.6)
-      vite-plugin-vue-inspector: 4.0.2(vite@5.2.6)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
+      vite-plugin-inspect: 0.8.3(vite@5.2.7)
+      vite-plugin-vue-inspector: 4.0.2(vite@5.2.7)
     transitivePeerDependencies:
       - '@nuxt/kit'
       - rollup
@@ -9252,7 +9252,7 @@ packages:
       - vue
     dev: true
 
-  /vite-plugin-vue-inspector@4.0.2(vite@5.2.6):
+  /vite-plugin-vue-inspector@4.0.2(vite@5.2.7):
     resolution:
       {
         integrity: sha512-KPvLEuafPG13T7JJuQbSm5PwSxKFnVS965+MP1we2xGw9BPkkc/+LPix5MMWenpKWqtjr0ws8THrR+KuoDC8hg==
@@ -9269,15 +9269,15 @@ packages:
       '@vue/compiler-dom': 3.4.21
       kolorist: 1.8.0
       magic-string: 0.30.8
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite@5.2.6(@types/node@20.11.30)(sass@1.72.0):
+  /vite@5.2.7(@types/node@20.11.30)(sass@1.72.0):
     resolution:
       {
-        integrity: sha512-FPtnxFlSIKYjZ2eosBQamz4CbyrTizbZ3hnGJlh/wMtCrlp1Hah6AzBLjGI5I2urTfNnpovpHdrL6YRuBOPnCA==
+        integrity: sha512-k14PWOKLI6pMaSzAuGtT+Cf0YmIx12z9YGon39onaJNy8DLBfBJrzg9FQEmkAM5lpHBZs9wksWAsyF/HkpEwJA==
       }
     engines: { node: ^18.0.0 || >=20.0.0 }
     hasBin: true
@@ -9363,7 +9363,7 @@ packages:
       strip-literal: 2.0.0
       tinybench: 2.6.0
       tinypool: 0.8.2
-      vite: 5.2.6(@types/node@20.11.30)(sass@1.72.0)
+      vite: 5.2.7(@types/node@20.11.30)(sass@1.72.0)
       vite-node: 1.4.0(@types/node@20.11.30)(sass@1.72.0)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:

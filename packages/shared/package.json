@@ -1,7 +1,7 @@
 {
   "name": "@manatsu/shared",
   "description": "Utilities for Manatsu",
-  "version": "0.6.21",
+  "version": "0.6.22",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@8.15.5",
@@ -40,10 +40,10 @@
   },
   "dependencies": {
     "@tb-dev/utility-types": "^1.2.4",
-    "@tb-dev/utils": "^1.4.2"
+    "@tb-dev/utils": "^1.4.3"
   },
   "devDependencies": {
-    "vite": "^5.2.6"
+    "vite": "^5.2.7"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.9.0",

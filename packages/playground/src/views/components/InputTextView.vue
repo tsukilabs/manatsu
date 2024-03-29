@@ -13,5 +13,8 @@ const second = ref<string | null>(null);
       <m-input-text v-model="second" placeholder="Text field" />
       <span> {{ second }} </span>
     </div>
+    <div>
+      <m-input-text disabled placeholder="Disabled" />
+    </div>
   </div>
 </template>

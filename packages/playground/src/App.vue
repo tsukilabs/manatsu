@@ -4,7 +4,6 @@ import { injectStrict, symbols } from 'manatsu/src/index.ts';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { useInvoke } from '@manatsu/composables/src/index.ts';
 import {
-  MScaffold,
   MTopAppbar,
   type SidebarItem,
   type TopAppbarMenuItem
@@ -72,16 +71,11 @@ function createUnhandledError() {
 
         <template #end>
           <div class="flex gap-2">
-            <m-button variant="outlined" @click="createUnhandledError">Error</m-button>
-            <m-button variant="outlined" @click="$mana.toggleDarkMode()">
+            <m-button @click="createUnhandledError">Error</m-button>
+            <m-button @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}
             </m-button>
-            <m-button
-              variant="outlined"
-              class="transition-none"
-              :style="{ color }"
-              @click="getColor"
-            >
+            <m-button class="transition-none" :style="{ color }" @click="getColor">
               {{ color }}
             </m-button>
           </div>

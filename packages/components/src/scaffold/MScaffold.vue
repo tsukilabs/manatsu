@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useElementSize } from '@manatsu/composables/src/index.ts';
-import { getCurrentApp, privateSymbols, symbols } from '@manatsu/shared';
-import { type MaybeRefOrGetter, type VNode, computed, inject, shallowRef, toRef } from 'vue';
+import { type MaybeRefOrGetter, type VNode, computed, shallowRef, toRef } from 'vue';
+import { getCurrentApp, injectStrict, privateSymbols, symbols } from '@manatsu/shared';
 import type { ScaffoldProps, SidebarItem } from './types';
 import MDynamicDialog from '../dialog/MDynamicDialog.vue';
 
@@ -68,7 +68,7 @@ function useBorder(border: MaybeRefOrGetter<string | boolean>) {
 }
 
 // Dialog
-const shouldPlaceDialog = inject(privateSymbols.placeDialogOnScaffold);
+const shouldPlaceDialog = injectStrict(privateSymbols.placeDialogOnScaffold);
 </script>
 
 <template>
@@ -131,6 +131,11 @@ const shouldPlaceDialog = inject(privateSymbols.placeDialogOnScaffold);
 
 <style lang="scss">
 @use '@manatsu/style/mixins/flex';
+
+:root {
+  --m-scaffold-content-padding: 1rem;
+  --m-scaffold-sidebar-padding: 1rem;
+}
 
 /* This is applied to the top and bottom bars. */
 @mixin outside {

@@ -49,7 +49,7 @@ const hasHeader = computed(() => {
 
 onClickOutside(dialogRef, () => {
   if (props.closeOnClickOutside) {
-    visible.value = false;
+    visible.value &&= false;
   }
 });
 

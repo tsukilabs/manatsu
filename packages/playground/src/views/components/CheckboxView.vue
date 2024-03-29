@@ -25,7 +25,7 @@ const group = ref(['label 1']);
 
 <template>
   <div class="flex gap-4">
-    <m-card variant="outlined" title="Single" class="w-max" header-style="padding-bottom: 0;">
+    <m-card title="Single" class="w-max" header-style="padding-bottom: 0;">
       <div class="flex flex-col gap-4">
         <pre>{{ singleValues }}</pre>
 
@@ -39,7 +39,7 @@ const group = ref(['label 1']);
       </div>
     </m-card>
 
-    <m-card variant="outlined" title="Group" class="w-max" header-style="padding-bottom: 0;">
+    <m-card title="Group" class="w-max" header-style="padding-bottom: 0;">
       <div class="flex flex-col gap-4">
         <pre>{{ JSON.stringify(group, null, 2) }}</pre>
 

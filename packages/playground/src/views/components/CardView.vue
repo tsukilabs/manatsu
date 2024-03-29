@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { capitalize } from 'lodash-es';
+import type { CardVariant } from 'manatsu/src/index.ts';
 
-const variants = ['filled', 'elevated', 'outlined'] as const;
+const variants: CardVariant[] = ['filled', 'elevated', 'outlined'];
 </script>
 
 <template>
@@ -19,7 +20,7 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
       </template>
 
       <template #header-end>
-        <m-button variant="outlined">Action</m-button>
+        <m-button>Action</m-button>
       </template>
 
       <template #media>
@@ -31,7 +32,7 @@ const variants = ['filled', 'elevated', 'outlined'] as const;
       </template>
 
       <template #footer>
-        <m-button variant="outlined">Action</m-button>
+        <m-button>Action</m-button>
       </template>
     </m-card>
   </div>
