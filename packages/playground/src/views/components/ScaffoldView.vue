@@ -15,13 +15,13 @@ const showOnlyContent = inject(symbols.showOnlyScaffoldContent);
 <template>
   <div class="flex flex-col gap-4">
     <div class="flex gap-4">
-      <m-button variant="outlined" @click="showTop = !showTop">Top</m-button>
-      <m-button variant="outlined" @click="showSidebar = !showSidebar">Sidebar</m-button>
-      <m-button variant="outlined" @click="showBottom = !showBottom">Bottom</m-button>
-      <m-button variant="outlined" @click="showOnlyContent = !showOnlyContent">Content</m-button>
+      <m-button @click="showTop = !showTop">Top</m-button>
+      <m-button @click="showSidebar = !showSidebar">Sidebar</m-button>
+      <m-button @click="showBottom = !showBottom">Bottom</m-button>
+      <m-button @click="showOnlyContent = !showOnlyContent">Content</m-button>
     </div>
 
-    <m-card variant="outlined" class="w-max">
+    <m-card class="w-max">
       <div>scaffoldTopHeight: {{ scaffoldTopHeight }}</div>
       <div>scaffoldBottomHeight: {{ scaffoldBottomHeight }}</div>
       <div>scaffoldContentHeight: {{ scaffoldContentHeight }}</div>

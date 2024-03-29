@@ -3,7 +3,7 @@ import { type VNode, computed } from 'vue';
 import type { ButtonProps } from './types';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: 'filled'
+  variant: 'outlined'
 });
 
 defineSlots<{ default?: () => VNode }>();

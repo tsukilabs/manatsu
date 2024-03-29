@@ -71,16 +71,11 @@ function createUnhandledError() {
 
         <template #end>
           <div class="flex gap-2">
-            <m-button variant="outlined" @click="createUnhandledError">Error</m-button>
-            <m-button variant="outlined" @click="$mana.toggleDarkMode()">
+            <m-button @click="createUnhandledError">Error</m-button>
+            <m-button @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}
             </m-button>
-            <m-button
-              variant="outlined"
-              class="transition-none"
-              :style="{ color }"
-              @click="getColor"
-            >
+            <m-button class="transition-none" :style="{ color }" @click="getColor">
               {{ color }}
             </m-button>
           </div>

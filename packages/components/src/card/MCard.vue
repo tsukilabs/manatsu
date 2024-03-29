@@ -5,7 +5,7 @@ import type { CardProps } from './types';
 
 const props = withDefaults(defineProps<CardProps>(), {
   mediaPosition: 'after',
-  variant: 'filled'
+  variant: 'outlined'
 });
 
 const slots = defineSlots<{
