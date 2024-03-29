@@ -1,4 +1,3 @@
-import type { Router } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
 import type { DarkMode, ErrorHandler } from '@manatsu/shared';
 
@@ -11,7 +10,6 @@ export interface ManatsuOptions {
    * @default true
    */
   placeDialogOnScaffold?: boolean;
-  router?: Router;
 }
 
 export interface ManatsuPluginGlobal {
