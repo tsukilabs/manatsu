@@ -3,10 +3,10 @@ import { symbols } from '@manatsu/shared';
 import { useWindowFocus, useWindowSize } from '@vueuse/core';
 import { provideDialog } from './dialog';
 import { provideErrorHandler } from './error';
+import { provideDarkMode } from './dark-mode';
 import type { ManatsuOptions } from '../types';
-import { isDarkMode, provideDarkMode } from './dark-mode';
 
-export { isDarkMode };
+export { isDarkMode, setDarkMode, toggleDarkMode } from './dark-mode';
 
 export function provide(app: App, options: ManatsuOptions) {
   app.runWithContext(() => {

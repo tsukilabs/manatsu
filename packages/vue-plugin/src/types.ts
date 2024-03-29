@@ -16,6 +16,6 @@ export interface ManatsuOptions {
 
 export interface ManatsuPluginGlobal {
   isDarkMode: () => boolean;
-  setDarkMode: (darkMode: DarkMode) => void;
+  setDarkMode: (mode: DarkMode) => void;
   toggleDarkMode: () => void;
 }
