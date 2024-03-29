@@ -1,0 +1,34 @@
+@use 'sass:list';
+
+@mixin -transition($properties, $duration, $timing-function) {
+  $transitions: ();
+  @each $property in $properties {
+    $transitions: list.append(
+      $transitions,
+      $property $duration $timing-function,
+      $separator: comma
+    );
+  }
+
+  transition: $transitions;
+}
+
+@mixin ease($properties, $duration) {
+  @include -transition($properties, $duration, ease);
+}
+
+@mixin ease-in($properties, $duration) {
+  @include -transition($properties, $duration, ease-in);
+}
+
+@mixin ease-in-out($properties, $duration) {
+  @include -transition($properties, $duration, ease-in-out);
+}
+
+@mixin ease-out($properties, $duration) {
+  @include -transition($properties, $duration, ease-out);
+}
+
+@mixin linear($properties, $duration) {
+  @include -transition($properties, $duration, linear);
+}

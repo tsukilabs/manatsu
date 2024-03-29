@@ -25,7 +25,7 @@ export function onKeyStroke(
     options
   );
 
-  tryOnScopeDispose(stop);
+  tryOnScopeDispose(() => stop());
 
   return stop;
 }

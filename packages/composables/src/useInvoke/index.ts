@@ -79,7 +79,7 @@ export function useInvoke<Data>(
     id = null;
   }
 
-  tryOnScopeDispose(stop);
+  tryOnScopeDispose(() => stop());
 
   return {
     state: state as Ref<Data>,

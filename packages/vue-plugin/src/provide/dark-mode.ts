@@ -11,7 +11,7 @@ export function setDarkMode(darkMode: MaybeRefOrGetter<boolean>) {
   const active = toValue(darkMode);
 
   const body = document.body;
-  const classes = splitWhitespace(body.getAttribute('class') ?? '');
+  const classes = splitWhitespace(body.getAttribute('class'));
 
   const manatsuDark = 'manatsu-dark';
   if (active && !classes.includes(manatsuDark)) {

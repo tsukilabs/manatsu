@@ -59,8 +59,7 @@ const mediaOrder = computed(() => {
         :style="titleStyle"
         role="heading"
       >
-        <slot v-if="$slots.title" name="title"></slot>
-        <span v-else>{{ title }}</span>
+        <slot name="title">{{ title }}</slot>
 
         <div
           v-if="subtitle || $slots.subtitle"
@@ -68,8 +67,7 @@ const mediaOrder = computed(() => {
           :class="subtitleClass"
           :style="subtitleStyle"
         >
-          <slot v-if="$slots.subtitle" name="subtitle"></slot>
-          <span v-else>{{ subtitle }}</span>
+          <slot name="subtitle">{{ subtitle }}</slot>
         </div>
       </div>
 
@@ -92,15 +90,14 @@ const mediaOrder = computed(() => {
     </div>
 
     <div v-if="hasFooter" class="m-card-footer" :class="footerClass" :style="footerStyle">
-      <slot v-if="$slots.footer" name="footer"></slot>
-      <template v-else-if="actions">
+      <slot name="footer">
         <m-button
           v-for="{ key, onClick, ...action } of actions"
           :key
           v-bind="action"
           @click="onClick"
         />
-      </template>
+      </slot>
     </div>
   </div>
 </template>

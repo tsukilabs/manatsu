@@ -10,6 +10,7 @@ import {
   MInputText,
   MRadio,
   MScaffold,
+  MSelect,
   MTable,
   MTableColumn,
   MToolbar,
@@ -31,6 +32,7 @@ declare module 'vue' {
     MInputText: typeof MInputText;
     MRadio: typeof MRadio;
     MScaffold: typeof MScaffold;
+    MSelect: typeof MSelect;
     MTable: typeof MTable;
     MTableColumn: typeof MTableColumn;
     MToolbar: typeof MToolbar;
@@ -44,6 +46,7 @@ export type {
   ButtonVariant,
   CardVariant,
   ColumnSortFn,
+  SelectOption,
   SidebarItem,
   TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
@@ -76,6 +79,7 @@ export {
   MInputText,
   MRadio,
   MScaffold,
+  MSelect,
   MTable,
   MTableColumn,
   MToolbar,
@@ -117,6 +121,7 @@ export function registerComponents(app: App) {
   app.component('MInputText', MInputText);
   app.component('MRadio', MRadio);
   app.component('MScaffold', MScaffold);
+  app.component('MSelect', MSelect);
   app.component('MTable', MTable);
   app.component('MTableColumn', MTableColumn);
   app.component('MToolbar', MToolbar);

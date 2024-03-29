@@ -4,7 +4,6 @@ import { injectStrict, symbols } from 'manatsu/src/index.ts';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { useInvoke } from '@manatsu/composables/src/index.ts';
 import {
-  MScaffold,
   MTopAppbar,
   type SidebarItem,
   type TopAppbarMenuItem

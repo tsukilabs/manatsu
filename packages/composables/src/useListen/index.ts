@@ -29,7 +29,7 @@ export function useListen<T = unknown>(
     unlisten?.();
   }
 
-  tryOnScopeDispose(stop);
+  tryOnScopeDispose(() => stop());
 
   return stop;
 }

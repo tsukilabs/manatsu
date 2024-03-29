@@ -21,8 +21,7 @@ const slots = defineSlots<{
   title?: () => VNode;
 }>();
 
-const appbarHeight = computed(() => toPixel(props.height));
-
+// Start
 const hasLogo = computed(() => Boolean(props.logo ?? slots.logo));
 const hasTitle = computed(() => Boolean(props.title ?? slots.title));
 const hasStart = computed(() => {
@@ -30,6 +29,10 @@ const hasStart = computed(() => {
   return Boolean(slots.start);
 });
 
+const startRef = shallowRef<HTMLElement | null>(null);
+const { width: startWidth } = useElementSize(startRef);
+
+// Content
 const hasContent = computed(() => {
   if (menuItems.value && menuItems.value.length > 0) return true;
   return Boolean(slots.content);
@@ -41,9 +44,7 @@ const alignment = computed(() => {
   return 'flex-end';
 });
 
-const startRef = shallowRef<HTMLElement | null>(null);
-const { width: startWidth } = useElementSize(startRef);
-
+// End
 const endRef = shallowRef<HTMLElement | null>(null);
 const { width: endWidth } = useElementSize(endRef);
 
@@ -59,45 +60,40 @@ defineExpose({ startWidth, endWidth });
       :class="startClass"
       :style="startStyle"
     >
-      <slot v-if="$slots.start" name="start"></slot>
+      <slot name="start">
+        <m-dynamic-link
+          :to="titleLink"
+          class="m-top-appbar-brand"
+          :class="titleLinkClass"
+          :style="titleLinkStyle"
+        >
+          <div v-if="hasLogo" class="m-top-appbar-logo" :class="logoClass" :style="logoStyle">
+            <slot name="logo">
+              <img :src="logo" />
+            </slot>
+          </div>
 
-      <m-dynamic-link
-        v-else
-        :to="titleLink"
-        class="m-top-appbar-brand"
-        :class="titleLinkClass"
-        :style="titleLinkStyle"
-      >
-        <div v-if="hasLogo" class="m-top-appbar-logo" :class="logoClass" :style="logoStyle">
-          <slot v-if="$slots.logo" name="logo"></slot>
-          <img v-else :src="logo" />
-        </div>
-
-        <div v-if="hasTitle" class="m-top-appbar-title" :class="titleClass" :style="titleStyle">
-          <slot v-if="$slots.title" name="title"></slot>
-          <span v-else>{{ title }}</span>
-        </div>
-      </m-dynamic-link>
+          <div v-if="hasTitle" class="m-top-appbar-title" :class="titleClass" :style="titleStyle">
+            <slot name="title">{{ title }}</slot>
+          </div>
+        </m-dynamic-link>
+      </slot>
     </div>
 
     <div v-if="hasContent" class="m-top-appbar-content" :class="contentClass" :style="contentStyle">
-      <slot v-if="$slots.content" name="content"></slot>
-      <nav
-        v-else-if="menuItems && menuItems.length > 0"
-        class="m-top-appbar-menu"
-        :class="menuClass"
-        :style="menuStyle"
-      >
-        <div
-          v-for="item of menuItems"
-          :key="item.key"
-          class="m-top-appbar-menu-item"
-          :class="menuItemClass"
-          :style="menuItemStyle"
-        >
-          <slot name="menu-item" v-bind="item"></slot>
-        </div>
-      </nav>
+      <slot name="content">
+        <nav class="m-top-appbar-menu" :class="menuClass" :style="menuStyle">
+          <div
+            v-for="item of menuItems"
+            :key="item.key"
+            class="m-top-appbar-menu-item"
+            :class="menuItemClass"
+            :style="menuItemStyle"
+          >
+            <slot name="menu-item" v-bind="item">{{ item.label }}</slot>
+          </div>
+        </nav>
+      </slot>
     </div>
 
     <div
@@ -120,7 +116,7 @@ defineExpose({ startWidth, endWidth });
   gap: 1.5rem;
   padding: 0 1rem;
   width: 100%;
-  height: v-bind('appbarHeight');
+  height: v-bind('toPixel(height)');
   overflow: hidden;
   white-space: nowrap;
 

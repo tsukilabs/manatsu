@@ -1,0 +1,11 @@
+@mixin -box-shadow($offset, $blur, $spread, $color) {
+  box-shadow: $offset $blur $spread $color;
+}
+
+@mixin box-15($offset: 0 0, $blur: 1px, $spread: 1px) {
+  @include -box-shadow($offset, $blur, $spread, $color: rgb(0 0 0 / 15%));
+}
+
+@mixin box-30($offset: 0 0, $blur: 1px, $spread: 1px) {
+  @include -box-shadow($offset, $blur, $spread, $color: rgb(0 0 0 / 30%));
+}

@@ -7,5 +7,6 @@ export * from './dynamic-link';
 export * from './input-text';
 export * from './radio';
 export * from './scaffold';
+export * from './select';
 export * from './table';
 export * from './toolbar';
