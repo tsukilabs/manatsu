@@ -7,11 +7,9 @@ export interface ManatsuGlobal {
 }
 
 function createScope() {
-  const symbol: unique symbol = Symbol();
-  const map = new WeakMap<symbol, ManatsuGlobal>();
+  let globalManatsu: ManatsuGlobal | null = null;
 
   function get(): ManatsuGlobal {
-    const globalManatsu = map.get(symbol);
     if (!globalManatsu) {
       throw new Error('manatsu plugin must be installed');
     }
@@ -20,7 +18,7 @@ function createScope() {
   }
 
   function set(manatsu: ManatsuGlobal) {
-    map.set(symbol, manatsu);
+    globalManatsu = manatsu;
   }
 
   return { get, set };
