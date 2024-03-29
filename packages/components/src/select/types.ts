@@ -19,6 +19,6 @@ export interface SelectProps {
 }
 
 export interface SelectOption<T = any> {
-  key: string;
+  key: string | number;
   value: T;
 }

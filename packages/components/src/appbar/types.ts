@@ -14,7 +14,7 @@ export interface TopAppbarBrandProps {
 }
 
 export interface TopAppbarMenuItem {
-  key: string;
+  key: string | number;
   label: string | (() => VNode);
   to?: RouteLocationRaw;
 }
