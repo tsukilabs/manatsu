@@ -72,10 +72,6 @@ function updateValue(option: SelectOption) {
   }
 }
 
-function getOptionClassList(option: SelectOption) {
-  return [props.optionsClass, isSelected(option) && 'm-select-selected'];
-}
-
 function isSelected(option: SelectOption) {
   if (Array.isArray(model.value)) return model.value.includes(option.value);
   return option.value === model.value;
@@ -115,7 +111,7 @@ function isSelected(option: SelectOption) {
           :id="`m-select-option-${id}-${index}`"
           :key="option.key"
           role="option"
-          :class="getOptionClassList(option)"
+          :class="[optionsClass, isSelected(option) ? 'm-select-selected' : null]"
           :style="optionsStyle"
           @click="updateValue(option)"
         >
@@ -150,10 +146,6 @@ function isSelected(option: SelectOption) {
   white-space: nowrap;
 }
 
-:root {
-  --m-select-dropdown-z-index: 1100;
-}
-
 .m-select {
   @include container;
   @include flex.x-between-y-center($inline: true);
@@ -179,7 +171,7 @@ function isSelected(option: SelectOption) {
     position: fixed;
     top: v-bind('toPixel(bottom + 1)');
     left: v-bind('toPixel(left)');
-    z-index: var(--m-select-dropdown-z-index);
+    z-index: 1100;
     box-shadow:
       0 4px 6px -1px rgba(0 0 0 / 10%),
       0 2px 4px -2px rgba(0 0 0 / 10%);
@@ -193,7 +185,7 @@ function isSelected(option: SelectOption) {
   &-dropdown > li {
     @include option;
 
-    &:hover:not(.m-select-selected) {
+    @include utils.hover {
       background-color: var(--m-color-surface-container);
     }
   }

@@ -1,6 +1,6 @@
 {
   "productName": "playground",
-  "version": "0.6.26",
+  "version": "0.6.27",
   "identifier": "tsukilabs.manatsu",
   "build": {
     "beforeBuildCommand": "pnpm run build",

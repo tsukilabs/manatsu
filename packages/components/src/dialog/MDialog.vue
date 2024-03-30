@@ -118,14 +118,10 @@ watchEffect(() => {
 <style lang="scss">
 @use '@manatsu/style/mixins/flex';
 
-:root {
-  --m-dialog-z-index: 1000;
-}
-
 .m-dialog-mask {
   @include flex.center;
   position: fixed;
-  z-index: var(--m-dialog-z-index);
+  z-index: 1000;
   inset: 0;
   width: 100%;
   height: 100%;
