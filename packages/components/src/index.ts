@@ -2,6 +2,7 @@ export * from './appbar';
 export * from './button';
 export * from './card';
 export * from './checkbox';
+export * from './chip';
 export * from './dialog';
 export * from './dynamic-link';
 export * from './input-text';

@@ -1,10 +1,10 @@
-import './assets/style.css';
+import '@/assets/style.css';
 import 'manatsu/components/style';
 import '@manatsu/style/themes/mana';
+import App from '@/App.vue';
 import { createApp } from 'vue';
 import { createManatsu, registerComponents } from 'manatsu/src/index.ts';
-import App from './App.vue';
-import { router } from './routes';
+import { router } from './router';
 import { StorageKey } from './utils';
 
 const app = createApp(App);

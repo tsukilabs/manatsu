@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { StorageKey } from '@/utils';
 import { startCase } from 'lodash-es';
 import { injectStrict, symbols } from 'manatsu/src/index.ts';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
@@ -8,8 +9,7 @@ import {
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
-import { StorageKey } from './utils';
-import { components } from './routes';
+import { components } from './router';
 
 const route = useRoute();
 const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
@@ -19,6 +19,7 @@ const darkMode = injectStrict(symbols.darkMode);
 
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
+  { key: 'test', label: 'Test', to: '/test' },
   { key: 'about', label: 'About', to: '/about' }
 ];
 
@@ -102,3 +103,4 @@ function createUnhandledError() {
     </template>
   </m-scaffold>
 </template>
+./router

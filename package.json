@@ -32,7 +32,7 @@
     "test:crate": "cargo test -p manatsu && cargo test -p manatsu-dev",
     "test:package": "vitest --run",
     "type-check": "pnpm run -r --bail --parallel --aggregate-output type-check",
-    "ui": "vitest --ui --watch",
+    "ui": "vitest --ui --watch --no-open --silent",
     "update": "miho update major -t"
   },
   "devDependencies": {

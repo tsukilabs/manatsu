@@ -14,6 +14,10 @@ export const components: RouteRecordRaw[] = [
     component: () => import('../views/components/CheckboxView.vue')
   },
   {
+    path: '/components/chip',
+    component: () => import('../views/components/ChipView.vue')
+  },
+  {
     path: '/components/dialog',
     component: () => import('../views/components/DialogView.vue')
   },
@@ -47,6 +51,7 @@ export const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: () => import('../views/HomeView.vue') },
+    { path: '/test', component: () => import('../views/TestView.vue') },
     { path: '/about', component: () => import('../views/AboutView.vue') },
     ...components
   ]
