@@ -142,6 +142,7 @@ function isSelected(option: SelectOption) {
 }
 
 @mixin option {
+  @include flex.x-start-y-center($inline: true);
   padding: 0.4rem 0.75em;
   width: 100%;
   overflow-x: hidden;
@@ -153,7 +154,6 @@ function isSelected(option: SelectOption) {
   @include container;
   @include flex.x-between-y-center($inline: true);
   @include transition.ease-in-out(border-color box-shadow, 0.2s);
-  min-height: calc(1rem + (2 * 0.4rem));
 
   &-disabled {
     opacity: 0.5;
@@ -167,6 +167,7 @@ function isSelected(option: SelectOption) {
 
   &-label {
     @include option;
+    min-height: calc(1rem + (2 * 0.75em));
   }
 
   &-dropdown {
