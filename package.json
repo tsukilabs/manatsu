@@ -43,7 +43,7 @@
     "@tb-dev/utility-types": "^1.2.4",
     "@tb-dev/utils": "^1.4.3",
     "@tb-dev/vue-import-config": "^1.0.5",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitest/browser": "^1.4.0",
     "@vitest/coverage-istanbul": "^1.4.0",

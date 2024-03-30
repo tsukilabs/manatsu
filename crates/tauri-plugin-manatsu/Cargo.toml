@@ -10,17 +10,8 @@ license = "MIT"
 edition = "2021"
 rust-version = "1.76"
 readme = "../../README.md"
-categories = [
-    "gui",
-    "web-programming",
-]
-keywords = [
-    "manatsu",
-    "plugin",
-    "tauri",
-    "tauri-plugin",
-    "vue",
-]
+categories = ["gui", "web-programming"]
+keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 
 [dependencies]
 anyhow = "1.0.81"

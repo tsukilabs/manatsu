@@ -1,4 +1,22 @@
-/// Execute `cargo` with the specified arguments.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! command {
+  ($program:expr) => {{
+    let mut cmd = if cfg!(windows) {
+      tokio::process::Command::new("cmd")
+    } else {
+      tokio::process::Command::new($program)
+    };
+
+    if cfg!(windows) {
+      cmd.arg("/C").arg($program);
+    };
+
+    cmd
+  }};
+}
+
+#[doc(hidden)]
 #[macro_export]
 macro_rules! cargo {
   ($args:expr) => {{
@@ -13,11 +31,11 @@ macro_rules! cargo {
   }};
 }
 
-/// Execute `pnpm` with the specified arguments.
+#[doc(hidden)]
 #[macro_export]
 macro_rules! pnpm {
   ($args:expr) => {{
-    miho::win_cmd!("pnpm").args($args)
+    $crate::command!("pnpm").args($args)
   }};
 
   ($( $arg:literal ),*) => {{

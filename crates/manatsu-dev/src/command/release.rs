@@ -1,10 +1,9 @@
+use crate::bail_on_output_error;
 use crate::package::Package;
 use crate::prelude::*;
 use crate::utils::Config;
 use clap::Args;
-use miho::git::{self, Commit, Git};
 use reqwest::{header, Client};
-use std::process::Stdio;
 
 #[derive(Debug, Args)]
 pub struct Release {
@@ -55,7 +54,7 @@ impl super::Command for Release {
 }
 
 async fn prepare() -> Result<()> {
-  if let Ok(true) = git::is_dirty().await {
+  if let Ok(true) = is_dirty().await {
     bail!("{}", "working directory is dirty".red());
   }
 
@@ -116,14 +115,35 @@ where
 }
 
 async fn commit_if_dirty(message: &str) -> Result<()> {
-  if let Ok(true) = git::is_dirty().await {
-    Commit::new(message)
-      .no_verify()
+  if let Ok(true) = is_dirty().await {
+    Command::new("git")
+      .args(["commit", "-m", message, "--no-verify", "--all"])
       .stderr(Stdio::null())
       .stdout(Stdio::null())
-      .spawn()
+      .spawn()?
+      .wait()
       .await?;
   }
 
   Ok(())
+}
+
+async fn is_dirty() -> Result<bool> {
+  let diff = Command::new("git").arg("diff").output().await?;
+  bail_on_output_error!(diff);
+
+  if !diff.stdout.is_empty() {
+    return Ok(true);
+  }
+
+  let output = Command::new("git")
+    .args(["status", "--porcelain"])
+    .output()
+    .await?;
+
+  bail_on_output_error!(output);
+
+  let is_empty = output.stdout.is_empty();
+
+  Ok(!is_empty)
 }

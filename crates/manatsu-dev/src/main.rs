@@ -1,6 +1,7 @@
 #![allow(clippy::missing_panics_doc)]
 
 mod command;
+mod macros;
 mod package;
 mod prelude;
 mod utils;

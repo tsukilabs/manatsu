@@ -3,7 +3,7 @@ import { toArray } from '@tb-dev/utils/array';
 import { isEmpty, toPixel } from '@tb-dev/utils';
 import { injectStrict, symbols } from '@manatsu/shared';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
-import { type VNode, computed, ref, shallowRef, toValue, watch } from 'vue';
+import { type VNode, computed, ref, shallowRef, toValue, triggerRef, watch } from 'vue';
 import { getUniqueId } from './utils';
 import MSelectTrigger from './MSelectTrigger.vue';
 import type { SelectOption, SelectProps } from './types';
@@ -66,6 +66,9 @@ function updateValue(option: SelectOption) {
     }
 
     model.value = value;
+
+    // Selected options won't update if the model is a shallowRef.
+    triggerRef(model);
   } else {
     model.value = option.value;
     visible.value = false;

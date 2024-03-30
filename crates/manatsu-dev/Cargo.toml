@@ -22,7 +22,6 @@ globset = "0.4.14"
 indoc = "2.0.5"
 inquire = "0.7.4"
 itertools = "0.12.1"
-miho = "4.3.2"
 regex = "1.10.4"
 walkdir = "2.5.0"
 natord = "1.0.9"
@@ -45,14 +44,8 @@ features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.12.2"
-features = [
-    "gzip",
-    "json",
-]
+features = ["gzip", "json"]
 
 [dependencies.tokio]
 version = "1.37.0"
-features = [
-    "macros",
-    "rt-multi-thread",
-]
+features = ["macros", "process", "rt-multi-thread"]
