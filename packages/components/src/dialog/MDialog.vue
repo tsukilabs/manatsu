@@ -148,7 +148,6 @@ watchEffect(() => {
 
   &-header {
     @include flex.x-start-y-center;
-    cursor: v-bind("dragHandle === headerRef ? 'move' : 'auto'");
     padding: 1rem;
     width: 100%;
     font-size: 1.25rem;
