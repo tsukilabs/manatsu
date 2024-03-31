@@ -1,8 +1,7 @@
 use crate::prelude::*;
 use chrono::{DateTime, FixedOffset};
 use std::cmp::Ordering;
-use std::fs;
-use tauri::{AppHandle, Manager, Runtime};
+use std::future::Future;
 
 pub mod date {
   use chrono::Local;
@@ -92,20 +91,20 @@ pub trait Log {
     Ok(path)
   }
 
-  fn read<R: Runtime>(app: &AppHandle<R>) -> Result<Vec<Self>>
+  fn read<R: Runtime>(app: &AppHandle<R>) -> impl Future<Output = Result<Vec<Self>>> + Send
   where
     Self: for<'de> Deserialize<'de>;
 
-  fn save<R: Runtime>(self, app: &AppHandle<R>) -> Result<()>;
+  fn save<R: Runtime>(self, app: &AppHandle<R>) -> impl Future<Output = Result<()>> + Send;
 }
 
 impl Log for Error {
-  fn read<R: Runtime>(app: &AppHandle<R>) -> Result<Vec<Self>>
+  async fn read<R: Runtime>(app: &AppHandle<R>) -> Result<Vec<Self>>
   where
     Self: for<'de> Deserialize<'de>,
   {
     let path = Self::path(app)?;
-    let logs = fs::read(path).unwrap_or_default();
+    let logs = fs::read(path).await.unwrap_or_default();
 
     let mut logs: Vec<Self> = serde_json::from_slice(&logs)?;
     logs.sort_unstable_by(|a, b| b.cmp(a));
@@ -113,7 +112,7 @@ impl Log for Error {
     Ok(logs)
   }
 
-  fn save<R>(mut self, app: &AppHandle<R>) -> Result<()>
+  async fn save<R>(mut self, app: &AppHandle<R>) -> Result<()>
   where
     R: Runtime,
   {
@@ -140,16 +139,16 @@ impl Log for Error {
 
     match log_dir.try_exists() {
       Ok(true) => {}
-      Ok(false) => fs::create_dir_all(log_dir)?,
+      Ok(false) => fs::create_dir_all(log_dir).await?,
       Err(e) => return Err(e.into()),
     }
 
-    let logs = fs::read(&path).unwrap_or_default();
+    let logs = fs::read(&path).await.unwrap_or_default();
     let mut logs: Vec<Error> = serde_json::from_slice(&logs).unwrap_or_default();
     logs.push(self);
 
     let logs = serde_json::to_vec_pretty(&logs)?;
-    fs::write(path, logs)?;
+    fs::write(path, logs).await?;
 
     Ok(())
   }

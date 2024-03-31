@@ -1,30 +1,19 @@
 mod template;
 
 use crate::prelude::*;
-use globset::{Glob, GlobSet, GlobSetBuilder};
+use semver::Version;
 use std::io::Cursor;
-use std::{env, fs};
+use taplo::formatter;
 pub use template::Template;
 use walkdir::WalkDir;
 use zip::ZipArchive;
-
-const DEFAULT_VERSION: &str = "0.1.0";
-
-macro_rules! clone_or_empty_string {
-  ($value:expr) => {
-    if let Some(ref value) = $value {
-      value.clone()
-    } else {
-      String::default()
-    }
-  };
-}
 
 pub struct Project {
   pub name: String,
   pub description: Option<String>,
   pub force: bool,
   pub template: Template,
+  pub version: Version,
 }
 
 impl Project {
@@ -77,7 +66,6 @@ impl Project {
 
     for entry in fs::read_dir(&dir)?.flatten() {
       let entry_path = entry.path();
-
       if globset.is_match(&entry_path) {
         remove_entry(entry_path)?;
       } else {
@@ -93,10 +81,8 @@ impl Project {
 
   fn find_extracted_dir(&self, path: &Path) -> Result<PathBuf> {
     let template_name = self.template.to_string();
-    for entry in fs::read_dir(path)? {
-      let entry = entry?;
+    for entry in fs::read_dir(path)?.flatten() {
       let entry_path = entry.path();
-
       if entry.metadata()?.is_dir() {
         let file_name = entry.file_name();
         if matches!(file_name.to_str(), Some(n) if n.contains(&template_name)) {
@@ -113,7 +99,7 @@ impl Project {
   fn update_project_metadata(&self, path: &Path) -> Result<()> {
     self.update_package_json(path)?;
 
-    if matches!(self.template, Template::Tauri) {
+    if self.template.is_tauri() {
       self.update_cargo_toml(path)?;
       self.update_tauri_conf(path)?;
     }
@@ -135,8 +121,8 @@ impl Project {
     }
 
     update!("name", self.name.clone());
-    update!("version", DEFAULT_VERSION.to_string());
-    update!("description", clone_or_empty_string!(self.description));
+    update!("version", self.version.to_string());
+    update!("description", self.description.clone().unwrap_or_default());
 
     let json = serde_json::to_string_pretty(&package_json)?;
     fs::write(path, json)?;
@@ -164,29 +150,16 @@ impl Project {
         };
       }
 
-      macro_rules! update_workspace {
-        ($key:literal, $value:expr) => {
-          if cargo_toml["workspace"]["package"].get($key).is_some() {
-            cargo_toml["workspace"]["package"][$key] = toml::Value::String($value);
-          }
-        };
-      }
-
       if cargo_toml.get("package").is_some() {
         update!("name", self.name.clone());
-        update!("version", DEFAULT_VERSION.to_string());
-        update!("description", clone_or_empty_string!(&self.description));
+        update!("version", self.version.to_string());
+        update!("description", self.description.clone().unwrap_or_default());
       }
 
-      if let Some(workspace) = cargo_toml.get("workspace") {
-        if workspace.get("package").is_some() {
-          update_workspace!("name", self.name.clone());
-          update_workspace!("version", DEFAULT_VERSION.to_string());
-          update_workspace!("description", clone_or_empty_string!(&self.description));
-        }
-      }
+      let options = formatter::Options::default();
+      let cargo_toml = toml::to_string(&cargo_toml)?;
+      let cargo_toml = formatter::format(&cargo_toml, options);
 
-      let cargo_toml = toml::to_string_pretty(&cargo_toml)?;
       fs::write(path, cargo_toml)?;
     }
 
@@ -205,10 +178,10 @@ impl Project {
     }
 
     update!("productName", self.name.clone());
-    update!("version", DEFAULT_VERSION.to_string());
+    update!("version", self.version.to_string());
 
     let title = self.name.to_case(Case::Title);
-    tauri_conf["tauri"]["windows"][0]["title"] = serde_json::Value::String(title);
+    tauri_conf["app"]["windows"][0]["title"] = serde_json::Value::String(title);
 
     let tauri_conf = serde_json::to_string_pretty(&tauri_conf)?;
     fs::write(path, tauri_conf)?;
@@ -226,8 +199,6 @@ impl Project {
     Ok(())
   }
 
-  /// Determine whether the project name is valid.
-  #[allow(clippy::missing_panics_doc)]
   pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
     let regex = Regex::new(Project::NAME_REGEX).unwrap();
     regex.is_match(name.as_ref())
@@ -271,15 +242,4 @@ fn remove_entry<P: AsRef<Path>>(path: P) -> Result<()> {
   }
 
   Ok(())
-}
-
-#[cfg(test)]
-mod tests {
-  use super::Project;
-
-  #[test]
-  fn should_determine_if_name_is_valid() {
-    assert!(Project::is_valid("my-project"));
-    assert!(!Project::is_valid("真夏"));
-  }
 }

@@ -1,4 +1,3 @@
-use crate::bail_on_output_error;
 use crate::package::Package;
 use crate::prelude::*;
 use crate::utils::Config;
@@ -15,7 +14,6 @@ pub struct Release {
 }
 
 impl super::Command for Release {
-  /// Release a new version, publishing all the public packages.
   async fn execute(self) -> Result<()> {
     prepare().await?;
 
@@ -29,9 +27,7 @@ impl super::Command for Release {
           .wait()
           .await?;
 
-        if !status.success() {
-          bail!("{}", "failed to publish packages".red());
-        }
+        bail_on_status_err!(status, "{}", "failed to publish packages".red());
       }
 
       if !self.only_package {
@@ -42,9 +38,7 @@ impl super::Command for Release {
             .wait()
             .await?;
 
-          if !status.success() {
-            bail!("{}", "failed to publish crates".red());
-          }
+          bail_on_status_err!(status, "{}", "failed to publish crates".red());
         }
       }
     }
@@ -68,10 +62,7 @@ async fn prepare() -> Result<()> {
   commit_if_dirty("chore: update tailwind classes").await?;
 
   let status = pnpm!("run", "format").spawn()?.wait().await?;
-  if !status.success() {
-    bail!("{}", "failed to format files".red());
-  }
-
+  bail_on_status_err!(status, "{}", "failed to format files".red());
   commit_if_dirty("style: format files").await?;
 
   Ok(())
@@ -130,7 +121,7 @@ async fn commit_if_dirty(message: &str) -> Result<()> {
 
 async fn is_dirty() -> Result<bool> {
   let diff = Command::new("git").arg("diff").output().await?;
-  bail_on_output_error!(diff);
+  bail_on_output_err!(diff);
 
   if !diff.stdout.is_empty() {
     return Ok(true);
@@ -141,7 +132,7 @@ async fn is_dirty() -> Result<bool> {
     .output()
     .await?;
 
-  bail_on_output_error!(output);
+  bail_on_output_err!(output);
 
   let is_empty = output.stdout.is_empty();
 

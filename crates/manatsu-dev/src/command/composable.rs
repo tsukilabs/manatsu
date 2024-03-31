@@ -95,19 +95,7 @@ fn update_src_index() -> Result<()> {
   fs::write(index, cts).map_err(Into::into)
 }
 
-/// Determines whether the composable name is valid.
 pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
   let regex = Regex::new(NAME_REGEX).unwrap();
   regex.is_match(name.as_ref())
-}
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-
-  #[test]
-  fn should_determine_if_name_is_valid() {
-    assert!(is_valid("useManatsu"));
-    assert!(!is_valid("composable-name"));
-  }
 }

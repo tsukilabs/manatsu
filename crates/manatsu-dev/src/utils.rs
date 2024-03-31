@@ -31,10 +31,7 @@ impl<'a> Formatter<'a> {
 
     println!("{}", "formatting files...".bright_cyan());
     let status = pnpm!(args).spawn()?.wait().await?;
-
-    if !status.success() {
-      bail!("{}", "failed to format files".red());
-    }
+    bail_on_status_err!(status, "{}", "failed to format files".red());
 
     Ok(())
   }
@@ -72,10 +69,7 @@ impl<'a> Linter<'a> {
 
     println!("{}", "linting files...".bright_cyan());
     let status = pnpm!(args).spawn()?.wait().await?;
-
-    if !status.success() {
-      bail!("{}", "failed to lint files".red());
-    }
+    bail_on_status_err!(status, "{}", "failed to lint files".red());
 
     Ok(())
   }

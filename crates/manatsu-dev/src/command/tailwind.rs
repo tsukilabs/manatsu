@@ -5,7 +5,6 @@ use walkdir::WalkDir;
 // https://regex101.com/r/mdP6Q7
 const CLASS_REGEX: &str = r#":class="(?:.*\.)?([a-zA-Z]+Class)""#;
 
-/// Collect all non-standard class attributes used by Manatsu.
 pub fn tailwind() -> Result<()> {
   let start = Instant::now();
 

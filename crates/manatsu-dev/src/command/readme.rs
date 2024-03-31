@@ -1,7 +1,6 @@
 use crate::package;
 use crate::prelude::*;
 
-/// Synchronizes all README files of the monorepo.
 pub fn readme() -> Result<()> {
   let start = Instant::now();
 

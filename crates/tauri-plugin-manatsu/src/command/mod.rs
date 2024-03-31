@@ -1,11 +1,10 @@
-pub mod color;
 pub mod log;
 
-use manatsu::log::VersionSnapshot;
+use crate::log::VersionSnapshot;
 
 #[tauri::command]
 pub async fn manatsu_version() -> String {
-  manatsu::VERSION.into()
+  crate::VERSION.into()
 }
 
 #[tauri::command]

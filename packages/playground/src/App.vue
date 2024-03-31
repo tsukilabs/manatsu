@@ -2,8 +2,6 @@
 import { StorageKey } from '@/utils';
 import { startCase } from 'lodash-es';
 import { injectStrict, symbols } from 'manatsu/src/index.ts';
-import { Command } from '@manatsu/tauri-plugin/src/index.ts';
-import { useInvoke } from '@manatsu/composables/src/index.ts';
 import {
   MTopAppbar,
   type SidebarItem,
@@ -40,11 +38,6 @@ const sidebarItemStyle = computed<CSSProperties | null>(() => {
   return { width: `${width}px` };
 });
 
-const { state: color, execute: getColor } = useInvoke<string>(
-  Command.RandomStringHexColor,
-  'initial'
-);
-
 function createUnhandledError() {
   return invoke('unhandled_error');
 }
@@ -75,9 +68,6 @@ function createUnhandledError() {
             <m-button @click="createUnhandledError">Error</m-button>
             <m-button @click="$mana.toggleDarkMode()">
               {{ darkMode ? 'Light' : 'Dark' }}
-            </m-button>
-            <m-button class="transition-none" :style="{ color }" @click="getColor">
-              {{ color }}
             </m-button>
           </div>
         </template>
