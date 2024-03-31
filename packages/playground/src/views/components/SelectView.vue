@@ -63,7 +63,7 @@ function generateOptions(amount: number, long = false, object = false) {
     <div class="flex w-56 flex-col gap-2">
       <div>{{ value3 }}</div>
       <div>
-        <m-select v-model="value3" :options="options3" class="w-56" />
+        <m-select v-model="value3" :options="options3" :hide-on-window-blur="false" class="w-56" />
       </div>
     </div>
     <div class="flex w-56 flex-col gap-2">

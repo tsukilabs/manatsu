@@ -6,6 +6,7 @@ import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { type VNode, computed, ref, shallowRef, toValue, triggerRef, watch } from 'vue';
 import { getUniqueId } from './utils';
 import MSelectTrigger from './MSelectTrigger.vue';
+import MEllipsis from '../ellipsis/MEllipsis.vue';
 import type { SelectOption, SelectProps } from './types';
 
 const model = defineModel<any>();
@@ -84,7 +85,7 @@ function isSelected(option: SelectOption) {
 <template>
   <div :id="`m-select-${id}`" ref="selectRef" :class="classList">
     <!-- eslint-disable vue/v-bind-style -->
-    <span
+    <div
       role="combobox"
       aria-haspopup="listbox"
       :aria-expanded="visible"
@@ -95,8 +96,8 @@ function isSelected(option: SelectOption) {
       :style="labelStyle"
       @click="toggle"
     >
-      {{ label }}
-    </span>
+      <m-ellipsis>{{ label }}</m-ellipsis>
+    </div>
 
     <m-select-trigger @click="toggle" />
 
@@ -119,7 +120,7 @@ function isSelected(option: SelectOption) {
           @click="updateValue(option)"
         >
           <slot name="option" v-bind="option">
-            <span>{{ transform(option.value) }}</span>
+            <m-ellipsis>{{ transform(option.value) }}</m-ellipsis>
           </slot>
         </li>
       </ul>
@@ -142,18 +143,15 @@ function isSelected(option: SelectOption) {
 }
 
 @mixin option {
-  @include flex.x-start-y-center($inline: true);
+  @include flex.x-start-y-center;
   padding: 0.4rem 0.75em;
-  width: 100%;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .m-select {
   @include container;
-  @include flex.x-between-y-center($inline: true);
+  @include flex.x-between-y-center;
   @include transition.ease-in-out(border-color box-shadow, 0.2s);
+  cursor: pointer;
 
   &-disabled {
     opacity: 0.5;
@@ -188,6 +186,7 @@ function isSelected(option: SelectOption) {
 
   &-dropdown > li {
     @include option;
+    cursor: pointer;
 
     @include utils.hover {
       background-color: var(--m-color-surface-container);

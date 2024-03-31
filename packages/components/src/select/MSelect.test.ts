@@ -81,7 +81,7 @@ describe('select', () => {
     const wrapper = mount(MSelect, {
       attachTo: document.body,
       props: {
-        options: generateOptions(5, true),
+        options: generateOptions(5),
         modelValue: null,
         transform: () => 'TEST'
       }
@@ -136,17 +136,10 @@ describe('select', () => {
   });
 });
 
-function generateOptions(amount: number, object = false) {
-  const array: any[] = [];
-
+function generateOptions(amount: number) {
+  const array: string[] = [];
   for (let i = 0; i < amount; i++) {
-    const text = `Option ${i + 1}`;
-
-    if (object) {
-      array.push({ test: text });
-    } else {
-      array.push(text);
-    }
+    array.push(`Option ${i + 1}`);
   }
 
   return array.map<SelectOption>((value) => ({ key: value, value }));

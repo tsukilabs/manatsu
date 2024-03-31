@@ -22,6 +22,10 @@ export const components: RouteRecordRaw[] = [
     component: () => import('../views/components/DialogView.vue')
   },
   {
+    path: '/components/ellipsis',
+    component: () => import('../views/components/EllipsisView.vue')
+  },
+  {
     path: '/components/input-text',
     component: () => import('../views/components/InputTextView.vue')
   },
