@@ -57,11 +57,6 @@ function remove() {
     gap: 0.5rem;
   }
 
-  &-filled {
-    background-color: var(--m-color-primary);
-    color: var(--m-color-on-primary);
-  }
-
   &-elevated {
     @include shadow.box-15;
     background-color: var(--m-color-surface-container-low);

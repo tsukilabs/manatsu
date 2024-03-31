@@ -13,6 +13,8 @@
 
 .m-chip-close {
   @include flex.center;
+  border-radius: var(--m-border-radius);
+  background-color: transparent;
   width: 1rem;
 
   & > svg {

@@ -2,7 +2,7 @@
 import { capitalize } from 'lodash-es';
 import type { ChipVariant } from 'manatsu/src/index.ts';
 
-const variants: ChipVariant[] = ['filled', 'elevated', 'outlined'];
+const variants: ChipVariant[] = ['elevated', 'outlined'];
 </script>
 
 <template>

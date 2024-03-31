@@ -1,4 +1,4 @@
-export type ChipVariant = 'filled' | 'elevated' | 'outlined';
+export type ChipVariant = 'elevated' | 'outlined';
 
 export interface ChipProps {
   label?: string;

@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { toPixel } from '@tb-dev/utils';
 import { toArray } from '@tb-dev/utils/array';
-import { isEmpty, toPixel } from '@tb-dev/utils';
 import { injectStrict, symbols } from '@manatsu/shared';
-import { onClickOutside, useElementBounding } from '@vueuse/core';
-import { type VNode, computed, ref, shallowRef, toValue, triggerRef, watch } from 'vue';
+import { type VNode, computed, ref, shallowRef, watch } from 'vue';
+import { onClickOutside, useElementBounding, watchDeep } from '@vueuse/core';
 import { getUniqueId } from './utils';
+import MSelectLabel from './MSelectLabel.vue';
+import MSelectChips from './MSelectChips.vue';
 import MSelectTrigger from './MSelectTrigger.vue';
 import MEllipsis from '../ellipsis/MEllipsis.vue';
 import type { SelectOption, SelectProps } from './types';
@@ -12,6 +14,7 @@ import type { SelectOption, SelectProps } from './types';
 const model = defineModel<any>();
 
 const props = withDefaults(defineProps<SelectProps>(), {
+  chips: true,
   hideOnWindowBlur: true,
   transform: String
 });
@@ -24,14 +27,7 @@ const id = getUniqueId();
 
 // Select
 const selectRef = shallowRef<HTMLElement | null>(null);
-const { width, bottom, left, update } = useElementBounding(selectRef);
-
-const label = computed(() => {
-  const value = toValue(model.value);
-  if (isEmpty(value)) return props.placeholder;
-  if (Array.isArray(value)) return value.map(props.transform).join(', ');
-  return props.transform(value);
-});
+const { width, bottom, left, update: updateBounding } = useElementBounding(selectRef);
 
 const classList = computed(() => {
   return ['m-select', props.disabled && 'm-select-disabled'];
@@ -49,7 +45,7 @@ watch(windowFocus, (hasFocus) => {
 
 const windowHeight = injectStrict(symbols.windowHeight);
 const windowWidth = injectStrict(symbols.windowWidth);
-watch([visible, model, label, windowHeight, windowWidth], () => update(), { deep: false });
+watchDeep([visible, model, windowHeight, windowWidth], updateBounding);
 
 function toggle() {
   if (props.disabled) return;
@@ -67,9 +63,6 @@ function updateValue(option: SelectOption) {
     }
 
     model.value = value;
-
-    // Selected options won't update if the model is a shallowRef.
-    triggerRef(model);
   } else {
     model.value = option.value;
     visible.value = false;
@@ -86,17 +79,18 @@ function isSelected(option: SelectOption) {
   <div :id="`m-select-${id}`" ref="selectRef" :class="classList">
     <!-- eslint-disable vue/v-bind-style -->
     <div
+      class="m-select-label"
+      :class="labelClass"
+      :style="labelStyle"
       role="combobox"
       aria-haspopup="listbox"
       :aria-expanded="visible"
       :aria-controls="`m-select-dropdown-${id}`"
       :aria-label="ariaLabel"
-      class="m-select-label"
-      :class="labelClass"
-      :style="labelStyle"
       @click="toggle"
     >
-      <m-ellipsis>{{ label }}</m-ellipsis>
+      <m-select-chips v-if="multiple && chips" v-model="model" :placeholder :transform />
+      <m-select-label v-else v-model="model" :placeholder :transform />
     </div>
 
     <m-select-trigger @click="toggle" />
