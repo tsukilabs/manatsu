@@ -1,7 +1,14 @@
 import type { StyleValue } from 'vue';
 
+export interface SelectOption<T = any> {
+  key: string | number;
+  value: T;
+}
+
 export interface SelectProps {
   ariaLabel?: string;
+  /** @default true */
+  chips?: boolean;
   disabled?: boolean;
   dropdownClass?: string;
   dropdownStyle?: StyleValue;
@@ -18,7 +25,12 @@ export interface SelectProps {
   transform?: (value: any) => string;
 }
 
-export interface SelectOption<T = any> {
-  key: string | number;
-  value: T;
+export interface SelectLabelProps {
+  placeholder?: SelectProps['placeholder'];
+  transform: NonNullable<SelectProps['transform']>;
+}
+
+export interface SelectChipsProps {
+  placeholder?: SelectProps['placeholder'];
+  transform: NonNullable<SelectProps['transform']>;
 }

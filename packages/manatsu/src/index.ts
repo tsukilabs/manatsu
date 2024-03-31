@@ -4,9 +4,11 @@ import {
   MButton,
   MCard,
   MCheckbox,
+  MChip,
   MDialog,
   MDynamicDialog,
   MDynamicLink,
+  MEllipsis,
   MInputText,
   MRadio,
   MScaffold,
@@ -26,9 +28,11 @@ declare module 'vue' {
     MButton: typeof MButton;
     MCard: typeof MCard;
     MCheckbox: typeof MCheckbox;
+    MChip: typeof MChip;
     MDialog: typeof MDialog;
     MDynamicDialog: typeof MDynamicDialog;
     MDynamicLink: typeof MDynamicLink;
+    MEllipsis: typeof MEllipsis;
     MInputText: typeof MInputText;
     MRadio: typeof MRadio;
     MScaffold: typeof MScaffold;
@@ -45,6 +49,7 @@ export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/inde
 export type {
   ButtonVariant,
   CardVariant,
+  ChipVariant,
   ColumnSortFn,
   SelectOption,
   SidebarItem,
@@ -73,9 +78,11 @@ export {
   MButton,
   MCard,
   MCheckbox,
+  MChip,
   MDialog,
   MDynamicDialog,
   MDynamicLink,
+  MEllipsis,
   MInputText,
   MRadio,
   MScaffold,
@@ -115,9 +122,11 @@ export function registerComponents(app: App) {
   app.component('MButton', MButton);
   app.component('MCard', MCard);
   app.component('MCheckbox', MCheckbox);
+  app.component('MChip', MChip);
   app.component('MDialog', MDialog);
   app.component('MDynamicDialog', MDynamicDialog);
   app.component('MDynamicLink', MDynamicLink);
+  app.component('MEllipsis', MEllipsis);
   app.component('MInputText', MInputText);
   app.component('MRadio', MRadio);
   app.component('MScaffold', MScaffold);

@@ -5,6 +5,7 @@ export * from './checkbox';
 export * from './chip';
 export * from './dialog';
 export * from './dynamic-link';
+export * from './ellipsis';
 export * from './input-text';
 export * from './radio';
 export * from './scaffold';

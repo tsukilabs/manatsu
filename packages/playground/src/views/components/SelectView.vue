@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { SelectOption } from '@manatsu/components/src/index.ts';
 
-const value1 = shallowRef<string | null>(null);
+const value1 = ref<string | null>(null);
 const options1 = shallowRef<SelectOption[]>(generateOptions(5, false, true));
 
-const value2 = shallowRef<string | null>(null);
+const value2 = ref<string | null>(null);
 const options2 = shallowRef<SelectOption[]>(generateOptions(100));
 
 const value3 = ref<string | null>(null);
-const options3 = ref<SelectOption[]>(generateOptions(30, true));
+const options3 = shallowRef<SelectOption[]>(generateOptions(30, true));
 
 function generateOptions(amount: number, long = false, object = false) {
   const array: any[] = [];
@@ -53,6 +53,8 @@ function generateOptions(amount: number, long = false, object = false) {
         <m-select
           v-model="value2"
           :options="options2"
+          multiple
+          :chips="false"
           :hide-on-window-blur="false"
           :transform="(value: string) => value.toUpperCase()"
           placeholder="Select a value"
@@ -63,7 +65,7 @@ function generateOptions(amount: number, long = false, object = false) {
     <div class="flex w-56 flex-col gap-2">
       <div>{{ value3 }}</div>
       <div>
-        <m-select v-model="value3" :options="options3" class="w-56" />
+        <m-select v-model="value3" :options="options3" :hide-on-window-blur="false" class="w-56" />
       </div>
     </div>
     <div class="flex w-56 flex-col gap-2">

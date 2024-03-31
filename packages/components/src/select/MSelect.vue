@@ -1,16 +1,20 @@
 <script setup lang="ts">
+import { toPixel } from '@tb-dev/utils';
 import { toArray } from '@tb-dev/utils/array';
-import { isEmpty, toPixel } from '@tb-dev/utils';
 import { injectStrict, symbols } from '@manatsu/shared';
-import { onClickOutside, useElementBounding } from '@vueuse/core';
-import { type VNode, computed, ref, shallowRef, toValue, triggerRef, watch } from 'vue';
+import { type VNode, computed, ref, shallowRef, watch } from 'vue';
+import { onClickOutside, useElementBounding, watchDeep } from '@vueuse/core';
 import { getUniqueId } from './utils';
+import MSelectLabel from './MSelectLabel.vue';
+import MSelectChips from './MSelectChips.vue';
 import MSelectTrigger from './MSelectTrigger.vue';
+import MEllipsis from '../ellipsis/MEllipsis.vue';
 import type { SelectOption, SelectProps } from './types';
 
 const model = defineModel<any>();
 
 const props = withDefaults(defineProps<SelectProps>(), {
+  chips: true,
   hideOnWindowBlur: true,
   transform: String
 });
@@ -23,14 +27,7 @@ const id = getUniqueId();
 
 // Select
 const selectRef = shallowRef<HTMLElement | null>(null);
-const { width, bottom, left, update } = useElementBounding(selectRef);
-
-const label = computed(() => {
-  const value = toValue(model.value);
-  if (isEmpty(value)) return props.placeholder;
-  if (Array.isArray(value)) return value.map(props.transform).join(', ');
-  return props.transform(value);
-});
+const { width, bottom, left, update: updateBounding } = useElementBounding(selectRef);
 
 const classList = computed(() => {
   return ['m-select', props.disabled && 'm-select-disabled'];
@@ -48,7 +45,7 @@ watch(windowFocus, (hasFocus) => {
 
 const windowHeight = injectStrict(symbols.windowHeight);
 const windowWidth = injectStrict(symbols.windowWidth);
-watch([visible, model, label, windowHeight, windowWidth], () => update(), { deep: false });
+watchDeep([visible, model, windowHeight, windowWidth], updateBounding);
 
 function toggle() {
   if (props.disabled) return;
@@ -66,9 +63,6 @@ function updateValue(option: SelectOption) {
     }
 
     model.value = value;
-
-    // Selected options won't update if the model is a shallowRef.
-    triggerRef(model);
   } else {
     model.value = option.value;
     visible.value = false;
@@ -84,19 +78,20 @@ function isSelected(option: SelectOption) {
 <template>
   <div :id="`m-select-${id}`" ref="selectRef" :class="classList">
     <!-- eslint-disable vue/v-bind-style -->
-    <span
+    <div
+      class="m-select-label"
+      :class="labelClass"
+      :style="labelStyle"
       role="combobox"
       aria-haspopup="listbox"
       :aria-expanded="visible"
       :aria-controls="`m-select-dropdown-${id}`"
       :aria-label="ariaLabel"
-      class="m-select-label"
-      :class="labelClass"
-      :style="labelStyle"
       @click="toggle"
     >
-      {{ label }}
-    </span>
+      <m-select-chips v-if="multiple && chips" v-model="model" :placeholder :transform />
+      <m-select-label v-else v-model="model" :placeholder :transform />
+    </div>
 
     <m-select-trigger @click="toggle" />
 
@@ -119,7 +114,7 @@ function isSelected(option: SelectOption) {
           @click="updateValue(option)"
         >
           <slot name="option" v-bind="option">
-            <span>{{ transform(option.value) }}</span>
+            <m-ellipsis>{{ transform(option.value) }}</m-ellipsis>
           </slot>
         </li>
       </ul>
@@ -142,18 +137,15 @@ function isSelected(option: SelectOption) {
 }
 
 @mixin option {
-  @include flex.x-start-y-center($inline: true);
+  @include flex.x-start-y-center;
   padding: 0.4rem 0.75em;
-  width: 100%;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .m-select {
   @include container;
-  @include flex.x-between-y-center($inline: true);
+  @include flex.x-between-y-center;
   @include transition.ease-in-out(border-color box-shadow, 0.2s);
+  cursor: pointer;
 
   &-disabled {
     opacity: 0.5;
@@ -188,6 +180,7 @@ function isSelected(option: SelectOption) {
 
   &-dropdown > li {
     @include option;
+    cursor: pointer;
 
     @include utils.hover {
       background-color: var(--m-color-surface-container);
