@@ -18,7 +18,7 @@ impl Template {
 
   /// Download a Manatsu template as bytes.
   pub async fn download(&self) -> Result<Bytes> {
-    let client = Client::builder().gzip(true).build()?;
+    let client = Client::builder().brotli(true).gzip(true).build()?;
     let template_url = self.url();
 
     let response = client
