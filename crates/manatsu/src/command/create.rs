@@ -1,13 +1,18 @@
-use anyhow::Result;
+use crate::prelude::*;
+use crate::project::{Project, Template};
 use inquire::validator::Validation;
 use inquire::{required, Select, Text};
-use manatsu::project::{Project, Template};
+use semver::Version;
 
 #[derive(Debug, clap::Args)]
 pub struct Create {
   /// Overwrites the directory if it already exists.
   #[arg(short = 'f', long)]
   force: bool,
+
+  /// Version of the project.
+  #[arg(short = 'v', long, value_name = "VERSION", default_value = "0.1.0")]
+  version: Option<String>,
 }
 
 impl super::Command for Create {
@@ -27,7 +32,7 @@ impl super::Command for Create {
 
     let description = Text::new("Description").prompt_skippable()?;
 
-    let options = vec![Template::Tauri, Template::Vue];
+    let options = Template::iter().collect_vec();
     let template = Select::new("Select a template", options).prompt()?;
 
     let project = Project {
@@ -35,6 +40,7 @@ impl super::Command for Create {
       description,
       force: self.force,
       template,
+      version: Version::parse(self.version.as_deref().unwrap())?,
     };
 
     project.create().await

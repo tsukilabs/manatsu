@@ -9,7 +9,6 @@ pub struct Build {
 }
 
 impl super::Command for Build {
-  /// Build the packages.
   async fn execute(self) -> Result<()> {
     let start = Instant::now();
 
@@ -50,10 +49,7 @@ impl super::Command for Build {
 
     println!("{}", "building packages...".bright_cyan());
     let status = pnpm!(args).spawn()?.wait().await?;
-
-    if !status.success() {
-      bail!("{}", "failed to build packages".red().bold());
-    }
+    bail_on_status_err!(status, "{}", "failed to build packages".red());
 
     println!("{}", "copying built files...".bright_cyan());
     copy_files(&packages)?;
@@ -70,9 +66,7 @@ async fn build_shared() -> Result<()> {
     .wait()
     .await?;
 
-  if !status.success() {
-    bail!("{}", "failed to build shared package".red());
-  }
+  bail_on_status_err!(status, "{}", "failed to build shared package".red());
 
   Ok(())
 }
@@ -82,7 +76,7 @@ fn should_build(package: &str) -> bool {
     return false;
   }
 
-  // The shared package has already been built.
+  // The shared package should already been built at this point.
   package != "shared"
 }
 

@@ -5,7 +5,6 @@
   "permissions": [
     "manatsu:allow-error-log-path",
     "manatsu:allow-read-error-logs",
-    "manatsu:allow-save-error-log",
-    "manatsu:allow-random-string-hex-color"
+    "manatsu:allow-save-error-log"
   ]
 }

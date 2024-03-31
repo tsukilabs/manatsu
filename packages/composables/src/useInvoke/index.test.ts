@@ -31,18 +31,18 @@ describe('useInvoke', () => {
 
   it('should invoke a command', async () => {
     const loading = ref(false);
-    const { state } = useInvoke(Command.RandomStringHexColor, '#FFFFFF', { loading });
-    expect(state.value).toBe('#FFFFFF');
+    const { state } = useInvoke(Command.ManatsuVersion, '0.7.0', { loading });
+    expect(state.value).toBe('0.7.0');
 
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
-    expect(state.value).toBe('#000000');
+    expect(state.value).toBe('1.0.0');
   });
 
   it('should not execute immediately', async () => {
     const loading = ref(false);
-    const { state } = useInvoke(Command.RandomStringHexColor, null, { loading, lazy: true });
+    const { state } = useInvoke(Command.ManatsuVersion, null, { loading, lazy: true });
     expect(state.value).toBeNull();
 
     await nextTick();
@@ -53,7 +53,7 @@ describe('useInvoke', () => {
 
   it('should execute manually', async () => {
     const loading = ref(false);
-    const { state, execute } = useInvoke(Command.RandomStringHexColor, null, {
+    const { state, execute } = useInvoke(Command.ManatsuVersion, null, {
       loading,
       lazy: true
     });
@@ -63,24 +63,24 @@ describe('useInvoke', () => {
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
-    expect(state.value).toBe('#000000');
+    expect(state.value).toBe('1.0.0');
   });
 
   it('should invoke again if the command changes', async () => {
     const loading = ref(false);
-    const command = ref<Command>(Command.RandomStringHexColor);
-    const { state } = useInvoke(command, '#FFFFFF', { loading });
+    const command = ref<Command>(Command.ManatsuVersion);
+    const { state } = useInvoke(command, '0.7.0', { loading });
 
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
-    expect(state.value).toBe('#000000');
+    expect(state.value).toBe('1.0.0');
 
-    command.value = Command.RandomStringRgbColor;
+    command.value = Command.ErrorLogPath;
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
-    expect(state.value).toBe('rgb(0, 0, 0)');
+    expect(state.value).toBe('error.log');
   });
 
   it('should throw if the command is invalid', async () => {
@@ -98,10 +98,10 @@ describe('useInvoke', () => {
 
 function handleCommand<T>(command: string): T {
   switch (command) {
-    case Command.RandomStringHexColor:
-      return '#000000' as T;
-    case Command.RandomStringRgbColor:
-      return 'rgb(0, 0, 0)' as T;
+    case Command.ManatsuVersion:
+      return '1.0.0' as T;
+    case Command.ErrorLogPath:
+      return 'error.log' as T;
     default:
       throw new Error('invalid command');
   }

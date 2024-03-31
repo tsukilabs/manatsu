@@ -309,90 +309,6 @@
           ]
         },
         {
-          "description": "allow-hex-to-hsl -> Enables the hex_to_hsl command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-hex-to-hsl"
-          ]
-        },
-        {
-          "description": "deny-hex-to-hsl -> Denies the hex_to_hsl command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-hex-to-hsl"
-          ]
-        },
-        {
-          "description": "allow-hex-to-rgb -> Enables the hex_to_rgb command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-hex-to-rgb"
-          ]
-        },
-        {
-          "description": "deny-hex-to-rgb -> Denies the hex_to_rgb command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-hex-to-rgb"
-          ]
-        },
-        {
-          "description": "allow-hex-to-string -> Enables the hex_to_string command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-hex-to-string"
-          ]
-        },
-        {
-          "description": "deny-hex-to-string -> Denies the hex_to_string command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-hex-to-string"
-          ]
-        },
-        {
-          "description": "allow-hsl-to-hex -> Enables the hsl_to_hex command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-hsl-to-hex"
-          ]
-        },
-        {
-          "description": "deny-hsl-to-hex -> Denies the hsl_to_hex command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-hsl-to-hex"
-          ]
-        },
-        {
-          "description": "allow-hsl-to-rgb -> Enables the hsl_to_rgb command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-hsl-to-rgb"
-          ]
-        },
-        {
-          "description": "deny-hsl-to-rgb -> Denies the hsl_to_rgb command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-hsl-to-rgb"
-          ]
-        },
-        {
-          "description": "allow-hsl-to-string -> Enables the hsl_to_string command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-hsl-to-string"
-          ]
-        },
-        {
-          "description": "deny-hsl-to-string -> Denies the hsl_to_string command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-hsl-to-string"
-          ]
-        },
-        {
           "description": "allow-manatsu-version -> Enables the manatsu_version command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -404,90 +320,6 @@
           "type": "string",
           "enum": [
             "deny-manatsu-version"
-          ]
-        },
-        {
-          "description": "allow-random-hex-color -> Enables the random_hex_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-random-hex-color"
-          ]
-        },
-        {
-          "description": "deny-random-hex-color -> Denies the random_hex_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-random-hex-color"
-          ]
-        },
-        {
-          "description": "allow-random-hsl-color -> Enables the random_hsl_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-random-hsl-color"
-          ]
-        },
-        {
-          "description": "deny-random-hsl-color -> Denies the random_hsl_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-random-hsl-color"
-          ]
-        },
-        {
-          "description": "allow-random-rgb-color -> Enables the random_rgb_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-random-rgb-color"
-          ]
-        },
-        {
-          "description": "deny-random-rgb-color -> Denies the random_rgb_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-random-rgb-color"
-          ]
-        },
-        {
-          "description": "allow-random-string-hex-color -> Enables the random_string_hex_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-random-string-hex-color"
-          ]
-        },
-        {
-          "description": "deny-random-string-hex-color -> Denies the random_string_hex_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-random-string-hex-color"
-          ]
-        },
-        {
-          "description": "allow-random-string-hsl-color -> Enables the random_string_hsl_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-random-string-hsl-color"
-          ]
-        },
-        {
-          "description": "deny-random-string-hsl-color -> Denies the random_string_hsl_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-random-string-hsl-color"
-          ]
-        },
-        {
-          "description": "allow-random-string-rgb-color -> Enables the random_string_rgb_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-random-string-rgb-color"
-          ]
-        },
-        {
-          "description": "deny-random-string-rgb-color -> Denies the random_string_rgb_color command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-random-string-rgb-color"
           ]
         },
         {
@@ -505,48 +337,6 @@
           ]
         },
         {
-          "description": "allow-rgb-to-hex -> Enables the rgb_to_hex command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-rgb-to-hex"
-          ]
-        },
-        {
-          "description": "deny-rgb-to-hex -> Denies the rgb_to_hex command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-rgb-to-hex"
-          ]
-        },
-        {
-          "description": "allow-rgb-to-hsl -> Enables the rgb_to_hsl command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-rgb-to-hsl"
-          ]
-        },
-        {
-          "description": "deny-rgb-to-hsl -> Denies the rgb_to_hsl command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-rgb-to-hsl"
-          ]
-        },
-        {
-          "description": "allow-rgb-to-string -> Enables the rgb_to_string command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-rgb-to-string"
-          ]
-        },
-        {
-          "description": "deny-rgb-to-string -> Denies the rgb_to_string command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-rgb-to-string"
-          ]
-        },
-        {
           "description": "allow-save-error-log -> Enables the save_error_log command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -558,20 +348,6 @@
           "type": "string",
           "enum": [
             "deny-save-error-log"
-          ]
-        },
-        {
-          "description": "allow-string-to-hex -> Enables the string_to_hex command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-string-to-hex"
-          ]
-        },
-        {
-          "description": "deny-string-to-hex -> Denies the string_to_hex command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-string-to-hex"
           ]
         },
         {

@@ -7,10 +7,8 @@ pub struct Package {
 }
 
 impl<'a> Package {
-  /// Private package names.
   pub const PRIVATE: [&'a str; 1] = ["playground"];
 
-  /// Public package names.
   pub const PUBLIC: [&'a str; 7] = [
     "manatsu",
     "components",

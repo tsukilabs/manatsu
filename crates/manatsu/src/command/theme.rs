@@ -1,8 +1,5 @@
-use anyhow::{bail, Result};
-use convert_case::{Case, Casing};
-use manatsu::theme;
-use std::path::PathBuf;
-use std::{env, fs};
+use crate::prelude::*;
+use crate::theme;
 
 #[derive(Debug, clap::Args)]
 pub struct Theme {
@@ -24,8 +21,8 @@ pub struct Theme {
 
 impl super::Command for Theme {
   async fn execute(self) -> Result<()> {
-    let source = resolve_path(self.source, || "tokens.css".to_string())?;
-    let output = resolve_path(self.output, || self.name.to_case(Case::Kebab))?;
+    let source = normalize(self.source, || "tokens.css".into())?;
+    let output = normalize(self.output, || self.name.to_case(Case::Kebab))?;
 
     if output.try_exists()? {
       if self.force {
@@ -41,7 +38,7 @@ impl super::Command for Theme {
   }
 }
 
-fn resolve_path(path: Option<PathBuf>, default_name: impl FnOnce() -> String) -> Result<PathBuf> {
+fn normalize(path: Option<PathBuf>, default_name: impl FnOnce() -> String) -> Result<PathBuf> {
   let mut path = path.unwrap_or_else(|| PathBuf::from(default_name()));
 
   if path.is_relative() {

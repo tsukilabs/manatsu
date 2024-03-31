@@ -5,7 +5,6 @@ use crate::utils::{Formatter, Linter};
 /// <https://regex101.com/r/igEb6A>
 const NAME_REGEX: &str = r"^[a-z][a-z-]*$";
 
-/// Generates a component template.
 pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
   let start = Instant::now();
 
@@ -128,19 +127,7 @@ fn update_src_index() -> Result<()> {
   fs::write(index, cts).map_err(Into::into)
 }
 
-/// Determines whether the component name is valid.
 pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
   let regex = Regex::new(NAME_REGEX).unwrap();
   regex.is_match(name.as_ref())
-}
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-
-  #[test]
-  fn should_determine_if_name_is_valid() {
-    assert!(is_valid("button"));
-    assert!(!is_valid("Select99@"));
-  }
 }

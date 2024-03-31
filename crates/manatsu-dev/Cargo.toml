@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.6.28"
+version = "0.7.0"
 publish = false
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -29,10 +29,6 @@ natord = "1.0.9"
 [dependencies.clap]
 version = "4.5.4"
 features = ["derive"]
-
-[dependencies.manatsu]
-version = "0.6"
-path = "../manatsu"
 
 [dependencies.serde]
 version = "1.0.197"

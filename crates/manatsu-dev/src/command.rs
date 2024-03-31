@@ -11,9 +11,8 @@ pub use build::Build;
 pub use plugin::plugin;
 pub use readme::readme;
 pub use release::Release;
-use std::future::Future;
 pub use tailwind::tailwind;
 
 pub trait Command {
-  fn execute(self) -> impl Future<Output = Result<()>> + Send;
+  async fn execute(self) -> Result<()>;
 }

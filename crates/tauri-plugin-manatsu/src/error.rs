@@ -8,6 +8,8 @@ pub enum Error {
   #[error(transparent)]
   Io(#[from] std::io::Error),
   #[error(transparent)]
+  SerdeJson(#[from] serde_json::Error),
+  #[error(transparent)]
   Tauri(#[from] tauri::Error),
   #[error(transparent)]
   Unknown(#[from] anyhow::Error),
