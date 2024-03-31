@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 import { config, enableAutoUnmount, mount } from '@vue/test-utils';
 import MSelect from './MSelect.vue';
+import MChip from '../chip/MChip.vue';
 import type { SelectOption } from './types';
 
 enableAutoUnmount(afterEach);
@@ -133,6 +134,59 @@ describe('select', () => {
 
     await options[0].trigger('click');
     expect(wrapper.props('modelValue')).toEqual(['Option 2', 'Option 3']);
+  });
+
+  it('should use chips when multiple', async () => {
+    const wrapper = mount(MSelect, {
+      attachTo: document.body,
+      props: {
+        options: generateOptions(5),
+        modelValue: [],
+        chips: true,
+        multiple: true
+      }
+    });
+
+    await wrapper.find('.m-select-label').trigger('click');
+    expect(wrapper.find('.m-select-dropdown').exists()).toBe(true);
+
+    const options = wrapper.findAll('.m-select-dropdown > li');
+    await options[0].trigger('click');
+    await options[1].trigger('click');
+    await options[2].trigger('click');
+
+    expect(wrapper.findAllComponents(MChip)).toHaveLength(3);
+  });
+
+  it('should remove chip on click', async () => {
+    const wrapper = mount(MSelect, {
+      attachTo: document.body,
+      props: {
+        options: generateOptions(5),
+        modelValue: ['Option 1', 'Option 2', 'Option 3'],
+        chips: true,
+        multiple: true
+      }
+    });
+
+    const chips = wrapper.findAll('.m-chip-close');
+    await chips[0].trigger('click');
+
+    expect(wrapper.props('modelValue')).toEqual(['Option 2', 'Option 3']);
+  });
+
+  it('should not use chips if `chips` is false', () => {
+    const wrapper = mount(MSelect, {
+      attachTo: document.body,
+      props: {
+        options: generateOptions(5),
+        modelValue: ['Option 1', 'Option 2', 'Option 3'],
+        chips: false,
+        multiple: true
+      }
+    });
+
+    expect(wrapper.findAllComponents(MChip)).toHaveLength(0);
   });
 });
 
