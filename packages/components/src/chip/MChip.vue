@@ -31,7 +31,7 @@ function remove() {
     <m-ellipsis class="m-chip-label">
       <slot>{{ label }}</slot>
     </m-ellipsis>
-    <m-chip-close v-if="removable" @click="remove" />
+    <m-chip-close v-if="removable" @click.stop="remove" />
   </div>
   <empty-component v-else />
 </template>
