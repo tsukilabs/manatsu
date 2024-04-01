@@ -22,6 +22,7 @@ function remove(index: number) {
       <m-chip
         v-for="(value, index) of model"
         :key="value"
+        class="m-select-chip"
         variant="outlined"
         removable
         @remove="() => remove(index)"
@@ -39,5 +40,10 @@ function remove(index: number) {
   @include flex.x-start-y-center;
   flex-wrap: wrap;
   gap: 0.5rem;
+  overflow: hidden;
+}
+
+.m-select-chip {
+  max-width: 100%;
 }
 </style>

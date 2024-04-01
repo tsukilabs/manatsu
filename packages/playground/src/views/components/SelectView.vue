@@ -10,6 +10,9 @@ const options2 = shallowRef<SelectOption[]>(generateOptions(100));
 const value3 = ref<string | null>(null);
 const options3 = shallowRef<SelectOption[]>(generateOptions(30, true));
 
+const value4 = ref<string | null>(null);
+const options4 = shallowRef<SelectOption[]>(generateOptions(30, true));
+
 function generateOptions(amount: number, long = false, object = false) {
   const array: any[] = [];
 
@@ -69,7 +72,19 @@ function generateOptions(amount: number, long = false, object = false) {
       </div>
     </div>
     <div class="flex w-56 flex-col gap-2">
-      <div>Disabled</div>
+      <div>{{ value4 }}</div>
+      <div>
+        <m-select
+          v-model="value4"
+          :options="options4"
+          multiple
+          :hide-on-window-blur="false"
+          placeholder="Select a value"
+          class="w-56"
+        />
+      </div>
+    </div>
+    <div class="flex w-56 items-center">
       <div>
         <m-select
           v-model="value1"

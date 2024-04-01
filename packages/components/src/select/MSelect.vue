@@ -159,6 +159,7 @@ function isSelected(option: SelectOption) {
 
   &-label {
     @include option;
+    width: 100%;
     min-height: calc(1rem + (2 * 0.75em));
   }
 
