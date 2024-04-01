@@ -2,8 +2,8 @@
 import { toPixel } from '@tb-dev/utils';
 import { toArray } from '@tb-dev/utils/array';
 import { injectStrict, symbols } from '@manatsu/shared';
-import { type VNode, computed, ref, shallowRef, watch } from 'vue';
 import { onClickOutside, useElementBounding, watchDeep } from '@vueuse/core';
+import { type CSSProperties, type VNode, computed, ref, shallowRef, watch } from 'vue';
 import { getUniqueId } from './utils';
 import MSelectLabel from './MSelectLabel.vue';
 import MSelectChips from './MSelectChips.vue';
@@ -38,14 +38,26 @@ const visible = ref(false);
 const dropdownRef = shallowRef<HTMLElement | null>(null);
 onClickOutside(dropdownRef, () => (visible.value &&= false));
 
+const windowHeight = injectStrict(symbols.windowHeight);
+const windowWidth = injectStrict(symbols.windowWidth);
+watchDeep([visible, model, windowHeight, windowWidth], updateBounding);
+
+const dropdownPosition = computed<CSSProperties>(() => {
+  return {
+    position: 'fixed',
+    top: toPixel(bottom.value + 1),
+    left: toPixel(left.value)
+  };
+});
+
+const dropdownComputedStyle = computed(() => {
+  return [props.dropdownStyle, dropdownPosition.value];
+});
+
 const windowFocus = injectStrict(symbols.windowFocus);
 watch(windowFocus, (hasFocus) => {
   if (!hasFocus && props.hideOnWindowBlur) visible.value &&= false;
 });
-
-const windowHeight = injectStrict(symbols.windowHeight);
-const windowWidth = injectStrict(symbols.windowWidth);
-watchDeep([visible, model, windowHeight, windowWidth], updateBounding);
 
 function toggle() {
   if (props.disabled) return;
@@ -102,7 +114,7 @@ function isSelected(option: SelectOption) {
         role="listbox"
         class="m-select-dropdown"
         :class="dropdownClass"
-        :style="dropdownStyle"
+        :style="dropdownComputedStyle"
       >
         <li
           v-for="(option, index) of options"
@@ -165,9 +177,6 @@ function isSelected(option: SelectOption) {
 
   &-dropdown {
     @include container;
-    position: fixed;
-    top: v-bind('toPixel(bottom + 1)');
-    left: v-bind('toPixel(left)');
     z-index: 1100;
     box-shadow:
       0 4px 6px -1px rgba(0 0 0 / 10%),
