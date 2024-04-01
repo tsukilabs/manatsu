@@ -1,8 +1,5 @@
 {
-  "plugins": [
-    "prettier-plugin-css-order",
-    "prettier-plugin-tailwindcss"
-  ],
+  "plugins": ["prettier-plugin-css-order", "prettier-plugin-tailwindcss"],
   "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
@@ -14,9 +11,7 @@
   "arrowParens": "always",
   "vueIndentScriptAndStyle": false,
   "tailwindConfig": "./packages/playground/tailwind.config.js",
-  "tailwindFunctions": [
-    "tw"
-  ],
+  "tailwindFunctions": ["tw"],
   "tailwindAttributes": [
     "body-class",
     "bottom-class",
