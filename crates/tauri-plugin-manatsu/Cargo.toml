@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.7.0"
+version = "0.7.1"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
@@ -28,10 +28,10 @@ version = "1.0.197"
 [dependencies.serde_json]
 version = "1.0.115"
 
-[build-dependencies.tauri-plugin]
-version = "2.0.0-beta.10"
-features = ["build"]
-
 [dependencies.tokio]
 version = "1.37.0"
 features = ["fs"]
+
+[build-dependencies.tauri-plugin]
+version = "2.0.0-beta.10"
+features = ["build"]

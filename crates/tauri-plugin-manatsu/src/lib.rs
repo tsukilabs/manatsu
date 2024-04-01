@@ -3,7 +3,7 @@
 #![allow(clippy::must_use_candidate)]
 
 mod command;
-mod error;
+pub mod error;
 pub mod log;
 pub(crate) mod prelude;
 

@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.15.5",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@tauri-apps/api": "^2.0.0-beta.6",
-    "@tb-dev/auto-import-config": "^1.2.17",
+    "@tb-dev/auto-import-config": "^1.2.18",
     "@tb-dev/eslint-config": "^3.3.2",
     "@tb-dev/stylelint-config": "^1.1.14",
     "@tb-dev/utility-types": "^1.2.4",
@@ -57,7 +57,7 @@
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
-    "prettier-plugin-css-order": "^2.1.1",
+    "prettier-plugin-css-order": "^2.1.2",
     "prettier-plugin-tailwindcss": "^0.5.13",
     "sass": "^1.72.0",
     "stylelint": "~16.3.1",

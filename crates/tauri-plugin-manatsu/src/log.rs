@@ -9,7 +9,6 @@ pub mod date {
   /// <https://docs.rs/chrono/latest/chrono/format/strftime/index.html>
   pub const TIMESTAMP: &str = "%F %T%.3f %:z";
 
-  #[must_use]
   pub fn now() -> String {
     Local::now().format(TIMESTAMP).to_string()
   }
@@ -35,17 +34,14 @@ impl VersionSnapshot {
     }
   }
 
-  #[must_use]
   pub fn manatsu() -> String {
     crate::VERSION.into()
   }
 
-  #[must_use]
   pub fn tauri() -> String {
     tauri::VERSION.into()
   }
 
-  #[must_use]
   pub fn webview() -> Option<String> {
     tauri::webview_version().ok()
   }
