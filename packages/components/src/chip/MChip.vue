@@ -28,9 +28,11 @@ function remove() {
 
 <template>
   <div v-if="visible" :class="classList">
-    <m-ellipsis class="m-chip-label">
-      <slot>{{ label }}</slot>
-    </m-ellipsis>
+    <div class="m-chip-label">
+      <m-ellipsis>
+        <slot>{{ label }}</slot>
+      </m-ellipsis>
+    </div>
     <m-chip-close v-if="removable" @click.stop="remove" />
   </div>
   <empty-component v-else />
@@ -49,12 +51,14 @@ function remove() {
   font-family: inherit;
 
   &-label {
-    @include flex.center;
+    @include flex.x-start-y-center;
+    flex-grow: 1;
+    min-width: 0;
   }
 
   &-removable {
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0.25rem;
   }
 
   &-elevated {
