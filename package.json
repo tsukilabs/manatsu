@@ -36,7 +36,7 @@
     "update": "miho update major -t"
   },
   "devDependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.6",
+    "@tauri-apps/api": "^2.0.0-beta.7",
     "@tb-dev/auto-import-config": "^1.2.18",
     "@tb-dev/eslint-config": "^3.3.2",
     "@tb-dev/stylelint-config": "^1.1.14",
