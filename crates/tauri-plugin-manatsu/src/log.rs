@@ -1,7 +1,6 @@
 use crate::prelude::*;
 use chrono::{DateTime, FixedOffset};
-use std::cmp::Ordering;
-use std::future::Future;
+use sysinfo::System;
 
 pub mod date {
   use chrono::Local;
@@ -18,6 +17,7 @@ pub mod date {
 pub struct VersionSnapshot {
   pub app: Option<String>,
   manatsu: Option<String>,
+  os: Option<String>,
   tauri: Option<String>,
   webview: Option<String>,
   vue: String,
@@ -29,6 +29,7 @@ impl VersionSnapshot {
       app: None,
       manatsu: Some(Self::manatsu()),
       tauri: Some(Self::tauri()),
+      os: System::long_os_version(),
       webview: Self::webview(),
       vue: vue.as_ref().to_owned(),
     }
@@ -118,6 +119,10 @@ impl Log for Error {
 
     if self.version.manatsu.is_none() {
       self.version.manatsu = Some(VersionSnapshot::manatsu());
+    }
+
+    if self.version.os.is_none() {
+      self.version.os = System::long_os_version();
     }
 
     if self.version.tauri.is_none() {

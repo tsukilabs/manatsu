@@ -56,6 +56,7 @@ export const router = createRouter({
   routes: [
     { path: '/', component: () => import('../views/HomeView.vue') },
     { path: '/test', component: () => import('../views/TestView.vue') },
+    { path: '/log', component: () => import('../views/LogView.vue') },
     { path: '/about', component: () => import('../views/AboutView.vue') },
     ...components
   ]

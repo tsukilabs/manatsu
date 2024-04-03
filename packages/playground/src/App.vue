@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { StorageKey } from '@/utils';
 import { startCase } from 'lodash-es';
-import { injectStrict, symbols } from 'manatsu/src/index.ts';
+import { handleError, injectStrict, symbols } from 'manatsu/src/index.ts';
 import {
   MTopAppbar,
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
+import { useStore } from './stores';
+import { StorageKey } from './utils';
 import { components } from './router';
+
+const store = useStore();
 
 const route = useRoute();
 const lastRoute = useLocalStorage(StorageKey.LastRoute, '/');
@@ -18,6 +21,7 @@ const darkMode = injectStrict(symbols.darkMode);
 const menuItems: TopAppbarMenuItem[] = [
   { key: 'home', label: 'Home', to: '/' },
   { key: 'test', label: 'Test', to: '/test' },
+  { key: 'log', label: 'Logs', to: '/log' },
   { key: 'about', label: 'About', to: '/about' }
 ];
 
@@ -38,8 +42,12 @@ const sidebarItemStyle = computed<CSSProperties | null>(() => {
   return { width: `${width}px` };
 });
 
-function createUnhandledError() {
-  return invoke('unhandled_error');
+async function createUnhandledError() {
+  try {
+    await invoke('unhandled_error');
+  } finally {
+    store.loadLogs().catch(handleError);
+  }
 }
 </script>
 

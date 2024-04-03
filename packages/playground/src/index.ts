@@ -3,15 +3,18 @@ import 'manatsu/components/style';
 import '@manatsu/style/themes/mana';
 import App from '@/App.vue';
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import { createManatsu, registerComponents } from 'manatsu/src/index.ts';
 import { router } from './router';
 import { StorageKey } from './utils';
 
 const app = createApp(App);
+const pinia = createPinia();
 const manatsu = createManatsu({ darkMode: true });
 
 registerComponents(app);
 
+app.use(pinia);
 app.use(router);
 app.use(manatsu);
 

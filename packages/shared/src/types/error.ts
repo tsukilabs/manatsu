@@ -6,6 +6,7 @@ export type ErrorHandler = (this: App, err: unknown) => void;
 export interface VersionSnapshot {
   app?: Nullish<string>;
   manatsu?: Nullish<string>;
+  os?: Nullish<string>;
   tauri?: Nullish<string>;
   vue: string;
   webview?: Nullish<string>;

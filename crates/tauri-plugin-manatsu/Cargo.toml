@@ -17,9 +17,10 @@ keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 anyhow = "1.0.81"
 thiserror = "1.0.58"
 chrono = "0.4.37"
+sysinfo = "0.30.8"
 
 [dependencies.tauri]
-version = "2.0.0-beta.13"
+version = "2.0.0-beta.14"
 
 [dependencies.serde]
 features = ["derive"]
@@ -33,5 +34,5 @@ version = "1.37.0"
 features = ["fs"]
 
 [build-dependencies.tauri-plugin]
-version = "2.0.0-beta.10"
+version = "2.0.0-beta.11"
 features = ["build"]

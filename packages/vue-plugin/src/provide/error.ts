@@ -20,7 +20,6 @@ function defaultErrorHandler(this: App, err: unknown) {
     message: err instanceof Error ? err.message : String(err),
     name: err instanceof Error ? err.name : 'Error',
     stack: err instanceof Error ? err.stack : null,
-    timestamp: null,
     version
   };
 

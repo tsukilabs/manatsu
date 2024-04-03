@@ -18,8 +18,7 @@ async fn unhandled_error() -> Result<()> {
   Err(anyhow!("This is an unhandled error")).map_err(Into::into)
 }
 
-#[tokio::main]
-async fn main() {
+fn main() {
   tauri::Builder::default()
     .plugin(tauri_plugin_window_state::Builder::default().build())
     .plugin(tauri_plugin_manatsu::init())
