@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.7.3"
+version = "0.7.4"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
@@ -17,10 +17,10 @@ keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 anyhow = "1.0.81"
 thiserror = "1.0.58"
 chrono = "0.4.37"
-sysinfo = "0.30.8"
 
-[dependencies.tauri]
-version = "2.0.0-beta.14"
+[dependencies.sysinfo]
+version = "0.30.8"
+default-features = false
 
 [dependencies.serde]
 features = ["derive"]
@@ -28,6 +28,9 @@ version = "1.0.197"
 
 [dependencies.serde_json]
 version = "1.0.115"
+
+[dependencies.tauri]
+version = "2.0.0-beta.14"
 
 [dependencies.tokio]
 version = "1.37.0"
