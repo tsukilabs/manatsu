@@ -59,11 +59,11 @@ pub struct Error {
 
 impl Error {
   fn datetime_or_default(&self) -> DateTime<FixedOffset> {
-    if let Some(timestamp) = &self.timestamp {
-      DateTime::parse_from_str(timestamp, date::TIMESTAMP).unwrap_or_default()
-    } else {
-      DateTime::default()
-    }
+    self
+      .timestamp
+      .as_ref()
+      .and_then(|t| DateTime::parse_from_str(t, date::TIMESTAMP).ok())
+      .unwrap_or_default()
   }
 }
 
@@ -84,7 +84,7 @@ impl Ord for Error {
 
 pub trait Log {
   fn path<R: Runtime>(app: &AppHandle<R>) -> Result<PathBuf> {
-    let path = app.path().app_log_dir()?.join("error.json");
+    let path = app.path().app_data_dir()?.join("error.json");
     Ok(path)
   }
 
@@ -136,21 +136,11 @@ impl Log for Error {
     self.version.app = app.config().version.clone();
 
     let path = Self::path(app)?;
-    let log_dir = path.parent().unwrap();
-
-    match log_dir.try_exists() {
-      Ok(true) => {}
-      Ok(false) => fs::create_dir_all(log_dir).await?,
-      Err(e) => return Err(e.into()),
-    }
-
     let logs = fs::read(&path).await.unwrap_or_default();
     let mut logs: Vec<Error> = serde_json::from_slice(&logs).unwrap_or_default();
     logs.push(self);
 
     let logs = serde_json::to_vec_pretty(&logs)?;
-    fs::write(path, logs).await?;
-
-    Ok(())
+    fs::write(path, logs).await.map_err(Into::into)
   }
 }
