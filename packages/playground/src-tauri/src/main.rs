@@ -14,6 +14,11 @@ async fn copyright() -> String {
 }
 
 #[tauri::command]
+async fn print(text: String) {
+  println!("{text}");
+}
+
+#[tauri::command]
 async fn unhandled_error() -> Result<()> {
   Err(anyhow!("This is an unhandled error")).map_err(Into::into)
 }
@@ -22,7 +27,7 @@ fn main() {
   tauri::Builder::default()
     .plugin(tauri_plugin_window_state::Builder::default().build())
     .plugin(tauri_plugin_manatsu::init())
-    .invoke_handler(tauri::generate_handler![copyright, unhandled_error])
+    .invoke_handler(tauri::generate_handler![copyright, print, unhandled_error])
     .run(tauri::generate_context!())
     .expect("playground could not be started");
 }

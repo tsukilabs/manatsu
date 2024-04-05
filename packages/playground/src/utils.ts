@@ -1,5 +1,6 @@
 export enum PlaygroundCommand {
-  Copyright = 'copyright'
+  Copyright = 'copyright',
+  Print = 'print'
 }
 
 export enum StorageKey {

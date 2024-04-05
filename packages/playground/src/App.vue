@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { startCase } from 'lodash-es';
 import { handleError, injectStrict, symbols } from 'manatsu/src/index.ts';
+import { invokeOnKeyDown, onKeyDown } from '@manatsu/composables/src/index.ts';
 import {
   MTopAppbar,
   type SidebarItem,
   type TopAppbarMenuItem
 } from '@manatsu/components/src/index.ts';
 import { useStore } from './stores';
-import { StorageKey } from './utils';
 import { components } from './router';
+import { PlaygroundCommand, StorageKey } from './utils';
 
 const store = useStore();
 
@@ -49,6 +50,14 @@ async function createUnhandledError() {
     store.loadLogs().catch(handleError);
   }
 }
+
+onKeyDown(['a', 'A'], () => console.log('Alt+A'), { altKey: true });
+onKeyDown(['a', 'A'], () => console.log('Ctrl+A'), { ctrlKey: true });
+onKeyDown(['a', 'A'], () => console.log('Shift+A'), { shiftKey: true });
+
+invokeOnKeyDown(['a', 'A'], PlaygroundCommand.Print, { text: 'Alt+A' }, { altKey: true });
+invokeOnKeyDown(['a', 'A'], PlaygroundCommand.Print, { text: 'Ctrl+A' }, { ctrlKey: true });
+invokeOnKeyDown(['a', 'A'], PlaygroundCommand.Print, { text: 'Shift+A' }, { shiftKey: true });
 </script>
 
 <template>
