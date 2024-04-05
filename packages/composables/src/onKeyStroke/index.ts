@@ -11,16 +11,32 @@ export function onKeyStroke(
   handler?: KeyStrokeEventHandler,
   options: OnKeyStrokeOptions = {}
 ) {
-  const { altKey = false, ctrlKey = false, shiftKey = false } = options;
-  const stop = original(
-    key,
-    (e) => {
+  const {
+    altKey = false,
+    ctrlKey = false,
+    metaKey = false,
+    shiftKey = false,
+    preventDefault = true
+  } = options;
+
+  const fn = (e: KeyboardEvent) => {
+    if (preventDefault) {
       e.preventDefault();
-      if (e.altKey !== altKey || e.ctrlKey !== ctrlKey || e.shiftKey !== shiftKey) return;
-      executeHandler(e, handler).catch(handleError);
-    },
-    options
-  );
+    }
+
+    if (
+      e.altKey !== altKey ||
+      e.ctrlKey !== ctrlKey ||
+      e.metaKey !== metaKey ||
+      e.shiftKey !== shiftKey
+    ) {
+      return;
+    }
+
+    executeHandler(e, handler).catch(handleError);
+  };
+
+  const stop = original(key, fn, options);
 
   tryOnScopeDispose(() => stop());
 

@@ -3,10 +3,12 @@ import type { OnKeyStrokeOptions as OnKeyStrokeOptionsOriginal } from '@vueuse/c
 
 export type KeyStrokeEventHandler = Nullish<(event: KeyboardEvent) => MaybePromise<any>>;
 
-export interface AuxiliarKeys {
+export interface OnKeyStrokeOptions extends OnKeyStrokeOptionsOriginal {
   altKey?: boolean;
   ctrlKey?: boolean;
+  metaKey?: boolean;
   shiftKey?: boolean;
-}
 
-export type OnKeyStrokeOptions = OnKeyStrokeOptionsOriginal & AuxiliarKeys;
+  /** @default true */
+  preventDefault?: boolean;
+}
