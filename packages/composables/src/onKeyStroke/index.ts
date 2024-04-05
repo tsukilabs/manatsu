@@ -2,24 +2,21 @@ import type { RouteLocationRaw } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
 import type { InvokeArgs } from '@tauri-apps/api/core';
 import { getRouter, handleError } from '@manatsu/shared';
-import {
-  type KeyFilter,
-  type OnKeyStrokeOptions,
-  onKeyStroke as original,
-  tryOnScopeDispose
-} from '@vueuse/core';
-import type { KeyStrokeEventHandler } from './types';
+import { type KeyFilter, onKeyStroke as original, tryOnScopeDispose } from '@vueuse/core';
 import { executeHandler, invokeCommand, pushRoute } from './utils';
+import type { KeyStrokeEventHandler, OnKeyStrokeOptions } from './types';
 
 export function onKeyStroke(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
   options: OnKeyStrokeOptions = {}
 ) {
+  const { altKey = false, ctrlKey = false, shiftKey = false } = options;
   const stop = original(
     key,
     (e) => {
       e.preventDefault();
+      if (e.altKey !== altKey || e.ctrlKey !== ctrlKey || e.shiftKey !== shiftKey) return;
       executeHandler(e, handler).catch(handleError);
     },
     options
