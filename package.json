@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.15.5",
@@ -43,7 +43,7 @@
     "@tb-dev/utility-types": "^1.2.5",
     "@tb-dev/utils": "^1.4.4",
     "@tb-dev/vue-import-config": "^1.0.6",
-    "@types/node": "^20.12.4",
+    "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitest/browser": "^1.4.0",
     "@vitest/coverage-istanbul": "^1.4.0",

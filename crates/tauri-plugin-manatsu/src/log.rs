@@ -24,7 +24,7 @@ pub struct VersionSnapshot {
 }
 
 impl VersionSnapshot {
-  pub fn new<S: AsRef<str>>(vue: S) -> Self {
+  pub fn new(vue: impl AsRef<str>) -> Self {
     Self {
       app: None,
       manatsu: Some(Self::manatsu()),
@@ -84,8 +84,11 @@ impl Ord for Error {
 
 pub trait Log {
   fn path<R: Runtime>(app: &AppHandle<R>) -> Result<PathBuf> {
-    let path = app.path().app_data_dir()?.join("error.json");
-    Ok(path)
+    app
+      .path()
+      .app_log_dir()
+      .map(|path| path.join("manatsu/error.json"))
+      .map_err(Into::into)
   }
 
   fn read<R: Runtime>(app: &AppHandle<R>) -> impl Future<Output = Result<Vec<Self>>> + Send
@@ -136,9 +139,17 @@ impl Log for Error {
     self.version.app = app.config().version.clone();
 
     let path = Self::path(app)?;
+    if let Some(parent_dir) = path.parent() {
+      if !parent_dir.try_exists()? {
+        fs::create_dir_all(parent_dir).await?;
+      }
+    }
+
     let logs = fs::read(&path).await.unwrap_or_default();
     let mut logs: Vec<Error> = serde_json::from_slice(&logs).unwrap_or_default();
+
     logs.push(self);
+    logs.sort_unstable_by(|a, b| b.cmp(a));
 
     let logs = serde_json::to_vec_pretty(&logs)?;
     fs::write(path, logs).await.map_err(Into::into)

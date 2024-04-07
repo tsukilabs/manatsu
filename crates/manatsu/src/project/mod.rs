@@ -109,7 +109,7 @@ impl Project {
     Ok(())
   }
 
-  fn update_package_json<P: AsRef<Path>>(&self, dir_path: P) -> Result<()> {
+  fn update_package_json(&self, dir_path: impl AsRef<Path>) -> Result<()> {
     let path = dir_path.as_ref().join("package.json");
     let package_json = fs::read_to_string(&path)?;
     let mut package_json: serde_json::Value = serde_json::from_str(&package_json)?;
@@ -130,7 +130,7 @@ impl Project {
     Ok(())
   }
 
-  fn update_cargo_toml<P: AsRef<Path>>(&self, dir_path: P) -> Result<()> {
+  fn update_cargo_toml(&self, dir_path: impl AsRef<Path>) -> Result<()> {
     let glob = Glob::new("**/Cargo.toml")?.compile_matcher();
     let entries = WalkDir::new(dir_path)
       .into_iter()
@@ -166,7 +166,7 @@ impl Project {
     Ok(())
   }
 
-  fn update_tauri_conf<P: AsRef<Path>>(&self, dir_path: P) -> Result<()> {
+  fn update_tauri_conf(&self, dir_path: impl AsRef<Path>) -> Result<()> {
     let path = dir_path.as_ref().join("src-tauri/tauri.conf.json");
     let tauri_conf = fs::read_to_string(&path)?;
     let mut tauri_conf: serde_json::Value = serde_json::from_str(&tauri_conf)?;
@@ -189,7 +189,7 @@ impl Project {
     Ok(())
   }
 
-  fn update_index_html<P: AsRef<Path>>(&self, dir_path: P) -> Result<()> {
+  fn update_index_html(&self, dir_path: impl AsRef<Path>) -> Result<()> {
     let path = dir_path.as_ref().join("index.html");
     let index_html = fs::read_to_string(&path)?;
     let index_html = index_html.replace("Manatsu", &self.name);
@@ -199,7 +199,7 @@ impl Project {
     Ok(())
   }
 
-  pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
+  pub fn is_valid(name: impl AsRef<str>) -> bool {
     let regex = Regex::new(Project::NAME_REGEX).unwrap();
     regex.is_match(name.as_ref())
   }
@@ -231,7 +231,7 @@ fn build_globset() -> GlobSet {
   builder.build().unwrap()
 }
 
-fn remove_entry<P: AsRef<Path>>(path: P) -> Result<()> {
+fn remove_entry(path: impl AsRef<Path>) -> Result<()> {
   let path = path.as_ref();
   let metadata = path.metadata()?;
 

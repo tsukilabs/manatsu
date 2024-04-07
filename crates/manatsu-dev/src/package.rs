@@ -28,12 +28,12 @@ impl<'a> Package {
     serde_json::from_str::<Package>(&package).map_err(Into::into)
   }
 
-  pub fn is_manual_chunk<P: AsRef<str>>(package: P) -> bool {
+  pub fn is_manual_chunk(package: impl AsRef<str>) -> bool {
     let package = package.as_ref();
     Package::MANUAL_CHUNK.contains(&package)
   }
 
-  pub fn is_private<P: AsRef<str>>(package: P) -> bool {
+  pub fn is_private(package: impl AsRef<str>) -> bool {
     let package = package.as_ref();
     Package::PRIVATE.contains(&package)
   }
@@ -48,7 +48,7 @@ pub fn all() -> Vec<String> {
 }
 
 /// Returns the path to a package.
-pub fn dir<P: AsRef<str>>(package: P) -> Result<PathBuf> {
+pub fn dir(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let cwd = env::current_dir()?;
   let path = cwd.join("packages").join(package);
@@ -56,28 +56,28 @@ pub fn dir<P: AsRef<str>>(package: P) -> Result<PathBuf> {
 }
 
 /// Returns the path to the source dir of a given package.
-pub fn src<P: AsRef<str>>(package: P) -> Result<PathBuf> {
+pub fn src(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("src");
   Ok(path)
 }
 
 /// Returns the path to the dist dir of a given package.
-pub fn dist<P: AsRef<str>>(package: P) -> Result<PathBuf> {
+pub fn dist(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("dist");
   Ok(path)
 }
 
 /// Returns the path to the `index.d.ts` file of a given package.
-pub fn dts<P: AsRef<str>>(package: P) -> Result<PathBuf> {
+pub fn dts(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dist(package)?.join("index.d.ts");
   Ok(path)
 }
 
 /// Returns the path to the `index.ts` file of a given package.
-pub fn index<P: AsRef<str>>(package: P) -> Result<PathBuf> {
+pub fn index(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = src(package)?.join("index.ts");
   Ok(path)

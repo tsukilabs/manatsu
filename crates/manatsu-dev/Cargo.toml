@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.7.7"
+version = "0.7.8"
 publish = false
 homepage = "https://github.com/tsukilabs/manatsu"
 repository = "https://github.com/tsukilabs/manatsu"
@@ -39,7 +39,7 @@ version = "1.0.115"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
-version = "0.12.2"
+version = "0.12.3"
 features = ["gzip", "json"]
 
 [dependencies.tokio]
