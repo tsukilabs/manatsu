@@ -10,11 +10,11 @@ export enum Command {
   VersionSnapshot = 'plugin:manatsu|version_snapshot'
 }
 
-export function errorLogPath(): Promise<string> {
+export function getErrorLogPath(): Promise<string> {
   return invoke(Command.ErrorLogPath);
 }
 
-export function manatsuVersion(): Promise<string> {
+export function getManatsuVersion(): Promise<string> {
   return invoke(Command.ManatsuVersion);
 }
 
@@ -26,7 +26,7 @@ export function saveErrorLog(log: ErrorLog): Promise<void> {
   return invoke(Command.SaveErrorLog, { log });
 }
 
-export function versionSnapshot(): Promise<VersionSnapshot> {
+export function createVersionSnapshot(): Promise<VersionSnapshot> {
   const app = getCurrentApp();
   return invoke(Command.VersionSnapshot, {
     vue: app.version

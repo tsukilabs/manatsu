@@ -140,9 +140,7 @@ impl Log for Error {
 
     let path = Self::path(app)?;
     if let Some(parent_dir) = path.parent() {
-      if !parent_dir.try_exists()? {
-        fs::create_dir_all(parent_dir).await?;
-      }
+      fs::create_dir_all(parent_dir).await?;
     }
 
     let logs = fs::read(&path).await.unwrap_or_default();

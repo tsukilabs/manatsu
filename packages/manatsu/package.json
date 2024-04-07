@@ -47,7 +47,6 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@manatsu/components": "workspace:*",
     "@manatsu/composables": "workspace:*",
     "@manatsu/shared": "workspace:*",
     "@manatsu/vue-plugin": "workspace:*",
@@ -58,7 +57,7 @@
     "vite": "^5.2.8"
   },
   "peerDependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.6",
+    "@tauri-apps/api": "^2.0.0-beta.7",
     "@vueuse/core": "^10.9.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"

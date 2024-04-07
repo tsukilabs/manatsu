@@ -8,7 +8,7 @@ mod prelude;
 mod utils;
 
 use clap::Parser;
-use command::{component, composable, Build, Command, Release};
+use command::{composable, Build, Command, Release};
 use inquire::validator::Validation;
 use inquire::{required, Text};
 use prelude::*;
@@ -19,8 +19,6 @@ use prelude::*;
 enum Cli {
   /// Build all the public packages.
   Build(Build),
-  /// Generate a component template.
-  Component,
   /// Generate a composable template.
   Composable,
   /// Update plugin commands.
@@ -29,8 +27,6 @@ enum Cli {
   Readme,
   /// Release a new version, publishing all the public packages.
   Release(Release),
-  /// Collect all non-standard class attributes used by Manatsu.
-  Tailwind,
 }
 
 #[tokio::main]
@@ -39,22 +35,6 @@ async fn main() -> Result<()> {
 
   match cli {
     Cli::Build(cmd) => cmd.execute().await,
-    Cli::Component => {
-      let validator = |name: &str| {
-        if component::is_valid(name) {
-          Ok(Validation::Valid)
-        } else {
-          Ok(Validation::Invalid("invalid component name".into()))
-        }
-      };
-
-      let name = Text::new("component name: ")
-        .with_validator(required!("component name is required"))
-        .with_validator(validator)
-        .prompt()?;
-
-      component::create(name).await
-    }
     Cli::Composable => {
       let validator = |name: &str| {
         if composable::is_valid(name) {
@@ -74,6 +54,5 @@ async fn main() -> Result<()> {
     Cli::Plugin => command::plugin().await,
     Cli::Readme => command::readme(),
     Cli::Release(cmd) => cmd.execute().await,
-    Cli::Tailwind => command::tailwind(),
   }
 }

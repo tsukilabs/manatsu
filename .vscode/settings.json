@@ -14,17 +14,10 @@
       "icon": "plugin",
       "extensions": ["tauri-plugin", "tauri-plugin-manatsu", "vue-plugin"],
       "format": "svg"
-    },
-    {
-      "icon": "component",
-      "extensions": ["components"],
-      "format": "svg",
-      "overrides": "component"
     }
   ],
   "files.exclude": {
-    ".eslintcache": true,
-    ".stylelintcache": true
+    ".eslintcache": true
   },
   "prettier.requireConfig": true,
   "editor.tabSize": 2,
@@ -38,61 +31,14 @@
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "rust-analyzer.showUnlinkedFileNotification": false,
-  "rust-analyzer.linkedProjects": ["Cargo.toml", "packages/playground/src-tauri/Cargo.toml"],
-  "stylelint.snippet": ["css", "postcss", "scss", "vue"],
-  "stylelint.validate": ["css", "postcss", "scss", "vue"],
-  "stylelint.packageManager": "pnpm",
   "conventionalCommits.promptScopes": true,
   "conventionalCommits.scopes": [
     "cli",
     "cli-dev",
-    "components",
     "composables",
     "core",
-    "playground",
     "style",
     "tauri-plugin",
     "vue-plugin"
-  ],
-  "tailwindCSS.experimental.configFile": "./packages/playground/tailwind.config.js",
-  "tailwindCSS.classAttributes": [
-    "body-class",
-    "bottom-class",
-    "center-class",
-    "class",
-    "content-class",
-    "dialog-class",
-    "dropdown-class",
-    "end-class",
-    "footer-class",
-    "header-class",
-    "header-end-class",
-    "header-start-class",
-    "input-class",
-    "label-class",
-    "logo-class",
-    "media-class",
-    "menu-class",
-    "menu-item-class",
-    "sidebar-class",
-    "sidebar-item-class",
-    "start-class",
-    "subtitle-class",
-    "tbody-class",
-    "tbody-row-class",
-    "thead-class",
-    "thead-row-class",
-    "title-class",
-    "title-link-class",
-    "top-class"
-  ],
-  "tailwindCSS.files.exclude": [
-    "**/.git/**",
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/target/**",
-    "**/packages/components/**",
-    "**/packages/style/**"
   ]
 }

@@ -4,7 +4,6 @@ import prettier from 'prettier';
 import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import autoprefixer from 'autoprefixer';
 
 const dtsOptions = {
   rollupTypes: false,
@@ -45,11 +44,6 @@ const dtsOptions = {
 export default defineConfig({
   root: __dirname,
   plugins: [vue(), dts(dtsOptions)],
-  css: {
-    postcss: {
-      plugins: [autoprefixer()]
-    }
-  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -64,7 +58,6 @@ export default defineConfig({
       output: {
         chunkFileNames: '[name].js',
         manualChunks: {
-          components: ['@manatsu/components/src/index.ts'],
           composables: ['@manatsu/composables/src/index.ts'],
           'vue-plugin': ['@manatsu/vue-plugin/src/index.ts']
         }

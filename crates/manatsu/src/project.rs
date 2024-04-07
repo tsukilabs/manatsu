@@ -1,10 +1,9 @@
-mod template;
-
 use crate::prelude::*;
+use bytes::Bytes;
+use reqwest::Client;
 use semver::Version;
 use std::io::Cursor;
 use taplo::formatter;
-pub use template::Template;
 use walkdir::WalkDir;
 use zip::ZipArchive;
 
@@ -12,7 +11,6 @@ pub struct Project {
   pub name: String,
   pub description: Option<String>,
   pub force: bool,
-  pub template: Template,
   pub version: Version,
 }
 
@@ -43,7 +41,7 @@ impl Project {
     }
 
     println!("downloading template...");
-    let bytes = self.template.download().await?;
+    let bytes = self.download().await?;
 
     println!("building project...");
     fs::create_dir_all(&path).with_context(|| "could not create project dir")?;
@@ -58,6 +56,20 @@ impl Project {
     println!("built {} in {:?}", self.name, start.elapsed());
 
     Ok(())
+  }
+
+  async fn download(&self) -> Result<Bytes> {
+    let client = Client::builder().brotli(true).gzip(true).build()?;
+    let url = "https://github.com/tsukilabs/template-tauri/archive/refs/heads/main.zip";
+
+    let response = client
+      .get(url)
+      .timeout(Duration::from_secs(10))
+      .send()
+      .await
+      .with_context(|| format!("could not fetch: {url}"))?;
+
+    response.bytes().await.map_err(Into::into)
   }
 
   fn hoist_extracted_files(&self, path: &Path) -> Result<()> {
@@ -80,12 +92,11 @@ impl Project {
   }
 
   fn find_extracted_dir(&self, path: &Path) -> Result<PathBuf> {
-    let template_name = self.template.to_string();
     for entry in fs::read_dir(path)?.flatten() {
       let entry_path = entry.path();
       if entry.metadata()?.is_dir() {
         let file_name = entry.file_name();
-        if matches!(file_name.to_str(), Some(n) if n.contains(&template_name)) {
+        if matches!(file_name.to_str(), Some(n) if n.contains("template-tauri")) {
           return Ok(entry_path);
         }
       }
@@ -97,19 +108,16 @@ impl Project {
   }
 
   fn update_project_metadata(&self, path: &Path) -> Result<()> {
-    self.update_package_json(path)?;
-
-    if self.template.is_tauri() {
-      self.update_cargo_toml(path)?;
-      self.update_tauri_conf(path)?;
-    }
-
-    self.update_index_html(path)?;
+    self
+      .update_package_json(path)?
+      .update_cargo_toml(path)?
+      .update_tauri_conf(path)?
+      .update_index_html(path)?;
 
     Ok(())
   }
 
-  fn update_package_json(&self, dir_path: impl AsRef<Path>) -> Result<()> {
+  fn update_package_json(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
     let path = dir_path.as_ref().join("package.json");
     let package_json = fs::read_to_string(&path)?;
     let mut package_json: serde_json::Value = serde_json::from_str(&package_json)?;
@@ -127,10 +135,10 @@ impl Project {
     let json = serde_json::to_string_pretty(&package_json)?;
     fs::write(path, json)?;
 
-    Ok(())
+    Ok(self)
   }
 
-  fn update_cargo_toml(&self, dir_path: impl AsRef<Path>) -> Result<()> {
+  fn update_cargo_toml(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
     let glob = Glob::new("**/Cargo.toml")?.compile_matcher();
     let entries = WalkDir::new(dir_path)
       .into_iter()
@@ -163,10 +171,10 @@ impl Project {
       fs::write(path, cargo_toml)?;
     }
 
-    Ok(())
+    Ok(self)
   }
 
-  fn update_tauri_conf(&self, dir_path: impl AsRef<Path>) -> Result<()> {
+  fn update_tauri_conf(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
     let path = dir_path.as_ref().join("src-tauri/tauri.conf.json");
     let tauri_conf = fs::read_to_string(&path)?;
     let mut tauri_conf: serde_json::Value = serde_json::from_str(&tauri_conf)?;
@@ -186,17 +194,17 @@ impl Project {
     let tauri_conf = serde_json::to_string_pretty(&tauri_conf)?;
     fs::write(path, tauri_conf)?;
 
-    Ok(())
+    Ok(self)
   }
 
-  fn update_index_html(&self, dir_path: impl AsRef<Path>) -> Result<()> {
+  fn update_index_html(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
     let path = dir_path.as_ref().join("index.html");
     let index_html = fs::read_to_string(&path)?;
     let index_html = index_html.replace("Manatsu", &self.name);
 
     fs::write(path, index_html)?;
 
-    Ok(())
+    Ok(self)
   }
 
   pub fn is_valid(name: impl AsRef<str>) -> bool {

@@ -58,9 +58,6 @@ async fn prepare() -> Result<()> {
   super::plugin().await?;
   commit_if_dirty("chore: update plugin commands").await?;
 
-  super::tailwind()?;
-  commit_if_dirty("chore: update tailwind classes").await?;
-
   let status = pnpm!("run", "format").spawn()?.wait().await?;
   bail_on_status_err!(status, "{}", "failed to format files".red());
   commit_if_dirty("style: format files").await?;
