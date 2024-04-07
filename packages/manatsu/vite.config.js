@@ -59,6 +59,7 @@ export default defineConfig({
         chunkFileNames: '[name].js',
         manualChunks: {
           composables: ['@manatsu/composables/src/index.ts'],
+          'tauri-plugin': ['@manatsu/tauri-plugin/src/index.ts'],
           'vue-plugin': ['@manatsu/vue-plugin/src/index.ts']
         }
       }

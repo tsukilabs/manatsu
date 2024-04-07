@@ -309,6 +309,20 @@
           ]
         },
         {
+          "description": "allow-is-dev -> Enables the is_dev command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-is-dev"
+          ]
+        },
+        {
+          "description": "deny-is-dev -> Denies the is_dev command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-is-dev"
+          ]
+        },
+        {
           "description": "allow-manatsu-version -> Enables the manatsu_version command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -362,6 +376,13 @@
           "type": "string",
           "enum": [
             "deny-version-snapshot"
+          ]
+        },
+        {
+          "description": "default -> Default permissions for the Manatsu plugin",
+          "type": "string",
+          "enum": [
+            "default"
           ]
         }
       ]

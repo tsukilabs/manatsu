@@ -1,9 +1,10 @@
+import { noop } from '@tb-dev/utils';
 import type { RouteLocationRaw } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
 import type { InvokeArgs } from '@tauri-apps/api/core';
 import { getRouter, handleError } from '@manatsu/shared';
 import { type KeyFilter, onKeyStroke as original, tryOnScopeDispose } from '@vueuse/core';
-import { executeHandler, invokeCommand, pushRoute } from './utils';
+import { execute, invokeCommand, pushRoute } from './utils';
 import type { KeyStrokeEventHandler, OnKeyStrokeOptions } from './types';
 
 export function onKeyStroke(
@@ -16,14 +17,11 @@ export function onKeyStroke(
     ctrlKey = false,
     metaKey = false,
     shiftKey = false,
+    dev = false,
     preventDefault = true
   } = options;
 
   const fn = (e: KeyboardEvent) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
-
     if (
       e.altKey !== altKey ||
       e.ctrlKey !== ctrlKey ||
@@ -33,7 +31,11 @@ export function onKeyStroke(
       return;
     }
 
-    executeHandler(e, handler).catch(handleError);
+    if (preventDefault) {
+      e.preventDefault();
+    }
+
+    execute(e, { dev }, handler).catch(handleError);
   };
 
   const stop = original(key, fn, options);
@@ -137,4 +139,32 @@ export function navigateOnKeyUp(
 ) {
   const router = getRouter();
   return onKeyUp(key, pushRoute(router, to), options);
+}
+
+export function preventKeyStroke(
+  key: KeyFilter,
+  options?: Omit<OnKeyStrokeOptions, 'preventDefault'>
+) {
+  return onKeyStroke(key, noop, { ...options, preventDefault: true });
+}
+
+export function preventKeyDown(
+  key: KeyFilter,
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'preventDefault'>
+) {
+  return onKeyDown(key, noop, { ...options, preventDefault: true });
+}
+
+export function preventKeyPressed(
+  key: KeyFilter,
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'preventDefault'>
+) {
+  return onKeyPressed(key, noop, { ...options, preventDefault: true });
+}
+
+export function preventKeyUp(
+  key: KeyFilter,
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'preventDefault'>
+) {
+  return onKeyUp(key, noop, { ...options, preventDefault: true });
 }

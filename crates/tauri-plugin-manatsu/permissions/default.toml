@@ -1,0 +1,11 @@
+"$schema" = "schemas/schema.json"
+[default]
+description = "Default permissions for the Manatsu plugin"
+permissions = [
+  "allow-error-log-path",
+  "allow-is-dev",
+  "allow-manatsu-version",
+  "allow-read-error-logs",
+  "allow-save-error-log",
+  "allow-version-snapshot",
+]

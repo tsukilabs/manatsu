@@ -1,5 +1,6 @@
 const COMMANDS: &[&str] = &[
   "error_log_path",
+  "is_dev",
   "manatsu_version",
   "read_error_logs",
   "save_error_log",

@@ -1,6 +1,16 @@
 export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 
 export {
+  Command,
+  createVersionSnapshot,
+  getErrorLogPath,
+  getManatsuVersion,
+  isDev,
+  readErrorLogs,
+  saveErrorLog
+} from '@manatsu/tauri-plugin/src/index.ts';
+
+export {
   type ComputedSymbol,
   type ErrorLog,
   type MaybeNullishRef,
@@ -31,6 +41,10 @@ export {
   onKeyPressed,
   onKeyStroke,
   onKeyUp,
+  preventKeyDown,
+  preventKeyPressed,
+  preventKeyStroke,
+  preventKeyUp,
   useElementSize,
   useInvoke,
   useListen

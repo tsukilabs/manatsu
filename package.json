@@ -33,7 +33,7 @@
     "@tauri-apps/api": "^2.0.0-beta.7",
     "@tb-dev/eslint-config": "^3.4.0",
     "@tb-dev/utility-types": "^1.2.5",
-    "@tb-dev/utils": "^1.4.4",
+    "@tb-dev/utils": "^1.5.0",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitest/ui": "^1.4.0",
@@ -53,6 +53,6 @@
     "vitest": "^1.4.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
-    "vue-tsc": "^2.0.10"
+    "vue-tsc": "^2.0.11"
   }
 }

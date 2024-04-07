@@ -16,7 +16,7 @@ impl<'a> Package {
     "vue-plugin",
   ];
 
-  pub const MANUAL_CHUNK: [&'a str; 2] = ["composables", "vue-plugin"];
+  pub const MANUAL_CHUNK: [&'a str; 3] = ["composables", "tauri-plugin", "vue-plugin"];
 
   pub fn read_root() -> Result<Package> {
     let path: PathBuf = env::current_dir()?.join("package.json");

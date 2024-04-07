@@ -17,8 +17,8 @@ importers:
         specifier: ^1.2.5
         version: 1.2.5
       '@tb-dev/utils':
-        specifier: ^1.4.4
-        version: 1.4.4
+        specifier: ^1.5.0
+        version: 1.5.0
       '@types/node':
         specifier: ^20.12.5
         version: 20.12.5
@@ -77,14 +77,17 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(vue@3.4.21)
       vue-tsc:
-        specifier: ^2.0.10
-        version: 2.0.10(typescript@5.4.4)
+        specifier: ^2.0.11
+        version: 2.0.11(typescript@5.4.4)
 
   packages/composables:
     dependencies:
       '@manatsu/shared':
         specifier: workspace:*
         version: link:../shared
+      '@manatsu/tauri-plugin':
+        specifier: workspace:*
+        version: link:../tauri-plugin
       '@tauri-apps/api':
         specifier: ^2.0.0-beta.7
         version: 2.0.0-beta.7
@@ -92,8 +95,8 @@ importers:
         specifier: ^1.2.5
         version: 1.2.5
       '@tb-dev/utils':
-        specifier: ^1.4.4
-        version: 1.4.4
+        specifier: ^1.5.0
+        version: 1.5.0
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -104,9 +107,6 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(vue@3.4.21)
     devDependencies:
-      '@manatsu/tauri-plugin':
-        specifier: workspace:*
-        version: link:../tauri-plugin
       '@manatsu/vue-plugin':
         specifier: workspace:*
         version: link:../vue-plugin
@@ -122,6 +122,9 @@ importers:
       '@manatsu/shared':
         specifier: workspace:*
         version: link:../shared
+      '@manatsu/tauri-plugin':
+        specifier: workspace:*
+        version: link:../tauri-plugin
       '@manatsu/vue-plugin':
         specifier: workspace:*
         version: link:../vue-plugin
@@ -132,8 +135,8 @@ importers:
         specifier: ^1.2.5
         version: 1.2.5
       '@tb-dev/utils':
-        specifier: ^1.4.4
-        version: 1.4.4
+        specifier: ^1.5.0
+        version: 1.5.0
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -148,48 +151,14 @@ importers:
         specifier: ^5.2.8
         version: 5.2.8(@types/node@20.12.5)(sass@1.74.1)
 
-  packages/playground:
-    dependencies:
-      '@manatsu/composables':
-        specifier: workspace:*
-        version: link:../composables
-      '@manatsu/shared':
-        specifier: workspace:*
-        version: link:../shared
-      '@manatsu/style':
-        specifier: workspace:*
-        version: link:../style
-      '@manatsu/tauri-plugin':
-        specifier: workspace:*
-        version: link:../tauri-plugin
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
-      manatsu:
-        specifier: workspace:*
-        version: link:../manatsu
-    devDependencies:
-      '@types/lodash-es':
-        specifier: ^4.17.12
-        version: 4.17.12
-      unplugin-auto-import:
-        specifier: ^0.17.5
-        version: 0.17.5(@vueuse/core@10.9.0)
-      unplugin-vue-components:
-        specifier: ^0.26.0
-        version: 0.26.0(vue@3.4.21)
-      vite:
-        specifier: ^5.2.8
-        version: 5.2.8(@types/node@20.12.5)(sass@1.74.1)
-
   packages/shared:
     dependencies:
       '@tb-dev/utility-types':
         specifier: ^1.2.5
         version: 1.2.5
       '@tb-dev/utils':
-        specifier: ^1.4.4
-        version: 1.4.4
+        specifier: ^1.5.0
+        version: 1.5.0
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -241,8 +210,8 @@ importers:
         specifier: ^1.2.5
         version: 1.2.5
       '@tb-dev/utils':
-        specifier: ^1.4.4
-        version: 1.4.4
+        specifier: ^1.5.0
+        version: 1.5.0
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.21)
@@ -1505,10 +1474,10 @@ packages:
         integrity: sha512-TB0xjDaNoocTWd0a6p/LRgAO+fmtLmTVvFL5D0stzJPmd0alY51Mh3w62ZO1ysAYv0qAMFPJlHBAEAPQFrgSsA==
       }
 
-  /@tb-dev/utils@1.4.4:
+  /@tb-dev/utils@1.5.0:
     resolution:
       {
-        integrity: sha512-wLale9SENx5PnvrhYeMiAR0m2d13EStMeegKC526XPQdd7FP/iuok5a+pI77wb9Q85/Sz8D49nbm46zo2p+RmQ==
+        integrity: sha512-M1mFzgsKc+64OoobIe0kVJQCV2uTVGaVn6LFEjivDWZ0NHlbUvlV2gr+WJHUjgduK2JSODABMAkegzS1XcBLaw==
       }
     dependencies:
       '@tb-dev/utility-types': 1.2.5
@@ -1531,22 +1500,6 @@ packages:
     resolution:
       {
         integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
-      }
-    dev: true
-
-  /@types/lodash-es@4.17.12:
-    resolution:
-      {
-        integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==
-      }
-    dependencies:
-      '@types/lodash': 4.14.202
-    dev: true
-
-  /@types/lodash@4.14.202:
-    resolution:
-      {
-        integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==
       }
     dev: true
 
@@ -1991,13 +1944,13 @@ packages:
       '@volar/source-map': 1.11.1
     dev: true
 
-  /@volar/language-core@2.2.0-alpha.5:
+  /@volar/language-core@2.2.0-alpha.6:
     resolution:
       {
-        integrity: sha512-RqERQ8HXxKC/HAGpDg7oG/Yg8n3rC3KEnYE3D7lcKIblU59JEZX73IWD/L3fdjzyeSglDWjL91iOblU8MuKEoA==
+        integrity: sha512-GmT28LX2w4x82uuQqNN/P94VOCsZRHBbGcGe+5bFtA2hbIbH6f8tFdMfgXFtyhbft/pj6f3xl37xe+t+nomLIA==
       }
     dependencies:
-      '@volar/source-map': 2.2.0-alpha.5
+      '@volar/source-map': 2.2.0-alpha.6
     dev: true
 
   /@volar/source-map@1.11.1:
@@ -2009,10 +1962,10 @@ packages:
       muggle-string: 0.3.1
     dev: true
 
-  /@volar/source-map@2.2.0-alpha.5:
+  /@volar/source-map@2.2.0-alpha.6:
     resolution:
       {
-        integrity: sha512-Lw1LOPgt1QGaQX9HstRTlBz5x6d5mGq9ZTFMeyWVr8/5YOv3hCU0ehtMTwmCiAX/ZyNSINFI01ODePy2hwy06A==
+        integrity: sha512-EztD2zoUopETY+ZCUZAGUHKgj4gOkY/2WnaOS+RSTc56xm85miSA4qOBS8Lt1Ruu5vV52WIZKHW/R9PbjkZWFA==
       }
     dependencies:
       muggle-string: 0.4.1
@@ -2028,13 +1981,13 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
-  /@volar/typescript@2.2.0-alpha.5:
+  /@volar/typescript@2.2.0-alpha.6:
     resolution:
       {
-        integrity: sha512-9UKZSDTcgvKMXz9TiU1kHmu3uMuH8+M7oZ6/CzBt8LvFda+ec/ZDcvBjQg2rU5EVn4d+YPYcqenkeHre3tO7Og==
+        integrity: sha512-wTr0jO3wVXQ9FjBbWE2iX8GgDoiHp1Nttsb+tKk5IeUUb6f1uOjyeIXuS4KfeMBpCufthRO2st2O2uatAs/UXQ==
       }
     dependencies:
-      '@volar/language-core': 2.2.0-alpha.5
+      '@volar/language-core': 2.2.0-alpha.6
       path-browserify: 1.0.1
     dev: true
 
@@ -2205,10 +2158,10 @@ packages:
       vue-template-compiler: 2.7.16
     dev: true
 
-  /@vue/language-core@2.0.10(typescript@5.4.4):
+  /@vue/language-core@2.0.11(typescript@5.4.4):
     resolution:
       {
-        integrity: sha512-3ULtX6hSPJNdNChi6aJ4FfdJNs5EShBLxnwLFTqrk2N1385WOwGVlbHeS2R6W9s9lXZ0+mC2bv4VlFSyeNPNGA==
+        integrity: sha512-5ivg8Vem/yckzXI3L3n0mdKBPRcHSlsGt6/dpbEx42PcH3MIHAjSAJBYvENXeWJxv2ClQc8BS2mH1Ho2U7jZig==
       }
     peerDependencies:
       typescript: '*'
@@ -2216,7 +2169,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@volar/language-core': 2.2.0-alpha.5
+      '@volar/language-core': 2.2.0-alpha.6
       '@vue/compiler-dom': 3.4.21
       '@vue/shared': 3.4.21
       computeds: 0.0.1
@@ -3048,14 +3001,6 @@ packages:
         integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
       }
     engines: { node: '>=10' }
-    dev: true
-
-  /escape-string-regexp@5.0.0:
-    resolution:
-      {
-        integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==
-      }
-    engines: { node: '>=12' }
     dev: true
 
   /eslint-config-prettier@9.1.0(eslint@8.57.0):
@@ -4185,14 +4130,6 @@ packages:
       wrap-ansi: 9.0.0
     dev: true
 
-  /local-pkg@0.4.3:
-    resolution:
-      {
-        integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==
-      }
-    engines: { node: '>=14' }
-    dev: true
-
   /local-pkg@0.5.0:
     resolution:
       {
@@ -4223,13 +4160,6 @@ packages:
     dependencies:
       p-locate: 5.0.0
     dev: true
-
-  /lodash-es@4.17.21:
-    resolution:
-      {
-        integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
-      }
-    dev: false
 
   /lodash.get@4.4.2:
     resolution:
@@ -5123,13 +5053,6 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
-  /scule@1.3.0:
-    resolution:
-      {
-        integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==
-      }
-    dev: true
-
   /semver@5.7.2:
     resolution:
       {
@@ -5394,15 +5317,6 @@ packages:
     engines: { node: '>=8' }
     dev: true
 
-  /strip-literal@1.3.0:
-    resolution:
-      {
-        integrity: sha512-PugKzOsyXpArk0yWmUwqOZecSO0GH0bPoctLcqNDH9J04pVW3lflYE0ujElBGTloevcxF5MofAOZ7C5l2b+wLg==
-      }
-    dependencies:
-      acorn: 8.11.3
-    dev: true
-
   /strip-literal@2.0.0:
     resolution:
       {
@@ -5641,29 +5555,6 @@ packages:
       }
     dev: true
 
-  /unimport@3.7.1:
-    resolution:
-      {
-        integrity: sha512-V9HpXYfsZye5bPPYUgs0Otn3ODS1mDUciaBlXljI4C2fTwfFpvFZRywmlOu943puN9sncxROMZhsZCjNXEpzEQ==
-      }
-    dependencies:
-      '@rollup/pluginutils': 5.1.0
-      acorn: 8.11.3
-      escape-string-regexp: 5.0.0
-      estree-walker: 3.0.3
-      fast-glob: 3.3.2
-      local-pkg: 0.5.0
-      magic-string: 0.30.8
-      mlly: 1.6.1
-      pathe: 1.1.2
-      pkg-types: 1.0.3
-      scule: 1.3.0
-      strip-literal: 1.3.0
-      unplugin: 1.9.0
-    transitivePeerDependencies:
-      - rollup
-    dev: true
-
   /universalify@0.1.2:
     resolution:
       {
@@ -5686,79 +5577,6 @@ packages:
         integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==
       }
     engines: { node: '>= 10.0.0' }
-    dev: true
-
-  /unplugin-auto-import@0.17.5(@vueuse/core@10.9.0):
-    resolution:
-      {
-        integrity: sha512-fHNDkDSxv3PGagX1wmKBYBkgaM4AKAgZmdJw/bxjhNljx9KSXSgHpGfX0MwUrq9qw6q1bhHIZVWyOwoY2koo4w==
-      }
-    engines: { node: '>=14' }
-    peerDependencies:
-      '@nuxt/kit': ^3.2.2
-      '@vueuse/core': '*'
-    peerDependenciesMeta:
-      '@nuxt/kit':
-        optional: true
-      '@vueuse/core':
-        optional: true
-    dependencies:
-      '@antfu/utils': 0.7.7
-      '@rollup/pluginutils': 5.1.0
-      '@vueuse/core': 10.9.0(vue@3.4.21)
-      fast-glob: 3.3.2
-      local-pkg: 0.5.0
-      magic-string: 0.30.8
-      minimatch: 9.0.3
-      unimport: 3.7.1
-      unplugin: 1.9.0
-    transitivePeerDependencies:
-      - rollup
-    dev: true
-
-  /unplugin-vue-components@0.26.0(vue@3.4.21):
-    resolution:
-      {
-        integrity: sha512-s7IdPDlnOvPamjunVxw8kNgKNK8A5KM1YpK5j/p97jEKTjlPNrA0nZBiSfAKKlK1gWZuyWXlKL5dk3EDw874LQ==
-      }
-    engines: { node: '>=14' }
-    peerDependencies:
-      '@babel/parser': ^7.15.8
-      '@nuxt/kit': ^3.2.2
-      vue: 2 || 3
-    peerDependenciesMeta:
-      '@babel/parser':
-        optional: true
-      '@nuxt/kit':
-        optional: true
-    dependencies:
-      '@antfu/utils': 0.7.7
-      '@rollup/pluginutils': 5.1.0
-      chokidar: 3.6.0
-      debug: 4.3.4
-      fast-glob: 3.3.2
-      local-pkg: 0.4.3
-      magic-string: 0.30.8
-      minimatch: 9.0.3
-      resolve: 1.22.8
-      unplugin: 1.9.0
-      vue: 3.4.21(typescript@5.4.4)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /unplugin@1.9.0:
-    resolution:
-      {
-        integrity: sha512-14PslvMY3gNbXnQtNIRB566Q057L5Fe7f5LDEamxVi0QQVxoz5hrveBwwZLcKyHtZ09ysmipxRRj5Lv+BGz2Iw==
-      }
-    engines: { node: '>=14.0.0' }
-    dependencies:
-      acorn: 8.11.3
-      chokidar: 3.6.0
-      webpack-sources: 3.2.3
-      webpack-virtual-modules: 0.6.1
     dev: true
 
   /update-browserslist-db@1.0.13(browserslist@4.23.0):
@@ -6131,17 +5949,17 @@ packages:
       typescript: 5.4.4
     dev: true
 
-  /vue-tsc@2.0.10(typescript@5.4.4):
+  /vue-tsc@2.0.11(typescript@5.4.4):
     resolution:
       {
-        integrity: sha512-XD9GuUuc40fdL6VrfbFS5PehxK6exhKGEkzCbMjT01HcJVNuJxXaPFIhMEfxn581eryX7LBygAH6YYqnXQGElA==
+        integrity: sha512-dl5MEU4VGZdQFGBnKfPpAfV3SQmBDWs9o4YhUPvDmwk+zmb/RprzFJK2sagR6EWazogZhXENvykd3wBXWS9kng==
       }
     hasBin: true
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@volar/typescript': 2.2.0-alpha.5
-      '@vue/language-core': 2.0.10(typescript@5.4.4)
+      '@volar/typescript': 2.2.0-alpha.6
+      '@vue/language-core': 2.0.11(typescript@5.4.4)
       semver: 7.6.0
       typescript: 5.4.4
     dev: true
@@ -6180,21 +5998,6 @@ packages:
         integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==
       }
     engines: { node: '>=12' }
-    dev: true
-
-  /webpack-sources@3.2.3:
-    resolution:
-      {
-        integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==
-      }
-    engines: { node: '>=10.13.0' }
-    dev: true
-
-  /webpack-virtual-modules@0.6.1:
-    resolution:
-      {
-        integrity: sha512-poXpCylU7ExuvZK8z+On3kX+S8o/2dQ/SVYueKA0D4WEMXROXgY8Ez50/bQEUmvoSMMrWcrJqCHuhAbsiwg7Dg==
-      }
     dev: true
 
   /whatwg-encoding@3.1.1:

@@ -9,6 +9,17 @@ export interface OnKeyStrokeOptions extends OnKeyStrokeOptionsOriginal {
   metaKey?: boolean;
   shiftKey?: boolean;
 
+  /**
+   * Only trigger the handler in development mode.
+   * Uses `tauri::dev()` to check.
+   * @default false
+   */
+  dev?: boolean;
+
   /** @default true */
   preventDefault?: boolean;
+}
+
+export interface ExecutorOptions {
+  dev: boolean;
 }
