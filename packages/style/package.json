@@ -27,9 +27,7 @@
   ],
   "type": "module",
   "files": [
-    "dist",
-    "src/mixins",
-    "src/themes"
+    "src"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -39,19 +37,13 @@
       "import": "./dist/index.js"
     },
     "./*": "./*",
-    "./themes/mana": "./src/themes/mana/index.scss",
-    "./mixins/flex": "./src/mixins/flex.scss",
-    "./mixins/shadow": "./src/mixins/shadow.scss",
-    "./mixins/transition": "./src/mixins/transition.scss",
-    "./mixins/utils": "./src/mixins/utils.scss"
-  },
-  "scripts": {
-    "build": "pnpm run --bail \"/^(type-check|build-only)$/\"",
-    "build-only": "vite build",
-    "type-check": "tsc --noEmit"
+    "./flex": "./src/flex.scss",
+    "./shadow": "./src/shadow.scss",
+    "./transition": "./src/transition.scss",
+    "./utils": "./src/utils.scss"
   },
   "peerDependencies": {
-    "sass": "^1.72.0"
+    "sass": "^1.74.1"
   },
   "engines": {
     "node": ">=20"

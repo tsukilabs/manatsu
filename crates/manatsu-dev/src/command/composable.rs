@@ -5,7 +5,7 @@ use crate::utils::{Formatter, Linter};
 /// <https://regex101.com/r/vBQTOL>
 const NAME_REGEX: &str = r"^(define|on|use)(?:-?[a-zA-Z])*$";
 
-pub async fn create<T: AsRef<str>>(name: T) -> Result<()> {
+pub async fn create(name: impl AsRef<str>) -> Result<()> {
   let start = Instant::now();
 
   let name = name.as_ref();
@@ -75,7 +75,7 @@ fn update_src_index() -> Result<()> {
   let mut composables = Vec::new();
 
   for entry in fs::read_dir(src)? {
-    if matches!(entry, Ok(ref e) if e.file_type().map(|t| t.is_dir()).unwrap_or(false)) {
+    if matches!(entry, Ok(ref e) if e.file_type().map(|it| it.is_dir()).unwrap_or(false)) {
       if let Ok(name) = entry?.file_name().into_string() {
         composables.push(name);
       }
@@ -95,7 +95,7 @@ fn update_src_index() -> Result<()> {
   fs::write(index, cts).map_err(Into::into)
 }
 
-pub fn is_valid<T: AsRef<str>>(name: T) -> bool {
+pub fn is_valid(name: impl AsRef<str>) -> bool {
   let regex = Regex::new(NAME_REGEX).unwrap();
   regex.is_match(name.as_ref())
 }

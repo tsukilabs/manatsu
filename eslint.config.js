@@ -5,10 +5,8 @@ export default config({
   vue: true,
   project: [
     'tsconfig.json',
-    'packages/components/tsconfig.json',
     'packages/composables/tsconfig.json',
     'packages/manatsu/tsconfig.json',
-    'packages/playground/tsconfig.json',
     'packages/shared/tsconfig.json',
     'packages/tauri-plugin/tsconfig.json',
     'packages/vue-plugin/tsconfig.json'
@@ -25,8 +23,7 @@ export default config({
       'vue/block-lang': [
         'error',
         { script: { lang: 'ts' }, style: { lang: 'scss', allowNoLang: false } }
-      ],
-      'vue/enforce-style-attribute': ['error', { allow: ['plain'] }]
+      ]
     }
   }
 });

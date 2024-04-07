@@ -9,9 +9,8 @@ pub struct Package {
 impl<'a> Package {
   pub const PRIVATE: [&'a str; 1] = ["playground"];
 
-  pub const PUBLIC: [&'a str; 7] = [
+  pub const PUBLIC: [&'a str; 6] = [
     "manatsu",
-    "components",
     "composables",
     "shared",
     "style",
@@ -19,9 +18,8 @@ impl<'a> Package {
     "vue-plugin",
   ];
 
-  pub const MANUAL_CHUNK: [&'a str; 3] = ["components", "composables", "vue-plugin"];
+  pub const MANUAL_CHUNK: [&'a str; 2] = ["composables", "vue-plugin"];
 
-  /// Read the root `package.json` file.
   pub fn read_root() -> Result<Package> {
     let path: PathBuf = env::current_dir()?.join("package.json");
     let package = fs::read_to_string(path)?;
@@ -39,7 +37,6 @@ impl<'a> Package {
   }
 }
 
-/// Returns all package names.
 pub fn all() -> Vec<String> {
   let mut packages = Package::PUBLIC.to_vec();
   packages.extend_from_slice(&Package::PRIVATE);
@@ -47,7 +44,6 @@ pub fn all() -> Vec<String> {
   packages.into_iter().map_into().collect_vec()
 }
 
-/// Returns the path to a package.
 pub fn dir(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let cwd = env::current_dir()?;
@@ -55,28 +51,24 @@ pub fn dir(package: impl AsRef<str>) -> Result<PathBuf> {
   Ok(path)
 }
 
-/// Returns the path to the source dir of a given package.
 pub fn src(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("src");
   Ok(path)
 }
 
-/// Returns the path to the dist dir of a given package.
 pub fn dist(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dir(package)?.join("dist");
   Ok(path)
 }
 
-/// Returns the path to the `index.d.ts` file of a given package.
 pub fn dts(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = dist(package)?.join("index.d.ts");
   Ok(path)
 }
 
-/// Returns the path to the `index.ts` file of a given package.
 pub fn index(package: impl AsRef<str>) -> Result<PathBuf> {
   let package = package.as_ref();
   let path = src(package)?.join("index.ts");

@@ -1,8 +1,12 @@
 use crate::prelude::*;
-use crate::project::{Project, Template};
+use crate::project::Project;
 use inquire::validator::Validation;
-use inquire::{required, Select, Text};
+use inquire::{required, Text};
 use semver::Version;
+
+pub trait Command {
+  async fn execute(self) -> Result<()>;
+}
 
 #[derive(Debug, clap::Args)]
 pub struct Create {
@@ -32,14 +36,10 @@ impl super::Command for Create {
 
     let description = Text::new("Description").prompt_skippable()?;
 
-    let options = Template::iter().collect_vec();
-    let template = Select::new("Select a template", options).prompt()?;
-
     let project = Project {
       name: project_name,
       description,
       force: self.force,
-      template,
       version: Version::parse(self.version.as_deref().unwrap())?,
     };
 
