@@ -72,10 +72,6 @@ async fn build_shared() -> Result<()> {
 }
 
 fn should_build(package: &str) -> bool {
-  if Package::is_private(package) {
-    return false;
-  }
-
   // The shared package should already been built at this point.
   package != "shared"
 }

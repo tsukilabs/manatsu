@@ -7,8 +7,6 @@ pub struct Package {
 }
 
 impl<'a> Package {
-  pub const PRIVATE: [&'a str; 1] = ["playground"];
-
   pub const PUBLIC: [&'a str; 6] = [
     "manatsu",
     "composables",
@@ -30,18 +28,10 @@ impl<'a> Package {
     let package = package.as_ref();
     Package::MANUAL_CHUNK.contains(&package)
   }
-
-  pub fn is_private(package: impl AsRef<str>) -> bool {
-    let package = package.as_ref();
-    Package::PRIVATE.contains(&package)
-  }
 }
 
 pub fn all() -> Vec<String> {
-  let mut packages = Package::PUBLIC.to_vec();
-  packages.extend_from_slice(&Package::PRIVATE);
-
-  packages.into_iter().map_into().collect_vec()
+  Package::PUBLIC.into_iter().map_into().collect_vec()
 }
 
 pub fn dir(package: impl AsRef<str>) -> Result<PathBuf> {
