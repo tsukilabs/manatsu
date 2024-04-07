@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.8.0"
+version = "0.8.1"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 homepage = "https://github.com/tsukilabs/manatsu"
