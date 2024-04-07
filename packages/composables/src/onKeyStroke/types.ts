@@ -20,6 +20,8 @@ export interface OnKeyStrokeOptions extends OnKeyStrokeOptionsOriginal {
   preventDefault?: boolean;
 }
 
+export type PreventKeyStrokeOptions = Omit<OnKeyStrokeOptions, 'preventDefault' | 'dev'>;
+
 export interface ExecutorOptions {
   dev: boolean;
 }

@@ -5,7 +5,7 @@ import type { InvokeArgs } from '@tauri-apps/api/core';
 import { getRouter, handleError } from '@manatsu/shared';
 import { type KeyFilter, onKeyStroke as original, tryOnScopeDispose } from '@vueuse/core';
 import { execute, invokeCommand, pushRoute } from './utils';
-import type { KeyStrokeEventHandler, OnKeyStrokeOptions } from './types';
+import type { KeyStrokeEventHandler, OnKeyStrokeOptions, PreventKeyStrokeOptions } from './types';
 
 export function onKeyStroke(
   key: KeyFilter,
@@ -141,30 +141,24 @@ export function navigateOnKeyUp(
   return onKeyUp(key, pushRoute(router, to), options);
 }
 
-export function preventKeyStroke(
-  key: KeyFilter,
-  options?: Omit<OnKeyStrokeOptions, 'preventDefault'>
-) {
+export function preventKeyStroke(key: KeyFilter, options?: PreventKeyStrokeOptions) {
   return onKeyStroke(key, noop, { ...options, preventDefault: true });
 }
 
 export function preventKeyDown(
   key: KeyFilter,
-  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'preventDefault'>
+  options?: Omit<PreventKeyStrokeOptions, 'eventName'>
 ) {
   return onKeyDown(key, noop, { ...options, preventDefault: true });
 }
 
 export function preventKeyPressed(
   key: KeyFilter,
-  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'preventDefault'>
+  options?: Omit<PreventKeyStrokeOptions, 'eventName'>
 ) {
   return onKeyPressed(key, noop, { ...options, preventDefault: true });
 }
 
-export function preventKeyUp(
-  key: KeyFilter,
-  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'preventDefault'>
-) {
+export function preventKeyUp(key: KeyFilter, options?: Omit<PreventKeyStrokeOptions, 'eventName'>) {
   return onKeyUp(key, noop, { ...options, preventDefault: true });
 }
