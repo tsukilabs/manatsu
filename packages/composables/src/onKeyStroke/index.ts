@@ -18,7 +18,7 @@ export function onKeyStroke(
     metaKey = false,
     shiftKey = false,
     dev = false,
-    preventDefault = true
+    prevent = true
   } = options;
 
   const fn = (e: KeyboardEvent) => {
@@ -31,7 +31,7 @@ export function onKeyStroke(
       return;
     }
 
-    if (preventDefault) {
+    if (prevent) {
       e.preventDefault();
     }
 
@@ -142,23 +142,23 @@ export function navigateOnKeyUp(
 }
 
 export function preventKeyStroke(key: KeyFilter, options?: PreventKeyStrokeOptions) {
-  return onKeyStroke(key, noop, { ...options, preventDefault: true });
+  return onKeyStroke(key, noop, { ...options, prevent: true });
 }
 
 export function preventKeyDown(
   key: KeyFilter,
   options?: Omit<PreventKeyStrokeOptions, 'eventName'>
 ) {
-  return onKeyDown(key, noop, { ...options, preventDefault: true });
+  return onKeyDown(key, noop, { ...options, prevent: true });
 }
 
 export function preventKeyPressed(
   key: KeyFilter,
   options?: Omit<PreventKeyStrokeOptions, 'eventName'>
 ) {
-  return onKeyPressed(key, noop, { ...options, preventDefault: true });
+  return onKeyPressed(key, noop, { ...options, prevent: true });
 }
 
 export function preventKeyUp(key: KeyFilter, options?: Omit<PreventKeyStrokeOptions, 'eventName'>) {
-  return onKeyUp(key, noop, { ...options, preventDefault: true });
+  return onKeyUp(key, noop, { ...options, prevent: true });
 }
