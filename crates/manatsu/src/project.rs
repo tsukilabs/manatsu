@@ -60,9 +60,12 @@ impl Project {
   }
 
   async fn download(&self) -> Result<Bytes> {
-    let client = Client::builder().brotli(true).gzip(true).build()?;
-    let url = "https://github.com/ferreira-tb/template-tauri/archive/refs/heads/main.zip";
+    let client = Client::builder()
+      .brotli(true)
+      .gzip(true)
+      .build()?;
 
+    let url = "https://github.com/ferreira-tb/template-tauri/archive/refs/heads/main.zip";
     let response = client
       .get(url)
       .timeout(Duration::from_secs(10))
@@ -80,14 +83,21 @@ impl Project {
     for entry in fs::read_dir(&dir)?.flatten() {
       let entry_path = entry.path();
       if globset.is_match(&entry_path) {
-        remove_entry(entry_path)?;
+        remove_entry(&entry_path)
+          .with_context(|| format!("could not remove: {}", entry_path.display()))?;
       } else {
         let target_path = path.join(entry.file_name());
-        fs::rename(entry_path, target_path)?;
+        fs::rename(&entry_path, &target_path).with_context(|| {
+          format!(
+            "could not move: {} -> {}",
+            entry_path.display(),
+            target_path.display()
+          )
+        })?;
       }
     }
 
-    fs::remove_dir_all(dir)?;
+    fs::remove_dir_all(&dir).with_context(|| format!("could not remove: {}", dir.display()))?;
 
     Ok(())
   }
@@ -177,7 +187,10 @@ impl Project {
   }
 
   fn update_tauri_conf(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
-    let path = dir_path.as_ref().join("src-tauri/tauri.conf.json");
+    let path = dir_path
+      .as_ref()
+      .join("src-tauri/tauri.conf.json");
+
     let tauri_conf = fs::read_to_string(&path)?;
     let mut tauri_conf: serde_json::Value = serde_json::from_str(&tauri_conf)?;
 
@@ -258,7 +271,6 @@ fn build_globset() -> GlobSet {
 fn remove_entry(path: impl AsRef<Path>) -> Result<()> {
   let path = path.as_ref();
   let metadata = path.metadata()?;
-
   if metadata.is_dir() {
     fs::remove_dir_all(path)?;
   } else if metadata.is_file() {
