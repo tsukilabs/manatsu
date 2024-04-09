@@ -1,6 +1,6 @@
 {
   "name": "manatsu",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Vue utilities for Tauri apps",
   "license": "MIT",
   "private": false,
@@ -38,8 +38,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./*": "./*",
-    "./components/style": "./dist/style.css"
+    "./*": "./*"
   },
   "scripts": {
     "build": "pnpm run --bail \"/^(type-check|build-only)$/\"",
