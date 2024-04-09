@@ -1,3 +1,4 @@
+export * from './onContextMenu';
 export * from './onKeyStroke';
 export * from './useElementSize';
 export * from './useInvoke';

@@ -1,0 +1,46 @@
+import { toRef } from 'vue';
+import { tryOnScopeDispose, watchImmediate } from '@vueuse/core';
+import { type MaybeNullishRef, handleError } from '@manatsu/shared';
+import type { ContextMenuEventHandler, OnContextMenuOptions } from './types';
+
+export function onContextMenu(
+  target: MaybeNullishRef<Element | Window | Document | typeof globalThis>,
+  handler: ContextMenuEventHandler,
+  options: OnContextMenuOptions = {}
+) {
+  const targetRef = toRef(target);
+  let removeEventListener: (() => void) | null = null;
+
+  const { prevent = true } = options;
+
+  function callback(e: MouseEvent) {
+    if (prevent) {
+      e.preventDefault();
+    }
+
+    execute(e, handler).catch(handleError);
+  }
+
+  const stopWatcher = watchImmediate(targetRef, (el) => {
+    removeEventListener?.();
+    removeEventListener = null;
+
+    el ??= globalThis;
+    el.addEventListener('contextmenu', callback);
+    removeEventListener = () => el.removeEventListener('contextmenu', callback);
+  });
+
+  function stop() {
+    stopWatcher();
+    removeEventListener?.();
+    removeEventListener = null;
+  }
+
+  tryOnScopeDispose(() => stop());
+
+  return stop;
+}
+
+async function execute(e: MouseEvent, handler: ContextMenuEventHandler) {
+  await handler(e);
+}

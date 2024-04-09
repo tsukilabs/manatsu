@@ -21,7 +21,7 @@ export function onKeyStroke(
     prevent = true
   } = options;
 
-  const fn = (e: KeyboardEvent) => {
+  function callback(e: KeyboardEvent) {
     if (
       e.altKey !== altKey ||
       e.ctrlKey !== ctrlKey ||
@@ -36,9 +36,9 @@ export function onKeyStroke(
     }
 
     execute(e, { dev }, handler).catch(handleError);
-  };
+  }
 
-  const stop = original(key, fn, options);
+  const stop = original(key, callback, options);
 
   tryOnScopeDispose(() => stop());
 
