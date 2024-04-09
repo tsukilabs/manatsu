@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.9.3"
+version = "0.9.4"
 publish = false
 homepage = "https://github.com/ferreira-tb/manatsu"
 repository = "https://github.com/ferreira-tb/manatsu"

@@ -1,11 +1,12 @@
 import { toRef } from 'vue';
+import { noop } from '@tb-dev/utils';
 import { tryOnScopeDispose, watchImmediate } from '@vueuse/core';
 import { type MaybeNullishRef, handleError } from '@manatsu/shared';
 import type { ContextMenuEventHandler, OnContextMenuOptions } from './types';
 
 export function onContextMenu(
   target: MaybeNullishRef<Element | Window | Document | typeof globalThis>,
-  handler: ContextMenuEventHandler,
+  handler: ContextMenuEventHandler = noop,
   options: OnContextMenuOptions = {}
 ) {
   const targetRef = toRef(target);
@@ -39,6 +40,10 @@ export function onContextMenu(
   tryOnScopeDispose(() => stop());
 
   return stop;
+}
+
+export function preventContextMenu() {
+  return onContextMenu(globalThis, noop, { prevent: true });
 }
 
 async function execute(e: MouseEvent, handler: ContextMenuEventHandler) {
