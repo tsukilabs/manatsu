@@ -1,14 +1,14 @@
 {
   "name": "@manatsu/shared",
   "description": "Utilities for Manatsu",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@8.15.5",
-  "homepage": "https://github.com/tsukilabs/manatsu",
+  "homepage": "https://github.com/ferreira-tb/manatsu",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tsukilabs/manatsu.git"
+    "url": "git+https://github.com/ferreira-tb/manatsu.git"
   },
   "contributors": [
     {

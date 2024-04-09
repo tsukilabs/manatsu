@@ -10,6 +10,7 @@ use zip::ZipArchive;
 pub struct Project {
   pub name: String,
   pub description: Option<String>,
+  pub author: Option<String>,
   pub force: bool,
   pub version: Version,
 }
@@ -20,9 +21,9 @@ impl Project {
 
   /// Create a new Manatsu project from a template.
   ///
-  /// Tauri: <https://github.com/tsukilabs/manatsu-template-tauri>
+  /// Tauri: <https://github.com/ferreira-tb/manatsu-template-tauri>
   ///
-  /// Vue: <https://github.com/tsukilabs/manatsu-template-vue>
+  /// Vue: <https://github.com/ferreira-tb/manatsu-template-vue>
   pub async fn create(self) -> Result<()> {
     let start = Instant::now();
 
@@ -60,7 +61,7 @@ impl Project {
 
   async fn download(&self) -> Result<Bytes> {
     let client = Client::builder().brotli(true).gzip(true).build()?;
-    let url = "https://github.com/tsukilabs/template-tauri/archive/refs/heads/main.zip";
+    let url = "https://github.com/ferreira-tb/template-tauri/archive/refs/heads/main.zip";
 
     let response = client
       .get(url)
@@ -112,7 +113,8 @@ impl Project {
       .update_package_json(path)?
       .update_cargo_toml(path)?
       .update_tauri_conf(path)?
-      .update_index_html(path)?;
+      .update_index_html(path)?
+      .update_readme_md(path)?;
 
     Ok(())
   }
@@ -203,6 +205,20 @@ impl Project {
     let index_html = index_html.replace("Manatsu", &self.name);
 
     fs::write(path, index_html)?;
+
+    Ok(self)
+  }
+
+  fn update_readme_md(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
+    let path = dir_path.as_ref().join("README.md");
+    let readme_md = fs::read_to_string(&path)?;
+    let mut readme_md = readme_md.replace("PROJECT_NAME", &self.name);
+
+    if let Some(author) = &self.author {
+      readme_md = readme_md.replace("Andrew Ferreira", author);
+    }
+
+    fs::write(path, readme_md)?;
 
     Ok(self)
   }

@@ -10,17 +10,25 @@ pub trait Command {
 
 #[derive(Debug, clap::Args)]
 pub struct Create {
+  #[arg(short = 'a', long, value_name = "AUTHOR")]
+  author: Option<String>,
+
+  #[arg(short = 'd', long, value_name = "DESCRIPTION")]
+  description: Option<String>,
+
   /// Overwrites the directory if it already exists.
   #[arg(short = 'f', long)]
   force: bool,
 
-  /// Version of the project.
+  #[arg(short = 'n', long, value_name = "NAME")]
+  name: Option<String>,
+
   #[arg(short = 'v', long, value_name = "VERSION", default_value = "0.1.0")]
   version: Option<String>,
 }
 
 impl super::Command for Create {
-  async fn execute(self) -> Result<()> {
+  async fn execute(mut self) -> Result<()> {
     let validator = |name: &str| {
       if Project::is_valid(name) {
         Ok(Validation::Valid)
@@ -29,16 +37,26 @@ impl super::Command for Create {
       }
     };
 
-    let project_name = Text::new("Project name")
-      .with_validator(required!("project name is required"))
-      .with_validator(validator)
-      .prompt()?;
+    let name = self.name.unwrap_or_else(|| {
+      Text::new("Project name")
+        .with_validator(required!("project name is required"))
+        .with_validator(validator)
+        .prompt()
+        .unwrap()
+    });
 
-    let description = Text::new("Description").prompt_skippable()?;
+    if self.description.is_none() {
+      self.description = Text::new("Description").prompt_skippable()?;
+    }
+
+    if self.author.is_none() {
+      self.author = Text::new("Author").prompt_skippable()?;
+    }
 
     let project = Project {
-      name: project_name,
-      description,
+      name,
+      description: self.description,
+      author: self.author,
       force: self.force,
       version: Version::parse(self.version.as_deref().unwrap())?,
     };

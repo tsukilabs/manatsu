@@ -72,7 +72,7 @@ where
   let package = Package::read_root()?;
   let client = Client::builder().build()?;
 
-  let owner_repo = "tsukilabs/manatsu";
+  let owner_repo = "ferreira-tb/manatsu";
   let endpoint = format!("https://api.github.com/repos/{owner_repo}/releases");
   let auth = format!("Bearer {}", github_token.as_ref());
 

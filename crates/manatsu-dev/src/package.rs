@@ -7,11 +7,10 @@ pub struct Package {
 }
 
 impl<'a> Package {
-  pub const PUBLIC: [&'a str; 6] = [
+  pub const PUBLIC: [&'a str; 5] = [
     "manatsu",
     "composables",
     "shared",
-    "style",
     "tauri-plugin",
     "vue-plugin",
   ];
