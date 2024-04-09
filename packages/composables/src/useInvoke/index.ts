@@ -5,6 +5,8 @@ import { type ErrorHandler, getCurrentApp, handleError } from '@manatsu/shared';
 import { type MaybeRefOrGetter, type Ref, isRef, ref, shallowRef, toRef, toValue } from 'vue';
 import type { UseInvokeOptions, UseInvokeReturn } from './types';
 
+export type { UseInvokeOptions, UseInvokeReturn } from './types';
+
 export function useInvoke<Data>(
   command: MaybeRefOrGetter<string>,
   initial: Data,
