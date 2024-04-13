@@ -1,3 +1,4 @@
+import type { MaybeNullishRef } from '@manatsu/shared';
 import type { MaybePromise, Nullish } from '@tb-dev/utility-types';
 import type { OnKeyStrokeOptions as OnKeyStrokeOptionsOriginal } from '@vueuse/core';
 
@@ -15,7 +16,8 @@ export interface OnKeyStrokeOptions extends OnKeyStrokeOptionsOriginal {
    * @default false
    */
   dev?: boolean;
-
+  /** @default true */
+  enabled?: MaybeNullishRef<boolean>;
   /** @default true */
   prevent?: boolean;
 }

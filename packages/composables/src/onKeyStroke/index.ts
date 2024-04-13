@@ -1,3 +1,4 @@
+import { toRef, toValue } from 'vue';
 import { noop } from '@tb-dev/utils';
 import type { RouteLocationRaw } from 'vue-router';
 import type { Nullish } from '@tb-dev/utility-types';
@@ -18,8 +19,11 @@ export function onKeyStroke(
     metaKey = false,
     shiftKey = false,
     dev = false,
+    enabled = true,
     prevent = true
   } = options;
+
+  const enabledRef = toRef(enabled);
 
   function callback(e: KeyboardEvent) {
     if (
@@ -35,7 +39,9 @@ export function onKeyStroke(
       e.preventDefault();
     }
 
-    execute(e, { dev }, handler).catch(handleError);
+    if (toValue(enabledRef)) {
+      execute(e, { dev }, handler).catch(handleError);
+    }
   }
 
   const stop = original(key, callback, options);

@@ -1,4 +1,4 @@
-import { toRef } from 'vue';
+import { toRef, toValue } from 'vue';
 import { noop } from '@tb-dev/utils';
 import { tryOnScopeDispose, watchImmediate } from '@vueuse/core';
 import { type MaybeNullishRef, handleError } from '@manatsu/shared';
@@ -12,14 +12,17 @@ export function onContextMenu(
   const targetRef = toRef(target);
   let removeEventListener: (() => void) | null = null;
 
-  const { prevent = true } = options;
+  const { enabled = true, prevent = true } = options;
+  const enabledRef = toRef(enabled);
 
   function callback(e: MouseEvent) {
     if (prevent) {
       e.preventDefault();
     }
 
-    execute(e, handler).catch(handleError);
+    if (toValue(enabledRef)) {
+      execute(e, handler).catch(handleError);
+    }
   }
 
   const stopWatcher = watchImmediate(targetRef, (el) => {
