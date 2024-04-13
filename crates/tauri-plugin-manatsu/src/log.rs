@@ -87,7 +87,7 @@ pub trait Log {
     app
       .path()
       .app_log_dir()
-      .map(|path| path.join("manatsu/error.json"))
+      .map(|path| path.join("error.json"))
       .map_err(Into::into)
   }
 

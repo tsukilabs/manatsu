@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.9.5"
+version = "0.9.6"
 description = "CLI tools for Manatsu"
 homepage = "https://github.com/ferreira-tb/manatsu"
 repository = "https://github.com/ferreira-tb/manatsu"
@@ -13,7 +13,7 @@ categories = ["gui", "web-programming"]
 keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
 [dependencies]
-anyhow = "1.0.81"
+anyhow = "1.0.82"
 convert_case = "0.6.0"
 globset = "0.4.14"
 inquire = "0.7.4"
