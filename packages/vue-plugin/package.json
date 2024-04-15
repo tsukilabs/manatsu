@@ -42,8 +42,8 @@
   "dependencies": {
     "@manatsu/shared": "workspace:*",
     "@manatsu/tauri-plugin": "workspace:*",
-    "@tb-dev/utility-types": "^1.2.5",
-    "@tb-dev/utils": "^1.5.0"
+    "@tb-dev/utility-types": "^1.2.6",
+    "@tb-dev/utils": "^1.5.1"
   },
   "devDependencies": {
     "vite": "^5.2.8"
