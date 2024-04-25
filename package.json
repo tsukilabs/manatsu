@@ -30,7 +30,7 @@
     "update": "miho update major -t"
   },
   "devDependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.7",
+    "@tauri-apps/api": "^2.0.0-beta.9",
     "@tb-dev/eslint-config": "^3.4.0",
     "@tb-dev/utility-types": "^1.2.6",
     "@tb-dev/utils": "^1.5.1",
