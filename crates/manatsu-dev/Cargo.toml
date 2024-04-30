@@ -4,15 +4,32 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.9.7"
+version = "0.9.8"
 publish = false
-homepage = "https://github.com/ferreira-tb/manatsu"
-repository = "https://github.com/ferreira-tb/manatsu"
-authors = ["Andrew Ferreira <andrew.shien2@gmail.com>"]
-license = "MIT"
-edition = "2021"
-rust-version = "1.76"
-readme = "../../README.md"
+
+[package.homepage]
+workspace = true
+
+[package.repository]
+workspace = true
+
+[package.authors]
+workspace = true
+
+[package.license]
+workspace = true
+
+[package.edition]
+workspace = true
+
+[package.rust-version]
+workspace = true
+
+[package.readme]
+workspace = true
+
+[lints]
+workspace = true
 
 [dependencies]
 anyhow = "1.0.82"

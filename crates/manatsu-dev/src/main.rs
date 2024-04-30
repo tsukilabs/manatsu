@@ -1,6 +1,3 @@
-#![allow(clippy::missing_panics_doc)]
-#![allow(clippy::must_use_candidate)]
-
 mod command;
 mod macros;
 mod package;

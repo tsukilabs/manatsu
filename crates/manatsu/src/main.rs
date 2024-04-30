@@ -1,5 +1,3 @@
-#![allow(clippy::must_use_candidate)]
-
 mod command;
 pub(crate) mod prelude;
 pub(crate) mod project;

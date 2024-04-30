@@ -51,7 +51,7 @@ impl Project {
     let mut zip = ZipArchive::new(cursor)?;
     zip.extract(&path)?;
 
-    self.hoist_extracted_files(&path)?;
+    hoist_extracted_files(&path)?;
     self.update_project_metadata(&path)?;
 
     println!("built {} in {:?}", self.name, start.elapsed());
@@ -70,48 +70,6 @@ impl Project {
       .with_context(|| format!("could not fetch: {url}"))?;
 
     response.bytes().await.map_err(Into::into)
-  }
-
-  fn hoist_extracted_files(&self, path: &Path) -> Result<()> {
-    let globset = build_globset();
-    let dir = self.find_extracted_dir(path)?;
-
-    for entry in fs::read_dir(&dir)?.flatten() {
-      let entry_path = entry.path();
-      if globset.is_match(&entry_path) {
-        remove_entry(&entry_path)
-          .with_context(|| format!("could not remove: {}", entry_path.display()))?;
-      } else {
-        let target_path = path.join(entry.file_name());
-        fs::rename(&entry_path, &target_path).with_context(|| {
-          format!(
-            "could not move: {} -> {}",
-            entry_path.display(),
-            target_path.display()
-          )
-        })?;
-      }
-    }
-
-    fs::remove_dir_all(&dir).with_context(|| format!("could not remove: {}", dir.display()))?;
-
-    Ok(())
-  }
-
-  fn find_extracted_dir(&self, path: &Path) -> Result<PathBuf> {
-    for entry in fs::read_dir(path)?.flatten() {
-      let entry_path = entry.path();
-      if entry.metadata()?.is_dir() {
-        let file_name = entry.file_name();
-        if matches!(file_name.to_str(), Some(n) if n.contains("template-tauri")) {
-          return Ok(entry_path);
-        }
-      }
-
-      remove_entry(&entry_path)?;
-    }
-
-    Err(anyhow!("could not find extracted folder"))
   }
 
   fn update_project_metadata(&self, path: &Path) -> Result<()> {
@@ -259,6 +217,48 @@ fn build_globset() -> GlobSet {
   add!("**/config.json");
 
   builder.build().unwrap()
+}
+
+fn find_extracted_dir(path: &Path) -> Result<PathBuf> {
+  for entry in fs::read_dir(path)?.flatten() {
+    let entry_path = entry.path();
+    if entry.metadata()?.is_dir() {
+      let file_name = entry.file_name();
+      if matches!(file_name.to_str(), Some(n) if n.contains("template-tauri")) {
+        return Ok(entry_path);
+      }
+    }
+
+    remove_entry(&entry_path)?;
+  }
+
+  Err(anyhow!("could not find extracted folder"))
+}
+
+fn hoist_extracted_files(path: &Path) -> Result<()> {
+  let globset = build_globset();
+  let dir = find_extracted_dir(path)?;
+
+  for entry in fs::read_dir(&dir)?.flatten() {
+    let entry_path = entry.path();
+    if globset.is_match(&entry_path) {
+      remove_entry(&entry_path)
+        .with_context(|| format!("could not remove: {}", entry_path.display()))?;
+    } else {
+      let target_path = path.join(entry.file_name());
+      fs::rename(&entry_path, &target_path).with_context(|| {
+        format!(
+          "could not move: {} -> {}",
+          entry_path.display(),
+          target_path.display()
+        )
+      })?;
+    }
+  }
+
+  fs::remove_dir_all(&dir).with_context(|| format!("could not remove: {}", dir.display()))?;
+
+  Ok(())
 }
 
 fn remove_entry(path: impl AsRef<Path>) -> Result<()> {
