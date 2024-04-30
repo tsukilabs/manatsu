@@ -4,7 +4,7 @@
   "version": "0.9.7",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@9.0.6",
   "homepage": "https://github.com/ferreira-tb/manatsu",
   "repository": {
     "type": "git",
@@ -39,8 +39,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@tb-dev/utility-types": "^1.2.6",
-    "@tb-dev/utils": "^1.5.1"
+    "@tb-dev/utility-types": "^1.2.7",
+    "@tb-dev/utils": "^1.5.2"
   },
   "devDependencies": {
     "vite": "^5.2.10"

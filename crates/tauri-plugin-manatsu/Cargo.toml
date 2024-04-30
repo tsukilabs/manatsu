@@ -15,27 +15,27 @@ keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
 
 [dependencies]
 anyhow = "1.0.82"
-thiserror = "1.0.58"
-chrono = "0.4.37"
+thiserror = "1.0.59"
+chrono = "0.4.38"
 
 [dependencies.sysinfo]
-version = "0.30.10"
+version = "0.30.11"
 default-features = false
 
 [dependencies.serde]
 features = ["derive"]
-version = "1.0.197"
+version = "1.0.199"
 
 [dependencies.serde_json]
-version = "1.0.115"
+version = "1.0.116"
 
 [dependencies.tauri]
-version = "2.0.0-beta.14"
+version = "2.0.0-beta.16"
 
 [dependencies.tokio]
 version = "1.37.0"
 features = ["fs"]
 
 [build-dependencies.tauri-plugin]
-version = "2.0.0-beta.11"
+version = "2.0.0-beta.13"
 features = ["build"]
