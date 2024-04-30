@@ -1,6 +1,6 @@
 # Manatsu
 
-Manatsu is a [Vue](https://vuejs.org/) utilities library, designed to integrate with [Tauri](https://beta.tauri.app/guides/) apps.
+Manatsu is a [Vue](https://vuejs.org/) utilities library for [Tauri](https://beta.tauri.app/guides/) apps.
 
 ```bash
 cargo install manatsu
