@@ -43,7 +43,7 @@
     "@tb-dev/utils": "^1.5.2"
   },
   "devDependencies": {
-    "vite": "^5.2.10"
+    "vite": "^5.2.11"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.9.0",
