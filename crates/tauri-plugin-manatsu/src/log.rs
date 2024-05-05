@@ -136,7 +136,7 @@ impl Log for Error {
       self.version.webview = VersionSnapshot::webview();
     }
 
-    self.version.app = app.config().version.clone();
+    app.config().version.clone_into(&mut self.version.app);
 
     let path = Self::path(app)?;
     if let Some(parent_dir) = path.parent() {

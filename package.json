@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.0.6",
@@ -30,13 +30,13 @@
     "update": "miho update major -t"
   },
   "devDependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.9",
-    "@tb-dev/eslint-config": "^3.4.0",
+    "@tauri-apps/api": "^2.0.0-beta.11",
+    "@tb-dev/eslint-config": "^3.4.3",
     "@tb-dev/utility-types": "^1.2.7",
-    "@tb-dev/utils": "^1.5.2",
-    "@types/node": "^20.12.7",
+    "@tb-dev/utils": "^1.6.0",
+    "@types/node": "^20.12.8",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vitest/ui": "^1.5.3",
+    "@vitest/ui": "^1.6.0",
     "@vueuse/core": "^10.9.0",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
@@ -44,15 +44,15 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-css-order": "^2.1.2",
-    "sass": "^1.75.0",
+    "sass": "^1.76.0",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10",
-    "vite-plugin-dts": "^3.9.0",
+    "vite": "^5.2.11",
+    "vite-plugin-dts": "^3.9.1",
     "vite-plugin-vue-devtools": "^7.1.3",
-    "vitest": "^1.5.3",
+    "vitest": "^1.6.0",
     "vue": "^3.4.26",
     "vue-router": "^4.3.2",
-    "vue-tsc": "^2.0.15"
+    "vue-tsc": "^2.0.16"
   }
 }

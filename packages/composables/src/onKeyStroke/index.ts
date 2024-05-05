@@ -59,20 +59,68 @@ export function onKeyDown(
   return onKeyStroke(key, handler, { ...options, eventName: 'keydown' });
 }
 
-export function onKeyPressed(
+export function onAltKeyStroke(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options: Omit<OnKeyStrokeOptions, 'eventName'> = {}
+  options?: OnKeyStrokeOptions
 ) {
-  return onKeyStroke(key, handler, { ...options, eventName: 'keypress' });
+  return onKeyStroke(key, handler, { ...options, altKey: true });
 }
 
-export function onKeyUp(
+export function onAltKeyDown(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options: Omit<OnKeyStrokeOptions, 'eventName'> = {}
+  options?: Omit<OnKeyStrokeOptions, 'eventName'>
 ) {
-  return onKeyStroke(key, handler, { ...options, eventName: 'keyup' });
+  return onKeyDown(key, handler, { ...options, altKey: true });
+}
+
+export function onCtrlKeyStroke(
+  key: KeyFilter,
+  handler?: KeyStrokeEventHandler,
+  options?: OnKeyStrokeOptions
+) {
+  return onKeyStroke(key, handler, { ...options, ctrlKey: true });
+}
+
+export function onCtrlKeyDown(
+  key: KeyFilter,
+  handler?: KeyStrokeEventHandler,
+  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+) {
+  return onKeyDown(key, handler, { ...options, ctrlKey: true });
+}
+
+export function onShiftKeyStroke(
+  key: KeyFilter,
+  handler?: KeyStrokeEventHandler,
+  options?: OnKeyStrokeOptions
+) {
+  return onKeyStroke(key, handler, { ...options, shiftKey: true });
+}
+
+export function onShiftKeyDown(
+  key: KeyFilter,
+  handler?: KeyStrokeEventHandler,
+  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+) {
+  return onKeyDown(key, handler, { ...options, shiftKey: true });
+}
+
+export function onCtrlShiftKeyStroke(
+  key: KeyFilter,
+  handler?: KeyStrokeEventHandler,
+  options?: OnKeyStrokeOptions
+) {
+  return onKeyStroke(key, handler, { ...options, ctrlKey: true, shiftKey: true });
+}
+
+export function onCtrlShiftKeyDown(
+  key: KeyFilter,
+  handler?: KeyStrokeEventHandler,
+  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+) {
+  return onKeyDown(key, handler, { ...options, ctrlKey: true, shiftKey: true });
 }
 
 export function invokeOnKeyStroke(
@@ -93,24 +141,6 @@ export function invokeOnKeyDown(
   return onKeyDown(key, invokeCommand(command, args), options);
 }
 
-export function invokeOnKeyPressed(
-  key: KeyFilter,
-  command: string,
-  args?: Nullish<InvokeArgs>,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
-) {
-  return onKeyPressed(key, invokeCommand(command, args), options);
-}
-
-export function invokeOnKeyUp(
-  key: KeyFilter,
-  command: string,
-  args?: Nullish<InvokeArgs>,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
-) {
-  return onKeyUp(key, invokeCommand(command, args), options);
-}
-
 export function navigateOnKeyStroke(
   key: KeyFilter,
   to: RouteLocationRaw,
@@ -129,24 +159,6 @@ export function navigateOnKeyDown(
   return onKeyDown(key, pushRoute(router, to), options);
 }
 
-export function navigateOnKeyPressed(
-  key: KeyFilter,
-  to: RouteLocationRaw,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
-) {
-  const router = getRouter();
-  return onKeyPressed(key, pushRoute(router, to), options);
-}
-
-export function navigateOnKeyUp(
-  key: KeyFilter,
-  to: RouteLocationRaw,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
-) {
-  const router = getRouter();
-  return onKeyUp(key, pushRoute(router, to), options);
-}
-
 export function preventKeyStroke(key: KeyFilter, options?: PreventKeyStrokeOptions) {
   return onKeyStroke(key, noop, { ...options, prevent: true });
 }
@@ -156,15 +168,4 @@ export function preventKeyDown(
   options?: Omit<PreventKeyStrokeOptions, 'eventName'>
 ) {
   return onKeyDown(key, noop, { ...options, prevent: true });
-}
-
-export function preventKeyPressed(
-  key: KeyFilter,
-  options?: Omit<PreventKeyStrokeOptions, 'eventName'>
-) {
-  return onKeyPressed(key, noop, { ...options, prevent: true });
-}
-
-export function preventKeyUp(key: KeyFilter, options?: Omit<PreventKeyStrokeOptions, 'eventName'>) {
-  return onKeyUp(key, noop, { ...options, prevent: true });
 }

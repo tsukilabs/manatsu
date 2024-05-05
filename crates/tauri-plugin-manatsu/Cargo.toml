@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.9.8"
+version = "0.9.9"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
@@ -43,13 +43,13 @@ default-features = false
 
 [dependencies.serde]
 features = ["derive"]
-version = "1.0.199"
+version = "1.0.200"
 
 [dependencies.serde_json]
 version = "1.0.116"
 
 [dependencies.tauri]
-version = "2.0.0-beta.16"
+version = "2.0.0-beta.17"
 
 [dependencies.tokio]
 version = "1.37.0"

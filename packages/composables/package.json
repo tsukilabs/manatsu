@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/composables",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Manatsu composables",
   "license": "MIT",
   "private": false,
@@ -48,17 +48,17 @@
     "@manatsu/shared": "workspace:*",
     "@manatsu/tauri-plugin": "workspace:*",
     "@tb-dev/utility-types": "^1.2.7",
-    "@tb-dev/utils": "^1.5.2"
+    "@tb-dev/utils": "^1.6.0"
   },
   "devDependencies": {
     "@manatsu/vue-plugin": "workspace:*",
-    "vite": "^5.2.10"
+    "vite": "^5.2.11"
   },
   "peerDependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.7",
+    "@tauri-apps/api": "^2.0.0-beta.11",
     "@vueuse/core": "^10.9.0",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue": "^3.4.26",
+    "vue-router": "^4.3.2"
   },
   "engines": {
     "node": ">=20"
