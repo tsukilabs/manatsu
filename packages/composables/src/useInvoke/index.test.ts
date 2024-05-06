@@ -76,7 +76,7 @@ describe('useInvoke', () => {
 
     expect(state.value).toBe('1.0.0');
 
-    command.value = Command.ErrorLogPath;
+    command.value = Command.LogPath;
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
 
@@ -100,7 +100,7 @@ function handleCommand<T>(command: string): T {
   switch (command) {
     case Command.ManatsuVersion:
       return '1.0.0' as T;
-    case Command.ErrorLogPath:
+    case Command.LogPath:
       return 'error.log' as T;
     default:
       throw new Error('invalid command');
