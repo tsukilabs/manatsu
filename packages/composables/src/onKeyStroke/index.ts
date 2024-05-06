@@ -62,7 +62,7 @@ export function onKeyDown(
 export function onAltKeyStroke(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: OnKeyStrokeOptions
+  options?: Omit<OnKeyStrokeOptions, 'altKey'>
 ) {
   return onKeyStroke(key, handler, { ...options, altKey: true });
 }
@@ -70,7 +70,7 @@ export function onAltKeyStroke(
 export function onAltKeyDown(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'altKey'>
 ) {
   return onKeyDown(key, handler, { ...options, altKey: true });
 }
@@ -78,7 +78,7 @@ export function onAltKeyDown(
 export function onCtrlKeyStroke(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: OnKeyStrokeOptions
+  options?: Omit<OnKeyStrokeOptions, 'ctrlKey'>
 ) {
   return onKeyStroke(key, handler, { ...options, ctrlKey: true });
 }
@@ -86,7 +86,7 @@ export function onCtrlKeyStroke(
 export function onCtrlKeyDown(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'ctrlKey'>
 ) {
   return onKeyDown(key, handler, { ...options, ctrlKey: true });
 }
@@ -94,7 +94,7 @@ export function onCtrlKeyDown(
 export function onShiftKeyStroke(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: OnKeyStrokeOptions
+  options?: Omit<OnKeyStrokeOptions, 'shiftKey'>
 ) {
   return onKeyStroke(key, handler, { ...options, shiftKey: true });
 }
@@ -102,7 +102,7 @@ export function onShiftKeyStroke(
 export function onShiftKeyDown(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'shiftKey'>
 ) {
   return onKeyDown(key, handler, { ...options, shiftKey: true });
 }
@@ -110,7 +110,7 @@ export function onShiftKeyDown(
 export function onCtrlShiftKeyStroke(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: OnKeyStrokeOptions
+  options?: Omit<OnKeyStrokeOptions, 'ctrlKey' | 'shiftKey'>
 ) {
   return onKeyStroke(key, handler, { ...options, ctrlKey: true, shiftKey: true });
 }
@@ -118,7 +118,7 @@ export function onCtrlShiftKeyStroke(
 export function onCtrlShiftKeyDown(
   key: KeyFilter,
   handler?: KeyStrokeEventHandler,
-  options?: Omit<OnKeyStrokeOptions, 'eventName'>
+  options?: Omit<OnKeyStrokeOptions, 'eventName' | 'ctrlKey' | 'shiftKey'>
 ) {
   return onKeyDown(key, handler, { ...options, ctrlKey: true, shiftKey: true });
 }

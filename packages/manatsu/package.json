@@ -1,10 +1,10 @@
 {
   "name": "manatsu",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "Vue utilities for Tauri apps",
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.0",
   "homepage": "https://github.com/ferreira-tb/manatsu",
   "repository": {
     "type": "git",
