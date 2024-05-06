@@ -30,8 +30,7 @@ describe('useInvoke', () => {
   afterEach(() => clearMocks());
 
   it('should invoke a command', async () => {
-    const loading = ref(false);
-    const { state } = useInvoke(Command.ManatsuVersion, '0.7.0', { loading });
+    const { state, loading } = useInvoke(Command.ManatsuVersion, '0.7.0');
     expect(state.value).toBe('0.7.0');
 
     await nextTick();
@@ -41,8 +40,7 @@ describe('useInvoke', () => {
   });
 
   it('should not execute immediately', async () => {
-    const loading = ref(false);
-    const { state } = useInvoke(Command.ManatsuVersion, null, { loading, lazy: true });
+    const { state, loading } = useInvoke(Command.ManatsuVersion, null, { lazy: true });
     expect(state.value).toBeNull();
 
     await nextTick();
@@ -52,11 +50,10 @@ describe('useInvoke', () => {
   });
 
   it('should execute manually', async () => {
-    const loading = ref(false);
-    const { state, execute } = useInvoke(Command.ManatsuVersion, null, {
-      loading,
+    const { state, execute, loading } = useInvoke(Command.ManatsuVersion, null, {
       lazy: true
     });
+
     expect(state.value).toBeNull();
 
     await execute();
@@ -67,9 +64,8 @@ describe('useInvoke', () => {
   });
 
   it('should invoke again if the command changes', async () => {
-    const loading = ref(false);
     const command = ref<Command>(Command.ManatsuVersion);
-    const { state } = useInvoke(command, '0.7.0', { loading });
+    const { state, loading } = useInvoke(command, '0.7.0');
 
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
@@ -85,9 +81,7 @@ describe('useInvoke', () => {
 
   it('should throw if the command is invalid', async () => {
     const onError = vi.fn();
-
-    const loading = ref(false);
-    useInvoke(null as any, null, { loading, onError });
+    const { loading } = useInvoke(null as any, null, { onError });
 
     await nextTick();
     await until(loading).not.toBeTruthy({ timeout: 50, throwOnTimeout: true });
