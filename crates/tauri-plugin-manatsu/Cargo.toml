@@ -49,7 +49,7 @@ version = "1.0.200"
 version = "1.0.116"
 
 [dependencies.tauri]
-version = "2.0.0-beta.17"
+version = "2.0.0-beta.18"
 
 [dependencies.tracing]
 version = "0.1.40"
@@ -60,5 +60,5 @@ version = "1.37.0"
 features = ["fs"]
 
 [build-dependencies.tauri-plugin]
-version = "2.0.0-beta.13"
+version = "2.0.0-beta.14"
 features = ["build"]
