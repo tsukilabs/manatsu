@@ -33,7 +33,7 @@ impl super::Command for Release {
       if !self.only_package {
         let crates = ["manatsu", "tauri-plugin-manatsu"];
         for crate_name in crates {
-          let status = cargo!(["publish", "-p", crate_name])
+          let status = cargo!(["publish", "-p", crate_name, "--locked"])
             .spawn()?
             .wait()
             .await?;
