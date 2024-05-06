@@ -32,7 +32,7 @@ workspace = true
 workspace = true
 
 [dependencies]
-anyhow = "1.0.82"
+anyhow = "1.0.83"
 colored = "2.1.0"
 convert_case = "0.6.0"
 globset = "0.4.14"
