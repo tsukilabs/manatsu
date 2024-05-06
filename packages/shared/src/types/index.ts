@@ -1,2 +1,3 @@
+export * from './vue';
 export * from './error';
-export * from './utils';
+export * from './symbols';

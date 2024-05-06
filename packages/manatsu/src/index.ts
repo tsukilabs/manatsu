@@ -3,25 +3,24 @@ export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/inde
 export {
   Command,
   createVersionSnapshot,
-  getErrorLogPath,
+  getLogPath,
   getManatsuVersion,
   isDev,
-  readErrorLogs,
-  saveErrorLog
+  readLogs,
+  saveLog
 } from '@manatsu/tauri-plugin/src/index.ts';
 
 export {
   type ComputedSymbol,
-  type ErrorLog,
+  EmptyComponent,
+  type Log,
   type MaybeNullishRef,
   type RefSymbol,
   type ShallowRefSymbol,
   type VersionSnapshot,
   type WritableRefSymbol,
   type WritableShallowRefSymbol,
-  defineEmptyComponent,
   getCurrentApp,
-  getRouter,
   handleError,
   injectStrict
 } from '@manatsu/shared';

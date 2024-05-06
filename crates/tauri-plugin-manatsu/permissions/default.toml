@@ -2,10 +2,10 @@
 [default]
 description = "Default permissions for the Manatsu plugin"
 permissions = [
-  "allow-error-log-path",
+  "allow-log-path",
   "allow-is-dev",
   "allow-manatsu-version",
-  "allow-read-error-logs",
-  "allow-save-error-log",
+  "allow-read-logs",
+  "allow-save-log",
   "allow-version-snapshot",
 ]

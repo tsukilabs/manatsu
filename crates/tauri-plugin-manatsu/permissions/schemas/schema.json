@@ -295,20 +295,6 @@
       "type": "string",
       "oneOf": [
         {
-          "description": "allow-error-log-path -> Enables the error_log_path command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-error-log-path"
-          ]
-        },
-        {
-          "description": "deny-error-log-path -> Denies the error_log_path command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-error-log-path"
-          ]
-        },
-        {
           "description": "allow-is-dev -> Enables the is_dev command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -320,6 +306,20 @@
           "type": "string",
           "enum": [
             "deny-is-dev"
+          ]
+        },
+        {
+          "description": "allow-log-path -> Enables the log_path command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-log-path"
+          ]
+        },
+        {
+          "description": "deny-log-path -> Denies the log_path command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-log-path"
           ]
         },
         {
@@ -337,31 +337,31 @@
           ]
         },
         {
-          "description": "allow-read-error-logs -> Enables the read_error_logs command without any pre-configured scope.",
+          "description": "allow-read-logs -> Enables the read_logs command without any pre-configured scope.",
           "type": "string",
           "enum": [
-            "allow-read-error-logs"
+            "allow-read-logs"
           ]
         },
         {
-          "description": "deny-read-error-logs -> Denies the read_error_logs command without any pre-configured scope.",
+          "description": "deny-read-logs -> Denies the read_logs command without any pre-configured scope.",
           "type": "string",
           "enum": [
-            "deny-read-error-logs"
+            "deny-read-logs"
           ]
         },
         {
-          "description": "allow-save-error-log -> Enables the save_error_log command without any pre-configured scope.",
+          "description": "allow-save-log -> Enables the save_log command without any pre-configured scope.",
           "type": "string",
           "enum": [
-            "allow-save-error-log"
+            "allow-save-log"
           ]
         },
         {
-          "description": "deny-save-error-log -> Denies the save_error_log command without any pre-configured scope.",
+          "description": "deny-save-log -> Denies the save_log command without any pre-configured scope.",
           "type": "string",
           "enum": [
-            "deny-save-error-log"
+            "deny-save-log"
           ]
         },
         {

@@ -1,7 +1,4 @@
-import type { App } from 'vue';
 import type { Nullish } from '@tb-dev/utility-types';
-
-export type ErrorHandler = (this: App, err: unknown) => void;
 
 export interface VersionSnapshot {
   app?: Nullish<string>;
@@ -12,7 +9,7 @@ export interface VersionSnapshot {
   webview?: Nullish<string>;
 }
 
-export interface ErrorLog {
+export interface Log {
   message: string;
   name: string;
   stack?: Nullish<string>;

@@ -49,7 +49,7 @@ impl VersionSnapshot {
 }
 
 #[derive(Deserialize, Serialize, PartialEq, Eq)]
-pub struct Error {
+pub struct Log {
   pub name: String,
   pub message: String,
   pub stack: Option<String>,
@@ -57,33 +57,8 @@ pub struct Error {
   pub timestamp: Option<String>,
 }
 
-impl Error {
-  fn datetime_or_default(&self) -> DateTime<FixedOffset> {
-    self
-      .timestamp
-      .as_ref()
-      .and_then(|t| DateTime::parse_from_str(t, date::TIMESTAMP).ok())
-      .unwrap_or_default()
-  }
-}
-
-impl PartialOrd for Error {
-  fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-    Some(self.cmp(other))
-  }
-}
-
-impl Ord for Error {
-  fn cmp(&self, other: &Self) -> Ordering {
-    match self.datetime_or_default().cmp(&other.datetime_or_default()) {
-      Ordering::Equal => self.name.cmp(&other.name),
-      ordering => ordering,
-    }
-  }
-}
-
-pub trait Log {
-  fn path<R: Runtime>(app: &AppHandle<R>) -> Result<PathBuf> {
+impl Log {
+  pub fn path<R: Runtime>(app: &AppHandle<R>) -> Result<PathBuf> {
     app
       .path()
       .app_log_dir()
@@ -91,18 +66,7 @@ pub trait Log {
       .map_err(Into::into)
   }
 
-  fn read<R: Runtime>(app: &AppHandle<R>) -> impl Future<Output = Result<Vec<Self>>> + Send
-  where
-    Self: for<'de> Deserialize<'de>;
-
-  fn save<R: Runtime>(self, app: &AppHandle<R>) -> impl Future<Output = Result<()>> + Send;
-}
-
-impl Log for Error {
-  async fn read<R: Runtime>(app: &AppHandle<R>) -> Result<Vec<Self>>
-  where
-    Self: for<'de> Deserialize<'de>,
-  {
+  pub async fn read<R: Runtime>(app: &AppHandle<R>) -> Result<Vec<Self>> {
     let path = Self::path(app)?;
     let logs = fs::read(path).await.unwrap_or_default();
 
@@ -112,10 +76,7 @@ impl Log for Error {
     Ok(logs)
   }
 
-  async fn save<R>(mut self, app: &AppHandle<R>) -> Result<()>
-  where
-    R: Runtime,
-  {
+  pub async fn save<R: Runtime>(mut self, app: &AppHandle<R>) -> Result<()> {
     if self.timestamp.is_none() {
       self.timestamp = Some(date::now());
     }
@@ -139,17 +100,42 @@ impl Log for Error {
     app.config().version.clone_into(&mut self.version.app);
 
     let path = Self::path(app)?;
-    if let Some(parent_dir) = path.parent() {
-      fs::create_dir_all(parent_dir).await?;
+    if let Some(parent) = path.parent() {
+      fs::create_dir_all(parent).await?;
     }
 
+    error!(name = %self.name, message = %self.message);
+
     let logs = fs::read(&path).await.unwrap_or_default();
-    let mut logs: Vec<Error> = serde_json::from_slice(&logs).unwrap_or_default();
+    let mut logs: Vec<Log> = serde_json::from_slice(&logs).unwrap_or_default();
 
     logs.push(self);
     logs.sort_unstable_by(|a, b| b.cmp(a));
 
     let logs = serde_json::to_vec_pretty(&logs)?;
     fs::write(path, logs).await.map_err(Into::into)
+  }
+
+  fn datetime_or_default(&self) -> DateTime<FixedOffset> {
+    self
+      .timestamp
+      .as_ref()
+      .and_then(|it| DateTime::parse_from_str(it, date::TIMESTAMP).ok())
+      .unwrap_or_default()
+  }
+}
+
+impl PartialOrd for Log {
+  fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+    Some(self.cmp(other))
+  }
+}
+
+impl Ord for Log {
+  fn cmp(&self, other: &Self) -> Ordering {
+    match self.datetime_or_default().cmp(&other.datetime_or_default()) {
+      Ordering::Equal => self.name.cmp(&other.name),
+      ordering => ordering,
+    }
   }
 }

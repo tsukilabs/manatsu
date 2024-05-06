@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.9.10"
+version = "0.10.0"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
@@ -34,8 +34,8 @@ workspace = true
 
 [dependencies]
 anyhow = "1.0.82"
-thiserror = "1.0.59"
 chrono = "0.4.38"
+thiserror = "1.0.59"
 
 [dependencies.sysinfo]
 version = "0.30.12"
@@ -50,6 +50,10 @@ version = "1.0.116"
 
 [dependencies.tauri]
 version = "2.0.0-beta.17"
+
+[dependencies.tracing]
+version = "0.1.40"
+features = ["release_max_level_warn"]
 
 [dependencies.tokio]
 version = "1.37.0"

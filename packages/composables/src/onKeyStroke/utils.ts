@@ -1,7 +1,7 @@
-import { handleError } from '@manatsu/shared';
 import type { Nullish } from '@tb-dev/utility-types';
 import { isDev } from '@manatsu/tauri-plugin/src/index.ts';
-import type { RouteLocationRaw, Router } from 'vue-router';
+import { getCurrentApp, handleError } from '@manatsu/shared';
+import { type RouteLocationRaw, useRouter } from 'vue-router';
 import { type InvokeArgs, invoke } from '@tauri-apps/api/core';
 import type { ExecutorOptions, KeyStrokeEventHandler } from './types';
 
@@ -36,8 +36,9 @@ export function invokeCommand(command: string, args?: Nullish<InvokeArgs>) {
   };
 }
 
-export function pushRoute(router: Nullish<Router>, to: RouteLocationRaw) {
-  if (!router) throw new Error('router is not available');
+export function pushRoute(to: RouteLocationRaw) {
+  const app = getCurrentApp();
+  const router = app.runWithContext(() => useRouter());
   return async function () {
     await router.push(to);
   };

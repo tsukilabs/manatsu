@@ -1,14 +1,12 @@
+import { getCurrentApp, getGlobalManatsu } from './global';
 import { type InjectionKey, defineComponent, inject } from 'vue';
-import { symbols } from './symbols';
-import { getCurrentApp } from './global';
 
-export function defineEmptyComponent() {
-  return defineComponent({
-    render() {
-      return null;
-    }
-  });
-}
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const EmptyComponent = defineComponent({
+  render() {
+    return null;
+  }
+});
 
 /** Same as `inject`, but throws an error if the value was not provided. */
 export function injectStrict<T>(key: InjectionKey<T> | string): T {
@@ -23,7 +21,6 @@ export function injectStrict<T>(key: InjectionKey<T> | string): T {
 }
 
 export function handleError(error: unknown) {
-  const errorHandler = injectStrict(symbols.errorHandler);
-  const app = getCurrentApp();
-  errorHandler?.call(app, error);
+  const manatsu = getGlobalManatsu();
+  manatsu.errorHandler?.call(manatsu.app, error);
 }

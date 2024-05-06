@@ -1,26 +1,18 @@
-import type { App, Plugin } from 'vue';
-import type { Nullish } from '@tb-dev/utility-types';
-import { saveErrorLog } from '@manatsu/tauri-plugin/src/index.ts';
-import {
-  type ErrorHandler,
-  type ErrorLog,
-  type VersionSnapshot,
-  setGlobalManatsu,
-  symbols
-} from '@manatsu/shared';
+import { type App, type Plugin, version } from 'vue';
+import { saveLog } from '@manatsu/tauri-plugin/src/index.ts';
+import { type ErrorHandler, setGlobalManatsu } from '@manatsu/shared';
 
 export interface ManatsuOptions {
-  errorHandler?: Nullish<ErrorHandler>;
+  errorHandler?: ErrorHandler;
 }
 
 export function createManatsu(options: ManatsuOptions = {}): Plugin {
   const manatsu: Plugin = {
     install(app) {
-      const fn = (options.errorHandler ?? defaultErrorHandler).bind(app);
-      app.config.errorHandler = fn;
-      app.provide(symbols.errorHandler, fn);
+      const errorHandler = (options.errorHandler ?? defaultErrorHandler).bind(app);
+      app.config.errorHandler = errorHandler;
 
-      setGlobalManatsu({ app });
+      setGlobalManatsu({ app, errorHandler });
     }
   };
 
@@ -28,15 +20,12 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
 }
 
 function defaultErrorHandler(this: App, err: unknown) {
-  const version: VersionSnapshot = { vue: this.version };
-  const log: ErrorLog = {
+  void saveLog({
     message: err instanceof Error ? err.message : String(err),
     name: err instanceof Error ? err.name : 'Error',
     stack: err instanceof Error ? err.stack : null,
-    version
-  };
-
-  void saveErrorLog(log);
+    version: { vue: version }
+  });
 
   console.error(err);
 }

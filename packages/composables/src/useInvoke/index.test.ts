@@ -1,11 +1,11 @@
-import { randomFillSync } from 'node:crypto';
+import { useInvoke } from '.';
 import { until } from '@vueuse/core';
+import { randomFillSync } from 'node:crypto';
 import { createApp, nextTick, ref } from 'vue';
 import { clearMocks, mockIPC } from '@tauri-apps/api/mocks';
 import { Command } from '@manatsu/tauri-plugin/src/index.ts';
 import { createManatsu } from '@manatsu/vue-plugin/src/index.ts';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { useInvoke } from '.';
 
 declare global {
   interface Window {

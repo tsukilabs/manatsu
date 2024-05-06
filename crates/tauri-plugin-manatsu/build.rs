@@ -1,9 +1,9 @@
 const COMMANDS: &[&str] = &[
-  "error_log_path",
   "is_dev",
+  "log_path",
   "manatsu_version",
-  "read_error_logs",
-  "save_error_log",
+  "read_logs",
+  "save_log",
   "version_snapshot",
 ];
 
