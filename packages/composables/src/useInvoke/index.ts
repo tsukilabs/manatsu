@@ -1,9 +1,8 @@
 import { invoke } from '@tauri-apps/api/core';
-import type { Nullish } from '@tb-dev/utility-types';
+import { getCurrentApp, handleError } from '@manatsu/shared';
 import type { UseInvokeOptions, UseInvokeReturn } from './types';
 import { tryOnScopeDispose, watchTriggerable } from '@vueuse/core';
-import { type ErrorHandler, getCurrentApp, handleError } from '@manatsu/shared';
-import { type MaybeRefOrGetter, type Ref, isRef, ref, shallowRef, toRef, toValue } from 'vue';
+import { type MaybeRefOrGetter, type Ref, readonly, ref, shallowRef, toRef, toValue } from 'vue';
 
 export type { UseInvokeOptions, UseInvokeReturn } from './types';
 
@@ -12,11 +11,13 @@ export function useInvoke<Data>(
   initial: Data,
   options: UseInvokeOptions<Data> = {}
 ): UseInvokeReturn<Data> {
-  const { deep = false, lazy = false, loading, shallow = true, transform } = options;
+  const { deep = false, lazy = false, shallow = true } = options;
 
   let id: symbol | null = null;
   const commandRef = toRef(command);
   const argsRef = toRef(options.args);
+
+  const loading = ref(false);
   const state = shallow ? shallowRef(initial) : ref(initial);
 
   const { stop: stopWatcher, trigger } = watchTriggerable(
@@ -26,20 +27,22 @@ export function useInvoke<Data>(
       id = current;
 
       try {
-        if (isRef(loading)) {
-          loading.value = true;
-        }
-
+        loading.value = true;
         let result = await invoke<Data>(toValue(command), toValue(argsRef) ?? undefined);
-        if (transform) result = await transform(result);
+        if (options.transform) result = await options.transform(result);
 
         if (current === id) {
           state.value = result;
+          await options.onSucess?.call(getCurrentApp(), result);
         }
       } catch (err) {
-        onError(options.onError, err);
+        if (options.onError) {
+          options.onError.call(getCurrentApp(), err);
+        } else {
+          handleError(err);
+        }
       } finally {
-        if (isRef(loading) && current === id) {
+        if (current === id) {
           loading.value = false;
         }
       }
@@ -59,15 +62,8 @@ export function useInvoke<Data>(
 
   return {
     state: state as Ref<Data>,
+    loading: readonly(loading),
     execute: trigger,
     stop
   };
-}
-
-function onError(fn: Nullish<ErrorHandler>, err: unknown) {
-  if (fn) {
-    fn.call(getCurrentApp(), err);
-  } else {
-    handleError(err);
-  }
 }
