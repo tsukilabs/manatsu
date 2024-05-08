@@ -50,11 +50,11 @@ version = "4.5.4"
 features = ["derive"]
 
 [dependencies.serde]
-version = "1.0.200"
+version = "1.0.201"
 features = ["derive"]
 
 [dependencies.serde_json]
-version = "1.0.116"
+version = "1.0.117"
 features = ["preserve_order"]
 
 [dependencies.toml]
