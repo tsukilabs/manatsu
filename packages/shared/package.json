@@ -1,7 +1,7 @@
 {
   "name": "@manatsu/shared",
   "description": "Utilities for Manatsu",
-  "version": "0.10.4",
+  "version": "0.10.5",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@9.1.0",

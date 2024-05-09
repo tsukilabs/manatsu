@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-manatsu"
-version = "0.10.4"
+version = "0.10.5"
 description = "Manatsu plugin for Tauri"
 links = "tauri-plugin-manatsu"
 keywords = ["manatsu", "plugin", "tauri", "tauri-plugin", "vue"]
@@ -35,7 +35,9 @@ workspace = true
 [dependencies]
 anyhow = "1.0.83"
 chrono = "0.4.38"
+serde_json = "1.0.117"
 thiserror = "1.0.60"
+tracing = "0.1.40"
 
 [dependencies.sysinfo]
 version = "0.30.12"
@@ -45,20 +47,13 @@ default-features = false
 features = ["derive"]
 version = "1.0.201"
 
-[dependencies.serde_json]
-version = "1.0.117"
-
 [dependencies.tauri]
-version = "2.0.0-beta.18"
-
-[dependencies.tracing]
-version = "0.1.40"
-features = ["release_max_level_warn"]
+version = "2.0.0-beta.19"
 
 [dependencies.tokio]
 version = "1.37.0"
 features = ["fs"]
 
 [build-dependencies.tauri-plugin]
-version = "2.0.0-beta.14"
+version = "2.0.0-beta.15"
 features = ["build"]
