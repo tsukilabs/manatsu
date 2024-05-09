@@ -55,6 +55,13 @@ export function handleError(
   }
 }
 
+export function handleErrorWithDialog(
+  error: unknown,
+  options: Omit<ErrorHandlerOptions, 'dialog'> = getErrorHandlerOptions()
+) {
+  handleError(error, { ...options, dialog: true });
+}
+
 async function showErrorMessage(error: string) {
   let title: string;
   try {

@@ -11,14 +11,14 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/eslint-config':
-        specifier: ^3.5.1
-        version: 3.5.1(eslint@8.57.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.0))
+        specifier: ^3.5.2
+        version: 3.5.2(eslint@8.57.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.0))
       '@tb-dev/utility-types':
-        specifier: ^1.2.7
-        version: 1.2.7
+        specifier: ^1.3.0
+        version: 1.3.0
       '@tb-dev/utils':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.7.4
+        version: 1.7.4
       '@types/node':
         specifier: ^20.12.11
         version: 20.12.11
@@ -92,11 +92,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.2.7
-        version: 1.2.7
+        specifier: ^1.3.0
+        version: 1.3.0
       '@tb-dev/utils':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.7.4
+        version: 1.7.4
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -132,11 +132,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.2.7
-        version: 1.2.7
+        specifier: ^1.3.0
+        version: 1.3.0
       '@tb-dev/utils':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.7.4
+        version: 1.7.4
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -157,11 +157,11 @@ importers:
         specifier: 2.0.0-beta.3
         version: 2.0.0-beta.3
       '@tb-dev/utility-types':
-        specifier: ^1.2.7
-        version: 1.2.7
+        specifier: ^1.3.0
+        version: 1.3.0
       '@tb-dev/utils':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.7.4
+        version: 1.7.4
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -185,11 +185,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.2.7
-        version: 1.2.7
+        specifier: ^1.3.0
+        version: 1.3.0
       '@tb-dev/utils':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.7.4
+        version: 1.7.4
       vue:
         specifier: ^3.4.26
         version: 3.4.26(typescript@5.4.5)
@@ -210,11 +210,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.2.7
-        version: 1.2.7
+        specifier: ^1.3.0
+        version: 1.3.0
       '@tb-dev/utils':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.7.4
+        version: 1.7.4
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -1064,26 +1064,26 @@ packages:
         integrity: sha512-B3KxLjFxCVB3AIYWN/xY9HM6tO7m4u6aQk1t0ZrBToXThowRU9f62527EO0oj0uNlyKlXx20up68NkpdlER0yg==
       }
 
-  '@tb-dev/eslint-config@3.5.1':
+  '@tb-dev/eslint-config@3.5.2':
     resolution:
       {
-        integrity: sha512-t3sfiky7lNl/3NHB1OdKdmOjlkF3Ew7n66PB8W+awLisLFiXvrHX1nPaoAIYdVdj56nf9JIUeiEkPPWvjOBSqA==
+        integrity: sha512-r0/kDbFVuqyWex9V1hVzdjakDoFMaaq8zDUxzZMtaRELLpOdrjkKFBncYrsAdFI2ZTO5L63v0EEQnnO8MttKDQ==
       }
     engines: { node: '>=20' }
     peerDependencies:
       eslint: ^8.57.0
       typescript: ^5.4.0
 
-  '@tb-dev/utility-types@1.2.7':
+  '@tb-dev/utility-types@1.3.0':
     resolution:
       {
-        integrity: sha512-+TA+4gi/BKwyiECyaGTxtfisgB3ziSG0kE6iS1Ad3URlJvKkdSoL3yVHRnHsVwRnspslvuU9mJZqXDxOLC4YAA==
+        integrity: sha512-5ZEjw1Ebce13O22WeO6tpoG0jcxE/tAzDH82Y9izvrgt1H7md3fV1/tt1UuJzYohD+3r0HgSW98wAj7ilZigGQ==
       }
 
-  '@tb-dev/utils@1.6.0':
+  '@tb-dev/utils@1.7.4':
     resolution:
       {
-        integrity: sha512-P3PIXsY6DxuT02GIuJ/z5lCeQ3gCTWYNtolrvF7RaKwxHLb9GanRVmKe0R+TGcf5qHkxDWM9SHfOWYcjtK7zGA==
+        integrity: sha512-MrzwqSbvM/ow24z0aFIjfo2JmzO53OexDAjmwPyPWElC/QFGLbBXmW5xaKOO+Aa+gkkxtC1SUmGRV/pk+/Ftpw==
       }
 
   '@types/argparse@1.0.38':
@@ -2109,10 +2109,10 @@ packages:
       vitest:
         optional: true
 
-  eslint-plugin-vue@9.25.0:
+  eslint-plugin-vue@9.26.0:
     resolution:
       {
-        integrity: sha512-tDWlx14bVe6Bs+Nnh3IGrD+hb11kf2nukfm6jLsmJIhmiRQ1SUaksvwY9U5MvPB0pcrg0QK0xapQkfITs3RKOA==
+        integrity: sha512-eTvlxXgd4ijE1cdur850G6KalZqk65k1JKoOI2d1kT3hr8sPD07j1q98FRFdNnpxBELGPWxZmInxeHGF/GxtqQ==
       }
     engines: { node: ^14.17.0 || >=16.0.0 }
     peerDependencies:
@@ -4761,7 +4761,7 @@ snapshots:
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.11
 
-  '@tb-dev/eslint-config@3.5.1(eslint@8.57.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.0))':
+  '@tb-dev/eslint-config@3.5.2(eslint@8.57.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.0))':
     dependencies:
       '@typescript-eslint/eslint-plugin': 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/parser': 7.8.0(eslint@8.57.0)(typescript@5.4.5)
@@ -4770,7 +4770,7 @@ snapshots:
       eslint-plugin-perfectionist: 2.10.0(eslint@8.57.0)(typescript@5.4.5)(vue-eslint-parser@9.4.2(eslint@8.57.0))
       eslint-plugin-unicorn: 52.0.0(eslint@8.57.0)
       eslint-plugin-vitest: 0.5.4(@typescript-eslint/eslint-plugin@7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.0))
-      eslint-plugin-vue: 9.25.0(eslint@8.57.0)
+      eslint-plugin-vue: 9.26.0(eslint@8.57.0)
       globals: 15.1.0
       typescript: 5.4.5
       vue-eslint-parser: 9.4.2(eslint@8.57.0)
@@ -4781,11 +4781,11 @@ snapshots:
       - svelte-eslint-parser
       - vitest
 
-  '@tb-dev/utility-types@1.2.7': {}
+  '@tb-dev/utility-types@1.3.0': {}
 
-  '@tb-dev/utils@1.6.0':
+  '@tb-dev/utils@1.7.4':
     dependencies:
-      '@tb-dev/utility-types': 1.2.7
+      '@tb-dev/utility-types': 1.3.0
 
   '@types/argparse@1.0.38': {}
 
@@ -5522,7 +5522,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-vue@9.25.0(eslint@8.57.0):
+  eslint-plugin-vue@9.26.0(eslint@8.57.0):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
       eslint: 8.57.0

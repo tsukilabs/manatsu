@@ -22,6 +22,7 @@ export {
   type WritableShallowRefSymbol,
   getCurrentApp,
   handleError,
+  handleErrorWithDialog,
   injectStrict
 } from '@manatsu/shared';
 
