@@ -49,7 +49,7 @@ version = "1.0.201"
 version = "1.0.117"
 
 [dependencies.tauri]
-version = "2.0.0-beta.18"
+version = "2.0.0-beta.19"
 
 [dependencies.tracing]
 version = "0.1.40"
