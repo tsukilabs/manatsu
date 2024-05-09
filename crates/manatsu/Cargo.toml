@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.10.1"
+version = "0.10.2"
 description = "CLI tools for Manatsu"
 keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
@@ -36,7 +36,7 @@ anyhow = "1.0.83"
 convert_case = "0.6.0"
 globset = "0.4.14"
 inquire = "0.7.5"
-zip = "0.6"
+zip = "0.6.6"
 walkdir = "2.5.0"
 bytes = "1.6.0"
 itertools = "0.12.1"
@@ -50,11 +50,11 @@ version = "4.5.4"
 features = ["derive"]
 
 [dependencies.serde]
-version = "1.0.200"
+version = "1.0.201"
 features = ["derive"]
 
 [dependencies.serde_json]
-version = "1.0.116"
+version = "1.0.117"
 features = ["preserve_order"]
 
 [dependencies.toml]
@@ -63,7 +63,7 @@ features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.12.4"
-features = ["brotli", "gzip", "json"]
+features = ["brotli", "gzip", "json", "rustls-tls"]
 
 [dependencies.tokio]
 version = "1.37.0"

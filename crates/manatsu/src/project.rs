@@ -60,7 +60,12 @@ impl Project {
   }
 
   async fn download(&self) -> Result<Bytes> {
-    let client = Client::builder().brotli(true).gzip(true).build()?;
+    let client = Client::builder()
+      .use_rustls_tls()
+      .brotli(true)
+      .gzip(true)
+      .build()?;
+
     let url = "https://github.com/ferreira-tb/template-tauri/archive/refs/heads/main.zip";
     let response = client
       .get(url)

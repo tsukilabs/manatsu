@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.10.1"
+version = "0.10.2"
 publish = false
 
 [package.homepage]
@@ -48,16 +48,16 @@ version = "4.5.4"
 features = ["derive"]
 
 [dependencies.serde]
-version = "1.0.200"
+version = "1.0.201"
 features = ["derive"]
 
 [dependencies.serde_json]
-version = "1.0.116"
+version = "1.0.117"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
 version = "0.12.4"
-features = ["gzip", "json"]
+features = ["gzip", "json", "rustls-tls"]
 
 [dependencies.tokio]
 version = "1.37.0"

@@ -70,7 +70,7 @@ where
   T: AsRef<str>,
 {
   let package = Package::read_root()?;
-  let client = Client::builder().build()?;
+  let client = Client::builder().use_rustls_tls().build()?;
 
   let owner_repo = "ferreira-tb/manatsu";
   let endpoint = format!("https://api.github.com/repos/{owner_repo}/releases");
