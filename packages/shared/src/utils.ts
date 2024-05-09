@@ -32,7 +32,7 @@ export function handleError(
   options: ErrorHandlerOptions = getErrorHandlerOptions()
 ) {
   const manatsu = getGlobalManatsu();
-  const { dialog = false, print = true } = options;
+  const { dialog = false, print = true, rethrow = false } = options;
 
   try {
     manatsu.errorHandler?.call(manatsu.app, error);
@@ -47,6 +47,11 @@ export function handleError(
       const msg = error instanceof Error ? error.message : String(error);
       void showErrorMessage(msg);
     }
+  }
+
+  if (rethrow) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw error;
   }
 }
 

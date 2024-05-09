@@ -18,6 +18,12 @@ export interface ErrorHandlerOptions {
    * @default true
    */
   print?: boolean;
+
+  /**
+   * Whether to rethrow the error after handling it.
+   * @default false
+   */
+  rethrow?: boolean;
 }
 
 export interface ManatsuGlobal {
