@@ -3,7 +3,7 @@
   "version": "0.10.5",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.1",
   "lint-staged": {
     "*.{?(c|m)@(j|t)s,?(s)css,vue,md,json,yaml}": "prettier --write"
   },
@@ -45,7 +45,7 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-css-order": "^2.1.2",
-    "sass": "^1.77.0",
+    "sass": "^1.77.1",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",

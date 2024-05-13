@@ -1,27 +1,4 @@
 {
-  "vsicons.associations.folders": [
-    {
-      "icon": "theme",
-      "extensions": ["composables"],
-      "format": "svg"
-    },
-    {
-      "icon": "aurelia",
-      "extensions": ["manatsu"],
-      "format": "svg"
-    },
-    {
-      "icon": "plugin",
-      "extensions": ["tauri-plugin", "tauri-plugin-manatsu", "vue-plugin"],
-      "format": "svg"
-    }
-  ],
-  "files.exclude": {
-    ".eslintcache": true
-  },
-  "prettier.requireConfig": true,
-  "editor.tabSize": 2,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
@@ -31,14 +8,28 @@
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "conventionalCommits.promptScopes": true,
-  "conventionalCommits.scopes": [
-    "cli",
-    "cli-dev",
-    "composables",
-    "core",
-    "style",
-    "tauri-plugin",
-    "vue-plugin"
+  "conventionalCommits.promptScopes": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "files.exclude": {
+    ".eslintcache": true
+  },
+  "prettier.requireConfig": true,
+  "vsicons.associations.folders": [
+    {
+      "extensions": ["composables"],
+      "format": "svg",
+      "icon": "theme"
+    },
+    {
+      "extensions": ["manatsu"],
+      "format": "svg",
+      "icon": "aurelia"
+    },
+    {
+      "extensions": ["tauri-plugin", "tauri-plugin-manatsu", "vue-plugin"],
+      "format": "svg",
+      "icon": "plugin"
+    }
   ]
 }
