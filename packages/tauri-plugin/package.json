@@ -1,7 +1,7 @@
 {
   "name": "@manatsu/tauri-plugin",
   "description": "Tauri plugin for Manatsu",
-  "version": "0.10.5",
+  "version": "0.10.6",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@9.1.1",
@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "@manatsu/shared": "workspace:*",
-    "@tb-dev/utility-types": "^1.3.0",
-    "@tb-dev/utils": "^1.7.4"
+    "@tb-dev/utility-types": "^1.3.1",
+    "@tb-dev/utils": "^1.7.5"
   },
   "devDependencies": {
     "vite": "^5.2.11"

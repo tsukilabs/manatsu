@@ -14,11 +14,11 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0(eslint@8.57.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1))
       '@tb-dev/utility-types':
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.1
+        version: 1.3.1
       '@tb-dev/utils':
-        specifier: ^1.7.4
-        version: 1.7.4
+        specifier: ^1.7.5
+        version: 1.7.5
       '@types/node':
         specifier: ^20.12.11
         version: 20.12.11
@@ -92,11 +92,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.1
+        version: 1.3.1
       '@tb-dev/utils':
-        specifier: ^1.7.4
-        version: 1.7.4
+        specifier: ^1.7.5
+        version: 1.7.5
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -132,11 +132,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.1
+        version: 1.3.1
       '@tb-dev/utils':
-        specifier: ^1.7.4
-        version: 1.7.4
+        specifier: ^1.7.5
+        version: 1.7.5
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -157,11 +157,11 @@ importers:
         specifier: 2.0.0-beta.3
         version: 2.0.0-beta.3
       '@tb-dev/utility-types':
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.1
+        version: 1.3.1
       '@tb-dev/utils':
-        specifier: ^1.7.4
-        version: 1.7.4
+        specifier: ^1.7.5
+        version: 1.7.5
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -185,11 +185,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.1
+        version: 1.3.1
       '@tb-dev/utils':
-        specifier: ^1.7.4
-        version: 1.7.4
+        specifier: ^1.7.5
+        version: 1.7.5
       vue:
         specifier: ^3.4.26
         version: 3.4.26(typescript@5.4.5)
@@ -210,11 +210,11 @@ importers:
         specifier: ^2.0.0-beta.11
         version: 2.0.0-beta.11
       '@tb-dev/utility-types':
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.1
+        version: 1.3.1
       '@tb-dev/utils':
-        specifier: ^1.7.4
-        version: 1.7.4
+        specifier: ^1.7.5
+        version: 1.7.5
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -1081,16 +1081,16 @@ packages:
       eslint: ^8.57.0
       typescript: ^5.4.0
 
-  '@tb-dev/utility-types@1.3.0':
+  '@tb-dev/utility-types@1.3.1':
     resolution:
       {
-        integrity: sha512-5ZEjw1Ebce13O22WeO6tpoG0jcxE/tAzDH82Y9izvrgt1H7md3fV1/tt1UuJzYohD+3r0HgSW98wAj7ilZigGQ==
+        integrity: sha512-C4+/aFleKnTvJ9hWmAWTetrDrzAs3op0DxmEYvHJzEYS3eaMu7LLdnS4VMkrAkvk7fkE7Wj7u+bI2XdPOUV/xA==
       }
 
-  '@tb-dev/utils@1.7.4':
+  '@tb-dev/utils@1.7.5':
     resolution:
       {
-        integrity: sha512-MrzwqSbvM/ow24z0aFIjfo2JmzO53OexDAjmwPyPWElC/QFGLbBXmW5xaKOO+Aa+gkkxtC1SUmGRV/pk+/Ftpw==
+        integrity: sha512-Rx0xAZ2aP8arlMWPceYH4y5I5s5Bh4TejxzwhXgLrgnh3uck3FobpCgIYs/CeAR40DL9UbwHen9LXPFxB6dE7g==
       }
 
   '@types/argparse@1.0.38':
@@ -4815,11 +4815,11 @@ snapshots:
       - svelte-eslint-parser
       - vitest
 
-  '@tb-dev/utility-types@1.3.0': {}
+  '@tb-dev/utility-types@1.3.1': {}
 
-  '@tb-dev/utils@1.7.4':
+  '@tb-dev/utils@1.7.5':
     dependencies:
-      '@tb-dev/utility-types': 1.3.0
+      '@tb-dev/utility-types': 1.3.1
 
   '@types/argparse@1.0.38': {}
 
