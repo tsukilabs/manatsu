@@ -1,4 +1,4 @@
-import { type App, type Plugin, version } from 'vue';
+import type { App, Plugin } from 'vue';
 import { saveLog } from '@manatsu/tauri-plugin/src/index.ts';
 import {
   type ErrorHandler,
@@ -34,6 +34,6 @@ function defaultErrorHandler(this: App, err: unknown) {
     message: err instanceof Error ? err.message : String(err),
     name: err instanceof Error ? err.name : 'Error',
     stack: err instanceof Error ? err.stack : null,
-    version: { vue: version }
+    version: { vue: this.version }
   });
 }

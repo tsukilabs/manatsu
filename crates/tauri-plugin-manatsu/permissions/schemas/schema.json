@@ -309,20 +309,6 @@
           ]
         },
         {
-          "description": "allow-log-path -> Enables the log_path command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-log-path"
-          ]
-        },
-        {
-          "description": "deny-log-path -> Denies the log_path command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-log-path"
-          ]
-        },
-        {
           "description": "allow-manatsu-version -> Enables the manatsu_version command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -334,20 +320,6 @@
           "type": "string",
           "enum": [
             "deny-manatsu-version"
-          ]
-        },
-        {
-          "description": "allow-read-logs -> Enables the read_logs command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "allow-read-logs"
-          ]
-        },
-        {
-          "description": "deny-read-logs -> Denies the read_logs command without any pre-configured scope.",
-          "type": "string",
-          "enum": [
-            "deny-read-logs"
           ]
         },
         {

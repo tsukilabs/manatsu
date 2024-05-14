@@ -19,11 +19,9 @@ impl Project {
   /// <https://regex101.com/r/9dSatE>
   const NAME_REGEX: &'static str = r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
 
-  /// Create a new Manatsu project from a template.
-  ///
-  /// Tauri: <https://github.com/ferreira-tb/manatsu-template-tauri>
-  ///
-  /// Vue: <https://github.com/ferreira-tb/manatsu-template-vue>
+  /// Create a new project from a template.
+  /// 
+  /// <https://github.com/ferreira-tb/template-tauri>
   pub async fn create(self) -> Result<()> {
     let start = Instant::now();
 

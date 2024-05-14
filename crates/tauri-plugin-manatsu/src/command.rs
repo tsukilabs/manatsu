@@ -7,18 +7,8 @@ pub async fn is_dev() -> bool {
 }
 
 #[tauri::command]
-pub async fn log_path<R: Runtime>(app: AppHandle<R>) -> Result<PathBuf> {
-  Log::path(&app).map_err(Into::into)
-}
-
-#[tauri::command]
 pub async fn manatsu_version() -> String {
   crate::VERSION.into()
-}
-
-#[tauri::command]
-pub async fn read_logs<R: Runtime>(app: AppHandle<R>) -> Result<Vec<Log>> {
-  Log::read(&app).await.map_err(Into::into)
 }
 
 #[tauri::command]
@@ -27,6 +17,8 @@ pub async fn save_log<R: Runtime>(app: AppHandle<R>, log: Log) -> Result<()> {
 }
 
 #[tauri::command]
-pub async fn version_snapshot(vue: String) -> VersionSnapshot {
-  VersionSnapshot::new(vue)
+pub async fn version_snapshot(vue: Option<String>) -> VersionSnapshot {
+  let mut snapshot = VersionSnapshot::new();
+  snapshot.vue = vue;
+  snapshot
 }
