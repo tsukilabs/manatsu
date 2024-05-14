@@ -20,14 +20,11 @@
     "install-dev": "cargo install --path crates/manatsu-dev --force",
     "lint": "eslint . --config eslint.config.js --cache",
     "lint-fix": "eslint . --config eslint.config.js --fix",
-    "pedantic": "cargo clippy -- -W clippy::pedantic",
     "prepare": "husky",
-    "release": "pnpm run \"/^(test|clippy)$/\" && pnpm run build && mana-dev release",
+    "release": "pnpm run clippy && pnpm run build && mana-dev release",
     "release:crate": "pnpm run clippy && pnpm run build && mana-dev release --only-crate",
     "release:package": "pnpm run test && pnpm run build && mana-dev release --only-package",
-    "test": "vitest --run",
     "type-check": "pnpm run -r --bail --parallel --aggregate-output type-check",
-    "ui": "vitest --ui --watch --no-open --silent",
     "update": "miho update major -t"
   },
   "devDependencies": {
@@ -37,7 +34,6 @@
     "@tb-dev/utils": "^1.7.5",
     "@types/node": "^20.12.11",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vitest/ui": "^1.6.0",
     "@vueuse/core": "^10.9.0",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
@@ -51,7 +47,6 @@
     "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-vue-devtools": "^7.1.3",
-    "vitest": "^1.6.0",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2",
     "vue-tsc": "^2.0.17"

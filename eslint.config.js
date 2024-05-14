@@ -1,7 +1,6 @@
 import config from '@tb-dev/eslint-config';
 
 export default config({
-  vitest: true,
   project: [
     'tsconfig.json',
     'packages/composables/tsconfig.json',

@@ -23,7 +23,6 @@ pub async fn create(name: impl AsRef<str>) -> Result<()> {
   fs::create_dir_all(&dir)?;
 
   write_index(&camel, &dir)?;
-  write_test(&camel, &dir)?;
 
   // Formats the files to ensure their structure is correct.
   let glob = format!("**/composables/src/{camel}/**/*.ts");
@@ -52,21 +51,6 @@ fn write_index(camel: &str, dir: &Path) -> Result<()> {
   "};
 
   let path = dir.join("index.ts");
-  fs::write(path, contents).map_err(Into::into)
-}
-
-fn write_test(camel: &str, dir: &Path) -> Result<()> {
-  let contents = formatdoc! {"
-    import {{ describe, it }} from 'vitest';
-
-    // import {{ {camel} }} from '.';
-
-    describe('{camel}', () => {{
-      it.todo('todo');
-    }});
-  "};
-
-  let path = dir.join("index.test.ts");
   fs::write(path, contents).map_err(Into::into)
 }
 
