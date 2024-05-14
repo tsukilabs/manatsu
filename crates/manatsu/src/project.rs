@@ -20,7 +20,7 @@ impl Project {
   const NAME_REGEX: &'static str = r"^(?:@[a-z0-9-*~][a-z0-9-*._~]*/)?[a-z0-9-~][a-z0-9-._~]*$";
 
   /// Create a new project from a template.
-  /// 
+  ///
   /// <https://github.com/ferreira-tb/template-tauri>
   pub async fn create(self) -> Result<()> {
     let start = Instant::now();
