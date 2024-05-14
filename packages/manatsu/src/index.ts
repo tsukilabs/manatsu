@@ -3,10 +3,8 @@ export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/inde
 export {
   Command,
   createVersionSnapshot,
-  getLogPath,
   getManatsuVersion,
   isDev,
-  readLogs,
   saveLog
 } from '@manatsu/tauri-plugin/src/index.ts';
 
