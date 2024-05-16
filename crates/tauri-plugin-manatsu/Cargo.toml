@@ -45,7 +45,7 @@ default-features = false
 
 [dependencies.serde]
 features = ["derive"]
-version = "1.0.201"
+version = "1.0.202"
 
 [dependencies.tauri]
 version = "2.0.0-beta.19"
