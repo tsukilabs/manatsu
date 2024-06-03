@@ -32,13 +32,13 @@ workspace = true
 workspace = true
 
 [dependencies]
-anyhow = "1.0.83"
+anyhow = "1.0.86"
 colored = "2.1.0"
 convert_case = "0.6.0"
 globset = "0.4.14"
 indoc = "2.0.5"
 inquire = "0.7.5"
-itertools = "0.12.1"
+itertools = "0.13.0"
 regex = "1.10.4"
 walkdir = "2.5.0"
 natord = "1.0.9"
@@ -48,7 +48,7 @@ version = "4.5.4"
 features = ["derive"]
 
 [dependencies.serde]
-version = "1.0.201"
+version = "1.0.203"
 features = ["derive"]
 
 [dependencies.serde_json]
@@ -60,5 +60,5 @@ version = "0.12.4"
 features = ["gzip", "json", "rustls-tls"]
 
 [dependencies.tokio]
-version = "1.37.0"
+version = "1.38.0"
 features = ["macros", "process", "rt-multi-thread"]
