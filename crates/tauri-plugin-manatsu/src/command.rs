@@ -3,7 +3,7 @@ use crate::prelude::*;
 
 #[tauri::command]
 pub async fn is_dev() -> bool {
-  tauri::dev()
+  tauri::is_dev()
 }
 
 #[tauri::command]
