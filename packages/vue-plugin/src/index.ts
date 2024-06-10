@@ -29,7 +29,7 @@ export function createManatsu(options: ManatsuOptions = {}): Plugin {
   return manatsu;
 }
 
-function defaultErrorHandler(this: App, err: unknown) {
+export function defaultErrorHandler(this: App, err: unknown) {
   void saveLog({
     message: err instanceof Error ? err.message : String(err),
     name: err instanceof Error ? err.name : 'Error',

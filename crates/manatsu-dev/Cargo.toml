@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.10.8"
+version = "0.10.9"
 publish = false
 
 [package.homepage]
@@ -39,12 +39,12 @@ globset = "0.4.14"
 indoc = "2.0.5"
 inquire = "0.7.5"
 itertools = "0.12.1"
-regex = "1.10.4"
+regex = "1.10.5"
 walkdir = "2.5.0"
 natord = "1.0.9"
 
 [dependencies.clap]
-version = "4.5.6"
+version = "4.5.7"
 features = ["derive"]
 
 [dependencies.serde]

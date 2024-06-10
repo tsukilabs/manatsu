@@ -1,4 +1,8 @@
-export { type ManatsuOptions, createManatsu } from '@manatsu/vue-plugin/src/index.ts';
+export {
+  type ManatsuOptions,
+  createManatsu,
+  defaultErrorHandler
+} from '@manatsu/vue-plugin/src/index.ts';
 
 export {
   Command,
