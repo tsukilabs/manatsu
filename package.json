@@ -3,7 +3,7 @@
   "version": "0.10.10",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@9.1.1",
+  "packageManager": "pnpm@9.3.0",
   "lint-staged": {
     "*.{?(c|m)@(j|t)s,?(s)css,vue,md,json,yaml}": "prettier --write"
   },
