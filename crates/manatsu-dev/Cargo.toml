@@ -4,7 +4,7 @@ path = "src/main.rs"
 
 [package]
 name = "manatsu-dev"
-version = "0.10.9"
+version = "0.10.10"
 publish = false
 
 [package.homepage]
@@ -38,7 +38,7 @@ convert_case = "0.6.0"
 globset = "0.4.14"
 indoc = "2.0.5"
 inquire = "0.7.5"
-itertools = "0.12.1"
+itertools = "0.13.0"
 regex = "1.10.5"
 walkdir = "2.5.0"
 natord = "1.0.9"
