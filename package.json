@@ -29,10 +29,10 @@
   },
   "devDependencies": {
     "@tauri-apps/api": "^2.0.0-beta.13",
-    "@tb-dev/eslint-config": "^3.8.0",
+    "@tb-dev/eslint-config": "^3.8.1",
     "@tb-dev/utility-types": "^1.3.3",
     "@tb-dev/utils": "^1.8.1",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.5",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vueuse/core": "^10.11.0",
     "eslint": "^8.57.0",
