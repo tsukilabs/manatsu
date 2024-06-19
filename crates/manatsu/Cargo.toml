@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.10.12"
+version = "0.10.13"
 description = "CLI tools for Manatsu"
 keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
@@ -62,7 +62,7 @@ version = "0.8.14"
 features = ["preserve_order"]
 
 [dependencies.reqwest]
-version = "0.12.4"
+version = "0.12.5"
 features = ["brotli", "gzip", "json", "rustls-tls"]
 
 [dependencies.tokio]
