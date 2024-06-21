@@ -1,5 +1,5 @@
-import { type Component, ref } from 'vue';
+import { type Component, type Ref, ref } from 'vue';
 
-export function templateRef<T extends HTMLElement | Component>() {
-  return ref<T | null>(null);
+export function templateRef<T extends HTMLElement | Component>(): Ref<T | null> {
+  return ref(null);
 }
