@@ -31,7 +31,6 @@ export {
 export {
   type UseInvokeOptions,
   type UseInvokeReturn,
-  componentRef,
   invokeOnKeyDown,
   invokeOnKeyStroke,
   navigateOnKeyDown,
@@ -50,7 +49,6 @@ export {
   preventContextMenu,
   preventKeyDown,
   preventKeyStroke,
-  templateRef,
   useElementSize,
   useHeight,
   useInvoke,

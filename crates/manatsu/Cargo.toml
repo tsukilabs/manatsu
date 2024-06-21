@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.11.5"
+version = "0.11.6"
 description = "CLI tools for Manatsu"
 keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
