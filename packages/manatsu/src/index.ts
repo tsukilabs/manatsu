@@ -54,5 +54,7 @@ export {
   useHeight,
   useInvoke,
   useListen,
-  useWidth
+  useWidth,
+  useWindowHeight,
+  useWindowWidth
 } from '@manatsu/composables/src/index.ts';
