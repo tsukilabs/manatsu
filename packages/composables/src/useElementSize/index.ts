@@ -1,4 +1,4 @@
-import { type MaybeRefOrGetter, toRef } from 'vue';
+import { type MaybeRefOrGetter, type Ref, toRef } from 'vue';
 import { type MaybeElement, useElementSize as original } from '@vueuse/core';
 
 /**
@@ -9,9 +9,9 @@ export function useElementSize<T extends MaybeElement>(element: MaybeRefOrGetter
 }
 
 export function useHeight<T extends MaybeElement>(element: MaybeRefOrGetter<T>) {
-  return useElementSize(element).height;
+  return useElementSize(element).height as Readonly<Ref<number>>;
 }
 
 export function useWidth<T extends MaybeElement>(element: MaybeRefOrGetter<T>) {
-  return useElementSize(element).width;
+  return useElementSize(element).width as Readonly<Ref<number>>;
 }
