@@ -31,6 +31,7 @@ export {
 export {
   type UseInvokeOptions,
   type UseInvokeReturn,
+  componentRef,
   invokeOnKeyDown,
   invokeOnKeyStroke,
   navigateOnKeyDown,
