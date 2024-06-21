@@ -1,7 +1,7 @@
 {
   "name": "@manatsu/vue-plugin",
   "description": "Vue plugin for Manatsu",
-  "version": "0.10.13",
+  "version": "0.11.0",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@9.3.0",
@@ -52,7 +52,7 @@
     "@tauri-apps/api": "^2.0.0-beta.13",
     "@vueuse/core": "^10.11.0",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.4.0"
   },
   "engines": {
     "node": ">=20"

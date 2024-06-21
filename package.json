@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.10.13",
+  "version": "0.11.0",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.3.0",
@@ -44,7 +44,7 @@
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3",
+    "vue-router": "^4.4.0",
     "vue-tsc": "^2.0.21"
   }
 }

@@ -49,7 +49,10 @@ export {
   preventContextMenu,
   preventKeyDown,
   preventKeyStroke,
+  templateRef,
   useElementSize,
+  useHeight,
   useInvoke,
-  useListen
+  useListen,
+  useWidth
 } from '@manatsu/composables/src/index.ts';
