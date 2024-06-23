@@ -1,7 +1,7 @@
 {
   "name": "@manatsu/vue-plugin",
   "description": "Vue plugin for Manatsu",
-  "version": "0.11.6",
+  "version": "0.11.7",
   "license": "MIT",
   "private": false,
   "packageManager": "pnpm@9.3.0",
@@ -42,8 +42,8 @@
   "dependencies": {
     "@manatsu/shared": "workspace:*",
     "@manatsu/tauri-plugin": "workspace:*",
-    "@tb-dev/utility-types": "^1.3.4",
-    "@tb-dev/utils": "^1.8.2"
+    "@tb-dev/utility-types": "^1.4.0",
+    "@tb-dev/utils": "^1.8.3"
   },
   "devDependencies": {
     "vite": "^5.3.1"
