@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@tauri-apps/api": "^2.0.0-beta.13",
-    "@tb-dev/eslint-config": "^3.8.3",
+    "@tb-dev/eslint-config": "^3.8.4",
     "@tb-dev/utility-types": "^1.4.0",
     "@tb-dev/utils": "^1.8.3",
     "@types/node": "^20.14.8",
