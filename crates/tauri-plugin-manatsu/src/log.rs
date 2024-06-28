@@ -100,18 +100,18 @@ impl Log {
   }
 
   pub fn write_to_disk<R: Runtime>(app: &AppHandle<R>) -> Result<()> {
-    let path = Log::path(app)?;
-    if let Some(parent) = path.parent() {
-      fs::create_dir_all(parent)?;
-    }
-
-    let logs = fs::read(&path).unwrap_or_default();
-    let mut logs: Vec<Log> = serde_json::from_slice(&logs).unwrap_or_default();
-
     let cache = app.state::<LogCache>();
     let mut cache = cache.0.lock().unwrap();
 
     if !cache.is_empty() {
+      let path = Log::path(app)?;
+      if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent)?;
+      }
+
+      let logs = fs::read(&path).unwrap_or_default();
+      let mut logs: Vec<Log> = serde_json::from_slice(&logs).unwrap_or_default();
+
       for log in cache.drain(..) {
         logs.push(log);
       }
