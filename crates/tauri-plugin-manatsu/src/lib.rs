@@ -6,6 +6,7 @@ pub use error::Error;
 pub use log::{date, Log, VersionSnapshot};
 
 use log::LogCache;
+use std::sync::Mutex;
 use tauri::plugin::{Builder, TauriPlugin};
 use tauri::{Manager, RunEvent, Runtime};
 
@@ -20,7 +21,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
       command::version_snapshot,
     ])
     .setup(|app, _api| {
-      app.manage(LogCache(Default::default()));
+      app.manage(LogCache(Mutex::default()));
       Ok(())
     })
     .on_event(move |app, event| {

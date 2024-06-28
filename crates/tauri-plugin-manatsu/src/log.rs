@@ -160,11 +160,6 @@ impl Log {
       .version
       .clone_into(&mut self.version.app);
 
-    let path = Self::path(app)?;
-    if let Some(parent) = path.parent() {
-      fs::create_dir_all(parent)?;
-    }
-
     error!(name = %self.name, message = %self.message);
 
     let cache = app.state::<LogCache>();
