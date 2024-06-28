@@ -47,8 +47,8 @@
   "dependencies": {
     "@manatsu/shared": "workspace:*",
     "@manatsu/tauri-plugin": "workspace:*",
-    "@tb-dev/utility-types": "^1.4.0",
-    "@tb-dev/utils": "^1.8.3"
+    "@tb-dev/utility-types": "^1.4.1",
+    "@tb-dev/utils": "^1.8.4"
   },
   "devDependencies": {
     "@manatsu/vue-plugin": "workspace:*",
