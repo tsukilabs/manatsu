@@ -21,6 +21,7 @@ pub mod date {
 }
 
 pub const MAX_CACHE_SIZE: usize = 20;
+
 static VUE_VERSION: OnceLock<String> = OnceLock::new();
 
 pub(crate) struct LogCache(pub(crate) Mutex<Vec<Log>>);
@@ -99,7 +100,7 @@ impl Log {
   }
 
   pub fn write_to_disk<R: Runtime>(app: &AppHandle<R>) -> Result<()> {
-    let path = Self::path(app)?;
+    let path = Log::path(app)?;
     if let Some(parent) = path.parent() {
       fs::create_dir_all(parent)?;
     }
