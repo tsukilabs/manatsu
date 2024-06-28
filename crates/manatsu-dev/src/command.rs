@@ -1,5 +1,4 @@
 mod build;
-pub mod composable;
 mod plugin;
 mod readme;
 mod release;

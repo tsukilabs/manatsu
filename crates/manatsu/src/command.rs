@@ -1,5 +1,5 @@
-use crate::prelude::*;
 use crate::project::Project;
+use anyhow::Result;
 use inquire::validator::Validation;
 use inquire::{required, Text};
 use semver::Version;

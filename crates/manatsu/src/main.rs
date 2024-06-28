@@ -1,10 +1,9 @@
 mod command;
-pub(crate) mod prelude;
-pub(crate) mod project;
+mod project;
 
+use anyhow::Result;
 use clap::Parser;
 use command::Command;
-use prelude::*;
 
 #[derive(Debug, Parser)]
 #[command(name = "manatsu")]

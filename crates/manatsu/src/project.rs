@@ -1,8 +1,14 @@
-use crate::prelude::*;
+use anyhow::{anyhow, bail, Context, Result};
 use bytes::Bytes;
+use convert_case::{Case, Casing};
+use globset::{Glob, GlobSet, GlobSetBuilder};
+use regex::Regex;
 use reqwest::Client;
 use semver::Version;
 use std::io::Cursor;
+use std::path::{Path, PathBuf};
+use std::time::{Duration, Instant};
+use std::{env, fs};
 use taplo::formatter;
 use walkdir::WalkDir;
 use zip::ZipArchive;
@@ -77,11 +83,16 @@ impl Project {
 
   fn update_project_metadata(&self, path: &Path) -> Result<()> {
     self
-      .update_package_json(path)?
-      .update_cargo_toml(path)?
-      .update_tauri_conf(path)?
-      .update_index_html(path)?
-      .update_readme_md(path)?;
+      .update_package_json(path)
+      .with_context(|| "could not update package.json")?
+      .update_cargo_toml(path)
+      .with_context(|| "could not update Cargo.toml")?
+      .update_tauri_conf(path)
+      .with_context(|| "could not update tauri.conf.json")?
+      .update_index_html(path)
+      .with_context(|| "could not update index.html")?
+      .update_readme_md(path)
+      .with_context(|| "could not update README.md")?;
 
     Ok(())
   }
@@ -167,9 +178,9 @@ impl Project {
   }
 
   fn update_index_html(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
-    let path = dir_path.as_ref().join("index.html");
+    let path = dir_path.as_ref().join("src/windows/main/index.html");
     let index_html = fs::read_to_string(&path)?;
-    let index_html = index_html.replace("Manatsu", &self.name);
+    let index_html = index_html.replace("PROJECT_NAME", &self.name);
 
     fs::write(path, index_html)?;
 
@@ -182,7 +193,7 @@ impl Project {
     let mut readme_md = readme_md.replace("PROJECT_NAME", &self.name);
 
     if let Some(author) = &self.author {
-      readme_md = readme_md.replace("Andrew Ferreira", author);
+      readme_md = readme_md.replace("AUTHOR_NAME", author);
     }
 
     fs::write(path, readme_md)?;
