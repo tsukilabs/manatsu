@@ -19,9 +19,19 @@ impl super::Command for Build {
 
     let packages = self
       .package
-      .unwrap_or_else(|| Package::PUBLIC.iter().map(ToString::to_string).collect())
+      .unwrap_or_else(|| {
+        Package::PUBLIC
+          .iter()
+          .map(ToString::to_string)
+          .collect()
+      })
       .into_iter()
-      .map(|pkg| pkg.trim().replace("@manatsu/", "").to_case(Case::Kebab))
+      .map(|pkg| {
+        pkg
+          .trim()
+          .replace("@manatsu/", "")
+          .to_case(Case::Kebab)
+      })
       .collect_vec();
 
     if packages.is_empty() {

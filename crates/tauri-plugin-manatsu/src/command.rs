@@ -1,5 +1,6 @@
+use crate::error::Result;
 use crate::log::{Log, VersionSnapshot};
-use crate::prelude::*;
+use tauri::{AppHandle, Runtime};
 
 #[tauri::command]
 pub async fn is_dev() -> bool {
@@ -13,7 +14,7 @@ pub async fn manatsu_version() -> String {
 
 #[tauri::command]
 pub async fn save_log<R: Runtime>(app: AppHandle<R>, log: Log) -> Result<()> {
-  log.save(&app).await.map_err(Into::into)
+  log.save(&app).map_err(Into::into)
 }
 
 #[tauri::command]

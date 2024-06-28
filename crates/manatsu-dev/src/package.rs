@@ -30,7 +30,10 @@ impl<'a> Package {
 }
 
 pub fn all() -> Vec<String> {
-  Package::PUBLIC.into_iter().map_into().collect_vec()
+  Package::PUBLIC
+    .into_iter()
+    .map_into()
+    .collect_vec()
 }
 
 pub fn dir(package: impl AsRef<str>) -> Result<PathBuf> {

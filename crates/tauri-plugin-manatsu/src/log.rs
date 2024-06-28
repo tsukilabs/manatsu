@@ -1,9 +1,13 @@
-use crate::prelude::*;
+use crate::error::Result;
 use chrono::{DateTime, FixedOffset, Local};
-use std::sync::OnceLock;
+use serde::{Deserialize, Serialize};
+use std::cmp::Ordering;
+use std::fs;
+use std::path::PathBuf;
+use std::sync::{Mutex, OnceLock};
 use sysinfo::System;
-
-static VUE_VERSION: OnceLock<String> = OnceLock::new();
+use tauri::{AppHandle, Manager, Runtime};
+use tracing::error;
 
 pub mod date {
   use chrono::Local;
@@ -15,6 +19,11 @@ pub mod date {
     Local::now().format(TIMESTAMP).to_string()
   }
 }
+
+pub const MAX_CACHE_SIZE: usize = 20;
+static VUE_VERSION: OnceLock<String> = OnceLock::new();
+
+pub(crate) struct LogCache(pub(crate) Mutex<Vec<Log>>);
 
 #[derive(Default, Deserialize, Serialize, PartialEq, Eq)]
 pub struct VersionSnapshot {
@@ -89,7 +98,36 @@ impl Log {
       .map_err(Into::into)
   }
 
-  pub async fn save<R: Runtime>(mut self, app: &AppHandle<R>) -> Result<()> {
+  pub fn write_to_disk<R: Runtime>(app: &AppHandle<R>) -> Result<()> {
+    let path = Self::path(app)?;
+    if let Some(parent) = path.parent() {
+      fs::create_dir_all(parent)?;
+    }
+
+    let logs = fs::read(&path).unwrap_or_default();
+    let mut logs: Vec<Log> = serde_json::from_slice(&logs).unwrap_or_default();
+
+    let cache = app.state::<LogCache>();
+    let mut cache = cache.0.lock().unwrap();
+
+    if !cache.is_empty() {
+      for log in cache.drain(..) {
+        logs.push(log);
+      }
+
+      cache.shrink_to_fit();
+      drop(cache);
+
+      logs.sort_unstable_by(|a, b| b.cmp(a));
+
+      let logs = serde_json::to_vec_pretty(&logs)?;
+      fs::write(path, logs)?;
+    }
+
+    Ok(())
+  }
+
+  pub fn save<R: Runtime>(mut self, app: &AppHandle<R>) -> Result<()> {
     if self.timestamp.is_none() {
       self.timestamp = date::now().into();
     }
@@ -116,23 +154,27 @@ impl Log {
       self.version.vue = VersionSnapshot::vue();
     }
 
-    app.config().version.clone_into(&mut self.version.app);
+    app
+      .config()
+      .version
+      .clone_into(&mut self.version.app);
 
     let path = Self::path(app)?;
     if let Some(parent) = path.parent() {
-      fs::create_dir_all(parent).await?;
+      fs::create_dir_all(parent)?;
     }
 
     error!(name = %self.name, message = %self.message);
 
-    let logs = fs::read(&path).await.unwrap_or_default();
-    let mut logs: Vec<Log> = serde_json::from_slice(&logs).unwrap_or_default();
+    let cache = app.state::<LogCache>();
+    let mut cache = cache.0.lock().unwrap();
+    cache.push(self);
 
-    logs.push(self);
-    logs.sort_unstable_by(|a, b| b.cmp(a));
+    if cache.len() > MAX_CACHE_SIZE {
+      Log::write_to_disk(app)?;
+    }
 
-    let logs = serde_json::to_vec_pretty(&logs)?;
-    fs::write(path, logs).await.map_err(Into::into)
+    Ok(())
   }
 
   fn datetime_or_default(&self) -> DateTime<FixedOffset> {
@@ -152,7 +194,10 @@ impl PartialOrd for Log {
 
 impl Ord for Log {
   fn cmp(&self, other: &Self) -> Ordering {
-    match self.datetime_or_default().cmp(&other.datetime_or_default()) {
+    match self
+      .datetime_or_default()
+      .cmp(&other.datetime_or_default())
+    {
       Ordering::Equal => self.name.cmp(&other.name),
       ordering => ordering,
     }

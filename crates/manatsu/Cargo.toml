@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.11.8"
+version = "0.12.0"
 description = "CLI tools for Manatsu"
 keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
@@ -46,7 +46,7 @@ taplo = "0.13.0"
 futures = "0.3.30"
 
 [dependencies.clap]
-version = "4.5.7"
+version = "4.5.8"
 features = ["derive"]
 
 [dependencies.serde]

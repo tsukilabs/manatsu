@@ -155,7 +155,9 @@ impl Project {
   }
 
   fn update_tauri_conf(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
-    let path = dir_path.as_ref().join("src-tauri/tauri.conf.json");
+    let path = dir_path
+      .as_ref()
+      .join("src-tauri/tauri.conf.json");
     let tauri_conf = fs::read_to_string(&path)?;
     let mut tauri_conf: serde_json::Value = serde_json::from_str(&tauri_conf)?;
 
@@ -178,7 +180,9 @@ impl Project {
   }
 
   fn update_index_html(&self, dir_path: impl AsRef<Path>) -> Result<&Self> {
-    let path = dir_path.as_ref().join("src/windows/main/index.html");
+    let path = dir_path
+      .as_ref()
+      .join("src/windows/main/index.html");
     let index_html = fs::read_to_string(&path)?;
     let index_html = index_html.replace("PROJECT_NAME", &self.name);
 

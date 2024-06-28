@@ -1,10 +1,10 @@
-import { toRef, toValue } from 'vue';
+import { toValue } from 'vue';
 import { noop } from '@tb-dev/utils';
 import { handleError } from '@manatsu/shared';
 import type { RouteLocationRaw } from 'vue-router';
+import { execute, invoke, navigate } from './utils';
 import type { Nullish } from '@tb-dev/utility-types';
 import type { InvokeArgs } from '@tauri-apps/api/core';
-import { execute, invokeCommand, pushRoute } from './utils';
 import { type KeyFilter, onKeyStroke as original, tryOnScopeDispose } from '@vueuse/core';
 import type { KeyStrokeEventHandler, OnKeyStrokeOptions, PreventKeyStrokeOptions } from './types';
 
@@ -18,12 +18,9 @@ export function onKeyStroke(
     ctrlKey = false,
     metaKey = false,
     shiftKey = false,
-    dev = false,
     enabled = true,
     prevent = true
   } = options;
-
-  const enabledRef = toRef(enabled);
 
   function callback(e: KeyboardEvent) {
     if (
@@ -39,8 +36,8 @@ export function onKeyStroke(
       e.preventDefault();
     }
 
-    if (toValue(enabledRef)) {
-      execute(e, { dev }, handler).catch(handleError);
+    if (toValue(enabled)) {
+      execute(e, handler).catch(handleError);
     }
   }
 
@@ -129,7 +126,7 @@ export function invokeOnKeyStroke(
   args?: Nullish<InvokeArgs>,
   options?: OnKeyStrokeOptions
 ) {
-  return onKeyStroke(key, invokeCommand(command, args), options);
+  return onKeyStroke(key, invoke(command, args), options);
 }
 
 export function invokeOnKeyDown(
@@ -138,7 +135,7 @@ export function invokeOnKeyDown(
   args?: Nullish<InvokeArgs>,
   options?: Omit<OnKeyStrokeOptions, 'eventName'>
 ) {
-  return onKeyDown(key, invokeCommand(command, args), options);
+  return onKeyDown(key, invoke(command, args), options);
 }
 
 export function navigateOnKeyStroke(
@@ -146,7 +143,7 @@ export function navigateOnKeyStroke(
   to: RouteLocationRaw,
   options?: OnKeyStrokeOptions
 ) {
-  return onKeyStroke(key, pushRoute(to), options);
+  return onKeyStroke(key, navigate(to), options);
 }
 
 export function navigateOnKeyDown(
@@ -154,7 +151,7 @@ export function navigateOnKeyDown(
   to: RouteLocationRaw,
   options?: Omit<OnKeyStrokeOptions, 'eventName'>
 ) {
-  return onKeyDown(key, pushRoute(to), options);
+  return onKeyDown(key, navigate(to), options);
 }
 
 export function preventKeyStroke(key: KeyFilter, options?: PreventKeyStrokeOptions) {
@@ -166,4 +163,46 @@ export function preventKeyDown(
   options?: Omit<PreventKeyStrokeOptions, 'eventName'>
 ) {
   return onKeyDown(key, noop, { ...options, prevent: true });
+}
+
+export function preventCtrlKeyStroke(
+  key: KeyFilter,
+  options?: Omit<PreventKeyStrokeOptions, 'ctrlKey'>
+) {
+  return preventKeyStroke(key, { ...options, ctrlKey: true });
+}
+
+export function preventCtrlKeyDown(
+  key: KeyFilter,
+  options?: Omit<PreventKeyStrokeOptions, 'eventName' | 'ctrlKey'>
+) {
+  return preventKeyDown(key, { ...options, ctrlKey: true });
+}
+
+export function preventShiftKeyStroke(
+  key: KeyFilter,
+  options?: Omit<PreventKeyStrokeOptions, 'shiftKey'>
+) {
+  return preventKeyStroke(key, { ...options, shiftKey: true });
+}
+
+export function preventShiftKeyDown(
+  key: KeyFilter,
+  options?: Omit<PreventKeyStrokeOptions, 'eventName' | 'shiftKey'>
+) {
+  return preventKeyDown(key, { ...options, shiftKey: true });
+}
+
+export function preventCtrlShiftKeyStroke(
+  key: KeyFilter,
+  options?: Omit<PreventKeyStrokeOptions, 'ctrlKey' | 'shiftKey'>
+) {
+  return preventKeyStroke(key, { ...options, ctrlKey: true, shiftKey: true });
+}
+
+export function preventCtrlShiftKeyDown(
+  key: KeyFilter,
+  options?: Omit<PreventKeyStrokeOptions, 'eventName' | 'ctrlKey' | 'shiftKey'>
+) {
+  return preventKeyDown(key, { ...options, ctrlKey: true, shiftKey: true });
 }

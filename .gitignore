@@ -30,6 +30,4 @@ coverage/
 dist/
 .temp
 .eslintcache
-.stylelintcache
 config.json
-tokens.css

@@ -11,8 +11,8 @@ importers:
         specifier: ^2.0.0-beta.13
         version: 2.0.0-beta.13
       '@tb-dev/eslint-config':
-        specifier: ^3.8.4
-        version: 3.8.4(eslint@8.57.0)(typescript@5.5.2)(vitest@1.6.0(@types/node@20.14.9)(sass@1.77.4))
+        specifier: ^3.8.5
+        version: 3.8.5(eslint@8.57.0)(typescript@5.5.2)(vitest@1.6.0(@types/node@20.14.9)(sass@1.77.4))
       '@tb-dev/utility-types':
         specifier: ^1.4.0
         version: 1.4.0
@@ -135,9 +135,6 @@ importers:
 
   packages/shared:
     dependencies:
-      '@tauri-apps/plugin-dialog':
-        specifier: ^2.0.0-beta.5
-        version: 2.0.0-beta.5
       '@tb-dev/utility-types':
         specifier: ^1.4.0
         version: 1.4.0
@@ -781,16 +778,10 @@ packages:
       }
     engines: { node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1' }
 
-  '@tauri-apps/plugin-dialog@2.0.0-beta.5':
+  '@tb-dev/eslint-config@3.8.5':
     resolution:
       {
-        integrity: sha512-jkaBCsx2v6WB6sB77fTMCeijuvT3FlzwschiHnPlD7aU6CHvQgRlpCv/FttPdTq4ih2t6MIlM4oX85hNYgfs6w==
-      }
-
-  '@tb-dev/eslint-config@3.8.4':
-    resolution:
-      {
-        integrity: sha512-aoFkjuCmuO9vLye+8LRt7++sH5gdU0Uq9WME+tWxq3IyYOXrJB1D1g8oUFo3aXQ2GlVV3jCFXBidc/Iq4gswDw==
+        integrity: sha512-wl5QVWCVBqA2tKjppFW5X15vaotRKZ+zZuWIGsMjpViZZcpRrSFYLfLlW3Uaa0ahWeHXcX67RIRDwXk5zKzZeQ==
       }
     engines: { node: '>=20' }
     peerDependencies:
@@ -3670,11 +3661,7 @@ snapshots:
 
   '@tauri-apps/api@2.0.0-beta.13': {}
 
-  '@tauri-apps/plugin-dialog@2.0.0-beta.5':
-    dependencies:
-      '@tauri-apps/api': 2.0.0-beta.13
-
-  '@tb-dev/eslint-config@3.8.4(eslint@8.57.0)(typescript@5.5.2)(vitest@1.6.0(@types/node@20.14.9)(sass@1.77.4))':
+  '@tb-dev/eslint-config@3.8.5(eslint@8.57.0)(typescript@5.5.2)(vitest@1.6.0(@types/node@20.14.9)(sass@1.77.4))':
     dependencies:
       '@typescript-eslint/eslint-plugin': 7.14.1(@typescript-eslint/parser@7.14.1(eslint@8.57.0)(typescript@5.5.2))(eslint@8.57.0)(typescript@5.5.2)
       '@typescript-eslint/parser': 7.14.1(eslint@8.57.0)(typescript@5.5.2)

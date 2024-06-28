@@ -13,14 +13,13 @@ export function onContextMenu(
   let removeEventListener: (() => void) | null = null;
 
   const { enabled = true, prevent = true } = options;
-  const enabledRef = toRef(enabled);
 
   function callback(e: MouseEvent) {
     if (prevent) {
       e.preventDefault();
     }
 
-    if (toValue(enabledRef)) {
+    if (toValue(enabled)) {
       execute(e, handler).catch(handleError);
     }
   }
