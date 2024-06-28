@@ -42,4 +42,3 @@ impl Default for Formatter<'_> {
     Self::new(".")
   }
 }
-
