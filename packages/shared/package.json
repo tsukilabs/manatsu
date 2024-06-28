@@ -39,8 +39,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@tb-dev/utility-types": "^1.4.0",
-    "@tb-dev/utils": "^1.8.3"
+    "@tb-dev/utility-types": "^1.4.1",
+    "@tb-dev/utils": "^1.8.4"
   },
   "devDependencies": {
     "vite": "^5.3.2"
