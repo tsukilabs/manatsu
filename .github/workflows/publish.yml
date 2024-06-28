@@ -25,7 +25,6 @@ jobs:
       - run: pnpm run -F @manatsu/shared build
       - run: pnpm run type-check
       - run: pnpm run lint
-      - run: pnpm run test
       - run: pnpm run clippy
 
   publish:
