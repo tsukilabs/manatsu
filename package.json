@@ -1,6 +1,6 @@
 {
   "name": "@manatsu/monorepo",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.4.0",
@@ -28,9 +28,9 @@
     "update": "miho update major -t"
   },
   "devDependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.13",
-    "@tb-dev/eslint-config": "^3.8.7",
-    "@tb-dev/utility-types": "^1.4.2",
+    "@tauri-apps/api": "^2.0.0-beta.14",
+    "@tb-dev/eslint-config": "^3.8.8",
+    "@tb-dev/utility-types": "^1.4.3",
     "@tb-dev/utils": "^1.8.5",
     "@types/node": "^20.14.9",
     "@vitejs/plugin-vue": "^5.0.5",

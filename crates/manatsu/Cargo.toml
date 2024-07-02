@@ -1,6 +1,6 @@
 [package]
 name = "manatsu"
-version = "0.12.0"
+version = "0.12.1"
 description = "CLI tools for Manatsu"
 keywords = ["cli", "components", "manatsu", "tauri", "vue"]
 
@@ -54,7 +54,7 @@ version = "1.0.203"
 features = ["derive"]
 
 [dependencies.serde_json]
-version = "1.0.118"
+version = "1.0.120"
 features = ["preserve_order"]
 
 [dependencies.toml]
